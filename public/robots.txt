@@ -1,0 +1,4 @@
+
+Sitemap: https://www.singingexperience.co.uk/sitemap.xml
+User-agent: *
+Allow: /

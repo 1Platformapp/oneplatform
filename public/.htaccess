@@ -1,0 +1,28 @@
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|woff2|mp4|swf)$">
+    Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+    
+</IfModule>
+
+#AuthType Basic
+#AuthName "public"
+#AuthUserFile "/home1/theaudition/.htpasswds/alpha.theaudition.tv/public/passwd"
+#require valid-user
+
+<FilesMatch "\.(pdf)$">
+    Allow from all
+    Satisfy Any
+
+</FilesMatch>
+

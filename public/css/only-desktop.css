@@ -1,0 +1,2201 @@
+
+
+
+
+.desktop-only {
+
+
+
+        display: initial;
+
+
+
+    }
+
+
+
+
+
+
+
+    .wrapper_outer { background: #f0f0f0; }
+
+
+
+    .header_outer {
+
+
+
+        background: #fc064c;
+
+
+
+    }
+
+
+
+    .header_inner { padding: 0; }
+
+
+
+    .hdr_logo_left a img { padding-top: 7px; }
+
+
+
+    .hrd_right_outer { width: 80%; }
+
+
+
+    .hdr_serch_outer { width: 49.7%; padding-top: 9px; }
+
+
+
+    .hdr_serch_outer label { width: 100%; }
+
+
+
+    .hdr_right_icon_outer { width: 50%; }
+
+
+
+    .hdr_menu_item, .hdr_menu_item a { display: initial; }
+
+
+
+    .hdr_menu_item {
+
+
+
+        background-repeat: no-repeat;
+
+
+
+        background-position: 90% 9px;
+
+
+
+        background-size: 28px;
+
+
+
+        min-width: 90px;
+
+
+
+        padding-left: 6px;
+
+
+
+        padding-right: 6px !important;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_menu_item:hover {
+
+
+
+        background-color: #818180;
+
+
+
+        box-shadow: inset 0 0 4px #444;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_menu_item.active {
+
+
+
+        background-color: #a30d33;
+
+
+
+        box-shadow: inset 0 0 4px #444;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_menu_item a {
+
+
+
+        font-size: 14px;
+
+
+
+        color: #fff;
+
+
+
+        padding: 0;
+
+
+
+        font-family: 'open_sansregular';
+
+
+
+        letter-spacing: 1px;
+
+
+
+        line-height: 3.2em;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_menu_item.tv {
+
+
+
+        background-image: url('../images/tv_menu_icon.png');
+
+
+
+        background-position-x: 70%;
+
+
+
+        padding-left: 20px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_menu_item.live {
+
+
+
+        background-image: url('../images/studios_menu_icon.png');
+
+
+
+        background-position-y: 11px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_menu_item.chart {
+
+
+
+        background-image: url('../images/chart_menu_icon.png');
+
+
+
+        background-position-y: 11px;
+
+
+
+        margin-right: 20px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_right_icon_outer ul li {
+
+
+
+        padding-top: 7px;
+
+
+
+        padding-bottom: 7px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .hdr_right_icon_outer ul .hdr_menu_user {
+
+
+
+        padding-right: 0;
+
+
+
+        text-align: right;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_left_sec_outer {
+
+
+
+        width: 35.45%;
+
+
+
+        float: right;
+
+
+
+        padding-top: 40px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_cent_right_outer {
+
+
+
+        width: 60.83%;
+
+
+
+        float: left;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_center_outer {
+
+
+
+        width: 98%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_center_outer h4 {
+
+
+
+        line-height: 42px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_center_outer h4 .cent_undo_btn {
+
+
+
+        height: 24px;
+
+
+
+        width: 24px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .jp-interface {
+
+        display: none;
+
+    }
+
+
+
+    .mobile-only {
+
+        display: none;
+
+    }
+
+
+
+    .tab_btns_outer.tab_dsk {
+
+        display: block;
+
+    }
+
+
+
+    .tab_btns_outer.tab_dsk ul li {
+
+        padding-right: 2px;
+
+    }
+
+
+
+    .tab_btns_outer.tab_dsk ul li:last-child {
+
+        padding-right: 0;
+
+    }
+
+
+
+    .tab_btns_outer.tab_dsk ul li a {
+
+        background-color: #fc074d;
+
+        border: none;
+
+        color: #fff;
+
+        font-size: 18px;
+
+        line-height: 48px;
+
+    }
+
+
+
+    .user_hm_rt_btm_otr {
+
+        padding: 0;
+
+    }
+
+
+
+    .user_hm_rt_btm_otr label {
+
+        display: block;
+
+        font-size: 18px !important;
+
+    }
+
+
+
+    .tab_btns_outer.tab_dsk ul li a:hover {
+
+        background-color: #808080;
+
+    }
+
+
+
+    .mCSB_inside > .mCSB_container, .hm_lst_slid_outer, .tab_det_left_sec {
+
+        background-color: #fff;
+
+    }
+
+
+
+    .ch_tab_det_outer, .user_hm_rt_btm_otr {
+
+        border: none;
+
+    }
+
+
+
+    .btm_text_stor_outer {
+
+        padding: 10px 0;
+
+    }
+
+
+
+    .btm_text_stor_outer p {
+
+        color: #888;
+
+        font-size: 18px;
+
+        line-height: 24px;
+
+        padding-top: 22px;
+
+    }
+
+
+
+    .panel {
+
+
+
+        background-color: #fff;
+
+
+
+        margin-bottom: 40px;
+
+
+
+        padding: 10px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .panel .project_name {
+
+
+
+        color: #fc064c;
+
+
+
+        font-family: 'open_sanssemibold';
+
+
+
+        font-size: 19px;
+
+
+
+        font-weight: bold;
+
+
+
+        text-align: center;
+
+
+
+    }
+
+
+
+
+
+
+
+    .user_hm_rt_btm_otr label:not(.feat_prod_add) {
+
+
+
+        background: #fff;
+
+
+
+        color: #999;
+
+
+
+        font-size: 18px;
+
+
+
+        font-weight: bold;
+
+
+
+        padding: 0 0 30px 0;
+
+
+
+    }
+
+
+
+
+
+
+
+    .fund_raise_left, .fund_raise_right {
+
+
+
+        float: none;
+
+
+
+        display: block;
+
+
+
+        margin-top: 16px;
+
+
+
+        overflow: hidden;
+
+
+
+        width: 100%;
+
+
+
+        margin-bottom: 64px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .fund_raise_left img {
+
+
+
+        margin: 0 auto;
+
+
+
+        /*height: 120px;*/
+
+
+
+    }
+
+
+
+    .fund_raise_left h3.project_line {
+
+
+
+        margin: 0 auto;
+
+
+
+        padding: 10px 0 0 0;
+
+
+
+        color: #999;
+
+
+
+        text-align: center;
+
+
+
+        font-size: 17px;
+
+
+
+        font-weight: 600;
+
+
+
+    }
+
+
+
+
+
+
+
+    .pricing_setail ul li.clearfix {
+
+
+
+        margin-bottom: 5px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .pricing_setail .fleft {
+
+
+
+        display: block;
+
+
+
+        float: left;
+
+
+
+        width: 60%;
+
+
+
+    }
+
+
+
+    
+
+
+
+    .pricing_setail .fright {
+
+
+
+        display: block;
+
+
+
+        float: left;
+
+
+
+        width: 40%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .fund_raise_status {
+
+
+
+        margin: 5px;
+
+
+
+        text-align: center;
+
+
+
+    }
+
+
+
+
+
+
+
+    .fund_raise_status .status_active,
+
+
+
+    .fund_raise_status .status_success {
+
+
+
+        color: #88c44a;
+
+
+
+        font-style: normal;
+
+
+
+    }
+
+
+
+
+
+
+
+    .fund_raise_status .status_fail {
+
+
+
+        color: #f1571a;
+
+
+
+        font-style: normal;
+
+
+
+    }
+
+
+
+
+
+
+
+    .social_btns {
+
+
+
+        margin-top: 22px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .social_btns ul li {
+
+
+
+        float: left;
+
+
+
+        width: 33%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .social_supp_btns ul li:last-child() {
+
+
+
+        float: right;
+
+
+
+    }
+
+
+
+
+
+
+
+    .social_btns ul li a {
+
+
+
+        border: 2px solid #f1f1f1;
+
+
+
+        border-bottom: none;
+
+
+
+        border-left: none;
+
+
+
+        display: block;
+
+
+
+        font-size:30px;
+
+
+
+        height: 56px;
+
+
+
+        padding: 2px;
+
+
+
+        text-align: center;
+
+
+
+        line-height: 26px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .social_btns ul li:last-child a {
+
+
+
+        border-right: none;
+
+
+
+    }
+
+
+
+
+
+    .user_left_bar_top_info {
+
+
+
+        margin-bottom: 10px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_tp_sec_left a img {
+
+
+
+        /*margin-top: 8px;*/
+
+
+
+        width: 100%;
+
+
+
+        height: auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_tp_sec_left a, .tab_chanel_list a {
+
+
+
+        width: 211px;
+
+
+
+    }
+
+
+
+
+
+    .ch_tp_sec_left .tp_sec_in_det {
+
+
+
+        width: 60%;
+
+
+
+        margin-right: 5px;
+
+
+
+        padding: 4px 0 0 15px;
+
+
+
+        float: left;
+
+
+
+    }
+
+    
+
+    .ch_tp_sec_right .cent_undo_btn {
+
+
+
+        float: right;
+
+
+
+        display: block;
+
+
+
+        width: 32px;
+
+
+
+        height: 32px;
+
+
+
+        background-size: 100% 100% !important;
+
+
+
+        background: url(../images/undo_btn_icon.png) no-repeat center center;
+
+
+
+        margin-bottom: 32px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_chanel_img_det a, .tp_sec_in_det a strong {
+
+
+
+        color: #444;
+
+
+
+        font-size: 18px;
+
+
+
+        font-weight: bold;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tp_sec_in_det a {
+
+
+
+        font-size: 18px;
+
+
+
+        line-height: 28px;
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+    .tab_chanel_list img {
+
+
+
+        height: auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_tp_play_btn {
+
+
+
+        float: right;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_chart_play {
+
+
+
+        height: 64px;
+
+
+
+        margin-top: 16px;
+
+
+
+        width: 64px;
+
+
+
+    }
+
+
+
+
+
+    .tab_chan_tp_btns ul li {
+
+
+
+        float: none;
+
+
+
+        margin: 20px 0 20px 0;
+
+
+
+        width: 210px !important;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_chan_tp_btns ul li.music,
+
+
+
+    .tab_chan_tp_btns ul li.album,
+
+
+
+    .tab_chan_tp_btns ul li.store {
+
+
+
+        width: 100%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .channel_tab_btn.music, .channel_tab_btn.album, .channel_tab_btn.store {
+
+
+
+        width: 210px;
+
+
+
+        height: 58px;
+
+
+
+        margin: 0;
+
+
+
+    }
+
+
+
+
+
+
+
+    .channel_tab_btn:nth-child(3) {
+
+
+
+        float: none;
+
+
+
+    }
+
+
+
+
+
+
+
+    .chan_lbl {
+
+
+
+        float: left;
+
+
+
+        margin-left: 226px;
+
+
+
+        font-size: 18px;
+
+
+
+        margin-top: -40px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_chanel_img_det {
+
+
+
+        padding-left: 16px;
+
+
+
+        width: 60%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_chanel_img_det p {
+
+
+
+        font-size: 18px;
+
+
+
+        line-height: 36px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_fan_list_outer {
+
+
+
+        padding: 10px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_fan_list_det {
+
+
+
+        width: 68%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .user_home_left_bar.tab_det_left_sec {
+
+
+
+        height: auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .social_supp_btns ul li a {
+
+
+
+        font-size: 18px;
+
+
+
+        margin: 10px auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .social_facebook_outer {
+
+
+
+        float: left;
+
+
+
+        padding: 10px;
+
+
+
+        width: 45%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .twitter_feed_outer {
+
+
+
+        overflow: hidden;
+
+
+
+        padding: 25px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .btm_center_outer {
+
+
+
+        background: #fff;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_left_sec_outer mark {
+
+
+
+        font-size: 24px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .down_up_btn {
+
+
+
+        width: 12px;
+
+
+
+        height: 16px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_list_like {
+
+
+
+        width: 18px;
+
+
+
+        height: 18px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_left_sec_outer p {
+
+
+
+        font-size: 12px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_left_sec_outer ul li:nth-child(2) {
+
+
+
+        margin-left: 10px;
+
+
+
+        margin-right: 10px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .vid_title {
+
+
+
+        font-size: 18px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_img_det ul li p {
+
+        color: #888;
+
+        font-size: 18px;
+
+        margin-top: 10px;
+
+        text-align: justify;
+
+        line-height: 22px;
+
+    }
+
+
+
+
+
+
+
+    .project_rit_btm_bns_otr {
+
+
+
+        padding-top: 0;
+
+
+
+    }
+
+
+
+
+
+
+
+    .user_bonus_header label {
+
+
+
+        font-family: 'open_sanssemibold';
+
+
+
+        background: #fff;
+
+
+
+        color: #fc064c;
+
+
+
+        font-size: 19px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .proj_cnter_story_sec_oter {
+
+
+
+        background: #fff;
+
+
+
+        padding: 10px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .user_hm_center .tp_center_video_outer {
+
+
+
+        margin-bottom: 0;
+
+
+
+    }
+
+
+
+
+
+
+
+    .proj_cntr_contribut_sec_otr h3 {
+
+
+
+        margin-top: 60px;
+
+
+
+        text-align: left;
+
+
+
+    }
+
+
+
+
+
+
+
+    .fund_sec {
+
+
+
+        padding: 10px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_tab_det_outer {
+
+
+
+        padding: 10px 0;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_rigt_img {
+
+
+
+        width: 120px !important;
+
+
+
+    }
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+    .ch_stream a {
+
+
+
+        width: 160px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_stream .tp_sec_in_det {
+
+
+
+        float: none;
+
+
+
+        padding-left: 10px;
+
+
+
+        overflow: hidden;
+
+
+
+        width: auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .ch_stream a {
+
+
+
+        font-size: 18px;
+
+
+
+        font-weight: bold;
+
+
+
+        line-height: 22px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tp_sec_in_det a:last-child {
+
+
+
+        color: #888;
+
+
+
+        font-size: 18px;
+
+
+
+        font-weight: normal;
+
+
+
+    }
+
+
+
+
+
+
+
+    .bio_sec_story_text {
+
+
+
+        font-size: 16px;
+
+
+
+        line-height: 23px;
+
+
+
+        color: #696772;
+
+
+
+    }
+
+
+
+
+
+
+
+    .user_hm_rt_btm_inner b {
+
+
+
+        font-size: 16px;
+
+
+
+        line-height: 40px;
+
+
+
+        margin-bottom: 5px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .product_scroll {
+
+
+
+        height: auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .mCSB_inside > .mCSB_container {
+
+
+
+        margin-right: 0 !important;
+
+
+
+    }
+
+
+
+
+
+
+
+    .pricing_setail ul li p {
+
+
+
+        font-family: 'open_sansregular';
+
+
+
+        font-size: 16px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .pricing_setail ul li h3 {
+
+
+
+        font-size: 18px;
+
+
+
+        padding-bottom: 5px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_rigt_imgdet_outer {
+
+
+
+        width: 80% !important;
+
+
+
+    }
+
+
+
+
+
+
+
+    .r_img_det {
+
+
+
+        float: left;
+
+
+
+        width: 56%;
+
+
+
+    }
+
+
+
+
+
+
+
+    .user_hm_rt_btm_inner p {
+
+
+
+        color: #696772;
+
+
+
+        font-size: 16px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .feat_music_temp mark {
+
+
+
+        font-size: 18px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .feat_product_temp .feat_bullet {
+
+
+
+        font-size: 16px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_chanel_btn a {
+
+
+
+        font-family: 'open_sansbold';
+
+
+
+        width: 60px !important;
+
+
+
+        line-height: 24px;
+
+
+
+        font-size: 22px;
+
+
+
+        font-weight: bold;
+
+
+
+    }
+
+
+
+
+
+
+
+    .project_rit_btm_bns_otr p {
+
+
+
+        color:#818181 !important;
+
+
+
+    }
+
+    .project_rit_btm_bns_otr h4{
+
+
+
+        color:#444 !important;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tot_awe_pro_outer {
+
+
+
+        padding: 20px 10px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tot_awe_pro_outer h3 {
+
+
+
+        font-size: 18px;
+
+
+
+        font-weight: bold;
+
+
+
+    }
+
+
+
+
+
+
+
+    .teb_chan_moreinfo_sec_outer a {
+
+
+
+        font-size: 18px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tot_awe_pro_outer p {
+
+
+
+        font-size: 16px;
+
+        margin-left: 25px;
+
+        color: #888;
+
+        font-family: 'open_sansregular';
+
+    }
+
+
+
+
+
+
+
+    .tab_fan_list_top a {
+
+
+
+        width: 210px;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_fan_list_top img {
+
+
+
+        height: auto;
+
+
+
+    }
+
+
+
+
+
+
+
+    .tab_fan_list_det a,
+
+
+
+    .tab_fan_list_top p,
+
+
+
+    .tab_fan_list_btm_text,
+
+
+
+    .vid_list_hvr p,
+
+
+
+    .vid_lidt_det a,
+
+
+
+    .vid_lidt_det p,
+
+
+
+    .vid_lidt_det ul li span {
+
+
+
+        font-size: 16px;
+
+
+
+    }

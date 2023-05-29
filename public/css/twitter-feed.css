@@ -1,0 +1,159 @@
+#twitter-feed{
+
+    font-family: Open Sans,sans-serif !important;
+    margin: 20px 0;
+}
+#twitter-bird-img{
+
+    width: 45px;
+    height: 35px;
+    margin-left: 15px;
+    display: unset;
+}
+#twitter-profile-username{
+
+    font-size: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-family: Open sans, sans-serif;
+}
+
+.twitter_feed_head { background: rgb(127, 204, 247); padding: 20px; display: flex; align-items: center; justify-content: center; }
+.twitter_feed_head i{ color: #fff; font-size: 30px; margin-right: 15px; }
+
+.twitter-article{
+
+    margin: 25px 0 35px 0;
+    min-height: 75px;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.twitter-pic a {
+
+    position: relative;
+}
+
+.user-pic{
+    position: absolute;
+    z-index: 5;
+    margin-top: 5px;
+    max-width: unset;
+}
+.twitter-text{
+
+    margin-left: 25px;
+    margin-right: 10px;
+    transition: all 0.2s ease-in 0s;
+    border: 1px solid #fff;
+}
+.tweet-head-left, .tweet-head-right{
+
+    margin-left: 25%;
+}
+.tweet-head-right{
+
+    margin-left: 48%;
+}
+.tweet-head-left a{
+
+    color: #fff;
+    text-decoration: none;
+}
+.tweet-head-left a:hover{
+
+    text-decoration: underline;
+}
+.tweet-head{
+    font-size: 11px;
+    color: #fff;
+    padding: 3px 0;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid #fff;
+}
+.tweet-body{
+
+    padding-left: 25%;
+    color: #fff;
+    font-family: Open sans, sans-serif;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    font-size: 15px;
+}
+.tweet-body a{
+
+    text-decoration: underline;
+    color: #fff;
+}
+.tweet-body a:hover{
+
+    text-decoration: underline;
+}
+
+.highlighted .tweet-body {
+
+    border-bottom: 1px solid #fff;
+}
+
+.twitter_scroll_body { 
+
+    max-height: 430px;
+    overflow: auto;
+}
+
+.highlighted .twitter-actions {
+
+    padding: 10px 5px;
+    max-height: unset;
+}
+
+.highlighted #retweet-indicator {
+
+    margin: 10px 5px;
+    max-height: unset;
+}
+
+.highlighted{
+
+    box-shadow: 1px 1px 10px #333;
+    -webkit-box-shadow: 1px 1px 10px #333;
+    -moz-box-shadow: 1px 1px 10px #333;
+    -ms-box-shadow: 1px 1px 10px #333;
+    -o-box-shadow: 1px 1px 10px #333;
+}
+.img-highlighted{
+
+    box-shadow: 10px 1px 15px #333;
+    -webkit-box-shadow: 10px 1px 15px #333;
+    -moz-box-shadow: 10px 1px 15px #333;
+    -ms-box-shadow: 10px 1px 15px #333;
+    -o-box-shadow: 10px 1px 15px #333;
+    transition: all 0.3s ease-in 0s;
+}
+
+#retweet-indicator {
+
+    max-height: 0;
+    transition: all 0.3s ease 0s;
+}
+.twitter-actions{
+
+    overflow: hidden;
+    max-height: 0;
+    text-align: right;
+    transition: all 0.3s ease 0s;
+}
+.twitter-actions .inside{
+
+    float: right;
+    width: auto;
+    margin-bottom: 5px;
+}
+.twitter-actions.show{
+
+    max-height: 200px;
+}
+

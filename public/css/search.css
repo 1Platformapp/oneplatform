@@ -1,0 +1,180 @@
+
+.search_center_outer { background-color: rgb(39,40,42); padding-bottom: 1px; margin-bottom: 150px; }
+.search_center_outer .search_main_tabs_inner { margin-bottom: 30px; }
+.search_center_outer .each_main_tab { font-family: Open sans, sans-serif; font-size: 16px; color: #818181; padding: 20px 20px 16px 20px; display: inline-block; width: 24.645%; text-align: center; cursor: pointer; }
+.search_center_outer .each_main_tab.active { font-weight: bold; border-bottom: 2px solid #000; color: #000; background-color: #fff; }
+.search_center_outer .search_choices_inner { margin-bottom: 15px; border-bottom: 1px solid #fff; }
+.search_choices_outer .each_choice { font-family: Open sans, sans-serif; font-size: 16px; color: #fff; padding: 5px; border: 1px solid #fff; display: inline-block; text-align: center; cursor: pointer; margin: 0 0 15px 0; }
+.search_result_outer .result_counter { font-family: Open sans, sans-serif; font-size: 16px; color: #fff; }
+.search_result_inner, .search_choices_inner { padding: 0 0 20px 5px; }
+.search_center_outer .each-music { margin-top: 20px; }
+.ch_left_sec_outer { padding-top: 1px; }
+.search_banner_inner a { display: block; padding: 115px 30px; color: #000; font-family: 'open_sansregular'; font-weight: bold; font-size: 20px; background-color: #ccc; margin: 30px 0 0 0; height: 250px; text-align: center; }
+.search_banner_inner .search_banner_head { font-family: Open sans, sans-serif; font-size: 16px; color: #000; text-align: center; }
+.search_center_outer .summary { position: relative; }
+.summary .music_thumbnail{ position: relative; }
+.summary .music_thumbnail .play_now { left: 40%; width: 30px; }
+.tab_chanel_list { cursor: unset; }
+.tab_chanel_list .summary { cursor: pointer; }
+.search_result_inner .result_load_more { color: #fff; font-size: 16px; font-family: Open sans, sans-serif; padding: 8px 20px; border-radius: 3px; text-align: center; cursor: pointer; border: 1px solid #fff; margin: 40px 5px 30px 0; }
+.card_sub_tab { display: inline-block; width: 17%;}
+.card_sub_tab:first-child { margin: 0 0 0 7%; }
+.search_cards .name{ color: #818181; cursor: pointer; display: inline-block; width: fit-content; font-family: Open sans, sans-serif; font-size: 16px; text-align: center; }
+.search_cards .card_sub_tab.active .name { font-weight: bold; color: #fff; border-bottom: 2px solid #fff; padding-bottom: 2px; }
+.card_sub_content .card_heading { margin: 20px 7%; font-family: Open sans, sans-serif; font-size: 15px;  color: #fff; }
+.card_content { display: flex; overflow-x: auto; margin: 0 7%; position: relative; backface-visibility: hidden; opacity: 1;  }
+#card_01_03 .card_content { overflow: unset; }
+.search_cards .card_check_label { display: block; margin: 5px 0; font-size: 14px !important; padding: 0 20px; color: #fff; font-family: Open sans, sans-serif; letter-spacing: 1.1px ; cursor: pointer; white-space: nowrap; }
+.search_cards .card_check_label input{ display: none; }
+.search_cards .card_check_label:not(.checked){ background: url(../images/check_unchecked.JPG) no-repeat left center; background-size: 12px; }
+.search_cards .card_check_label.checked { background: url(../images/check_tick2.png) no-repeat left center; background-size: 12px; }
+.layout-slider { width: 100%; text-align: center; margin-top: 30px; }
+.layout-slider .slider_contain { width: 97%; display: inline-block; padding: 0 5px; }
+.slider_contain { position: relative; }
+.slider_contain .custom_range{ position: absolute; font-size: 23px; top: 20px; color: #fff; font-weight: bold; font-family: 'open_sanslight'; }
+.slider_contain .custom_range#custom_range_from { left: 3px; }
+.slider_contain .custom_range#custom_range_to { right: 3px; }
+.search_cards .card_main_btn { color: #fff; font-size: 16px; font-family: Open sans, sans-serif; padding: 8px 20px; text-align: center; cursor: pointer; margin: 20px 7%; border: 1px solid #fff; border-radius: 5px; }
+.search_cards .card_main_btn:active { background: #27282A; color: #fff; margin-bottom: 2px; }
+.each_card .card_end { color: #999; height: 1px; margin: 30px 10px; }
+
+.jslider .jslider-value.jslider-value-to , .jslider .jslider-value{  opacity: 1 !important; font-size: 13px !important; color: #fff; font-family: 'open_sanslight'; font-weight: bold;  }
+.jslider .jslider-label { opacity: 0 !important; }
+
+.artist_search_icon { cursor: pointer; position: relative; float: right; background: #fff; height: 100%; width: 10%; font-size: 16px; }
+.artist_search_icon i { color: #000; margin: 0 0 0 40%; }
+.artists_search { width: 90%; height: 100%; font-size: 16px; padding: 0 5px; color: #fff; }
+.artist_field_inner { border: 1px solid #fff; height: 40px; }
+.artists_inner { margin: 0 20px; }
+.search_artist_results .result_load_more{ color: #000; font-size: 16px; font-family: Open sans, sans-serif; padding: 2px 20px; text-align: center; cursor: pointer; border: 1px solid #000; margin: 40px 5px 30px 0;
+}
+.search_artist_results .result_counter{ font-family: Open sans, sans-serif; font-size: 16px; color: #fff; margin-bottom: 10px; }
+.artists_title { font-size: 16px; margin: 0 0 10px 0; color: #fff; font-family: Open sans, sans-serif; }
+
+#result_02 { padding: 0 5px; }
+.each_artist { cursor: pointer; margin-bottom: 20px; }
+.each_artist_inner { display: flex; align-items: center; transition:0.5s all ease-in-out; -webkit-transition:0.5s all ease-in-out; -moz-transition:0.5s all ease-in-out; -o-transition:0.5s all ease-in-out; }
+.each_artist_inner:hover { background:#000; }
+.each_artist .each_artist_inner { position: relative; }
+.each_artist .artist_left { display: inline-block; }
+.each_artist .artist_left a.main_img_contain { width: 211px; }
+.each_artist .artist_left a.main_img_contain img { width: 211px; }
+.each_artist .artist_right { display: inline-block; margin: 0 0 0 10px; line-height: 40px; }
+.each_artist .artist_actions { right: 10px; }
+.each_artist .artist_user_name { display: block; color: #fff; font-size: 16px; font-family: Open sans, sans-serif; }
+.each_artist .artist_info { font-family: Open sans, sans-serif; color: #fff; font-size: 14px; margin-right: 10px; }
+.each_artist .artist_actions a{ border: 1px solid #fff; color: #fff; padding: 5px 8px; font-size: 14px; font-family: Open sans, sans-serif; transition:0.5s all ease-in-out; -webkit-transition:0.5s all ease-in-out; -moz-transition:0.5s all ease-in-out; -o-transition:0.5s all ease-in-out; border-radius: 3px; }
+.each_artist .artist_info i{ margin-right: 5px; }
+.each_artist .artist_actions a:hover { background-color: #000; color: #fff; }
+.each_artist .user_connected { width: 20px; height: 20px; display: inline-block; }
+
+.card_pre_search { display: flex; margin: 40px 7% 0 7%; flex-direction: column; }
+.card_pre_search_each { margin-bottom: 30px; display: flex; flex-direction: row; justify-content: space-between; }
+.card_each_pre { transition:0.2s all ease-in-out; padding: 1px; position: relative; flex: 0 1 30%; text-transform: uppercase; }
+.card_each_pre:hover { padding: 0; }
+.card_each_pre img { border-radius: 3px; cursor: pointer; }
+.card_each_pre .pre_title { position: absolute; bottom: 15px; left: 15px; color: #fff; font-size: 19px; font-family: 'open_sanssemibold'; }
+
+.card_content::-webkit-scrollbar { width: 4px; }
+.card_content::-webkit-scrollbar-track { box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+.card_content::-webkit-scrollbar-thumb { background-color: darkgrey; outline: 1px solid slategrey; }
+
+.each_search_result { padding: 0 20px 20px; }
+
+.content_outer .auto_content { background: none !important; width: 97% !important; }
+.pg_back.active { height: 100% !important; }
+
+.smart_btn span { cursor: pointer; display: inline-block; position: relative; transition: 0.3s; }
+.smart_btn span:after { content: '\00bb'; position: absolute; opacity: 0; top: 0; right: -20px; transition: 0.3s; }
+.smart_btn:hover span { padding-right: 25px; }
+.smart_btn:hover span:after { opacity: 1; right: 0; }
+
+.tab_det_left_sec.tab_det_dsk { padding: 0 20px 20px; }
+.content_outer:not(.playing) { padding-top: calc(100vh - 318px) !important; }
+
+.recent_users { font-size: 15px; padding: 20px 10px; }
+.auth_carosel_section { background: #fcfcfc; margin: 0; }
+.auth_carosel_name { color: #13a89e; font-weight: bold; margin-top: 10px; font-size: 11px; }
+.auth_each_carosel img { max-width: 150px; }
+.auth_each_carosel { min-width: calc(25%); }
+.each-album-music .thismusic_user_name, .each-music .thismusic_user_name { color: #13a89e; }
+
+@media (min-width:1024px) and (max-width: 1365px) {
+    .content_outer.playing { padding-top: calc(100vh - 318px) !important; }
+}
+@media (min-width:1366px){
+    .content_outer.playing { padding-top: calc(100vh - 318px) !important; }
+}
+@media (max-width:767px){
+    .content_outer .auto_content { position: relative; background: #fff; }
+    .content_outer.playing { padding-top: 0 !important; }
+    .each_search_result { padding: unset; }
+}
+@media (min-width:768px) and (max-width: 1024px) {
+    .content_outer.playing { padding-top: calc(100vh - 318px) !important; }
+}
+@media (min-width:320px) and (max-width: 767px) {
+    .header_outer { display: none; }
+    .pg_back { top: 0 !important; } 
+    .card_pre_search_each { flex-direction: column; margin: 0; }
+    .card_each_pre { flex: 0 1 100%; margin-bottom: 10px; }
+    .content_outer:not(.playing) { padding-top: calc(100vh - 370px) !important; }
+
+    .search_center_outer .each_main_tab { border-width: 3px !important; padding: 7px 0 5px 0 !important; font-size: 13px !important; width: 24% !important; }
+    .search_center_outer { margin: 0 7px 0 7px !important; }
+    .card_sub_tab:first-child { margin: 0 !important; }
+    .search_center_outer .search_main_tabs_inner { margin-bottom: 15px !important; }
+    .search_cards .card_sub_tab .name { font-size: 12px !important; }
+    .card_sub_tab { width: 19% !important; }
+    .card_sub_content .card_heading { margin: 20px 0 !important; font-family: 'open_sansregular' !important; font-size: 11px !important; }
+    .card_content { margin: 0 !important; }
+    .each_card .card_header, .each_card .card_body { padding-left: 15px !important; }
+    .search_cards .card_check_label {  }
+    .search_cards .card_main_btn { margin: 20px 0 !important; font-size: 17px !important; padding: 2px 20px !important; }
+    .layout-slider { margin-top: 20px !important; }
+    .each_card .card_end { margin: 20px 0 !important; }
+    .ch_left_sec_outer {  }
+    .search_choices_outer .each_choice { font-size: 15px !important; padding: 2px !important; }
+    .search_result_outer .result_counter { font-size: 14px !important; }
+    .search_center_outer .each-music { margin-top: 0px !important; margin-bottom: 50px; padding-top: 10px; }
+    .search_banner_inner .search_banner_head { margin-bottom: 20px; }
+    
+    .summary .music_thumbnail .play_now { height: 25px !important; width: 25px !important; }
+    .ch_select_perch_options:not(.add_to_basket) { background-size: 20px; }
+    .ch_select_perch_options select option { font-size: 14px; }
+    .search_result_inner .result_load_more { padding: 0 !important; font-size: 16px !important; }
+
+    .each_artist a.main_img_contain{ width: auto !important; }
+    .each_artist a.main_img_contain img{ width: auto !important; height: 56px; }
+    .each_artist .artist_user_name, .each_artist .artist_info { font-weight: unset !important; font-size: 12px !important; }
+    .each_artist .artist_right { line-height: 25px !important; }
+    .each_artist .artist_actions a { padding: 2px 5px !important; font-size: 10px !important; font-weight: unset !important;}
+    .each_artist .artist_actions { right: 0 !important; }
+    .search_artist_results .result_counter { font-size: 14px !important; }
+    .each_artist .artist_info { margin-right: 0 !important; }
+
+    .artists_search { width: 80% !important; }
+    .artist_search_icon { width: 20% !important; }
+    .artist_field_inner { height: 30px !important; }
+    .artists_title { font-size: 14px !important; }
+
+    .auth_carosel_user .auth_carosel_nav_each { font-size: 22px; }
+    .auth_carosel_user .auth_carosel_animate { font-size: 14px; }
+    .auth_carosel_section { margin: 0 7px; }
+    .each-music .res_left_artist a { color: #13a89e !important; }
+}
+
+@media (width:320px){
+
+    .search_center_outer .each_main_tab { width: 24% !important; }
+    .each-music .ch_video_detail_outer { padding: 0 10px !important; }
+    .chan_btn_submit { width: 64%; }
+    .music_tot_disp:not(.active) { width: 36%; }
+}
+
+@media (width:360px) {
+
+    .each-music .fav_np { margin: 0 4px !important; }
+    .chan_btn_submit { width: 64%; }
+    .music_tot_disp:not(.active) { width: 36%; }
+}

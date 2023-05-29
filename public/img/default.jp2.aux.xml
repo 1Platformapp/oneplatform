@@ -1,0 +1,36 @@
+<PAMDataset>
+  <Metadata domain="IMAGE_STRUCTURE">
+    <MDI key="INTERLEAVE">PIXEL</MDI>
+  </Metadata>
+  <Metadata>
+    <MDI key="EXIF_ColorSpace">1</MDI>
+    <MDI key="EXIF_ComponentsConfiguration">0x1 0x2 0x3 00</MDI>
+    <MDI key="EXIF_DateTime">2017:11:29 00:14:36</MDI>
+    <MDI key="EXIF_ExifVersion">0210</MDI>
+    <MDI key="EXIF_FlashpixVersion">0100</MDI>
+    <MDI key="EXIF_ImageDescription">Email with young woman using a laptop computer on floor</MDI>
+    <MDI key="EXIF_Orientation">1</MDI>
+    <MDI key="EXIF_PixelXDimension">7657</MDI>
+    <MDI key="EXIF_PixelYDimension">3659</MDI>
+    <MDI key="EXIF_ResolutionUnit">2</MDI>
+    <MDI key="EXIF_Software">Adobe Photoshop CC 2017 (Windows)</MDI>
+    <MDI key="EXIF_XResolution">(300)</MDI>
+    <MDI key="EXIF_YCbCrPositioning">1</MDI>
+    <MDI key="EXIF_YResolution">(300)</MDI>
+  </Metadata>
+  <PAMRasterBand band="1">
+    <Metadata domain="IMAGE_STRUCTURE">
+      <MDI key="COMPRESSION">JPEG2000</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="2">
+    <Metadata domain="IMAGE_STRUCTURE">
+      <MDI key="COMPRESSION">JPEG2000</MDI>
+    </Metadata>
+  </PAMRasterBand>
+  <PAMRasterBand band="3">
+    <Metadata domain="IMAGE_STRUCTURE">
+      <MDI key="COMPRESSION">JPEG2000</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>

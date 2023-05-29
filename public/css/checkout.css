@@ -1,0 +1,88 @@
+
+#monies_submit:disabled { opacity:  0.65; cursor: not-allowed; }
+.project_name { display: flex; text-align: left !important; margin-top: 10px; text-align: center; border-bottom: 2px solid rgb(230, 230, 230); padding: 0 0 10px 0; }
+.tab_chanel_list img:not(.play_now) { }
+.tab_chanel_list img.play_now { width: 30px !important; }
+.ch_tp_sec_left a, .tab_chanel_list a { width: unset; max-width: unset !important; min-width: unset !important; }
+.tabd2_head { font-size: 15px !important; font-family: Open sans, sans-serif !important; }  
+.each-music .thismusic_user_name {  }
+.each-music .thismusic_license_name { font-size: 12px; }
+.each-music .lower_music_det .each_lower_det { font-size: 9px !important; }
+.each-music .thismusic_wave_img img { display: none; }
+.each-music .fav_np, .each-music .buy_np, .each-album .buy_np, .each-album-music .fav_np, .each-album-music .buy_np { font-size: 18px !important; }
+.tab_chanel_img_det p, .tab_chanel_img_det a, .tp_sec_in_det a strong {  }
+.user_product_summary_left { float: left; margin-top: 12px; margin-right: 10px; }
+.user_product_summary_right { float: left; margin-top: 12px; }
+.user_product_summary_left img { width: 120px !important; margin: unset !important; }
+.user_product_summary_right h3 { font-size: 16px !important; }
+.user_product_summary_right p { font-size: 14px !important; color: #999 !important; margin: 0 !important; }
+.tot_awe_pro_upper { flex-direction: column; align-items: flex-start; }
+.proj_notice_head { margin-bottom: 5px; color: #fff; font-family: Open Sans, sans-serif; font-size: 16px; margin-top: 10px; border-bottom: 2px solid rgb(230, 230, 230); padding: 0 0 10px 0; }
+.user_product_img_thumb,.tot_awe_pro_outer { padding: 0 0 20px 0 !important; }
+.tot_awe_stand { margin-bottom: 20px; }
+.each-album { background: none !important; }
+.album_tab_lowerSection { padding: 20px 10px !important; }
+.each-album-music .thismusic_wave_img, .each-music .thismusic_wave_img { margin-top: 15px !important; }
+.each-album-music .thismusic_song_name, .each-music .thismusic_song_name { color: #fff; }
+.item_share { font-size: 18px !important; }
+.tab_chanel_list .tab_chanel_img_det a { display: none; }
+.wrapper_outer { background: #f1f1f1; }
+
+.cart_items_outer .ch_select_perch_options { padding: 5px !important; color: #444 !important; border: 1px solid #444 !important; line-height: unset !important;  height: auto !important; }
+.cart_items_outer .ch_select_perch_options text { line-height: unset !important; padding: 3px 4px !important; font-size: 16px !important; }
+.cart_suggestions_outer .ch_select_perch_options { font-size: 16px !important;  }
+.cart_suggestions_outer .ch_select_perch_options text { font-size: 14px; }
+.make_offer_outer { font-size: 14px; }
+.tot_awe_pro_outer h3, .summary .thismusic_song_name, .summary .thismusic_album_name {  }
+#cart_scrutiny { margin: 0 0 0 20px; cursor: pointer; }
+.colio_header { display: flex; flex-direction: row; align-items: center; justify-content: center; }
+.ch_center_outer h4 { display: block; text-align: center; }
+#email_error, #city_error, #password_error, #m_e_error, #p_e_error { font-size: 12px; color: #dc3545; font-family: Open sans, sans-serif; padding: 0; }
+
+.proj_notice_para { font-size: 14px; color: #fff; line-height: 22px; font-family: Open Sans, sans-serif; margin-top: 20px; }
+.proj_notice_head_two { background: #818181; color: #fff; padding: 6px; margin-top: 20px; }
+.proj_notice_list { color: #fff; line-height: 25px; margin-left: 30px; margin-top: 12px; }
+.proj_notice_list li { list-style: disc; }
+.user_product_summary_actions { float: right; margin-top: 37px; color: #fff; display: flex; flex-direction: column; }
+.user_product_action_btn { padding: 5px; cursor: pointer; font-size: 12px; text-align: center; }
+.item_disp_update_price { background-color: #1e7e34; }
+.item_disp_remove { background-color: #000; }
+
+.tot_awe_pro_colors,.tot_awe_pro_sizes,.tot_awe_pro_quantity { margin-left: 0; margin-bottom: 20px; }
+.user_product_actions { display: none; }
+
+.proj_cont_each_det { display: flex; flex-direction: row; align-items: center; cursor: pointer; border: 1px solid #fff; padding: 20px 10px; position: relative; }
+.proj_cont_each_det .selected { position: absolute; top: -5px; right: -5px; background: #13a89e; color: #fff; padding: 5px; border-radius: 50%; display: none; }
+.proj_det_paypal_icon i { color: #fff; font-size: 36px; margin-right: 5px; }
+.proj_det_name { color: #fff; }
+.proj_det_stripe_icon { display: flex; flex-direction: row; align-items: center; }
+.proj_det_stripe_icon i { color: #fff; font-size: 36px; margin-right: 5px; }
+.proj_cont_each_det.active { border-color: #13a89e; } 
+.proj_cont_each_det.active .selected { display: block; }
+.proj_cont_each_det.disabled { opacity: 0.3; cursor: not-allowed; }
+
+@media (min-width: 768px){
+
+	.tot_awe_pro_outer h3 { margin-left: 0 !important; margin-top: 5px; }
+	.tot_awe_pro_outer p { margin-left: 0 !important; }
+}
+
+@media (min-width:320px) and (max-width: 767px) {
+
+	.user_product_summary_right,.user_product_summary_left { width: unset !important; }
+	.each-music .summary .main_img,.each-music .summary .main_an { min-height: unset !important; max-height: unset !important; max-width: 120px !important; }
+	.each-music { margin-top: 15px !important; margin-bottom: 0 !important; }
+	.tot_awe_pro_outer h3 { white-space: unset !important; font-size: 14px !important; margin-top: 10px; padding-bottom: 0; }
+    .panel { padding: 5px !important; }
+    .proj_cnter_story_sec_oter { padding-right: auto !important; }
+    .proj_cntr_contribut_sec_otr ul li b { line-height: 21px; }
+    #cart_scrutiny { display:  block; border-bottom: none !important; text-align: center !important; }
+    #shopping_suggest_filler,#checkout_filler { margin-top: 20px; }
+    .tab_chanel_list img { height: auto; }
+    .content_outer:not(.playing) .content_inner { padding: 20px 0 10px 0 !important; }
+    .content_outer { margin-top: 55px; } 
+    .cart_suggestions_outer,.cart_items_outer { padding: 20px 0; }
+    .proj_cont_each_det { flex-direction: column; }
+    .proj_det_pic { margin-bottom: 10px; }
+    .proj_det_stripe_icon i,.proj_det_paypal_icon i { font-size: 30px; }
+}
