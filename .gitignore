@@ -15,3 +15,16 @@ yarn-error.log
 /.idea
 /.vscode
 /storage
+/.htaccess
+/public/.htaccess
+/public/index.php
+/public/sitemap.xml
+/public/robots.txt
+/public/ic_update.php
+/public/ic_insert.php
+/public/firebase-messaging-sw.js
+/public/favicon.ico
+/public/error_log
+/public/apple-touch-icon-se.png
+/config/constants.php
+/server.php
