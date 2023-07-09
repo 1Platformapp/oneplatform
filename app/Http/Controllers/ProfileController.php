@@ -111,10 +111,10 @@ class ProfileController extends Controller
 
         		//$fcm = new PushNotificationController();
         		//$return = $fcm->send('eyRJ5GFQGkXrgQHrQ3joy2:APA91bGJJj6_Bjqawvz_rdTl1Am0ygeKTJxKlfYEjOOzn-Nr_6ckQuNZfJ0Ftzzt8N_Kn-D3DMXKyb0CwqGk4GODXKUapw5UsOSYKCjaqX3E2jPMMht1Tcmh5ax_RjKXwORzZvKYBqwi', 'Message From Ahsan', 'The night is dark and full of terrors', 'ios');
-                
+
 
         		//print($fileName);exit;
-                
+
             }
 
             if(isset($request->email_user) && $user->id != $request->email_user){
@@ -129,12 +129,12 @@ class ProfileController extends Controller
         if($user->profile->basic_setup != 1 && !$user->is_buyer_only){
 
             if(Session::has('forceNext')){
-                
+
                 $forceN = Session::get('forceNext');
                 Session::forget('forceNext');
                 return redirect(route('profile.setup', ['page' => $forceN]));
             }else{
-                
+
                 $setupProfileWizard = $user->setupProfileWizard();
 
                 if($setupProfileWizard['error'] != ''){
@@ -207,18 +207,18 @@ class ProfileController extends Controller
         $fans = [];
         foreach ($instantSales as $key => $checkout) {
             foreach ($checkout->instantCheckoutItems as $key => $instantCheckoutItem) {
-                
+
                 if($instantCheckoutItem->type == 'music'){
-                    $singlesSold++; 
+                    $singlesSold++;
                 }
                 if($instantCheckoutItem->type == 'album'){
-                    $albumsSold++; 
+                    $albumsSold++;
                 }
                 if($instantCheckoutItem->type == 'product'){
-                    $productsSold++; 
+                    $productsSold++;
                 }
                 if($instantCheckoutItem->type == 'custom-product'){
-                    $productsSold++; 
+                    $productsSold++;
                 }
                 if($checkout->customer && !in_array($checkout->customer->id, $fans)){
                 	$fans[] = $checkout->customer->id;
@@ -229,7 +229,7 @@ class ProfileController extends Controller
             $totalRevenue += $commonMethods->convert($checkout->currency, strtoupper($user->profile->default_currency), $checkAmount);
         }
         foreach ($crowdfundSales as $key => $checkout) {
-            
+
             if($checkout->stripe_charge_id){
 
                 $totalRevenue += $commonMethods->convert($checkout->currency, strtoupper($user->profile->default_currency), $checkout->amount);
@@ -275,7 +275,7 @@ class ProfileController extends Controller
                 $fileName = 'agent-agreements/'.$pdfName;
                 $data = ['expert' => $user->expert];
                 PDF::loadView('pdf.agent-platform-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
-                $user->expert->pdf = $pdfName; 
+                $user->expert->pdf = $pdfName;
                 $user->expert->save();
             }
         }
@@ -294,7 +294,7 @@ class ProfileController extends Controller
             if($clientsPortalCon && $result = mysqli_query($clientsPortalCon, 'SELECT * FROM Voucher ORDER BY id DESC')){
                 $assocArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 foreach($assocArray as $key => $value){
-                    
+
                     $vouchers[$value['id']]['id'] = $value['id'];
                     $vouchers[$value['id']]['name'] = $value['name'];
                 }
@@ -340,7 +340,7 @@ class ProfileController extends Controller
 
             'instantPurchases' => $instantPurchases,
 
-            'instantSales' => $instantSales, 
+            'instantSales' => $instantSales,
 
             'crowdfundPurchases' => $crowdfundPurchases,
 
@@ -387,7 +387,7 @@ class ProfileController extends Controller
 
             Session::flash('user_has_invalid_email', '1');
         }
-        
+
         $this->updateUserStripeData($user);
 
         return view( 'pages.profile', $data );
@@ -414,10 +414,10 @@ class ProfileController extends Controller
     }
 
     public function startupWizard(Request $request, $action = null){
-    
+
         $referer = request()->headers->get('referer');
         if ($referer && strpos($referer, '/profile-setup/' ) !== false) {
-            
+
             $backBtnUrl = $referer;
             $backBtnUrl = str_replace('profile-setup', 'profile-setup/next', $backBtnUrl);
         }else{
@@ -483,13 +483,13 @@ class ProfileController extends Controller
         }else if($action == 'upgrade-subscription'){
 
             if(!$user->internalSubscription){
-                
+
                 return redirect(route('profile'));
             }
-            
+
             $package = explode('_', $user->internalSubscription->subscription_package);
             if($package[0] != 'silver'){
-                
+
                 return redirect(route('profile'));
             }
 
@@ -516,7 +516,7 @@ class ProfileController extends Controller
 
                 $lastUpdated = $user->profile->stripe_data_last_updated_at;
                 if($user->internalSubscription && $user->internalSubscription->stripe_customer_id && $user->internalSubscription->stripe_subscription_id && (!$lastUpdated || strtotime(date('Y-m-d H:i:s')) - strtotime($lastUpdated) >= 86400)){
-                    
+
                     // updates the stripe data once in a day
 
                     $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
@@ -551,7 +551,7 @@ class ProfileController extends Controller
                                     $internalInvoice->stripe_charge_id = $invoice['charge'] != '' ? $invoice['charge'] : NULL;
                                     $internalInvoice->created_at_stripe = $invoice['created'];
                                     $internalInvoice->currency = $invoice['currency'];
-                                    $internalInvoice->pay_invoice_url = $invoice['hosted_invoice_url'] != '' ? $invoice['hosted_invoice_url'] : NULL; 
+                                    $internalInvoice->pay_invoice_url = $invoice['hosted_invoice_url'] != '' ? $invoice['hosted_invoice_url'] : NULL;
                                     $internalInvoice->download_invoice_url = $invoice['invoice_pdf'] != '' ? $invoice['invoice_pdf'] : NULL;
                                     $internalInvoice->period_start = $invoice['lines']['data'][0]['period']['start'];
                                     $internalInvoice->period_end = $invoice['lines']['data'][0]['period']['end'];
@@ -570,7 +570,7 @@ class ProfileController extends Controller
                                     $internalInvoice->amount_paid = $invoice['amount_paid'];
                                     $internalInvoice->attempt_count = $invoice['attempt_count'];
                                     $internalInvoice->stripe_charge_id = $invoice['charge'] != '' ? $invoice['charge'] : NULL;
-                                    $internalInvoice->pay_invoice_url = $invoice['hosted_invoice_url'] != '' ? $invoice['hosted_invoice_url'] : NULL; 
+                                    $internalInvoice->pay_invoice_url = $invoice['hosted_invoice_url'] != '' ? $invoice['hosted_invoice_url'] : NULL;
                                     $internalInvoice->download_invoice_url = $invoice['invoice_pdf'] != '' ? $invoice['invoice_pdf'] : NULL;
                                     $internalInvoice->next_payment_attempt = $invoice['next_payment_attempt'] == '' ? NULL : $invoice['next_payment_attempt'];
 
@@ -582,9 +582,9 @@ class ProfileController extends Controller
                         $user->profile->stripe_data_last_updated_at = date('Y-m-d H:i:s');
                         $user->profile->save();
                     }
-                }    
+                }
             }else if($action == 'cancel_subscription'){
-                
+
             }
         }
     }
@@ -705,12 +705,12 @@ class ProfileController extends Controller
 
                         $user->internalSubscription->delete();
                     }
-                    
+
                 	$card = $response['paymentMethod']['card'];
                     $paymentIntent = $response['subscription']['latest_invoice']['payment_intent'];
                     $data['subscription_payment_intent_status'] = $paymentIntent['status'];
                     $data['subscription_payment_intent_client_secret'] = $paymentIntent['client_secret'];
-                    
+
                     $userInternalSubscription = new InternalSubscription();
                     $userInternalSubscription->user_id = $user->id;
                     $userInternalSubscription->stripe_subscription_id = $response['subscription']['id'];
@@ -936,7 +936,7 @@ class ProfileController extends Controller
         }
 
         if($planId != ''){
-            
+
             $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
             try {
 
@@ -1044,7 +1044,7 @@ class ProfileController extends Controller
     {
 
         $user = User::where('username', $userParams)->where('active' , '1')->first();
-                    
+
         if(!$user){
             return redirect(route('site.home'));
         }
@@ -1059,7 +1059,7 @@ class ProfileController extends Controller
 
             $videos = $competition->videos()->where('show_in_cart', 1)->with( 'profile.user.address', 'profile.job' )->orderBy( DB::raw( 'ISNULL(`rank`),`rank`' ) )->get();
         }
-        
+
         $userVideo = $competition->videos()->where('profile_id', $user->profile->id)->orderBy( 'id', 'desc' )->first();
 
         $projectVideo = $user->profile->user_bio_video_url != "" ? Youtube::parseVIdFromURL($user->profile->user_bio_video_url) : "";
@@ -1179,7 +1179,7 @@ class ProfileController extends Controller
         if($subTab){
             Session::flash('subTab', $subTab);
         }
-        
+
         return redirect(route('profile'));
     }
 
@@ -1289,7 +1289,7 @@ class ProfileController extends Controller
         if($userParams == 'customDomain'){
 
             //$result = Mail::to('sheikh.muhammad.hanif.99@gmail.com')->send(new \App\Mail\Agent(UserChat::all()->first()));
-                
+
 
             // routed from user custom domain
             $serverName = $_SERVER['SERVER_NAME'];
@@ -1302,14 +1302,14 @@ class ProfileController extends Controller
                 }
 
                 $user = $customDomainActiveSubscription->user;
-                
+
                 if($user->hasActivePaidSubscription()){
-                    
+
                 }else{
 
                     return redirect(route('user.home', ['params' => $user->username]));
                 }
-            } 
+            }
 
             if(!isset($_SESSION)) {
                 session_start();
@@ -1317,14 +1317,14 @@ class ProfileController extends Controller
             $mergeCartId =isset($_SESSION['basket_customer_id'])?$_SESSION['basket_customer_id']:time()+rand(10000, 99999);
             Session::flash('mergeCart', $mergeCartId);
 
-            if($user->default_tab_home != null && $user->default_tab_home != ''){ 
+            if($user->default_tab_home != null && $user->default_tab_home != ''){
                 Session::flash('loadUserTab', $user->default_tab_home);
             }
 
         }else if($userParams != ''){
 
             $user = User::where('username', $userParams)->where('active' , '1')->first();
-            
+
             if(!$user){
 
                 if(Auth::check()){
@@ -1334,7 +1334,7 @@ class ProfileController extends Controller
                 return redirect(route('site.home'));
             }
 
-            if($user->default_tab_home != null && $user->default_tab_home != ''){ 
+            if($user->default_tab_home != null && $user->default_tab_home != ''){
                 Session::flash('loadUserTab', $user->default_tab_home);
             }
         }
@@ -1409,13 +1409,13 @@ class ProfileController extends Controller
 
         $referer = request()->headers->get('referer');
         if($referer != '' && $user->profile->splash && isset($user->profile->splash['type'])){
-            
+
             if($user->profile->splash['type'] == 'product'){
                 $item = UserProduct::find($user->profile->splash['id']);
             }else{
                 $item = UserMusic::find($user->profile->splash['id']);
             }
-            
+
             if($user->profile->splash['type'] == 'music'){
                 $splashUrl = route('item.share.track', ['itemSlug' => str_slug($item->song_name)]);
             }else{
@@ -1434,7 +1434,7 @@ class ProfileController extends Controller
 
         	Session::flash('notice', 'You will receive an E-voucher for print immediately after your purchase');
         }
-        
+
 
         $data   = [
 
@@ -1583,7 +1583,7 @@ class ProfileController extends Controller
 
         //return $return;
 
-        
+
 
         return Redirect::back()->with("page", "uploads");
 
@@ -1743,7 +1743,7 @@ class ProfileController extends Controller
         //ini_set('memory_limit', '512M');
 
         $commonMethods = new CommonMethods();
-        
+
         $referer = request()->headers->get('referer');
 
         $user = Auth::User();
@@ -1883,7 +1883,7 @@ class ProfileController extends Controller
             if($duplication){
                 Session::flash('error', 'Username already exists in our system. Choose another');
             }else{
-                
+
                 $user->username = $request->username;
             }
         }
@@ -1922,7 +1922,7 @@ class ProfileController extends Controller
             $extention = $profileImage->getClientOriginalExtension();
             $allowedExtensions = ['jpg', 'png', 'jpeg'];
             if(in_array($extention, $allowedExtensions)){
-                
+
                 $originalImageName = "user-orig-" . uniqid() . "." . $extention;
                 $imageName = "user-dp-" . uniqid() . "." . $extention;
                 $sliderImageName = "user-dp-slider" . uniqid() . "." . $extention;
@@ -1970,7 +1970,7 @@ class ProfileController extends Controller
             $extention = $icon->getClientOriginalExtension();
             $allowedExtensions = ['ico'];
             if(in_array($extention, $allowedExtensions)){
-                
+
                 $faviconName = 'user-favicon-'.uniqid().'.'.$extention;
                 $faviconPath = public_path('user-media/favicon/').$faviconName;
                 if(move_uploaded_file($_FILES['pro_favicon_ico']['tmp_name'], $faviconPath)){
@@ -1995,10 +1995,10 @@ class ProfileController extends Controller
                 $id = $explode[1];
                 $it = $explode[0];
                 if($it == 'product'){
-                    
+
                     $item = UserProduct::where(['id' => $id, 'user_id' => $user->id])->get()->first();
                 }else if($it == 'music'){
-                    
+
                     $item = UserMusic::where(['id' => $id, 'user_id' => $user->id])->get()->first();
                 }
 
@@ -2161,7 +2161,7 @@ class ProfileController extends Controller
                         }
                         $record = PortfolioElement::where(['order' => $key, 'portfolio_id' => $portfolio->id])->first();
                         $pElement = ($record === null) ? new PortfolioElement() : $record;
-                        
+
                         if($record && $record->type == 'image' && CommonMethods::fileExists(public_path('portfolio-images/').$record->value)){
 
                             unlink(public_path('portfolio-images/').$record->value);
@@ -2307,15 +2307,15 @@ class ProfileController extends Controller
                     }
 
                     $designDetails = [
-                        'product_id' => $userProduct['design']['product_id'], 
+                        'product_id' => $userProduct['design']['product_id'],
                         'design_id' => $userProduct['design']['design_id'],
                         'design_type' => $userProduct['design']['design_type'],
                         'colors' => $col,
                         'default_color' => $defaultColor,
                         'design_pos' => [
-                            'top' => $userProduct['design']['design_pos']['top'], 
-                            'left' => $userProduct['design']['design_pos']['left'], 
-                            'width' => $userProduct['design']['design_pos']['width'], 
+                            'top' => $userProduct['design']['design_pos']['top'],
+                            'left' => $userProduct['design']['design_pos']['left'],
+                            'width' => $userProduct['design']['design_pos']['width'],
                             'height' => $userProduct['design']['design_pos']['height'],
                             'angle' => $userProduct['design']['design_pos']['angle'],
                         ]
@@ -2453,7 +2453,7 @@ class ProfileController extends Controller
 
                 $stream = new UserLiveStream();
             }
-            
+
             $stream->user_id = $user->id;
             $stream->url = $url;
             $stream->product = $product != '' ? $product : NULL;
@@ -2675,7 +2675,7 @@ class ProfileController extends Controller
                     }
 
                     if(!file_exists(public_path($mainFolder))){
-                        
+
                         mkdir($mainFolder, 0777, true);
                         mkdir($mainFolder.'/templates', 0777, true);
                         mkdir($mainFolder.'/templates/resized', 0777, true);
@@ -2700,7 +2700,7 @@ class ProfileController extends Controller
                     }else{
                         $response = ['success' => 0, 'error' => $imageGrey['error'], 'data' => 0];
                     }
-                    
+
                 }else if($request->has('pro_design_exist_file')){
 
                     $designImage = UserProductDesign::where(['user_id' => $user->id, 'id' => $request->pro_design_exist_file])->first();
@@ -2801,20 +2801,20 @@ class ProfileController extends Controller
                                             }
                                         }
                                     }
-                                    
+
                                     if($response['success'] == 1){
                                         $firstProduct = UserProduct::where(['user_id' => $user->id])->orderBy('order', 'desc')->first();
                                         $order = $firstProduct ? ((int)$firstProduct->order) + 1 : 1;
                                         $designDetails = [
-                                            'product_id' => $productId, 
+                                            'product_id' => $productId,
                                             'design_id' => $designId,
                                             'design_type' => $prodType,
                                             'colors' => $col,
                                             'default_color' => $defaultColor,
                                             'design_pos' => [
-                                                'top' => $top, 
-                                                'left' => $left, 
-                                                'width' => $width, 
+                                                'top' => $top,
+                                                'left' => $left,
+                                                'width' => $width,
                                                 'height' => $height,
                                                 'angle' => $angle,
                                             ]
@@ -2893,7 +2893,7 @@ class ProfileController extends Controller
                     }
                     $userMusic->order = $order;
                 }
-    
+
                 $userMusic->song_name = $request->song_name != NULL ? $request->song_name : "";
                 $userMusic->album_name = $request->album_name != NULL ? $request->album_name : "";
                 $userMusic->bpm = $request->bpm != NULL ? $request->bpm : "";
@@ -2906,7 +2906,7 @@ class ProfileController extends Controller
                 $userMusic->slug = str_slug($userMusic->song_name);
 
                 foreach (Config('constants.licenses') as $key2 => $eachLicense) {
-                    
+
                     if($request->has($eachLicense['input_name'])){
 
                         $userMusic->{$eachLicense['input_name']} = $request->get($eachLicense['input_name']) != '' ? strtoupper($request->get($eachLicense['input_name'])) : NULL;
@@ -2923,7 +2923,7 @@ class ProfileController extends Controller
                 if($request->use_of_licenses_perpetual == 1){
                     $userMusic->use_of_licenses_perpetual = $request->use_of_licenses_perpetual != NULL ? $request->use_of_licenses_perpetual: "";
                 }
-                
+
                 $userMusic->allow_bespoke_license_offer = $request->allow_bespoke_license_offer == 1 ? 1 : NULL;
                 $userMusic->instruments = array_filter(explode(',', trim($request->instruments)));
 
@@ -2958,13 +2958,13 @@ class ProfileController extends Controller
                     $userMusic->thumbnail_player = 'player-thumbnail-user-'.$user->id.'-uniquid-'.$uniqueId.'-pp'.'.'.$ext;
                     $userMusic->thumbnail_feat = 'thumbnail-feat-'.$user->id.'-uniquid-'.$uniqueId.'-pp'.'.'.$ext;
                 }
-                
+
                 $userMusic->save();
 
                 $data['music_id'] = $userMusic->id;
 
                 if(!$user->has_music_license && $musicHasLicense){
-                    
+
                     $userNotification = new UserNotificationController();
                     $request->request->add(['user' => 727, 'customer' => $user->id, 'type' => 'music_license_verification', 'source_id' => $user->id]);
                     $response = json_decode($userNotification->create($request), true);
@@ -2988,7 +2988,7 @@ class ProfileController extends Controller
 
                     $contents = collect(Storage::cloud()->listContents('/', false));
                     foreach ($musicArray as $key => $download) {
-                        
+
                         if($download['itemtype'] == $itemType){
 
                             if(strpos($download['itemtype'], 'loop') !== false){
@@ -3056,7 +3056,7 @@ class ProfileController extends Controller
                             $music->addDownloadItem($fileDetails, $itemType, 'local', $fileName);
                             $data['music_mp3'] = $fileName;
                             $success = 1;
-                        }else{  
+                        }else{
                             $error = 'Error: Your package storage limit has reached';
                         }
                     }
@@ -3083,11 +3083,11 @@ class ProfileController extends Controller
                     $contents = collect(Storage::cloud()->listContents('/', false));
 
                     foreach ($deleteExplode as $key => $value) {
-                        
+
                         if(count($musicArray)){
-                            
+
                             foreach ($musicArray as $key => $download) {
-                                
+
                                 if($download['itemtype'] == $value){
 
                                     if(strpos($download['itemtype'], 'loop') !== false){
@@ -3158,7 +3158,7 @@ class ProfileController extends Controller
 
                             $tracks = $music->loops;
                             if(is_array($tracks) && count($tracks) && isset($tracks[$trackIndex])){
-                                
+
                                 if(CommonMethods::fileExists(public_path( 'user-music-files/loops/' ).$tracks[$trackIndex])) {
 
                                     unlink(public_path('user-music-files/loops/').$tracks[$trackIndex]);
@@ -3166,7 +3166,7 @@ class ProfileController extends Controller
                                 $tracks[$trackIndex] = '';
                                 $music->loops = $tracks;
                                 $music->save();
-                                
+
                                 $success = 1;
                             }
                         }
@@ -3212,10 +3212,10 @@ class ProfileController extends Controller
 
                 $email = $request->email;
                 $password = $request->password;
-                
+
                 if (Auth::attempt(array('email' => $email, 'password' => $password))){
                     $success = 1;
-                }else{        
+                }else{
                     $errorMessage = 'Incorrect credentials';
                     $success = 0;
                 }
@@ -3243,9 +3243,9 @@ class ProfileController extends Controller
                 $followee = User::find($request->user);
                 $follower = $user;
                 $message = $request->has('message') ? $request->message : null;
-                    
+
                 if(!UserFollow::where(['followee_user_id' => $followee->id, 'follower_user_id' => $follower->id])->exists()){
-                    
+
                     $userFollow = new UserFollow();
                     $userFollow->followee_user_id = $followee->id;
                     $userFollow->follower_user_id = $follower->id;
@@ -3257,7 +3257,7 @@ class ProfileController extends Controller
                     $response = json_decode($userNotification->create($request), true);
 
                     $success = 1;
-                }else{        
+                }else{
                     $errorMessage = 'You are already following this user';
                     $success = 0;
                 }
@@ -3282,14 +3282,14 @@ class ProfileController extends Controller
             $email = $request->get('pro_fill_email');
             $password = $request->get('pro_fill_password');
             $user = Auth::user();
-            
+
             $emailExist = User::where('email', $email)->get()->first();
             if(!$emailExist){
 
                 $user->email = $email;
                 $user->password = bcrypt($password);
                 $user->save();
-                
+
                 $success = 1;
                 $error = '';
             }else{
@@ -3300,7 +3300,7 @@ class ProfileController extends Controller
             $success = 0;
             $error = 'No data';
         }
-        
+
         return json_encode(['success' => $success, 'error' => $error]);
     }
 
@@ -3312,7 +3312,7 @@ class ProfileController extends Controller
 
             $musicFileName = $request->get('music_file_name');
             $musicWaveFormImageBase64 = $request->get('music_waveform_image');
-            
+
             $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $musicWaveFormImageBase64));
             if($imageData !== false){
 
@@ -3322,7 +3322,7 @@ class ProfileController extends Controller
 
                 $fileName = null;
             }
-            
+
             $music = UserMusic::where('music_file', $musicFileName)->get()->first();
             if($music){
 
@@ -3345,10 +3345,10 @@ class ProfileController extends Controller
             $success = 0;
             $error = 'No data';
         }
-        
+
         return json_encode(['success' => $success, 'error' => $error]);
     }
-    
+
     public function deleteLiveStream(Request $request){
 
         $return['error'] = $return['success'] = '';
@@ -3514,7 +3514,7 @@ class ProfileController extends Controller
                     }
 
                     foreach($product->design['colors'] as $key => $color){
-                        
+
                         if(CommonMethods::fileExists(public_path($designsPath).$color['image'])){
 
                             unlink(public_path($designsPath).$color['image']);
@@ -3692,7 +3692,7 @@ class ProfileController extends Controller
 
                         unlink(public_path('user-music-thumbnails/') . $music->thumbnail);
                     }
-                    
+
                     if($music->music_file != '' && CommonMethods::fileExists(public_path('user-music-files/') . $music->music_file)) {
 
                         unlink(public_path('user-music-files/') . $music->music_file);
@@ -3701,7 +3701,7 @@ class ProfileController extends Controller
 
                             $contents = collect(Storage::cloud()->listContents('/', false));
                             foreach ($downloads as $key => $download) {
-                                
+
                                 if(strpos($download['itemtype'], 'loop') !== false){
                                     $UnFileDir = 'loops/';
                                 }else if(strpos($download['itemtype'], 'stem') !== false){
@@ -3917,7 +3917,7 @@ class ProfileController extends Controller
         }else{
             $storyImagesNew[2] = isset($storyImages[2]) ? $storyImages[2] : '';
         }
-        
+
         $user->profile->story_images = implode(',', $storyImagesNew);
 
         $user->profile->save();
@@ -3969,12 +3969,12 @@ class ProfileController extends Controller
 
                     $success = 1;
                 }
-           } 
+           }
         }else{
 
             $error = 'No data';
         }
-        
+
         return json_encode(['success' => $success, 'error' => $error]);
     }
 
@@ -4074,7 +4074,7 @@ class ProfileController extends Controller
             $output32 = curl_exec($ch3);
             curl_close ($ch3);
             $return3 = json_decode(trim($output32), TRUE);
-            
+
             if( strlen($userAccessTokenSL) && strlen($userId) ){
 
                 if( Auth::user() ){
@@ -4089,7 +4089,7 @@ class ProfileController extends Controller
 
                     return redirect(route('profile'));
 
-                }else{  
+                }else{
 
                     $redirectUrl = "/profile";
                     $isBuyerOnly = NULL;
@@ -4167,12 +4167,12 @@ class ProfileController extends Controller
                }else{
                    $error = 'Email/Password is not correct';
                }
-           } 
+           }
         }else{
 
             $error = 'No data';
         }
-        
+
 
         return json_encode(['success' => $success, 'error' => $error]);
     }
@@ -4302,7 +4302,7 @@ class ProfileController extends Controller
         $iFrame = '';
         $commonMethods = new commonMethods;
         if($request->userId){
-            
+
             $user = User::find($request->userId);
         }else{
 
@@ -4394,7 +4394,7 @@ class ProfileController extends Controller
                 $subs = StripeSubscription::find($type_id);
 
                 if($subs){
-                    
+
                     $subs->thank_you_sent = 1;
                     $subs->save();
                 }
@@ -4741,7 +4741,7 @@ class ProfileController extends Controller
             "result" => $return2,
 
             "totalRecords" => $get_total_rows,
-            
+
             "success" => 1,
 
         );
@@ -4768,7 +4768,7 @@ class ProfileController extends Controller
 
             $campaign = $commonMethods->getUserRealCampaignDetails($user->id);
             $userCampaign = userCampaign::find($campaign['id']);
-            
+
             if(!$campaign['campaignTitle'] || $campaign['campaignTitle'] == ''){
 
                 $userCampaign->created_at = date('Y-m-d H:i:s');
@@ -4888,13 +4888,13 @@ class ProfileController extends Controller
 
                 $user->subscription_amount = $request->subscription_amount;
             }
-            
+
 
             $user->accept_donations = $request->accept_donations == 1 ? $request->accept_donations : null;
 
             $user->save();
 
-            return redirect(route('profile'));  
+            return redirect(route('profile'));
         }
     }
 
@@ -5334,7 +5334,7 @@ class ProfileController extends Controller
                         $userProfile->user_bio_video_id = $videoUrl != '' ? Youtube::parseVIdFromURL($videoUrl) : NULL;
 
                         $userProfile->user_bio_video_title = $videoUrl != '' ? substr($commonMethods->getVideoTitle($userProfile->user_bio_video_id), 0, 40) : NULL;
-                        
+
                         $userProfile->user_bio_video_url = $videoUrl;
 
                         $userProfile->save();
@@ -5528,7 +5528,7 @@ class ProfileController extends Controller
                 $sourceFile = strpos($filePath, 'STAN_') !== false ? public_path('standard-licenses/'.$filePath) : public_path('bespoke-licenses/'.$filePath);
                 $mime = 'application/pdf';
             }
-            
+
 
             if($type != ''){
 
@@ -5540,7 +5540,7 @@ class ProfileController extends Controller
                 }else{
                     $filename = $explode[0].trim($music->song_name).' - 1Platform TV.'.$extensions[$mime];
                 }
-                
+
 
                 if(strpos($type, 'loop') !== false){
                     $decFDir = 'loops/';
@@ -5560,7 +5560,7 @@ class ProfileController extends Controller
                 readfile($sourceFile);
 
                 exit;
-                
+
             }else{
                 $error = 'File not found';
             }
@@ -5726,10 +5726,10 @@ class ProfileController extends Controller
 
     public function getUserTwitterContent($username)
     {
-        
+
         session_start();
         require_once("twitter-custom-embedded-feed/twitteroauth/twitteroauth/twitteroauth.php");
-         
+
         $twitterUsername = trim($username);
         $twitteruser = $twitterUsername;
         $notweets = 10000;
@@ -5737,16 +5737,16 @@ class ProfileController extends Controller
         $consumersecret = "R8KFwit0M6EE0yMD9OxmoT74VKmlS7Lr09ZnjxPXuPa71A4FJg";
         $accesstoken = "2491516098-eBEhuseamO5TXqUbohkG4TVI55ZXnAKuj1DFVUa";
         $accesstokensecret = "52KPbQWWZodK6rEj8uHd70B9gnsZKmkYa2ctM7UXyjIDu";
-         
+
         function getConnectionWithAccessToken($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
           $connection = new \TwitterOAuth($cons_key, $cons_secret, $oauth_token, $oauth_token_secret);
           return $connection;
         }
-         
+
         $connection = getConnectionWithAccessToken($consumerkey, $consumersecret, $accesstoken, $accesstokensecret);
-         
+
         $tweets = $connection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$twitteruser."&count=".$notweets);
-         
+
         echo json_encode($tweets);
     }
 
@@ -5766,7 +5766,7 @@ class ProfileController extends Controller
 
                 $id = $request->get('id');
                 if($id == 'my_url' && $request->get('domain_url') != ''){
-                    
+
                     $customDomain->domain_url = $request->get('domain_url');
                     $customDomain->save();
 
@@ -5841,17 +5841,17 @@ class ProfileController extends Controller
         $errorMessage = '';
 
         if(Auth::check()){
-            
+
             $user = Auth::user();
             if($request->has('url') && $request->has('action') && $request->get('action') == 'add'){
 
                 $user->music_smart_links_url = $request->get('url');
-                $user->save(); 
+                $user->save();
 
                 $success = 1;
             }else if( $request->has('action') && $request->get('action') == 'remove'){
                 $user->music_smart_links_url = NULL;
-                $user->save(); 
+                $user->save();
 
                 $success = 1;
             }else{
@@ -5871,7 +5871,7 @@ class ProfileController extends Controller
         $errorMessage = '';
 
         if(Auth::check()){
-            
+
             $user = Auth::user();
             if($request->has('music_id') && $request->has('status') && $request->has('pin')){
 
@@ -5912,7 +5912,7 @@ class ProfileController extends Controller
 
                 $id = $request->get('id');
                 if($id == 'custom_logo' && $request->hasFile('logo')){
-                    
+
                     $image = $request->file('logo');
                     $extention = $image->getClientOriginalExtension();
                     $allowedExtensions = ['jpg', 'png', 'jpeg'];
@@ -5937,7 +5937,7 @@ class ProfileController extends Controller
                         $errorMessage = 'Logo image format is not supported';
                     }
                 }else if($id == 'custom_banner' && $request->hasFile('banner')){
-                    
+
                     $image = $request->file('banner');
                     $extention = $image->getClientOriginalExtension();
                     $allowedExtensions = ['jpg', 'png', 'jpeg'];
@@ -5963,7 +5963,7 @@ class ProfileController extends Controller
                         $errorMessage = 'Banner image format is not supported';
                     }
                 }else if($id == 'custom_background' && $request->hasFile('background')){
-                    
+
                     $image = $request->file('background');
                     $extention = $image->getClientOriginalExtension();
                     $allowedExtensions = ['jpg', 'png', 'jpeg'];
@@ -6031,17 +6031,17 @@ class ProfileController extends Controller
 
                 $id = $request->get('id');
                 if($id == 'h_l_standard_content'){
-                    
+
                     $user->home_layout = 'standard';
                     $user->save();
                     $success = 1;
                 }else if($id == 'h_l_background_content'){
-                    
+
                     $user->home_layout = 'background';
                     $user->save();
                     $success = 1;
                 }else if($id == 'h_l_banner_content'){
-                    
+
                     $user->home_layout = 'banner';
                     $user->save();
                     $success = 1;
@@ -6070,12 +6070,12 @@ class ProfileController extends Controller
 
                 $id = $request->get('id');
                 if($id == 'h_logo_standard_content'){
-                    
+
                     $user->home_logo = 'standard';
                     $user->save();
                     $success = 1;
                 }else if($id == 'h_logo_custom_content'){
-                    
+
                     $user->home_logo = 'custom';
                     $user->save();
                     $success = 1;
@@ -6095,7 +6095,7 @@ class ProfileController extends Controller
 
     public function prepareZip(Request $request)
     {
-        
+
         $success = 0;
         $downloadLink = '';
         $errorMessage = '';
@@ -6123,7 +6123,7 @@ class ProfileController extends Controller
                             $success = 1;
                             if(count($music->downloads)){
                                 foreach ($music->downloads as $item) {
-                                    $cloudDownloads .= '#'.$item['path'].'::'.$item['itemtype'].'::'.$item['size'].'::'.$item['source'].'::'.$item['dec_fname'];   
+                                    $cloudDownloads .= '#'.$item['path'].'::'.$item['itemtype'].'::'.$item['size'].'::'.$item['source'].'::'.$item['dec_fname'];
                                 }
 
                                 if($checkoutItem->license_pdf != null){
@@ -6136,7 +6136,7 @@ class ProfileController extends Controller
                         }else{
 
                             try{
-                                
+
                                 $zipFileName = 'music_'.$checkoutItem->source_table_id.'.zip';
                                 if($commonMethods->fileExists(public_path('user-music-downloads/'.$zipFileName))){
                                     unlink(public_path('user-music-downloads/'.$zipFileName));
@@ -6144,9 +6144,9 @@ class ProfileController extends Controller
                                 $zip = new ZipArchive;
                                 $publicDir = public_path();
                                 if($zip->open($publicDir.'/user-music-downloads/'.$zipFileName, ZipArchive::CREATE) === TRUE){
-                                    
+
                                     if($checkoutItem->stripeCheckout && $checkoutItem->stripeCheckout->user){
-                                        
+
                                         $filename = $checkoutItem->stripeCheckout->user->name.' - 1Platform TV';
                                     }else{
 
@@ -6208,7 +6208,7 @@ class ProfileController extends Controller
                     }
 
                     try {
-                        
+
                         $zip = new ZipArchive;
                         $publicDir = public_path();
                         if($zip->open($publicDir.'/user-music-downloads/'.$zipFileName, ZipArchive::CREATE) === TRUE){
@@ -6221,7 +6221,7 @@ class ProfileController extends Controller
                                         }else{
                                             $filenamee = $checkoutItemDetail->name.' - 1Platform TV.mp3';
                                         }
-                                        
+
                                         $zip->addFile($publicDir.'/user-music-files/'.$checkoutItemDetail->file_name, $filenamee);
                                     }
                                 }
@@ -6236,7 +6236,7 @@ class ProfileController extends Controller
                     }
                 }else{
                     $errorMessage = 'Your request has incorrect data';
-                }                
+                }
             }else{
                 $errorMessage = 'Your request has insufficient data';
             }
@@ -6249,7 +6249,7 @@ class ProfileController extends Controller
 
     public function downloadZip($dir, $fileName, $downloadAs)
     {
-        
+
         $path = $dir.'/'.$fileName;
 
         $downloadAs = str_replace(" ","-", $downloadAs);
@@ -6274,7 +6274,7 @@ class ProfileController extends Controller
             $user = Auth::user();
             $success = 0;
             $error = '';
-            
+
             if($user && $request->has('username')){
                 $username = $request->get('username');
                 $duplication = User::where('id', '!=' , $user->id)->where('username', $username)->first();
@@ -6282,7 +6282,7 @@ class ProfileController extends Controller
                     $error = 'This username already exists';
                     $success = 0;
                 }else{
-                    
+
                     $user->username = $username;
                     $user->save();
                     $success = 1;
@@ -6358,7 +6358,7 @@ class ProfileController extends Controller
 
                 $id = $request->get('data');
                 $value = $user->hidden_tabs_home;
-                
+
                 if($value && count($value) && in_array($id, $value)){
 
                     $pos = array_search($id, $value);
@@ -6367,7 +6367,7 @@ class ProfileController extends Controller
 
                     $value[] = $id;
                 }
-       
+
                 $user->hidden_tabs_home = $value;
                 $user->save();
                 $success = 1;
@@ -6436,7 +6436,7 @@ class ProfileController extends Controller
                 $pair = $request->get('pair');
                 $type = $request->has('type') ? $request->get('type') : '';
                 $explode = explode(':', $pair);
-                
+
                 if($error == ''){
 
                     $chat = new UserChat();
@@ -6448,7 +6448,7 @@ class ProfileController extends Controller
 
                     $chat->save();
 
-                    $success = 1; 
+                    $success = 1;
                 }
             }else{
 
@@ -6485,7 +6485,7 @@ class ProfileController extends Controller
 
                     $partnerId = $partnerChatDate = $partnerChatNote = [];
                     foreach ($chats as $key => $chat) {
-                        
+
                         if($chat->recipient && $chat->recipient->id == $user->id){
 
                             if($chat->sender && !in_array($chat->sender->id, $partnerId) && $chat->recipient->id != $chat->sender->id){
@@ -6529,7 +6529,7 @@ class ProfileController extends Controller
                         $groupChats = UserChat::where('group_id', $preloadId)->orderBy('id', 'desc')->take(20)->get()->reverse();
                         if(count($groupChats)){
                             foreach ($groupChats as $chat) {
-                                
+
                                 if($chat->sender){
                                     $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $chat])->render();
                                 }
@@ -6561,7 +6561,7 @@ class ProfileController extends Controller
                     $groupChats = UserChat::where('group_id', $userPersonalGroup->id)->orderBy('id', 'desc')->take(20)->get()->reverse();
                     if(count($groupChats)){
                         foreach ($groupChats as $chat) {
-                            
+
                             if($chat->sender){
                                 $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $chat])->render();
                                 $seen = $chat->seen;
@@ -6585,13 +6585,13 @@ class ProfileController extends Controller
                 if(count($userChatGroups)){
 
                     foreach ($userChatGroups as $key3 => $groupId) {
-                        
+
                         if($userPersonalGroup && $userPersonalGroup->id == $groupId){
                             continue;
                         }
 
                         $groupFirst = $groupFirst == 0 ? 1 : 2;
-                        
+
                         $chatGroup = UserChatGroup::find($groupId);
 
                         $data['partnersList'] .= \View::make('parts.group-chat-partner', ['group' => $chatGroup, 'first' => $groupFirst, 'key' => $key3, 'firstEver' => $data['partnerChat'] == '' && $preloadId == 0 ? 1 : 0, 'commonMethods' => $commonMethods, 'length' => count($userChatGroups), 'preloadId' => $preloadId])->render();
@@ -6600,7 +6600,7 @@ class ProfileController extends Controller
                             $groupChats = UserChat::where('group_id', $groupId)->orderBy('id', 'desc')->take(20)->get()->reverse();
                             if(count($groupChats)){
                                 foreach ($groupChats as $chat) {
-                                    
+
                                     if($chat->sender){
                                         $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $chat])->render();
                                     }
@@ -6614,7 +6614,7 @@ class ProfileController extends Controller
                 if(count($partnerId)){
 
                     foreach ($partnerId as $key => $value) {
-                        
+
                         $partner = User::find($value);
                         $data['partnersList'] .= \View::make('parts.chat-partner', ['user' => $partner, 'last' => $key === key(array_slice($partnerId, -1, 1, true)) ? 1 : 0, 'first' => $key === key($partnerId) ? 1 : 0, 'partnerChatDate' => $partnerChatDate[$key], 'partnerChatNote' => $partnerChatNote[$key], 'commonMethods' => $commonMethods, 'firstEver' => $data['partnerChat'] == '' && $preloadId == 0 ? 1 : 0, 'preloadId' => $preloadId])->render();
                         if($key === key($partnerId) && $data['partnerChat'] == ''){
@@ -6625,9 +6625,9 @@ class ProfileController extends Controller
                                         $q->where('sender_id', $partner->id)->orWhere('recipient_id', $partner->id)->orWhere('pair_user_one', $partner->id)->orWhere('pair_user_two', $partner->id);
                                     })->orderBy('id', 'desc')->take(20)->get()->reverse();
                             if(count($firstPartnerChats)){
-                                
+
                                 foreach ($firstPartnerChats as $firstPartnerChat) {
-                                    
+
                                     $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $firstPartnerChat, 'partner' => $partner, 'commonMethods' => $commonMethods])->render();
                                 }
                             }
@@ -6667,9 +6667,9 @@ class ProfileController extends Controller
                                 $q->where('sender_id', $partner->id)->orWhere('recipient_id', $partner->id)->orWhere('pair_user_one', $partner->id)->orWhere('pair_user_two', $partner->id);
                             })->where('id', '>', $cursor)->orderBy('id', 'desc')->take(20)->get()->reverse();
                     if($chats->first()){
-                        
+
                         foreach ($chats as $key => $chat) {
-                            
+
                             $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $chat])->render();
                         }
                     }
@@ -6689,9 +6689,9 @@ class ProfileController extends Controller
 
                         $chats = UserChat::where('group_id', $groupId)->where('id', '>', $cursor)->orderBy('id', 'desc')->take(20)->get()->reverse();
                         if($chats->first()){
-                            
+
                             foreach ($chats as $key => $chat) {
-                                
+
                                 if($chat->sender){
                                     $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $chat])->render();
                                     $seen = $chat->seen;
@@ -6741,7 +6741,7 @@ class ProfileController extends Controller
                     }
 
                     foreach ($pairs as $key2 => $pair) {
-                        
+
                         $pairsCounter++;
                         $explode = explode(':',$pair);
 
@@ -6753,7 +6753,7 @@ class ProfileController extends Controller
                         if(count($chats)){
 
                             foreach ($chats as $key => $chat) {
-                                
+
                                 if(($chat->admin) || ($chat->sender && $chat->recipient)){
 
                                     if($key == 0){
@@ -6793,7 +6793,7 @@ class ProfileController extends Controller
                 if(count($chats)){
 
                     foreach ($chats as $key => $chat) {
-                        
+
                         if(($chat->admin) || ($chat->sender && $chat->recipient)){
 
                             $data['partnerActivityStatus'] = $pairS->activityStatus().':'.$pairR->activityStatus();
@@ -6819,9 +6819,9 @@ class ProfileController extends Controller
 
             			    $chats = UserChat::where('group_id', $group->id)->where('id', '<', $cursor)->orderBy('id', 'desc')->take(20)->get()->reverse();
             			    if($chats->first()){
-            			        
+
             			        foreach ($chats as $key => $chat) {
-            			            
+
             			            if($chat->sender){
             			                $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $chat])->render();
             			            }
@@ -6850,9 +6850,9 @@ class ProfileController extends Controller
             			                $q->where('sender_id', $partner->id)->orWhere('recipient_id', $partner->id)->orWhere('pair_user_one', $partner->id)->orWhere('pair_user_two', $partner->id);
             			            })->where('id', '<', $cursor)->orderBy('id', 'desc')->take(20)->get()->reverse();
             			    if($chats->first()){
-            			        
+
             			        foreach ($chats as $key => $chat) {
-            			            
+
             			            $data['partnerChat'] .= \View::make('parts.chat-partner-message', ['chat' => $chat])->render();
             			        }
             			    }
@@ -6871,7 +6871,7 @@ class ProfileController extends Controller
     }
 
     public function restricted(Request $request)
-    { 
+    {
         if(Auth::check()){
 
             $data = [
@@ -6888,7 +6888,7 @@ class ProfileController extends Controller
     public function stripeWebhook(Request $request){
 
         require_once(app_path().'/includes/stripe2/stripe-php-7/init.php');
-        
+
         \Stripe\Stripe::setApiKey(Config('constants.stripe_key_secret'));
         $endpoint_secret = Config('constants.stripe_webhook_secret');
 
@@ -6913,13 +6913,13 @@ class ProfileController extends Controller
         // Handle the event
         switch ($event->type) {
             case 'charge.succeeded':
-                
+
                 $commonMethods = new CommonMethods();
                 $charge = $event->data->object;
 
                 break;
             case 'balance.available':
-                
+
                 $commonMethods = new CommonMethods();
                 $balance = $event->data->object;
                 $balanceAmount = $balance['available'][0]['amount'];
@@ -6992,7 +6992,7 @@ class ProfileController extends Controller
             $data = ['success' => 0, 'error' => ''];
             $id = $request->get('id');
             $type = $request->get('type');
-            
+
             $customerBasket = CustomerBasket::find($id);
             if($customerBasket){
 
@@ -7168,8 +7168,8 @@ class ProfileController extends Controller
                                     $instantCheckoutItemDetail->description = 'loop for music: '.$music->song_name;
                                     $instantCheckoutItemDetail->file_name = $loop;
                                     $instantCheckoutItemDetail->license = null;
-                                    $instantCheckoutItemDetail->save(); 
-                                }  
+                                    $instantCheckoutItemDetail->save();
+                                }
                             }
                         }
                         if($type == 'music' && $music !== null && is_array($music->stems) && count($music->stems)){
@@ -7184,7 +7184,7 @@ class ProfileController extends Controller
                                     $instantCheckoutItemDetail->file_name = $stem;
                                     $instantCheckoutItemDetail->license = null;
                                     $instantCheckoutItemDetail->save();
-                                }   
+                                }
                             }
                         }
 
@@ -7212,12 +7212,12 @@ class ProfileController extends Controller
                         $message = 'Successfully sent money to ' . $seller->name;
                         Session::flash('success', $message);
                         Session::flash('page', 'orders');
-                        $redirectUrl = route('profile'); 
+                        $redirectUrl = route('profile');
 
                         if(count($seller->devices)){
 
                             foreach ($seller->devices as $device) {
-                                
+
                                 if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                     $fcm = new PushNotificationController();
@@ -7272,7 +7272,7 @@ class ProfileController extends Controller
                     $product = UserProduct::find($productId);
                     $customProduct = CustomProduct::find($customProductId);
                     $currSym = $commonMethods->getCurrencySymbol(strtoupper($seller->profile->default_currency));
-                    
+
                     if(isset($paymentIntent['charges']) && isset($paymentIntent['charges']['data'][0])){
                         $charge = $paymentIntent['charges']['data'][0];
                         $applicationFeeId = $charge['application_fee'];
@@ -7341,14 +7341,14 @@ class ProfileController extends Controller
                     if(count($seller->devices)){
 
                         foreach ($seller->devices as $device) {
-                            
+
                             if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                 $fcm = new PushNotificationController();
                                 $return = $fcm->send($device->device_id, 'New sale from '.$buyer->firstName(), str_limit('Item purchased from your online store', 24), $device->platform);
                             }
                         }
-                    } 
+                    }
 
                     $success = 1;
                 }else{
@@ -7374,7 +7374,7 @@ class ProfileController extends Controller
 
             $chatId = $request->get('id');
             $chat = UserChat::find($chatId);
-            
+
             $paymentDet = $this->verifyInstantPaymentAndGetData('chat', $chat->id);
             if($paymentDet && is_array($paymentDet)){
 
@@ -7483,7 +7483,7 @@ class ProfileController extends Controller
             if(isset($data['type']) && $data['type'] == 'custom_product'){
 
                 $paymentDet = $this->verifyInstantPaymentAndGetData($data['type'], $data['product'].'_'.$data['quantity'].'_'.$data['countryCode'].'_'.$data['shipping_country']);
-                
+
                 $seller = User::find($paymentDet['sellerId']);
                 $buyer = $paymentDet['buyerId'] ? User::find($paymentDet['buyerId']) : NULL;
                 $product = UserProduct::find($paymentDet['productId']);
@@ -7526,7 +7526,7 @@ class ProfileController extends Controller
                     http_response_code(500);
                     return json_encode(['error' => $paymentIntent['error']['message']]);
                 }
-                
+
                 $output = [
                     'clientSecret' => $paymentIntent['client_secret'],
                     'seller' => $seller->id,
@@ -7608,14 +7608,14 @@ class ProfileController extends Controller
                 $platformFromSeller = $totalPrice * (3/100);
                 $agentFromSeller = $chatDetails->agentContact && $chatDetails->agentContact->commission ? $totalPrice * ($chatDetails->agentContact->commission/100) : 0;
                 $agentFinalShare = $agentFromSeller;
-                
+
                 if($chatDetails->agentTwo && $chatDetails->buyerContact){
                     $agentTwoFinalShare = $agentFinalShare * (50/100);
                     $agentFinalShare = $agentFinalShare - $agentTwoFinalShare;
                     $agentTwoExpert = $chatDetails->agentTwo->expert;
                     $platformFromAgentTwo = $agentTwoFinalShare * ($agentTwoExpert->commission/100);
                     $agentTwoFinalShare = $agentTwoFinalShare - $platformFromAgentTwo;
-                }   
+                }
 
                 $platformFromAgent = $chatDetails->agent->expert->commission ? $agentFinalShare * ($chatDetails->agent->expert->commission/100) : 0;
                 $agentFinalShare = $agentFinalShare - $platformFromAgent;
@@ -7677,17 +7677,17 @@ class ProfileController extends Controller
                     'deliveryCostType' => $shippingCountryId == 213 ? 'local' : 'international',
                 ];
             }else{
-                
+
                 return false;
             }
         }else{
-                
+
             return false;
         }
     }
 
     public function cancelSubscription(Request $request)
-    { 
+    {
         $commonMethods = new CommonMethods();
         $error = '';
         $success = 0;
@@ -7761,9 +7761,9 @@ class ProfileController extends Controller
     }
 
     public function userActionRequired(Request $request, $type)
-    { 
+    {
         $commonMethods = new CommonMethods();
-        
+
         $data = [
 
             'type' => $type

@@ -6,7 +6,7 @@
 
 
 @section('page-level-css')
-    
+
     @php $page = '' @endphp
 
     @php $subTab = '' @endphp
@@ -49,12 +49,12 @@
 
     <link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.21')}}" />
     <link rel="stylesheet" href="{{asset('simplepicker/simplepicker.css')}}">
-  
+
 @stop
 
 
 @section('page-level-js')
-	
+
 	<script src="{{asset('simplepicker/simplepicker.js')}}"></script>
 	<script src="https://js.stripe.com/v3/"></script>
    	<script type="text/javascript">
@@ -63,7 +63,7 @@
    		window.notifications = '{{$notificationsopener}}';
         window.userOS = '{{$userOS}}';
         window.appCards = '{{$cardsopener}}';
-        
+
    	</script>
 
    	<script src="{{asset('js/profile.min.js?v=5.22')}}"></script>
@@ -89,13 +89,13 @@
 @stop
 
 @section('flash-message-container')
-    
+
     @php $quickSetup = $user->quickSetupProfile() @endphp
 
     @if (Session::has('error'))
 
         <div class="error_span">
-            <i class="fa fa-times-circle"></i> 
+            <i class="fa fa-times-circle"></i>
             {{ (is_array(Session::get('error'))) ? Session::get('error')[0] : Session::get('error') }}
         </div>
 
@@ -104,7 +104,7 @@
     @if (Session::has('success'))
 
         <div class="success_span">
-            <i class="fa fa-check-circle"></i> 
+            <i class="fa fa-check-circle"></i>
             {{ (is_array(Session::get('success'))) ? Session::get('success')[0] : Session::get('success') }}
         </div>
 
@@ -177,7 +177,7 @@
                             {{$agent->agentUser->name}}
                         @else
                             N/A
-                        @endif                        
+                        @endif
                     </div>
                 </div>
     		</div>
@@ -262,7 +262,7 @@
                             @if($checkout->type == 'crowdfund')
                                 Crowdfund sale
                             @else
-                                {{count($checkout->instantCheckoutItems)}} 
+                                {{count($checkout->instantCheckoutItems)}}
                                 {{count($checkout->instantCheckoutItems) == 1 ? 'item' : 'items'}}
                             @endif
                         </div>
@@ -403,7 +403,7 @@
     				</div>
     				<div class="pro_build_acc_link">
     					@if($user->hasActivePaidSubscription())
-    						
+
     					@else
     						<a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}">
 		    					<i class="fa fa-external-link"></i>
@@ -512,7 +512,7 @@
 
             @include('parts.profile-orders-section', ['page' => $page])
 
-            @include('parts.profile-chat', ['page' => $page])
+            @include('parts.profile-chat-old', ['page' => $page])
 
         </div>
 
@@ -521,7 +521,7 @@
 @stop
 
 @section('miscellaneous-html')
-    
+
     @include('parts.add-form-elements')
 
     <div id="body-overlay"></div>
@@ -547,7 +547,7 @@
     <input type="hidden" id="twitter_user_name" value="{{config('services.twitter.user_name')}}">
 
     <input type="hidden" id="item_share_title" value="">
-    
+
     <input type="hidden" id="item_share_link" value="">
 
     <div style="display: none;" id="further_skill_each_item_temp">

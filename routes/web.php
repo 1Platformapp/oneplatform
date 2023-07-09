@@ -34,10 +34,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ProfileSetupController;
+use App\Http\Controllers\AgencyController;
 
 $domainSubscribers = App\Models\CustomDomainSubscription::where('status', 1)->get();
 foreach ($domainSubscribers as $key => $domainSubscriber) {
-    
+
     Route::domain($domainSubscriber->domain_url)->group(function () use ($domainSubscriber) {
 
         if($domainSubscriber->domain_url == 'www.singingexperience.co.uk'){
@@ -117,7 +118,7 @@ Route::post('agent-contact-request/send', [AgentContactController::class, 'sendR
 Route::post('agent-contact-request/delete', [AgentContactController::class, 'deleteRequestToAgent'])->name('agent.contact.delete.request');
 
 Route::prefix('agent-contact')->group(function(){
-    
+
     Route::post('create', [AgentContactController::class, 'create'])->name('agent.contact.create');
     Route::get('approve-agreement/{id}/{agentId}', [AgentContactController::class, 'approveAgreement'])->name('agent.contact.approve.agreement');
     Route::post('verify-contact-response', [AgentContactController::class, 'verifyContactResponse'])->name('agent.contact.verify.response');
@@ -132,7 +133,7 @@ Route::post('post-payment', [ProjectController::class, 'postPayment'])->name('po
 Route::post('process-reminder-login', [ProfileController::class, 'processReminderLogin'])->name('process.reminder.login');
 
 Route::prefix('bispoke-license')->group(function(){
-    
+
     Route::prefix('message')->group(function(){
 
         Route::post('list', [BispokeLicenseController::class, 'messages'])->name('bispoke.license.message.list');
@@ -144,11 +145,11 @@ Route::prefix('bispoke-license')->group(function(){
         Route::post('add', [BispokeLicenseController::class, 'addAgreement'])->name('bispoke.license.add.agreement');
         Route::post('response', [BispokeLicenseController::class, 'agreementResponse'])->name('bispoke.license.agreement.response');
     });
-    
+
 });
 
 Route::prefix('paypal')->group(function(){
-    
+
     Route::get('onboard-redirect', [PayPalController::class, 'onboardRedirect'])->name('paypal.onboard.redirect');
     Route::post('prepare-order', [PayPalController::class, 'prepareCheckout'])->name('paypal.prepare.order');
     Route::get('post-order', [PayPalController::class, 'postCheckout'])->name('paypal.post.order');
@@ -168,7 +169,7 @@ Route::get('logout', [LoginController::class, 'logout']);
 Auth::routes();
 
 Route::prefix('chat')->group(function(){
-    
+
     Route::post('sendMessage', [ChartController::class, 'sendChatMessage'])->name('send.chat.message');
     Route::get('admin', [ProfileController::class, 'adminChat'])->name('admin.chat');
     Route::post('admin/join', [ProfileController::class, 'chatJoinAdmin'])->name('chat.join.admin');
@@ -305,7 +306,7 @@ Route::prefix('email')->group(function(){
 Route::domain(Config::get('constants.primaryDomain'))->group(function () {
 
     Route::post('cancelSubscription', [ProfileController::class, 'cancelSubscription'])->name('cancel.subscription');
-    
+
     Route::prefix('live-stream')->group(function(){
 
         Route::post('post', [ProfileController::class, 'postLiveStream'])->name('user.live.stream.create');
@@ -352,9 +353,9 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
     });
 
     Route::group( [ 'middleware' => [ 'web' ] ], function () {
-        
+
         Route::prefix('google-cloud')->group(function(){
-            
+
             Route::prefix('file')->group(function(){
 
                 //Route::get('list', [GoogleDriveStorage::class, 'listFiles'])->name('gd.list.all.files');
@@ -364,14 +365,14 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         });
 
         Route::prefix('proffer-project')->group(function(){
-            
+
             Route::post('add', [ProfferProjectController::class, 'create'])->name('proffer.project.add');
             Route::post('response', [ProfferProjectController::class, 'projectResponse'])->name('proffer.project.response');
             Route::get('download-pdf/{filename}/{title}', [ProfferProjectController::class, 'downloadPDF'])->name('proffer.project.download.pdf');
         });
 
         Route::prefix('proffer-product')->group(function(){
-            
+
             Route::post('add', [ProfferProductController::class, 'create'])->name('proffer.product.add');
             Route::post('response', [ProfferProductController::class, 'productResponse'])->name('proffer.product.response');
             Route::get('download-pdf/{filename}/{title}', [ProfferProductController::class, 'downloadPDF'])->name('proffer.product.download.pdf');
@@ -404,6 +405,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::post('saveUserSubscribers', [ProfileController::class, 'saveUserSubscribers'])->name('save.user.subscribers');
         Route::post('getUserCompleteInfo', [ChartController::class, 'getUserCompleteInfo'])->name('user-complete-info');
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+        Route::get('dashboard', [AgencyController::class, 'index'])->name('agency.dashboard');
         Route::get('profile/{tab}/{subtab?}', [ProfileController::class, 'profileWithTab'])->name('profile.with.tab');
         Route::get('profile/access/{tab}/{info}', [ProfileController::class, 'profileWithTabInfo'])->name('profile.with.tab.info');
         Route::get('startup-wizard/{action?}', [ProfileController::class, 'startupWizard'])->name('user.startup.wizard');
@@ -496,15 +498,15 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::post('unlock-user-private-music', [ChartController::class, 'unlockUserPrivateMusic'])->name('unlock.user.private.music');
 
         Route::prefix('push-notification')->group(function(){
-            
+
             Route::post('register', [PushNotificationController::class, 'register'])->name('push.notif.create');
             Route::get('user/{redirectUrl}/{userId}', [PushNotificationController::class, 'user'])->name('push.notif.user');
         });
     });
-	
+
 	Route::get('product-list', [HomeController::class, 'productList']);
 	Route::get('product-details/{id}', [HomeController::class, 'productDetails']);
-    
+
     //Route::get('login/facebook', [LoginController::class, 'redirectToProvider']);
     Route::post('login/facebook/callback', [ 'uses' => 'HomeController@handleFacebookJsLogin', 'as' => 'handle.fb.js.login' ]);
     Route::get('login/contribute_facebook', [LoginController::class, 'redirectToProviderContributeFb']);

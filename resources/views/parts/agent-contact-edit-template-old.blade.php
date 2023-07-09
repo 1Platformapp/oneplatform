@@ -5,7 +5,10 @@
     <input type="hidden" name="send_email" value="0">
 
     <div class="pro_music_info">
-        <div class="pro_form_title">Edit Contact</div>
+        <label>
+            Edit Contact
+            <i class="fa fa-times edit_elem_close"></i>
+        </label>
         <div class="pro_stream_input_outer">
 
             <div class="pro_stream_input_each">

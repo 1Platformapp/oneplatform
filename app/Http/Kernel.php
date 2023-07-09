@@ -43,6 +43,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\UserUpdateActivity::class
         ],
 
+        'agency.authentication' => [
+            \App\Http\Middleware\Agency::class
+        ],
+
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
