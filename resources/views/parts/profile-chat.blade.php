@@ -340,19 +340,29 @@
         var thiss = $(this);
         var error = 0;
         var form = thiss.closest('form');
+        var email = form.find('input[name="pro_contact_email"]');
+        var questionId = form.find('select[name="pro_contact_questionnaireId"]');
         form.find('.has-danger').removeClass('has-danger');
         if($(this).hasClass('edit_and_send_agree')){
 
-            form.find('input[name="send_email"]').val('1');
+            if(email.val() == ''){
+                error = 1;
+                email.closest('.pro_stream_input_each').addClass('has-danger');
+            }else{
+                form.find('input[name="send_email"]').val('1');
+            }
         }else if($(this).hasClass('edit_and_send_question')){
 
-            form.find('input[name="send_email"]').val('2');
-            if(form.find('select[name="pro_contact_questionnaireId"]').val() == ''){
+            if(email.val() == ''){
                 error = 1;
-                form.find('select[name="pro_contact_questionnaireId"]').closest('.pro_stream_input_each').addClass('has-danger');
+                email.closest('.pro_stream_input_each').addClass('has-danger');
+            }else if(questionId.val() == ''){
+                error = 1;
+                questionId.closest('.pro_stream_input_each').addClass('has-danger');
+            }else{
+                form.find('input[name="send_email"]').val('2');
             }
         }else{
-
             form.find('input[name="send_email"]').val('0');
         }
 
