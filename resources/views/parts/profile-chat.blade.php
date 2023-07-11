@@ -236,7 +236,6 @@
         </div>
     </div>
 </div>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.5')}}">
 <script>
     $('select[name="pro_contact_already_user"]').change(function(){
@@ -335,71 +334,31 @@
         }
     });
 
-    $('.m_btm_right_icons .m_btn_calendar').click(function(e){
+    $('.edit_now, .edit_and_send_agree, .edit_and_send_question').click(function(e){
 
-        var id = $(this).attr('data-id');
-        $('div[data-id="u-calendar-'+id+'"]').slideToggle(() => {
+        e.preventDefault();
+        var thiss = $(this);
+        var error = 0;
+        var form = thiss.closest('form');
+        form.find('.has-danger').removeClass('has-danger');
+        if($(this).hasClass('edit_and_send_agree')){
 
-            var calendarEl = document.getElementById('calendar-'+id);
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    initialDate: '2023-07-07',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    events: [
-      {
-        title: 'All Day Event',
-        start: '2023-07-01'
-      },
-      {
-        title: 'Long Event',
-        start: '2023-07-07',
-        end: '2023-07-10'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2023-07-09T16:00:00'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2023-07-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2023-07-11',
-        end: '2023-07-13'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-07-12T10:30:00',
-        end: '2023-07-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2023-07-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2023-07-12T14:30:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2023-07-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: 'https://google.com/',
-        start: '2023-07-28'
-      }
-    ]
-  });
-            calendar.render();
-        });
+            form.find('input[name="send_email"]').val('1');
+        }else if($(this).hasClass('edit_and_send_question')){
+
+            form.find('input[name="send_email"]').val('2');
+            if(form.find('select[name="pro_contact_questionnaireId"]').val() == ''){
+                error = 1;
+                form.find('select[name="pro_contact_questionnaireId"]').closest('.pro_stream_input_each').addClass('has-danger');
+            }
+        }else{
+
+            form.find('input[name="send_email"]').val('0');
+        }
+
+        if(!error){
+            form.submit();
+        }
     });
 
 
