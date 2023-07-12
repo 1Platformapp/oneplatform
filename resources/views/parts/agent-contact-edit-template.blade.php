@@ -1,4 +1,4 @@
-<form data-id="u_contact_form_{{$contact->id}}" action="{{route('agent.contact.update')}}" method="POST" style="display: none;">
+<form action="{{route('agent.contact.update')}}" method="POST">
     {{ csrf_field() }}
 
     <input type="hidden" name="edit" value="{{$contact->id}}">

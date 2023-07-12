@@ -1,7 +1,6 @@
 
 <div class="pro_pg_tb_det" style="display: block">
     <div class="pro_pg_tb_det_inner">
-
         <div id="contacts_section" class="sub_cat_data">
             <div class="pro_main_tray">
                 <div class="pro_tray_title">Manage Network Contacts</div>
@@ -161,8 +160,15 @@
                                 </div>
 
                                 <div class="edit_elem_bottom">
-                                    @include('parts.agent-contact-edit-template', ['contact' => $contact])
-                                    @include('parts.agent-contact-calendar', ['contact' => $contact])
+                                    <div class="each_dash_section instant_hide" data-id="contact_edit_{{$contact->id}}">
+                                        @include('parts.agent-contact-edit-template', ['contact' => $contact])
+                                    </div>
+                                    <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$contact->id}}">
+                                        @include('parts.agent-contact-calendar', ['contact' => $contact])
+                                    </div>
+                                    <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
+                                        @include('parts.agent-contact-agreement', ['contact' => $contact])
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -280,10 +286,20 @@
         }
     });
 
-    $('.m_btm_edit').click(function(e){
+    $('.m_btm_edit, .m_btn_files, .m_btn_calendar').click(function(e){
 
         var id = $(this).attr('data-id');
-        $('form[data-id="u_contact_form_'+id+'"]').slideToggle();
+        if($(this).hasClass('m_btm_edit')){
+            $('.each_dash_section:not(.each_dash_section[data-id="contact_edit_'+id+'"])').addClass('instant_hide');
+            $('.each_dash_section[data-id="contact_edit_'+id+'"]').toggleClass('instant_hide');
+        }else if($(this).hasClass('m_btn_files')){
+            $('.each_dash_section:not(.each_dash_section[data-id="contact_agreement_'+id+'"])').addClass('instant_hide');
+            $('.each_dash_section[data-id="contact_agreement_'+id+'"]').toggleClass('instant_hide');
+        }else if($(this).hasClass('m_btn_calendar')){
+            $('.each_dash_section:not(.each_dash_section[data-id="contact_calendar_'+id+'"])').addClass('instant_hide');
+            $('.each_dash_section[data-id="contact_calendar_'+id+'"]').toggleClass('instant_hide');
+        }
+
     });
 
     $('.m_btm_del').click(function(e){

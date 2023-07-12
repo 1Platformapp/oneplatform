@@ -9,6 +9,8 @@
 @stop
 
 @section('page-level-js')
+
+    <script src="https://cdn.tailwindcss.com"></script>
 @stop
 
 @section('header')
