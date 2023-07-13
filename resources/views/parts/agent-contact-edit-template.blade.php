@@ -29,12 +29,18 @@
             <div class="pro_stream_input_each">
                 <textarea placeholder="Write your terms (if any)" type="text" class="pro_contact_textarea" name="pro_contact_terms">{{$contact->terms}}</textarea>
             </div><br><br>
-            <div class="pro_m_chech_outer multi_btn">
-                <input class="edit_and_send_question edit_with_action" type="button" value="Save and send questionnaire">
-                @if(!$contact->approved)
-            	<input class="edit_and_send_agree edit_with_action" type="button" value="Save and send agreement">
-                @endif
-                <input class="edit_now" type="button" value="Save">
+            <div class="pro_m_chech_outer multi_btn flex flex-row items-center">
+                <div class="flex flex-row items-center gap-2">
+                    <div class="bg-white shadow-lg shadow-custom rounded-md text-sm font-semibold text-gray-600 px-5 py-2 cursor-pointer edit_with_action edit_and_send_question">
+                        Save and send questionnaire
+                    </div>
+                    @if(!$contact->approved)
+                    <div class="bg-white shadow-lg shadow-custom rounded-md text-sm font-semibold text-gray-600 px-5 py-2 cursor-pointer edit_with_action edit_and_send_agree">
+                        Save and send agreement
+                    </div>
+                    @endif
+                </div>
+                <div class="bg-white shadow-lg shadow-custom rounded-md text-sm font-semibold text-gray-600 px-5 py-2 cursor-pointer ml-auto edit_now">Save</div>
             </div>
         </div>
 

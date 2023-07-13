@@ -11,6 +11,17 @@
 @section('page-level-js')
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+            boxShadow: {
+                'custom': '0 0 13px #818181',
+            },
+        }
+      }
+    }
+  </script>
 @stop
 
 @section('header')

@@ -387,5 +387,19 @@
         }
     });
 
+    $('.switch_contracts_view').click(function(e){
+
+        var form = $(this).closest('form');
+        form.find('.contracts_list').toggleClass('instant_hide');
+        form.find('.new_contracts').toggleClass('instant_hide');
+        if($(this).attr('data-list') == 'add'){
+            $(this).attr('data-list', 'list');
+            $(this).text('Add contracts');
+        }else if($(this).attr('data-list') == 'list'){
+            $(this).attr('data-list', 'add');
+            $(this).text('My contracts');
+        }
+    })
+
 
 </script>

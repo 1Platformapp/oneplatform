@@ -1,13 +1,13 @@
-<form>
+<form data-id="{{$contact->id}}">
     <div class="pro_music_info">
         <div class="pro_form_title flex items-center">
             <div>Contracts</div>
-            <button type="button" class="rounded bg-indigo-50 px-2 py-1 ml-auto text-sm font-semibold text-gray-600 shadow-sm hover:bg-gray-200">
+            <button type="button" data-list="list" class="switch_contracts_view rounded bg-white shadow-lg shadow-custom px-10 py-1 ml-auto text-sm font-semibold text-gray-600 hover:bg-gray-200">
                 Add Contract
             </button>
         </div>
         <div class="pro_stream_input_outer">
-            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul role="list" class="contracts_list grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 <li class="col-span-1 divide-y divide-gray-200 rounded-lg border">
                     <div class="flex w-full items-center justify-between space-x-6 p-6">
                         <div class="flex-1 truncate">
@@ -128,6 +128,47 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                </li>
+            </ul>
+            <ul role="list" class="instant_hide new_contracts divide-y divide-gray-100">
+                <li class="relative flex justify-between gap-x-6 px-4 py-4 hover:bg-gray-200 sm:px-6 lg:px-8">
+                    <div class="flex gap-x-4">
+                        <i class="fas fa-file-pdf text-lg"></i>
+                        <div class="min-w-0 flex-auto">
+                            <p class="text-md leading-6 text-gray-900">
+                                <a href="#"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Master Producer</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-4">
+                        <a href="#" class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</a>
+                    </div>
+                </li>
+                <li class="relative flex justify-between gap-x-6 px-4 py-4 hover:bg-gray-200 sm:px-6 lg:px-8">
+                    <div class="flex gap-x-4">
+                        <i class="fas fa-file-pdf text-lg"></i>
+                        <div class="min-w-0 flex-auto">
+                            <p class="text-sm leading-6 text-gray-900">
+                                <a href="#"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Producer Contract</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-4">
+                        <a href="#" class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</a>
+                    </div>
+                </li>
+                <li class="relative flex justify-between gap-x-6 px-4 py-4 hover:bg-gray-200 sm:px-6 lg:px-8">
+                    <div class="flex gap-x-4">
+                        <i class="fas fa-file-pdf text-lg"></i>
+                        <div class="min-w-0 flex-auto">
+                            <p class="text-sm leading-6 text-gray-900">
+                                <a href="#"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Recording Contract</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-4">
+                        <a href="#" class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</a>
                     </div>
                 </li>
             </ul>
