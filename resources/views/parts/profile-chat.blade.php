@@ -394,7 +394,7 @@
         form.find('.new_contracts').toggleClass('instant_hide');
         if($(this).attr('data-list') == 'add'){
             $(this).attr('data-list', 'list');
-            $(this).text('Add contracts');
+            $(this).text('Add contract');
         }else if($(this).attr('data-list') == 'list'){
             $(this).attr('data-list', 'add');
             $(this).text('My contracts');

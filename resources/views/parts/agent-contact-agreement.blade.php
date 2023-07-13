@@ -137,12 +137,12 @@
                         <i class="fas fa-file-pdf text-lg"></i>
                         <div class="min-w-0 flex-auto">
                             <p class="text-md leading-6 text-gray-900">
-                                <a href="#"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Master Producer</a>
+                                <a target="blank" href="{{route('agency.contract', ['id' => 1, 'contact' => $contact->id])}}"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Master Producer</a>
                             </p>
                         </div>
                     </div>
                     <div class="flex items-center gap-x-4">
-                        <a href="#" class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</a>
+                        <div class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</div>
                     </div>
                 </li>
                 <li class="relative flex justify-between gap-x-6 px-4 py-4 hover:bg-gray-200 sm:px-6 lg:px-8">
@@ -150,12 +150,12 @@
                         <i class="fas fa-file-pdf text-lg"></i>
                         <div class="min-w-0 flex-auto">
                             <p class="text-sm leading-6 text-gray-900">
-                                <a href="#"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Producer Contract</a>
+                                <a target="blank" href="{{route('agency.contract', ['id' => 1, 'contact' => $contact->id])}}"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Producer Contract</a>
                             </p>
                         </div>
                     </div>
                     <div class="flex items-center gap-x-4">
-                        <a href="#" class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</a>
+                        <div class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</div>
                     </div>
                 </li>
                 <li class="relative flex justify-between gap-x-6 px-4 py-4 hover:bg-gray-200 sm:px-6 lg:px-8">
@@ -163,12 +163,12 @@
                         <i class="fas fa-file-pdf text-lg"></i>
                         <div class="min-w-0 flex-auto">
                             <p class="text-sm leading-6 text-gray-900">
-                                <a href="#"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Recording Contract</a>
+                                <a target="blank" href="{{route('agency.contract', ['id' => 1, 'contact' => $contact->id])}}"><span class="absolute inset-x-0 -top-px bottom-0"></span>Artist Recording Contract</a>
                             </p>
                         </div>
                     </div>
                     <div class="flex items-center gap-x-4">
-                        <a href="#" class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</a>
+                        <div class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Preview</div>
                     </div>
                 </li>
             </ul>

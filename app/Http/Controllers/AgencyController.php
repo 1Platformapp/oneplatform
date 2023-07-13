@@ -9,6 +9,7 @@ use App\Models\UserChat;
 use App\Models\AgentContact;
 use App\Models\UserChatGroup;
 use App\Models\StripeCheckout;
+use App\Models\Contract;
 
 use Illuminate\Http\Request;
 
@@ -87,5 +88,23 @@ class AgencyController extends Controller
         ];
 
         return view('pages.admin-home', $data);
+    }
+
+    public function addContractForm(Request $request, $id, $contactId = null)
+    {
+        $commonMethods = new CommonMethods();
+        $user = Auth::user();
+        $contract = Contract::find($id);
+        if($contract){
+
+            $data   = [
+
+                'commonMethods' => $commonMethods,
+                'contract' => $contract,
+                'user' => $user
+            ];
+
+            return view('pages.admin-add-contract', $data);
+        }
     }
 }
