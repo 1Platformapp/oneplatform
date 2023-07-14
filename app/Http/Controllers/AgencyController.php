@@ -10,11 +10,14 @@ use App\Models\AgentContact;
 use App\Models\UserChatGroup;
 use App\Models\StripeCheckout;
 use App\Models\Contract;
+use App\Models\AgencyContract;
+use App\Mail\AgencyContract as AgencyContractMailer;
 
 use Illuminate\Http\Request;
 
 use Auth;
 use Image;
+use Mail;
 
 class AgencyController extends Controller
 {
@@ -85,6 +88,8 @@ class AgencyController extends Controller
             'user' => $user,
             'purchaseParticulars' => $purchaseParticulars,
             'topSales' => $topSales,
+            'contracts' => Contract::all(),
+            'agencyContracts' => $agencyContracts
         ];
 
         return view('pages.admin-home', $data);
@@ -95,16 +100,72 @@ class AgencyController extends Controller
         $commonMethods = new CommonMethods();
         $user = Auth::user();
         $contract = Contract::find($id);
+        $agentContact = AgentContact::find($contactId);
         if($contract){
 
             $data   = [
 
                 'commonMethods' => $commonMethods,
                 'contract' => $contract,
-                'user' => $user
+                'user' => $user,
+                'agentContact' => $agentContact
             ];
 
             return view('pages.admin-add-contract', $data);
+        }
+    }
+
+    public function createContract(Request $request, $id, $contactId)
+    {
+        $commonMethods = new CommonMethods();
+        $user = Auth::user();
+        $contract = Contract::find($id);
+        $agentContact = AgentContact::find($contactId);
+        if($contract){
+
+            $data = $request->get('data');
+            $terms = $request->get('terms');
+            $contractName = $request->get('name') != '' ? $request->get('name') : $contract->title;
+
+            $extension = explode('/', mime_content_type($data))[1];
+            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
+            $fileName = rand(100000, 999999).'.'.$extension;
+            file_put_contents(public_path('signatures/').$fileName, $imageData);
+            if($agentContact->agentUser->id == $user->id){
+                $signatures = ['agent' => $fileName];
+                $creator = 'agent';
+                $recipient = $agentContact->contactUser;
+            }else if($agentContact->contactUser->id == $user->id){
+                $signatures = ['contact' => $fileName];
+                $creator = 'contact';
+                $recipient = $agentContact->agentUser;
+            }else{
+                $signatures = [];
+                $creator = '';
+            }
+
+            $contractDetails = '';
+            $contractPieces = explode('<<var>>', $contract->body);
+            foreach ($contractPieces as $key => $piece) {
+
+                if($request->has('input-'.$key)){
+                    $contractDetails .= $piece . ' ' . $request->get('input-' . $key) . ' ';
+                }
+            }
+
+            $agencyContract = new AgencyContract();
+            $agencyContract->contact_id = $contactId;
+            $agencyContract->contract_id = $id;
+            $agencyContract->contract_name = $contractName;
+            $agencyContract->contract_details = $contractDetails;
+            $agencyContract->signatures = $signatures;
+            $agencyContract->custom_terms = $terms;
+            $agencyContract->creator = $creator;
+
+            $agencyContract->save();
+
+            Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $recipient, 'contract-created'));
+            return redirect()->route('agency.dashboard');
         }
     }
 }

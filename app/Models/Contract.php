@@ -8,7 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Contract extends Authenticatable
-
 {
+
+    public function agencyContracts(){
+        return $this->hasMany( AgecyContract::class );
+    }
 
 }

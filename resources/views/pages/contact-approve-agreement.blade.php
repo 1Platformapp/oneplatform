@@ -6,18 +6,18 @@
 
 @section('pagetitle') Review and sign the agreement @endsection
 
-@section('pagekeywords') 
-    
+@section('pagekeywords')
+
 @endsection
 
-@section('pagedescription') 
-    
+@section('pagedescription')
+
 @endsection
 
 <!-- Page Level CSS !-->
 @section('page-level-css')
     <style type="text/css">
-        
+
         .auto_content { width: 100%; }
         .document_outer { max-width: 1000px; width: 100%; margin: 50px auto 100px auto; }
         .document_outer .document_in { padding: 30px 10px 50px 10px; background: #fff; }
@@ -48,15 +48,15 @@
         }
 
         .btn_01 { background: #fff; width: 150px; text-align: center; padding: 10px; cursor: pointer; border: 1px solid #818181; text-transform: uppercase; font-size: 14px; }
-        .btn_01:hover { background: #818181; color: #fff; } 
-        
+        .btn_01:hover { background: #818181; color: #fff; }
+
     </style>
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}" >
 @stop
 
 <!-- Page Level Javascript !-->
 @section('page-level-js')
-    
+
     <script src="{{asset('esign/libs/modernizr.js')}}"></script>
     <script src="{{asset('esign/src/jSignature.js')}}"></script>
 
@@ -64,7 +64,7 @@
         $('document').ready(function(){
 
             if (Modernizr.touch){
-                      
+
             }
 
             $('#do_sign').click(function(){
@@ -134,7 +134,7 @@
 
 
 @section('page-content')
-    
+
     <div class="document_outer">
 
         <div class="document_header">
@@ -188,7 +188,7 @@
         </div>
         <div class="esign_submit">
             <p style="font-size: 16px;color: #818181;margin: 50px 0;">
-                If you approve the agreement and have added your valid signature you can click submit 
+                If you approve the agreement and have added your valid signature you can click submit
             </p>
 
             <div class="esign_submit_button btn_01">Submit</div>

@@ -167,7 +167,7 @@
                                         @include('parts.agent-contact-calendar', ['contact' => $contact])
                                     </div>
                                     <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
-                                        @include('parts.agent-contact-agreement', ['contact' => $contact])
+                                        @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts])
                                     </div>
                                 </div>
                             </div>

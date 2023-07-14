@@ -406,7 +406,8 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::post('getUserCompleteInfo', [ChartController::class, 'getUserCompleteInfo'])->name('user-complete-info');
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyController::class, 'index'])->name('agency.dashboard');
-        Route::get('add-contract/{id}/{contact?}', [AgencyController::class, 'addContractForm'])->name('agency.contract');
+        Route::get('add-contract/{id}/{contact}', [AgencyController::class, 'addContractForm'])->name('agency.contract');
+        Route::post('add-contract/{id}/{contact?}', [AgencyController::class, 'createContract'])->name('agency.contract.create');
         Route::get('profile/{tab}/{subtab?}', [ProfileController::class, 'profileWithTab'])->name('profile.with.tab');
         Route::get('profile/access/{tab}/{info}', [ProfileController::class, 'profileWithTabInfo'])->name('profile.with.tab.info');
         Route::get('startup-wizard/{action?}', [ProfileController::class, 'startupWizard'])->name('user.startup.wizard');
