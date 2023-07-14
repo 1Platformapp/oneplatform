@@ -89,7 +89,7 @@ class AgencyController extends Controller
             'purchaseParticulars' => $purchaseParticulars,
             'topSales' => $topSales,
             'contracts' => Contract::all(),
-            'agencyContracts' => $agencyContracts
+            'agencyContracts' => []
         ];
 
         return view('pages.admin-home', $data);
