@@ -173,6 +173,7 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
 .agents_listing .music_btm_thumb { position: relative; }
 .agents_listing .is_current_agent { background: #000 !important; color: #fff !important; cursor: auto !important; }
 .agents_listing .is_pending { background: #ffc107 !important; color: #000 !important; cursor: auto !important; }
+.agents_listing .is_pending { background: #ffc107 !important; color: #000 !important; cursor: auto !important; }
 .agents_listing .fully_booked { background: #28a745; opacity: 0.5; cursor: auto !important; }
 .chat_switch_outer { position: relative; }
 .chat_switch_txt { top: -25px; right: 0; position: absolute; font-size: 12px; color: #818181; }

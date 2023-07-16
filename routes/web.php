@@ -406,8 +406,12 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::post('getUserCompleteInfo', [ChartController::class, 'getUserCompleteInfo'])->name('user-complete-info');
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyController::class, 'index'])->name('agency.dashboard');
-        Route::get('add-contract/{id}/{contact}', [AgencyController::class, 'addContractForm'])->name('agency.contract');
-        Route::post('add-contract/{id}/{contact?}', [AgencyController::class, 'createContract'])->name('agency.contract.create');
+        Route::get('dashboard/add-contract/{id}/{contact}', [AgencyController::class, 'addContractForm'])->name('agency.contract.add.form');
+        Route::get('dashboard/edit-contract/{id}', [AgencyController::class, 'editContractForm'])->name('agency.contract.edit.form');
+        Route::get('dashboard/view-contract/{id}', [AgencyController::class, 'viewContractForm'])->name('agency.contract.view.form');
+        Route::post('dashboard/create-contract/{id}/{contact}', [AgencyController::class, 'createContract'])->name('agency.contract.create');
+        Route::post('dashboard/update-contract/{id}', [AgencyController::class, 'updateContract'])->name('agency.contract.update');
+        Route::post('dashboard/approve-contract/{id}', [AgencyController::class, 'approveContract'])->name('agency.contract.approve');
         Route::get('profile/{tab}/{subtab?}', [ProfileController::class, 'profileWithTab'])->name('profile.with.tab');
         Route::get('profile/access/{tab}/{info}', [ProfileController::class, 'profileWithTabInfo'])->name('profile.with.tab.info');
         Route::get('startup-wizard/{action?}', [ProfileController::class, 'startupWizard'])->name('user.startup.wizard');

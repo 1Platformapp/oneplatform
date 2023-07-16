@@ -2,7 +2,7 @@
 @extends('templates.basic-template')
 
 
-@section('pagetitle') Add Contract | Dashboard @endsection
+@section('pagetitle') View Contract | Dashboard @endsection
 
 
 <!-- Page Level CSS !-->
@@ -45,9 +45,8 @@
 @php
     $body = $contract->body;
     $variables = explode("<<var>>", $body);
-    $agentContact = $action == 'add' ? $agentContact : $agencyContract->contact;
-    $isAgent = $agentContact->agentUser->id == $user->id ? true : false;
-    $isContact = $agentContact->contactUser->id == $user->id ? true : false;
+    $isAgent = $contract->contact->agentUser->id == $user->id ? true : false;
+    $isContact = $contract->contact->contactUser->id == $user->id ? true : false;
 @endphp
 
 <div class="contact_details_outer">
@@ -60,45 +59,25 @@
         @endif
         <div class="contact_details_section">
             <div class="contact_section_head">
-                {{$contract->title}}
+                {{$contract->contract_name}}
+                {{$contract->custom_terms}}
             </div>
             <div class="contact_section_body">
-                <form class="flex flex-col" id="signature-form" action="{{$action == 'edit' ? route('agency.contract.update', ['id' => $agencyContract->id]) : route('agency.contract.create', ['id' => $contract->id, 'contact' => $agentContact->id])}}" method="POST">
+                <form class="flex flex-col" id="signature-form" action="{{route('agency.contract.approve', ['id' => $contract->id])}}" method="POST">
                     {{csrf_field()}}
 
                     <div class="element_container mt-8">
-                    @if($action == 'edit')
-                        {!!$agencyContract->contract_details!!}
-                        @if($agencyContract->custom_terms)
-                            <br><br>
-                            {!! $agencyContract->custom_terms !!}
-                        @endif
-                    @else
-                        @foreach ($variables as $index => $variable)
-                            <span class="text-sm font-normal">{!!$variable!!}</span>
-
-                            @if($index + 1 < count($variables))
-                            <input class="border-b border-solid border-black text-theme-red mb-2" name="input-{{$index}}" type="text" />
-                            @endif
-                        @endforeach
+                    {!! $contract->contract_details !!}
+                    @if($contract->custom_terms)
+                        <br><br>
+                        {!! $contract->custom_terms !!}
                     @endif
-
-                    </div>
-                    <div class="my-12">
-                        <label for="comment" class="block text-sm font-medium leading-6 text-gray-900">Name your contract (optional)</label>
-                        <div class="mt-2">
-                            <input type="text" value="{{isset($agencyContract) ? $agencyContract->contract_name : ''}}" name="name" class="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" placeholder="(e.g song writing contract)">
-                        </div><br>
-                        <label for="comment" class="block text-sm font-medium leading-6 text-gray-900">Add your custom terms(optional)</label>
-                        <div class="mt-2">
-                            <textarea placeholder="Enter terms on top of above..." rows="4" name="terms" class="px-2 outline-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">{{isset($agencyContract) ? $agencyContract->custom_terms : ''}}</textarea>
-                        </div>
                     </div>
                     <div class="flex items-end justify-between mt-24 mb-12 gap-20">
                         <div class="flex flex-col w-1/2">
                             @if($isAgent)
-                                @if($action == 'edit' && count($agencyContract->signatures) && isset($agencyContract->signatures['agent']))
-                                    <img class="mb-2" src="{{asset('signatures/'.$agencyContract->signatures['agent'])}}">
+                                @if(count($contract->signatures) && isset($contract->signatures['agent']))
+                                    <img class="mb-2" src="{{asset('signatures/'.$contract->signatures['agent'])}}">
                                 @else
                                     <button id="signature-prompt" type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 px-12 py-4 mb-2 text-center hover:border-gray-400">
                                         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -115,13 +94,15 @@
                                         <span class="cursor-pointer"><i class="fa fa-times-circle"></i></span>
                                     </div>
                                 @endif
+                            @else
+                                <img class="mb-2" src="{{asset('signatures/'.$contract->signatures['agent'])}}">
                             @endif
                             <div class="border-t border-solid pt-1 border-black text-center font-medium">Producer</div>
                         </div>
                         <div class="flex flex-col w-1/2">
                             @if($isContact)
-                                @if($action == 'edit' && count($agencyContract->signatures) && isset($agencyContract->signatures['artist']))
-                                    <img class="mb-2" src="{{asset('signatures/'.$agencyContract->signatures['artist'])}}">
+                                @if(count($contract->signatures) && isset($contract->signatures['artist']))
+                                    <img class="mb-2" src="{{asset('signatures/'.$contract->signatures['artist'])}}">
                                 @else
                                     <button id="signature-prompt" type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 px-12 py-4 mb-2 text-center hover:border-gray-400">
                                         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -138,17 +119,14 @@
                                         <span class="cursor-pointer"><i class="fa fa-times-circle"></i></span>
                                     </div>
                                 @endif
+                            @else
+                                <img class="mb-2" src="{{asset('signatures/'.$contract->signatures['artist'])}}">
                             @endif
                             <div class="border-t border-solid pt-1 border-black text-center font-medium">Artist</div>
                         </div>
                     </div>
-
-                    @if($action == 'edit')
-                        <button type="submit" class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
-                    @else
-                        <button id="signature-submit-button" type="button" disabled class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
-                        <input type="hidden" value="" id="signature-data" name="data">
-                    @endif
+                    <button id="signature-submit-button" type="button" disabled class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                    <input type="hidden" value="" id="signature-data" name="data">
                 </form>
             </div>
         </div>

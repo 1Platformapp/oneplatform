@@ -1,6 +1,6 @@
 
 @if(isset($notification) && $notification != 'none')
-	
+
 	@if($notification->type != 'system' && $notification->customer)
 		@if($notification->type == 'sale')
 			@php $tab = 'orders' @endphp
@@ -30,6 +30,11 @@
 		@elseif($notification->type == 'new_user_to_platform_manager')
 			@php $user = \App\Models\User::find($notification->source_table_id) @endphp
 			@php $customLink = 'https://www.duong.1platform.tv/admin/users' @endphp
+        @elseif($notification->type == 'contract_created')
+			@php $customLink = route('admin.dashboard') @endphp
+        @elseif($notification->type == 'contract_approved_for_agent' || $notification->type == 'contract_approved_for_contact')
+			@php $customLink = route('agency.dashboard') @endphp
+            @php $contract = \App\Models\AgencyContract::find($notification->source_table_id) @endphp
 		@endif
 
 		<div data-id="{{$notification->id}}" data-type="{{$notification->type}}" data-link="{{isset($customLink) && $customLink != '' ? $customLink : ($tab != '' ? route('profile.with.tab',['tab' => $tab]) : route('profile')) }}" class="each_usr_notif_item">
@@ -66,6 +71,10 @@
 		            	{{$user->name}} requires verification to sell music licenses
 		            @elseif($notification->type == 'new_user_to_platform_manager')
 		            	{{$user->name}} has created an account
+                    @elseif($notification->type == 'contract_created')
+		            	New contract created for you
+                    @elseif($notification->type == 'contract_approved_for_agent' || $notification->type == 'contract_approved_for_contact')
+		            	Your Contract {{$contract ? $contract->contract_name : ''}} a now active
 		            @endif
 
 		            @if($notification->type == 'chat')
@@ -99,7 +108,7 @@
 
 	@endif
 @else
-	
+
 	<div id="notif_is_empty" data-id="" data-type=""  data-link="" class="each_usr_notif_item">
 	    <div class="cart_empty_img">
 	        <i class="fa fa-bell-slash"></i>

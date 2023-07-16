@@ -223,6 +223,45 @@
             </div>
         </div>
     </div>
+
+    <div class="pro_page_pop_up clearfix" id="get_agent_popup">
+
+        <div class="pro_soc_con_face_inner clearfix">
+
+            <div class="soc_con_top_logo clearfix">
+                <a style="opacity:0;" class="logo8">
+                    <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
+                </a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="stage_one">
+                <div class="soc_con_face_username clearfix">
+                    <div class="primary_headline">Request to have an artist manager</div>
+                    <div class="pro_pop_text_light text_normal">
+                        Your request will be sent to <span class="pro_text_dark new_agent_name"></span>
+                    </div>
+                    <div class="current_agent instant_hide">
+                        <div class="main_headline current_agent_name"></div>
+                        <div class="pro_pop_text_light text_normal">is your current artist manager</div>
+                    </div>
+                    <div class="new_agent">
+                        <div class="main_headline new_agent_name"></div>
+                        <div class="pro_pop_text_light text_normal">is the manager you are requesting for</div>
+                    </div>
+                </div>
+                <br><br>
+                <div id="proceed_get_agent" class="pro_button">Send Request</div>
+            </div>
+            <div class="stage_two instant_hide">
+                <div class="soc_con_face_username clearfix">
+                    <div class="pro_pop_text_light text_center">
+                        Your request has been sent to <span class="pro_text_dark new_agent_name"></span>. The manager will be resposible to process and reply to this request. Keep checking your email and 1Platform account for any updates regarding this request.
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('bottom-section')

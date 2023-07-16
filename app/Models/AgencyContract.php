@@ -22,6 +22,10 @@ class AgencyContract extends Authenticatable
         return $this->belongsTo( Contract::class );
     }
 
+    public function contact(){
+        return $this->belongsTo( AgentContact::class );
+    }
+
     public function setSignaturesAttribute($value){
         $this->attributes['signatures'] = serialize($value);
     }

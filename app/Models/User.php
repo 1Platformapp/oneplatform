@@ -72,20 +72,20 @@ class User extends Authenticatable
 
     }
 
-    /** 
-       
+    /**
+
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
- 
- 
+
+
      */
- 
- 
+
+
     public function devices()
-   
+
     {
-  
+
         return $this->hasMany( UserDevice::class );
-  
+
     }
 
     /**
@@ -175,7 +175,7 @@ class User extends Authenticatable
 
 
     public function canWatchLiveStream($streamId)
-    {   
+    {
         $success = 0;
         $stream = UserLiveStream::find($streamId);
         if($stream && $stream->user){
@@ -190,7 +190,7 @@ class User extends Authenticatable
                         if($checkout->customer && $checkout->customer->id == $this->id && $checkout->user && $checkout->user->id == $user->id){
 
                             $success = 1;
-                        }   
+                        }
                     }
                 }
             }
@@ -202,7 +202,7 @@ class User extends Authenticatable
                     if($subscription->customer && $subscription->customer->id == $this->id){
 
                         $success = 1;
-                    }   
+                    }
                 }
             }
 
@@ -213,7 +213,7 @@ class User extends Authenticatable
                     if($follow->followerUser && $follow->followerUser->id == $this->id){
 
                         $success = 1;
-                    } 
+                    }
                 }
             }
 
@@ -226,7 +226,7 @@ class User extends Authenticatable
                         if(count($checkout->instantCheckoutItems)){
 
                             foreach ($checkout->instantCheckoutItems as $instantItem) {
-                                
+
                                 if($stream->product && $instantItem->type == 'product'){
 
                                     if($stream->product == 'all' || ($stream->productt && $stream->productt->id == $instantItem->source_table_id)){
@@ -242,7 +242,7 @@ class User extends Authenticatable
                                     }
                                 }
                             }
-                        }  
+                        }
                     }
                 }
             }
@@ -865,7 +865,7 @@ class User extends Authenticatable
 
             $hasAgreement = \App\Models\AgentContact::where(['contact_id' => $user->id, 'agent_id' => $this->id, 'approved' => 1])->first();
             if($hasAgreement){
-                
+
                 $return = 1;
             }
         }
@@ -946,10 +946,10 @@ class User extends Authenticatable
             ['step' => 19, 'name' => 'finish', 'skip' => 0],
 
         ];
-        
+
 
         foreach ($array as $key => $page) {
-            
+
             if($page['name'] == $currenctPage){
 
                 return isset($array[$key+1]) ? $array[$key+1]['name'] : 'finish';
@@ -961,7 +961,7 @@ class User extends Authenticatable
     }
 
     public function setupProfileWizard()
-    {   
+    {
         $commonMethods = new CommonMethods();
         $error = $softError = '';
         $redirect = NULL;
@@ -1063,7 +1063,7 @@ class User extends Authenticatable
         $socialScore = $this->profile->social_youtube && $this->profile->social_youtube != '' ? $socialScore + 1 : $socialScore;
         $socialScore = $this->profile->social_spotify_user_access_token && $this->profile->social_spotify_user_access_token != '' ? $socialScore + 1 : $socialScore;
         if($socialScore < 1){
-            
+
             $social = 0;
             $error = $error == '' ? 'social' : $error;
             $redirect = $redirect ? $redirect : route('profile.setup', ['page' => 'social']);
@@ -1160,19 +1160,19 @@ class User extends Authenticatable
 
             $error = 'Your profile cannot be empty';
         }else if($this->home_layout == 'background' && ($this->custom_background == '' || $this->custom_background == NULL)){
-            
+
             $error = 'Please upload a custom background image by clicking the +image button next to background layout';
         }else if($this->home_layout == 'banner' && ($this->custom_banner == '' || $this->custom_banner == NULL)){
-            
+
             $error = 'Please upload a custom banner image by clicking the +image button next to banner layout';
         }else if($this->home_layout == 'banner' && ($this->profile->user_bio_video_url == '' || $this->profile->user_bio_video_url == NULL)){
-            
+
             $error = 'Please add a promo video link (YouTube link only)';
         }else if($this->home_layout == 'standard' && ($this->profile->user_bio_video_url == '' || $this->profile->user_bio_video_url == NULL)){
-            
+
             $error = 'Please add a promo video link (YouTube link only)';
         }else if($this->home_logo == 'custom' && ($this->custom_logo == '' || $this->custom_logo == NULL)){
-            
+
             $error = 'Please upload a logo image by clicking the +image button next to custom logo';
         }else{
 
@@ -1205,7 +1205,7 @@ class User extends Authenticatable
             $media = 0;
             $error = $error == '' ? 'edit:media' : $error;
         }else{
-            
+
             $media = 1;
         }
 
@@ -1214,7 +1214,7 @@ class User extends Authenticatable
             $bio = 0;
             $error = $error == '' ? 'edit:bio' : $error;
         }else{
-            
+
             $bio = 1;
         }
 
@@ -1223,19 +1223,19 @@ class User extends Authenticatable
             $design = 0;
             $error = $error == '' ? 'edit:design' : $error;
         }else if($this->home_layout == 'background' && ($this->custom_background == '' || $this->custom_background == NULL)){
-            
+
             $design = 0;
             $error = $error == '' ? 'edit:design' : $error;
         }else if($this->home_layout == 'banner' && ($this->custom_banner == '' || $this->custom_banner == NULL || $this->profile->user_bio_video_url == '' || $this->profile->user_bio_video_url == NULL)){
-            
+
             $design = 0;
             $error = $error == '' ? 'edit:design' : $error;
         }else if($this->home_layout == 'standard' && ($this->profile->user_bio_video_url == '' || $this->profile->user_bio_video_url == NULL)){
-            
+
             $design = 0;
             $error = $error == '' ? 'edit:design' : $error;
         }else if($this->home_logo == 'custom' && ($this->custom_logo == '' || $this->custom_logo == NULL)){
-            
+
             $design = 0;
             $error = $error == '' ? 'edit:design' : $error;
         }else{
@@ -1248,7 +1248,7 @@ class User extends Authenticatable
             $music = 0;
             $error = $error == '' ? 'media:add-music' : $error;
         }else{
-            
+
             $music = 1;
         }
 
@@ -1257,7 +1257,7 @@ class User extends Authenticatable
             $product = 0;
             $error = $error == '' ? 'media:products' : $error;
         }else{
-            
+
             $product = 1;
         }
 
@@ -1339,7 +1339,7 @@ class User extends Authenticatable
     {
 
         $status = 0;
-        
+
         if($this->hasMusicalFilled() || $this->hasBioFilled() || !$this->hasSocialEmpty()){
 
             $status = 1;
@@ -1435,7 +1435,7 @@ class User extends Authenticatable
         $return = 0;
 
         foreach ($this->campaigns as $campaign) {
-            
+
             if($campaign->status == 'active'){
                 $return = $campaign;
                 break;
@@ -1611,6 +1611,13 @@ class User extends Authenticatable
 
     }
 
+    public function isAgent()
+    {
+
+        return $this->expert && $this->expert->status == 1 && $this->apply_expert == 2;
+
+    }
+
     public function contactRequests()
     {
 
@@ -1690,7 +1697,7 @@ class User extends Authenticatable
         }else{
 
             $return = str_replace(' ', '', $this->name);
-            
+
             $duplication = User::where('id', '!=' , $this->id)->where('username', $return)->first();
             if($duplication){
                 $return = $return.rand(100,999);
@@ -1732,13 +1739,13 @@ class User extends Authenticatable
 
             $musics = $this->musics;
             foreach ($musics as $key => $music) {
-                
+
                 $delete = 0;
                 if($music->music_file == ''){
                     $delete = 1;
                 }else if(is_array($music->downloads) && count($music->downloads)){
                     foreach ($music->downloads as $key2 => $musicItem){
-                        
+
                         if($musicItem['itemtype'] == 'main'){
                             $dir = '';
                         }else if(strpos($musicItem['itemtype'], 'loop_')){
@@ -1827,7 +1834,7 @@ class User extends Authenticatable
                         $query->where('contact_id', $this->id)->orWhere('agent_id', $this->id);
                     })->whereNull('approved')->get()->first();
         if($contact){
-            
+
             $return = $contact;
         }
 

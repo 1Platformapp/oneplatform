@@ -25,7 +25,7 @@ class Agency
 
         $user = Auth::user();
 
-        if($user->apply_expert !== 2){
+        if($user->is_buyer_only){
 
             return redirect(route('profile'));
         }

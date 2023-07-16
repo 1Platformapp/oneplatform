@@ -23,6 +23,10 @@ class AgentContact extends Authenticatable
         return $this->hasMany( ContactQuestion::class )->orderBy('order', 'asc');
     }
 
+    public function contracts(){
+        return $this->hasMany( Contract::class );
+    }
+
 
     public function generateCode(){
 

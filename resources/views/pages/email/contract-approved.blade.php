@@ -100,13 +100,11 @@
                                             <tr>
                                                 <td height="22">&nbsp;</td>
                                             </tr>
-                                            @if($action == 'contract-created')
                                             <tr>
                                                 <td style="color:#8c8c8c;font-family:Open Sans,sans-serif;font-weight: 500;font-size:11px">
-                                                    You have been sent a new contract{{$contract->contact && $contract->contact->agentUser ? ' from '.$contract->contact->agentUser->name : ''}}. Visit your account at 1Platform to take action.
+                                                    Contract title: {{$contract->contract_name}}
                                                 </td>
                                             </tr>
-                                            @endif
                                             </tbody>
                                         </table>
 
@@ -116,8 +114,6 @@
 
                                 </tbody>
                             </table>
-
-
                         </td>
                     </tr>
                     </tbody>
