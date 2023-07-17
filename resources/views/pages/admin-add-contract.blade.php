@@ -71,7 +71,7 @@
                     @foreach ($variables as $index => $variable)
                         <span class="text-sm font-normal">{!!$variable!!}</span>
                         @if($index + 1 < count($variables))
-                        <input class="border-b border-solid border-black text-theme-red mb-2" name="inputData[]" value="{{$agencyContract ? $details['data'][$index] : ''}}" type="text" />
+                        <input class="border-b border-solid border-black text-theme-red mb-2" name="inputData[]" value="{{$action == 'edit' ? $details['data'][$index] : ''}}" type="text" />
                         @endif
                     @endforeach
 
@@ -79,11 +79,11 @@
                     <div class="my-12">
                         <label for="comment" class="block text-sm font-medium leading-6 text-gray-900">Name your contract (optional)</label>
                         <div class="mt-2">
-                            <input type="text" value="{{isset($agencyContract) ? $agencyContract->contract_name : ''}}" name="name" class="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" placeholder="(e.g song writing contract)">
+                            <input type="text" value="{{$action == 'edit' ? $agencyContract->contract_name : ''}}" name="name" class="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" placeholder="(e.g song writing contract)">
                         </div><br>
                         <label for="comment" class="block text-sm font-medium leading-6 text-gray-900">Add your custom terms(optional)</label>
                         <div class="mt-2">
-                            <textarea placeholder="Enter terms on top of above..." rows="4" name="terms" class="px-2 outline-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">{{isset($agencyContract) ? $agencyContract->custom_terms : ''}}</textarea>
+                            <textarea placeholder="Enter terms on top of above..." rows="4" name="terms" class="px-2 outline-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">{{$action == 'edit' ? $agencyContract->custom_terms : ''}}</textarea>
                         </div>
                     </div>
                     <div class="flex items-end justify-between mt-24 mb-12 gap-20">
