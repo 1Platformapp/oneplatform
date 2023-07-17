@@ -71,7 +71,7 @@
                     @foreach ($variables as $index => $variable)
                         <span class="text-sm font-normal">{!!$variable!!}</span>
                         @if($index + 1 < count($variables))
-                        <input class="border-b border-solid border-black text-theme-red mb-2" name="inputData[]" value="{{$action == 'edit' ? $details['data'][$index] : ''}}" type="text" />
+                        <input class="border-b border-solid border-black text-theme-red mb-2" name="inputData[]" value="{{$action == 'edit' && isset($details['data'][$index]) ? $details['data'][$index] : ''}}" type="text" />
                         @endif
                     @endforeach
 
