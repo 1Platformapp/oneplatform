@@ -70,7 +70,7 @@
                     @foreach ($variables as $index => $variable)
                         <span class="text-sm font-normal">{!!$variable!!}</span>
                         @if($index + 1 < count($variables))
-                        <span>{{$details['data'][$index]}}</span>
+                        <span class="text-theme-red">{{$details['data'][$index]}}</span>
                         @endif
                     @endforeach
                     @if($contract->custom_terms)
