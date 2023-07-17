@@ -243,7 +243,7 @@ class AgencyController extends Controller
 
                 Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $recipient, 'contract-created'));
                 $userNotification = new UserNotificationController();
-                $request->request->add(['customer' => $recipient->id, 'user' => $user->id, 'type' => 'contract_created', 'source_id' => $agencyContract->id]);
+                $request->request->add(['user' => $recipient->id, 'customer' => $user->id, 'type' => 'contract_created', 'source_id' => $agencyContract->id]);
                 $response = json_decode($userNotification->create($request), true);
             }
 
