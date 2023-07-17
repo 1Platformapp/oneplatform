@@ -31,7 +31,7 @@
 			@php $user = \App\Models\User::find($notification->source_table_id) @endphp
 			@php $customLink = 'https://www.duong.1platform.tv/admin/users' @endphp
         @elseif($notification->type == 'contract_created')
-			@php $customLink = route('admin.dashboard') @endphp
+			@php $customLink = route('agency.dashboard') @endphp
         @elseif($notification->type == 'contract_approved_for_agent' || $notification->type == 'contract_approved_for_contact')
 			@php $customLink = route('agency.dashboard') @endphp
             @php $contract = \App\Models\AgencyContract::find($notification->source_table_id) @endphp
