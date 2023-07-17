@@ -43,7 +43,7 @@
 @section('page-content')
 
 @php
-    $details = $agencyContract->contract_details;
+    $details = $contract->contract_details;
     $variables = explode("<<var>>", $details['body']);
     $isAgent = $contract->contact->agentUser->id == $user->id ? true : false;
     $isContact = $contract->contact->contactUser->id == $user->id ? true : false;
