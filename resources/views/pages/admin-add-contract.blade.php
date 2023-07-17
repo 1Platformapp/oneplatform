@@ -44,9 +44,9 @@
 
 @php
     $body = $contract->body;
-    $details = $agencyContract ? $agencyContract->contract_details['body'] : $body;
+    $details = $action == 'edit' ? $agencyContract->contract_details['body'] : $body;
     $variables = explode("<<var>>", $details);
-    $agentContact = $action == 'add' ? $agentContact : $agencyContract->contact;
+    $agentContact = $action == 'edit' ? $agencyContract->contact : $agentContact;
     $isAgent = $agentContact->agentUser->id == $user->id ? true : false;
     $isContact = $agentContact->contactUser->id == $user->id ? true : false;
 @endphp
