@@ -213,10 +213,12 @@ class AgencyController extends Controller
                 $signatures = ['agent' => $fileName];
                 $creator = 'agent';
                 $recipient = $agentContact->contactUser;
+                $legalName = ['agent' => $request->get('legalName')];
             }else if($agentContact->contactUser->id == $user->id){
                 $signatures = ['artist' => $fileName];
                 $creator = 'artist';
                 $recipient = $agentContact->agentUser;
+                $legalName = ['artist' => $request->get('legalName')];
             }else{
                 $signatures = [];
                 $creator = '';
@@ -232,6 +234,7 @@ class AgencyController extends Controller
             $agencyContract->contract_details = $contractDetails;
             $agencyContract->signatures = $signatures;
             $agencyContract->custom_terms = $terms;
+            $agencyContract->legalNames = $legalName;
             $agencyContract->creator = $creator;
 
             $agencyContract->save();
@@ -280,6 +283,7 @@ class AgencyController extends Controller
 
             // contract can only be approved by contract partner
             $signatures = $agencyContract->signatures;
+            $legalNames = $agencyContract->legal_names;
 
             if((isset($signatures['agent']) && $agencyContract->contact->agentUser->id == $user->id) || isset($signatures['artist']) && $agencyContract->contact->contactUser->id == $user->id){
 
@@ -305,14 +309,16 @@ class AgencyController extends Controller
             if($agencyContract->contact->agentUser->id == $user->id){
 
                 $signatures['agent'] = $fileName;
+                $legalNames['agent'] = $request->get('legalName');
             }else if($agencyContract->contact->contactUser->id == $user->id){
 
                 $signatures['artist'] = $fileName;
+                $legalNames['artist'] = $request->get('legalName');
             }
 
             $pdfName = strtoupper('acnt_'.uniqid()).'.pdf';
             $fileName = 'agent-agreements/'.$pdfName;
-            $data = ['contact' => $agencyContract->contact->contactUser, 'contractDetails' => $contractDetails, 'agent' => $agencyContract->contact->agentUser, 'contract' => $agencyContract, 'signatures' => $signatures];
+            $data = ['contact' => $agencyContract->contact->contactUser, 'legalNames' => $legalNames, 'contractDetails' => $contractDetails, 'agent' => $agencyContract->contact->agentUser, 'contract' => $agencyContract, 'signatures' => $signatures];
             PDF::loadView('pdf.agent-contract-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
 
             $result = Mail::to($agencyContract->contact->agentUser->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $agencyContract->contact->agentUser, 'contract-approved-for-agent'));
@@ -329,6 +335,7 @@ class AgencyController extends Controller
             $agencyContract->signatures = $signatures;
             $agencyContract->contract_details = [$contractDetails];
             $agencyContract->approved_at = date('Y-m-d H:i:s');
+            $agencyContract->legal_names = $legalNames;
             $agencyContract->save();
 
             return redirect()->route('agency.dashboard');

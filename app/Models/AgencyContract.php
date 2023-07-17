@@ -43,4 +43,13 @@ class AgencyContract extends Authenticatable
     {
         return $value && unserialize($value) ? array_filter(unserialize($value)) : [];
     }
+
+    public function setLegalNamesAttribute($value){
+        $this->attributes['legal_names'] = serialize($value);
+    }
+
+    public function getLegalNamesAttribute($value)
+    {
+        return $value && unserialize($value) ? array_filter(unserialize($value)) : [];
+    }
 }

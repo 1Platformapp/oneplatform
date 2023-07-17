@@ -98,11 +98,15 @@
                                         <img id="signature-image" class="mb-2" src="">
                                         <span class="cursor-pointer"><i class="fa fa-times-circle"></i></span>
                                     </div>
+                                    <div class="border-t border-solid pt-1 border-black text-center font-medium">
+                                        <input id="legal-name" name="legalName" class="border-b border-solid pt-1 border-black text-center font-medium" type="text" placeholder="Enter your legal name" />
+                                    </div>
                                 @endif
                             @else
                                 <img class="mb-2" src="{{asset('signatures/'.$contract->signatures['agent'])}}">
+                                <div class="text-theme-red">Dated: {{date('d-m-Y', strtotime($contract->created_at))}}</div>
+                                <div class="border-t border-solid pt-1 border-black text-center font-medium">{{$contract->legal_names['agent']}}</div>
                             @endif
-                            <div class="border-t border-solid pt-1 border-black text-center font-medium">Producer</div>
                         </div>
                         <div class="flex flex-col w-1/2">
                             @if($isContact)
@@ -123,14 +127,18 @@
                                         <img id="signature-image" class="mb-2" src="">
                                         <span class="cursor-pointer"><i class="fa fa-times-circle"></i></span>
                                     </div>
+                                    <div class="border-t border-solid pt-1 border-black text-center font-medium">
+                                        <input id="legal-name" name="legalName" class="border-b border-solid pt-1 border-black text-center font-medium" type="text" placeholder="Enter your legal name" />
+                                    </div>
                                 @endif
                             @else
                                 <img class="mb-2" src="{{asset('signatures/'.$contract->signatures['artist'])}}">
+                                <div class="text-theme-red">Dated: {{date('d-m-Y', strtotime($contract->created_at))}}</div>
+                                <div class="border-t border-solid pt-1 border-black text-center font-medium">{{$contract->legal_names['artist']}}</div>
                             @endif
-                            <div class="border-t border-solid pt-1 border-black text-center font-medium">Artist</div>
                         </div>
                     </div>
-                    <button id="signature-submit-button" type="button" disabled class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                    <button id="signature-submit-button" type="button" class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
                     <input type="hidden" value="" id="signature-data" name="data">
                 </form>
             </div>

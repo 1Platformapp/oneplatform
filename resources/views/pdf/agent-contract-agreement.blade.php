@@ -102,11 +102,24 @@
                         <tr style="max-width:100%;">
                             <td style="width:60%;vertical-align:top;">
                                 <img style="max-width:150px; max-height: 100px;" src="{{public_path('signatures/'.$signatures['agent'])}}"><br /><br />
-                                {{$agent->name}}
+                                {{$legalNames['agent']}}
                             </td>
                             <td style="width:60%;vertical-align:top;">
                                 <img style="max-width:150px; max-height: 100px;" src="{{public_path('signatures/'.$signatures['artist'])}}"><br /><br />
-                                {{$contact->name}}
+                                {{$legalNames['artist']}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 15px;width:55%;vertical-align:top;"></td>
+                            <td style="width:30%;vertical-align:top;"></td>
+                            <td style="width:15%;vertical-align:top;"></td>
+                        </tr>
+                        <tr style="max-width:100%;">
+                            <td style="width:60%;vertical-align:top;">
+                                {{date('d-m-Y', strtotime($contract->created_at))}}
+                            </td>
+                            <td style="width:60%;vertical-align:top;">
+                                {{date('d-m-Y')}}
                             </td>
                         </tr>
                         @endif

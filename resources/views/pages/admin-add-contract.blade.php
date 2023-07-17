@@ -91,6 +91,10 @@
                             @if($isAgent)
                                 @if($action == 'edit' && count($agencyContract->signatures) && isset($agencyContract->signatures['agent']))
                                     <img class="mb-2" src="{{asset('signatures/'.$agencyContract->signatures['agent'])}}">
+                                    <div class="text-theme-red">Dated: {{date('d-m-Y', strtotime($agencyContract->created_at))}}</div>
+                                    <div class="border-t border-solid pt-1 border-black text-center font-medium">
+                                        {{$agencyContract->legal_names['agent']}}
+                                    </div>
                                 @else
                                     <button id="signature-prompt" type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 px-12 py-4 mb-2 text-center hover:border-gray-400">
                                         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -106,14 +110,22 @@
                                         <img id="signature-image" class="mb-2" src="">
                                         <span class="cursor-pointer"><i class="fa fa-times-circle"></i></span>
                                     </div>
+                                    <div class="border-t border-solid pt-1 border-black text-center font-medium">
+                                        <input id="legal-name" name="legalName" class="border-b border-solid pt-1 border-black text-center font-medium" type="text" placeholder="Enter your legal name" />
+                                    </div>
                                 @endif
+                            @else
+                                <div class="border-t border-solid pt-1 border-black text-center font-medium">Producer</div>
                             @endif
-                            <div class="border-t border-solid pt-1 border-black text-center font-medium">Producer</div>
                         </div>
                         <div class="flex flex-col w-1/2">
                             @if($isContact)
                                 @if($action == 'edit' && count($agencyContract->signatures) && isset($agencyContract->signatures['artist']))
                                     <img class="mb-2" src="{{asset('signatures/'.$agencyContract->signatures['artist'])}}">
+                                    <div class="text-theme-red">Dated: {{date('d-m-Y', strtotime($agencyContract->created_at))}}</div>
+                                    <div class="border-t border-solid pt-1 border-black text-center font-medium">
+                                        {{$agencyContract->legal_names['artist']}}
+                                    </div>
                                 @else
                                     <button id="signature-prompt" type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 px-12 py-4 mb-2 text-center hover:border-gray-400">
                                         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -129,16 +141,20 @@
                                         <img id="signature-image" class="mb-2" src="">
                                         <span class="cursor-pointer"><i class="fa fa-times-circle"></i></span>
                                     </div>
+                                    <div class="border-t border-solid pt-1 border-black text-center font-medium">
+                                        <input id="legal-name" name="legalName" class="border-b border-solid pt-1 border-black text-center font-medium" type="text" placeholder="Enter your legal name" />
+                                    </div>
                                 @endif
+                            @else
+                                <div class="border-t border-solid pt-1 border-black text-center font-medium">Artist</div>
                             @endif
-                            <div class="border-t border-solid pt-1 border-black text-center font-medium">Artist</div>
                         </div>
                     </div>
 
                     @if($action == 'edit')
                         <button type="submit" class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
                     @else
-                        <button id="signature-submit-button" type="button" disabled class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                        <button id="signature-submit-button" type="button" class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
                         <input type="hidden" value="" id="signature-data" name="data">
                     @endif
                 </form>

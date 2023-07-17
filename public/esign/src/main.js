@@ -39,12 +39,16 @@ $('document').ready(function(){
     submitBtn.click(function(e){
 
         e.preventDefault();
-        if($('#signature-image').attr('src') != ''){
+        if($('#signature-image').attr('src') == ''){
+
+            alert('Add your signature');
+        }else if($('#legal-name').val() == ''){
+
+            alert('Enter your legal name');
+        }else{
 
             $('#signature-form #signature-data').val($('#signature-image').attr('src'));
             $('#signature-form').submit();
-        }else{
-            alert('Add your signature');
         }
     })
 });
