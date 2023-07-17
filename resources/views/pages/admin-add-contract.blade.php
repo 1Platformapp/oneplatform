@@ -43,8 +43,8 @@
 @section('page-content')
 
 @php
-    $body = $contract->body;
-    $variables = explode("<<var>>", $body);
+    $details = $agencyContract->contract_details;
+    $variables = explode("<<var>>", $details['body']);
     $agentContact = $action == 'add' ? $agentContact : $agencyContract->contact;
     $isAgent = $agentContact->agentUser->id == $user->id ? true : false;
     $isContact = $agentContact->contactUser->id == $user->id ? true : false;
@@ -67,21 +67,12 @@
                     {{csrf_field()}}
 
                     <div class="element_container mt-8">
-                    @if($action == 'edit')
-                        {!!$agencyContract->contract_details!!}
-                        @if($agencyContract->custom_terms)
-                            <br><br>
-                            {!! $agencyContract->custom_terms !!}
+                    @foreach ($variables as $index => $variable)
+                        <span class="text-sm font-normal">{!!$variable!!}</span>
+                        @if($index + 1 < count($variables))
+                        <input class="border-b border-solid border-black text-theme-red mb-2" name="inputData[]" value="{{$agencyContract ? $details['data'][$index] : ''}}" type="text" />
                         @endif
-                    @else
-                        @foreach ($variables as $index => $variable)
-                            <span class="text-sm font-normal">{!!$variable!!}</span>
-
-                            @if($index + 1 < count($variables))
-                            <input class="border-b border-solid border-black text-theme-red mb-2" name="input-{{$index}}" type="text" />
-                            @endif
-                        @endforeach
-                    @endif
+                    @endforeach
 
                     </div>
                     <div class="my-12">

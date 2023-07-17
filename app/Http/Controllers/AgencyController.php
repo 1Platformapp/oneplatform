@@ -151,7 +151,7 @@ class AgencyController extends Controller
 
             if(($agencyContract->creator == 'agent' && $agencyContract->contact->agentUser->id == $user->id) || ($agencyContract->creator == 'artist' && $agencyContract->contact->contactUser->id == $user->id)){
 
-                // owner of the contract can update
+                // owner of the contract can edit
                 $data   = [
 
                     'commonMethods' => $commonMethods,
@@ -223,14 +223,7 @@ class AgencyController extends Controller
             }
 
             $contractDetails = '';
-            $contractPieces = explode('<<var>>', $contract->body);
-            foreach ($contractPieces as $key => $piece) {
-
-                $contractDetails .= $piece;
-                if($request->has('input-'.$key)){
-                    $contractDetails .= ' ' . $request->get('input-' . $key) . ' ';
-                }
-            }
+            $contractDetails = ['body' => str_replace(array("'", "\""), " ", $contract->body), 'data' => $request->get('inputData')];
 
             $agencyContract = new AgencyContract();
             $agencyContract->contact_id = $contactId;
@@ -243,11 +236,15 @@ class AgencyController extends Controller
 
             $agencyContract->save();
 
-            Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $recipient, 'contract-created'));
+            if($recipient && $recipient->email){
+
+                Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $recipient, 'contract-created'));
+                $userNotification = new UserNotificationController();
+                $request->request->add(['customer' => $recipient->id, 'user' => $user->id, 'type' => 'contract_created', 'source_id' => $agencyContract->id]);
+                $response = json_decode($userNotification->create($request), true);
+            }
+
             return redirect()->route('agency.dashboard');
-            $userNotification = new UserNotificationController();
-            $request->request->add(['customer' => $recipient->id, 'user' => $user->id, 'type' => 'contract_created', 'source_id' => $agencyContract->id]);
-            $response = json_decode($userNotification->create($request), true);
         }
     }
 
@@ -262,9 +259,11 @@ class AgencyController extends Controller
             // owner of the contract can update
             $terms = $request->get('terms') == '' ? NULL : $request->get('terms');
             $name = $request->get('name') == '' ? $contract->title : $request->get('name');
+            $contractDetails = ['body' => $agencyContract->contract_details['body'], 'data' => $request->get('inputData')];
 
             $agencyContract->contract_name = $name;
             $agencyContract->custom_terms = $terms;
+            $agencyContract->contract_details = $contractDetails;
             $agencyContract->save();
 
             return redirect()->route('agency.dashboard');

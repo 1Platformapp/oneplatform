@@ -43,8 +43,8 @@
 @section('page-content')
 
 @php
-    $body = $contract->body;
-    $variables = explode("<<var>>", $body);
+    $details = $agencyContract->contract_details;
+    $variables = explode("<<var>>", $details['body']);
     $isAgent = $contract->contact->agentUser->id == $user->id ? true : false;
     $isContact = $contract->contact->contactUser->id == $user->id ? true : false;
 @endphp
@@ -67,7 +67,12 @@
                     {{csrf_field()}}
 
                     <div class="element_container mt-8">
-                    {!! $contract->contract_details !!}
+                    @foreach ($variables as $index => $variable)
+                        <span class="text-sm font-normal">{!!$variable!!}</span>
+                        @if($index + 1 < count($variables))
+                        <span>{{$details['data'][$index]}}</span>
+                        @endif
+                    @endforeach
                     @if($contract->custom_terms)
                         <br><br>
                         {!! $contract->custom_terms !!}

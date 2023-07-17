@@ -8,7 +8,7 @@ $('document').ready(function(){
         submitBtn.prop('disabled', false);
     });
 
-    $("#signature-prompt").click(function(e) {
+    $("#signature-prompt, #signature-prompt svg, #signature-prompt span").click(function(e) {
         if(e.target !== e.currentTarget) return;
         $('#esign_popup,#body-overlay').show();
         $('#signature').empty();
