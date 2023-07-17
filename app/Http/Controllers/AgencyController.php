@@ -198,57 +198,65 @@ class AgencyController extends Controller
         $commonMethods = new CommonMethods();
         $user = Auth::user();
         $contract = Contract::find($id);
-        $agentContact = AgentContact::find($contactId);
-        if($contract){
+        $agentContact = AgentContact::where(['id' => $contactId, 'approved' => 1])->get()->first();
 
-            $data = $request->get('data');
-            $terms = $request->get('terms');
-            $contractName = $request->get('name') != '' ? $request->get('name') : $contract->title;
+        if(!$contract){
 
-            $extension = explode('/', mime_content_type($data))[1];
-            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
-            $fileName = rand(100000, 999999).'.'.$extension;
-            file_put_contents(public_path('signatures/').$fileName, $imageData);
-            if($agentContact->agentUser->id == $user->id){
-                $signatures = ['agent' => $fileName];
-                $creator = 'agent';
-                $recipient = $agentContact->contactUser;
-                $legalName = ['agent' => $request->get('legalName')];
-            }else if($agentContact->contactUser->id == $user->id){
-                $signatures = ['artist' => $fileName];
-                $creator = 'artist';
-                $recipient = $agentContact->agentUser;
-                $legalName = ['artist' => $request->get('legalName')];
-            }else{
-                $signatures = [];
-                $creator = '';
-            }
-
-            $contractDetails = '';
-            $contractDetails = ['body' => str_replace(array("'", "\""), " ", $contract->body), 'data' => $request->get('inputData')];
-
-            $agencyContract = new AgencyContract();
-            $agencyContract->contact_id = $contactId;
-            $agencyContract->contract_id = $id;
-            $agencyContract->contract_name = $contractName;
-            $agencyContract->contract_details = $contractDetails;
-            $agencyContract->signatures = $signatures;
-            $agencyContract->custom_terms = $terms;
-            $agencyContract->legalNames = $legalName;
-            $agencyContract->creator = $creator;
-
-            $agencyContract->save();
-
-            if($recipient && $recipient->email){
-
-                Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $recipient, 'contract-created'));
-                $userNotification = new UserNotificationController();
-                $request->request->add(['user' => $recipient->id, 'customer' => $user->id, 'type' => 'contract_created', 'source_id' => $agencyContract->id]);
-                $response = json_decode($userNotification->create($request), true);
-            }
-
-            return redirect()->route('agency.dashboard');
+            return 'Error: no contract found';
         }
+
+        if(!$agentContact){
+
+            return 'Error: contact not approved yet';
+        }
+
+        $data = $request->get('data');
+        $terms = $request->get('terms');
+        $contractName = $request->get('name') != '' ? $request->get('name') : $contract->title;
+
+        $extension = explode('/', mime_content_type($data))[1];
+        $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data));
+        $fileName = rand(100000, 999999).'.'.$extension;
+        file_put_contents(public_path('signatures/').$fileName, $imageData);
+        if($agentContact->agentUser->id == $user->id){
+            $signatures = ['agent' => $fileName];
+            $creator = 'agent';
+            $recipient = $agentContact->contactUser;
+            $legalName = ['agent' => $request->get('legalName')];
+        }else if($agentContact->contactUser->id == $user->id){
+            $signatures = ['artist' => $fileName];
+            $creator = 'artist';
+            $recipient = $agentContact->agentUser;
+            $legalName = ['artist' => $request->get('legalName')];
+        }else{
+            $signatures = [];
+            $creator = '';
+        }
+
+        $contractDetails = '';
+        $contractDetails = ['body' => str_replace(array("'", "\""), " ", $contract->body), 'data' => $request->get('inputData')];
+
+        $agencyContract = new AgencyContract();
+        $agencyContract->contact_id = $contactId;
+        $agencyContract->contract_id = $id;
+        $agencyContract->contract_name = $contractName;
+        $agencyContract->contract_details = $contractDetails;
+        $agencyContract->signatures = $signatures;
+        $agencyContract->custom_terms = $terms;
+        $agencyContract->legalNames = $legalName;
+        $agencyContract->creator = $creator;
+
+        $agencyContract->save();
+
+        if($recipient && $recipient->email){
+
+            Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $recipient, 'contract-created'));
+            $userNotification = new UserNotificationController();
+            $request->request->add(['user' => $recipient->id, 'customer' => $user->id, 'type' => 'contract_created', 'source_id' => $agencyContract->id]);
+            $response = json_decode($userNotification->create($request), true);
+        }
+
+        return redirect()->route('agency.dashboard');
     }
 
     public function updateContract(Request $request, $id)
