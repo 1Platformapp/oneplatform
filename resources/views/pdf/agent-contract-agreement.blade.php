@@ -88,7 +88,7 @@
                         </tr>
                         <tr>
                             <td style="color:#888;font-size: 14px;width:100%;vertical-align:bottom;">
-                                {!! $contract->contract_details.'<br /><br />'.$contract->custom_terms !!}
+                                {!! $contractDetails.'<br /><br />'.$contract->custom_terms !!}
                             </td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>

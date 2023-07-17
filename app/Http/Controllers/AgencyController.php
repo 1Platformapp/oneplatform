@@ -292,6 +292,16 @@ class AgencyController extends Controller
             $fileName = rand(100000, 999999).'.'.$extension;
             file_put_contents(public_path('signatures/').$fileName, $imageData);
 
+            $contractDetails = '';
+            $contractPieces = explode('<<var>>', $agencyContract->contract_details['body']);
+            foreach ($contractPieces as $key => $piece) {
+
+                $contractDetails .= $piece;
+                if(isset($agencyContract->contract_details['data'][$key])){
+                    $contractDetails .= ' ' . $agencyContract->contract_details['data'][$key] . ' ';
+                }
+            }
+
             if($agencyContract->contact->agentUser->id == $user->id){
 
                 $signatures['agent'] = $fileName;
@@ -302,8 +312,7 @@ class AgencyController extends Controller
 
             $pdfName = strtoupper('acnt_'.uniqid()).'.pdf';
             $fileName = 'agent-agreements/'.$pdfName;
-            $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $agencyContract->contract_details.$agencyContract->custom_terms);
-            $data = ['contact' => $agencyContract->contact->contactUser, 'agent' => $agencyContract->contact->agentUser, 'contract' => $agencyContract, 'signatures' => $signatures];
+            $data = ['contact' => $agencyContract->contact->contactUser, 'contractDetails' => $contractDetails, 'agent' => $agencyContract->contact->agentUser, 'contract' => $agencyContract, 'signatures' => $signatures];
             PDF::loadView('pdf.agent-contract-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
 
             $result = Mail::to($agencyContract->contact->agentUser->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $agencyContract->contact->agentUser, 'contract-approved-for-agent'));
@@ -318,6 +327,7 @@ class AgencyController extends Controller
 
             $agencyContract->pdf = $pdfName;
             $agencyContract->signatures = $signatures;
+            $agencyContract->contract_details = [$contractDetails];
             $agencyContract->approved_at = date('Y-m-d H:i:s');
             $agencyContract->save();
 
