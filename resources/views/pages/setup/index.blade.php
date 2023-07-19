@@ -3,20 +3,20 @@
 @section('pagetitle') {{$title}} @endsection
 
 
-@section('pagekeywords') 
+@section('pagekeywords')
 @endsection
 
 
-@section('pagedescription') 
+@section('pagedescription')
 @endsection
 
 
-@section('seocontent') 
+@section('seocontent')
 @endsection
 
 
 @section('page-level-css')
-	
+
 	<link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.21')}}" />
 	<link rel="stylesheet" href="{{asset('simplepicker/simplepicker.css')}}" />
 	<link rel="stylesheet" href="{{asset('css/profile.orders.css')}}">
@@ -47,14 +47,14 @@
 		.pro_inp_list_outer { padding-top: 8px; }
 		.pro_note ul li { line-height: 18px; margin: 9px 0; }
 		.setup_welcome { margin: auto; width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-		.setup_welcome_head { font-size: 26px; margin-bottom: 8px; } 
+		.setup_welcome_head { font-size: 26px; margin-bottom: 8px; }
 		.setup_welcome_sub_head { font-size: 13px; }
 		.setup_welcome .edit_profile_btn_1 { width: 100%; }
 		.color_tem { color: #007bff; }
 		.check_each_name { font-size: 12px; }
 		.pro_tab_feature, .pro_tab_hide_show { margin: 0 5px; }
 		*[disabled="disabled"] { cursor: not-allowed; background: #ccc; }
-		
+
 		.manager_chat .manager_chat_init { border: 1px solid #d5dade; display: flex; }
 		.manager_chat .manager_chat_init .chat_right { flex: 0 1 67%; border-left: 1px solid #d5dade; }
 		.manager_chat .manager_chat_init .chat_left { flex: 0 1 33%; }
@@ -88,7 +88,7 @@
 
 
 @section('page-level-js')
-	
+
 	<script type="text/javascript" src="{{asset('js/jwpatch.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/instantiate_jwp.js')}}"></script>
 
@@ -98,7 +98,7 @@
 		  return /\s/g.test(s);
 		}
 
-		
+
  		function validateCurrency(){
 
  			var value = document.forms['currencyForm']['currency'].value;
@@ -229,7 +229,7 @@
 
 					formData.append('page', 'subscription');
 				}
-				
+
 				$.ajax({
 
 				    url: '/profile-setup/save-next',
@@ -260,7 +260,7 @@
 				var formData = new FormData();
 				formData.append('_token', $('meta[name="csrf-token"]').attr('content') );
 				formData.append('managerChatPage', page);
-				
+
 				$.ajax({
 
 				    url: '/profile-setup/save-next',
@@ -296,7 +296,7 @@
 	@if($page == 'news' || $page == 'social' || $page == 'videos' || $page == 'product')
 		<script type="text/javascript" src="{{asset('js/profile.media.js?v=1.7')}}"></script>
 	@endif
-	
+
 	<script src="{{asset('simplepicker/simplepicker.js')}}"></script>
 	<script type="text/javascript" src="{{asset('js/jquery.draggableTouch.min.js')}}"></script>
    	<script src="{{asset('js/profile.min.js?v=5.22')}}"></script>
@@ -305,11 +305,11 @@
 
 
 @section('flash-message-container')
-    
+
     @if (Session::has('error'))
 
         <div class="error_span">
-            <i class="fa fa-times-circle"></i> 
+            <i class="fa fa-times-circle"></i>
             {{ (is_array(Session::get('error'))) ? Session::get('error')[0] : Session::get('error') }}
         </div>
     	@php Illuminate\Support\Facades\Session::forget('error'); @endphp
@@ -321,7 +321,7 @@
 @section('page-content')
 
 	@if(!Session::has('managerChat'))
-	
+
 	@if($page == 'welcome')
 
 		@php $suggestedUsername = $user->recommendedUsername() @endphp
@@ -721,7 +721,7 @@
 				</div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 
@@ -764,7 +764,7 @@
 				</div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 
@@ -826,7 +826,7 @@
 				</div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 
@@ -918,7 +918,7 @@
 				</div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 
@@ -961,7 +961,7 @@
 				</div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 
@@ -1004,7 +1004,7 @@
 				</div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 
@@ -1048,11 +1048,11 @@
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
-		            This is optional but highly recommended that you can look for an artist manager that will help you boost your sales or increase your fan base 
+		            This is optional but highly recommended that you can look for an artist manager that will help you boost your sales or increase your fan base
 		        </div>
 			</div>
 		</div>
-		@include('parts.profile-chat', ['page' => 'chat', 'subTab' => 'get-agent', 'setupWizard' => ''])
+		@include('parts.profile-chat-old', ['page' => 'chat', 'subTab' => 'get-agent', 'setupWizard' => ''])
 
 	@elseif($page == 'subscription')
 
@@ -1091,7 +1091,7 @@
 			    </div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 		<div class="pro_note">
@@ -1142,7 +1142,7 @@
 				</div>
 			</div>
 			<div class="setup_tray_foot">
-				
+
 			</div>
 		</div>
 
@@ -1174,7 +1174,7 @@
 						Step 19 of 19
 					</div>
 					<div class="setup_tray_head">
-						Well done 
+						Well done
 					</div>
 				</div>
 				<div class="setup_tray_right">
@@ -1265,8 +1265,8 @@
 @endsection
 
 
-@section('miscellaneous-html')	
-	
+@section('miscellaneous-html')
+
 	@php Illuminate\Support\Facades\Session::forget('managerChat') @endphp
 
 	@include('parts.add-form-elements')
@@ -1632,11 +1632,11 @@
 	                </div>
 	                <div class="current_agent instant_hide">
 	                    <div class="main_headline current_agent_name"></div>
-	                    <div class="pro_pop_text_light text_normal">is your current artist manager</div> 
+	                    <div class="pro_pop_text_light text_normal">is your current artist manager</div>
 	                </div>
 	                <div class="new_agent">
 	                    <div class="main_headline new_agent_name"></div>
-	                    <div class="pro_pop_text_light text_normal">is the manager you are requesting for</div>  
+	                    <div class="pro_pop_text_light text_normal">is the manager you are requesting for</div>
 	                </div>
 	            </div>
 	            <br><br>
@@ -1646,7 +1646,7 @@
 	            <div class="soc_con_face_username clearfix">
 	                <div class="pro_pop_text_light text_center">
 	                    Your request has been sent to <span class="pro_text_dark new_agent_name"></span>. The manager will be resposible to process and reply to this request. Keep checking your email and 1Platform account for any updates regarding this request.
-	                </div>  
+	                </div>
 	            </div>
 	            <br>
 	        </div>

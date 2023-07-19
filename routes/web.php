@@ -413,6 +413,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::post('dashboard/update-contract/{id}', [AgencyController::class, 'updateContract'])->name('agency.contract.update');
         Route::post('dashboard/approve-contract/{id}', [AgencyController::class, 'approveContract'])->name('agency.contract.approve');
         Route::get('profile/{tab}/{subtab?}', [ProfileController::class, 'profileWithTab'])->name('profile.with.tab');
+        Route::post('dashboard/chat', [AgencyController::class, 'userChat'])->name('agency.chat');
         Route::get('profile/access/{tab}/{info}', [ProfileController::class, 'profileWithTabInfo'])->name('profile.with.tab.info');
         Route::get('startup-wizard/{action?}', [ProfileController::class, 'startupWizard'])->name('user.startup.wizard');
         Route::get('action-required/{type}', [ProfileController::class, 'userActionRequired'])->name('user.action.required');

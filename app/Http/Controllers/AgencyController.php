@@ -80,7 +80,7 @@ class AgencyController extends Controller
 
         if(!$isAgent){
 
-            $contacts = AgentContact::where(['email' => $user->email])->get();
+            $contacts = AgentContact::where(['contact_id' => $user->id])->get();
             if(count($contacts) && $contacts->first()->agentUser){
 
                 $agents = User::where('apply_expert', 2)->orderByRaw("id = ".$contacts->first()->agentUser->id." desc")->get()->filter(function ($user){
@@ -348,5 +348,100 @@ class AgencyController extends Controller
 
             return redirect()->route('agency.dashboard');
         }
+    }
+
+    public function userChat(Request $request){
+
+        $user = Auth::user();
+        $success = false;
+        $data = [
+            'private' => ['messages' => []],
+            'group' => ['messages' => [], 'members' => []]
+        ];
+        $commonMethods = new CommonMethods();
+
+        if(!$request->has('type') || !$request->has('data')){
+
+            return json_encode(array('success' => false, 'error' => 'no or incomplete data'));
+        }
+
+        $type = $request->get('type');
+        $contactId = $request->get('data');
+        $cursor = $request->get('cursor');
+        if($type == 'contact-chat'){
+
+            $agentContact = AgentContact::find($contactId);
+
+            if(!$agentContact || !$agentContact->agentUser || !$agentContact->contactUser){
+
+                return json_encode(array('success' => false, 'error' => 'some required data does not exist'));
+            }
+
+            $agent = $agentContact->agentUser;
+            $artist = $agentContact->contactUser;
+
+            if($agentContact->approved == 1){
+
+                $chatGroup = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
+
+                if(!$chatGroup){
+
+                    return json_encode(array('success' => false, 'error' => 'some required data does not exist'));
+                }
+
+                $chatQuery = UserChat::where('group_id', $chatGroup->id);
+                if((int ) $cursor > 0){
+
+                    $chatQuery->where('id', '<' , $cursor);
+                }
+                $chatMessages = $chatQuery->orderBy('id', 'desc')->take(20)->get()->reverse();
+                if(count($chatMessages)){
+
+                    foreach ($chatMessages as $key => $chatMessage) {
+
+                        if($chatMessage->sender){
+                            $data['group']['messages'][] .= \View::make('parts.chat-partner-message', ['chat' => $chatMessage])->render();
+                            $seen = $chatMessage->seen;
+                            if(count($seen)){
+                                if(!in_array($user->id, $seen)){
+                                    $seen[] = $user->id;
+                                    $chatMessage->seen = $seen;
+                                    $chatMessage->save();
+                                }
+                            }else{
+                                $seen[] = $user->id;
+                                $chatMessage->seen = $seen;
+                                $chatMessage->save();
+                            }
+                        }
+                    }
+                }
+
+                $data['group']['members'] = $chatGroup->other_members;
+                $success = true;
+            }else{
+
+                $partner = $user->isAgent() ? $artist : $agent;
+                $chatMessages = UserChat::where(function($q) use ($user) {
+                        $q->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
+                    })->where(function($q) use ($partner) {
+                        $q->where('sender_id', $partner->id)->orWhere('recipient_id', $partner->id);
+                    })->orderBy('id', 'desc')->take(20)->get()->reverse();
+                if(count($chatMessages)){
+
+                    foreach ($chatMessages as $key => $chatMessage) {
+
+                        if($chatMessage->sender){
+
+                            $data['private']['messages'][] .= \View::make('parts.chat-partner-message', ['chat' => $chatMessage])->render();
+                        }
+                    }
+                }
+
+                $success = true;
+            }
+        }
+
+        return json_encode(['success' => $success, 'data' => $data]);
     }
 }

@@ -143,6 +143,7 @@
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </li>
+                                                @if($contact->approved)
                                                 <li>
                                                     <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$contact->id}}">
                                                         <i class="fas fa-file-pdf"></i>
@@ -153,6 +154,18 @@
                                                         <i class="fa fa-calendar"></i>
                                                     </a>
                                                 </li>
+                                                @else
+                                                <li>
+                                                    <a title="Agreements" class="m_btn_right_icon_each">
+                                                        <i class="fas fa-file-pdf"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a title="Calendar" class="m_btn_right_icon_each">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </a>
+                                                </li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -161,11 +174,16 @@
                                         <div class="each_dash_section instant_hide" data-id="contact_edit_{{$contact->id}}">
                                             @include('parts.agent-contact-edit-template', ['contact' => $contact])
                                         </div>
+                                        @if($contact->approved)
                                         <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$contact->id}}">
                                             @include('parts.agent-contact-calendar', ['contact' => $contact])
                                         </div>
                                         <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
                                             @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'isAgent' => $isAgent])
+                                        </div>
+                                        @endif
+                                        <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
+                                            @include('parts.agent-contact-chat', ['contact' => $contact, 'isAgent' => $isAgent, 'user' => $user])
                                         </div>
                                     </div>
                                 </div>
@@ -507,7 +525,7 @@
         }
     });
 
-    $('.m_btm_edit, .m_btn_files, .m_btn_calendar').click(function(e){
+    $('.m_btm_edit, .m_btn_files, .m_btn_calendar, .m_btn_chat').click(function(e){
 
         var id = $(this).attr('data-id');
         if($(this).hasClass('m_btm_edit')){
@@ -519,8 +537,20 @@
         }else if($(this).hasClass('m_btn_calendar')){
             $('.each_dash_section:not(.each_dash_section[data-id="contact_calendar_'+id+'"])').addClass('instant_hide');
             $('.each_dash_section[data-id="contact_calendar_'+id+'"]').toggleClass('instant_hide');
-        }
+        }else if($(this).hasClass('m_btn_chat')){
+            var elem = $('.each_dash_section[data-id="contact_chat_'+id+'"]');
+            $('.each_dash_section').not(elem).addClass('instant_hide');
+            elem.toggleClass('instant_hide');
 
+            if(!elem.hasClass('instant_hide')){
+
+                var formData = new FormData();
+                formData.append('type', 'contact-chat');
+                formData.append('data', id);
+
+                getChatMessages(elem.find('.chat_outer'), formData);
+            }
+        }
     });
 
     $('.m_btm_del').click(function(e){
@@ -645,6 +675,90 @@
 
         $('#get_agent_popup,#body-overlay').show();
     });
+
+    $('.chat_main_body .chat_main_body_messages').on('scroll', function() {
+
+        var thiss = $(this);
+        var parent = thiss.closest('.chat_outer');
+        var id = parent.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+        if(thiss.get(0).scrollTop == 0 && thiss.find('.chat_each_message').length > 0){
+            parent.find('.loading_messages').removeClass('instant_hide');
+            var firstMessage = thiss.find('.chat_each_message').first();
+
+            var formData = new FormData();
+            formData.append('type', 'contact-chat');
+            formData.append('data', id);
+            formData.append('cursor', firstMessage.attr('data-cursor'));
+            getChatMessages(parent, formData);
+        }
+    });
+
+    function getChatMessages(element, formData){
+
+        $.ajax({
+
+            url: '/dashboard/chat',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function (response) {
+
+                element.find('.loading_messages').addClass('instant_hide');
+                if(response.success){
+                    if(response.data.group.messages.length){
+
+                        renderChatMessages(element, formData.get('cursor'), response.data.group.messages);
+                    }else if(response.data.private.messages.length){
+
+                        renderChatMessages(element, formData.get('cursor'), response.data.private.messages);
+                    }else{
+
+                        if(!formData.get('cursor')){
+                            element.find('.chat_main_body_messages').html('<div class="text-sm text-center font-semibold text-gray-500 m-auto">No messages found</div>');
+                        }
+                    }
+                }else{
+
+                    console.log(response.error);
+                }
+            }
+        });
+    }
+
+    function renderChatMessages(element, cursor, messages){
+
+        if(cursor){
+
+            element.find('.chat_main_body_messages').prepend(messages);
+            renderScrollHeight(element, cursor);
+        }else{
+
+            element.find('.chat_main_body_messages').html(messages);
+            renderScrollHeight(element);
+        }
+    }
+
+    function renderScrollHeight(element, cursor = null){
+
+        if(cursor){
+
+            var height = 0;
+            element.find('.chat_main_body_messages .chat_each_message').filter(function() {
+                if($(this).attr('data-cursor') < parseInt(cursor)){
+
+                    height += $(this).outerHeight(true);
+                }
+            });
+            element.find('.chat_main_body_messages').animate({ scrollTop: height }, 0);
+        }else{
+
+            setTimeout(function(){
+                element.find('.chat_main_body_messages').animate({ scrollTop: element.find('.chat_main_body_messages')[0].scrollHeight + 5000 }, 0);
+            }, 100);
+        }
+    }
 
 
 </script>
