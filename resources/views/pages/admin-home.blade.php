@@ -174,7 +174,29 @@
 
 @section('miscellaneous-html')
 
+    @include('parts.add-form-elements')
+
     <div id="body-overlay"></div>
+
+    <div class="pro_pop_chat_upload in_progress new_popup pro_page_pop_up clearfix" style="z-index: 10;">
+        <div class="pro_soc_con_face_inner clearfix">
+            <div class="pro_pop_head">Upload details</div>
+            <div class="pro_pop_body">
+                <div class="pro_body_in"></div>
+                <div class="pro_pop_info">
+                    It may take a while, please be patient. Do not refresh or navigate away from this page
+                </div>
+            </div>
+            <div class="pro_pop_foot">
+                <div class="foot_help">
+                    Having problems? Please try again or contact us via online chat
+                </div>
+                <div class="foot_action">
+                    <!--<div id="minify_upload" class="foot_action_btn">Hide</div>!-->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="pro_confirm_delete_outer pro_page_pop_up clearfix" >
 

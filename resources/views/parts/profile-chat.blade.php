@@ -693,6 +693,108 @@
         }
     });
 
+    $('.chat_outer .submit_btn').click(function(){
+
+        var thiss = $(this);
+        var parent = thiss.closest('.chat_outer');
+        var id = parent.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+        var attachments = parent.find('.chat_attachments');
+        var message = parent.find('.new_message');
+
+        if(message.val() != '' || attachments.val() != ''){
+
+            thiss.addClass('disabled');
+
+            if(attachments.val() != ''){
+
+                prepareChatUploader(parent);
+                $('.pro_pop_chat_upload,#body-overlay').show();
+                startChatUploader(parent);
+            }else{
+
+                var formData = new FormData();
+                formData.append('contact', id);
+                formData.append('message', message.val());
+                formData.append('action', 'send-message');
+
+                $.ajax({
+
+                    url: '/dashboard/create-message',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    success: function (response) {
+
+                        thiss.removeClass('disabled');
+
+                        if(response.success){
+                            parent.find('.attachment_area .close').trigger('click');
+                            refreshChat(parent);
+                        }else{
+                            console.log(response.error);
+                        }
+
+                        parent.find('.new_message').val('').change();
+                    }
+                });
+            }
+        }
+    });
+
+    $('.chat_main_body_attach').click(function(e){
+
+        e.preventDefault();
+        var parent = $(this).closest('.chat_outer');
+        parent.find('.chat_attachments').trigger('click');
+    });
+
+    $('.attachment_area .close').click(function(){
+
+        var parent = $(this).closest('.chat_outer');
+        parent.find('.chat_attachments').val('');
+        parent.find('.attachment_area .each_attach').remove();
+        parent.find('.chat_main_body_foot').removeClass('attachment');
+    });
+
+    $('.chat_attachments').change(function(){
+
+        var parent = $(this).closest('.chat_outer');
+        if(this.files && this.files[0]){
+            for(var i = 0; i < this.files.length; i++){
+                if(this.files[i].type == 'image/jpeg' || this.files[i].type == 'image/png'){
+                    if(this.files[i].size > 5*1024*1024){
+                        alert('Your file '+this.files[i].name+' is more than 5MB');
+                    }else{
+                        var reader = new FileReader();
+                        reader.onload = imageIsLoaded;
+                        reader.readAsDataURL(this.files[i]);
+                    }
+                }else{
+                    if(this.files[i].size > 100*1024*1024){
+                        alert('Your file '+this.files[i].name+' is more than 5MB');
+                    }else{
+                        var extension = this.files[i].name.split('.').pop();
+                        parent.find('.attachment_area').append('<div class="each_attach file"><div class="up">File</div><div class="down"><i class="fa fa-file-o"></i></div></div>');
+                        parent.find('.chat_main_body_foot').addClass('attachment');
+                        parent.find('.new_message').focus();
+                    }
+                }
+            }
+        }
+    });
+
+    function refreshChat(element){
+
+        var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+        var formData = new FormData();
+        formData.append('type', 'contact-chat');
+        formData.append('data', id);
+
+        getChatMessages(element, formData);
+    }
+
     function getChatMessages(element, formData){
 
         $.ajax({
@@ -760,5 +862,99 @@
         }
     }
 
+    function prepareChatUploader(element){
 
+        var attachments = element.find('.chat_attachments')[0].files;
+        var html = $('#pro_pop_chat_upload_sample').html();
+
+        $(html).appendTo($('.pro_pop_chat_upload .pro_body_in'));
+        var item = $('.pro_pop_chat_upload .pro_body_in .pro_pop_chat_upload_each').last();
+        item.attr('data-type', 'attachment-initialize');
+        item.find('.item_name').text('Initializing');
+        item.find('.item_info').removeClass('instant_hide');
+
+        for (var index = 0; index < attachments.length; index++) {
+            $(html).appendTo($('.pro_pop_chat_upload .pro_body_in'));
+            var item = $('.pro_pop_chat_upload .pro_body_in .pro_pop_chat_upload_each').last();
+            item.attr('data-type', 'attachment-upload');
+            item.attr('data-id', index);
+            var size = attachments[index].size;
+            var name = attachments[index].name;
+            var sizeem = Math.round(size/(1024*1024));
+            var sizeek = Math.round(size/(1024));
+            item.find('.item_size').text(sizeem > 0 ? sizeem+' MB' : sizeek+' KB');
+            item.find('.item_name').text(name);
+            item.find('.item_file').removeClass('instant_hide');
+        }
+        $(html).appendTo($('.pro_pop_chat_upload .pro_body_in'));
+        var item = $('.pro_pop_chat_upload .pro_body_in .pro_pop_chat_upload_each').last();
+        item.attr('data-type', 'attachment-finalize');
+        item.find('.item_name').text('Finalizing');
+        item.find('.item_info').removeClass('instant_hide');
+    }
+
+    function startChatUploader(element, id = null){
+
+        var popElem = $('.pro_pop_chat_upload .pro_pop_chat_upload_each.waiting').first();
+        if(popElem.length){
+
+            popElem.addClass('pending').removeClass('failed');
+            popElem.find('.item_status i').addClass('fa-spinner fa-spin').removeClass('fa-check-circle fa-pause');
+
+            var formData = new FormData();
+            var dataType = popElem.attr('data-type');
+
+            if(dataType == 'attachment-finalize'){
+
+                var contactId = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                formData.append('chat', id);
+                formData.append('contact', contactId);
+                formData.append('message', element.find('.new_message').val());
+            }else if(dataType == 'attachment-upload'){
+
+                var attachments = element.find('.chat_attachments')[0].files;
+                formData.append('attachment', attachments[popElem.attr('data-id')]);
+                formData.append('chat', id);
+            }
+
+            formData.append('action', dataType);
+            $.ajax({
+
+                url: '/dashboard/create-message',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                dataType: "json",
+                enctype: 'multipart/form-data',
+                success: function (response){
+
+                    if(response.success == 1){
+                        popElem.removeClass('pending waiting').addClass('complete');
+                        popElem.find('.item_status i').removeClass('fa-spinner fa-spin').addClass('fa-check-circle');
+                    }else{
+                        popElem.removeClass('pending waiting').addClass('failed');
+                        popElem.find('.item_status i').removeClass('fa-spinner fa-spin').addClass('fa-exclamation-triangle');
+                    }
+
+                    startChatUploader(element, response.id);
+                },
+                error: function(response){
+
+                    popElem.removeClass('pending waiting').addClass('failed');
+                    popElem.find('.item_status i').removeClass('fa-spinner fa-spin').addClass('fa-exclamation-triangle');
+                }
+            });
+        }else{
+            element.find('.attachment_area .close').trigger('click');
+            refreshChat(element);
+
+            element.find('.new_message').val('').change();
+            element.find('.attachment_area .close').trigger('click');
+            $('.pro_pop_chat_upload .pro_pop_chat_upload_each').remove();
+            $('.pro_pop_chat_upload,#body-overlay').hide();
+            element.find('.submit_btn').removeClass('disabled');
+        }
+    }
 </script>
