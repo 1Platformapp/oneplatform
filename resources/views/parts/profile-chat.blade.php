@@ -289,7 +289,7 @@
                                 @php $agentContacts = \App\Models\AgentContact::where('agent_id', $agent->id)->get() @endphp
                                 @php $isContact = \App\Models\AgentContact::where(['agent_id' => $agent->id, 'email' => $user->email])->first() @endphp
                                 @php $requestSent = \App\Models\AgentContactRequest::where(['agent_user_id' => $agent->id, 'contact_user_id' => $user->id])->first() @endphp
-                                <div class="agents_listing music_btm_list no_sorting clearfix">
+                                <div class="agents_listing agent_contact_listing music_btm_list no_sorting clearfix">
                                     <div class="edit_elem_top">
                                         <div class="m_btm_list_left">
                                             <div data-image="{{$agentPDetails['image']}}" class="music_btm_thumb">
@@ -335,7 +335,7 @@
                                             <ul>
                                                 @if($isContact && $isContact->approved)
                                                 <li>
-                                                    <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$agent->id}}">
+                                                    <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$isContact->id}}">
                                                         <i class="fas fa-comment-dots"></i>
                                                     </a>
                                                 </li>
@@ -370,6 +370,11 @@
                                         </div>
                                         <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$agent->id}}">
                                             @include('parts.agent-contact-agreement', ['contact' => $isContact, 'contracts' => $contracts, 'myContracts' => $myContracts])
+                                        </div>
+                                        @endif
+                                        @if($isContact)
+                                        <div class="each_dash_section instant_hide" data-id="contact_chat_{{$isContact->id}}">
+                                            @include('parts.agent-contact-chat', ['contact' => $isContact, 'isAgent' => false, 'user' => $user])
                                         </div>
                                         @endif
                                     </div>

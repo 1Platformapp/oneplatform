@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Http\Controllers\CommonMethods;
+use App\Http\Controllers\PushNotificationController;
+use App\Http\Controllers\UserNotificationController;
 
 use App\Models\UserCampaign;
 use App\Models\UserLiveStream;
@@ -1839,6 +1841,29 @@ class User extends Authenticatable
         }
 
         return $return;
+    }
+
+    public function sendAppNotifications($title, $body){
+
+        if(count($this->devices)){
+
+            foreach ($this->devices as $device) {
+
+                if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
+
+                    $fcm = new PushNotificationController();
+                    $return = $fcm->send($device->device_id, $title, $body, $device->platform);
+                }
+            }
+        }
+    }
+
+    public function sendWebNotification($senderId, $chatId){
+
+        $request = request();
+        $userNotification = new UserNotificationController();
+        $request->request->add(['user' => $this->id,'customer' => $senderId, 'type' => 'chat','source_id' => $chatId]);
+        $response = json_decode($userNotification->create($request), true);
     }
 }
 

@@ -520,6 +520,8 @@ class AgencyController extends Controller
             $chat->music_id = NULL;
             $chat->save();
             $id = $chat->id;
+
+            $response = $chat->sendNotifications();
         }else if($action == 'attachment-upload'){
 
             $chat = UserChat::find($request->get('chat'));

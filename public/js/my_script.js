@@ -31,12 +31,12 @@ $(document).ready(function() {
     checkApp();
 
     setTimeout(function(){
-        
+
         if($('#platform').length && $('#platform').val() == '1'){
 
             $('.usr_men_cat_each:not(.usr_men_recommend,.usr_men_logout)').addClass('instant_hide');
         }
-        
+
     }, 200);
 
     Audio.prototype.play = (function(play) {
@@ -46,7 +46,7 @@ $(document).ready(function() {
                 promise = play.apply(audio, args);
             if(promise !== undefined) {
                 promise.catch(_ => {
-                    
+
                 });
             }
         };
@@ -193,7 +193,7 @@ $(document).ready(function() {
                 dataType: "json",
                 type: 'post',
                 data: {'find_type': findType, 'find': id, 'identity_type': 'guest', 'identity': ''},
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         portElem.removeClass('port_loading');
                         $('.portfolio_det_outer').html(response.data.data);
@@ -252,7 +252,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+
     $('#search_btn,#top-search-field-res').click(function(){
 
         window.location.href = '/search';
@@ -262,7 +262,7 @@ $(document).ready(function() {
     var notLoggedIn;
 
     notLoggedIn = setTimeout(function(){
-        if($("#show_not_logged_in").val() == '1' && $('#body-overlay').css('display') != 'block' && $('#has_free_sub').length && $('#has_free_sub').val() == '1'){ 
+        if($("#show_not_logged_in").val() == '1' && $('#body-overlay').css('display') != 'block' && $('#has_free_sub').length && $('#has_free_sub').val() == '1'){
             $("#not_logged_in, #body-overlay").show();
         }
     }, 120000);
@@ -316,7 +316,7 @@ $(document).ready(function() {
                 cache: false,
                 dataType: 'json',
                 success: function (response) {
-                    
+
                     if(response.success == 1){
                         $('#user-follow-popup .follow_authenticator').addClass('instant_hide');
                         $('#user-follow-popup .follow_go_ahead').removeClass('instant_hide');
@@ -346,7 +346,7 @@ $(document).ready(function() {
             cache: false,
             dataType: 'json',
             success: function (response) {
-                
+
                 if(response.success == 1){
                     $('#body-overlay,#user-follow-popup').hide();
                     $('#user-follow-popup #follow_message').val('');
@@ -371,9 +371,9 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             data: formData,
-            success: function(response) { 
+            success: function(response) {
                 if(response.success == 1){
-                    
+
                     $('#notif_count_res,#notif_count').text('').removeClass('notif_counter_ok');
                     $('.user_notif_item_status .noti_status_new').removeClass('noti_status_new').addClass('noti_status_seen').text('Seen');
                 }else{
@@ -397,7 +397,7 @@ $(document).ready(function() {
             var download = thiss.attr('data-download');
             var downloadAs = thiss.parent().parent().parent().find('.my_purchase_sec a').first().text();
             $('#body-overlay,.pro_initiating_download').show();
-            
+
             $.ajax({
 
                 url: '/prepare-zip',
@@ -406,7 +406,7 @@ $(document).ready(function() {
                 cache: false,
                 dataType: 'json',
                 success: function (response) {
-                    
+
                     $('#body-overlay,.pro_initiating_download').hide();
                     if(response.success == 1 && response.download_link != ''){
                         window.location.href = response.download_link;
@@ -434,7 +434,7 @@ $(document).ready(function() {
         var targetId = $(this).data('target-id');
 
         $("html, body").animate({scrollTop: $('.each_tab_btn[data-show="#'+targetId+'"]').offset().top - 80}, 1500, function(){
-            $('.each_tab_btn[data-show="#'+targetId+'"]').trigger('click'); 
+            $('.each_tab_btn[data-show="#'+targetId+'"]').trigger('click');
         });
     });
 
@@ -448,22 +448,22 @@ $(document).ready(function() {
     });
 
     $('.tab_btns_outer,.tv_tab_btns_outer').delegate( ".each_tab_btn:not(.true_active):not(.disabled)", "mouseenter", function(e){
-    
+
         $(this).addClass('active').find('.border').show();
     });
 
     $('.tab_btns_outer,.tv_tab_btns_outer').delegate( ".each_tab_btn:not(.true_active):not(.disabled)", "mouseleave", function(e){
-    
+
         $(this).removeClass('active').find('.border').hide();
     });
 
     $('.user_short_hand_tab').delegate( ".user_short_tab_each:not(.true_active):not(.disabled)", "mouseenter", function(e){
-    
+
         $(this).addClass('active');
     });
 
     $('.user_short_hand_tab').delegate( ".user_short_tab_each:not(.true_active):not(.disabled)", "mouseleave", function(e){
-    
+
         $(this).removeClass('active');
     });
 
@@ -515,13 +515,13 @@ $(document).ready(function() {
     $('#news_nav_next').click(function(){
 
         var next = $('.news_updates_outer').find('.news_update_each:visible:first').next();
-        if(next && next.hasClass('news_update_each')){ 
+        if(next && next.hasClass('news_update_each')){
             $('.news_updates_outer').find('.news_update_each:visible:first').fadeOut('slow', function(){
 
                 next.fadeIn('fast').css('display', 'flex');
             });
         }else{
-    
+
             $('.news_updates_outer').find('.news_update_each:visible:first').fadeOut('slow', function(){
 
                 $('.news_updates_outer .news_update_each:first').fadeIn('fast').css('display', 'flex');
@@ -532,13 +532,13 @@ $(document).ready(function() {
     $('#news_nav_back').click(function(){
 
         var prev = $('.news_updates_outer').find('.news_update_each:visible:first').prev();
-        if(prev && prev.hasClass('news_update_each')){ 
+        if(prev && prev.hasClass('news_update_each')){
             $('.news_updates_outer').find('.news_update_each:visible:first').fadeOut('slow', function(){
 
                 prev.fadeIn('fast').css('display', 'flex');
             });
         }else{
-    
+
             $('.news_updates_outer').find('.news_update_each:visible:first').fadeOut('slow', function(){
 
                 $('.news_updates_outer .news_update_each:last').fadeIn('fast').css('display', 'flex');
@@ -581,10 +581,10 @@ $(document).ready(function() {
                 $(showTabContent).removeClass('instant_hide');
 
                 if($(this).parent().hasClass('tab_dsk')){
-            
+
                     $('.tab_det_left_sec.tab_det_dsk').find('.lazy_tab_img').show();
                 }else{
-                    
+
                     $('.tab_det_left_sec:not(.tab_det_dsk)').find('.lazy_tab_img').show();
                 }
 
@@ -621,7 +621,7 @@ $(document).ready(function() {
                                         fillSocialTabWithTwitterFeed();
                                     });
                                 });
-                            } 
+                            }
                             $.getScript('/js/instagram-feed.js?v=1.1', function() {
                                 fillSocialTabWithInstagramFeed(mainTabUserId);
                             });
@@ -774,7 +774,7 @@ $(document).ready(function() {
                         }
                     });
                 }
-            }    
+            }
         }else{
 
             if(thiss.hasClass('fly_user_home')){
@@ -784,7 +784,7 @@ $(document).ready(function() {
             if(thiss.hasClass('tab_btn_info')){
                 var videoId = $(this).attr('data-video-id');
                 if(typeof videoId !== typeof undefined && videoId !== false && videoId != ''){
-                    
+
                     if( browserWidth <= 767 ) {
                         $("html, body").animate({scrollTop: $("body").offset().top - 50}, "slow");
                     }else{
@@ -800,24 +800,24 @@ $(document).ready(function() {
                 for (var i=0; i<imgDefer.length; i++) {
                     if(imgDefer[i].getAttribute('data-src')) {
                         imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
-                    } 
+                    }
                 }
                 $('.tv_slide_out_outer').toggleClass('active');
                 $('body').toggleClass('lock_page');
                 $('#body-overlay').toggle();
             }
         }
-        
+
     });
 
-    
+
     $('body').delegate('#offer_guide', 'click', function(e){
 
         var videoId = $(this).attr('data-video-id');
         if(typeof videoId !== typeof undefined && videoId !== false && videoId != ''){
 
             mediaInstance = playMediaElementVideo(0, 'https://www.youtube.com/watch?v='+videoId, mediaInstance, 1);
-            
+
             $('.mejs__container').removeClass('instant_hide');
             $('.content_outer').addClass('playing');
 
@@ -833,11 +833,11 @@ $(document).ready(function() {
 
         var videoId = $(this).attr('data-video-id');
         if(typeof videoId !== typeof undefined && videoId !== false && videoId != ''){
-            
+
             mediaInstance = playMediaElementVideo(0, 'https://www.youtube.com/watch?v='+videoId, mediaInstance, 1);
             $('.mejs__container').removeClass('instant_hide');
             $('.content_outer').addClass('playing');
-            
+
             if( browserWidth <= 767 ) {
                 $("html, body").animate({scrollTop: $("body").offset().top - 50}, "slow");
             }else{
@@ -1239,7 +1239,7 @@ $(document).ready(function() {
             $(this).find('input.new_popup_check').val('1');
         }
     });
-    
+
     $(".pro_m_chech_outer .bespoke_license_offer").click(function(){
 
         $(this).removeClass('m_check_error');
@@ -1330,7 +1330,7 @@ $(document).ready(function() {
         var error = 0;
 
         var form = thiss.parent().find('form');
-        form.submit();  
+        form.submit();
     });
 
     $('#profile_tab_01 .save_profile_outer').click(function(e){
@@ -1354,7 +1354,7 @@ $(document).ready(function() {
         var level = $('#profile_tab_01 select[name=level]');
         var skill = $('#profile_tab_01 select[name=skill]');
         var currency = $('#profile_tab_01 select[name=default_currency]');
-        
+
 
         if(thiss.parent().attr('id') == 'personal_section'){
 
@@ -1411,7 +1411,7 @@ $(document).ready(function() {
                         type: 'canvas',
                         size: 'viewport'
                     }).then(function (resp) {
-                        
+
                         formData.append(id, resp);
                         if(!storyImages.eq(index + 1).length){
                             $('#pro_uploading_in_progress_real,#body-overlay').show();
@@ -1482,7 +1482,7 @@ $(document).ready(function() {
 
             }else{
 
-                form.submit();  
+                form.submit();
             }
         }
     });
@@ -1499,13 +1499,13 @@ $(document).ready(function() {
         var name = $('#profile_tab_14 #contacts_section input[name=pro_contact_name]');
         var alreadyUser = $('#profile_tab_14 #contacts_section select[name="pro_contact_already_user"]');
         var alreadyUserEmail = $('#profile_tab_14 #contacts_section input[name="pro_contact_already_user_email"]');
-        
+
         if( name.val() == '' ){ error = 1; name.closest('.pro_stream_input_each').addClass('has-danger'); }
         if(alreadyUser.val() == '1' && alreadyUserEmail.val() == ''){
 
             error = 1; alreadyUserEmail.closest('.pro_stream_input_each').addClass('has-danger');
         }
-        
+
         var browserWidth = $( window ).width();
 
         if( browserWidth <= 767 ) { var margin = 50; }
@@ -2064,10 +2064,10 @@ $(document).ready(function() {
 
     });
 
-    
 
 
-    
+
+
 
     $("#post_video_submit_yes").click(function () {
 
@@ -2222,7 +2222,7 @@ $(document).ready(function() {
 
             $('#body-overlay,#pro_uploading_in_progress_real').show();
             setTimeout(function() {
-                
+
                 thiss.closest('form').submit();
             }, 500);
         }
@@ -2234,21 +2234,21 @@ $(document).ready(function() {
         var form = $(this).closest('form');
 
         if(form.length){
-            
+
             form.find('.has-danger').removeClass('has-danger');
             var error = 0;
             var url = form.find('.video_url');
             var chart = form.find('.video_chart_entry');
 
-            if(url.val() == '') { 
+            if(url.val() == '') {
                 error = 1;
                 url.parent().addClass('has-danger');
             }
-            if(url.val() != '' && !matchYoutubeUrl(url.val()) && !matchSoundcloudUrl(url.val())){ 
+            if(url.val() != '' && !matchYoutubeUrl(url.val()) && !matchSoundcloudUrl(url.val())){
                 error = 1;
                 url.parent().addClass('has-danger');
             }
-            if(chart.val() == '') { 
+            if(chart.val() == '') {
                 //error = 1;
                 //chart.closest('.pro_stream_input_each').addClass('has-danger');
             }
@@ -2274,7 +2274,7 @@ $(document).ready(function() {
         var form = $(this).closest('form');
 
         if(form.length){
-            
+
             form.find('.has-danger').removeClass('has-danger');
 
             var error = 0;
@@ -2307,16 +2307,16 @@ $(document).ready(function() {
 
             if(name.val() == ''){ error = 1; name.closest('.pro_stream_input_each').addClass('has-danger'); }
 
-            if(priceOption.val() == 'addprice' && price.val() == ''){ 
-                error = 1; 
-                price.closest('.pro_stream_input_each').addClass('has-danger'); 
+            if(priceOption.val() == 'addprice' && price.val() == ''){
+                error = 1;
+                price.closest('.pro_stream_input_each').addClass('has-danger');
             }else if(priceOption.val() == ''){
                 error = 1;
                 priceOption.closest('.pro_stream_input_each').addClass('has-danger');
             }
 
-            if(shippingOption.val() == 'yes' && (localDelivery.val() == '' || intDelivery.val() == '')){ 
-                error = 1; 
+            if(shippingOption.val() == 'yes' && (localDelivery.val() == '' || intDelivery.val() == '')){
+                error = 1;
                 if(localDelivery.val() == ''){
                     localDelivery.closest('.pro_stream_input_each').addClass('has-danger');
                 }
@@ -2328,8 +2328,8 @@ $(document).ready(function() {
                 shippingOption.closest('.pro_stream_input_each').addClass('has-danger');
             }
 
-            if(ticketOption.val() == 'yes' && (ticketLocation.val() == '' || ticketTime.val() == '')){ 
-                error = 1; 
+            if(ticketOption.val() == 'yes' && (ticketLocation.val() == '' || ticketTime.val() == '')){
+                error = 1;
                 if(ticketLocation.val() == ''){
                     ticketLocation.closest('.pro_stream_input_each').addClass('has-danger');
                 }
@@ -2343,7 +2343,7 @@ $(document).ready(function() {
 
             if(specialOfferPrice.length){
 
-                if(specialOfferPrice.val() != ''){ 
+                if(specialOfferPrice.val() != ''){
                     if(specialOfferStartDateTime.val() == ''){
                         error = 1;
                         specialOfferStartDateTime.closest('.pro_stream_input_each').addClass('has-danger');
@@ -2378,7 +2378,7 @@ $(document).ready(function() {
                 //proceed with form submission
                 $('#body-overlay,#pro_uploading_in_progress_real').show();
                 setTimeout(function() {
-                    
+
                     form.submit();
                 }, 500);
             }
@@ -2387,7 +2387,7 @@ $(document).ready(function() {
     });
 
     $('#profile_tab_02 #my_albums_section .m_btm_star').click(function(e){
-        
+
         var id = $(this).attr('data-album-id');
         var elem = $(this);
         if( id ){
@@ -2424,10 +2424,10 @@ $(document).ready(function() {
                 if(data.error == ""){
 
                     if(elem.hasClass("active")){
-                        
+
                         elem.removeClass("active");
                     }else{
-                        
+
                         elem.addClass("active");
                     }
 
@@ -2651,7 +2651,7 @@ $(document).ready(function() {
                         error = 1;
                     }
                 }
-                
+
             });
         }
         if( error == 0 ){
@@ -2679,12 +2679,12 @@ $(document).ready(function() {
                 musicContainer.find('input[name="more_moods"]').val(musicMoods);
 
                 prepareUploader(container);
-                
+
                 $('.music_zip_upload_popup,#body-overlay').show();
                 $('#close_upload').addClass('instant_hide');
 
                 if($('.pro_pop_upload_each.waiting:not(.instant_hide)').length){
-                    
+
                     startUploader(container);
                 }
             }else{
@@ -2758,7 +2758,7 @@ $(document).ready(function() {
         $('.each-album').find('.add_to_cart_album').css('display', 'block');
 
         $('.add_to_cart_item').css('display', 'none');
-       
+
         thiss.find('.add_to_cart_item').css('display', display);
 
         var lyricsHeight = 112;
@@ -2774,10 +2774,10 @@ $(document).ready(function() {
         }
 
         if(!thiss.hasClass('active_video_list_chan_tab')){
-            
+
             $('.active_video_list_chan_tab').removeClass('active_video_list_chan_tab');
             thiss.addClass('active_video_list_chan_tab');
-                
+
             if(thiss.data('musicfile') != ''){
                 updateAndPlayAudioPlayer(thiss, '/user-music-files/' + thiss.data('musicfile'), true);
             }else{
@@ -2805,7 +2805,7 @@ $(document).ready(function() {
 
     });
 
-    
+
     $('body').delegate('.fav_np, .ap_outer .track_fav', 'click', function(e){
         var thiss = $(this);
         var music = thiss.parent().parent().parent().parent().attr('data-musicid');
@@ -2840,7 +2840,7 @@ $(document).ready(function() {
     });
 
     $('body').delegate(".each-album .buy_np", "click", function(e){
-        
+
         $(this).closest('.each-album').find('.add_to_cart_album .add_to_basket').trigger('click');
     });
 
@@ -2874,7 +2874,7 @@ $(document).ready(function() {
         var display = thiss.find('.add_to_cart_item').css('display');
 
         $('.add_to_cart_item').css('display', 'none');
-       
+
         thiss.find('.add_to_cart_item').css('display', display);
 
         var lyricsHeight = 112;
@@ -2888,7 +2888,7 @@ $(document).ready(function() {
                 lyricsDet.addClass('overflowing');
                 lyricsDet.parent().find('.lyrics_more').removeClass('instant_hide').text('Read More');
             }
-            
+
             if(!thiss.hasClass('active_video_list_chan_tab')){
                 alert('wring');
                 $('.active_video_list_chan_tab').removeClass('active_video_list_chan_tab');
@@ -2914,7 +2914,7 @@ $(document).ready(function() {
                 }
             }
             thisAlbum.addClass('active_video_list_chan_tab');
-            
+
             if(thisAlbum.find('.add_to_cart_item').not(":hidden").length > 0){
 
                 thisAlbum.find('.add_to_cart_album').slideUp();
@@ -2945,13 +2945,13 @@ $(document).ready(function() {
         $('.each-album').find('.album_tab_lowerSection').css('display', 'none');
 
         $('.add_to_cart_item').css('display', 'none');
-       
+
         thiss.find('.album_tab_lowerSection').css('display', display);
 
         thiss.find('.album_tab_lowerSection').slideToggle('slow', function(){
 
             if(!thiss.hasClass('active_video_list_chan_tab')){
-                
+
                 $('.active_video_list_chan_tab').removeClass('active_video_list_chan_tab');
                 thiss.addClass('active_video_list_chan_tab');
             }else{
@@ -2983,7 +2983,7 @@ $(document).ready(function() {
         	$('#choose-music-license .choose_music_license_submit').addClass('disabled');
         	$('#choose-music-license .choose_music_license_outer').html('<div class="no_records">This music has no licenses</div>');
         }
-        
+
         $('#choose-music-license').attr('musicid', musicId);
         $('#choose-music-license,#body-overlay').show();
     });
@@ -3162,9 +3162,9 @@ $(document).ready(function() {
                     dataType: "json",
                     type: 'post',
                     data: {'find_type': 'countries', 'find': product_id, 'identity_type': 'pod_buyer', 'identity': ''},
-                    success: function(response) { 
+                    success: function(response) {
                         if(response.success == 1){
-                            
+
                             var curr = response.data.currencySym;
                             $('#pay_quick_popup .pay_item_thumb img').attr('src', image);
                             $('#pay_quick_popup #pay_quick_shipping_country').html(response.data.countries);
@@ -3180,7 +3180,7 @@ $(document).ready(function() {
                 });
             }
         }
-       
+
         if(!error && this.dataset.purchasetype != "custom_product"){
 
             addCartItem(basket_license, purchase_type, music_id, product_id, album_id, basket_price, basket_user_id, 0, meta_data);
@@ -3232,7 +3232,7 @@ $(document).ready(function() {
         $('.hrd_cart_outer').toggleClass('active');
         $('body').toggleClass('lock_page');
         $('#body-overlay').toggle();
-        
+
         loadMyDeferredImages($("#top_basket_popup img.prevent_pre_loading"));
         $("#top_basket_popup,#body-overlay").show();
 
@@ -3357,7 +3357,7 @@ $(document).ready(function() {
             }else{
                 $('.cent_undo_btn').addClass('instant_hide');
             }
-            
+
 
             $('.ch_tab_tv_outer .stream_thumb img').attr('src', thumb);
 
@@ -3374,7 +3374,7 @@ $(document).ready(function() {
             $('.ch_tab_tv_outer .hosts_container').html(hosts);
 
             $('.ch_left_sec_outer').removeClass('instant_hide');
-            
+
 
             if(streamLiveStatus == '1'){
 
@@ -3423,7 +3423,7 @@ $(document).ready(function() {
 
             if( browserWidth <= 767 ) {
 
-                
+
                 $("html, body").animate({scrollTop: $("body").offset().top}, "slow");
             }else{
 
@@ -3477,12 +3477,12 @@ $(document).ready(function() {
             if(isLive == '1'){
                 videoId = atob(videoId);
             }
-            
+
             var baseUrl = $('#base_url').val();
             var videoTitleFormatted = videoTitle.replace(/[^\w\s!?]/g, ' ');
             var link = baseUrl+'video-share/'+videoId+'/'+encodeURIComponent(userName)+'/'+$('#share_current_page').val()+'_'+window.currentUserId;
             var urlLink = baseUrl+'url-share/'+$('#share_current_page').val()+'_'+window.currentUserId+'/'+encodeURIComponent(userName)+'/'+btoa(userOriginalImage);
-            
+
             if(isLive != '1'){
                 $('#video_share_id').val(videoId);
                 $('#video_share_title').val(videoTitleFormatted);
@@ -3522,7 +3522,7 @@ $(document).ready(function() {
             $('.mejs__container').removeClass('instant_hide');
             $('.content_outer').addClass('playing');
 
-            
+
             if( browserWidth <= 767 ) {
 
                 $("html, body").animate({scrollTop: $("body").offset().top}, "slow");
@@ -3563,7 +3563,7 @@ $(document).ready(function() {
             dataType: "json",
             type: 'post',
             data: {'find_type': 'url_owner_id', 'find': videoId, 'identity_type': identityType, 'identity': ''},
-            success: function(response) { 
+            success: function(response) {
                 if(response.success == 1){
                     var userId = response.data.userId;
                     window.currentUserId = userId;
@@ -3573,9 +3573,9 @@ $(document).ready(function() {
                         dataType: "json",
                         type: 'post',
                         data: {'find_type': 'user_personal_information,user_campaign_information', 'find': userId, 'identity_type': identityType, 'identity': videoId},
-                        success: function(response2) { 
+                        success: function(response2) {
                             if(response2.success == 1){
-                                
+
                                 if(browserWidth <= 767){
 
                                     var userCampaignStory = '<p>'+decodeHTMLEntities(response2.data.campaignUserInfo.storyText)+'</p>';
@@ -3644,7 +3644,7 @@ $(document).ready(function() {
                                 var videoTitleFormatted = videoTitle.replace(/[^\w\s!?]/g, ' ');
                                 var link = baseUrl+'video-share/'+videoId+'/'+encodeURIComponent(userName)+'/'+$('#share_current_page').val()+'_'+window.currentUserId;
                                 var urlLink = baseUrl+'url-share/'+$('#share_current_page').val()+'_'+window.currentUserId+'/'+encodeURIComponent(userName)+'/'+btoa(userOriginalImage);
-                                
+
                                 $('#video_share_id').val(videoId);
                                 $('#video_share_title').val(videoTitleFormatted);
                                 $('#video_share_link').val(link);
@@ -3680,7 +3680,7 @@ $(document).ready(function() {
 
 
 
-    
+
 
 
 
@@ -4153,7 +4153,7 @@ $(document).ready(function() {
     $("#add_edit_bonus_form").submit(function(evt) {
 
         $('.pro_add_edit_bonus_outer').hide();
-        
+
         $('#pro_uploading_in_progress_real,#body-overlay').show();
 
         var formData = new FormData($(this)[0]);
@@ -4977,7 +4977,7 @@ $(document).ready(function() {
     });
 
     $('body').delegate('#profile_tab_02 #add_music_section .music_file_button,#profile_tab_02 #edit_music_section .music_file_button', 'click', function(e){
-    
+
         e.preventDefault();
 
         $(this).closest('form').find('.music-file[name="music-file"]').trigger('click');
@@ -5006,7 +5006,7 @@ $(document).ready(function() {
             dataType: "json",
             type: 'get',
             data: {'email_address':emailAddress},
-            success: function(response) { 
+            success: function(response) {
                 if(!response.success){
 
                     $('.pro_reset_password #error').text(response.error).show();
@@ -5029,7 +5029,7 @@ $(document).ready(function() {
             dataType: "json",
             type: 'post',
             data: {'action' : 'request','email_address':emailAddress},
-            success: function(response) { 
+            success: function(response) {
                 if(!response.success){
 
                     $('#change_pwd_secure_popup .stage_one .main_error').text(response.error).show();
@@ -5081,7 +5081,7 @@ $(document).ready(function() {
                 dataType: "json",
                 type: 'post',
                 data: {'action' : 'execute','security_token':securityToken.val(),'new_password':newPassword.val(),'new_password_confirmation':newPasswordConfirmation.val()},
-                success: function(response) { 
+                success: function(response) {
                     if(response.success){
 
                         $('#change_pwd_secure_popup .stage_two').addClass('instant_hide');
@@ -5143,9 +5143,9 @@ $(document).ready(function() {
 
     // reset password changes..
 
-    
 
-    
+
+
 
     $('.profile_outer,.content_outer,.hdr_right_icon_outer ul li:first').mouseover(function(e){
 
@@ -5220,7 +5220,7 @@ $(document).ready(function() {
                 var response = removeCartItem(basket);
             }else if($(this).closest('.donator_outer').hasClass('donation_goal')){
                 removeCrowdFundDonation();
-            } 
+            }
         }
     });
 
@@ -5299,7 +5299,7 @@ $(document).ready(function() {
                 enctype: 'multipart/form-data',
                 processData: false,
                 data: formData,
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         $('#bespoke_license_popup input,#bespoke_license_popup textarea').val('');
                         $('.stage_two #sender_name').text($('.each-music:first .thismusic_user_name').text());
@@ -5341,7 +5341,7 @@ $(document).ready(function() {
                 enctype: 'multipart/form-data',
                 processData: false,
                 data: formData,
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         location.reload();
                     }else{
@@ -5390,7 +5390,7 @@ $(document).ready(function() {
                 enctype: 'multipart/form-data',
                 processData: false,
                 data: formData,
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         $('#chat_message_popup input,#chat_message_popup textarea').val('');
                         $('.stage_two #sender_name').text(response.data.recipient_name);
@@ -5504,7 +5504,7 @@ $(document).ready(function() {
             dataType: "json",
             type: 'post',
             data: {'find_type': findType, 'find': find, 'identity_type': identityType, 'identity': checkout},
-            success: function(response) { 
+            success: function(response) {
                 if(response.success == 1){
                     var name = response.data.name;
                     var email = response.data.email;
@@ -5518,7 +5518,7 @@ $(document).ready(function() {
                     }else{
                         $("#cont_popup_address").html('');
                     }
-                    
+
                     $("#cont_popup_name").text(name);
                     $("#cont_popup_email").text(email);
                     $("#contact_popup").show();
@@ -5701,7 +5701,7 @@ $(document).ready(function() {
             $('#feat_slide_'+newFeatSlide).fadeIn('fast');
             $('.user_hm_rt_btm_otr #feat_current_slide').val(newFeatSlide);
         });
-        
+
         //$('#feat_slide_'+newFeatSlide).show("slide", { direction: "right" }, 500);
 
     });
@@ -5730,7 +5730,7 @@ $(document).ready(function() {
 
         }
 
-        
+
 
         $('#feat_slide_'+currentFeatSlide).fadeOut('slow', 'swing', function(){
 
@@ -6001,7 +6001,7 @@ $(document).ready(function() {
 
         $('#loading_messages').removeClass('instant_hide');
         $('.chat_main_body_messages').html('');
-        
+
         var formData = new FormData();
         formData.append('action', 'partners');
         refreshChatBox('full', formData);
@@ -6112,13 +6112,13 @@ $(document).ready(function() {
                 }
             });
             if(elem.hasClass('chat_each_group')){
-                
+
                 var main = elem.find('.inner .chat_user_pic');
                 $('#proffer_project_select_customer').append($('<option>',{
                     value: main.attr('data-id'),
                     text : main.attr('data-name')
                 }));
-                
+
                 elem.find('.chat_member_each_outer:not(.chat_member_add)').each(function(){
 
                     var value = $(this).attr('data-member');
@@ -6178,7 +6178,7 @@ $(document).ready(function() {
             formData.append('endTermSelect', endTermSelect.val());
             formData.append('endTerm', endTerm.val());
             formData.append('price', price.val());
-            
+
             var elem = $('.chat_each_user.active:first');
             if(elem.hasClass('chat_each_group')){
                 var groupId = elem.attr('data-group');
@@ -6199,7 +6199,7 @@ $(document).ready(function() {
                 enctype: 'multipart/form-data',
                 processData: false,
                 data: formData,
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         var name = selectCustomer.find('option:selected').text();
                         $('#add_agreement_popup .stage_two #sender_name').text(name);
@@ -6237,7 +6237,7 @@ $(document).ready(function() {
         if(selectProduct.val() == ''){ error = 1; $('#add_product_select_product_error').removeClass('instant_hide'); }
         if(price.val() == ''){ error = 1; $('#add_product_price_error').removeClass('instant_hide'); }
         if(selectCustomer.val() == ''){ error = 1; $('#add_product_select_customer_error').removeClass('instant_hide'); }
-        
+
         if(!error){
 
             var formData = new FormData();
@@ -6250,10 +6250,10 @@ $(document).ready(function() {
                 var partnerId = elem.attr('data-partner');
                 formData.append('recipient', partnerId);
             }
-            
+
             formData.append('product', selectProduct.val());
             formData.append('price', price.val());
-            
+
             $.ajax({
 
                 url: "/proffer-product/add",
@@ -6264,7 +6264,7 @@ $(document).ready(function() {
                 enctype: 'multipart/form-data',
                 processData: false,
                 data: formData,
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         var name = selectCustomer.find('option:selected').text();
                         $('#add_product_popup .stage_two #add_product_customer_name').text(name);
@@ -6307,7 +6307,7 @@ $(document).ready(function() {
         if(endTerm.val() == '' && endTermSelect.val() == 'custom'){ error = 1; $('#proffer_project_end_term_error').removeClass('instant_hide'); }
         if(endTermSelect.val() == ''){ error = 1; $('#proffer_project_end_term_select_error').removeClass('instant_hide'); }
         if(selectCustomer.val() == ''){ error = 1; $('#proffer_project_select_customer_error').removeClass('instant_hide'); }
-        
+
         if(!error){
 
             var formData = new FormData();
@@ -6320,13 +6320,13 @@ $(document).ready(function() {
                 var partnerId = elem.attr('data-partner');
                 formData.append('recipient', partnerId);
             }
-            
+
             formData.append('title', title.val());
             formData.append('description', description.val());
             formData.append('endTermSelect', endTermSelect.val());
             formData.append('endTerm', endTerm.val());
             formData.append('price', price.val());
-            
+
 
             $.ajax({
 
@@ -6338,7 +6338,7 @@ $(document).ready(function() {
                 enctype: 'multipart/form-data',
                 processData: false,
                 data: formData,
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         var name = selectCustomer.find('option:selected').text();
                         $('#proffer_project_popup .stage_two #sender_name').text(name);
@@ -6403,7 +6403,7 @@ $(document).ready(function() {
                 var groupId = thiss.attr('data-group');
                 var formData = new FormData();
                 var name = thiss.find('.chat_user_name').text();
-                
+
                 if(thiss.hasClass('chat_each_group')){
                     formData.append('group', groupId);
                     formData.append('action', 'group-chat');
@@ -6424,7 +6424,7 @@ $(document).ready(function() {
                 $('.chat_head_name').text(thiss.find('.chat_user_name:first').text()+' - '+thiss.find('.chat_user_name:last').text());
             }
         }
-        
+
     });
 
     $('#chat_attachments').change(function(){
@@ -6507,7 +6507,7 @@ $(document).ready(function() {
                     startChatUploader();
                 }else{
 
-                    var formData = new FormData(); 
+                    var formData = new FormData();
 
                     if($('#profile_tab_14').length){
 
@@ -6519,7 +6519,7 @@ $(document).ready(function() {
                             var partnerId = elem.attr('data-partner');
                             formData.append('recipient', partnerId);
                         }
-                        
+
                         formData.append('message', message.val());
 
                         $.ajax({
@@ -6602,7 +6602,7 @@ $(document).ready(function() {
             formData.append('conversation', sessionStorage.getItem('pagecontentopener'));
             sessionStorage.removeItem('pagecontentopener');
         }
-        
+
         refreshChatBox('full', formData);
     }
 
@@ -6747,7 +6747,7 @@ $(document).ready(function() {
                     dataType: "json",
                     success: function (response) {
                         if(response.success){
-                            
+
                             $('#private_music_unlock_popup').attr({'data-type': '', 'data-music-id': ''});
                             $('#private_music_unlock_popup #unlock_pin').val('');
                             $('#private_music_unlock_popup,#body-overlay').hide();
@@ -6797,7 +6797,7 @@ $(document).ready(function() {
                     dataType: "json",
                     success: function (response) {
                         if(response.success){
-                            
+
                             var formData = new FormData();
                             formData.append('action', 'admin-pair-chat');
                             formData.append('pair', pair);
@@ -6810,7 +6810,7 @@ $(document).ready(function() {
                 });
             }
         }
-        
+
     });
 
     $('.int_sub_nav_btn').click(function(){
@@ -6820,7 +6820,7 @@ $(document).ready(function() {
         if(thiss.hasClass('int_nav_btn_prev')){
 
             var position = $('.int_sub_act_outer').scrollLeft() - 5 - cons;
-            
+
         }else if(thiss.hasClass('int_nav_btn_next')){
 
             var position = $('.int_sub_act_outer').scrollLeft() + 5 + cons;
@@ -6877,7 +6877,7 @@ $(document).ready(function() {
                 dataType: "json",
                 type: 'post',
                 data: {'find_type': 'user_services_panel', 'find': id, 'identity_type': '', 'identity': ''},
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         $('.search_right_outer').prepend(response.data.html);
                         window.currentUserId = id;
@@ -6908,7 +6908,7 @@ $(document).ready(function() {
     });
 
     $('body').delegate('#pay_quick_final:not(.disabled)', 'click', function(e){
-    
+
         initiateInstantPayment(window.stripe, window.eCardNumber);
     });
 
@@ -6943,7 +6943,7 @@ $(document).ready(function() {
                 success: function (response) {
 
                     if(response.success){
-                        
+
                         location.reload();
                     }else{
                         alert(response.error);
@@ -6981,7 +6981,7 @@ $(document).ready(function() {
                 success: function (response) {
 
                     if(response.success){
-                            
+
                         location.reload();
                     }else{
                         alert(response.error);
@@ -7044,7 +7044,7 @@ $(document).ready(function() {
         var thiss = $(this);
         var element = thiss.closest('.elem_sortable');
         var formData = new FormData();
-        
+
         formData.append('element', element.attr('data-sort'));
         if(thiss.hasClass('edit_elem_sort_down') && element.next().length && element.next().hasClass('elem_sortable')){
             var action = 'down';
@@ -7071,7 +7071,7 @@ $(document).ready(function() {
                             element.prev().insertAfter(element);
                         }else{
                             element.next().insertBefore(element);
-                        }   
+                        }
                     }
                 },
                 complete: function() {
@@ -7165,7 +7165,7 @@ $(document).ready(function() {
         if(platform != '2'){
         	$('#share_item_toast #share_item_mobile_menu').remove();
         }
-        
+
         $('#share_item_toast').attr('data-item-id', thiss.attr('data-item')).slideDown('fast');
     });
 
@@ -7260,11 +7260,11 @@ $(document).ready(function() {
             $('#pay_quick_error').removeClass('instant_hide').text('Shipping city is required');
             error = 1;
         }else if($('#pay_quick_popup #pay_quick_shipping_postcode').length && $('#pay_quick_popup #pay_quick_shipping_postcode').val() == ''){
-            
+
             $('#pay_quick_error').removeClass('instant_hide').text('Shipping postcode is required');
             error = 1;
         }else if($('#pay_quick_popup #pay_quick_shipping_country').length && $('#pay_quick_popup #pay_quick_shipping_country').val() == ''){
-            
+
             $('#pay_quick_error').removeClass('instant_hide').text('Shipping country is required');
             error = 1;
         }
@@ -7281,7 +7281,7 @@ $(document).ready(function() {
                 dataType: "json",
                 type: 'post',
                 data: {'find_type': 'pod_delivery_cost', 'find': split[2], 'identity_type': 'pod_buyer', 'identity': identity},
-                success: function(response) { 
+                success: function(response) {
                     if(response.success == 1){
                         var deliveryCost = response.data.deliveryCost;
                         var curr = response.data.currencySym;
@@ -7289,9 +7289,9 @@ $(document).ready(function() {
                         var quantity = product.closest('.tot_awe_pro_outer').find('.tot_awe_pro_qua').val();
                         var subTotal = quantity * price;
                         var grandTotal = subTotal + deliveryCost;
-                        
+
                         $('#pay_quick_popup .item_price_subtotal .item_price_sec_val_sym').text(curr);
-                        $('#pay_quick_popup .item_price_subtotal .item_price_sec_val_num').text(subTotal.toFixed(2));        
+                        $('#pay_quick_popup .item_price_subtotal .item_price_sec_val_num').text(subTotal.toFixed(2));
                         $('#pay_quick_popup .item_price_shipping .item_price_sec_val_sym').text(curr);
                         $('#pay_quick_popup .item_price_shipping .item_price_sec_val_num').text(deliveryCost.toFixed(2));
                         $('#pay_quick_popup .item_price_grand_total .item_price_sec_val_sym').text(curr);
@@ -7312,7 +7312,7 @@ $(document).ready(function() {
     });
 
     $('body').delegate('.tot_awe_pro_expand', 'click', function(e){
-    
+
         var src = $(this).closest('.tot_awe_pro_outer').find('.user_product_img_thumb img').attr('src');
         $('#product_full_image_popup img').attr('src', src);
         $('#product_full_image_popup,#body-overlay').show();
@@ -7347,7 +7347,7 @@ $(document).ready(function() {
             $('.pay_item_purchase_qua_num').text(newQuantity);
             productElem.find('.tot_awe_pro_qua').val(newQuantity);
             var subTotal = price * newQuantity;
-            var shippingCost = parseInt(popup.find('.item_price_shipping .item_price_sec_val_num').text()); 
+            var shippingCost = parseInt(popup.find('.item_price_shipping .item_price_sec_val_num').text());
             var grandTotal = shippingCost + subTotal;
 
             popup.find('.item_price_subtotal .item_price_sec_val_num').text(subTotal.toFixed(2));
@@ -7362,7 +7362,7 @@ $(document).ready(function() {
         for (var i=0; i<imgDefer.length; i++) {
             if(imgDefer[i].getAttribute('data-src')) {
                 imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
-            } 
+            }
         }
         $('.hrd_cart_outer').toggleClass('active');
         $('body').toggleClass('lock_page');
@@ -7435,7 +7435,7 @@ $(document).ready(function() {
             var msg = 'Once saved you cannot change these settings. Are you sure to continue?';
         }
 
-        if(confirm(msg)){ 
+        if(confirm(msg)){
             var error = 0;
             var formData = new FormData();
             if($('#pro_default_currency_value').length){
@@ -7473,8 +7473,8 @@ $(document).ready(function() {
                         }
                     }
                 });
-            }            
-        }        
+            }
+        }
     });
 
     $('body').delegate('.usr_men_quick_each:not(.active):not(.disabled),.pro_get_start_each_panel,.chat_get_help', 'click', function(e){
@@ -7500,7 +7500,7 @@ $(document).ready(function() {
             $('.pro_left_sec_outer').hide();
             $('.pro_right_sec_outer').show();
         }
-        
+
         $('.pro_pg_tb_det').hide();
         sessionStorage.setItem('proCat', cat);
         sessionStorage.setItem('proSubCat', subcat);
@@ -7689,7 +7689,7 @@ $(document).ready(function() {
                 }
             }else{
 
-                //$('.usr_men_quick_each:first').trigger('click'); 
+                //$('.usr_men_quick_each:first').trigger('click');
             }
         }
     }
@@ -7704,12 +7704,12 @@ function addCartItem(basket_license, purchase_type, music_id, product_id, album_
             dataType: "json",
             type: 'post',
             data: {'find_type': 'user_free_seller_information', 'find': basket_user_id, 'identity_type': 'free_buyer', 'identity': ''},
-            success: function(response) { 
+            success: function(response) {
                 if(response.success == 1){
                     var name = response.data.name;
                     var currencySymbol = response.data.currencySymbol;
                     var skill = response.data.skill;
-                    
+
                     $('#add_item_free_popup #head_name').text(name+' - '+skill);
                     $('#add_item_free_popup #item_owner').text(name);
                     $('#add_item_free_popup #currency').text(currencySymbol);
@@ -7891,7 +7891,7 @@ function updateAudioFileData(audioFileName){
     Spectrum.on('ready', function () {
 
         var waveImage = Spectrum.exportImage('png', 10000);
-        
+
         var formData = new FormData();
         formData.append('music_file_name', audioFileName);
         formData.append('music_waveform_image', waveImage);
@@ -7908,14 +7908,14 @@ function updateAudioFileData(audioFileName){
             success: function (response) {
 
                 if(response.success == '1'){
-                    
+
                     sessionStorage.removeItem('forceBusy');
                 }else{
                     alert('Could not save music waveform');
                 }
             }
         });
-        
+
     });
 }
 
@@ -7925,7 +7925,7 @@ function loadMyDeferredImages(elements){
         if(elements[i].getAttribute('data-src')) {
             elements[i].setAttribute('src',elements[i].getAttribute('data-src'));
             elements[i].classList.remove('instant_hide');
-        } 
+        }
     }
 }
 
@@ -8045,9 +8045,9 @@ function playVimeoVideo(videoId, autoPLay){
 
     var player = $('#vimeo_player');
 
-    if( autoPLay ){ 
-        var autoPlayOption = 'autoplay=1&'; 
-    }else{ 
+    if( autoPLay ){
+        var autoPlayOption = 'autoplay=1&';
+    }else{
         var autoPlayOption = '';
     }
 
@@ -8066,9 +8066,9 @@ function playJWPVideo(container, videoId, autoPLay, mute, title, description, re
 
     var player = $('#jw_player');
 
-    if( autoPLay ){ 
-        var autoPlayOption = true; 
-    }else{ 
+    if( autoPLay ){
+        var autoPlayOption = true;
+    }else{
         var autoPlayOption = false;
     }
 
@@ -8120,7 +8120,7 @@ function setBonusThumb(inputField){
 function playMediaElementVideo(videoType, videoSrc, mediaElementInstance, autoPlay, poster = null ){
 
     var browserWidth = $( window ).width();
-    
+
     if($('#soundcloudPlayer').length){
         $('#soundcloudPlayer').removeAttr('src').hide();
     }
@@ -8131,7 +8131,7 @@ function playMediaElementVideo(videoType, videoSrc, mediaElementInstance, autoPl
 
         window.jwplayer('jw_player').remove();
     }
-    
+
     $('.mejs__container.mejs__video').css('display', 'block');
 
     if(mediaElementInstance){
@@ -8161,7 +8161,7 @@ function playMediaElementVideo(videoType, videoSrc, mediaElementInstance, autoPl
         }
     }
 
-    
+
     if( videoSrc ){
 
         $('#player1').css('width','100%').css('height', '100%').attr('src', videoSrc);
@@ -8248,7 +8248,7 @@ function facebookShare(type){
     }
 
     if(dynamicLink == ''){ error = 1; }
-    
+
     if(!error){
 
         var appId = $('#facebook_app_id').val();
@@ -8258,10 +8258,10 @@ function facebookShare(type){
         var height = 650;
         var left   = ($(window).width()  - width)  / 2;
         var top    = ($(window).height() - height) / 2;
-        
+
         window.open(pageURL, dynamicTitle, 'toolbar=no, location=no, directories=no, status=no, menubar=yes, scrollbars=no, resizable=no, copyhistory=no, width=' + width + ', height=' + height + ', top=' + top + ', left=' + left);
     }
-    
+
     return false;
 }
 
@@ -8289,8 +8289,8 @@ function twitterShare(type){
         var via = $('#twitter_user_name').val();
         var description = dynamicTitle.replace(/<(?:.|\n)*?>/gm, '');
         description = description.trim();
-        if( description != '' ){ 
-            var text = encodeURIComponent(description+'\n'); 
+        if( description != '' ){
+            var text = encodeURIComponent(description+'\n');
         }
 
         var width  = 600,
@@ -8340,11 +8340,11 @@ function postUserTabLoaded(){
 function musicHoverSupport(){
 
     $('.each-music .summary,.each-album-music .summary').hover(function(){
-    
+
       $(this).find('.play_now').removeClass('instant_hide');
-     
+
     }, function(){
-      
+
       $(this).find('.play_now').addClass('instant_hide');
 
     });
@@ -8363,7 +8363,7 @@ function autoPlayMyMusic(musicId){
     }else{
 
         $('#tab2 .music_main_outer .each-music[data-musicid="'+musicId+'"] .summary').trigger('click');
-        
+
         if($('.read-more.mobile-only').length){
             $('.read-more.mobile-only').trigger('click');
         }
@@ -8402,15 +8402,15 @@ function validateEmail(email) {
 
 var calcTempo = function (buffer) {
 
-    
+
 }
 
 function agreementAction(value, id, account, seller, price, music){
-    
+
     var music = atob(music);
     var price = atob(price);
     var curr = $('#pay_quick_popup').attr('data-currency');
-    
+
     if(value == 'Accepted' || value == 'Declined'){
 
         if(confirm('Be sure to read the agreement before proceding. Are you sure to proceed?')){
@@ -8431,7 +8431,7 @@ function agreementAction(value, id, account, seller, price, music){
                 dataType: "json",
                 success: function (response) {
                     if(response.success){
-                        
+
                         if(value == 'Accepted'){
                             if($('.chat_each_user.active').hasClass('chat_each_group')){
                                 preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a music license', 'Price: '+curr+price);
@@ -8467,14 +8467,14 @@ function agreementAction(value, id, account, seller, price, music){
 }
 
 function profferProjectAction(value, id, account, seller, price){
-    
+
     var price = atob(price);
     var curr = $('#pay_quick_popup').attr('data-currency');
-    
+
     if(value == 'Accepted' || value == 'Declined'){
 
         if(confirm('Be sure to read the project file before proceding. Are you sure to proceed?')){
-            
+
 
             var formData = new FormData();
             formData.append('response', value);
@@ -8490,7 +8490,7 @@ function profferProjectAction(value, id, account, seller, price){
                 dataType: "json",
                 success: function (response) {
                     if(response.success){
-                        
+
                         if(value == 'Accepted'){
                             if($('.chat_each_user.active').hasClass('chat_each_group')){
                                 preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a project', 'Price: '+curr+price);
@@ -8526,14 +8526,14 @@ function profferProjectAction(value, id, account, seller, price){
 }
 
 function profferProductAction(value, id, account, productId, seller, price){
-    
+
     var price = atob(price);
     var curr = $('#pay_quick_popup').attr('data-currency');
-    
+
     if(value == 'Accepted' || value == 'Declined'){
 
         if(confirm('Be sure to read the product file before proceding. Are you sure to proceed?')){
-            
+
 
             var formData = new FormData();
             formData.append('response', value);
@@ -8549,7 +8549,7 @@ function profferProductAction(value, id, account, productId, seller, price){
                 dataType: "json",
                 success: function (response) {
                     if(response.success){
-                        
+
                         if(value == 'Accepted'){
 
                             if($('.chat_each_user.active').hasClass('chat_each_group')){
@@ -8601,7 +8601,7 @@ function preparePayInstant(account, id, cardNumberF, cardExpiryF, cardCvcF, main
 
     var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#000','lineHeight': '31px'};
     var invalidStyles = {'color': '#fc064c'};
-    
+
     window.eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
     window.eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
     window.eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
@@ -8614,7 +8614,7 @@ function preparePayInstant(account, id, cardNumberF, cardExpiryF, cardCvcF, main
     $('#pay_quick_popup').attr('data-id', id);
 
     if(id.includes('custom_product')){
-        
+
         var split = subText.split('_');
         $('#pay_quick_popup .pay_item_name').text(limitString(split[4], 40));
         $('#pay_quick_popup .pay_item_price').text(split[2]);
@@ -8653,21 +8653,21 @@ function refreshChatBox(type, formData, elem = false){
                 $('#loading_messages').addClass('instant_hide');
                 if(type == 'full'){
 
-                    $('.chat_users_outer').html(response.data.partnersList); 
+                    $('.chat_users_outer').html(response.data.partnersList);
 
                     if($('#profile_tab_14').length){
-                        
+
                         var name = $('.chat_each_user.active:first .chat_user_name').text();
-                        $('.chat_head_name').text(name);  
+                        $('.chat_head_name').text(name);
                     }else if($('#admin_chat').length){
 
                         var nameone = $('.chat_each_user.active:first .chat_each_sender_sec .chat_user_name').text();
                         var nametwo = $('.chat_each_user.active:first .chat_each_recipient_sec .chat_user_name').text();
-                        $('.chat_head_name').text(nameone+' - '+nametwo);  
+                        $('.chat_head_name').text(nameone+' - '+nametwo);
                     }
 
                     if(!$('.chat_each_user.active').length){
-                        
+
                         $('.chat_each_user[data-partner="admin"]').trigger('click');
                     }
                 }
@@ -8705,7 +8705,7 @@ function refreshChatBox(type, formData, elem = false){
                         }, 1500);
                     }
                 }else{
-                    
+
                     if(response.data.partnerChat != ''){
 
                         $('.chat_main_body_messages').append(response.data.partnerChat).animate({ scrollTop: $('.chat_main_body_messages')[0].scrollHeight + 5000 }, 0);
@@ -8756,7 +8756,7 @@ function refreshChatBox(type, formData, elem = false){
                             topp = topp + parseInt($(this).outerHeight(true));
                         }else{
                             topp = topp - parseInt($(this).prev().outerHeight(true));
-                            return false; 
+                            return false;
                         }
                     });
                     container.animate({ scrollTop: topp }, 0);
@@ -8777,7 +8777,7 @@ function updateChat(){
         if(display != 'none' && ($('.notif_service').length || ($('.usr_men_quick_each[data-cat="chat"][data-sub-cat="chat_box"]').hasClass('active') && $('#filter_none').hasClass('active')))){
 
             var elem = $('.chat_each_user.active');
-            if(elem.length == 0 || elem.hasClass('chat_each_admin') && elem.hasClass('protected')){ 
+            if(elem.length == 0 || elem.hasClass('chat_each_admin') && elem.hasClass('protected')){
 
                 error = 1;
             }
@@ -8794,7 +8794,7 @@ function updateChat(){
             }else{
                 formData.append('cursor', 0);
             }
-            
+
             if(elem.hasClass('chat_each_group')){
                 formData.append('action', 'group-chat');
                 formData.append('group', elem.attr('data-group'));
@@ -8838,7 +8838,7 @@ function startNotificationsService(){
         success: function(response) {
 
             if(response.success == 1){
-                
+
                 if(response.html != ''){
 
                     if(response.lastChatNotifId > currentNotifId){
@@ -8870,16 +8870,12 @@ function refreshNotificationsBox(){
     formData.append('mode', 'fetch');
     formData.append('id', currentNotifId);
 
-    if(window.location.href.indexOf('profile') !== -1 && $('.chat_each_user.active').length){
-        if($('.chat_each_user.active').hasClass('chat_each_group')){
-            formData.append('fetch_activity_status', 'group_'+$('.chat_each_group.active').attr('data-group'));
-        }else{
-            formData.append('fetch_activity_status', 'partner_'+$('.chat_each_user.active').attr('data-partner'));
-        }
+    if(window.location.href.indexOf('dashboard') !== -1 && $('.each_dash_section:not(.instant_hide)').length){
+        var id = $('.each_dash_section:not(.instant_hide)').closest('.agent_contact_listing').find('.m_btm_right_icons .m_btn_chat').attr('data-id');
+        formData.append('contact', id);
     }
 
     $.ajax({
-
         url: '/update-user-notifications',
         dataType: "json",
         type: 'post',
@@ -8887,9 +8883,9 @@ function refreshNotificationsBox(){
         processData: false,
         contentType: false,
         data: formData,
-        success: function(response) { 
+        success: function(response) {
             if(response.success == 1){
-                
+
                 if(response.html != ''){
 
                     $('#notif_is_empty').remove();
@@ -8903,8 +8899,9 @@ function refreshNotificationsBox(){
                                 updateC = 1;
                             }
                         });
-                        if(window.location.href.indexOf('/profile') !== -1 && updateC){
-                            updateChat();
+                        if(window.location.href.indexOf('/dashboard') !== -1 && updateC && $('.each_dash_section:not(.instant_hide)').length){
+                            var element = $('.each_dash_section:not(.instant_hide)').find('.chat_outer');
+                            refreshChat(element);
                         }
                         $('#notif_count_res,#notif_count').text(newNotifs).addClass('notif_counter_ok');
                         notifInAud.currentTime = 0;
@@ -8912,30 +8909,10 @@ function refreshNotificationsBox(){
                     }
                 }
 
-                if(typeof response.data !== 'undefined' && typeof response.data.partnerActivityStatus !== 'undefined'){
-
-                    if($('.chat_each_user.active:first').hasClass('chat_each_group')){
-                        var partnerActivityStatus = response.data.partnerActivityStatus.split('::');
-                        //$('.chat_each_user.active:first .inner .chat_user_pic .chat_user_status').removeClass('online inactive offline').addClass(partnerActivityStatus[0].split('_')[1]);
-                        for(i = 1; i < partnerActivityStatus.length; i++) {
-                            var elemm = $('.chat_each_user.active:first .chat_user_members .chat_member_each_outer[data-member="'+partnerActivityStatus[i].split('_')[0]+'"]');
-                            var mainElem = $('.chat_each_user.active:first .chat_user_pic[data-id="'+partnerActivityStatus[i].split('_')[0]+'"]');
-                            if(elemm.length){
-                                elemm.find('.chat_member_each .chat_group_member_status').removeClass('online inactive offline').addClass(partnerActivityStatus[i].split('_')[1]);
-                            }else if(mainElem.length){
-                                mainElem.find('.chat_user_status').removeClass('online inactive offline').addClass(partnerActivityStatus[i].split('_')[1]);
-                            }
-                        }
-                    }else{
-                        $('.chat_each_user.active:first .chat_user_status_txt').text(response.data.partnerActivityStatus);
-                        $('.chat_each_user.active:first .chat_user_status').removeClass('online inactive offline').addClass(response.data.partnerActivityStatus);
-                    }
-                }
-
-                var timeLapse = window.location.href.indexOf('profile') !== -1 ? 10000 : 30000;
+                var timeLapse = window.location.href.indexOf('/dashboard') !== -1 && $('.each_dash_section:not(.instant_hide)').length ? 10000 : 30000;
                 setTimeout(refreshNotificationsBox, timeLapse);
             }else{
-                alert(data.error);
+                console.log(data.error);
             }
         }
     });
@@ -9040,7 +9017,7 @@ function Interval(time) {
 }
 
 function productOfferCountdown(i){
-    
+
     if(i.isRunning()){
         i.stop();
     }
@@ -9108,7 +9085,7 @@ function initiateInstantPayment(stripe, eCardNumber){
                     cache: false,
                     dataType: 'json',
                     success: function (response) {
-                        
+
                         if(typeof response.error !== 'undefined' && response.error != ''){
                             alert(response.error);
                             $('#pay_quick_final').removeClass('disabled');
@@ -9123,7 +9100,7 @@ function initiateInstantPayment(stripe, eCardNumber){
                             }
                         }
                     }
-                });     
+                });
             }
         });
     }

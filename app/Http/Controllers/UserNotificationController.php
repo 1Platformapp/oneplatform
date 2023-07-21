@@ -31,6 +31,8 @@ use App\Models\City;
 
 use App\Models\Country;
 
+use App\Models\AgentContact;
+
 use App\Models\UserChatGroup;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -88,18 +90,18 @@ class UserNotificationController extends Controller
 
         $this->middleware('user.update.activity');
     }
-    
+
 
     public function index(Request $request){
 
-        
+
     }
 
     public function create(Request $request){
 
         $data = ['success' => 0, 'error' => 0, 'errorMessage' => ''];
         $commonMethods = new CommonMethods();
-        
+
         $customerId = $request->has('customer') ? $request->get('customer') : (Auth::check() ? Auth::user() : NULL);
         $customer = $customerId ? User::find($customerId) : NULL;
         $userId = $request->has('user') ? $request->get('user') : NULL;
@@ -148,43 +150,49 @@ class UserNotificationController extends Controller
                         }
                     }
 
-                    if($request->has('fetch_activity_status')){
+                    if($request->has('contact')){
 
-                        $chatActivity = explode('_', $request->get('fetch_activity_status'));
-                        if($chatActivity[0] == 'group'){
+                        $contact = AgentContact::find($request->get('contact'));
 
-                            $group = UserChatGroup::find($chatActivity[1]);
-                            if($group->contact && $group->agent){
+                        if($contact && $contact->agentUser && $contact->contactUser){
 
-                                if($user->id == $group->agent_id){
-                                    $groupStatus[] = $group->contact->id.'_'.$group->contact->activityStatus();
-                                }else if($user->id == $group->contact_id){
-                                    $groupStatus[] = $group->agent->id.'_'.$group->agent->activityStatus();
-                                }else{
-                                    $groupStatus[] = $group->contact->id.'_'.$group->contact->activityStatus();
-                                    $groupStatus[] = $group->agent->id.'_'.$group->agent->activityStatus();
+                            $agent = $contact->agentUser;
+                            $artist = $contact->contactUser;
+
+                            if($contact->approved == 1){
+
+                                $group = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
+
+                                $targets = $targetUsers = [];
+                                $targets[] = $group->agent_id;
+                                $targets[] = $group->contact_id;
+                                if(count($group->other_members)){
+                                    $targets = array_merge($targets,$group->other_members);
                                 }
+                                if(($key = array_search($user->id, $targets)) !== false) {
+                                    unset($targets[$key]);
+                                }
+                                foreach ($targets as $target) {
+                                    $targetUsers[] = User::find($target);
+                                }
+                            }else{
 
-                                if(is_array($group->other_members) && count($group->other_members)){
-                                    foreach($group->other_members as $memberId){
-                                        if(in_array($user->id, $group->other_members)){
-                                            continue;
-                                        }
-                                        $member = User::find($memberId);
-                                        if($member){
-                                            $groupStatus[] = $memberId.'_'.$member->activityStatus();
-                                        }
-                                    }
-                                }
-                                if($group->otherAgent){
-                                    $groupStatus[] = $group->other_agent_id.'_'.$group->otherAgent->activityStatus();
-                                }
-                                $data['data']['partnerActivityStatus'] = implode('::', $groupStatus);
+                                $targetUsers = $user->isAgent() ? [$artist] : [$agent];
                             }
-                        }else if($chatActivity[0] == 'partner'){
 
-                            $partner = User::find($chatActivity[1]);
-                            $data['data']['partnerActivityStatus'] = $partner->activityStatus();
+                            $activityStatus = [];
+                            if(count($targetUsers)){
+
+                                foreach ($targetUsers as $targetUser) {
+
+                                    $activityStatus[] = $targetUser->activityStatus();
+                                }
+
+                                $data['data']['partnerActivityStatus'] = implode('::', $activityStatus);
+                            }
+                        }else{
+
+                            $data['errorMessage'] = 'no contact found';
                         }
                     }
 
