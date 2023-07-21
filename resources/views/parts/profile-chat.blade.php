@@ -333,7 +333,7 @@
 
                                         <div class="m_btm_right_icons">
                                             <ul>
-                                                @if($isContact && $isContact->approved)
+                                                @if($isContact)
                                                 <li>
                                                     <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$isContact->id}}">
                                                         <i class="fas fa-comment-dots"></i>
