@@ -486,7 +486,7 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.5')}}">
+<link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.8')}}">
 <script>
     $('select[name="pro_contact_already_user"]').change(function(){
 

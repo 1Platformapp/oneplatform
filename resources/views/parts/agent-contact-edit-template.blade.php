@@ -31,11 +31,11 @@
             </div><br><br>
             <div class="pro_m_chech_outer multi_btn flex flex-row items-center">
                 <div class="flex flex-row items-center gap-2">
-                    <div class="bg-white shadow-lg shadow-custom rounded-md text-sm font-semibold text-gray-600 px-5 py-2 cursor-pointer edit_with_action edit_and_send_question">
+                    <div class="bg-white shadow-lg shadow-custom rounded-md text-sm font-semibold text-gray-600 px-5 py-2 cursor-pointer edit_with_action edit_and_send_question text-center">
                         Save and send questionnaire
                     </div>
                     @if(!$contact->approved)
-                    <div class="bg-white shadow-lg shadow-custom rounded-md text-sm font-semibold text-gray-600 px-5 py-2 cursor-pointer edit_with_action edit_and_send_agree">
+                    <div class="bg-white shadow-lg shadow-custom rounded-md text-sm font-semibold text-gray-600 px-5 py-2 cursor-pointer edit_with_action edit_and_send_agree text-center">
                         Save and send agreement
                     </div>
                     @endif

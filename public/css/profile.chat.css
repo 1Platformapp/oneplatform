@@ -69,14 +69,14 @@
 .chat_main_body .chat_main_body_foot .submit_btn { background-color: #5cb85c; margin-left: auto; }
 .chat_main_body .chat_main_body_foot .add_agreement_btn { background-color: #3498db; }
 .chat_main_body .chat_main_body_foot .join_chat_btn { background-color: #007bff; }
-.chat_main_body .chat_main_body_foot .refresh_messages { background-color: #6c757d; margin-left: 10px; }
-.chat_main_body .chat_main_body_foot .proffer_project_btn { background: #17a2b8; margin-right: auto; margin-left: 10px; }
-.chat_main_body .chat_main_body_foot .add_product_btn { background: #c18d0b; margin-right: auto; margin-left: 10px; }
+.chat_main_body .chat_main_body_foot .refresh_messages { background-color: #6c757d; }
+.chat_main_body .chat_main_body_foot .proffer_project_btn { background: #17a2b8; margin-right: auto; }
+.chat_main_body .chat_main_body_foot .add_product_btn { background: #c18d0b; margin-right: auto; }
 .chat_main_body .chat_main_body_attach { position: absolute; right: 5px; font-size: 18px; cursor: pointer; color: #818181; }
 .chat_main_body .chat_main_body_foot .chat_main_body_attach { top: -97px; }
 .chat_main_body_foot .attachment_area { width: 100%; min-height: 80px; border: 1px solid #d3d9dd; border-bottom: none; border-radius: 4px 4px 0 0; padding: 10px; }
 .chat_main_body_foot .attachment_area .close { position: absolute; top: -17px; right: 4px; cursor: pointer; }
-.foot_action_ext_btns { display: flex; flex-direction: row; justify-content: space-between; }
+.foot_action_ext_btns { display: grid; grid-template-columns: auto auto auto auto; }
 .chat_main_body_messages::-webkit-scrollbar { width: 4px; }
 .chat_main_body_messages::-webkit-scrollbar-track { box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
 .chat_main_body_messages::-webkit-scrollbar-thumb { background-color: darkgrey; outline: 1px solid slategrey; }
@@ -238,4 +238,12 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
     .chat_outer .chat_each_group .chat_group_member_status { bottom: 9px !important; left: -4px !important; font-size: 9px !important; }
     .chat_each_group .chat_member_remove i { top: -10px !important; font-size: 10px !important; }
     .chat_each_group .chat_member_each_outer:not(:first-of-type) { margin-left: 2px !important; }
+
+    .edit_elem_top { flex-direction: column; }
+    .edit_elem_top .m_btm_list_left { flex-direction: row; }
+    .edit_elem_top .m_btm_list_left ul { margin-top: 0; margin-left: 5px; }
+    .edit_elem_top .m_btm_right_icons { margin-left: 0; margin-top: 7px; }
+    .edit_now { margin-top: 10px; margin-left: unset !important; }
+    .foot_action_ext_btns { grid-template-columns: auto auto; }
+    .chat_each_message .chat_message_det { flex: 0 1 80%; }
 }
