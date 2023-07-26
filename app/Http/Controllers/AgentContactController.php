@@ -115,11 +115,11 @@ class AgentContactController extends Controller
 
         $this->middleware('user.update.activity');
     }
-    
+
 
     public function index(Request $request){
 
-        
+
     }
 
     public function create(Request $request){
@@ -141,6 +141,11 @@ class AgentContactController extends Controller
             if(!$contactUser){
 
                 return redirect()->back()->with(['error' => 'The user email is not an email of a valid account at 1Platform']);
+            }
+            $contactExist = AgencyContact::where(['email' => $alreadyUserEmail, 'agent_id' => $user->id])->first();
+            if($contactUser){
+
+                return redirect()->back()->with(['error' => 'This person is already your contact']);
             }
         }else{
 
@@ -245,7 +250,7 @@ class AgentContactController extends Controller
 
                 $agentQuestionnaire = AgentQuestionnaire::find($questionnaireId);
                 foreach($agentQuestionnaire->questions as $key => $question){
-                	
+
                 	$contactQuestion = new ContactQuestion();
                 	$contactQuestion->agent_contact_id = $contact->id;
                 	$contactQuestion->value = $question->value;
@@ -468,7 +473,7 @@ class AgentContactController extends Controller
         }else{
             $contact = User::find($contactId);
         }
-        
+
         $html = \View::make('parts.group-chat-member', ['group' => $group, 'member' => $contact, 'commonMethods' => $commonMethods])->render();
         if(isset($group->other_agent_id) && $group->other_agent_id && isset($agentContact)){
             $html .= \View::make('parts.group-chat-member', ['group' => $group, 'member' => $agentContact->agentUser, 'commonMethods' => $commonMethods])->render();
@@ -478,36 +483,19 @@ class AgentContactController extends Controller
 
             if($action == 'add'){
 
-                $newGroup = new UserChatGroup();
-                $newGroup->agent_id = $user->id;
-                $newGroup->contact_id = $group->contact_id;
-                $newGroup->other_members = [$contactId];
-                $success = $newGroup->save();
-                $sourceId = $newGroup->id;
+                $group->other_members = array_map(function ($a, $b) { return $a + $b; }, $group->other_members, [$contactId]);
+                $success = $group->save();
+                $sourceId = $group->id;
 
                 $userNotification = new UserNotificationController();
                 $request->request->add(['user' => $contactId, 'customer' => $user->id, 'type' => 'agent_group_member_add', 'source_id' => $sourceId]);
                 $response = json_decode($userNotification->create($request), true);
             }else if($action == 'remove'){
-                if(in_array($contactId, $group->other_members)){
-                    $members = $group->other_members;
-                    if(($key = array_search($contactId, $members)) !== false){
-                    	$groupChat = UserChat::where(['group_id' => $group->id])->get();
-                    	$groupContactId = $group->contact->id;
-                    	if(count($groupChat)){
-                    		foreach($groupChat as $chat){
-                    			$chat->delete();
-                    		}
-                    	}
-                        $group->delete();
 
-                        $userNotification = new UserNotificationController();
-                        $request->request->add(['user' => $contactId, 'customer' => $user->id, 'type' => 'agent_group_member_remove', 'source_id' => $groupContactId]);
-                        $response = json_decode($userNotification->create($request), true);
-                        $success = 1;
-                    }else{
-                    	$error = 'Member does not belong to this group';
-                    }
+                if(in_array($contactId, $group->other_members)){
+                    $group->other_members = array_diff($group->other_members, [$contactId]);
+                    $group->save();
+                    $success = true;
                 }else{
                     $error = 'This contact does not exist in this group chat';
                 }
@@ -535,7 +523,7 @@ class AgentContactController extends Controller
 
                     unlink(public_path('agent-agreements/').$contact->agreement_pdf);
                 }
-                
+
                 $userChatGroup = UserChatGroup::where(['contact_id' => $contact->contact_id, 'agent_id' => $user->id])->first();
                 if($userChatGroup){
                     $userChatGroup->delete();
@@ -547,7 +535,7 @@ class AgentContactController extends Controller
                     $contact->contactUser->address->delete();
                     $contact->contactUser->delete();
                 }
-                
+
                 $return['success'] = $contact->delete();
             }else{
 
@@ -584,13 +572,13 @@ class AgentContactController extends Controller
                 elseif(Auth::check() && Auth::user()->id == $question->agentContact->contactUser->id)
                     $isAllowed = 'user';
             }
-                
+
             if($isAllowed){
 
                 $question->elements->each(function($element) {
                 	$element->delete();
                 });
-                
+
                 $return['success'] = $question->delete();
             }else{
 
@@ -663,7 +651,7 @@ class AgentContactController extends Controller
             if(is_array($questions) && count($questions)){
 
                 foreach ($questions as $key => $question) {
-                    
+
                     if(trim($question) != ''){
 
                         $agentQuestionnaireElement = new AgentQuestionnaireElement();
@@ -709,7 +697,7 @@ class AgentContactController extends Controller
             if(is_array($questions) && count($questions)){
 
                 foreach ($questions as $key => $question) {
-                    
+
                     if(trim($question) != ''){
 
                         $agentQuestionnaireElement = new AgentQuestionnaireElement();
@@ -774,7 +762,7 @@ class AgentContactController extends Controller
             	return response(['success' => 1]);
 
             }else if($action == 'add-answer'){
-            	
+
             	$questionId = $request->question_id;
             	$question = ContactQuestion::find($questionId);
 
@@ -803,7 +791,7 @@ class AgentContactController extends Controller
             	            }
             	            $record = ContactQuestionElement::where(['order' => $key, 'contact_question_id' => $question->id])->first();
             	            $pElement = ($record === null) ? new ContactQuestionElement() : $record;
-            	            
+
             	            if($record && $record->type == 'image' && CommonMethods::fileExists(public_path('contact-info-images/').$record->value)){
 
             	                unlink(public_path('contact-info-images/').$record->value);
@@ -869,7 +857,7 @@ class AgentContactController extends Controller
     public function showDetails(Request $request, $code){
 
         $contact = AgentContact::where(['code' => $code])->first();
-        
+
         if($contact && $contact->contactUser && $contact->agentUser){
 
             $data = [
@@ -899,7 +887,7 @@ class AgentContactController extends Controller
 
                 $requestExist = AgentContactRequest::where(['contact_user_id' => $user->id, 'agent_user_id' => $agent->id])->first();
                 if($requestExist){
-                    
+
                     $error = 'Request already sent';
                 }else{
 

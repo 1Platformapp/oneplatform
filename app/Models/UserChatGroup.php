@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Http\Controllers\CommonMethods;
+use Auth;
 
 class UserChatGroup extends Authenticatable
 {
@@ -66,5 +68,42 @@ class UserChatGroup extends Authenticatable
                 $chat->save();
             }
         }
+    }
+
+    public function getGroupMembers(){
+
+        $return = '';
+        $agent = $this->agent;
+        $artist = $this->contact;
+        $user = Auth::user();
+        $commonMethods = new CommonMethods();
+
+        if($agent && $artist){
+
+            if($user->id == $agent->id){
+                $return .= \View::make('parts.group-chat-member', ['add' => '1', 'group' => $this]);
+            }
+            if($user->id == $artist->id){
+                $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $artist, 'commonMethods' => $commonMethods]);
+            }
+            if($user->id != $agent->id && $user->id != $artist->id){
+                $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $artist, 'commonMethods' => $commonMethods]);
+            }
+            if(is_array($this->other_members) && count($this->other_members)){
+                foreach($this->other_members as $memberId){
+
+                    $member = User::find($memberId);
+                    if(!$member) {
+                        continue;
+                    }
+                    $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $member, 'commonMethods' => $commonMethods]);
+                }
+            }
+            if($this->otherAgent){
+                $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $this->otherAgent, 'commonMethods' => $commonMethods]);
+            }
+        }
+
+        return $return;
     }
 }

@@ -1,14 +1,14 @@
 
 
 @if(isset($add))
-	
-	<div title="Add a contact in this chat" class="chat_member_each_outer chat_member_add">
+
+	<div title="Add a contact in this chat" class="chat_member_each_outer chat_member_add" data-id="{{isset($group) ? $group->id : ''}}">
 		<div class="chat_member_each">
 			<i class="fa fa-plus"></i>
 		</div>
 	</div>
 @else
-	
+
 	<div data-name="{{$member->name}}" data-member="{{$member->id}}" class="chat_member_each_outer">
 		@if(Auth::user()->id == $group->agent_id && $group->other_agent_id != $member->id)
 		<div class="chat_member_remove">

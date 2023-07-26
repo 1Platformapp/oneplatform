@@ -284,6 +284,49 @@
             </div>
         </div>
     </div>
+
+    <div class="pro_page_pop_up clearfix" id="add_chat_group_member_popup">
+        <div class="pro_soc_con_face_inner clearfix">
+            <div class="soc_con_top_logo clearfix">
+                <a style="opacity:0;" class="logo8">
+                    <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
+                </a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="stage_one">
+                <div class="soc_con_face_username clearfix">
+                    <div class="main_headline">Introduce a contact in this chat</div><br>
+                    <div class="hide_on_mobile"><br></div>
+                    <div class="pro_pop_multi_row">
+                        <div class="each_col">
+                            @if(Auth::check())
+                            <select id="add_chat_group_member">
+                                <option value="">Choose your contact</option>
+                                <option value="add_by_code">Add contact by code</option>
+                                @if(count(Auth::user()->contacts))
+                                    @foreach(Auth::user()->contacts as $contact)
+                                        @if(!$contact->contactUser || $contact->approved == NULL)
+                                            @php continue @endphp
+                                        @endif
+                                        <option value="{{$contact->contactUser->id}}">{{$contact->contactUser->name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <div class="instant_hide error" id="add_chat_group_member_error">Required</div>
+                            @endif
+                        </div>
+                        <div class="each_col">
+                            <input class="dummy_field" type="text" name="fakeusernameremembered">
+                            <input disabled="disabled" placeholder="Enter Contact Code" type="text" id="add_chat_group_member_contact_code" />
+                            <div class="instant_hide error" id="add_chat_group_member_contact_code_error">Required</div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div id="send_add_chat_group_member" class="pro_button">SUBMIT</div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('bottom-section')

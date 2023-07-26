@@ -417,16 +417,21 @@ class AgencyController extends Controller
                     }
                 }
 
-                $data['group']['members'] = $chatGroup->other_members;
+                $data['group']['members'] = $chatGroup->getGroupMembers();
                 $success = true;
             }else{
 
                 $partner = $user->isAgent() ? $artist : $agent;
-                $chatMessages = UserChat::where(function($q) use ($user) {
+                $chatQuery = UserChat::where(function($q) use ($user) {
                         $q->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
                     })->where(function($q) use ($partner) {
                         $q->where('sender_id', $partner->id)->orWhere('recipient_id', $partner->id);
-                    })->orderBy('id', 'desc')->take(20)->get()->reverse();
+                    });
+                if((int ) $cursor > 0){
+
+                    $chatQuery->where('id', '<' , $cursor);
+                }
+                $chatMessages = $chatQuery->orderBy('id', 'desc')->take(20)->get()->reverse();
                 if(count($chatMessages)){
 
                     foreach ($chatMessages as $key => $chatMessage) {

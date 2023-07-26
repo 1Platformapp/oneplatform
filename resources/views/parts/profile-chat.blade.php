@@ -183,7 +183,7 @@
                                         </div>
                                         @endif
                                         <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
-                                            @include('parts.agent-contact-chat', ['contact' => $contact, 'isAgent' => $isAgent, 'user' => $user])
+                                            @include('parts.agent-contact-chat', ['contact' => $contact, 'isAgent' => $isAgent, 'user' => $user,'commonMethods' => $commonMethods])
                                         </div>
                                     </div>
                                 </div>
@@ -790,6 +790,161 @@
         }
     });
 
+    $('body').delegate('.chat_outer:not(.disabled) .refresh_messages', 'click', function(e){
+
+        var element = $(this).closest('.chat_outer');
+        element.find('.loading_messages').removeClass('instant_hide');
+        element.find('.chat_main_body_messages').html('');
+
+        refreshChat(element);
+    });
+
+    $('body').delegate('.chat_outer:not(.disabled) .proffer_project_btn:not(.disabled)', 'click', function(e){
+
+        var elem = $('.chat_each_user.active');
+        if(elem.length && $('#profile_tab_14').length){
+
+            $('#proffer_project_select_customer option').each(function() {
+                if($(this).val() != ''){
+                    $(this).remove();
+                }
+            });
+            if(elem.hasClass('chat_each_group')){
+
+                var main = elem.find('.inner .chat_user_pic');
+                $('#proffer_project_select_customer').append($('<option>',{
+                    value: main.attr('data-id'),
+                    text : main.attr('data-name')
+                }));
+
+                elem.find('.chat_member_each_outer:not(.chat_member_add)').each(function(){
+
+                    var value = $(this).attr('data-member');
+                    var title = $(this).attr('data-name');
+                    if(value != window.currentUserId){
+                        $('#proffer_project_select_customer').append($('<option>',{
+                            value: value,
+                            text : title
+                        }));
+                    }
+                });
+            }else{
+                $('#proffer_project_select_customer').append($('<option>',{
+                    value: elem.attr('data-partner'),
+                    text : elem.find('.chat_user_name').text()
+                }));
+            }
+
+            $('#proffer_project_popup .stage_one input,#proffer_project_popup .stage_one textarea').val('');
+            $('#proffer_project_popup .stage_two').addClass('instant_hide');
+            $('#proffer_project_popup .stage_one').removeClass('instant_hide');
+
+            var name = $('.chat_each_user.active:first .chat_user_name').text();
+            $('#proffer_project_popup #proffer_project_customer_name').text(name);
+            $('#proffer_project_popup,#body-overlay').show();
+        }else{
+            alert('You cannot proffer a project yet');
+        }
+    });
+
+    $('body').delegate('.chat_member_add', 'click', function(e){
+        var id = $(this).attr('data-id');
+        var contact = $(this).closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+        $('#add_chat_group_member_popup #add_chat_group_member').val('');
+        $('#add_chat_group_member_popup').attr('data-group', id);
+        $('#add_chat_group_member_popup').attr('data-contact', contact);
+        $('#add_chat_group_member_popup,#body-overlay').show();
+        e.stopPropagation();
+    });
+
+    $('body').delegate('.chat_member_remove', 'click', function(e){
+        e.stopPropagation();
+        var group = $(this).closest('.chat_group_members').find('.chat_member_add').attr('data-id');
+        var member = $(this).closest('.chat_member_each_outer');
+        if(confirm('Are you sure?')){
+
+            var formData = new FormData();
+            formData.append('group', group);
+            formData.append('contact', member.attr('data-member'));
+            formData.append('action', 'remove');
+
+            $.ajax({
+
+                url: '/agent-contact/add-remove-to-group',
+                type: 'POST',
+                data: formData,
+                contentType:false,
+                cache: false,
+                processData: false,
+                dataType: 'json',
+                success: function (response) {
+
+                    if(response.success){
+
+                        $('.pro_page_pop_up, #body-overlay').hide();
+                        member.remove();
+                    }else{
+                        alert(response.error);
+                    }
+                }
+            });
+        }
+    });
+
+    $('body').delegate('#send_add_chat_group_member', 'click', function(e){
+
+        var id = $('#add_chat_group_member_popup').attr('data-group');
+        var contact = $('#add_chat_group_member_popup').attr('data-contact');
+        var contactId = $('#add_chat_group_member').val();
+        var contactCode = $('#add_chat_group_member_contact_code').val();
+        if(contactId == '' || id == ''){
+
+            alert('Your request data is missing');
+        }else{
+
+            var formData = new FormData();
+            formData.append('group', id);
+            formData.append('contact', contactId);
+            formData.append('contactCode', contactCode);
+            formData.append('action', 'add');
+
+            $.ajax({
+
+                url: '/agent-contact/add-remove-to-group',
+                type: 'POST',
+                data: formData,
+                contentType:false,
+                cache: false,
+                processData: false,
+                dataType: 'json',
+                success: function (response) {
+
+                    if(response.success){
+
+                        $('.pro_page_pop_up, #body-overlay').hide();
+                        var element = $('.agent_contact_listing[data-form="my-contact-form_'+contact+'"]').find('.chat_outer');
+                        element.find('.chat_group_members').append(response.html);
+                    }else{
+                        console.log(response.error);
+                    }
+                }
+            });
+        }
+    });
+
+    $('#add_chat_group_member').change(function(){
+
+        $('#add_chat_group_member_contact_code_error').addClass('instant_hide');
+
+        if($(this).val() == 'add_by_code'){
+
+            $('#add_chat_group_member_contact_code').prop('disabled', false).focus();
+        }else{
+
+            $('#add_chat_group_member_contact_code').prop('disabled', true);
+        }
+    });
+
     function refreshChat(element){
 
         var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
@@ -816,10 +971,10 @@
                 if(response.success){
                     if(response.data.group.messages.length){
 
-                        renderChatMessages(element, formData.get('cursor'), response.data.group.messages);
+                        renderChatMessages(element, formData.get('cursor'), response.data.group);
                     }else if(response.data.private.messages.length){
 
-                        renderChatMessages(element, formData.get('cursor'), response.data.private.messages);
+                        renderChatMessages(element, formData.get('cursor'), response.data.private);
                     }else{
 
                         if(!formData.get('cursor')){
@@ -834,16 +989,21 @@
         });
     }
 
-    function renderChatMessages(element, cursor, messages){
+    function renderChatMessages(element, cursor, data){
 
         if(cursor){
 
-            element.find('.chat_main_body_messages').prepend(messages);
+            element.find('.chat_main_body_messages').prepend(data.messages);
             renderScrollHeight(element, cursor);
         }else{
 
-            element.find('.chat_main_body_messages').html(messages);
+            element.find('.chat_main_body_messages').html(data.messages);
             renderScrollHeight(element);
+        }
+
+        if(data.members){
+
+            element.find('.chat_group_members').html(data.members);
         }
     }
 
