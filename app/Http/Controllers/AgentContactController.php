@@ -483,7 +483,7 @@ class AgentContactController extends Controller
 
             if($action == 'add'){
 
-                $group->other_members = array_map(function ($a, $b) { return $a + $b; }, $group->other_members, [$contactId]);
+                $group->other_members = array_merge($group->other_members, [$contactId]);
                 $success = $group->save();
                 $sourceId = $group->id;
 
