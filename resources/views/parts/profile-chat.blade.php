@@ -53,10 +53,10 @@
                             @endif
                         </label>
                         <div class="m_btm_filters_outer">
-                            <div class="m_btm_filter_search">
+                            <div class="m_btm_filter_search flex-1">
                                 <input data-target="agent_contact_listing" placeholder="Search your contacts by name" type="text" class="m_btm_filter_search_field" />
                             </div>
-                            <div class="m_btm_filter_drop">
+                            <div class="m_btm_filter_drop flex-1">
                                 <select data-target="agent_contact_listing" class="m_btm_filter_dropdown">
                                     <option value="">Filter contacts</option>
                                     <option value="all">All</option>
@@ -65,132 +65,188 @@
                                     <option value="Main Network">My Main Network</option>
                                 </select>
                             </div>
+                            <div class="smart_switch_outer switch_personal_chat flex-1 ml-auto">
+                                <div class="smart_switch_txt">Show Personal Chat</div>
+                                <label class="smart_switch">
+                                    <input type="checkbox" />
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
                         </div>
                         <div class="btn_list_outer">
-                        @if(count($user->contacts) > 0)
-                            @foreach($user->contacts as $contact)
-                                @if(!$contact->contactUser)
-                                    @php continue @endphp
-                                @endif
-                                @php $contactPDetails = $commonMethods->getUserRealDetails($contact->contactUser->id) @endphp
-                                <div data-approved="{{$contact->approved ? '1' : ''}}" data-form="my-contact-form_{{ $contact->id }}" class="agent_contact_listing music_btm_list no_sorting clearfix">
-                                    <div class="edit_elem_top">
-                                        <div class="m_btm_list_left">
-                                            <div data-image="{{$contactPDetails['image']}}" class="music_btm_thumb">
-                                                <div class="music_bottom_load_thumb">Load Image</div>
-                                            </div>
-                                            <ul class="music_btm_img_det">
-                                                <li>
-                                                    <a class="filter_search_target" href="">
-                                                        {{$contact->contactUser ? $contact->contactUser->name : $contact->name}}
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <p>
-                                                        <br>
-                                                        {{$contact->commission ? $contact->commission . '% - ' : ''}} {{$contact->approved ? 'Approved' : ($contact->agreement_sign == 'sent' ? 'Sent to Sign' : 'Not Approved')}}
-                                                        {{$contact->review ? ' - '.'Sent to Review' : ''}}
-                                                        {{$contactPDetails['city'] != '' ? ' - '.$contactPDetails['city'] : ''}}
-                                                        {{$contactPDetails['skills'] != '' ? ' - '.$contactPDetails['skills'] : ''}}
-                                                        <br>
-                                                        {{$contact->code}}
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="m_btm_right_icons">
-                                            <ul>
-                                                <li>
-                                                    <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$contact->id}}">
-                                                        <i class="fas fa-comment-dots"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a title="Edit" data-id="{{$contact->id}}" class="m_btn_right_icon_each m_btm_edit active">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    @if($contact->contactUser->username)
-                                                    <a target="_blank" title="Website" href="{{route('user.home',['params' => $contact->contactUser->username])}}" class="m_btn_right_icon_each m_btm_website active">
-                                                        <i class="fa fa-globe"></i>
-                                                    </a>
-                                                    @else
-                                                    <a title="Website" href="javascript:void(0)" class="m_btn_right_icon_each m_btm_website">
-                                                        <i class="fa fa-globe"></i>
-                                                    </a>
-                                                    @endif
-                                                </li>
-                                                <li>
-                                                    @if(!$contact->is_already_user || ($contact->is_already_user && $contact->approved))
-                                                    <a title="Switch account" data-id="{{route('agent.contact.switch.account',['code' => $contact->code])}}" class="m_btn_right_icon_each m_btm_switch_account active">
-                                                        <i class="fa fa-cog"></i>
-                                                    </a>
-                                                    @else
-                                                    <a title="Switch account" data-id="" class="m_btn_right_icon_each m_btm_view">
-                                                        <i class="fa fa-cog"></i>
-                                                    </a>
-                                                    @endif
-                                                </li>
-                                                <li>
-                                                    <a data-open="blank" title="View Submission" data-id="{{route('agent.contact.details',['code' => $contact->code])}}" class="m_btn_right_icon_each m_btm_view active">
-                                                        <i class="fa fa-file-text-o"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a title="Delete" class="m_btn_right_icon_each m_btm_del active" data-del-id="{{$contact->id}}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </li>
-                                                @if($contact->approved)
-                                                <li>
-                                                    <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$contact->id}}">
-                                                        <i class="fas fa-file-pdf"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$contact->id}}">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </a>
-                                                </li>
-                                                @else
-                                                <li>
-                                                    <a title="Agreements" class="m_btn_right_icon_each">
-                                                        <i class="fas fa-file-pdf"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a title="Calendar" class="m_btn_right_icon_each">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </a>
-                                                </li>
-                                                @endif
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="edit_elem_bottom">
-                                        <div class="each_dash_section instant_hide" data-id="contact_edit_{{$contact->id}}">
-                                            @include('parts.agent-contact-edit-template', ['contact' => $contact])
-                                        </div>
-                                        @if($contact->approved)
-                                        <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$contact->id}}">
-                                            @include('parts.agent-contact-calendar', ['contact' => $contact])
-                                        </div>
-                                        <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
-                                            @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'isAgent' => $isAgent])
-                                        </div>
+                            <div class="chat_filter_container">
+                                <div class="chat_filter_tab chat_filter_contacts">
+                                @if(count($user->contacts) > 0)
+                                    @foreach($user->contacts as $contact)
+                                        @if(!$contact->contactUser)
+                                            @php continue @endphp
                                         @endif
-                                        <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
-                                            @include('parts.agent-contact-chat', ['contact' => $contact, 'isAgent' => $isAgent, 'user' => $user,'commonMethods' => $commonMethods])
+                                        @php $contactPDetails = $commonMethods->getUserRealDetails($contact->contactUser->id) @endphp
+                                        <div data-approved="{{$contact->approved ? '1' : ''}}" data-form="my-contact-form_{{ $contact->id }}" class="agent_contact_listing music_btm_list no_sorting clearfix">
+                                            <div class="edit_elem_top">
+                                                <div class="m_btm_list_left">
+                                                    <div data-image="{{$contactPDetails['image']}}" class="music_btm_thumb">
+                                                        <div class="music_bottom_load_thumb">Load Image</div>
+                                                    </div>
+                                                    <ul class="music_btm_img_det">
+                                                        <li>
+                                                            <a class="filter_search_target" href="">
+                                                                {{$contact->contactUser ? $contact->contactUser->name : $contact->name}}
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <p>
+                                                                <br>
+                                                                {{$contact->commission ? $contact->commission . '% - ' : ''}} {{$contact->approved ? 'Approved' : ($contact->agreement_sign == 'sent' ? 'Sent to Sign' : 'Not Approved')}}
+                                                                {{$contact->review ? ' - '.'Sent to Review' : ''}}
+                                                                {{$contactPDetails['city'] != '' ? ' - '.$contactPDetails['city'] : ''}}
+                                                                {{$contactPDetails['skills'] != '' ? ' - '.$contactPDetails['skills'] : ''}}
+                                                                <br>
+                                                                {{$contact->code}}
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="m_btm_right_icons">
+                                                    <ul>
+                                                        <li>
+                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$contact->id}}">
+                                                                <i class="fas fa-comment-dots"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a title="Edit" data-id="{{$contact->id}}" class="m_btn_right_icon_each m_btm_edit active">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            @if($contact->contactUser->username)
+                                                            <a target="_blank" title="Website" href="{{route('user.home',['params' => $contact->contactUser->username])}}" class="m_btn_right_icon_each m_btm_website active">
+                                                                <i class="fa fa-globe"></i>
+                                                            </a>
+                                                            @else
+                                                            <a title="Website" href="javascript:void(0)" class="m_btn_right_icon_each m_btm_website">
+                                                                <i class="fa fa-globe"></i>
+                                                            </a>
+                                                            @endif
+                                                        </li>
+                                                        <li>
+                                                            @if(!$contact->is_already_user || ($contact->is_already_user && $contact->approved))
+                                                            <a title="Switch account" data-id="{{route('agent.contact.switch.account',['code' => $contact->code])}}" class="m_btn_right_icon_each m_btm_switch_account active">
+                                                                <i class="fa fa-cog"></i>
+                                                            </a>
+                                                            @else
+                                                            <a title="Switch account" data-id="" class="m_btn_right_icon_each m_btm_view">
+                                                                <i class="fa fa-cog"></i>
+                                                            </a>
+                                                            @endif
+                                                        </li>
+                                                        <li>
+                                                            <a data-open="blank" title="View Submission" data-id="{{route('agent.contact.details',['code' => $contact->code])}}" class="m_btn_right_icon_each m_btm_view active">
+                                                                <i class="fa fa-file-text-o"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a title="Delete" class="m_btn_right_icon_each m_btm_del active" data-del-id="{{$contact->id}}">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </li>
+                                                        @if($contact->approved)
+                                                        <li>
+                                                            <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$contact->id}}">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$contact->id}}">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </a>
+                                                        </li>
+                                                        @else
+                                                        <li>
+                                                            <a title="Agreements" class="m_btn_right_icon_each">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a title="Calendar" class="m_btn_right_icon_each">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </a>
+                                                        </li>
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="edit_elem_bottom">
+                                                <div class="each_dash_section instant_hide" data-id="contact_edit_{{$contact->id}}">
+                                                    @include('parts.agent-contact-edit-template', ['contact' => $contact])
+                                                </div>
+                                                @if($contact->approved)
+                                                <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$contact->id}}">
+                                                    @include('parts.agent-contact-calendar', ['contact' => $contact])
+                                                </div>
+                                                <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
+                                                    @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'isAgent' => $isAgent])
+                                                </div>
+                                                @endif
+                                                <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
+                                                    @include('parts.agent-contact-chat')
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endforeach
+                                @else
+                                    <div class="no_results">No records yet</div>
+                                @endif
                                 </div>
-                            @endforeach
-                        @else
-                        <div class="no_results">No records yet</div>
-                        @endif
+                                <div class="chat_filter_tab chat_filter_personal instant_hide">
+                                @if(count($user->personalChatPartners()) > 0)
+                                    @foreach($user->personalChatPartners() as $partnerId)
+                                        @php $partner = \App\Models\User::find($partnerId) @endphp
+                                        @if(!$partner)
+                                            @php continue @endphp
+                                        @endif
+                                        @php $partnerPDetails = $commonMethods->getUserRealDetails($partnerId) @endphp
+                                        <div data-form="my-contact-form_{{ $partner->id }}" class="agent_partner_listing music_btm_list no_sorting clearfix">
+                                            <div class="edit_elem_top">
+                                                <div class="m_btm_list_left">
+                                                    <div data-image="{{$partnerPDetails['image']}}" class="music_btm_thumb">
+                                                        <div class="music_bottom_load_thumb">Load Image</div>
+                                                    </div>
+                                                    <ul class="music_btm_img_det">
+                                                        <li>
+                                                            <a class="filter_search_target" href="">
+                                                                {{$partner->name}}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="m_btm_right_icons">
+                                                    <ul>
+                                                        <li>
+                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$contact->id}}">
+                                                                <i class="fas fa-comment-dots"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="edit_elem_bottom">
+                                                <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
+                                                    @include('parts.agent-contact-chat', ['is_personal' => true])
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="no_results">No records yet</div>
+                                @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -942,6 +998,18 @@
         }else{
 
             $('#add_chat_group_member_contact_code').prop('disabled', true);
+        }
+    });
+
+    $('.switch_personal_chat .smart_switch input').change(function(){
+
+        $('.chat_filter_tab').addClass('instant_hide');
+        if($(this).prop("checked") == true){
+
+            $('.chat_filter_tab.chat_filter_personal').removeClass('instant_hide');
+        }else{
+
+            $('.chat_filter_tab.chat_filter_contacts').removeClass('instant_hide');
         }
     });
 

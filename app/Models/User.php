@@ -875,6 +875,34 @@ class User extends Authenticatable
         return $return;
     }
 
+    public function personalChatPartners(){
+
+        $user = $this;
+        $partners = [];
+        $chats = UserChat::whereNotNull('is_personal')->where(function($q) use ($user) {
+                $q->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
+            })->orderBy('id', 'desc')->get();
+
+        foreach ($chats as $key => $chat) {
+            if($chat->recipient && $chat->sender){
+
+                if($chat->recipient->id == $user->id){
+                    if(!in_array($chat->sender->id, $partners)){
+
+                        $partners[] = $chat->sender->id;
+                    }
+                }else if($chat->sender->id == $user->id){
+                    if(!in_array($chat->recipient->id, $partners)){
+
+                        $partners[] = $chat->recipient->id;
+                    }
+                }
+            }
+        }
+
+        return $partners;
+    }
+
     /**
 
      * @return bool

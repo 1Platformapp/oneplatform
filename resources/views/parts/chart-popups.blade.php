@@ -218,10 +218,10 @@
                 <div class="instant_hide error" id="bispoke_email_error">Required</div>
                 <input placeholder="Password" type="password" id="bispoke_login_password" />
                 <div class="instant_hide error" id="bispoke_pass_error">Required</div>
-                @endguest 
+                @endguest
                 @auth
                 <div class="main_headline">Negotiate with the owner</div><br>
-                @endauth 
+                @endauth
                 <textarea id="bispoke_offer" placeholder="Write your proposal here (i.e music name, terms of use, price etc)"></textarea>
                 <div class="instant_hide error" id="bispoke_offer_error">Required</div>
             </div>
@@ -236,7 +236,7 @@
             <div class="soc_con_face_username clearfix">
                 <div class="pro_pop_text_light">
                     Your proposal has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('profile.with.tab', ['tab' => 'chat'])}}" class="pro_text_dark">chat</a> to read replies or send more messages/details about your proposal.
-                </div>  
+                </div>
             </div>
             <br>
         </div>
@@ -268,10 +268,10 @@
                 <div class="instant_hide error" id="chat_message_email_error">Required</div>
                 <input placeholder="Password" type="password" id="chat_message_login_password" />
                 <div class="instant_hide error" id="chat_message_pass_error">Required</div>
-                @endguest 
+                @endguest
                 @auth
                 <div class="main_headline">Send message and start a chat now</div><br>
-                @endauth 
+                @endauth
                 <textarea id="chat_message" placeholder="Write your message here"></textarea>
                 <div class="instant_hide error" id="chat_message_error">Required</div>
             </div>
@@ -285,8 +285,8 @@
         <div class="stage_two instant_hide">
             <div class="soc_con_face_username clearfix">
                 <div class="pro_pop_text_light">
-                    Your message has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('profile.with.tab', ['tab' => 'chat'])}}" class="pro_text_dark">chat</a> to read replies or send more messages.
-                </div>  
+                    Your message has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('agency.dashboard')}}" class="pro_text_dark">chat</a> to read replies or send more messages.
+                </div>
             </div>
             <br>
         </div>
@@ -435,21 +435,21 @@
                     <div class="item_price_sec_title">Subtotal</div>
                     <div class="item_price_sec_val">
                         <div class="item_price_sec_val_sym"></div>
-                        <div class="item_price_sec_val_num"></div>      
+                        <div class="item_price_sec_val_num"></div>
                     </div>
                 </div>
                 <div class="item_price_each item_price_shipping">
                     <div class="item_price_sec_title">Shipping</div>
                     <div class="item_price_sec_val">
                         <div class="item_price_sec_val_sym"></div>
-                        <div class="item_price_sec_val_num"></div>       
+                        <div class="item_price_sec_val_num"></div>
                     </div>
                 </div>
                 <div class="item_price_each item_price_grand_total">
                     <div class="item_price_sec_title">Total To Pay</div>
                     <div class="item_price_sec_val">
                         <div class="item_price_sec_val_sym"></div>
-                        <div class="item_price_sec_val_num"></div>      
+                        <div class="item_price_sec_val_num"></div>
                     </div>
                 </div>
             </div><br>

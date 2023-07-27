@@ -215,7 +215,7 @@ class UserChat extends Authenticatable
 
             foreach ($recipients as $recip) {
 
-                $diffMins = isset($currentChat) && $currentChat->first()->created_at->diffInMinutes();
+                $diffMins = isset($currentChat) && $currentChat->first() ? $currentChat->first()->created_at->diffInMinutes() : 0;
                 if($diffMins >= 15){
                     $result = Mail::to($recip->email)->bcc(Config('constants.bcc_email'))->send(new Agent($this));
                     $recip->sendAppNotifications('Message from '.$sender->firstName(), str_limit($this->message, 24));

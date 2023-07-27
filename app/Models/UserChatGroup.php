@@ -65,6 +65,7 @@ class UserChatGroup extends Authenticatable
                     $chat->recipient_id = NULL;
                 }
                 $chat->group_id = $this->id;
+                $chat->is_personal = NULL;
                 $chat->save();
             }
         }

@@ -1,4 +1,3 @@
-@php $group = \App\Models\UserChatGroup::where(['agent_id' => $contact->agentUser->id, 'contact_id' => $contact->contactUser->id])->get()->first(); @endphp
 <div class="chat_outer border-none {{$user->chat_switch == 1 ? '' : 'disabled'}}">
     <div class="flex flex-row mt-5 chat_group_members"></div>
     <div class="chat_right border-none flex-1 !important">

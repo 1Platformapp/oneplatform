@@ -106,8 +106,8 @@
 .chat_each_user.active.unread { background-color: #DAA520; color: #fff; }
 .chat_each_user.active.unread .chat_user_sh_message { color: #fff; }
 .chat_each_user.active.unread .chat_user_date { color: #fff; }
-.chat_switch_outer { display: flex; }
-.smart_switch { position: relative; display: inline-block; width: 60px; height: 24px; margin-left: auto; margin-bottom: 20px; }
+.smart_switch_outer { display: flex; }
+.smart_switch { position: relative; display: inline-block; width: 60px; height: 24px; margin-left: auto; margin-bottom: 0 !important; }
 .smart_switch input { opacity: 0; width: 0; height: 0; }
 .smart_switch .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s; }
 .smart_switch .slider:before { position: absolute; content: ""; height: 16px; width: 26px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s; }
@@ -128,10 +128,10 @@
 .chat_outer .chat_member_remove i { position: absolute; top: -6px; right: -2px; color: #dc3545; font-size: 12px; }
 .music_btm_list.elem_sortable { margin-bottom: 40px; }
 .chat_each_group .chat_user_unseen { background: #dc3545; color: #fff; padding: 3px; margin-left: auto; border-radius: 3px; font-size: 11px; }
-.m_btm_filters_outer { display: flex; flex-direction: row; width: 50%; align-items: center; margin-bottom: 70px; }
-.m_btm_filter_search { flex: 0 1 50%; }
+.m_btm_filters_outer { display: flex; flex-direction: row; align-items: center; margin-bottom: 70px; }
+.m_btm_filter_search {  }
 .m_btm_filter_search_field { border: 1px solid #818181; width: 100%; height: 30px; padding: 2px; }
-.m_btm_filter_drop { flex: 0 1 50%; border: 1px solid #818181; width: 100%; height: 30px; margin-left: 5px; }
+.m_btm_filter_drop { border: 1px solid #818181; width: 100%; height: 30px; margin-left: 5px; }
 .m_btm_filter_dropdown { color: #818181; width: 100%; height: 28px; }
 .chat_partners_outer { overflow-y: auto; max-height: 450px; }
 .chat_each_group { flex-direction: column; align-items: unset; }
@@ -173,8 +173,8 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
 .agents_listing .is_pending { background: #ffc107 !important; color: #000 !important; cursor: auto !important; }
 .agents_listing .is_pending { background: #ffc107 !important; color: #000 !important; cursor: auto !important; }
 .agents_listing .fully_booked { background: #28a745; opacity: 0.5; cursor: auto !important; }
-.chat_switch_outer { position: relative; }
-.chat_switch_txt { top: -25px; right: 0; position: absolute; font-size: 12px; color: #818181; }
+.smart_switch_outer { position: relative; }
+.smart_switch_txt { top: -25px; right: 0; position: absolute; font-size: 12px; color: #818181; }
 .user_message_hyp { color: #818181; text-decoration: none; word-break: break-all; }
 .user_message_hyp:hover { text-decoration: underline; }
 .ques_field_textarea { width: 100%; height: 100px; border: 1px solid #ccc; padding: 10px; font-size: 14px; font-family: Open sans, sans-serif; line-height: 20px; color: #444; }

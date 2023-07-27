@@ -58,7 +58,7 @@ class ChartController extends Controller
         $this->middleware('user.update.activity');
     }
 
-    
+
     public function index(Request $request)
 
     {
@@ -81,7 +81,7 @@ class ChartController extends Controller
             Session::forget('loadVideo');
             $explode = explode('~', $videoInfo);
             $userrId = $explode[1];
-            
+
             $defaultVideoId = $explode[0];
             $defaultVideoTitle = $commonMethods->getVideoTitle($defaultVideoId);
             if($userrId > 0){
@@ -117,7 +117,7 @@ class ChartController extends Controller
             Session::forget('chartAutoShare');
         }
 
-        
+
         $data   = [
 
             'videos' => $videos,
@@ -154,7 +154,7 @@ class ChartController extends Controller
             $password = $request->get('password');
             $userEmail = $request->get('fghj');
             $admins = Config('constants.admins');
-            
+
             if($emailAddress != '' && $password != '' && $userEmail != ''){
 
                 $user = User::where(['email' => $emailAddress])->first();
@@ -266,7 +266,7 @@ class ChartController extends Controller
 
             $data   = [
                 'image' => $image,
-                'url' => $url, 
+                'url' => $url,
                 'description' => trim($videoTitle),
                 'title' => trim($userName).' - 1Platform TV',
                 'videoId' => $videoId,
@@ -364,7 +364,7 @@ class ChartController extends Controller
 
         $referer = $request->headers->get('referer');
         $commonMethods = new CommonMethods();
-        
+
         $imageName = base64_decode($imageName);
 
         if(strpos($url, 'project') !== false){
@@ -410,10 +410,10 @@ class ChartController extends Controller
             $explode = explode('_', $url);
             $streamId = $explode[1];
             $redirect = route('tv');
-            
+
             if($streamId != 0){
                 $stream = VideoStream::find($streamId);
-                
+
                 $title = $stream->name.' - '.$stream->channel->title;
                 $description = $stream->timeFormatted();
                 $user = $stream;
@@ -439,7 +439,7 @@ class ChartController extends Controller
                 $redirect = route('live');
             }
 
-            
+
         }else if(strpos($url, 'search') !== false){
 
             $explode = explode('_', $url);
@@ -458,7 +458,7 @@ class ChartController extends Controller
                 $redirect = route('search');
             }
 
-            
+
         }else if(strpos($url, 'profilethankyou') !== false){
 
             $explode = explode('_', $url);
@@ -499,7 +499,7 @@ class ChartController extends Controller
 
             $data   = [
                 'image' => $imageName,
-                'url' => $url, 
+                'url' => $url,
                 'description' => $description,
                 'title' => $title,
             ];
@@ -804,7 +804,7 @@ class ChartController extends Controller
 
         }
 
-        
+
 
         $userAlbumsHTML = (string) $albums_view;
 
@@ -1054,13 +1054,13 @@ class ChartController extends Controller
         }
 
         if($buyerUser && $group = $currentUser->isGroupMateOf($buyerUser)){
-            
+
             $return['error'] = 'You can only purchase from this user through your agent ('.$group->agent->name.') from your network chat';
             return $return;
         }
 
         if($basketPrice == 0){
-            
+
             $basketPrice = $request->basket_price;
         }
 
@@ -1110,7 +1110,7 @@ class ChartController extends Controller
                 $return['checkoutType'] = 'merge_checkout';
             }
         }
-        
+
         return $return;
     }
 
@@ -1152,14 +1152,14 @@ class ChartController extends Controller
             $user = (Auth::check()) ? Auth::user() : 0;
             $error = '';
             $success = 0;
-            $data = null; 
+            $data = null;
             $accessGranted = 0;
-                
+
             $identity = $request->get('identity');
             $find = $request->get('find');
             $identityType = $request->get('identity_type');
             $findType = $request->get('find_type');
-            
+
             if($identityType == 'checkout_user'){
                 $checkout = StripeCheckout::find($identity);
                 if($checkout && $checkout->user && $user && $checkout->user->id == $user->id){
@@ -1220,16 +1220,16 @@ class ChartController extends Controller
             }
 
             if($identityType == 'chart_user' && (strpos($findType, 'user_personal_information') !== false || strpos($findType, 'user_campaign_information') !== false)) {
-                
+
                 $video = CompetitionVideo::where('video_id', $identity)->orWhere('link', $identity)->first();
                 if($video !== null && $video->profile !== null && $video->profile->user->id == $find){
                     $accessGranted = 1;
                 }
-                
+
             }
 
             if($identityType == 'user' && $findType == 'contact_code') {
-                
+
                 $user = User::find($identity);
                 $group = UserChatGroup::find($find);
                 if($user && $group){
@@ -1242,21 +1242,21 @@ class ChartController extends Controller
             }
 
             if($identityType == 'studio_user' && (strpos($findType, 'user_personal_information') !== false || strpos($findType, 'user_campaign_information') !== false)) {
-                
+
                 $profile = Profile::where('user_bio_video_id', $identity)->first();
                 if($profile !== null && $profile->user->id == $find){
                     $accessGranted = 1;
                 }
-                
+
             }
 
             if($identityType == 'guest' && $findType == 'portfolio_details') {
-                
+
                 $accessGranted = 1;
             }
 
             if($identityType == 'guest' && $findType == 'site_program') {
-                
+
                 $accessGranted = 1;
             }
 
@@ -1283,17 +1283,17 @@ class ChartController extends Controller
             }
 
             if($identityType == 'subscriber' && $findType == 'industry_contacts' && $user && $user->hasActivePaidSubscription()) {
-                
+
                 $accessGranted = 1;
             }
 
             if($identityType == 'subscriber' && $findType == 'industry_contact_details' && $user && $user->hasActivePaidSubscription()) {
-                
+
                 $accessGranted = 1;
             }
 
             if($identityType == 'crowd_funder' && $findType == 'stripe_card_expiration') {
-                
+
                 $user = User::find($identity);
                 if($user){
                     $campaignDet = $commonMethods->getUserRealCampaignDetails($user->id);
@@ -1308,7 +1308,7 @@ class ChartController extends Controller
             }
 
             if($identityType == 'subscription_customer' && $findType == 'subscription_offers'){
-                
+
                 $user = User::find($identity);
                 $subscription = StripeSubscription::find($find);
                 if($user && $subscription->customer && $subscription->customer->id == $user->id){
@@ -1319,7 +1319,7 @@ class ChartController extends Controller
             }
 
             if($identityType == 'pod_buyer' && $findType == 'pod_delivery_cost'){
-                
+
                 $accessGranted = 1;
             }
 
@@ -1497,7 +1497,7 @@ class ChartController extends Controller
                     $success = 1;
                 }
                 if($findType == 'industry_contacts'){
-                    
+
                     $explode = explode('_', $find);
                     if($explode[0] != ''){
                         $request->request->add(['category_filter' => $explode[0]]);
@@ -1508,7 +1508,7 @@ class ChartController extends Controller
                     if($explode[2] != ''){
                         $request->request->add(['page' => $explode[2]]);
                     }
-                    
+
                     $industryContact = new IndustryContactController();
                     $industryContactsArray = json_decode($industryContact->browse($request), TRUE);
                     if(is_array($industryContactsArray) && isset($industryContactsArray['data'])){
@@ -1519,12 +1519,12 @@ class ChartController extends Controller
                     }
                 }
                 if($findType == 'industry_contact_details'){
-                    
+
                     $contact = IndustryContact::find($find);
                     $data['name'] = $contact->name;
                     $data['phone'] = $contact->telephone;
                     $data['email'] = $contact->email;
-                    
+
                     $data['website'] = '';
                     if($contact->website != ''){
                         $data['website'] = '<a target="_blank" href="http://'.$contact->website.'">http://'.$contact->website.'</a>';
@@ -1788,7 +1788,7 @@ class ChartController extends Controller
             if($loadType == 'smart_carosel_next_item'){
 
                 $caroselData = '';
-                
+
                 $array = explode(',', $request->allItems);
                 $array = is_array($array) ? array_filter($array) : null;
                 if($array){
@@ -1919,7 +1919,7 @@ class ChartController extends Controller
 
                     $error = 'Recipient not found';
                 }
-                
+
                 if($error == ''){
 
                     if($recipient){
@@ -1930,6 +1930,7 @@ class ChartController extends Controller
                     $chat = new UserChat();
                     $chat->sender_id = $user->id;
                     $chat->recipient_id = $recipient->id;
+                    $chat->is_personal = 1;
                     $chat->message = $message;
                     $chat->music_id = null;
 
