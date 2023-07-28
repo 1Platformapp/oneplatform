@@ -88,7 +88,10 @@ class AgencyController extends Controller
                 });
             }else{
 
-                $agents = $contacts = [];
+                $agents = User::where('apply_expert', 2)->get()->filter(function ($user){
+                    return $user->expert && $user->expert->status == 1;
+                });
+                $contacts = [];
             }
         }else{
 
@@ -366,11 +369,11 @@ class AgencyController extends Controller
         }
 
         $type = $request->get('type');
-        $contactId = $request->get('data');
+        $dataId = $request->get('data');
         $cursor = $request->get('cursor');
         if($type == 'contact-chat'){
 
-            $agentContact = AgentContact::find($contactId);
+            $agentContact = AgentContact::find($dataId);
 
             if(!$agentContact || !$agentContact->agentUser || !$agentContact->contactUser){
 
@@ -445,6 +448,31 @@ class AgencyController extends Controller
 
                 $success = true;
             }
+        }else if($type == 'partner-chat'){
+
+            $partner = User::find($dataId);
+            $chatQuery = UserChat::where(function($q) use ($user) {
+                    $q->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
+                })->where(function($q) use ($partner) {
+                    $q->where('sender_id', $partner->id)->orWhere('recipient_id', $partner->id);
+                });
+            if((int ) $cursor > 0){
+
+                $chatQuery->where('id', '<' , $cursor);
+            }
+            $chatMessages = $chatQuery->orderBy('id', 'desc')->take(20)->get()->reverse();
+            if(count($chatMessages)){
+
+                foreach ($chatMessages as $key => $chatMessage) {
+
+                    if($chatMessage->sender){
+
+                        $data['private']['messages'][] .= \View::make('parts.chat-partner-message', ['chat' => $chatMessage])->render();
+                    }
+                }
+            }
+
+            $success = true;
         }
 
         return json_encode(['success' => $success, 'data' => $data]);
@@ -463,7 +491,7 @@ class AgencyController extends Controller
         }else if($request->get('action') == 'attachment-finalize' && (!$request->has('chat') || !$request->has('contact') || !$request->has('message'))){
 
             $error = 'some required data does not exist (ref: chat_finalize)';
-        }else if($request->get('action') == 'send-message' && (!$request->has('contact') || !$request->has('message'))){
+        }else if($request->get('action') == 'send-message' && ((!$request->has('contact') && (!$request->has('partner'))) || !$request->has('message'))){
 
             $error = 'some required data does not exist (ref: send_message)';
         }else if($request->get('action') == 'attachment-upload' && (!$request->has('chat') || !$request->file('attachment'))){
@@ -476,7 +504,8 @@ class AgencyController extends Controller
             return json_encode(['success' => false, 'error' => $error]);
         }
 
-        $contactId= $request->get('contact');
+        $contactId = $request->get('contact');
+        $partnerId = $request->get('partner');
         $message = $request->get('message');
         $action = $request->get('action');
         if($action == 'attachment-initialize'){
@@ -492,31 +521,41 @@ class AgencyController extends Controller
             $id = $chat->id;
         }else if($action == 'send-message' || $action == 'attachment-finalize'){
 
-            $agentContact = AgentContact::find($contactId);
-            if(!$agentContact || !$agentContact->agentUser || !$agentContact->contactUser){
-                return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: agent_contact)'));
-            }
-
-            $agent = $agentContact->agentUser;
-            $artist = $agentContact->contactUser;
-
             if($action == 'attachment-finalize'){
                 $chat = UserChat::find($request->get('chat'));
             }else{
                 $chat = new UserChat();
             }
 
-            if($agentContact->approved == 1){
+            if($request->has('contact')){
 
-                $chatGroup = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
-                if(!$chatGroup){
-                    return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: chat_group)'));
+                $agentContact = AgentContact::find($contactId);
+                if(!$agentContact || !$agentContact->agentUser || !$agentContact->contactUser){
+                    return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: agent_contact)'));
                 }
 
-                $chat->group_id = $chatGroup->id;
-            }else{
+                $agent = $agentContact->agentUser;
+                $artist = $agentContact->contactUser;
 
-                $partner = $user->isAgent() ? $artist : $agent;
+                if($agentContact->approved == 1){
+
+                    $chatGroup = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
+                    if(!$chatGroup){
+                        return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: chat_group)'));
+                    }
+
+                    $chat->group_id = $chatGroup->id;
+                }else{
+
+                    $partner = $user->isAgent() ? $artist : $agent;
+                    $chat->recipient_id = $partner->id;
+                }
+            }else if($request->has('partner')){
+
+                $partner = User::find($partnerId);
+                if(!$partner){
+                    return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: agent_partner)'));
+                }
                 $chat->recipient_id = $partner->id;
             }
 

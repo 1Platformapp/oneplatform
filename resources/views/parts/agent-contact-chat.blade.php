@@ -30,12 +30,14 @@
                     <div class="chat_main_body_attach">
                         <i class="fa fa-paperclip"></i>
                     </div>
+                    @if(!isset($isPersonal))
                     <div class="foot_action_ext_btns gap-2">
                         <div class="add_agreement_btn foot_action_btn text-center"><i class="fa fa-plus"></i> License</div>
                         <div class="add_product_btn foot_action_btn text-center"><i class="fa fa-plus"></i> Product</div>
                         <div class="proffer_project_btn foot_action_btn text-center"><i class="fa fa-plus"></i> Project</div>
                         <div class="refresh_messages foot_action_btn text-center"><i class="fa fa-refresh"></i> Refresh Chat</div>
                     </div>
+                    @endif
                     <div class="submit_btn foot_action_btn text-center"><i class="fa fa-paper-plane"></i> Send</div>
                 </div>
                 <input class="instant_hide chat_attachments" type="file" name="attachFiles[]" multiple />

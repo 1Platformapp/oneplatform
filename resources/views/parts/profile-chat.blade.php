@@ -47,9 +47,14 @@
                     </form>
 
                     <div class="pro_btm_listing_outer">
-                        <label>My Network Contacts
+                        <label class="chat_label chat_label_contacts">My Network Contacts
                             @if(count($user->contacts) > 0)
                                 {{'('.count($user->contacts).')'}}
+                            @endif
+                        </label>
+                        <label class="chat_label chat_label_personal instant_hide">My Personal Chats
+                            @if(count($user->personalChatPartners()) > 0)
+                                {{'('.count($user->personalChatPartners()).')'}}
                             @endif
                         </label>
                         <div class="m_btm_filters_outer">
@@ -227,7 +232,7 @@
                                                 <div class="m_btm_right_icons">
                                                     <ul>
                                                         <li>
-                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$contact->id}}">
+                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$partner->id}}">
                                                                 <i class="fas fa-comment-dots"></i>
                                                             </a>
                                                         </li>
@@ -236,8 +241,8 @@
                                             </div>
 
                                             <div class="edit_elem_bottom">
-                                                <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
-                                                    @include('parts.agent-contact-chat', ['is_personal' => true])
+                                                <div class="each_dash_section instant_hide" data-id="partner_chat_{{$partner->id}}">
+                                                    @include('parts.agent-contact-chat', ['isPersonal' => true])
                                                 </div>
                                             </div>
                                         </div>
@@ -338,202 +343,270 @@
                 </div>
                 <div class="get_agent_outer">
                     <div class="pro_btm_listing_outer pt-0">
-                        <div class="">
-                        @if(count($agents) > 0)
-                            @foreach($agents as $agent)
-                                @php $agentPDetails = $commonMethods->getUserRealDetails($agent->id) @endphp
-                                @php $agentContacts = \App\Models\AgentContact::where('agent_id', $agent->id)->get() @endphp
-                                @php $isContact = \App\Models\AgentContact::where(['agent_id' => $agent->id, 'email' => $user->email])->first() @endphp
-                                @php $requestSent = \App\Models\AgentContactRequest::where(['agent_user_id' => $agent->id, 'contact_user_id' => $user->id])->first() @endphp
-                                <div class="agents_listing agent_contact_listing music_btm_list no_sorting clearfix">
-                                    <div class="edit_elem_top">
+                        <label class="chat_label chat_label_contacts">Agents
+                            @if(count($agents) > 0)
+                                {{'('.(count($agents) + 5).')'}}
+                            @endif
+                        </label>
+                        <label class="chat_label chat_label_personal instant_hide">My Personal Chats
+                            @if(count($user->personalChatPartners()) > 0)
+                                {{'('.count($user->personalChatPartners()).')'}}
+                            @endif
+                        </label>
+                        <div class="m_btm_filters_outer">
+                            <div class="smart_switch_outer switch_personal_chat flex-1 ml-auto">
+                                <div class="smart_switch_txt">Show Personal Chat</div>
+                                <label class="smart_switch">
+                                    <input type="checkbox" />
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="btn_list_outer">
+                            <div class="chat_filter_container">
+                                <div class="chat_filter_tab chat_filter_agents">
+                                @if(count($agents) > 0)
+                                    @foreach($agents as $agent)
+                                        @php $agentPDetails = $commonMethods->getUserRealDetails($agent->id) @endphp
+                                        @php $agentContacts = \App\Models\AgentContact::where('agent_id', $agent->id)->get() @endphp
+                                        @php $isContact = \App\Models\AgentContact::where(['agent_id' => $agent->id, 'email' => $user->email])->first() @endphp
+                                        @php $requestSent = \App\Models\AgentContactRequest::where(['agent_user_id' => $agent->id, 'contact_user_id' => $user->id])->first() @endphp
+                                        <div class="agents_listing agent_contact_listing music_btm_list no_sorting clearfix">
+                                            <div class="edit_elem_top">
+                                                <div class="m_btm_list_left">
+                                                    <div data-image="{{$agentPDetails['image']}}" class="music_btm_thumb">
+                                                        <div class="music_bottom_load_thumb">Load Image</div>
+                                                    </div>
+                                                    <ul class="music_btm_img_det">
+                                                        <li>
+                                                            <a class="filter_search_target" href="javascript:void(0)">
+                                                                {{$agent->name}}
+                                                            </a>
+                                                        </li>
+                                                        <li><br>
+                                                            <p>
+                                                                <i class="fa fa-users"></i>
+                                                                    @if($agent->id == 727)
+                                                                        {{number_format(350 + count($agentContacts))}}
+                                                                    @elseif($agent->id == 722)
+                                                                        {{number_format(175 + count($agentContacts))}}
+                                                                    @else
+                                                                        {{count($agentContacts)}}
+                                                                    @endif
+                                                                    network contacts
+                                                                @if($agentPDetails['city'] != '')
+                                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> {{$agentPDetails['city']}}
+                                                                @endif
+                                                                @if($isContact)
+                                                                    @if($isContact->approved)
+                                                                        <div class="get_agent is_current_agent">Your agent</div>
+                                                                    @else
+                                                                        <div class="get_agent is_pending">Pending</div>
+                                                                    @endif
+                                                                @elseif($requestSent)
+                                                                <div class="get_agent is_pending">Request sent</div>
+                                                                @else
+                                                                <div data-id="{{$agent->id}}" class="get_agent">Get this agent</div>
+                                                                @endif
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="m_btm_right_icons">
+                                                    <ul>
+                                                        @if($isContact)
+                                                        <li>
+                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$isContact->id}}">
+                                                                <i class="fas fa-comment-dots"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-open="blank" title="View Submission" data-id="{{route('agent.contact.details',['code' => $isContact->code])}}" class="m_btn_right_icon_each m_btm_view active">
+                                                                <i class="fa fa-file-text-o"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$agent->id}}">
+                                                                <i class="fas fa-file-pdf"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$agent->id}}">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </a>
+                                                        </li>
+                                                        @endif
+                                                        <li>
+                                                            <a target="_blank" title="Website" href="{{route('user.home',['params' => $agent->username])}}" class="m_btn_right_icon_each m_btm_website active">
+                                                                <i class="fa fa-globe"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="edit_elem_bottom">
+                                                @if($isContact && $isContact->approved)
+                                                <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$agent->id}}">
+                                                    @include('parts.agent-contact-calendar', ['contact' => $isContact])
+                                                </div>
+                                                <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$agent->id}}">
+                                                    @include('parts.agent-contact-agreement', ['contact' => $isContact, 'contracts' => $contracts, 'myContracts' => $myContracts])
+                                                </div>
+                                                @endif
+                                                @if($isContact)
+                                                <div class="each_dash_section instant_hide" data-id="contact_chat_{{$isContact->id}}">
+                                                    @include('parts.agent-contact-chat', ['contact' => $isContact, 'isAgent' => false, 'user' => $user])
+                                                </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    <div class="agents_listing music_btm_list no_sorting clearfix">
                                         <div class="m_btm_list_left">
-                                            <div data-image="{{$agentPDetails['image']}}" class="music_btm_thumb">
+                                            <div data-image="" class="music_btm_thumb">
                                                 <div class="music_bottom_load_thumb">Load Image</div>
                                             </div>
                                             <ul class="music_btm_img_det">
                                                 <li>
-                                                    <a class="filter_search_target" href="javascript:void(0)">
-                                                        {{$agent->name}}
-                                                    </a>
+                                                    <a class="filter_search_target" href="javascript:void(0)">Bradley Kendal</a>
                                                 </li>
                                                 <li><br>
                                                     <p>
-                                                        <i class="fa fa-users"></i>
-                                                            @if($agent->id == 727)
-                                                                {{number_format(350 + count($agentContacts))}}
-                                                            @elseif($agent->id == 722)
-                                                                {{number_format(175 + count($agentContacts))}}
-                                                            @else
-                                                                {{count($agentContacts)}}
-                                                            @endif
-                                                            network contacts
-                                                        @if($agentPDetails['city'] != '')
-                                                        &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> {{$agentPDetails['city']}}
-                                                        @endif
-                                                        @if($isContact)
-                                                            @if($isContact->approved)
-                                                                <div class="get_agent is_current_agent">Your agent</div>
-                                                            @else
-                                                                <div class="get_agent is_pending">Pending</div>
-                                                            @endif
-                                                        @elseif($requestSent)
-                                                        <div class="get_agent is_pending">Request sent</div>
-                                                        @else
-                                                        <div data-id="{{$agent->id}}" class="get_agent">Get this agent</div>
-                                                        @endif
+                                                        <i class="fa fa-users"></i> 500 network contacts
+                                                        &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Birmingham
+                                                        <div data-id="" class="get_agent fully_booked">Fully booked</div>
                                                     </p>
                                                 </li>
                                             </ul>
                                         </div>
-
-                                        <div class="m_btm_right_icons">
-                                            <ul>
-                                                @if($isContact)
+                                    </div>
+                                    <div class="agents_listing music_btm_list no_sorting clearfix">
+                                        <div class="m_btm_list_left">
+                                            <div data-image="" class="music_btm_thumb">
+                                                <div class="music_bottom_load_thumb">Load Image</div>
+                                            </div>
+                                            <ul class="music_btm_img_det">
                                                 <li>
-                                                    <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$isContact->id}}">
-                                                        <i class="fas fa-comment-dots"></i>
-                                                    </a>
+                                                    <a class="filter_search_target" href="javascript:void(0)">The billingham Agency</a>
                                                 </li>
-                                                <li>
-                                                    <a data-open="blank" title="View Submission" data-id="{{route('agent.contact.details',['code' => $isContact->code])}}" class="m_btn_right_icon_each m_btm_view active">
-                                                        <i class="fa fa-file-text-o"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$agent->id}}">
-                                                        <i class="fas fa-file-pdf"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$agent->id}}">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </a>
-                                                </li>
-                                                @endif
-                                                <li>
-                                                    <a target="_blank" title="Website" href="{{route('user.home',['params' => $agent->username])}}" class="m_btn_right_icon_each m_btm_website active">
-                                                        <i class="fa fa-globe"></i>
-                                                    </a>
+                                                <li><br>
+                                                    <p>
+                                                        <i class="fa fa-users"></i> 450 network contacts
+                                                        &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Liverpool
+                                                        <div data-id="" class="get_agent fully_booked">Fully booked</div>
+                                                    </p>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="edit_elem_bottom">
-                                        @if($isContact && $isContact->approved)
-                                        <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$agent->id}}">
-                                            @include('parts.agent-contact-calendar', ['contact' => $isContact])
+                                    <div class="agents_listing music_btm_list no_sorting clearfix">
+                                        <div class="m_btm_list_left">
+                                            <div data-image="" class="music_btm_thumb">
+                                                <div class="music_bottom_load_thumb">Load Image</div>
+                                            </div>
+                                            <ul class="music_btm_img_det">
+                                                <li>
+                                                    <a class="filter_search_target" href="javascript:void(0)">New York Agency</a>
+                                                </li>
+                                                <li><br>
+                                                    <p>
+                                                        <i class="fa fa-users"></i> 800 network contacts
+                                                        &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> New York City
+                                                        <div data-id="" class="get_agent fully_booked">Fully booked</div>
+                                                    </p>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$agent->id}}">
-                                            @include('parts.agent-contact-agreement', ['contact' => $isContact, 'contracts' => $contracts, 'myContracts' => $myContracts])
+                                    </div>
+                                    <div class="agents_listing music_btm_list no_sorting clearfix">
+                                        <div class="m_btm_list_left">
+                                            <div data-image="" class="music_btm_thumb">
+                                                <div class="music_bottom_load_thumb">Load Image</div>
+                                            </div>
+                                            <ul class="music_btm_img_det">
+                                                <li>
+                                                    <a class="filter_search_target" href="javascript:void(0)">Connections</a>
+                                                </li>
+                                                <li><br>
+                                                    <p>
+                                                        <i class="fa fa-users"></i> 300 network contacts
+                                                        &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Bristol
+                                                        <div data-id="" class="get_agent fully_booked">Fully booked</div>
+                                                    </p>
+                                                </li>
+                                            </ul>
                                         </div>
+                                    </div>
+                                    <div class="agents_listing music_btm_list no_sorting clearfix">
+                                        <div class="m_btm_list_left">
+                                            <div data-image="" class="music_btm_thumb">
+                                                <div class="music_bottom_load_thumb">Load Image</div>
+                                            </div>
+                                            <ul class="music_btm_img_det">
+                                                <li>
+                                                    <a class="filter_search_target" href="javascript:void(0)">Taxi agency</a>
+                                                </li>
+                                                <li><br>
+                                                    <p>
+                                                        <i class="fa fa-users"></i> 250 network contacts
+                                                        &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Cambridge
+                                                        <div data-id="" class="get_agent fully_booked">Fully booked</div>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="no_results">No records yet</div>
+                                @endif
+                                </div>
+                                <div class="chat_filter_tab chat_filter_personal instant_hide">
+                                @if(count($user->personalChatPartners()) > 0)
+                                    @foreach($user->personalChatPartners() as $partnerId)
+                                        @php $partner = \App\Models\User::find($partnerId) @endphp
+                                        @if(!$partner)
+                                            @php continue @endphp
                                         @endif
-                                        @if($isContact)
-                                        <div class="each_dash_section instant_hide" data-id="contact_chat_{{$isContact->id}}">
-                                            @include('parts.agent-contact-chat', ['contact' => $isContact, 'isAgent' => false, 'user' => $user])
+                                        @php $partnerPDetails = $commonMethods->getUserRealDetails($partnerId) @endphp
+                                        <div data-form="my-contact-form_{{ $partner->id }}" class="agent_partner_listing music_btm_list no_sorting clearfix">
+                                            <div class="edit_elem_top">
+                                                <div class="m_btm_list_left">
+                                                    <div data-image="{{$partnerPDetails['image']}}" class="music_btm_thumb">
+                                                        <div class="music_bottom_load_thumb">Load Image</div>
+                                                    </div>
+                                                    <ul class="music_btm_img_det">
+                                                        <li>
+                                                            <a class="filter_search_target" href="">
+                                                                {{$partner->name}}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="m_btm_right_icons">
+                                                    <ul>
+                                                        <li>
+                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$partner->id}}">
+                                                                <i class="fas fa-comment-dots"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="edit_elem_bottom">
+                                                <div class="each_dash_section instant_hide" data-id="partner_chat_{{$partner->id}}">
+                                                    @include('parts.agent-contact-chat', ['isPersonal' => true])
+                                                </div>
+                                            </div>
                                         </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">Bradley Kendal</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 500 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Birmingham
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
+                                    @endforeach
+                                @else
+                                    <div class="no_results">No records yet</div>
+                                @endif
                                 </div>
                             </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">The billingham Agency</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 450 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Liverpool
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">New York Agency</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 800 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> New York City
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">Connections</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 300 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Bristol
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">Taxi agency</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 250 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Cambridge
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        @else
-                        <div class="no_results">No records yet</div>
-                        @endif
                         </div>
                     </div>
                 </div>
@@ -588,30 +661,41 @@
 
     $('.m_btm_edit, .m_btn_files, .m_btn_calendar, .m_btn_chat').click(function(e){
 
-        var id = $(this).attr('data-id');
-        if($(this).hasClass('m_btm_edit')){
+         var id = $(this).attr('data-id');
+         if($(this).hasClass('m_btm_edit')){
             $('.each_dash_section:not(.each_dash_section[data-id="contact_edit_'+id+'"])').addClass('instant_hide');
             $('.each_dash_section[data-id="contact_edit_'+id+'"]').toggleClass('instant_hide');
-        }else if($(this).hasClass('m_btn_files')){
+         }else if($(this).hasClass('m_btn_files')){
             $('.each_dash_section:not(.each_dash_section[data-id="contact_agreement_'+id+'"])').addClass('instant_hide');
             $('.each_dash_section[data-id="contact_agreement_'+id+'"]').toggleClass('instant_hide');
-        }else if($(this).hasClass('m_btn_calendar')){
+         }else if($(this).hasClass('m_btn_calendar')){
             $('.each_dash_section:not(.each_dash_section[data-id="contact_calendar_'+id+'"])').addClass('instant_hide');
             $('.each_dash_section[data-id="contact_calendar_'+id+'"]').toggleClass('instant_hide');
-        }else if($(this).hasClass('m_btn_chat')){
-            var elem = $('.each_dash_section[data-id="contact_chat_'+id+'"]');
-            $('.each_dash_section').not(elem).addClass('instant_hide');
+         }else if($(this).hasClass('m_btn_chat')){
+            if($(this).closest('.music_btm_list').hasClass('agent_contact_listing')){
+
+               var elem = $('.each_dash_section[data-id="contact_chat_'+id+'"]');
+               var parent = $(this).closest('.agent_contact_listing');
+               var type = 'contact-chat';
+            }else if($(this).closest('.music_btm_list').hasClass('agent_partner_listing')){
+
+               var elem = $('.each_dash_section[data-id="partner_chat_'+id+'"]');
+               var parent = $(this).closest('.agent_partner_listing');
+               var type = 'partner-chat';
+            }
+
+            parent.find('.each_dash_section').not(elem).addClass('instant_hide');
             elem.toggleClass('instant_hide');
 
             if(!elem.hasClass('instant_hide')){
 
-                var formData = new FormData();
-                formData.append('type', 'contact-chat');
-                formData.append('data', id);
+               var formData = new FormData();
+               formData.append('type', type);
+               formData.append('data', id);
 
-                getChatMessages(elem.find('.chat_outer'), formData);
+               getChatMessages(elem.find('.chat_outer'), formData);
             }
-        }
+         }
     });
 
     $('.m_btm_del').click(function(e){
@@ -741,13 +825,20 @@
 
         var thiss = $(this);
         var parent = thiss.closest('.chat_outer');
-        var id = parent.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
         if(thiss.get(0).scrollTop == 0 && thiss.find('.chat_each_message').length > 0){
             parent.find('.loading_messages').removeClass('instant_hide');
             var firstMessage = thiss.find('.chat_each_message').first();
 
+            if(parent.closest('.music_btm_list').hasClass('agent_contact_listing')){
+                var id = parent.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                $type = 'contact-chat';
+            }else if(parent.closest('.music_btm_list').hasClass('agent_partner_listing')){
+                var id = parent.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                $type = 'partner-chat';
+            }
+
             var formData = new FormData();
-            formData.append('type', 'contact-chat');
+            formData.append('type', $type);
             formData.append('data', id);
             formData.append('cursor', firstMessage.attr('data-cursor'));
             getChatMessages(parent, formData);
@@ -758,9 +849,18 @@
 
         var thiss = $(this);
         var parent = thiss.closest('.chat_outer');
-        var id = parent.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
         var attachments = parent.find('.chat_attachments');
         var message = parent.find('.new_message');
+
+        if($(this).closest('.music_btm_list').hasClass('agent_contact_listing')){
+
+            var id = parent.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'contact';
+        }else if($(this).closest('.music_btm_list').hasClass('agent_partner_listing')){
+
+            var id = parent.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'partner';
+        }
 
         if(message.val() != '' || attachments.val() != ''){
 
@@ -774,7 +874,7 @@
             }else{
 
                 var formData = new FormData();
-                formData.append('contact', id);
+                formData.append($type, id);
                 formData.append('message', message.val());
                 formData.append('action', 'send-message');
 
@@ -1003,21 +1103,29 @@
 
     $('.switch_personal_chat .smart_switch input').change(function(){
 
-        $('.chat_filter_tab').addClass('instant_hide');
+        $('.chat_filter_tab, .m_btm_filter_search, .m_btm_filter_drop, .chat_label').addClass('instant_hide');
         if($(this).prop("checked") == true){
 
-            $('.chat_filter_tab.chat_filter_personal').removeClass('instant_hide');
+            $('.chat_filter_tab.chat_filter_personal, .chat_label_personal').removeClass('instant_hide');
         }else{
 
-            $('.chat_filter_tab.chat_filter_contacts').removeClass('instant_hide');
+            $('.chat_filter_tab.chat_filter_contacts, .chat_label_contacts, .chat_filter_tab.chat_filter_agents, .m_btm_filter_search, .m_btm_filter_drop').removeClass('instant_hide');
         }
     });
 
     function refreshChat(element){
 
-        var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+        if(element.closest('.music_btm_list').hasClass('agent_contact_listing')){
+
+            var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'contact-chat';
+        }else if(element.closest('.music_btm_list').hasClass('agent_partner_listing')){
+
+            var id = element.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'partner-chat';
+        }
         var formData = new FormData();
-        formData.append('type', 'contact-chat');
+        formData.append('type', $type);
         formData.append('data', id);
 
         getChatMessages(element, formData);
