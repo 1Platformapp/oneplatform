@@ -162,10 +162,10 @@ class UserNotificationController extends Controller
                             if($contact->approved == 1){
 
                                 $group = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
+                                $targets = $targetUsers = [];
 
                                 if($group){
 
-                                    $targets = $targetUsers = [];
                                     $targets[] = $group->agent_id;
                                     $targets[] = $group->contact_id;
                                     if(count($group->other_members)){
