@@ -788,42 +788,6 @@ class User extends Authenticatable
 
     }
 
-    public function chatGroups()
-    {
-        $return = [];
-        $chatGroups = UserChatGroup::where('agent_id', $this->id)->orWhere('contact_id', $this->id)->orWhere('other_agent_id', $this->id)->get();
-
-        if(count($chatGroups)){
-
-            foreach ($chatGroups as $chatGroup) {
-                $return[] = $chatGroup->id;
-            }
-        }
-        $chatGroups = UserChatGroup::where('other_members', 'like', '%'.$this->id.'%')->get();
-        if(count($chatGroups)){
-
-            foreach ($chatGroups as $chatGroup) {
-                if(is_array($chatGroup->other_members) && in_array($this->id, $chatGroup->other_members)){
-                    $return[] = $chatGroup->id;
-                }
-            }
-        }
-
-        $returnn = [];
-        if(count($return)){
-            $orderedGroupChat = UserChat::whereIn('group_id', $return)->orderBy('id', 'desc')->get();
-            foreach($orderedGroupChat as $key => $chat){
-                if(!in_array($chat->group->id, $returnn)){
-                    $returnn[] = $chat->group->id;
-                }
-            }
-            $diff = array_diff($return,$returnn);
-            $returnn = array_merge($returnn, $diff);
-        }
-
-        return $returnn;
-    }
-
 
     public function isGroupMateOf($user){
 
@@ -901,6 +865,15 @@ class User extends Authenticatable
         }
 
         return $partners;
+    }
+
+    public function chatGroups(){
+
+        $groups = UserChatGroup::get()->filter(function ($group){
+            return $group->agent && $group->contact && $group->other_members && is_array($group->other_members) && in_array($this->id, $group->other_members);
+        });
+
+        return $groups;
     }
 
     /**

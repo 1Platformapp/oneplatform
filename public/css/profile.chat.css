@@ -123,7 +123,7 @@
 .chat_outer .chat_member_each img { width: 35px; height: 35px; border-radius: 50%; }
 .chat_outer .chat_user_pic { background: #818181; border-radius: 2px; width: 45px; height: 45px; border: 1px solid #818181; display: flex; align-items: center;justify-content: center; }
 .chat_outer .chat_user_pic img { width: 35px; height: 35px; border-radius: 50%; }
-.chat_outer .chat_member_each_outer { position: relative; float: left; margin-right: 2px; display: flex; flex-direction: column; align-items: center; margin-top: 5px; }
+.chat_outer .chat_member_each_outer { position: relative; float: left; margin-right: 8px; display: flex; flex-direction: column; align-items: center; margin-top: 5px; }
 .chat_outer .chat_member_name { font-size: 11px; }
 .chat_outer .chat_member_remove i { position: absolute; top: -6px; right: -2px; color: #dc3545; font-size: 12px; }
 .music_btm_list.elem_sortable { margin-bottom: 40px; }

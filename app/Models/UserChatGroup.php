@@ -84,17 +84,15 @@ class UserChatGroup extends Authenticatable
             if($user->id == $agent->id){
                 $return .= \View::make('parts.group-chat-member', ['add' => '1', 'group' => $this]);
             }
-            if($user->id == $artist->id){
-                $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $artist, 'commonMethods' => $commonMethods]);
-            }
             if($user->id != $agent->id && $user->id != $artist->id){
+                $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $agent, 'commonMethods' => $commonMethods]);
                 $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $artist, 'commonMethods' => $commonMethods]);
             }
             if(is_array($this->other_members) && count($this->other_members)){
                 foreach($this->other_members as $memberId){
 
                     $member = User::find($memberId);
-                    if(!$member) {
+                    if(!$member || $user->id == $member->id) {
                         continue;
                     }
                     $return .= \View::make('parts.group-chat-member', ['group' => $this, 'member' => $member, 'commonMethods' => $commonMethods]);

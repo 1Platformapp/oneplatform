@@ -83,20 +83,25 @@ class AgencyController extends Controller
             $contacts = AgentContact::where(['contact_id' => $user->id])->get();
             if(count($contacts) && $contacts->first()->agentUser){
 
-                $agents = User::where('apply_expert', 2)->orderByRaw("id = ".$contacts->first()->agentUser->id." desc")->get()->filter(function ($user){
+                $agentContact = $contacts->first();
+                $agents = User::where('apply_expert', 2)->where('id', '<>', $contacts->first()->agentUser->id)->get()->filter(function ($user){
                     return $user->expert && $user->expert->status == 1;
                 });
             }else{
 
+                $agentContact = NULL;
                 $agents = User::where('apply_expert', 2)->get()->filter(function ($user){
                     return $user->expert && $user->expert->status == 1;
                 });
                 $contacts = [];
             }
+            $chatGroups = $user->chatGroups();
         }else{
 
             $contacts = AgentContact::where(['agent_id' => $user->id])->get();
             $agents = [];
+            $chatGroups = NULL;
+            $agentContact = NULL;
         }
 
         $myContracts = count($contacts) ? AgencyContract::whereIn('contact_id', $contacts->pluck('id')->all())->get() : [];
@@ -117,7 +122,9 @@ class AgencyController extends Controller
             'agencyContracts' => [],
             'agents' => $agents,
             'isAgent' => $isAgent,
-            'myContracts' => $myContracts
+            'myContracts' => $myContracts,
+            'chatGroups' => $chatGroups,
+            'agentContact' => $agentContact
         ];
 
         return view('pages.admin-home', $data);

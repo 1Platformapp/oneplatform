@@ -10,7 +10,7 @@
 
             <div class="pro_stream_input_each">
                 <input class="dummy_field" type="text" name="email">
-                <input {{$contact->approved ? 'readonly' : ''}} value="{{$contact->email}}" placeholder="Email" type="text" class="pro_stream_input" name="pro_contact_email" />
+                <input {{$contact->approved || $contact->is_already_user ? 'readonly' : ''}} value="{{$contact->email}}" placeholder="Email" type="text" class="pro_stream_input" name="pro_contact_email" />
             </div>
 
             <div class="pro_stream_input_each stream_sec_opt_outer">

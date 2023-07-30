@@ -142,8 +142,8 @@ class AgentContactController extends Controller
 
                 return redirect()->back()->with(['error' => 'The user email is not an email of a valid account at 1Platform']);
             }
-            $contactExist = AgencyContact::where(['email' => $alreadyUserEmail, 'agent_id' => $user->id])->first();
-            if($contactUser){
+            $contactExist = AgentContact::where(['email' => $alreadyUserEmail, 'agent_id' => $user->id])->first();
+            if($contactExist){
 
                 return redirect()->back()->with(['error' => 'This person is already your contact']);
             }
@@ -206,6 +206,15 @@ class AgentContactController extends Controller
         $sendEmail = $request->get('send_email');
 
         if($contact){
+
+            if($email != '' && !$contact->is_already_user){
+
+                $userExist = User::where(['email' => $email])->get()->first();
+                $agentContact = AgentContact::where(['email' => $email])->get()->first();
+                if($userExist || ($agentContact && $agentContact->id != $contactId)){
+                    return redirect()->back()->with(['error' => 'Error: cannot duplicate email for un-registered contacts (ref: email_already_exist - '.$email.')']);
+                }
+            }
 
             $contactCCommission = $contact->commission;
             $contactCTerms = $contact->terms;
@@ -382,7 +391,7 @@ class AgentContactController extends Controller
                 $alreadyUser = User::where(['email' => $contact->email, 'active' => 1])->first();
                 if(!$alreadyUser){
 
-                    return 'Error: Cannot proceed from here. Please contact your agent to know the details of this issue';
+                    return 'Error: Please contact your agent to know the details of this issue (ref: contact_email_mismatch)';
                 }
 
                 $contactId = $contact->contact_id;
