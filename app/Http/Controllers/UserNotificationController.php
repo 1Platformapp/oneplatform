@@ -163,17 +163,20 @@ class UserNotificationController extends Controller
 
                                 $group = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
 
-                                $targets = $targetUsers = [];
-                                $targets[] = $group->agent_id;
-                                $targets[] = $group->contact_id;
-                                if(count($group->other_members)){
-                                    $targets = array_merge($targets,$group->other_members);
-                                }
-                                if(($key = array_search($user->id, $targets)) !== false) {
-                                    unset($targets[$key]);
-                                }
-                                foreach ($targets as $target) {
-                                    $targetUsers[] = User::find($target);
+                                if($group){
+
+                                    $targets = $targetUsers = [];
+                                    $targets[] = $group->agent_id;
+                                    $targets[] = $group->contact_id;
+                                    if(count($group->other_members)){
+                                        $targets = array_merge($targets,$group->other_members);
+                                    }
+                                    if(($key = array_search($user->id, $targets)) !== false) {
+                                        unset($targets[$key]);
+                                    }
+                                    foreach ($targets as $target) {
+                                        $targetUsers[] = User::find($target);
+                                    }
                                 }
                             }else{
 
