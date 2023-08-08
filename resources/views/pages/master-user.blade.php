@@ -8,15 +8,15 @@
 <!-- Page Level CSS !-->
 @section('page-level-css')
     <style type="text/css">
-        
+
         body { background-image: url(https://www.1platform.tv/images/chart_back_04.jpg); background-size: cover; background-position: top center; background-repeat: no-repeat; }
-        .auth_box_outer .form_group input { background: #ccc none repeat scroll 0 0; border-radius: 23px; height: 48px; } 
-        .auth_box_outer .login_button_outer { background-color: #333; box-shadow: unset; border-radius: 27px; }   
+        .auth_box_outer .form_group input { background: #ccc none repeat scroll 0 0; border-radius: 23px; height: 48px; }
+        .auth_box_outer .login_button_outer { background-color: #333; box-shadow: unset; border-radius: 27px; }
         .auth_box_outer .login_button_outer input { height: 40px; }
         .auth_box_outer { border: 0; opacity: 0.75; }
         .register_button_outer a { font-size: 14px !important; font-weight: bold; }
         .register_button_outer { text-align: center; background: none; border: none; box-shadow: unset; text-transform: uppercase; }
-        
+
 
         @media (min-width:320px) and (max-width: 767px) {
 
@@ -32,8 +32,8 @@
 
     <script type="text/javascript">
         $('document').ready(function(){
-            
-            
+
+
         });
     </script>
 @stop
@@ -86,7 +86,7 @@
                         <div class="auth_box_inner">
                             <form class="form-horizontal" method="POST" action="{{ route('post.master.user') }}">
                                 {{ csrf_field() }}
-                                
+
                                 <div class="form_group">
                                     <input required id="email_address" type="email" class="form_input" name="email" />
                                 </div>
@@ -102,7 +102,7 @@
                                     <input type="submit" value="Log in">
                                 </div><br /><br />
                                 <div class="register_button_outer">
-                                    <a href="{{ route('register') }}">Create an account</a>
+
                                 </div>
                                 <div class="login_register_text_02">
                                     <span style="color: #fff; font-weight: bold;">Creating an account with the 1Platform TV, means you agree to our </span><a href="{{ asset("tc") }}">terms and conditions, </a><a href="">privacy policy</a>

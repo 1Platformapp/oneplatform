@@ -6,18 +6,18 @@
 
 @section('pagetitle') 1 Platform | Login @endsection
 
-@section('pagekeywords') 
+@section('pagekeywords')
     <meta name="keywords" content="1platform login,artists,musicians,discover music,songs,songwriters,producers,filmmakers,raise money,promote music,sell music, content creators,connect people,networking,distribution,premium streams,creative,business,sell,music,music license,crowdfunding,studios,online store,gigs,merchandise,bespoke license,music industry" />
     @if(Config('constants.primaryDomain') != $_SERVER['SERVER_NAME'])
     <meta name="robots" content="noindex, nofollow" />
     @endif
 @endsection
 
-@section('pagedescription') 
+@section('pagedescription')
     <meta name="description" content="Login to your 1platform account"/>
 @endsection
 
-@section('seocontent') 
+@section('seocontent')
     <h1 class="main_heading">1 Platform Login</h1>
     <h2 class="second_heading">Discover music and support its creators</h2>
     <h3 class="second_heading">Create a networking agency, register networks under your agency and earn commission from each of your network sales</h3>
@@ -28,12 +28,12 @@
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}" >
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <style type="text/css">
-        
+
         .auto_content { width: 100%; }
         .video_upper_inner { background-image: url(https://www.1platform.tv/images/chart_back_04_2.jpg); background-size: cover; background-position: top center; background-repeat: no-repeat; }
         .auth_box_outer { width: 45%; padding: 0 5em 10em; position: relative; top: -60px; }
-        .auth_box_outer .form_group input { font-size: 15px; background: #ccc none repeat scroll 0 0; border-radius: 23px; height: 40px; } 
-        .auth_box_outer .login_button_outer { background-color: #333; box-shadow: unset; border-radius: 27px; }   
+        .auth_box_outer .form_group input { font-size: 15px; background: #ccc none repeat scroll 0 0; border-radius: 23px; height: 40px; }
+        .auth_box_outer .login_button_outer { background-color: #333; box-shadow: unset; border-radius: 27px; }
         .auth_box_outer .login_button_outer input { height: 27px; font-family: 'Montserrat', sans-serif; font-size: 15px; }
         .auth_box_outer { padding-top: 150px; border-radius: 3px; border-color: #818181; opacity: 0.75; background: #444; }
         .register_button_outer a { font-size: 14px !important; font-weight: bold; }
@@ -106,16 +106,16 @@
         .home_section_music h2 { font-size: 43px; }
         .home_section_music h4 { margin-top: 15px; font-size: 20px; }
         .home_section_spacer { background-color: #dbe1e5; min-height: 5px; margin-bottom: 20px; }
-        .home_section_portfolio { font-family: 'Montserrat', sans-serif; padding: 20px 30px; } 
+        .home_section_portfolio { font-family: 'Montserrat', sans-serif; padding: 20px 30px; }
         .portfolio_outer { font-family: 'Montserrat', sans-serif; }
         .home_section_portfolio h2 { font-size: 20px; margin-bottom: 30px; }
         .home_section_portfolio h2 span { font-size: 30px; }
-        .home_section_packages { margin-top: 50px; font-family: 'Montserrat', sans-serif; padding: 20px 30px; } 
+        .home_section_packages { margin-top: 50px; font-family: 'Montserrat', sans-serif; padding: 20px 30px; }
         .home_section_packages .header { padding: 20px 0; background: #222; color: #fff; }
         .home_section_packages h2 { font-size: 30px; text-align: center; }
         .home_section_packages h4 { text-align: center; margin-top: 15px; font-size: 16px; margin-bottom: 20px; }
 
-        
+
         .portfolio_det_elem_each iframe { max-width: 800px; margin: 20px auto 0 auto; }
         .int_sub_liner .int_sub_offer_each, .int_sub_liner .int_sub_dhead { font-weight: normal; }
 
@@ -134,10 +134,10 @@
               xfbml      : true,
               version    : 'v5.0'
             });
-              
-            FB.AppEvents.logPageView();     
+
+            FB.AppEvents.logPageView();
         };
-        
+
         (function(d, s, id){
            var js, fjs = d.getElementsByTagName(s)[0];
            if (d.getElementById(id)) {return;}
@@ -201,7 +201,7 @@
 
         function statusChangeCallback(response){
             if(response.authResponse && response.status == 'connected'){
-                proceedWithRegisteration(response);  
+                proceedWithRegisteration(response);
             }else{
                 FB.login(function(response){
                     if(response.authResponse && response.status == 'connected'){
@@ -263,7 +263,7 @@
                                     <input type="submit" value="Log In">
                                 </div>
                                 <div class="auth_btn_helper">
-                                    <a href="{{ route('register') }}">Create an account</a>
+
                                 </div>
                             </div>
                         </form>
@@ -288,16 +288,16 @@
                                         <input placeholder="Enter your password" required type="password" class="form_input {{ ($errors->has('email')) ? 'auth_error' : '' }}" name="password" id="password" />
                                     </div>
                                     <div class="forgot_password_outer">
-                                        
+
                                         <a class="forgot_password" href="">Forgot Your Password?</a>
                                     </div>
                                     <div class="login_button_outer">
                                         <input type="submit" value="LOG IN">
                                     </div><br /><br />
                                     <div class="register_button_outer">
-                                        <a href="{{ route('register') }}">Create an account</a>
+
                                     </div>
-                                    
+
                                 </form>
                             </div>
                         </div>
@@ -352,7 +352,7 @@
                                 <div class="int_sub_head">
                                     <div class="int_sub_head_up">Subscriptions</div>
                                 </div>
-                                
+
                                 <div class="int_sub_dhead">Price</div>
                                 <div class="int_sub_offer_outer">
                                     <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
@@ -378,7 +378,7 @@
                                 </div>
                             </div>
                             <div class="int_sub_act_outer">
-                                
+
                                 <div class="int_sub_each pro_hover">
                                     <div class="int_sub_head">
                                         <div class="int_sub_head_up">{{ucfirst($packages[0]['name'])}}</div>
@@ -443,7 +443,7 @@
                                             <div class="int_sub_confirm int_sub_pay">Sign Up</div>
                                         </div>
                                         <div class="int_sub_offer_each">
-                                            {{$packages[1]['application_fee']}}% 
+                                            {{$packages[1]['application_fee']}}%
                                         </div>
                                         <div class="int_sub_offer_each">
                                             <div class="int_sub_offer_yes">
@@ -492,7 +492,7 @@
                                             <div class="int_sub_confirm int_sub_pay">Sign Up</div>
                                         </div>
                                         <div class="int_sub_offer_each">
-                                            {{$packages[2]['application_fee']}}%  
+                                            {{$packages[2]['application_fee']}}%
                                         </div>
                                         <div class="int_sub_offer_each">
                                             <div class="int_sub_offer_yes">
