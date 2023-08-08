@@ -87,7 +87,7 @@
                                             @php continue @endphp
                                         @endif
                                         @php $contactPDetails = $commonMethods->getUserRealDetails($contact->contactUser->id) @endphp
-                                        <div data-approved="{{$contact->approved ? '1' : ''}}" data-form="my-contact-form_{{ $contact->id }}" class="agent_contact_listing music_btm_list no_sorting clearfix">
+                                        <div data-partner="{{$contact->contactUser->id}}" data-approved="{{$contact->approved ? '1' : ''}}" data-form="my-contact-form_{{ $contact->id }}" class="agent_contact_listing music_btm_list no_sorting clearfix">
                                             <div class="edit_elem_top">
                                                 <div class="m_btm_list_left">
                                                     <div data-image="{{$contactPDetails['image']}}" class="music_btm_thumb">
@@ -1083,7 +1083,7 @@
             });
             stage.find('input,textarea').val('');
 
-            if(element.closest('.music_btm_list').hasClass('agent_contact_listing')){
+            if(element.closest('.music_btm_list').hasClass('agent_contact_listing') && element.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == '1'){
 
                 var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
                 purchaseType = 'group-purchase';
@@ -1096,6 +1096,11 @@
                 var id = element.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
                 purchaseType = 'partner-purchase';
                 customers.push({ key: id, value: element.closest('.music_btm_list.agent_partner_listing').find('.filter_search_target').text() });
+            }else if(element.closest('.music_btm_list').hasClass('agent_contact_listing') && element.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == ''){
+
+                var id = element.closest('.agent_contact_listing').attr('data-partner');
+                purchaseType = 'partner-purchase';
+                customers.push({ key: id, value: element.closest('.music_btm_list.agent_contact_listing').find('.filter_search_target').text() });
             }
 
             for (var i = 0; i < customers.length; i++) {
@@ -1269,7 +1274,13 @@
                             $('#chat_purchase_popup .stage_two').removeClass('instant_hide');
                             $('#chat_purchase_popup input, #chat_purchase_popup textarea').val('');
 
-                            refreshChat($('div[data-form="my-contact-form_'+purchaseId+'"]').find('.chat_outer'));
+                            var element = $('div[data-form="my-contact-form_'+purchaseId+'"]');
+                            if(element.length == 0){
+                                element = $('div[data-partner="'+purchaseId+'"]');
+                            }
+                            if(element.length){
+                                refreshChat(element.find('.chat_outer'));
+                            }
                         }else{
                             alert(response.error);
                         }

@@ -144,11 +144,6 @@ class ProfferProjectController extends Controller
                     return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
                 }
 
-                if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
-
-                    return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
-                }
-
                 if($customer == 'partner' && $user->isAgent() && $group->contact){
                     $recipient = $group->contact;
                 }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
