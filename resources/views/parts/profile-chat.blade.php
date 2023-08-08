@@ -1621,7 +1621,7 @@
                         if(response.success){
 
                             if(value == 'Accepted'){
-                                if(parent.closest('.music_btm_list').hasClass('agent_contact_listing')){
+                                if(parent.closest('.music_btm_list').hasClass('agent_contact_listing') && parent.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == '1'){
                                     preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + type, 'Price: '+curr+price);
                                     $('#pay_quick_popup,#body-overlay').show();
                                 }else{
@@ -1636,7 +1636,7 @@
             }
         }else if(value == 'addToCart'){
 
-            if(parent.closest('.music_btm_list').hasClass('agent_contact_listing')){
+            if(parent.closest('.music_btm_list').hasClass('agent_contact_listing') && parent.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == '1'){
                 preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + type, 'Price: '+curr+price);
                 $('#pay_quick_popup,#body-overlay').show();
             }else{
