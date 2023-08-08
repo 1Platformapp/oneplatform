@@ -8374,65 +8374,6 @@ function agreementAction(value, id, account, seller, price, music){
     }
 }
 
-function profferProjectAction(value, id, account, seller, price){
-
-    var price = atob(price);
-    var curr = $('#pay_quick_popup').attr('data-currency');
-
-    if(value == 'Accepted' || value == 'Declined'){
-
-        if(confirm('Be sure to read the project file before proceding. Are you sure to proceed?')){
-
-
-            var formData = new FormData();
-            formData.append('response', value);
-            formData.append('project', id);
-
-            $.ajax({
-
-                url: '/proffer-project/response',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function (response) {
-                    if(response.success){
-
-                        if(value == 'Accepted'){
-                            if($('.chat_each_user.active').hasClass('chat_each_group')){
-                                preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a project', 'Price: '+curr+price);
-                                $('#pay_quick_popup,#body-overlay').show();
-                            }else{
-                                addCartItem('', 'project', 0, 0, 0, price, seller, id);
-                            }
-                        }else{
-                            var formData = new FormData();
-                            var elem = $('.chat_each_user.active:first');
-                            if(elem.hasClass('chat_each_group')){
-                                formData.append('action', 'group-chat');
-                                formData.append('group', elem.attr('data-group'));
-                            }else{
-                                formData.append('action', 'partner-chat');
-                                formData.append('partner', elem.attr('data-partner'));
-                            }
-                            refreshChatBox('chat', formData);
-                        }
-                    }
-                }
-            });
-        }
-    }else if(value == 'addToCart'){
-
-        if($('.chat_each_user.active').hasClass('chat_each_group')){
-            preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a project', 'Price: '+curr+price);
-            $('#pay_quick_popup,#body-overlay').show();
-        }else{
-            addCartItem('', 'project', 0, 0, 0, price, seller, id);
-        }
-    }
-}
-
 function profferProductAction(value, id, account, productId, seller, price){
 
     var price = atob(price);
@@ -8490,51 +8431,6 @@ function profferProductAction(value, id, account, productId, seller, price){
         }else{
             addCartItem('', 'proferred-product', 0, 0, 0, price, seller, id);
         }
-    }
-}
-
-
-function preparePayInstant(account, id, cardNumberF, cardExpiryF, cardCvcF, mainText, subText){
-
-    if(account !== null){
-
-        var account = atob(account);
-        window.stripe = Stripe($('#stripe_publishable_key').val(), { stripeAccount: account});
-    }else{
-
-        window.stripe = Stripe($('#stripe_publishable_key').val());
-    }
-
-    var elements = window.stripe.elements();
-
-    var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#000','lineHeight': '31px'};
-    var invalidStyles = {'color': '#fc064c'};
-
-    window.eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
-    window.eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
-    window.eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
-
-    window.eCardNumber.mount(cardNumberF);
-    window.eCardCvc.mount(cardCvcF);
-    window.eCardExpiry.mount(cardExpiryF);
-
-    $('#pay_quick_popup #pay_quick_error').text('').removeClass('instant_hide');
-    $('#pay_quick_popup').attr('data-id', id);
-
-    if(id.includes('custom_product')){
-
-        var split = subText.split('_');
-        $('#pay_quick_popup .pay_item_name').text(limitString(split[4], 40));
-        $('#pay_quick_popup .pay_item_price').text(split[2]);
-        $('#pay_quick_popup .pay_item_purchase_qua .pay_item_purchase_qua_num').text(split[3]);
-        $('#pay_quick_popup .pay_item_purchase_det').text(split[0]);
-        if(split[1] != ''){
-            $('#pay_quick_popup .pay_item_purchase_det').text($('#pay_quick_popup .pay_item_purchase_det').text()+' - '+split[1]);
-        }
-    }else{
-
-        $('#pay_quick_popup .main_headline').text(mainText);
-        $('#pay_quick_popup .second_headline').html(subText);
     }
 }
 

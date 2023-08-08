@@ -91,16 +91,17 @@
 .chat_main_header .header_each_action:not(:last-of-type) { margin-right: 30px; }
 .chat_main_header .header_each_action.active { color: #922c88; }
 .chat_main_header .header_each_action:hover { color: #922c88; }
-.chat_each_message.msg_agreement .msg_agreement_det { flex: 0 1 100%; margin-left: 15px; font-size: 18px; }
+.chat_each_message.msg_agreement .msg_agreement_det { margin-left: 15px; font-size: 18px; }
 .chat_each_message.msg_agreement .chat_message_det_bottom a { color: #777; display: flex; width: 100%; }
 .chat_each_message.msg_agreement .chat_message_det_bottom i { font-size: 38px; }
-.chat_each_message.msg_agreement .msg_agree_status { font-size: 12px; font-weight: bold; text-align: left; }
+.chat_each_message.msg_agreement .msg_agree_status { font-size: 12px; font-weight: bold; text-align: left; margin-bottom: 6px; }
+.chat_each_message.msg_agreement .msg_agree_name { font-weight: bold; font-size: 16px; }
 .chat_each_message.msg_agreement .chat_message_det_bottom { cursor: pointer; }
 .chat_each_message.msg_agreement .chat_message_det_bottom a:hover { color: #000; }
 .loading_messages { width: 60px; margin: 0 auto; }
 .chat_each_message .agree_status_btn { color: #fff; padding: 5px; border-radius: 2px; margin: 0 1px; }
-.chat_each_message .agree_status_btn#msg_agree_accept { background: #5cb85c; }
-.chat_each_message .agree_status_btn#msg_agree_decline { background: #dc3545; }
+.chat_each_message .agree_status_btn#msg_agree_accept { background: #007bff; }
+.chat_each_message .agree_status_btn#msg_agree_decline { background: #5a6268; }
 .chat_each_message .agree_status_btn#msg_agree_add { background: #3498db; }
 .chat_each_message .msg_agreement_actions { flex: 0 1 100%; display: flex; align-items: center; justify-content: flex-end; }
 .chat_each_user.active.unread { background-color: #DAA520; color: #fff; }

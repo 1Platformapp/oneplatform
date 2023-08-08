@@ -7198,13 +7198,13 @@ class ProfileController extends Controller
                             $m->bcc($buyerObj->bcc);
                             $m->to($buyerObj->customer->email, $buyerObj->customer->name);
                             if($buyerObj->type == 'music'){
-                                $m->attach(asset('bespoke-licenses/'.$buyerObj->filename));
+                                $m->attach(public_path('bespoke-licenses/'.$buyerObj->filename));
                             }
                             if($buyerObj->type == 'project'){
-                                $m->attach(asset('proffered-project/'.$buyerObj->filename));
+                                $m->attach(public_path('proffered-project/'.$buyerObj->filename));
                             }
                             if($buyerObj->type == 'proferred-product'){
-                                $m->attach(asset('proffered-product/'.$buyerObj->filename));
+                                $m->attach(public_path('proffered-product/'.$buyerObj->filename));
                             }
                             $m->subject('Your Order at 1Platform');
                         });

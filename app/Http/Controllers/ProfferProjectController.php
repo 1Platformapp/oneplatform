@@ -21,6 +21,8 @@ use App\Models\Profile;
 
 use App\Models\UserAlbum;
 
+use App\Models\AgentContact;
+
 use App\Models\UserMusic;
 
 use App\Models\UserProduct;
@@ -88,13 +90,13 @@ class ProfferProjectController extends Controller
 
         $this->middleware('user.update.activity');
     }
-    
+
 
     public function index(Request $request)
 
     {
 
-        
+
     }
 
     public function create(Request $request){
@@ -110,32 +112,51 @@ class ProfferProjectController extends Controller
 
         if($user && $request->has('description') && $request->has('title') && $request->has('price')){
 
-            
+
             $message = $request->get('description');
             $endTermSelect = $request->get('endTermSelect');
             $endTerm = $request->get('endTerm');
             $title = $request->get('title');
             $price = $request->get('price');
+            $type = $request->get('type');
+            $customer = $request->get('customer');
 
-            if($request->has('recipient')){
+            if($type == 'partner-purchase'){
 
-                $recipientId = $request->get('recipient');
+                $recipientId = $request->get('id');
                 $recipient = User::find($recipientId);
-            }else if($request->has('group')){
+            }else if($type == 'group-purchase'){
 
-                $groupId = $request->get('group');
-                $groupRecipientId = $request->get('groupRecipient');
-                $group = UserChatGroup::find($groupId);
-                $groupRecipient = User::find($groupRecipientId);
+                $agentContactId = $request->get('id');
+                $agentContact = AgentContact::find($agentContactId);
+
+                if(!$agentContact){
+                    return json_encode(['success' => 0, 'error' => 'unknown contact']);
+                }
+
+                $group = UserChatGroup::where(['agent_id' => $agentContact->agent_id, 'contact_id' => $agentContact->contact_id])->get()->first();
+
+                if(!$group){
+                    return json_encode(['success' => 0, 'error' => 'unknown group']);
+                }
+
+                if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
+                    return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
+                }
 
                 if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
 
                     return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
                 }
 
-                $recipient = $groupRecipient;
+                if($customer == 'partner' && $user->isAgent() && $group->contact){
+                    $recipient = $group->contact;
+                }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
+                    $recipient = $group->agent;
+                }else{
+                    $recipient = User::find($customer);
+                }
             }
-            
 
             if($recipient){
 
@@ -152,9 +173,9 @@ class ProfferProjectController extends Controller
                 $chat->group_id = isset($group) ? $group->id : NULL;
                 $chat->message = $message;
                 $chat->project = [
-                    'filename'        => $ticketNumber, 
-                    'title'           => $title, 
-                    'price'           => $price, 
+                    'filename'        => $ticketNumber,
+                    'title'           => $title,
+                    'price'           => $price,
                     'status'          => 'Pending',
                     'endTermSelect'   => $endTermSelect,
                     'endTerm'         => $endTerm,
@@ -167,7 +188,7 @@ class ProfferProjectController extends Controller
                 $request->request->add(['user' => $recipient->id,'customer' => $user->id,'type' => 'chat','source_id' => $chat->id]);
                 $response = json_decode($userNotification->create($request), true);
 
-                $success = 1;    
+                $success = 1;
             }else{
 
                 $error = 'No recipient';
@@ -202,12 +223,12 @@ class ProfferProjectController extends Controller
                 $chat->project = [
                     'filename' => $chat->project['filename'],
                     'title'    => $chat->project['title'],
-                    'price'    => isset($chat->project['price'])?$chat->project['price']:0, 
+                    'price'    => isset($chat->project['price'])?$chat->project['price']:0,
                     'status'   => $response,
                 ];
 
                 $chat->save();
-                $success = 1;    
+                $success = 1;
             }else{
 
                 $error = 'Not allowed';

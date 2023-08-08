@@ -10,6 +10,7 @@
 
 @section('page-level-js')
 
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{{ asset('js/tailwind-custom.js') }}"></script>
 @stop
@@ -176,7 +177,133 @@
 
     @include('parts.add-form-elements')
 
+    @include('parts.basket-popups')
+
     <div id="body-overlay"></div>
+
+    <div class="pro_page_pop_up clearfix" id="chat_purchase_popup">
+
+        <div class="pro_soc_con_face_inner clearfix">
+
+            <div class="soc_con_top_logo clearfix">
+                <a style="opacity:0;" class="logo8">
+                    <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
+                </a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="stage_one">
+                <div class="project stage">
+                    <div class="soc_con_face_username clearfix">
+                        <div class="main_headline">Set up a new Project Agreement</div><br>
+                        <select class="choose_customer_dropdown">
+                            <option value="">Choose recipient</option>
+                        </select>
+                        <div class="instant_hide error choose_customer_error">Required</div>
+                        <input class="dummy_field" type="text" name="fakeusernameremembered">
+                        <input placeholder="Title" type="text" class="title" />
+                        <div class="instant_hide error title_error">Required</div>
+                        <div class="pro_pop_multi_row">
+                            <div class="each_col">
+                                <select class="choose_end_term_dropdown">
+                                    <option value="">Term Date</option>
+                                    <option value="perpetual">Perpetual</option>
+                                    <option value="custom">Let me write end term</option>
+                                </select>
+                                <div class="instant_hide error choose_end_term_error">Required</div>
+                            </div>
+                            <div class="each_col">
+                                <input class="dummy_field" type="text" name="fakeusernameremembered">
+                                <input disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
+                                <div class="instant_hide error end_term_error">Required</div>
+                            </div>
+                        </div>
+                        <input class="dummy_field" type="text" name="fakeusernameremembered">
+                        <input placeholder="Price" type="number" class="price" />
+                        <div class="instant_hide error price_error">Required</div>
+                        <textarea class="description" placeholder="Project description (i.e details/milestones/terms etc)"></textarea>
+                        <div class="instant_hide error description_error">Required</div>
+                    </div>
+                </div>
+                <div class="license stage">
+                    <div class="soc_con_face_username clearfix">
+                        <div class="main_headline">You are adding a bespoke license agreement</div><br>
+                        <select class="choose_customer_dropdown">
+                            <option value="">Choose recipient</option>
+                        </select>
+                        <div class="instant_hide error choose_customer_error">Required</div>
+                        @if(Auth::check())
+                        <select class="choose_agreement_music">
+                            <option value="">Choose music</option>
+                            @if(count(Auth::user()->musics))
+                                @foreach(Auth::user()->musics as $music)
+                                <option value="{{$music->id}}">{{$music->song_name}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                        <div class="instant_hide error choose_agreement_music_error">Required</div>
+                        @endif
+                        <div class="pro_pop_multi_row">
+                            <div class="each_col">
+                                <select class="choose_end_term_dropdown">
+                                    <option value="">Term Date</option>
+                                    <option value="perpetual">Perpetual</option>
+                                    <option value="custom">Let me write end term</option>
+                                </select>
+                                <div class="instant_hide error choose_end_term_error">Required</div>
+                            </div>
+                            <div class="each_col">
+                                <input class="dummy_field" type="text" name="fakeusernameremembered">
+                                <input disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
+                                <div class="instant_hide error end_term_error">Required</div>
+                            </div>
+                        </div>
+                        <select class="choose_agreement_license">
+                            <option selected value="bespoke">Bespoke Agreement</option>
+                            @foreach(config('constants.licenses') as $key => $license)
+                            <option value="{{$key}}">{{$license['name']}}</option>
+                            @endforeach
+                        </select>
+                        <input class="dummy_field" type="text" name="fakeusernameremembered">
+                        <input placeholder="Price" type="number" class="price" />
+                        <div class="instant_hide error price_error">Required</div>
+                        <textarea class="license_terms" placeholder="Write all terms of use here"></textarea>
+                        <div class="license_terms_error instant_hide error">Required</div>
+                    </div>
+                </div>
+                <div class="product stage">
+                    <div class="soc_con_face_username clearfix">
+                        <div class="main_headline">You are adding a product</div><br>
+                        <select class="choose_customer_dropdown">
+                            <option value="">Choose recipient</option>
+                        </select>
+                        <div class="instant_hide error choose_customer_error">Required</div>
+                        <select class="choose_product">
+                            @if(Auth::user())
+                            <option value="">Choose product</option>
+                            @foreach(Auth::user()->products as $product)
+                            <option value="{{$product->id}}">{{$product->title}}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                        <div class="instant_hide error choose_product_error">Required</div>
+                        <input class="dummy_field" type="text" name="fakeusernameremembered">
+                        <input placeholder="Price" type="number" class="price" />
+                        <div class="instant_hide error price_error">Required</div>
+                    </div>
+                </div>
+                <br>
+                <div class="pro_button chat_purchase_send_btn">SUBMIT</div>
+            </div>
+            <div class="stage_two instant_hide">
+                <div class="soc_con_face_username clearfix">
+                    <div class="pro_pop_text_light text_center">
+                        Successfully sent to <span class="pro_text_dark" id="sender_name"></span>. The user will be offered to accept
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
 
     <div class="pro_pop_chat_upload in_progress new_popup pro_page_pop_up clearfix" style="z-index: 10;">
         <div class="pro_soc_con_face_inner clearfix">
@@ -327,6 +454,42 @@
             </div>
         </div>
     </div>
+
+    <div data-currency="{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}" class="pro_page_pop_up clearfix" id="pay_quick_popup">
+
+        <div class="pro_soc_con_face_inner clearfix">
+            <div class="soc_con_top_logo clearfix">
+                <a style="opacity:0;" class="logo8">
+                    <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
+                </a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="stage_one">
+                <div class="soc_con_face_username clearfix">
+                    <div class="main_headline"></div>
+                    <div class="second_headline"></div>
+                    <div id="pay_quick_error" class="instant_hide m_e_card_pop_error"></div>
+                    <div id="pay_quick_card_number" class="m_e_card_elem m_e_card_pop"></div>
+                    <div class="pro_pop_multi_row">
+                        <div class="each_col">
+                            <input class="dummy_field" type="text" name="fakeusernameremembered">
+                            <input placeholder="Card Name" type="text" id="pay_quick_card_name" />
+                        </div>
+                        <div class="each_col">
+                            <div id="pay_quick_card_cvc" class="m_e_card_elem m_e_card_pop"></div>
+                        </div>
+                    </div>
+                    <div class="pro_pop_multi_row">
+                        <div id="pay_quick_card_expiry" class="m_e_card_elem m_e_card_pop"></div>
+                    </div>
+                </div>
+                <br>
+                <div id="pay_quick_final" class="pro_button">SUBMIT</div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
 @stop
 
 @section('bottom-section')

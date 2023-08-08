@@ -37,19 +37,19 @@
             <a download href="{{asset('bespoke-licenses/'.$chat->agreement['filename'])}}">
                 <i class="fa fa-file-pdf-o"></i>
                 <div class="msg_agreement_det">
-                    <div class="msg_agree_name">License</div>
                     <div class="msg_agree_status {{strtolower($chat->agreement['status'])}}">{{$chat->agreement['status']}}</div>
+                    <div class="msg_agree_name">LICENSE</div>
                 </div>
                 @php $price = isset($chat->agreement['price']) ? $chat->agreement['price'] : 0 @endphp
                 @php $music = isset($chat->agreement['music']) ? $chat->agreement['music'] : 0 @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->agreement['status'] == 'Pending')
                 <div class="msg_agreement_actions">
-                    <div onclick="agreementAction('Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
-                    <div onclick="agreementAction('Declined', '{{$chat->id}}', '', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
+                    <div onclick="chatPurchaseAction(this, 'license', 'Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
+                    <div onclick="chatPurchaseAction(this, 'license', 'Declined', '{{$chat->id}}', '', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
                 </div>
                 @elseif(Auth::user()->id == $chat->recipient->id && $chat->agreement['status'] == 'Accepted')
                 <div class="msg_agreement_actions">
-                    <div onclick="agreementAction('addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_add" class="agree_status_btn">
+                    <div onclick="chatPurchaseAction(this, 'license', 'addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_add" class="agree_status_btn">
                         Add to cart
                     </div>
                 </div>
@@ -59,18 +59,18 @@
             <a download href="{{asset('proffered-project/'.$chat->project['filename'])}}">
                 <i class="fa fa-file-pdf-o"></i>
                 <div class="msg_agreement_det">
-                    <div class="msg_agree_name">Project</div>
                     <div class="msg_agree_status {{strtolower($chat->project['status'])}}">{{$chat->project['status']}}</div>
+                    <div class="msg_agree_name">PROJECT</div>
                 </div>
                 @php $price = isset($chat->project['price']) ? $chat->project['price'] : 0 @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->project['status'] == 'Pending')
                 <div class="msg_agreement_actions">
-                    <div onclick="profferProjectAction('Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
-                    <div onclick="profferProjectAction('Declined', '{{$chat->id}}', '', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
+                    <div onclick="chatPurchaseAction(this, 'project', 'Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
+                    <div onclick="chatPurchaseAction(this, 'project', 'Declined', '{{$chat->id}}', '', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
                 </div>
                 @elseif(Auth::user()->id == $chat->recipient->id && $chat->project['status'] == 'Accepted')
                 <div class="msg_agreement_actions">
-                    <div onclick="profferProjectAction('addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_add" class="agree_status_btn">
+                    <div onclick="chatPurchaseAction(this, 'project', 'addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_add" class="agree_status_btn">
                         Add to cart
                     </div>
                 </div>
@@ -80,19 +80,19 @@
             <a download href="{{asset('proffered-product/'.$chat->product['filename'])}}">
                 <i class="fa fa-file-pdf-o"></i>
                 <div class="msg_agreement_det">
-                    <div class="msg_agree_name">Product</div>
                     <div class="msg_agree_status {{strtolower($chat->product['status'])}}">{{$chat->product['status']}}</div>
+                    <div class="msg_agree_name">PRODUCT</div>
                 </div>
                 @php $price = isset($chat->product['price']) ? $chat->product['price'] : 0 @endphp
                 @php $productId = $chat->product['id'] @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->product['status'] == 'Pending')
                 <div class="msg_agreement_actions">
-                    <div onclick="profferProductAction('Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
-                    <div onclick="profferProductAction('Declined', '{{$chat->id}}', '', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
+                    <div onclick="chatPurchaseAction(this, 'product', 'Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
+                    <div onclick="chatPurchaseAction(this, 'product', 'Declined', '{{$chat->id}}', '', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
                 </div>
                 @elseif(Auth::user()->id == $chat->recipient->id && $chat->product['status'] == 'Accepted')
                 <div class="msg_agreement_actions">
-                    <div onclick="profferProductAction('addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_add" class="agree_status_btn">
+                    <div onclick="chatPurchaseAction(this, 'product', 'addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_add" class="agree_status_btn">
                         Add to cart
                     </div>
                 </div>

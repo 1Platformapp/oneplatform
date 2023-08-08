@@ -19,6 +19,8 @@ use App\Models\UserCampaign as UserCampaign;
 
 use App\Models\Profile;
 
+use App\Models\AgentContact;
+
 use App\Models\UserAlbum;
 
 use App\Models\UserMusic;
@@ -90,13 +92,13 @@ class ProfferProductController extends Controller
 
         $this->middleware('user.update.activity');
     }
-    
+
 
     public function index(Request $request)
 
     {
 
-        
+
     }
 
     public function create(Request $request){
@@ -110,32 +112,51 @@ class ProfferProductController extends Controller
             $user = Auth::user();
         }
 
-        if($user && $request->has('product')){
+        if($user && $request->has('product') && $request->has('price')){
 
-            
+
             $productId = $request->get('product');
             $price = $request->get('price');
             $product = UserProduct::find($productId);
+            $type = $request->get('type');
+            $customer = $request->get('customer');
 
-            if($request->has('recipient')){
+            if($type == 'partner-purchase'){
 
-                $recipientId = $request->get('recipient');
+                $recipientId = $request->get('id');
                 $recipient = User::find($recipientId);
-            }else if($request->has('group')){
+            }else if($type == 'group-purchase'){
 
-                $groupId = $request->get('group');
-                $groupRecipientId = $request->get('groupRecipient');
-                $group = UserChatGroup::find($groupId);
-                $groupRecipient = User::find($groupRecipientId);
+                $agentContactId = $request->get('id');
+                $agentContact = AgentContact::find($agentContactId);
+
+                if(!$agentContact){
+                    return json_encode(['success' => 0, 'error' => 'unknown contact']);
+                }
+
+                $group = UserChatGroup::where(['agent_id' => $agentContact->agent_id, 'contact_id' => $agentContact->contact_id])->get()->first();
+
+                if(!$group){
+                    return json_encode(['success' => 0, 'error' => 'unknown group']);
+                }
+
+                if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
+                    return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
+                }
 
                 if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
 
-                    return json_encode(['success' => 0, 'error' => 'You cannot add product in this chat']);
+                    return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
                 }
 
-                $recipient = $groupRecipient;
+                if($customer == 'partner' && $user->isAgent() && $group->contact){
+                    $recipient = $group->contact;
+                }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
+                    $recipient = $group->agent;
+                }else{
+                    $recipient = User::find($customer);
+                }
             }
-            
 
             if($recipient && $product && $product->user_id == $user->id){
 
@@ -152,9 +173,9 @@ class ProfferProductController extends Controller
                 $chat->group_id = isset($group) ? $group->id : NULL;
                 $chat->message = NULL;
                 $chat->product = [
-                    'filename'        => $ticketNumber, 
-                    'id'              => $productId, 
-                    'price'           => $price, 
+                    'filename'        => $ticketNumber,
+                    'id'              => $productId,
+                    'price'           => $price,
                     'status'          => 'Pending',
                     'title'           => $product->title,
                 ];
@@ -166,7 +187,7 @@ class ProfferProductController extends Controller
                 $request->request->add(['user' => $recipient->id,'customer' => $user->id,'type' => 'chat','source_id' => $chat->id]);
                 $response = json_decode($userNotification->create($request), true);
 
-                $success = 1;    
+                $success = 1;
             }else{
 
                 $error = 'No recipient';
@@ -201,13 +222,13 @@ class ProfferProductController extends Controller
                 $chat->product = [
                     'filename' => $chat->product['filename'],
                     'id'       => $chat->product['id'],
-                    'price'    => isset($chat->product['price'])?$chat->product['price']:0, 
+                    'price'    => isset($chat->product['price'])?$chat->product['price']:0,
                     'status'   => $response,
                     'title'    => 'Product',
                 ];
 
                 $chat->save();
-                $success = 1;    
+                $success = 1;
             }else{
 
                 $error = 'Not allowed';

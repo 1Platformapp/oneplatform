@@ -17,6 +17,7 @@ use App\Models\UserChatGroup;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\User;
+use App\Models\AgentContact;
 
 use App\Http\Controllers\UserNotificationController;
 use App\Http\Controllers\CommonMethods;
@@ -54,13 +55,13 @@ class BispokeLicenseController extends Controller
 
         $this->middleware('user.update.activity');
     }
-    
+
 
     public function index(Request $request)
 
     {
 
-        
+
     }
 
     public function sendMessage(Request $request){
@@ -137,7 +138,7 @@ class BispokeLicenseController extends Controller
 
                     $error = 'Message cannot be delivered';
                 }
-                
+
                 if($error == ''){
 
                     if($type == 'initialize'){
@@ -163,9 +164,9 @@ class BispokeLicenseController extends Controller
                         if($type == 'finalize' && $request->has('chat')){
                             $chat = UserChat::find($request->get('chat'));
                         }else{
-                            $chat = new UserChat();    
+                            $chat = new UserChat();
                         }
-                        
+
                         $chat->sender_id = $user->id;
                         $chat->group_id = $group ? $group->id : NULL;
                         $chat->recipient_id = $recipient ? $recipient->id : NULL;
@@ -179,7 +180,7 @@ class BispokeLicenseController extends Controller
                             if(count($recipient->devices)){
 
                             	foreach ($recipient->devices as $device) {
-                            		
+
                             		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                             			$fcm = new PushNotificationController();
@@ -195,7 +196,7 @@ class BispokeLicenseController extends Controller
                                 if(count($recipient->devices)){
 
                                 	foreach ($recipient->devices as $device) {
-                                		
+
                                 		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                 			$fcm = new PushNotificationController();
@@ -205,7 +206,7 @@ class BispokeLicenseController extends Controller
                                 }
                             }
                         }else if($recipient && $type == 'platform-manager-first'){
-                            
+
                             // default reply for user from manager
                             $chat = new UserChat();
                             $chat->sender_id = $recipient->id;
@@ -220,7 +221,7 @@ class BispokeLicenseController extends Controller
                             if(count($recipient->devices)){
 
                                 foreach ($recipient->devices as $device) {
-                                    
+
                                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                         $fcm = new PushNotificationController();
@@ -236,7 +237,7 @@ class BispokeLicenseController extends Controller
                             if(count($gRecipient->devices)){
 
                             	foreach ($gRecipient->devices as $device) {
-                            		
+
                             		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                             			$fcm = new PushNotificationController();
@@ -263,7 +264,7 @@ class BispokeLicenseController extends Controller
                         	        if(count($recip->devices)){
 
                         	        	foreach ($recip->devices as $device) {
-                        	        		
+
                         	        		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         	        			$fcm = new PushNotificationController();
@@ -338,7 +339,7 @@ class BispokeLicenseController extends Controller
             $user = Auth::user();
         }
 
-        if($user && $request->has('terms') && $request->has('music') && $request->has('price')){
+        if($user && $request->has('terms') && $request->has('music') && $request->has('price') && $request->has('license')){
 
             $message = $request->get('terms');
             $endTermSelect = $request->get('endTermSelect');
@@ -347,24 +348,44 @@ class BispokeLicenseController extends Controller
             $license = $request->get('license');
             $price = $request->get('price');
             $music = UserMusic::find($musicId);
-            
-            if($request->has('recipient')){
+            $type = $request->get('type');
+            $customer = $request->get('customer');
 
-                $recipientId = $request->get('recipient');
+            if($type == 'partner-purchase'){
+
+                $recipientId = $request->get('id');
                 $recipient = User::find($recipientId);
-            }else if($request->has('group')){
+            }else if($type == 'group-purchase'){
 
-                $groupId = $request->get('group');
-                $groupRecipientId = $request->get('groupRecipient');
-                $group = UserChatGroup::find($groupId);
-                $groupRecipient = User::find($groupRecipientId);
+                $agentContactId = $request->get('id');
+                $agentContact = AgentContact::find($agentContactId);
+
+                if(!$agentContact){
+                    return json_encode(['success' => 0, 'error' => 'unknown contact']);
+                }
+
+                $group = UserChatGroup::where(['agent_id' => $agentContact->agent_id, 'contact_id' => $agentContact->contact_id])->get()->first();
+
+                if(!$group){
+                    return json_encode(['success' => 0, 'error' => 'unknown group']);
+                }
+
+                if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
+                    return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
+                }
 
                 if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
 
                     return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
                 }
 
-                $recipient = $groupRecipient;
+                if($customer == 'partner' && $user->isAgent() && $group->contact){
+                    $recipient = $group->contact;
+                }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
+                    $recipient = $group->agent;
+                }else{
+                    $recipient = User::find($customer);
+                }
             }
 
             if($music && $music->user->id == $user->id && $recipient){
@@ -382,9 +403,9 @@ class BispokeLicenseController extends Controller
                 $chat->group_id = isset($group) ? $group->id : NULL;
                 $chat->message = $message;
                 $chat->agreement = [
-                    'filename'        => $ticketNumber, 
-                    'music'           => $music->id, 
-                    'price'           => $price, 
+                    'filename'        => $ticketNumber,
+                    'music'           => $music->id,
+                    'price'           => $price,
                     'status'          => 'Pending',
                     'endTermSelect'   => $endTermSelect,
                     'endTerm'         => $endTerm,
@@ -398,7 +419,7 @@ class BispokeLicenseController extends Controller
                 $request->request->add(['user' => $recipient->id,'customer' => $user->id,'type' => 'chat','source_id' => $chat->id]);
                 $response = json_decode($userNotification->create($request), true);
 
-                $success = 1;    
+                $success = 1;
             }else{
 
                 $error = 'No music';
@@ -422,23 +443,23 @@ class BispokeLicenseController extends Controller
             $user = Auth::user();
         }
 
-        if($user && $request->has('response') && $request->has('agreement')){
+        if($user && $request->has('response') && $request->has('license')){
 
-            $chatId = $request->get('agreement');
+            $chatId = $request->get('license');
             $response = $request->get('response');
             $chat = UserChat::find($chatId);
 
             if($chat && $chat->recipient->id == $user->id && count($chat->agreement)){
 
                 $chat->agreement = [
-                    'filename' => $chat->agreement['filename'], 
-                    'music'    => $chat->agreement['music'], 
-                    'price'    => isset($chat->agreement['price'])?$chat->agreement['price']:0, 
+                    'filename' => $chat->agreement['filename'],
+                    'music'    => $chat->agreement['music'],
+                    'price'    => isset($chat->agreement['price'])?$chat->agreement['price']:0,
                     'status'   => $response,
                 ];
 
                 $chat->save();
-                $success = 1;    
+                $success = 1;
             }else{
 
                 $error = 'Not allowed';

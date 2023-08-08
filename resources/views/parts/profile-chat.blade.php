@@ -1045,51 +1045,237 @@
         refreshChat(element);
     });
 
-    $('body').delegate('.chat_outer:not(.disabled) .proffer_project_btn:not(.disabled)', 'click', function(e){
+    $('body').delegate('.chat_outer:not(.disabled) .proffer_project_btn:not(.disabled),.chat_outer:not(.disabled) .add_product_btn:not(.disabled),.chat_outer:not(.disabled) .add_agreement_btn:not(.disabled)', 'click', function(e){
 
-        var elem = $('.chat_each_user.active');
-        if(elem.length && $('#profile_tab_14').length){
+        var element = $(this).closest('.chat_outer');
+        var type = null;
+        var members = [];
+        var purchaseItem = null;
+        var purchaseType = null;
+        var customers = [];
 
-            $('#proffer_project_select_customer option').each(function() {
+        if($(this).hasClass('proffer_project_btn')){
+            purchaseItem = 'project';
+        }else if($(this).hasClass('add_product_btn')){
+            purchaseItem = 'product';
+        }else if($(this).hasClass('add_agreement_btn')){
+            purchaseItem = 'license';
+        }
+
+        if(purchaseItem){
+
+            $('#chat_purchase_popup .stage, #chat_purchase_popup .stage_two').addClass('instant_hide');
+            if(purchaseItem == 'project'){
+
+                var stage = $('#chat_purchase_popup .stage_one .project');
+            }else if(purchaseItem == 'product'){
+
+                var stage = $('#chat_purchase_popup .stage_one .product');
+            }else if(purchaseItem == 'license'){
+
+                var stage = $('#chat_purchase_popup .stage_one .license');
+            }
+
+            stage.find('.choose_customer_dropdown').find('option').each(function() {
                 if($(this).val() != ''){
                     $(this).remove();
                 }
             });
-            if(elem.hasClass('chat_each_group')){
+            stage.find('input,textarea').val('');
 
-                var main = elem.find('.inner .chat_user_pic');
-                $('#proffer_project_select_customer').append($('<option>',{
-                    value: main.attr('data-id'),
-                    text : main.attr('data-name')
-                }));
+            if(element.closest('.music_btm_list').hasClass('agent_contact_listing')){
 
-                elem.find('.chat_member_each_outer:not(.chat_member_add)').each(function(){
-
-                    var value = $(this).attr('data-member');
-                    var title = $(this).attr('data-name');
-                    if(value != window.currentUserId){
-                        $('#proffer_project_select_customer').append($('<option>',{
-                            value: value,
-                            text : title
-                        }));
-                    }
+                var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                purchaseType = 'group-purchase';
+                customers.push({ key: 'partner', value: element.closest('.music_btm_list.agent_contact_listing').find('.filter_search_target').text() });
+                element.find('.chat_member_each_outer:not(.chat_member_add)').each(function(){
+                    customers.push({ key: $(this).attr('data-member'), value: $(this).attr('data-name') });
                 });
-            }else{
-                $('#proffer_project_select_customer').append($('<option>',{
-                    value: elem.attr('data-partner'),
-                    text : elem.find('.chat_user_name').text()
-                }));
+            }else if(element.closest('.music_btm_list').hasClass('agent_partner_listing')){
+
+                var id = element.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                purchaseType = 'partner-purchase';
+                customers.push({ key: id, value: element.closest('.music_btm_list.agent_partner_listing').find('.filter_search_target').text() });
             }
 
-            $('#proffer_project_popup .stage_one input,#proffer_project_popup .stage_one textarea').val('');
-            $('#proffer_project_popup .stage_two').addClass('instant_hide');
-            $('#proffer_project_popup .stage_one').removeClass('instant_hide');
-
-            var name = $('.chat_each_user.active:first .chat_user_name').text();
-            $('#proffer_project_popup #proffer_project_customer_name').text(name);
-            $('#proffer_project_popup,#body-overlay').show();
+            for (var i = 0; i < customers.length; i++) {
+                stage.find('.choose_customer_dropdown').append($('<option>',{
+                    value: customers[i].key,
+                    text : customers[i].value
+                }));
+            }
+            $('#chat_purchase_popup').attr({
+                'data-type': purchaseType,
+                'data-item': purchaseItem,
+                'data-id': id
+            });
+            stage.removeClass('instant_hide');
+            $('#chat_purchase_popup .stage_one').removeClass('instant_hide');
+            $('#chat_purchase_popup,#body-overlay').show();
         }else{
-            alert('You cannot proffer a project yet');
+
+            alert('Invalid option');
+        }
+    });
+
+    $('body').delegate('.choose_end_term_dropdown', 'change', function(e){
+
+        if($(this).val() == 'custom'){
+            $(this).closest('.pro_pop_multi_row').find('.end_term').attr('disabled', false).focus();
+        }else{
+            $(this).closest('.pro_pop_multi_row').find('.end_term').val('').attr('disabled', true);
+        }
+    });
+
+    $('body').delegate('.chat_purchase_send_btn', 'click', function(e){
+
+        var thiss = $(this);
+        $('.stage .error').addClass('instant_hide');
+        var error = 0;
+        var purchaseType = $('#chat_purchase_popup').attr('data-type');
+        var purchaseItem = $('#chat_purchase_popup').attr('data-item');
+        var purchaseId = $('#chat_purchase_popup').attr('data-id');
+        var formData = new FormData();
+
+        if(purchaseItem == 'project'){
+
+            var stage = $('#chat_purchase_popup .stage_one .project');
+            var url = '/proffer-project/add';
+        }else if(purchaseItem == 'product'){
+
+            var stage = $('#chat_purchase_popup .stage_one .product');
+            var url = '/proffer-product/add';
+        }else if(purchaseItem == 'license'){
+
+            var stage = $('#chat_purchase_popup .stage_one .license');
+            var url = '/bispoke-license/agreement/add';
+        }else{
+
+            error = 1;
+            alert('Incorrect purchase');
+        }
+
+        if(error == 0){
+
+            var customer = stage.find('.choose_customer_dropdown');
+            var title = stage.find('.title');
+            var endTermSelect = stage.find('.choose_end_term_dropdown');
+            var endTerm = stage.find('.end_term');
+            var price = stage.find('.price');
+            var description = stage.find('.description');
+            var product = stage.find('.choose_product');
+            var music = stage.find('.choose_agreement_music');
+            var license = stage.find('.choose_agreement_license');
+            var licenseTerms = stage.find('.license_terms');
+
+            if(stage.find('.choose_customer_dropdown').length > 0){
+                if(customer.val() == ''){
+                    stage.find('.choose_customer_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('customer', customer.val());
+                }
+            }
+            if(stage.find('.title').length > 0){
+
+                if(title.val() == ''){
+                    stage.find('.title_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('title', title.val());
+                }
+            }
+            if(stage.find('.price').length > 0){
+
+                if(price.val() == ''){
+                    stage.find('.price_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('price', price.val());
+                }
+            }
+            if(stage.find('.description').length > 0){
+
+                if(description.val() == ''){
+                    stage.find('.description_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('description', description.val());
+                }
+            }
+            if(stage.find('.choose_end_term_dropdown').length > 0){
+
+                if(endTermSelect.val() == ''){
+                    stage.find('.choose_end_term_error').removeClass('instant_hide');
+                    error = 1;
+                }else if(endTermSelect.val() == 'custom' && endTerm.val() == ''){
+                    stage.find('.end_term_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('endTermSelect', endTermSelect.val());
+                    formData.append('endTerm', endTerm.val());
+                }
+            }
+            if(stage.find('.choose_product').length > 0){
+                if(product.val() == ''){
+                    stage.find('.choose_product_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('product', product.val());
+                }
+            }
+            if(stage.find('.choose_agreement_music').length > 0){
+                if(music.val() == ''){
+                    stage.find('.choose_agreement_music_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('music', music.val());
+                }
+            }
+            if(stage.find('.choose_agreement_license').length > 0){
+                if(license.val() == ''){
+                    stage.find('.choose_agreement_license_error').removeClass('instant_hide');
+                    error = 1;
+                }else{
+                    formData.append('license', license.val());
+                }
+            }
+            if(stage.find('.license_terms').length > 0){
+                formData.append('terms', licenseTerms.val());
+            }
+
+            if(error){
+                console.log('error');
+            }else{
+
+                formData.append('type', purchaseType);
+                formData.append('id', purchaseId);
+
+                $.ajax({
+
+                    url: url,
+                    dataType: "json",
+                    type: 'post',
+                    cache: false,
+                    contentType: false,
+                    enctype: 'multipart/form-data',
+                    processData: false,
+                    data: formData,
+                    success: function(response) {
+                        if(response.success == 1){
+                            var name = customer.find('option:selected').text();
+                            $('#chat_purchase_popup .stage_two #sender_name').text(name);
+                            $('#chat_purchase_popup .stage_one').addClass('instant_hide');
+                            $('#chat_purchase_popup .stage_two').removeClass('instant_hide');
+                            $('#chat_purchase_popup input, #chat_purchase_popup textarea').val('');
+
+                            refreshChat($('div[data-form="my-contact-form_'+purchaseId+'"]').find('.chat_outer'));
+                        }else{
+                            alert(response.error);
+                        }
+                    }
+                });
+            }
         }
     });
 
@@ -1386,6 +1572,109 @@
             $('.pro_pop_chat_upload .pro_pop_chat_upload_each').remove();
             $('.pro_pop_chat_upload,#body-overlay').hide();
             element.find('.submit_btn').removeClass('disabled');
+        }
+    }
+
+    function chatPurchaseAction(element, type, value, id, account, seller, price){
+
+        var price = atob(price);
+        var curr = $('#pay_quick_popup').attr('data-currency');
+        var parent = $(element).closest('.chat_outer');
+
+        if(type == 'project'){
+
+            url = '/proffer-project/response';
+        }else if(type == 'product'){
+            url = '/proffer-product/response';
+        }else if(type == 'license'){
+            url = '/bispoke-license/agreement/response';
+        }
+
+        if(value == 'Accepted' || value == 'Declined'){
+
+            if(confirm('Be sure to read the project file before proceding. Are you sure to proceed?')){
+
+                var formData = new FormData();
+                formData.append('response', value);
+                formData.append(type, id);
+
+                $.ajax({
+
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    success: function (response) {
+                        if(response.success){
+
+                            if(value == 'Accepted'){
+                                if(parent.closest('.music_btm_list').hasClass('agent_contact_listing')){
+                                    preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + type, 'Price: '+curr+price);
+                                    $('#pay_quick_popup,#body-overlay').show();
+                                }else{
+                                    addCartItem('', type, 0, 0, 0, price, seller, id);
+                                }
+                            }else{
+                                refreshChat(parent);
+                            }
+                        }
+                    }
+                });
+            }
+        }else if(value == 'addToCart'){
+
+            if(parent.closest('.music_btm_list').hasClass('agent_contact_listing')){
+                preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + type, 'Price: '+curr+price);
+                $('#pay_quick_popup,#body-overlay').show();
+            }else{
+                addCartItem('', type, 0, 0, 0, price, seller, id);
+            }
+        }
+    }
+
+    function preparePayInstant(account, id, cardNumberF, cardExpiryF, cardCvcF, mainText, subText){
+
+        if(account !== null){
+
+            var account = atob(account);
+            window.stripe = Stripe($('#stripe_publishable_key').val(), { stripeAccount: account});
+        }else{
+
+            window.stripe = Stripe($('#stripe_publishable_key').val());
+        }
+
+        var elements = window.stripe.elements();
+
+        var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#000','lineHeight': '31px'};
+        var invalidStyles = {'color': '#fc064c'};
+
+        window.eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
+        window.eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
+        window.eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
+
+        window.eCardNumber.mount(cardNumberF);
+        window.eCardCvc.mount(cardCvcF);
+        window.eCardExpiry.mount(cardExpiryF);
+
+        $('#pay_quick_popup #pay_quick_error').text('').removeClass('instant_hide');
+        $('#pay_quick_popup').attr('data-id', id);
+
+        if(id.includes('custom_product')){
+
+            var split = subText.split('_');
+            $('#pay_quick_popup .pay_item_name').text(limitString(split[4], 40));
+            $('#pay_quick_popup .pay_item_price').text(split[2]);
+            $('#pay_quick_popup .pay_item_purchase_qua .pay_item_purchase_qua_num').text(split[3]);
+            $('#pay_quick_popup .pay_item_purchase_det').text(split[0]);
+            if(split[1] != ''){
+                $('#pay_quick_popup .pay_item_purchase_det').text($('#pay_quick_popup .pay_item_purchase_det').text()+' - '+split[1]);
+            }
+        }else{
+
+            $('#pay_quick_popup .main_headline').text(mainText);
+            $('#pay_quick_popup .second_headline').html(subText);
         }
     }
 </script>
