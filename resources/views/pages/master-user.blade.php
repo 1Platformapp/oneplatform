@@ -102,7 +102,7 @@
                                     <input type="submit" value="Log in">
                                 </div><br /><br />
                                 <div class="register_button_outer">
-
+                                    <a href="{{ route('register') }}">Create an account</a>
                                 </div>
                                 <div class="login_register_text_02">
                                     <span style="color: #fff; font-weight: bold;">Creating an account with the 1Platform TV, means you agree to our </span><a href="{{ asset("tc") }}">terms and conditions, </a><a href="">privacy policy</a>

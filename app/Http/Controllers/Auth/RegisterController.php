@@ -88,7 +88,7 @@ class RegisterController extends Controller
     }
 
     public function registerUser(Request $request){
-
+exit;
         $user = User::where("email", $request->email)->first();
         if($user){
             Session::flash('error', "Email already exists");
@@ -180,7 +180,7 @@ class RegisterController extends Controller
                 $result = Mail::to($user->email)->bcc('cotysostudios@gmail.com')->send(new MailUser('emailVerified', $user));
                 $platformManager = User::find(config('constants.admins')['1platformagent']['user_id']);
                 foreach ($platformManager->devices as $device) {
-                                    
+
                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         $fcm = new PushNotificationController();

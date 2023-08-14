@@ -263,7 +263,7 @@
                                     <input type="submit" value="Log In">
                                 </div>
                                 <div class="auth_btn_helper">
-
+                                    <a href="{{ route('register') }}">Create an account</a>
                                 </div>
                             </div>
                         </form>
@@ -295,7 +295,7 @@
                                         <input type="submit" value="LOG IN">
                                     </div><br /><br />
                                     <div class="register_button_outer">
-
+                                        <a href="{{ route('register') }}">Create an account</a>
                                     </div>
 
                                 </form>
