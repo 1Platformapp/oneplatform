@@ -166,6 +166,7 @@ Route::prefix('paypal')->group(function(){
 });
 
 Route::get('logout', [LoginController::class, 'logout']);
+Auth::routes();
 
 Route::prefix('chat')->group(function(){
 
