@@ -139,13 +139,15 @@ class AgentContactController extends Controller
 
             $contactUser = User::where(['email' => $alreadyUserEmail, 'active' => 1])->first();
             if(!$contactUser){
-
                 return redirect()->back()->with(['error' => 'The user email is not an email of a valid account at 1Platform']);
             }
-            $contactExist = AgentContact::where(['email' => $alreadyUserEmail, 'agent_id' => $user->id])->first();
-            if($contactExist){
 
-                return redirect()->back()->with(['error' => 'This person is already your contact']);
+            $contactExist = AgentContact::where(function($q) use ($user) {
+                $q->where('contact_id', $user->id)->orWhere('agent_id', $user->id);
+            })->where('email', $isAlreadyUser)->get()->first();
+
+            if($contactExist){
+                return redirect()->back()->with(['error' => 'This person is already in your contact list']);
             }
         }else{
 
@@ -392,23 +394,6 @@ class AgentContactController extends Controller
                 if(!$alreadyUser){
 
                     return 'Error: Please contact your agent to know the details of this issue (ref: contact_email_mismatch)';
-                }
-
-                $contactId = $contact->contact_id;
-                $existingAgentContact = AgentContact::where('contact_id', $contactId)->where('agent_id', '!=', $agentId)->first();
-                if($existingAgentContact){
-
-                    $existingAgentId = $existingAgentContact->agent_id;
-                    $existingUserChatGroup = UserChatGroup::where(['agent_id' => $existingAgentId, 'contact_id' => $contactId])->first();
-                    if($existingUserChatGroup){
-                        $existingUserChatGroup->delete();
-                    }
-
-                    $userNotification = new UserNotificationController();
-                    $request->request->add(['user' => $existingAgentContact->agentUser->id, 'customer' => $existingAgentContact->contactUser->id, 'type' => 'contact_left_agent', 'source_id' => NULL]);
-                    $response = json_decode($userNotification->create($request), true);
-
-                    $existingAgentContact->delete();
                 }
 
                 $contact->approved = 1;

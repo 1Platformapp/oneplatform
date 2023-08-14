@@ -1621,6 +1621,15 @@ class User extends Authenticatable
 
     }
 
+    public function isAgentOfContact($contact)
+    {
+        if($contact->agentUser && $this->id == $contact->agentUser->id){
+            return true;
+        }
+
+        return false;
+    }
+
     public function contactRequests()
     {
 

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Auth;
 
 class AgentContact extends Authenticatable
 {
@@ -26,7 +27,6 @@ class AgentContact extends Authenticatable
     public function contracts(){
         return $this->hasMany( Contract::class );
     }
-
 
     public function generateCode(){
 

@@ -78,9 +78,14 @@ class AgencyController extends Controller
             }
         }
 
+        $contacts = AgentContact::where(function($q) use ($user) {
+            $q->where('contact_id', $user->id)->orWhere('agent_id', $user->id);
+        })->orderBy('id', 'desc')->get();
+
+        $chatGroups = $user->chatGroups();
+
         if(!$isAgent){
 
-            $contacts = AgentContact::where(['contact_id' => $user->id])->get();
             if(count($contacts) && $contacts->first()->agentUser){
 
                 $agentContact = $contacts->first();
@@ -95,12 +100,9 @@ class AgencyController extends Controller
                 });
                 $contacts = [];
             }
-            $chatGroups = $user->chatGroups();
         }else{
 
-            $contacts = AgentContact::where(['agent_id' => $user->id])->get();
             $agents = [];
-            $chatGroups = NULL;
             $agentContact = NULL;
         }
 
@@ -124,7 +126,8 @@ class AgencyController extends Controller
             'isAgent' => $isAgent,
             'myContracts' => $myContracts,
             'chatGroups' => $chatGroups,
-            'agentContact' => $agentContact
+            'agentContact' => $agentContact,
+            'contacts' => $contacts
         ];
 
         return view('pages.admin-home', $data);
@@ -431,7 +434,7 @@ class AgencyController extends Controller
                 $success = true;
             }else{
 
-                $partner = $user->isAgent() ? $artist : $agent;
+                $partner = $user->isAgentOfContact($agentContact) ? $artist : $agent;
                 $chatQuery = UserChat::where(function($q) use ($user) {
                         $q->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
                     })->where(function($q) use ($partner) {
@@ -554,7 +557,7 @@ class AgencyController extends Controller
                     $chat->group_id = $chatGroup->id;
                 }else{
 
-                    $partner = $user->isAgent() ? $artist : $agent;
+                    $partner = $user->isAgentOfContact($agentContact) ? $artist : $agent;
                     $chat->recipient_id = $partner->id;
                 }
             }else if($request->has('partner')){
