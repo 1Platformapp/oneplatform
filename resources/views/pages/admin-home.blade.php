@@ -430,12 +430,16 @@
                             <select id="add_chat_group_member">
                                 <option value="">Choose your contact</option>
                                 <option value="add_by_code">Add contact by code</option>
-                                @if(count(Auth::user()->contacts))
-                                    @foreach(Auth::user()->contacts as $contact)
+                                @if(count($contacts))
+                                    @foreach($contacts as $contact)
                                         @if(!$contact->contactUser || $contact->approved == NULL)
                                             @php continue @endphp
                                         @endif
-                                        <option value="{{$contact->contactUser->id}}">{{$contact->contactUser->name}}</option>
+                                        @php
+                                            $isAgentUser = $user->isAgentOfContact($contact);
+                                            $partnerUser = $isAgentUser ? $contact->contactUser : $contact->agentUser;
+                                        @endphp
+                                        <option value="{{$partnerUser->id}}">{{$partnerUser->name}}</option>
                                     @endforeach
                                 @endif
                             </select>

@@ -7,7 +7,7 @@
                         <path d="M171.3 158.4L113 100l58.4-58.4c3.6-3.6 3.6-9.4 0-13s-9.4-3.6-13 0L100 87 41.6 28.7c-3.6-3.6-9.4-3.6-13 0s-3.6 9.4 0 13L87 100l-58.4 58.4c-3.6 3.6-3.6 9.4 0 13s9.4 3.6 13 0L100 113l58.4 58.4c3.6 3.6 9.4 3.6 13 0s3.5-9.5-.1-13z"></path>
                     </g>
                 </svg>
-            </div>  
+            </div>
         </div>
         <div class="usr_men_items_outer">
             <div class="usr_men_items_inner">
@@ -36,7 +36,7 @@
                                             <i class="fas fa-handshake"></i>
                                         </div>Hire Professional Agent
                                     </div>
-                                </div>   
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                                         YouTube Videos
                                     </div>
                                 </div>
-                                
+
                                 <div data-link="profile/media/premium-videos" data-cat="media" data-sub-cat="live_streams" class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-video"></i>
@@ -195,7 +195,7 @@
                                         Premium Videos
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -304,7 +304,7 @@
                                         View
                                     </div>
                                 </a>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                     <div data-cat="chat" class="usr_men_cat_each {{isset($page)&&$page=='chat'?'pro_tb_active':''}}">
@@ -321,15 +321,6 @@
                                         Chat
                                     </div>
                                 </div>
-                                @if(Auth::user()->expert && Auth::user()->apply_expert == 2)
-                                <div data-link="profile/chat/contacts" data-cat="chat" data-sub-cat="contacts" class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-users"></i>
-                                    </div>
-                                    <div class="usr_men_quick_txt">
-                                        Agent Contacts
-                                    </div>
-                                </div>
                                 <div data-link="profile/chat/questionnaires" data-cat="chat" data-sub-cat="questionnaires" class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-question-circle"></i>
@@ -338,7 +329,6 @@
                                         Agent Questionnaires
                                     </div>
                                 </div>
-                                @endif
                                 @if(!Auth::user()->expert && Auth::user()->apply_expert != 2)
                                 <div data-link="profile/chat/get-agent" data-cat="chat" data-sub-cat="get_agent" class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">

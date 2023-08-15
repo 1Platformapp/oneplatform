@@ -122,11 +122,13 @@
                                                         <i class="fas fa-comment-dots"></i>
                                                     </a>
                                                 </li>
+                                                @if($isAgentUser)
                                                 <li>
                                                     <a title="Edit" data-id="{{$contact->id}}" class="m_btn_right_icon_each m_btm_edit active">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
                                                 </li>
+                                                @endif
                                                 <li>
                                                     @if($partnerUser->username)
                                                     <a target="_blank" title="Website" href="{{route('user.home',['params' => $partnerUser->username])}}" class="m_btn_right_icon_each m_btm_website active">
@@ -138,6 +140,7 @@
                                                     </a>
                                                     @endif
                                                 </li>
+                                                @if($isAgentUser)
                                                 <li>
                                                     @if(!$contact->is_already_user || ($contact->is_already_user && $contact->approved))
                                                     <a title="Switch account" data-id="{{route('agent.contact.switch.account',['code' => $contact->code])}}" class="m_btn_right_icon_each m_btm_switch_account active">
@@ -149,16 +152,19 @@
                                                     </a>
                                                     @endif
                                                 </li>
+                                                @endif
                                                 <li>
                                                     <a data-open="blank" title="View Submission" data-id="{{route('agent.contact.details',['code' => $contact->code])}}" class="m_btn_right_icon_each m_btm_view active">
                                                         <i class="fa fa-file-text-o"></i>
                                                     </a>
                                                 </li>
+                                                @if($isAgentUser)
                                                 <li>
                                                     <a title="Delete" class="m_btn_right_icon_each m_btm_del active" data-del-id="{{$contact->id}}">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </li>
+                                                @endif
                                                 @if($contact->approved)
                                                 <li>
                                                     <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$contact->id}}">
@@ -187,15 +193,17 @@
                                     </div>
 
                                     <div class="edit_elem_bottom">
+                                        @if($isAgentUser)
                                         <div class="each_dash_section instant_hide" data-id="contact_edit_{{$contact->id}}">
                                             @include('parts.agent-contact-edit-template', ['contact' => $contact])
                                         </div>
+                                        @endif
                                         @if($contact->approved)
                                         <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$contact->id}}">
                                             @include('parts.agent-contact-calendar', ['contact' => $contact])
                                         </div>
                                         <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
-                                            @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'isAgent' => $isAgent])
+                                            @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts])
                                         </div>
                                         @endif
                                         <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
@@ -259,19 +267,13 @@
 
             <div class="pro_btm_listing_outer">
                 <label>My groups</label>
-                <div class="m_btm_filters_outer">
-                    <div class="m_btm_filter_search">
-
-                    </div>
-                </div>
                 <div class="btn_list_outer">
                     @if(count($chatGroups))
                     <div class="chat_groups">
                         @foreach($chatGroups as $chatGroup)
                         @php $groupContact = \App\Models\AgentContact::where(['contact_id' => $chatGroup->contact_id, 'agent_id' => $chatGroup->agent_id])->get()->first() @endphp
                         @if($groupContact)
-                        @php $contactPDetails = $commonMethods->getUserRealDetails($groupContact->contactUser->id) @endphp
-                        <div id="{{$chatGroup->id}}" data-form="my-contact-form_{{ $groupContact->id }}" class="agent_contact_listing music_btm_list no_sorting clearfix">
+                        <div id="{{$chatGroup->id}}" data-form="my-contact-form_{{ $groupContact->id }}" class="chat_group_listing agent_contact_listing music_btm_list no_sorting clearfix">
                             <div class="edit_elem_top">
                                 <div class="m_btm_list_left">
                                     <div class="music_btm_thumb">
@@ -280,14 +282,8 @@
                                     <ul class="music_btm_img_det">
                                         <li>
                                             <a class="filter_search_target" href="">
-                                                {{$groupContact->contactUser->name}}
+                                                You and {{count($chatGroup->other_members) + 1}} more members in this group
                                             </a>
-                                            <p>
-                                                <br>
-                                                {{$contactPDetails['city'] != '' ? $contactPDetails['city'] : ''}}
-                                                {{ $contactPDetails['city'] != '' && $contactPDetails['skills'] != '' ? ' - ' : '' }}
-                                                {{$contactPDetails['skills'] != '' ? $contactPDetails['skills'] : ''}}
-                                            </p>
                                         </li>
                                     </ul>
                                 </div>
@@ -316,6 +312,7 @@
                 </div>
             </div>
 
+            @if(count($user->contactRequests) > 0)
             <div class="pro_btm_listing_outer">
                 <label>Network Contact Requests</label>
                 <div class="m_btm_filters_outer">
@@ -324,7 +321,6 @@
                     </div>
                 </div>
                 <div class="btn_list_outer">
-                @if(count($user->contactRequests) > 0)
                     @foreach($user->contactRequests as $contactRequest)
                         @php $contactPDetails = $commonMethods->getUserRealDetails($contactRequest->contactUser->id) @endphp
                         <div class="agent_contact_request_listing music_btm_list no_sorting clearfix">
@@ -371,11 +367,9 @@
                             </div>
                         </div>
                     @endforeach
-                @else
-                <div class="no_results">No records yet</div>
-                @endif
                 </div>
             </div>
+            @endif
             @if(!$isAgent)
             <div class="sub_cat_data">
                 <div class="pro_music_search pro_music_info no_border">
@@ -1103,6 +1097,13 @@
                 element.find('.chat_member_each_outer:not(.chat_member_add)').each(function(){
                     customers.push({ key: $(this).attr('data-member'), value: $(this).attr('data-name') });
                 });
+            }else if(element.closest('.music_btm_list').hasClass('chat_group_listing')){
+
+                var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                purchaseType = 'group-purchase';
+                element.find('.chat_member_each_outer:not(.chat_member_add)').each(function(){
+                    customers.push({ key: $(this).attr('data-member'), value: $(this).attr('data-name') });
+                });
             }else if(element.closest('.music_btm_list').hasClass('agent_partner_listing')){
 
                 var id = element.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
@@ -1598,19 +1599,27 @@
         }
     }
 
-    function chatPurchaseAction(element, type, value, id, account, seller, price){
+    function chatPurchaseAction(element, type, value, id, account, seller, price, itemId){
 
         var price = atob(price);
         var curr = $('#pay_quick_popup').attr('data-currency');
         var parent = $(element).closest('.chat_outer');
+        var customId;
+        var customType;
 
         if(type == 'project'){
 
             url = '/proffer-project/response';
-        }else if(type == 'product'){
+            customId = '';
+            customType = 'project';
+        }else if(type == 'proferred-product'){
             url = '/proffer-product/response';
-        }else if(type == 'license'){
+            customId = '';
+            customType = 'product';
+        }else if(type == 'instant-license'){
             url = '/bispoke-license/agreement/response';
+            customId = 'bespoke_' + id;
+            customType = 'license';
         }
 
         if(value == 'Accepted' || value == 'Declined'){
@@ -1619,7 +1628,7 @@
 
                 var formData = new FormData();
                 formData.append('response', value);
-                formData.append(type, id);
+                formData.append(customType, id);
 
                 $.ajax({
 
@@ -1633,11 +1642,15 @@
                         if(response.success){
 
                             if(value == 'Accepted'){
-                                if(parent.closest('.music_btm_list').hasClass('agent_contact_listing') && parent.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == '1'){
-                                    preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + type, 'Price: '+curr+price);
-                                    $('#pay_quick_popup,#body-overlay').show();
+                                if((parent.closest('.music_btm_list').hasClass('agent_contact_listing') && parent.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == '1') || (parent.closest('.music_btm_list').hasClass('chat_group_listing'))){
+                                    var response = preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + customType, 'Price: '+curr+price);
+                                    if(response == ''){
+                                        $('#pay_quick_popup,#body-overlay').show();
+                                    }else{
+                                        alert(response);
+                                    }
                                 }else{
-                                    addCartItem('', type, 0, 0, 0, price, seller, id);
+                                    addCartItem(customId, type, 0, 0, 0, price, seller, id);
                                 }
                             }else{
                                 refreshChat(parent);
@@ -1648,56 +1661,73 @@
             }
         }else if(value == 'addToCart'){
 
-            if(parent.closest('.music_btm_list').hasClass('agent_contact_listing') && parent.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == '1'){
-                preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + type, 'Price: '+curr+price);
-                $('#pay_quick_popup,#body-overlay').show();
+            if((parent.closest('.music_btm_list').hasClass('agent_contact_listing') && parent.closest('.music_btm_list.agent_contact_listing').attr('data-approved') == '1') || (parent.closest('.music_btm_list').hasClass('chat_group_listing'))){
+                var response = preparePayInstant(account, id, '#pay_quick_card_number', '#pay_quick_card_expiry', '#pay_quick_card_cvc', 'You are purchasing a ' + customType, 'Price: '+curr+price);
+                if(response == ''){
+                    $('#pay_quick_popup,#body-overlay').show();
+                }else{
+                    alert(response);
+                }
             }else{
-                addCartItem('', type, 0, 0, 0, price, seller, id);
+                addCartItem(customId, type, 0, 0, 0, price, seller, id);
             }
         }
     }
 
     function preparePayInstant(account, id, cardNumberF, cardExpiryF, cardCvcF, mainText, subText){
 
-        if(account !== null){
+        var error = '';
+
+        if(account === ''){
+
+            error = 'This seller has not connected the stripe account'
+        }else if(account === null){
+
+            window.stripe = Stripe($('#stripe_publishable_key').val());
+        }else{
 
             var account = atob(account);
             window.stripe = Stripe($('#stripe_publishable_key').val(), { stripeAccount: account});
-        }else{
-
-            window.stripe = Stripe($('#stripe_publishable_key').val());
         }
 
-        var elements = window.stripe.elements();
+        if(error != ''){
 
-        var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#000','lineHeight': '31px'};
-        var invalidStyles = {'color': '#fc064c'};
+            return error;
+        }else{
 
-        window.eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
-        window.eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
-        window.eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
+            var elements = window.stripe.elements();
 
-        window.eCardNumber.mount(cardNumberF);
-        window.eCardCvc.mount(cardCvcF);
-        window.eCardExpiry.mount(cardExpiryF);
+            var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#000','lineHeight': '31px'};
+            var invalidStyles = {'color': '#fc064c'};
 
-        $('#pay_quick_popup #pay_quick_error').text('').removeClass('instant_hide');
-        $('#pay_quick_popup').attr('data-id', id);
+            window.eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
+            window.eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
+            window.eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
 
-        if(id.includes('custom_product')){
+            window.eCardNumber.mount(cardNumberF);
+            window.eCardCvc.mount(cardCvcF);
+            window.eCardExpiry.mount(cardExpiryF);
 
-            var split = subText.split('_');
-            $('#pay_quick_popup .pay_item_name').text(limitString(split[4], 40));
-            $('#pay_quick_popup .pay_item_price').text(split[2]);
-            $('#pay_quick_popup .pay_item_purchase_qua .pay_item_purchase_qua_num').text(split[3]);
-            $('#pay_quick_popup .pay_item_purchase_det').text(split[0]);
-            if(split[1] != ''){
-                $('#pay_quick_popup .pay_item_purchase_det').text($('#pay_quick_popup .pay_item_purchase_det').text()+' - '+split[1]);
+            $('#pay_quick_popup #pay_quick_error').text('').removeClass('instant_hide');
+            $('#pay_quick_popup').attr('data-id', id);
+
+            if(id.includes('custom_product')){
+
+                var split = subText.split('_');
+                $('#pay_quick_popup .pay_item_name').text(limitString(split[4], 40));
+                $('#pay_quick_popup .pay_item_price').text(split[2]);
+                $('#pay_quick_popup .pay_item_purchase_qua .pay_item_purchase_qua_num').text(split[3]);
+                $('#pay_quick_popup .pay_item_purchase_det').text(split[0]);
+                if(split[1] != ''){
+                    $('#pay_quick_popup .pay_item_purchase_det').text($('#pay_quick_popup .pay_item_purchase_det').text()+' - '+split[1]);
+                }
+            }else{
+
+                $('#pay_quick_popup .main_headline').text(mainText);
+                $('#pay_quick_popup .second_headline').html(subText);
             }
-        }else{
-
-            $('#pay_quick_popup .main_headline').text(mainText);
-            $('#pay_quick_popup .second_headline').html(subText);
         }
+
+        return '';
     }
 </script>

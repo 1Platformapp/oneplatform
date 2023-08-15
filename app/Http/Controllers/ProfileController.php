@@ -7607,7 +7607,7 @@ class ProfileController extends Controller
                 $totalPrice = $details['price'];
                 $platformFromSeller = $totalPrice * (3/100);
                 $agentFromSeller = $chatDetails->agentContact && $chatDetails->agentContact->commission ? $totalPrice * ($chatDetails->agentContact->commission/100) : 0;
-                $agentFinalShare = $agentFromSeller;
+                $agentFinalShare = $chatDetails->buyer->id == $chatDetails->agent->id ? 0 : $agentFromSeller;
 
                 if($chatDetails->agentTwo && $chatDetails->buyerContact){
                     $agentTwoFinalShare = $agentFinalShare * (50/100);

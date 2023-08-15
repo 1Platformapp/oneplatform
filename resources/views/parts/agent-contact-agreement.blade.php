@@ -39,7 +39,7 @@
                     </div>
                     <div>
                         <div class="-mt-px flex divide-x divide-gray-200">
-                            @if((($myContract->creator == 'agent' && $isAgent) || ($myContract->creator == 'artist' && !$isAgent)) && count($myContract->signatures) < 2)
+                            @if((($myContract->creator == 'agent' && Auth::user()->isAgentOfContact($contact)) || ($myContract->creator == 'artist' && !Auth::user()->isAgentOfContact($contact))) && count($myContract->signatures) < 2)
                             <div class="flex w-0 flex-1">
                                 <a href="{{route('agency.contract.edit.form', ['id' => $myContract->id])}}" target="_blank" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
                                     <i class="fa fa-pencil text-gray-400"></i>&nbsp;Edit

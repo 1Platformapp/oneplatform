@@ -44,12 +44,12 @@
                 @php $music = isset($chat->agreement['music']) ? $chat->agreement['music'] : 0 @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->agreement['status'] == 'Pending')
                 <div class="msg_agreement_actions">
-                    <div onclick="chatPurchaseAction(this, 'license', 'Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
-                    <div onclick="chatPurchaseAction(this, 'license', 'Declined', '{{$chat->id}}', '', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
+                    <div onclick="chatPurchaseAction(this, 'instant-license', 'Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
+                    <div onclick="chatPurchaseAction(this, 'instant-license', 'Declined', '{{$chat->id}}', '', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
                 </div>
                 @elseif(Auth::user()->id == $chat->recipient->id && $chat->agreement['status'] == 'Accepted')
                 <div class="msg_agreement_actions">
-                    <div onclick="chatPurchaseAction(this, 'license', 'addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_add" class="agree_status_btn">
+                    <div onclick="chatPurchaseAction(this, 'instant-license', 'addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{base64_encode($music)}}');return false;" id="msg_agree_add" class="agree_status_btn">
                         Add to cart
                     </div>
                 </div>
@@ -87,12 +87,12 @@
                 @php $productId = $chat->product['id'] @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->product['status'] == 'Pending')
                 <div class="msg_agreement_actions">
-                    <div onclick="chatPurchaseAction(this, 'product', 'Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
-                    <div onclick="chatPurchaseAction(this, 'product', 'Declined', '{{$chat->id}}', '', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
+                    <div onclick="chatPurchaseAction(this, 'proferred-product', 'Accepted', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{$productId}}');return false;" id="msg_agree_accept" class="agree_status_btn">Accept</div>
+                    <div onclick="chatPurchaseAction(this, 'proferred-product', 'Declined', '{{$chat->id}}', '', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_decline" class="agree_status_btn">Decline</div>
                 </div>
                 @elseif(Auth::user()->id == $chat->recipient->id && $chat->product['status'] == 'Accepted')
                 <div class="msg_agreement_actions">
-                    <div onclick="chatPurchaseAction(this, 'product', 'addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$productId}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}');return false;" id="msg_agree_add" class="agree_status_btn">
+                    <div onclick="chatPurchaseAction(this, 'proferred-product', 'addToCart', '{{$chat->id}}', '{{base64_encode($chat->sender->profile->stripe_user_id)}}', '{{$chat->sender->id}}', '{{base64_encode($price)}}', '{{$productId}}');return false;" id="msg_agree_add" class="agree_status_btn">
                         Add to cart
                     </div>
                 </div>
