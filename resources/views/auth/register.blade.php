@@ -3,20 +3,20 @@
 @section('pagetitle') Create your account at 1 Platform @endsection
 
 
-@section('pagekeywords') 
+@section('pagekeywords')
 @endsection
 
 
-@section('pagedescription') 
+@section('pagedescription')
 @endsection
 
 
-@section('seocontent') 
+@section('seocontent')
 @endsection
 
 
 @section('page-level-css')
-    
+
     <link href="{{asset('css/auth.min.css')}}" rel="stylesheet" type="text/css" />
 
     <style>
@@ -38,18 +38,16 @@
         .setup_next_btn { background: #0069d9; color: #fff; justify-content: flex-end; }
         .setup_tray_info { font-size: 15px; margin-top: 8px; line-height: 16px; background: #0069d9; color: white; padding: 8px; }
         .setup_welcome { margin: auto; width: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .setup_welcome_head { font-size: 26px; margin-bottom: 8px; } 
+        .setup_welcome_head { font-size: 26px; margin-bottom: 8px; }
         .setup_welcome_sub_head { font-size: 13px; }
         .setup_welcome .edit_profile_btn_1 { width: 100%; }
-        .manager_chat_option { display: flex; flex-direction: row; align-items: center; margin: 50px 0; } 
+        .manager_chat_option { display: flex; flex-direction: row; align-items: center; margin: 50px 0; }
         .manager_chat_option span {  cursor: pointer; padding: 10px; border: 1px solid #f1f1f1; margin: 0 2px; }
 
         .reg_error{ float: left; text-align: left; font-size: 12px; color: #fc064c; display: none; }
         .setup_signup input[type="text"],input[type="password"],input[type="url"]{ width: 100%; color: #000; padding: 5px; font-size: 14px; height: 38px; border: 1px solid rgb(230, 230, 230); margin: 2px 0; }
         .setup_signup input[type="submit"] { background-color: rgb(39, 40, 42); color: #fff; padding: 9px; text-align: center; cursor: pointer; width: 99%; margin: 0 auto; display:  block; transition: all 0.1s linear 0s; text-transform: uppercase; border-radius: 3px; }
         .startup_wizard_signup_row { margin-bottom: 19px; }
-        #verify_code_outer { position: relative; }
-        #verify_code_actual { position: absolute; top: 0; right: 0; bottom: 0; display: flex; margin: 2px 0; align-items: center; justify-content: center; background-color: rgb(39, 40, 42); color: #fff; padding: 9px; text-align: center; }
 
         @media (min-width:320px) and (max-width: 767px) {
 
@@ -71,97 +69,93 @@
 
 
 @section('page-level-js')
+<head>
+   <script src="https://www.google.com/recaptcha/api.js"></script>
+   <script>
 
-    <script>
+      function validateRegister(){
+         var success = true;
+         var name = $("#register-form input[name=name]").val();
+         var firstName = $("#register-form input[name=firstName]").val();
+         var lastName = $("#register-form input[name=lastName]").val();
+         var email = $("#register-form input[name=email]").val();
+         var contact_number = $("#register-form input[name=contact_number]").val();
+         var confirm_email = $("#register-form input[name=email_confirmation]").val();
+         var pwd = $("#register-form input[name=password]").val();
 
-        function validateRegister(){
-            var success = true;
-            var name = $("#register-form input[name=name]").val();
-            var firstName = $("#register-form input[name=firstName]").val();
-            var lastName = $("#register-form input[name=lastName]").val();
-            var email = $("#register-form input[name=email]").val();
-            var contact_number = $("#register-form input[name=contact_number]").val();
-            var confirm_email = $("#register-form input[name=email_confirmation]").val();
-            var pwd = $("#register-form input[name=password]").val();
-            var verify_code = $("#register-form input[name=verify_code]").val();
+         $('.reg_error').hide();
 
-            $('.reg_error').hide();
+         if(name == ''){
+               //$("#name_error").text('Name is required').show();
+               //success = false;
+         }
 
-            if(name == ''){
-                //$("#name_error").text('Name is required').show();
-                //success = false;
-            }
+         if(firstName == ''){
+               $("#first_name_error").text('First Name is required').show();
+               success = false;
+         }
 
-            if(firstName == ''){
-                $("#first_name_error").text('First Name is required').show();
-                success = false;
-            }
+         if(lastName == ''){
+               $("#last_name_error").text('Last Name is required').show();
+               success = false;
+         }
 
-            if(lastName == ''){
-                $("#last_name_error").text('Last Name is required').show();
-                success = false;
-            }
+         if(email == ''){
+               $("#email_error").text('Email is required').show();
+               success = false;
+         }
+         if(confirm_email == ''){
+               $("#confirm_email_error").text('Email confirmation is required').show();
+               success = false;
+         }
+         if(email != '' && confirm_email != '' && email != confirm_email){
+               $("#email_error,#confirm_email_error").text('Email do not match').show();
+               success = false;
+         }
+         if(email != '' && confirm_email != '' && email == confirm_email && !validateEmail(email)){
+               $("#email_error").text('Email is not valid').show();
+               success = false;
+         }
 
-            if(email == ''){
-                $("#email_error").text('Email is required').show();
-                success = false;
-            }
-            if(confirm_email == ''){
-                $("#confirm_email_error").text('Email confirmation is required').show();
-                success = false;
-            }
-            if(email != '' && confirm_email != '' && email != confirm_email){
-                $("#email_error,#confirm_email_error").text('Email do not match').show();
-                success = false;
-            }
-            if(email != '' && confirm_email != '' && email == confirm_email && !validateEmail(email)){
-                $("#email_error").text('Email is not valid').show();
-                success = false;
-            }
-            if(verify_code == ''){
-                //$("#verify_code_error").text('Required').show();
-                //success = false;
-            }
+         if(pwd == ''){
+               $("#pwd_error").text('Password is required').show();
+               success = false;
+         }else if(pwd.length < 6){
+            $("#pwd_error").text('Password should be at least 6 characters long').show();
+               success = false;
+         }
+         if(contact_number == ''){
+               //$("#contact_number_error").text('Contact number is required').show();
+               //success = false;
+         }
+         return success;
+      }
 
-            if(pwd == ''){
-                $("#pwd_error").text('Password is required').show();
-                success = false;
-            }else if(pwd.length < 6){
-            	$("#pwd_error").text('Password should be at least 6 characters long').show();
-                success = false;
-            }
-            if(contact_number == ''){
-                //$("#contact_number_error").text('Contact number is required').show();
-                //success = false;
-            }
-            return success;
-        }
+      $(document).ready(function(){
 
-        $(document).ready(function(){
+         $('.manager_chat_option span').click(function(){
 
-            $('.manager_chat_option span').click(function(){
+               if($(this).attr('data-manager-action') == 'yes'){
 
-                if($(this).attr('data-manager-action') == 'yes'){
-                    
-                    $('input[name="managerChat"]').val(1);
-                }
-                $('.setup_welcome').addClass('instant_hide');
-                $('.setup_signup').removeClass('instant_hide');
-            });
+                  $('input[name="managerChat"]').val(1);
+               }
+               $('.setup_welcome').addClass('instant_hide');
+               $('.setup_signup').removeClass('instant_hide');
+         });
 
-        });
+      });
 
-    </script>
+   </script>
 
 @endsection
 
 
 @section('flash-message-container')
-    
+
     @if (Session::has('error'))
 
         <div class="error_span">
-            <i class="fa fa-times-circle"></i> 
+            <i class="fa fa-times-circle"></i>
             {{ (is_array(Session::get('error'))) ? Session::get('error')[0] : Session::get('error') }}
         </div>
     @endif
@@ -170,7 +164,7 @@
 
 
 @section('page-content')
-    
+
     <div class="setup_welcome {{Session::has('error') ? 'instant_hide' : ''}}">
         <div class="setup_logo">
             <img src={{asset('images/test/setup_welcome.gif')}}>
@@ -188,7 +182,7 @@
     </div>
 
     <div class="setup_signup {{!Session::has('error') ? 'instant_hide' : ''}}">
-        
+
         <div class="setup_tray_main">
             <div class="setup_tray_left">
                 <div class="setup_tray_step">
@@ -244,6 +238,8 @@
                 <a href="{{route('tc')}}">terms and conditions, </a>
                 <a href="{{route('privacy.policy')}}">privacy policy</a>
             </div><br />
+            <div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div>
+            <br />
             <div class="">
                 <input type="submit" value="Submit">
             </div>
