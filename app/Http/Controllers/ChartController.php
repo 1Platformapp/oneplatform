@@ -1499,14 +1499,18 @@ class ChartController extends Controller
                 if($findType == 'industry_contacts'){
 
                     $explode = explode('_', $find);
-                    if($explode[0] != ''){
+
+                    if(isset($explode[0]) && $explode[0] != ''){
                         $request->request->add(['category_filter' => $explode[0]]);
                     }
-                    if($explode[1] != ''){
+                    if(isset($explode[1]) && $explode[1] != ''){
                         $request->request->add(['city_filter' => $explode[1]]);
                     }
-                    if($explode[2] != ''){
+                    if(isset($explode[2]) && $explode[2] != ''){
                         $request->request->add(['page' => $explode[2]]);
+                    }
+                    if(isset($explode[3]) && $explode[3] == '1'){
+                        $request->request->add(['is_fav' => '1']);
                     }
 
                     $industryContact = new IndustryContactController();

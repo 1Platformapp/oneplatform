@@ -4,8 +4,6 @@
 	@if($notification->type != 'system' && $notification->customer)
 		@if($notification->type == 'sale')
 			@php $tab = 'orders' @endphp
-		@elseif($notification->type == 'contact_approved_for_agent' || $notification->type == 'contact_approved_for_contact' || $notification->type == 'agent_form_filled' || $notification->type == 'agent_contact_request' || $notification->type == 'agent_group_member_add' || $notification->type == 'agent_group_member_remove')
-			@php $tab = 'chat' @endphp
 		@else
 			@php $tab = '' @endphp
 		@endif
@@ -26,7 +24,7 @@
 			@php $user = \App\Models\User::find($notification->source_table_id) @endphp
 			@php $customLink = 'https://www.duong.1platform.tv/admin/users/music-license-approval' @endphp
 		@elseif($notification->type == 'chat')
-			@php $customLink = route('profile.with.tab.info', ['tab' => 'chat', 'info' => 'conv_'.$notification->source_table_id]) @endphp
+			@php $customLink = route('agency.dashboard') @endphp
 		@elseif($notification->type == 'new_user_to_platform_manager')
 			@php $user = \App\Models\User::find($notification->source_table_id) @endphp
 			@php $customLink = 'https://www.duong.1platform.tv/admin/users' @endphp
@@ -37,7 +35,7 @@
             @php $contract = \App\Models\AgencyContract::find($notification->source_table_id) @endphp
 		@endif
 
-		<div data-id="{{$notification->id}}" data-type="{{$notification->type}}" data-link="{{isset($customLink) && $customLink != '' ? $customLink : ($tab != '' ? route('profile.with.tab',['tab' => $tab]) : route('profile')) }}" class="each_usr_notif_item">
+		<div data-id="{{$notification->id}}" data-type="{{$notification->type}}" data-link="{{isset($customLink) && $customLink != '' ? $customLink : ($tab != '' ? route('profile.with.tab',['tab' => $tab]) : route('agency.dashboard')) }}" class="each_usr_notif_item">
 		    <div class="usr_notif_item_avatar">
 		        <img alt="user notification" src="{{$commonMethods->getUserDisplayImage($notification->customer->id)}}" />
 		    </div>

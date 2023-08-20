@@ -4091,7 +4091,7 @@ class ProfileController extends Controller
 
                 }else{
 
-                    $redirectUrl = "/profile";
+                    $redirectUrl = "/dashboard";
                     $isBuyerOnly = NULL;
 
                     if(Session::has('socialite_from') && strpos(Session::get('socialite_from'), 'negotiate_') !== false){

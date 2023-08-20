@@ -30,32 +30,32 @@ class IndustryContactController extends Controller
 
     public function add(Request $request)
     {
-        
+
     }
 
     public function create(Request $request)
     {
-        
+
     }
 
     public function edit(Request $request)
     {
-        
+
     }
 
     public function read(Request $request)
     {
-        
+
     }
 
     public function update(Request $request)
     {
-        
+
     }
 
     public function destroy(Request $request)
     {
-       
+
     }
 
     public function browse(Request $request)
@@ -66,6 +66,7 @@ class IndustryContactController extends Controller
         $limit = 9;
         $page = 1;
         $where = [];
+        $user = Auth::user();
 
         if($request->has('page') && $request->page != ''){
 
@@ -92,9 +93,10 @@ class IndustryContactController extends Controller
             }
         }
 
+        $favsOnly = $request->has('is_fav') && $request->is_fav == '1' && is_array($user->favourite_industry_contacts) ? true : false;
         $all = $request->city_filter;
 
-        $allIndustryContacts = IndustryContact::where($where)->get();
+        $allIndustryContacts = $favsOnly ? IndustryContact::where($where)->whereIn('id', $user->favourite_industry_contacts)->get() : IndustryContact::where($where)->get();
         $totalRecords = count($allIndustryContacts);
         $totalPages = ceil($totalRecords/$limit);
 
@@ -107,8 +109,8 @@ class IndustryContactController extends Controller
         $pageInfoEncrypted = ['first' => $this->encodeDecode('encrypt', $firstPage), 'prev' => $this->encodeDecode('encrypt', $prevPage), 'current' => $this->encodeDecode('encrypt', $currentPage), 'next' => $this->encodeDecode('encrypt', $nextPage), 'last' => $this->encodeDecode('encrypt', $lastPage)];
         $pageInfo = ['first' => $firstPage, 'prev' => $prevPage, 'current' => $currentPage, 'next' => $nextPage, 'last' => $lastPage, 'total_pages' => $totalPages];
 
-        $contacts = IndustryContact::where($where)->skip($offset)->take($limit)->get();
-        $html = \View::make('parts.industry-contacts', ['contacts' => $contacts, 'pageInfo' => $pageInfo, 'pageInfoEncrypted' => $pageInfoEncrypted])->render();
+        $contacts = $favsOnly ? IndustryContact::where($where)->whereIn('id', $user->favourite_industry_contacts)->skip($offset)->take($limit)->get() : IndustryContact::where($where)->skip($offset)->take($limit)->get();
+        $html = \View::make('parts.industry-contacts', ['contacts' => $contacts, 'pageInfo' => $pageInfo, 'pageInfoEncrypted' => $pageInfoEncrypted, 'filters' => $where])->render();
 
         return json_encode(['success' => $success, 'error' => $error, 'data' => $html, 'next_page' => $nextPage, 'prev_page' => $prevPage, 'current_page' => $currentPage]);
     }

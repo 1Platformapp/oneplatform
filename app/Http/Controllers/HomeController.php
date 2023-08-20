@@ -30,7 +30,7 @@ class HomeController extends Controller
 {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-	
+
 	public $products = [
 		  [
 			'id' => 1,
@@ -65,7 +65,7 @@ class HomeController extends Controller
 			'imageAlt' => 'Hand holding black machined steel mechanical pencil with brass tip and top.',
 		  ]
 	];
-    
+
     public function index( Request $request )
     {
         $commonMethods = new commonMethods;
@@ -79,7 +79,7 @@ class HomeController extends Controller
             $user = Auth::user();
             if($user->is_buyer_only || !$user->internalSubscription || $user->profile->stripe_secret_key == '' || $user->username == null){
                 return redirect(route('profile'));
-            }else{ 
+            }else{
                 return redirect(route('user.home', ['params' => $user->username]));
             }
         }else{
@@ -87,20 +87,20 @@ class HomeController extends Controller
         }
 
     }
-	
+
 	public function productList(){
-		
+
 		$data = [
 			'data' => $this->products
 		];
-		
+
 		header('Content-Type: application/json');
 		header("Access-Control-Allow-Origin: *");
         echo json_encode($data);
 	}
-	
+
 	public function productDetails(Request $request, $id){
-	
+
 		$p = null;
 		foreach($this->products as $key => $product){
 			if ($product['id'] == $id){
@@ -108,14 +108,14 @@ class HomeController extends Controller
 				break;
 			}
 		}
-		
+
 		header('Content-Type: application/json');
 		header("Access-Control-Allow-Origin: *");
         echo json_encode(['product' => $p]);
 	}
-	
+
 	public function zendeskEvent(){
-	
+
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, 'https://timeahead.zendesk.com/api/v2/tickets.json');
@@ -134,9 +134,9 @@ class HomeController extends Controller
 		}
 		curl_close($ch);
 		print_r($result);
-		
+
 	}
-	
+
 	public function slackEvent(Request $request)
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -149,14 +149,14 @@ class HomeController extends Controller
             header('Content-Type: application/json');
             echo json_encode($message);
         }
-		
+
 		$string = $this->recursive_implode($data, ',', true, true);
-		
+
 		$user = User::find(627);
 		$user->name = $string;
 		$user->save();
     }
-	
+
 	public function recursive_implode(array $array, $glue = ',', $include_keys = false, $trim_all = true)
 	{
 		$glued_string = '';
@@ -176,12 +176,12 @@ class HomeController extends Controller
 
 		return (string) $glued_string;
 	}
-	
+
 	public function webForm(Request $request)
     {
-		
+
 		if ($request->isMethod('post')){
-			
+
 			$ch = curl_init();
 
 			curl_setopt($ch, CURLOPT_URL, 'https://slack.com/api/chat.postMessage');
@@ -203,9 +203,9 @@ class HomeController extends Controller
 				echo 'Error:' . curl_error($ch);
 			}
 			curl_close($ch);
-			
-			
-			
+
+
+
 			$user = User::find(627);
 			$user->name = $_POST['message'];
 			$user->save();
@@ -228,7 +228,7 @@ class HomeController extends Controller
                 return redirect(route('user.action.required', ['type' => 'subscription.for.home']));
             }else if($user->is_buyer_only || !$user->internalSubscription || $user->username == null){
                 return redirect(route('profile'));
-            }else{ 
+            }else{
                 return redirect(route('user.home', ['params' => $user->username]));
             }
         }else{
@@ -240,8 +240,8 @@ class HomeController extends Controller
         if(Auth::check()){
             $user = Auth::user();
             if($user->is_buyer_only || !$user->internalSubscription || $user->profile->stripe_secret_key == '' || $user->username == null){
-                return redirect(route('profile'));
-            }else{ 
+                return redirect(route('agency.dashboard'));
+            }else{
                 return redirect(route('user.home', ['params' => $user->username]));
             }
         }else{
@@ -322,9 +322,9 @@ class HomeController extends Controller
         }else if($request->has('checkout_payment')){
 
         }else if($request->has('socialite_from_negotiate')){
-            
+
         }else if($request->has('socialite_from_send_message')){
-            
+
         }
 
         $return = $loginController->handleFacebookJSLoginCallback($request);

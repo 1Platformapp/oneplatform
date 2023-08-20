@@ -86,7 +86,7 @@ body { width: 100%; font-size: 14px; font-family: Open sans, sans-serif; -webkit
 .pro_page_pop_up input:not(:first-of-type):not(.groupon),.pro_page_pop_up select:not(:first-child):not(.groupon), .pro_page_pop_up textarea:not(.groupon) { margin-top: 20px; }
 .pro_page_pop_up .pro_pop_multi_row { display: flex; justify-content: space-between; }
 .pro_page_pop_up .pro_pop_multi_row .each_col { flex: 0 1 49%; }
-.pro_page_pop_up .pro_pop_multi_row select,.pro_page_pop_up .pro_pop_multi_row input { margin-top: 20px; } 
+.pro_page_pop_up .pro_pop_multi_row select,.pro_page_pop_up .pro_pop_multi_row input { margin-top: 20px; }
 .pro_page_pop_up input.groupon, .pro_page_pop_up textarea.groupon { margin-top: 0px; }
 .pro_page_pop_up .pro_input_group:not(:first-of-type) { margin-top: 20px; }
 .pro_page_pop_up textarea { border: 2px solid rgb(230, 230, 230); width: 100%; height: 100px; font-family: Open sans, sans-serif; font-size: 15px; color: #000; padding: 5px; }
@@ -180,7 +180,7 @@ body { width: 100%; font-size: 14px; font-family: Open sans, sans-serif; -webkit
 .pro_reset_password .pro_soc_top_close { height: 14px; margin-top: 2px; }
 
 #to_top { display: none; position: fixed; right: 5px; bottom: 0; width: 34px; height: 35px; cursor: pointer; background: #444; color: #fff; font-size: 35px; font-family: Open sans, sans-serif; text-align: center; width: 45px; height: 45px;  }
-.has-danger label { border-color: rgb(207, 92, 96) !important; }  
+.has-danger label { border-color: rgb(207, 92, 96) !important; }
 .has-danger .music_file_label,.has-danger .music_file_button{ background-color: #fc064c; color: #fff; }
 .has-danger span { color: rgb(207, 92, 96) !important; }
 .has-danger .p_lic_left,.has-danger input[type="number"],.has-danger input[type="text"] { border-width: 2px; border-color: #fc064c; }
@@ -384,7 +384,7 @@ body { width: 100%; font-size: 14px; font-family: Open sans, sans-serif; -webkit
 }
 
 @-moz-document url-prefix('') {
-  
+
 }
 
 .usr_notif_items_outer { margin-top: 40px; width: 100%; }
@@ -469,7 +469,7 @@ body { width: 100%; font-size: 14px; font-family: Open sans, sans-serif; -webkit
 .each-album-music { margin-bottom: 25px; }
 .each-album-music .thismusic_album_name { overflow: hidden; white-space: nowrap; color:#fff; }
 .allow_offer.ch_select_options { display: flex; align-items: center; }
-.allow_offer.ch_select_options .ch_select_perch_options { width: 50%; } 
+.allow_offer.ch_select_options .ch_select_perch_options { width: 50%; }
 .make_offer_outer { transition:0.3s all ease-in-out; cursor: pointer; font-family: Open sans, sans-serif; color: #fff; height: 40px; border: 1px solid #999; padding: 0px 10px; font-size: 17px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; width: 50%; }
 .make_offer_outer:hover { background-color: #000; }
 .private-music .lock_outer { margin-top: 5px; right: 0; color: #13a89e; display: flex; font-size: 15px; flex-direction: column; align-items: center; }
@@ -539,7 +539,7 @@ html{ line-height: unset; }
 
 	.each-music .thismusic_user_name, .each-album-music .thismusic_user_name { font-size: 13px !important; }
 	.each-music .thismusic_song_name, .each-album-music .thismusic_song_name { font-size: 12px !important; }
-	.each-music .fav_np, .each-music .buy_np { font-size: 20px !important; } 
+	.each-music .fav_np, .each-music .buy_np { font-size: 20px !important; }
 	.each-music .summary .play_now, .each-album-music .summary .play_now { width: 33px !important; }
 	.ch_video_detail_right_sec span  { font-size:11px;  padding-bottom:6px; }
 	.ch_video_detail_right_sec span p  { font-size:10px; padding:0px 2px 0px 2px; }
@@ -547,7 +547,7 @@ html{ line-height: unset; }
 
 	.tab_chanel_img_det a, .tp_sec_in_det a strong { font-size: 13px !important; }
 	.tab_chanel_img_det p { font-size: 12px !important; }
-	
+
 	.wrapper_outer { width:100%; min-width:0%; }
 	.auto_content { width:100%;  }
 	.content_inner { width:100%; padding:10px; }
@@ -631,7 +631,7 @@ html{ line-height: unset; }
 	.hdr_right_icon_outer ul .hdr_menu_user { padding-right: 0; text-align: right; }
 	.ch_left_sec_outer { width: 35.45%; float: right; padding-top: 40px; }
 	.ch_cent_right_outer { width: 63.83%; float: left; }
-	
+
 	.mobile-only { display: none !important; }
 	.tab_chanel_list a { min-width: 105px; max-width: 105px; }
     .tab_chanel_list .tab_chanel_img_det a { min-width: unset; max-width: unset; width: auto; }

@@ -3,7 +3,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\IndustryContactController;
 use App\Http\Controllers\CommonMethods;
+
 use App\Models\User;
 use App\Models\UserChat;
 use App\Models\AgentContact;
@@ -11,9 +14,10 @@ use App\Models\UserChatGroup;
 use App\Models\StripeCheckout;
 use App\Models\Contract;
 use App\Models\AgencyContract;
-use App\Mail\AgencyContract as AgencyContractMailer;
+use App\Models\IndustryContactRegion;
+use App\Models\IndustryContactCategoryGroup;
 
-use Illuminate\Http\Request;
+use App\Mail\AgencyContract as AgencyContractMailer;
 
 use Auth;
 use Image;

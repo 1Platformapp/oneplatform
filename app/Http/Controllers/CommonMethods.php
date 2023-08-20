@@ -58,7 +58,7 @@ class CommonMethods extends Controller
 
 
      */
-    
+
 
     public function createDBConnection($host, $username, $password, $database){
 
@@ -147,7 +147,7 @@ class CommonMethods extends Controller
         $return = ['min_price' => 0, 'recommended_price' => 0, 'commission' => 0, 'vat' => 0, 'success' => 0, 'error' => ''];
         $vatPercent = 20;
         $bonusPercent = 58.8;
-        
+
         $currency = !$currency ? 'gbp' : $currency;
         $costPrice = $currency == 'gbp' ? $product->cost_price_gbp : ($currency == 'usd' ? $product->cost_price_usd : $product->cost_price_eur);
 
@@ -225,7 +225,7 @@ class CommonMethods extends Controller
             imagedestroy($im);
             return ['success' => 1, 'error' => '', 'data' => $printImg];
         }catch(Exception $e) {
-            
+
             return ['success' => 0, 'error' => $e->getMessage(), 'data' => NULL];
         }
     }
@@ -236,9 +236,9 @@ class CommonMethods extends Controller
         $mainFolder = 'prints/uf_'.$user->id;
 
         try {
-            
+
             if(!file_exists(public_path($mainFolder))){
-                
+
                 return ['success' => 0, 'error' => 'No folder for this user '];
             }
 
@@ -254,7 +254,7 @@ class CommonMethods extends Controller
             }
 
             $imageTwoName = rand(100000,999999).'.'.$ext;
-            
+
             if($condicion[0] != $imageTwoWidth){
 
                 Image::make(public_path($imageTwoSrc))->resize($imageTwoWidth, null,function($constraint){$constraint->aspectRatio();})->save(public_path($mainFolder.'/templates/resized/'.$imageTwoName), 100);
@@ -289,16 +289,16 @@ class CommonMethods extends Controller
             imagedestroy($im2);
 
             if(file_exists(asset($mainFolder.'/templates/resized/'.$imageTwoName))){
-                
+
                 unlink(public_path($mainFolder.'/templates/resized/'.$imageTwoName));
             }
 
             return ['success' => 1, 'error' => 0, 'data' => $printImg];
 
         }catch (Exception $e) {
-            
+
             return ['success' => 0, 'error' => $e->getMessage(), 'data' => 0];
-        }   
+        }
     }
 
 
@@ -317,7 +317,7 @@ class CommonMethods extends Controller
         }
         $userCampaign = UserCampaign::where('user_id', $userId)->where('status', 'active')->orderBy('id', 'desc')->first();
         if(!$userCampaign){
-            
+
             $campaign = new UserCampaign;
             $campaign->user_id = $userId;
             $campaign->amount = $campaign->duration = $campaign->extend_duration = $campaign->non_charity_payment_flag = 0;
@@ -373,7 +373,7 @@ class CommonMethods extends Controller
 
             $successful = $amountRaised >= $userCampaign->amount && $userCampaign->amount > 0 ? 1 : 0;
             $unsuccessful = $amountRaised < $userCampaign->amount && $userCampaign->amount > 0 && $daysLeft <= 0 ? 1 : 0;
-        
+
             $targetAmount = $userCampaign->amount > 0 ? self::getNumberShortened($userCampaign->amount, 2) : 'N/A';
 
             foreach ($userr->musics as $key => $music) {
@@ -420,7 +420,7 @@ class CommonMethods extends Controller
                 $campaign['mainHeaderTextTwo'] = '';
                 $campaign['projectTitle'] = $userr->name."'s Store";
             }
-            
+
             $campaign['campaignIsLive'] = $userCampaign->is_live;
             $campaign['campaignTitle'] = $userCampaign->title;
             $campaign['campaignPercentImage'] = '/percent-images/'.$amountRaisedPercent.'.png';;
@@ -532,7 +532,7 @@ class CommonMethods extends Controller
                 $userDetails['country'] = $nonExistantCheckout->country;
             }
         }
-        
+
         return $userDetails;
     }
 
@@ -586,7 +586,7 @@ class CommonMethods extends Controller
     public static function userAgentCheckoutFee($userId){
 
         $return = ['agent_id' => 0, 'percent' => 0];
-        $user = User::find($userId);    
+        $user = User::find($userId);
         if($user){
             $userContact = AgentContact::where(['contact_id' => $user->id])->first();
             if($userContact && $userContact->contactUser && $userContact->agentUser && $userContact->agentUser->expert && $userContact->agentUser->expert->agent_from_platform_fee_type == 2 && $userContact->approved == 1 && $userContact->contactUser->profile->stripe_user_id != '' && $userContact->agentUser->profile->story_text != '' && $userContact->agentUser->custom_background != ''){
@@ -612,7 +612,7 @@ class CommonMethods extends Controller
             if(count($user->musics)){
 
                 foreach ($user->musics as $userMusic) {
-                    
+
                     if(self::fileExists(public_path('user-music-thumbnails/' . $userMusic->thumbnail_feat))){
 
                         $return['musicData'] += self::getFileSize(public_path('user-music-thumbnails/' . $userMusic->thumbnail_feat));
@@ -644,7 +644,7 @@ class CommonMethods extends Controller
                     }
                 }
                 foreach ($user->products as $userProduct) {
-                    
+
                     if(self::fileExists(public_path('user-product-thumbnails/' . $userProduct->thumbnail))){
 
                         $return['productData'] += self::getFileSize(public_path('user-product-thumbnails/' . $userProduct->thumbnail));
@@ -656,7 +656,7 @@ class CommonMethods extends Controller
                 if($userCampaign && count($userCampaign->perks)){
 
                     foreach ($userCampaign->perks as $bonus) {
-                        
+
                         if(self::fileExists(public_path('user-bonus-thumbnails/' . $bonus->thumbnail))){
 
                             $return['campaignData'] += self::getFileSize(public_path('user-bonus-thumbnails/' . $bonus->thumbnail));
@@ -740,7 +740,7 @@ class CommonMethods extends Controller
 
             //$valueNOK = Currency::conv($from = $currencyFrom, $to = $currencyTo, $value = $amount, $decimals = 2);
             //$value = file_get_contents('https://free.currconv.com/api/v7/convert?q='.$currencyFrom.'_'.$currencyTo.'&compact=ultra&apiKey=eb81f53143815dae528c');
-            
+
             //$obj = json_decode($value, true);
             //$exchangeRate = $obj[$currencyFrom.'_'.$currencyTo];
             //$valueNOK = $exchangeRate * $amount;
@@ -752,7 +752,7 @@ class CommonMethods extends Controller
         if(isset($toGBP) && $currencyFrom != 'GBP' && $amount != 0){
 
             //$value = file_get_contents('https://free.currconv.com/api/v7/convert?q='.$currencyFrom.'_GBP'.'&compact=ultra&apiKey=eb81f53143815dae528c');
-            
+
             //$obj = json_decode($value, true);
             //$exchangeRate = $obj[$currencyFrom.'_'.$currencyTo];
             //$valueNOK = $exchangeRate * $amount;
@@ -801,7 +801,7 @@ class CommonMethods extends Controller
             //$valueNOK = $amount;
 
             //$value = file_get_contents('https://free.currconv.com/api/v7/convert?q='.$currencyFrom.'_'.$currencyTo.'&compact=ultra&apiKey=eb81f53143815dae528c');
-            
+
             //$obj = json_decode($value, true);
             //$exchangeRate = $obj[$currencyFrom.'_'.$currencyTo];
             //$valueNOK = $exchangeRate * $amount;
@@ -815,7 +815,7 @@ class CommonMethods extends Controller
 
 
     public function removeEmoji($string){
-        
+
         // Match Enclosed Alphanumeric Supplement
         $regex_alphanumeric = '/[\x{1F100}-\x{1F1FF}]/u';
         $clear_string = preg_replace($regex_alphanumeric, '', $string);
@@ -831,7 +831,7 @@ class CommonMethods extends Controller
         // Match Transport And Map Symbols
         $regex_transport = '/[\x{1F680}-\x{1F6FF}]/u';
         $clear_string = preg_replace($regex_transport, '', $clear_string);
-        
+
         // Match Supplemental Symbols and Pictographs
         $regex_supplemental = '/[\x{1F900}-\x{1F9FF}]/u';
         $clear_string = preg_replace($regex_supplemental, '', $clear_string);
@@ -863,7 +863,7 @@ class CommonMethods extends Controller
                 $youtube = new Youtube('AIzaSyClmbXrPVdKDFBIEzIcX4ZvblS9tZwA6fE');
                 $details = json_decode(json_encode($youtube->getVideoInfo($videoId)), true);
                 $title = $commonMethods->removeEmoji(htmlspecialchars_decode($details['snippet']['title']));
-                
+
             } catch(\Exception $ex){
 
 
@@ -903,7 +903,7 @@ class CommonMethods extends Controller
     }
 
     public static function validateYoutubeLink($value) {
-        
+
         if(preg_match('/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i', $value)){
             return true;
         }
@@ -913,7 +913,7 @@ class CommonMethods extends Controller
 
 
     public static function getYoutubeIdFromUrl($url) {
-        
+
         $parts = parse_url($url);
         if(isset($parts['query'])){
             parse_str($parts['query'], $qs);
@@ -1348,14 +1348,14 @@ class CommonMethods extends Controller
 
 
     public function getYoutubeVideoId($url) {
-     
+
         if (stristr($url,'youtu.be/')){
-            preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); 
-            return $final_ID[4]; 
+            preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID);
+            return $final_ID[4];
         }
         else{
-            @preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.*?)\/(embed\/|watch.*?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); 
-            return $IDD[5]; 
+            @preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.*?)\/(embed\/|watch.*?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD);
+            return $IDD[5];
         }
     }
 
@@ -1501,7 +1501,7 @@ class CommonMethods extends Controller
 
 
 
-            
+
 
 
             foreach($campaign->checkouts as $checkout){
@@ -1520,7 +1520,7 @@ class CommonMethods extends Controller
 
 
 
-            
+
 
 
 
@@ -1778,7 +1778,7 @@ class CommonMethods extends Controller
 
 
 
-    
+
 
 
             foreach ($campaign->checkouts as $checkout){
@@ -1975,7 +1975,7 @@ class CommonMethods extends Controller
 
         $return['name'] = $user->name;
 
-    
+
 
         $return['splitname'] = preg_replace('/\s/', '<br/>', $return['name'], 1);
 
@@ -2403,7 +2403,7 @@ class CommonMethods extends Controller
 
     public static function getRedirectUrlAfterLogin(){
 
-        return '/profile';
+        return '/dashboard';
     }
 
     public static function getUserBrowser(){
@@ -3225,7 +3225,7 @@ class CommonMethods extends Controller
         }
 
         foreach ($basket as $key => $b) {
-            
+
             if($b->purchase_type == 'music' && !$b->music){
 
                 $b->delete();
@@ -3443,7 +3443,7 @@ class CommonMethods extends Controller
         $userProduct = UserProduct::find($productId);
         $commonMethods = new CommonMethods();
 
-        if( $userProduct ){ 
+        if( $userProduct ){
 
             if($basketId == null){
 
@@ -3897,7 +3897,7 @@ class CommonMethods extends Controller
 
 
 
-    public function timeElapsedString( $datetime, $level = 7 ) { 
+    public function timeElapsedString( $datetime, $level = 7 ) {
 
         $now = new \DateTime;
         $ago = new \DateTime($datetime);
@@ -3927,12 +3927,12 @@ class CommonMethods extends Controller
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 
-    public function createDatabaseBackup($host,$user,$pass,$name,$tables,$except){ 
+    public function createDatabaseBackup($host,$user,$pass,$name,$tables,$except){
 
         $return = '';
         $tables = $tables == '' ? '*' : $tables;
         $link = mysqli_connect($host,$user,$pass,$name);
-        
+
         //get all of the tables
         if($tables == '*')
         {
@@ -3955,17 +3955,17 @@ class CommonMethods extends Controller
         {
             $result = mysqli_query($link, 'SELECT * FROM '.$table);
             $num_fields = mysqli_num_fields($result);
-            
+
             $return.= 'DROP TABLE `'.$table.'`;';
             $row2 = mysqli_fetch_row(mysqli_query($link, 'SHOW CREATE TABLE '.$table));
             $return.= "\n\n".$row2[1].";\n\n";
-            
-            for ($i = 0; $i < $num_fields; $i++) 
+
+            for ($i = 0; $i < $num_fields; $i++)
             {
                 while($row = mysqli_fetch_row($result))
                 {
                     $return.= "INSERT INTO `".$table."` VALUES(";
-                    for($j=0; $j < $num_fields; $j++) 
+                    for($j=0; $j < $num_fields; $j++)
                     {
                         $row[$j] = addslashes($row[$j]);
                         $row[$j] = preg_replace("#\n#","\\n",$row[$j]);

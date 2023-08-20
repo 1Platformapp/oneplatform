@@ -1,47 +1,179 @@
 <div class="pro_pg_tb_det" style="display: block">
     <div class="pro_pg_tb_det_inner">
         <div id="contacts_section" class="sub_cat_data">
-            <div class="pro_main_tray">
+            <div class="flex flex-row bg-[#666] text-white">
                 <div class="pro_tray_title">{{$isAgent ? 'Agency' : ''}} Dashboard</div>
             </div>
+            @php $userPDetails = $commonMethods->getUserRealDetails($user->id) @endphp
+            <div class="">
+                <div class="music_btm_list no_sorting clearfix">
+                    <div class="edit_elem_top">
+                        <div class="m_btm_list_left">
+                            <div class="music_btm_thumb">
+                                <img src="{{$userPDetails['image']}}" />
+                            </div>
+                            <ul class="music_btm_img_det">
+                                <li>
+                                    <a class="filter_search_target" href="">
+                                        Ahsan Hanif
+                                    </a>
+                                </li>
+                                <li>
+                                    <p>
+                                    {{$userPDetails['city'] != '' ? $userPDetails['city'] : ''}}
+                                    {{$userPDetails['skills'] != '' ? ' - '.$userPDetails['skills'] : ''}}
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
 
-            <div class="pro_music_search pro_music_info no_border">
-                <div class="pro_note">
-                    <ul>
-                        <li>Create a new contact in your network</li>
-                        <li>Enter the name, email, commission (if any) and terms (if any). The contact person will be offered to accept or decline this agreement. If its accepted the contact person becomes a 1platform user and can login with your given credentials and can connect a bank account and start selling or providing any services</li>
-                        <li>You will get a commission (if you have provided one) for each sale your contact person will receive through you</li>
-                        <li>After you have created a new contact, you can EDIT and set up an account</li>
-                        <li>After you have set up your contact's account, commission amount and terms, go to edit contact, enter the email and submit. This will send out an email to your contact person and will ask for the approval</li>
-                    </ul>
+                        <div class="m_btm_right_icons">
+                            <ul>
+                                <li>
+                                    <a title="Add contact" class="m_btn_right_icon_each m_btn_add_contact active" data-id="add-contact">
+                                        <i class="fas fa-user-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-open="blank" title="Home page" data-id="{{route('my.user.home')}}" class="m_btn_right_icon_each m_btm_view active">
+                                        <i class="fa fa-globe"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-open="blank" title="Edit profile" data-id="{{route('profile.setup', ['page' => 'welcome'])}}" title="Edit Profile" class="m_btn_right_icon_each m_btm_view active">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a title="Diary" class="m_btn_right_icon_each m_btn_diary active" data-id="my-diary">
+                                        <i class="fa fa-calendar"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="my-industry-contacts">
+                                        <i class="fas fa-handshake"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="edit_elem_bottom">
+                        <div class="each_dash_section" data-value="add-contact">
+                            <div class="pro_music_search pro_music_info no_border">
+                                <div class="pro_note">
+                                    <ul>
+                                        <li>Create a new contact in your network</li>
+                                        <li>Enter the name, email, commission (if any) and terms (if any). The contact person will be offered to accept or decline this agreement. If its accepted the contact person becomes a 1platform user and can login with your given credentials and can connect a bank account and start selling or providing any services</li>
+                                        <li>You will get a commission (if you have provided one) for each sale your contact person will receive through you</li>
+                                        <li>After you have created a new contact, you can EDIT and set up an account</li>
+                                        <li>After you have set up your contact's account, commission amount and terms, go to edit contact, enter the email and submit. This will send out an email to your contact person and will ask for the approval</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <form id="add-contact-form" action="{{route('agent.contact.create')}}" method="POST">
+                                {{ csrf_field() }}
+                                <div class="pro_stream_input_outer">
+                                    <div class="pro_stream_input_each">
+                                        <input placeholder="Name" type="text" class="pro_stream_input" name="pro_contact_name" />
+                                    </div>
+                                    <div class="pro_stream_input_row">
+                                        <div class="pro_stream_input_each">
+                                            <div class="stream_sec_opt_outer">
+                                                <select name="pro_contact_already_user">
+                                                    <option value="">Is this person already registered at 1Platform?</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="pro_stream_input_each">
+                                            <input disabled="" placeholder="Email of user registered at 1Platform" type="text" class="pro_stream_input" name="pro_contact_already_user_email">
+                                        </div>
+                                    </div><br><br>
+                                    <div class="pro_m_chech_outer flex">
+                                        <button type="button" class="add-contact-submit ml-auto bg-white shadow-lg hover:shadow-custom rounded-md text-md font-semibold text-gray-600 px-10 py-2 cursor-pointer text-center">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="each_dash_section instant_hide" data-value="my-diary">
+                            My diary
+                        </div>
+                        <div class="each_dash_section instant_hide" data-value="my-industry-contacts">
+                        @if($user->hasActivePaidSubscription())
+                            <div class="pro_music_info mt-10">
+                                <div class="pro_form_title flex flex-col">
+                                    <div class="flex items-center">
+                                        <div>{{count(\App\Models\IndustryContact::all())}} Industry Contacts Found</div>
+                                        <div class="smart_switch_outer switch_industry_contacts flex-1 ml-auto">
+                                            <div class="smart_switch_txt">Show Favourite Only</div>
+                                            <label class="smart_switch">
+                                                <input type="checkbox" />
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        @php
+                                            $industryContactRegions = \App\Models\IndustryContactRegion::orderBy('id', 'asc')->get();
+                                            $industryContactCategoryGroups = \App\Models\IndustryContactCategoryGroup::orderBy('id', 'asc')->get();
+                                        @endphp
+                                        <div class="ind_con_search_outer flex flex-row items-center mb-5 border-b border-gray-200 py-4">
+                                            <div class="ind_con_search_by inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0">
+                                                <select data-type="ind_cont_drop" id="ind_con_search_by_category">
+                                                    <option value="">I'm Looking For:</option>
+                                                    @foreach($industryContactCategoryGroups as $icCategoryGroup)
+                                                    <optgroup label="{{$icCategoryGroup->name}}">
+                                                        @if(count($icCategoryGroup->categories))
+                                                            @foreach($icCategoryGroup->categories as $icCategory)
+                                                            <option value="{{$icCategory->lookup_id}}">{{$icCategory->name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </optgroup>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="ind_con_search_by inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0 ml-5">
+                                                <select data-type="ind_cont_drop" id="ind_con_search_by_city">
+                                                    <option value="">In City / Region / Country:</option>
+                                                    <optgroup label="ANYWHERE FROM">
+                                                        <option value="alluk">UK</option>
+                                                        <option value="allusa">USA</option>
+                                                        <option value="allcanada">Canada</option>
+                                                    </optgroup>
+                                                    @foreach($industryContactRegions as $icRegion)
+                                                    <optgroup label="{{$icRegion->name.' ('.$icRegion->country->abbreviation.')'}}">
+                                                    @if(count($icRegion->cities))
+                                                        @foreach($icRegion->cities as $icCity)
+                                                        <option value="{{$icCity->city_id}}">{{$icCity->name}}</option>
+                                                        @endforeach
+                                                    @endif
+                                                    </optgroup>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="ind_con_search_submit inline-flex items-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 ml-5 cursor-pointer">Search</div>
+                                        </div>
+                                        <div class="mt-5 industry-contacts-well"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                        </div>
+                        <div class="each_dash_section instant_hide" data-value="my-transactions">
+                            Transactions
+                        </div>
+                    </div>
                 </div>
             </div>
-            <form id="add-contact-form" action="{{route('agent.contact.create')}}" method="POST">
-                {{ csrf_field() }}
-                <div class="pro_stream_input_outer">
-                    <div class="pro_stream_input_each">
-                        <input placeholder="Name" type="text" class="pro_stream_input" name="pro_contact_name" />
-                    </div>
-                    <div class="pro_stream_input_row">
-                        <div class="pro_stream_input_each">
-                            <div class="stream_sec_opt_outer">
-                                <select name="pro_contact_already_user">
-                                    <option value="">Is this person already registered at 1Platform?</option>
-                                    <option value="1">Yes</option>
-                                    <option value="0">No</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pro_stream_input_each">
-                            <input disabled="" placeholder="Email of user registered at 1Platform" type="text" class="pro_stream_input" name="pro_contact_already_user_email">
-                        </div>
-                    </div><br><br>
-                    <div class="pro_m_chech_outer">
-                        <input class="add-contact-submit" type="button" value="Submit">
-                    </div>
-                </div>
-            </form>
-
             <div class="pro_btm_listing_outer">
                 <label class="chat_label chat_label_contacts">My Network Contacts
                     @if(count($contacts) > 0)
@@ -712,6 +844,8 @@
     </div>
 </div>
 <link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.8')}}">
+<link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
+<script src="{{ asset('select2/select2.min.js') }}"></script>
 <script>
     $('select[name="pro_contact_already_user"]').change(function(){
 
@@ -753,6 +887,123 @@
 
             form.submit();
         }
+    });
+
+    $('body').delegate('.ind_con_each_action.details', 'click', function(e){
+
+        var find = $(this).closest('.ind_con_each_outer').attr('data-id');
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': 'industry_contact_details', 'find': find, 'identity_type': 'subscriber', 'identity': ''},
+            success: function(response) {
+                if(response.success == 1){
+
+                    $('.ind_con_details_popup .pro_pop_ind_con_each').addClass('instant_hide').find('.item_name').text('');
+                    $('.ind_con_details_popup .pro_pop_head').text('').addClass('instant_hide');
+
+                    if(response.data.name != ''){
+                        $('.ind_con_details_popup .pro_pop_head').text(response.data.name).removeClass('instant_hide');
+                    }
+                    if(response.data.address != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="address"] .item_name').text(response.data.address);
+                    }
+                    if(response.data.email != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="email"]').removeClass('instant_hide').find('.item_name').text(response.data.email);
+                    }
+                    if(response.data.phone != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="phone"]').removeClass('instant_hide').find('.item_name').text(response.data.phone);
+                    }
+                    if(response.data.website != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="website"]').removeClass('instant_hide').find('.item_name').html(response.data.website);
+                    }
+                    if(response.data.facebook != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="facebook"]').removeClass('instant_hide').find('.item_name').html(response.data.facebook);
+                    }
+                    if(response.data.twitter != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="twitter"]').removeClass('instant_hide').find('.item_name').html(response.data.twitter);
+                    }
+                    if(response.data.instagram != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="instagram"]').removeClass('instant_hide').find('.item_name').html(response.data.instagram);
+                    }
+                    if(response.data.youtube != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="youtube"]').removeClass('instant_hide').find('.item_name').html(response.data.youtube);
+                    }
+                    if(response.data.soundcloud != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="soundcloud"]').removeClass('instant_hide').find('.item_name').html(response.data.soundcloud).removeClass('instant_hide');
+                    }
+                    if(response.data.information != ''){
+                        $('.ind_con_details_popup .pro_pop_ind_con_each[data-type="information"]').removeClass('instant_hide').find('.item_name').html(response.data.information);
+                    }
+
+                    $('.ind_con_details_popup, #body-overlay').show();
+                }else{
+                    alert(response.error);
+                }
+            }
+        });
+    });
+
+    $('body').delegate('.ind_con_each_action.favourites:not(.disabled)', 'click', function(e){
+
+        var thiss = $(this);
+        thiss.addClass('disabled');
+        var id = thiss.closest('.ind_con_each_outer').attr('data-id');
+
+        $.ajax({
+
+            url: "/toggle-ind-con-fav",
+            dataType: "json",
+            type: 'post',
+            data: {'id': id},
+            success: function(response) {
+                if(response.success == 1){
+
+                    if(response.action == 'removed'){
+                        thiss.removeClass('added').find('span').text(' Add to Favourites');
+                        thiss.find('i').removeClass('fas').addClass('far');
+                    }else{
+                        thiss.addClass('added').find('span').text(' Added to Favourites');
+                        thiss.find('i').removeClass('far').addClass('fas');
+                    }
+                }else{
+                    alert(response.error);
+                }
+            },
+            complete: function(response){
+                thiss.removeClass('disabled');
+            }
+        });
+    });
+
+    $('.m_btn_add_contact, .m_btn_diary, .m_btn_industry-contacts, .m_btn_transactions').click(function(e){
+
+        var id = $(this).attr('data-id');
+        $('.each_dash_section:not(.each_dash_section[data-value="'+id+'"])').addClass('instant_hide');
+        $('.each_dash_section[data-value="'+id+'"]').toggleClass('instant_hide');
+
+        if($(this).hasClass('m_btn_industry-contacts') && !$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')){
+
+            getIndustryContacts('');
+        }
+    });
+
+    $('body').delegate('.ind_con_each_nav:not(.disabled),.ind_con_search_submit', 'click', function(e){
+
+        if($(this).hasClass('ind_con_each_nav')){
+            var page = $(this).attr('data-key');
+            $(this).addClass('disabled');
+        }else{
+            var page = '';
+        }
+
+        var category = $('#ind_con_search_by_category').val();
+        var city = $('#ind_con_search_by_city').val();
+        var find = category+'_'+city+'_'+page;
+
+        getIndustryContacts(find);
     });
 
     $('.m_btm_edit, .m_btn_files, .m_btn_calendar, .m_btn_chat').click(function(e){
@@ -1412,6 +1663,39 @@
             $('.chat_filter_tab.chat_filter_contacts, .chat_label_contacts, .chat_filter_tab.chat_filter_agent, .m_btm_filter_search, .m_btm_filter_drop').removeClass('instant_hide');
         }
     });
+
+    $('.switch_industry_contacts .smart_switch input').change(function(){
+
+        if($(this).prop("checked") == true){
+
+            getIndustryContacts('___1');
+        }else{
+
+            getIndustryContacts('');
+        }
+    });
+
+    function getIndustryContacts(find){
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': 'industry_contacts', 'find': find, 'identity_type': 'subscriber', 'identity': ''},
+            success: function(response) {
+                if(response.success == 1){
+                    $('.industry-contacts-well').html(response.data.data);
+                    $('select[data-type="ind_cont_drop"]').select2();
+                }else{
+                    alert(data.error);
+                }
+            },
+            complete: function(response){
+                $(this).removeClass('disabled');
+            }
+        });
+    }
 
     function refreshChat(element){
 

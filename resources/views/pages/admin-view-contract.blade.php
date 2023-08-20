@@ -18,8 +18,6 @@
 <!-- Page Level Javascript !-->
 @section('page-level-js')
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="{{ asset('js/tailwind-custom.js') }}"></script>
 <script src="{{asset('esign/libs/modernizr.js')}}"></script>
 <script src="{{asset('esign/src/jSignature.js')}}"></script>
 <script src="{{asset('esign/src/main.js')}}"></script>

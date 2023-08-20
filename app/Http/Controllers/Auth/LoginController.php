@@ -33,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/profile';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -78,7 +78,7 @@ class LoginController extends Controller
     protected function redirectTo(){
 
         $user = Auth::user();
-        $url = $this->handleUserProAppRedirect($user, route('profile.with.tab', ['tab' => 'chat', 'subTab' => 'box']));
+        $url = $this->handleUserProAppRedirect($user, route('agency.dashboard'));
         return $url;
     }
 
@@ -139,7 +139,7 @@ class LoginController extends Controller
      * @return Response
      */
     public function handleProviderCallback()
-    {   
+    {
         if(isset($_GET['error_code']) && $_GET['error_code'] != '' && (int) $_GET['error_code'] > 0){
             return redirect(route('login'));
         }
@@ -147,7 +147,7 @@ class LoginController extends Controller
         if(!isset($_SESSION)) {
             session_start();
         }
-        $redirectUrl = "/profile";
+        $redirectUrl = "/dashboard";
         $isBuyerOnly = NULL;
         if(Session::has('contributeUserId')){
             $redirectUrl = "/project/" . Session::get('contributeUserId');
@@ -216,7 +216,7 @@ class LoginController extends Controller
         //Session::flash('basketFlag', $request->basketFlag);
         return Socialite::driver('facebook')->redirect();
     }
-    
+
     public function redirectToProviderCheckoutFb(Request $request){
     	Session::flash('checkoutUserId', $request->userId);
         //Session::flash('basketFlag', $request->basketFlag);
@@ -252,7 +252,7 @@ class LoginController extends Controller
         if(!isset($_SESSION)) {
             session_start();
         }
-        $redirectUrl = '/profile';
+        $redirectUrl = '/dashboard';
         $isBuyerOnly = NULL;
         if(Session::has('socialite_from') && strpos(Session::get('socialite_from'), 'negotiate_') !== false){
             $socialiteFrom = explode('_', Session::get('socialite_from'));
@@ -319,7 +319,7 @@ class LoginController extends Controller
     public function handleProviderCallbackGoogle()
     {
 
-        $redirectUrl = "/profile";
+        $redirectUrl = "/dashboard";
         $isBuyerOnly = NULL;
         if(Session::has('contributeUserId')){
             $redirectUrl = "/project/" . Session::get('contributeUserId');
@@ -437,7 +437,7 @@ class LoginController extends Controller
     }
 
     public function logout(){
-        
+
         if(Auth::check()){
 
         	if(!isset($_SESSION)) {
@@ -454,10 +454,10 @@ class LoginController extends Controller
 
         	Auth::user()->last_activity = null;
         	Auth::user()->save();
-        	
+
         	Auth::logout();
         }
-        
+
         return redirect(route('login'));
     }
 }

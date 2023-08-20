@@ -209,7 +209,7 @@
 		            processData: false,
 				    success: function (response) {
 
-				        window.location.href = '/profile';
+				        window.location.href = '/dashboard';
 				    }
 				});
 			});

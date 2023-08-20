@@ -11,8 +11,6 @@
 @section('page-level-js')
 
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="{{ asset('js/tailwind-custom.js') }}"></script>
 @stop
 
 @section('header')
@@ -489,6 +487,68 @@
                 </div>
                 <br>
                 <div id="pay_quick_final" class="pro_button">SUBMIT</div>
+            </div>
+        </div>
+    </div>
+    <div class="ind_con_details_popup pro_page_pop_up new_popup clearfix" style="z-index: 10;">
+
+        <div class="pro_soc_con_face_inner clearfix">
+            <div style="padding: 10px 20px;" class="soc_con_top_logo clearfix">
+                <a style="opacity:0;" class="logo8">
+                    <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
+                </a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="pro_pop_head"></div>
+            <div class="pro_pop_body">
+                <div data-type="address" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-home"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="email" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-envelope"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="phone" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-phone"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="website" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-globe"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="facebook" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-facebook-square"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="twitter" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-twitter-square"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="instagram" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-instagram"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="youtube" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-youtube"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="soundcloud" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-soundcloud"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+                <div data-type="information" class="pro_pop_ind_con_each instant_hide">
+                    <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-info-circle"></i></div>
+                    <div class="pro_pop_each_ind_con_item item_name"></div>
+                </div>
+            </div>
+            <div class="pro_pop_foot">
+                <div class="foot_help">
+                    If the listing details have changed let us know via online chat to the bottom right
+                </div>
+                <div class="foot_action">
+
+                </div>
             </div>
         </div>
     </div>
