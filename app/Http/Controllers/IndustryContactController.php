@@ -112,7 +112,7 @@ class IndustryContactController extends Controller
         $contacts = $favsOnly ? IndustryContact::where($where)->whereIn('id', $user->favourite_industry_contacts)->skip($offset)->take($limit)->get() : IndustryContact::where($where)->skip($offset)->take($limit)->get();
         $html = \View::make('parts.industry-contacts', ['contacts' => $contacts, 'pageInfo' => $pageInfo, 'pageInfoEncrypted' => $pageInfoEncrypted, 'filters' => $where])->render();
 
-        return json_encode(['success' => $success, 'error' => $error, 'data' => $html, 'next_page' => $nextPage, 'prev_page' => $prevPage, 'current_page' => $currentPage]);
+        return json_encode(['success' => $success, 'error' => $error, 'data' => $html, 'next_page' => $nextPage, 'prev_page' => $prevPage, 'current_page' => $currentPage, 'total_records' => $totalRecords]);
     }
 
     public function encodeDecode($action, $string){

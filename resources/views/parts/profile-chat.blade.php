@@ -15,7 +15,7 @@
                             <ul class="music_btm_img_det">
                                 <li>
                                     <a class="filter_search_target" href="">
-                                        Ahsan Hanif
+                                        {{$user->name}}
                                     </a>
                                 </li>
                                 <li>
@@ -112,7 +112,7 @@
                             <div class="pro_music_info mt-10">
                                 <div class="pro_form_title flex flex-col">
                                     <div class="flex items-center">
-                                        <div>{{count(\App\Models\IndustryContact::all())}} Industry Contacts Found</div>
+                                        <div><span class="ind_con_count">{{count(\App\Models\IndustryContact::all())}}</span> Industry Contacts Found</div>
                                         <div class="smart_switch_outer switch_industry_contacts flex-1 ml-auto">
                                             <div class="smart_switch_txt">Show Favourite Only</div>
                                             <label class="smart_switch">
@@ -162,7 +162,9 @@
                                             </div>
                                             <div class="ind_con_search_submit inline-flex items-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 ml-5 cursor-pointer">Search</div>
                                         </div>
-                                        <div class="mt-5 industry-contacts-well"></div>
+                                        <div class="mt-5 industry-contacts-well">
+                                            <div class="text-center text-md mt-10">...Loading</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1687,8 +1689,13 @@
                 if(response.success == 1){
                     $('.industry-contacts-well').html(response.data.data);
                     $('select[data-type="ind_cont_drop"]').select2();
+                    if(response.data.total_records == 0){
+                        $('.industry-contacts-well').html('<div class="text-center mt-10">No records found</div>');
+                    }
+                    $('.ind_con_count').text(response.data.total_records);
                 }else{
-                    alert(data.error);
+                    console.log(data.error);
+                    $('.industry-contacts-well').html(data.error);
                 }
             },
             complete: function(response){

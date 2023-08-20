@@ -1517,6 +1517,7 @@ class ChartController extends Controller
                     $industryContactsArray = json_decode($industryContact->browse($request), TRUE);
                     if(is_array($industryContactsArray) && isset($industryContactsArray['data'])){
                         $data['data'] = $industryContactsArray['data'];
+                        $data['total_records'] = $industryContactsArray['total_records'];
                         $success = 1;
                     }else{
                         $error = 'Error';
