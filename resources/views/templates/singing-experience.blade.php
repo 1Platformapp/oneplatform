@@ -12,7 +12,7 @@
         @yield('pagekeywords', '')
         @yield('pagedescription', '')
         <link rel="icon" href="{{asset('user-media/favicon/user-favicon-5f525dd506526.ico')}}" type="image/x-icon" />
-        <link rel="stylesheet" href="{{asset('css/style.min.css?v=3.15')}}" >
+        <link rel="stylesheet" href="{{asset('css/style.min.css?v=3.16')}}" >
         <link rel="canonical" href="{{url()->current()}}">
         <link rel="apple-touch-icon" href="{{asset('apple-touch-icon-se.png')}}">
         <script src="{{asset('js/jquery.min.js')}}"></script>

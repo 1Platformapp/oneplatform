@@ -22,7 +22,7 @@
         <link rel="apple-touch-icon" href="{{asset('apple-touch-icon-se.png')}}">
         @endif
         <link rel="icon" href="{{asset('favicon.ico?v=1.1')}}" type="image/x-icon" />
-        <link href="{{asset('css/style.min.css?v=3.15')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/style.min.css?v=3.16')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('css/auth.min.css')}}" rel="stylesheet" type="text/css" />
         <!------------------------>
         <script src="{{asset('js/jquery.min.js')}}" type="text/javascript"></script>

@@ -15,7 +15,6 @@ class VerifyCsrfToken extends Middleware
         //
         'stripe/*',
         'ckfinder/*',
-        'push-notification/*',
-		'slack/*'
+        'push-notification/*'
     ];
 }
