@@ -99,6 +99,9 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
+
+        return redirect(route('agency.dashboard'));
+
         $commonMethods = new CommonMethods();
         if(Auth::check()){
 
