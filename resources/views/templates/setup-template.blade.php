@@ -12,7 +12,7 @@
         <title>@yield('pagetitle')</title>
         <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}" class="switchmediaall">
         <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
-        <link href="/css/style.min.css?v=3.14" rel="stylesheet" type="text/css" />
+        <link href="/css/style.min.css?v=3.15" rel="stylesheet" type="text/css" />
         <link href="/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <script src="/js/jquery.min.js" type="text/javascript"></script>
@@ -27,7 +27,7 @@
         <style>
             .jwplayer.jw-flag-aspect-mode { height:380px !important; }
         </style>
-        
+
         @yield('seocontent')
         <script>
             var browserWidth = $( window ).width();
@@ -71,13 +71,13 @@
                     if(imgDefer[i].getAttribute('data-src')) {
                         imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
                         imgDefer[i].classList.remove('instant_hide');
-                    } 
+                    }
                 }
 
                 var browserWidth = $( window ).width();
                 if( browserWidth > 767 ){
 
-                    
+
                 }
             }
 
@@ -87,7 +87,7 @@
 
                     loadDeferredTasks();
                 }, 3000);
-                
+
             });
         </script>
 

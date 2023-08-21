@@ -36,7 +36,7 @@
 	    <link rel="stylesheet" href="{{asset('player-element/dist/speed/speed.min.css')}}">
 	    <link rel="stylesheet" href="{{asset('player-element/dist/chromecast/chromecast.min.css')}}">
 	    <link rel="stylesheet" href="{{asset('player-element/dist/context-menu/context-menu.min.css')}}">
-	    <link href="{{asset('css/style.min.css?v=3.14')}}" rel="stylesheet" type="text/css">
+	    <link href="{{asset('css/style.min.css?v=3.15')}}" rel="stylesheet" type="text/css">
 	    <link href="{{asset('css/frontend.min.css?v=3.17')}}" rel="stylesheet" type="text/css">
 
 	    <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -58,7 +58,7 @@
 	    @else
 	    <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
 	    @endif
-	    
+
 	</head>
 
 	<body>
@@ -97,7 +97,7 @@
 
 		       	@yield('imp-notice','')
 		    </aside>
-	        
+
 	        <section>
 
 	        	@yield('seocontent')
@@ -137,8 +137,8 @@
 		                		<div data-basket="" data-user="" id="post_cart_toast" class="post_cart_toast">
 		                		    <div class="toast_inner">
 		                		        <div class="message">Added to cart</div>
-		                		        <div id="undo" class="each_option">Undo</div> | 
-		                		        <div id="continue" class="each_option">Continue</div> | 
+		                		        <div id="undo" class="each_option">Undo</div> |
+		                		        <div id="continue" class="each_option">Continue</div> |
 		                		        <div id="checkout" class="each_option">Checkout</div>
 		                		    </div>
 		                		    <div id="close" class="action"><i class="fa fa-times"></i></div>
@@ -147,8 +147,8 @@
 		                		<div data-type="" data-bonusid="" data-total="" data-delivery="" data-deliverytext="" id="crowd_funder_toast" class="post_cart_toast">
 		                		    <div class="toast_inner">
 		                		        <div class="message"></div>
-		                		        <div id="undo" class="each_option">Undo</div> | 
-		                		        <div id="continue" class="each_option">Continue</div> | 
+		                		        <div id="undo" class="each_option">Undo</div> |
+		                		        <div id="continue" class="each_option">Continue</div> |
 		                		        <div id="crowd_checkout" class="each_option">Checkout</div>
 		                		    </div>
 		                		    <div id="close" class="action"><i class="fa fa-times"></i></div>
@@ -166,7 +166,7 @@
 		                		            </div>
 		                		            <div id="share_item_mobile_menu" class="each_option hide_on_desktop">
 		                		                <i class="fa fa-share"></i>
-		                		            </div>          
+		                		            </div>
 		                		            <div id="share_item_copy" class="each_option">Copy Link</div>
 		                		        </div>
 		                		    </div>

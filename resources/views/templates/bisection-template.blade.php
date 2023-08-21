@@ -20,7 +20,7 @@
 
     <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
 
-    <link href="/css/style.min.css?v=3.14" rel="stylesheet" type="text/css" />
+    <link href="/css/style.min.css?v=3.15" rel="stylesheet" type="text/css" />
 
     <link href="/css/app.css" rel="stylesheet" type="text/css" />
 

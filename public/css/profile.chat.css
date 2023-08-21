@@ -191,7 +191,7 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
 	.chat_search_outer { margin: 0 2px !important; }
 	.m_btm_filter_drop { margin-left: unset !important; }
 	.m_btm_filter_search { width: 100%; margin-bottom: 5px; }
-	.m_btm_filters_outer { flex-direction: column !important; width: 100%; }
+	.m_btm_filters_outer { flex-direction: column !important; width: 100%; align-items: unset; }
 
 	.chat_each_group { margin-left: 0 !important; align-items: end !important; min-width: auto !important; border: 1px solid #ccc; margin-right: 2px; }
 	.chat_partition_each { border-top: 0 !important; margin: 5px 0 5px 5px !important; border-left: 1px dashed #ccc; padding: 0 0 0 5px !important; }

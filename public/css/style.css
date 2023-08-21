@@ -70,12 +70,12 @@ body { width: 100%; font-size: 14px; font-family: Open sans, sans-serif; -webkit
 .tab_chanel_img_det a { width: auto; font-family: Open sans, sans-serif; color:#fff; font-size:12px; float:none !important; -webkit-transition:0.3s all ease-in-out; -moz-transition:0.3s all ease-in-out; -o-transition:0.3s all ease-in-out; transition:0.3s all ease-in-out;    }
 .tab_chanel_img_det p { line-height: 30px; font-family: Open sans, sans-serif; color:#999; font-size:14px; white-space: nowrap; overflow: hidden; }
 
-#body-overlay{ display: none; height: 100%; width: 100%; position: fixed; top: 0; left: 0; background: #000; opacity: 0.7; z-index: 10; }
+#body-overlay{ display: none; height: 100%; width: 100%; position: fixed; top: 0; left: 0; background: #000; opacity: 0.7; z-index: 50; }
 
 .active_video_list_chan_tab > .summary { width:100% !important; background:#fc064c;  transition:0.5s all ease-in-out; -webkit-transition:0.5s all ease-in-out; -moz-transition:0.5s all ease-in-out; -o-transition:0.5s all ease-in-out; }
 .active_video_list_chan_tab .each_user_video_artist, .active_video_list_chan_tab > .summary a, .active_video_list_chan_tab > .summary p{ color: #fff !important; }
 
-.pro_page_pop_up { display: none; top: 0; height: fit-content; bottom: 0; left: 0; right: 0; margin: auto; width: 450px; position: fixed; border-radius: 4px; z-index: 11 !important; padding: 20px; background-color: #fff; color: #000; }
+.pro_page_pop_up { display: none; top: 0; height: fit-content; bottom: 0; left: 0; right: 0; margin: auto; width: 450px; position: fixed; border-radius: 4px; z-index: 51 !important; padding: 20px; background-color: #fff; color: #000; }
 .pro_page_pop_up .pro_soc_top_close { margin-top: -2px; cursor: pointer; margin-left: auto; }
 .pro_page_pop_up .soc_con_top_logo { text-align: center; display: flex; align-items: center; justify-content: center; }
 .pro_page_pop_up .soc_con_face_username, .pro_page_pop_up .soc_con_youtube_username { margin-top: 30px; }

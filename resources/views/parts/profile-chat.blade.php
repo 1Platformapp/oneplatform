@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="edit_elem_bottom">
-                        <div class="each_dash_section" data-value="add-contact">
+                        <div class="each_dash_section instant_hide" data-value="add-contact">
                             <div class="pro_music_search pro_music_info no_border">
                                 <div class="pro_note">
                                     <ul>
@@ -97,7 +97,7 @@
                                         </div>
                                     </div><br><br>
                                     <div class="pro_m_chech_outer flex">
-                                        <button type="button" class="add-contact-submit ml-auto bg-white shadow-lg hover:shadow-custom rounded-md text-md font-semibold text-gray-600 px-10 py-2 cursor-pointer text-center">
+                                        <button type="button" class="add-contact-submit w-full md:w-auto ml-auto bg-white shadow-custom md:shadow-lg hover:shadow-custom rounded-md text-md font-semibold text-gray-600 px-10 py-2 cursor-pointer text-center">
                                             Submit
                                         </button>
                                     </div>
@@ -111,9 +111,9 @@
                         @if($user->hasActivePaidSubscription())
                             <div class="pro_music_info mt-10">
                                 <div class="pro_form_title flex flex-col">
-                                    <div class="flex items-center">
-                                        <div><span class="ind_con_count">{{count(\App\Models\IndustryContact::all())}}</span> Industry Contacts Found</div>
-                                        <div class="smart_switch_outer switch_industry_contacts flex-1 ml-auto">
+                                    <div class="flex flex-col md:flex-row md:items-center">
+                                        <div class="flex-1"><span class="ind_con_count">{{count(\App\Models\IndustryContact::all())}}</span> Industry Contacts Found</div>
+                                        <div class="smart_switch_outer flex-1 switch_industry_contacts mt-10 md:mt-0 md:ml-auto">
                                             <div class="smart_switch_txt">Show Favourite Only</div>
                                             <label class="smart_switch">
                                                 <input type="checkbox" />
@@ -126,41 +126,43 @@
                                             $industryContactRegions = \App\Models\IndustryContactRegion::orderBy('id', 'asc')->get();
                                             $industryContactCategoryGroups = \App\Models\IndustryContactCategoryGroup::orderBy('id', 'asc')->get();
                                         @endphp
-                                        <div class="ind_con_search_outer flex flex-row items-center mb-5 border-b border-gray-200 py-4">
-                                            <div class="ind_con_search_by inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0">
-                                                <select data-type="ind_cont_drop" id="ind_con_search_by_category">
-                                                    <option value="">I'm Looking For:</option>
-                                                    @foreach($industryContactCategoryGroups as $icCategoryGroup)
-                                                    <optgroup label="{{$icCategoryGroup->name}}">
-                                                        @if(count($icCategoryGroup->categories))
-                                                            @foreach($icCategoryGroup->categories as $icCategory)
-                                                            <option value="{{$icCategory->lookup_id}}">{{$icCategory->name}}</option>
+                                        <div class="ind_con_search_outer flex flex-col space-y-2 md:space-y-0 md:flex-row md:items-center mb-5 border-b border-gray-200 py-4">
+                                            <div class="flex flex-row items-center">
+                                                <div class="ind_con_search_by overflow-hidden w-1/2 inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0">
+                                                    <select data-type="ind_cont_drop" id="ind_con_search_by_category">
+                                                        <option value="">I'm Looking For:</option>
+                                                        @foreach($industryContactCategoryGroups as $icCategoryGroup)
+                                                        <optgroup label="{{$icCategoryGroup->name}}">
+                                                            @if(count($icCategoryGroup->categories))
+                                                                @foreach($icCategoryGroup->categories as $icCategory)
+                                                                <option value="{{$icCategory->lookup_id}}">{{$icCategory->name}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </optgroup>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="ind_con_search_by overflow-hidden w-1/2 inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0 md:ml-5">
+                                                    <select data-type="ind_cont_drop" id="ind_con_search_by_city">
+                                                        <option value="">City/Region/Country</option>
+                                                        <optgroup label="ANYWHERE FROM">
+                                                            <option value="alluk">UK</option>
+                                                            <option value="allusa">USA</option>
+                                                            <option value="allcanada">Canada</option>
+                                                        </optgroup>
+                                                        @foreach($industryContactRegions as $icRegion)
+                                                        <optgroup label="{{$icRegion->name.' ('.$icRegion->country->abbreviation.')'}}">
+                                                        @if(count($icRegion->cities))
+                                                            @foreach($icRegion->cities as $icCity)
+                                                            <option value="{{$icCity->city_id}}">{{$icCity->name}}</option>
                                                             @endforeach
                                                         @endif
-                                                    </optgroup>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="ind_con_search_by inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0 ml-5">
-                                                <select data-type="ind_cont_drop" id="ind_con_search_by_city">
-                                                    <option value="">In City / Region / Country:</option>
-                                                    <optgroup label="ANYWHERE FROM">
-                                                        <option value="alluk">UK</option>
-                                                        <option value="allusa">USA</option>
-                                                        <option value="allcanada">Canada</option>
-                                                    </optgroup>
-                                                    @foreach($industryContactRegions as $icRegion)
-                                                    <optgroup label="{{$icRegion->name.' ('.$icRegion->country->abbreviation.')'}}">
-                                                    @if(count($icRegion->cities))
-                                                        @foreach($icRegion->cities as $icCity)
-                                                        <option value="{{$icCity->city_id}}">{{$icCity->name}}</option>
+                                                        </optgroup>
                                                         @endforeach
-                                                    @endif
-                                                    </optgroup>
-                                                    @endforeach
-                                                </select>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="ind_con_search_submit inline-flex items-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 ml-5 cursor-pointer">Search</div>
+                                            <div class="ind_con_search_submit inline-flex items-center justify-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 cursor-pointer">Search</div>
                                         </div>
                                         <div class="mt-5 industry-contacts-well">
                                             <div class="text-center text-md mt-10">...Loading</div>
@@ -187,7 +189,7 @@
                         {{'('.count($user->personalChatPartners()).')'}}
                     @endif
                 </label>
-                <div class="m_btm_filters_outer">
+                <div class="m_btm_filters_outer items-end md:items-center">
                     <div class="m_btm_filter_search flex-1">
                         <input data-target="agent_contact_listing" placeholder="Search your contacts by name" type="text" class="m_btm_filter_search_field" />
                     </div>
@@ -200,7 +202,7 @@
                             <option value="Main Network">My Main Network</option>
                         </select>
                     </div>
-                    <div class="smart_switch_outer switch_personal_chat flex-1 ml-auto">
+                    <div class="smart_switch_outer switch_personal_chat flex-1 mt-10 md:mt-0 md:ml-auto">
                         <div class="smart_switch_txt">Show Personal Chat</div>
                         <label class="smart_switch">
                             <input type="checkbox" />
@@ -694,50 +696,41 @@
                                 @php $agentContacts = \App\Models\AgentContact::where('agent_id', $agent->id)->get() @endphp
                                 @php $requestSent = \App\Models\AgentContactRequest::where(['agent_user_id' => $agent->id, 'contact_user_id' => $user->id])->first() @endphp
                                 <div class="agents_listing agent_contact_listing music_btm_list no_sorting clearfix">
-                                    <div class="edit_elem_top">
-                                        <div class="m_btm_list_left">
-                                            <div data-image="{{$agentPDetails['image']}}" class="music_btm_thumb">
-                                                <div class="music_bottom_load_thumb">Load Image</div>
-                                            </div>
-                                            <ul class="music_btm_img_det">
-                                                <li>
-                                                    <a class="filter_search_target" href="javascript:void(0)">
-                                                        {{$agent->name}}
-                                                    </a>
-                                                </li>
-                                                <li><br>
-                                                    <p>
-                                                        <i class="fa fa-users"></i>
-                                                            @if($agent->id == 727)
-                                                                {{number_format(350 + count($agentContacts))}}
-                                                            @elseif($agent->id == 722)
-                                                                {{number_format(175 + count($agentContacts))}}
-                                                            @else
-                                                                {{count($agentContacts)}}
-                                                            @endif
-                                                            network contacts
-                                                        @if($agentPDetails['city'] != '')
-                                                        &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> {{$agentPDetails['city']}}
-                                                        @endif
-                                                        @if($requestSent)
-                                                        <div class="get_agent is_pending">Request sent</div>
+                                    <div class="m_btm_list_left">
+                                        <div data-image="{{$agentPDetails['image']}}" class="music_btm_thumb">
+                                            <div class="music_bottom_load_thumb">Load Image</div>
+                                        </div>
+                                        <ul class="music_btm_img_det">
+                                            <li class="flex flex-row items-center gap-2">
+                                                <a target="_blank" title="Website" href="{{route('user.home',['params' => $agent->username])}}" class="m_btn_right_icon_each m_btm_website active">
+                                                    <i class="fa fa-globe"></i>
+                                                </a>
+                                                <a class="filter_search_target" href="javascript:void(0)">
+                                                    {{$agent->name}}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <p>
+                                                    <i class="fa fa-users"></i>
+                                                        @if($agent->id == 727)
+                                                            {{number_format(350 + count($agentContacts))}}
+                                                        @elseif($agent->id == 722)
+                                                            {{number_format(175 + count($agentContacts))}}
                                                         @else
-                                                        <div data-id="{{$agent->id}}" class="get_agent">Get this agent</div>
+                                                            {{count($agentContacts)}}
                                                         @endif
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="m_btm_right_icons">
-                                            <ul>
-                                                <li>
-                                                    <a target="_blank" title="Website" href="{{route('user.home',['params' => $agent->username])}}" class="m_btn_right_icon_each m_btm_website active">
-                                                        <i class="fa fa-globe"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                        network contacts
+                                                    @if($agentPDetails['city'] != '')
+                                                    &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> {{$agentPDetails['city']}}
+                                                    @endif
+                                                    @if($requestSent)
+                                                    <div class="get_agent is_pending">Request sent</div>
+                                                    @else
+                                                    <div data-id="{{$agent->id}}" class="get_agent">Get this agent</div>
+                                                    @endif
+                                                </p>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             @endforeach
@@ -845,7 +838,7 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.8')}}">
+<link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.9')}}">
 <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
 <script src="{{ asset('select2/select2.min.js') }}"></script>
 <script>

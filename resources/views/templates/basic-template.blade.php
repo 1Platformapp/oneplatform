@@ -11,18 +11,18 @@
         <title>@yield('pagetitle')</title>
         @yield('pagekeywords', '')
         @yield('pagedescription', '')
-    
+
         @if(\Request::route()->getName() == 'site.home' || \Request::route()->getName() == 'user.home' || \Request::route()->getName() == 'custom.domain.home')
             <link rel="canonical" href="{{asset('')}}">
         @else
             <link rel="canonical" href="{{url()->current()}}">
         @endif
-        
+
         @if(parse_url(request()->root())['host'] == 'www.singingexperience.co.uk')
         <link rel="apple-touch-icon" href="{{asset('apple-touch-icon-se.png')}}">
         @endif
         <link rel="icon" href="{{asset('favicon.ico?v=1.1')}}" type="image/x-icon" />
-        <link href="{{asset('css/style.min.css?v=3.14')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/style.min.css?v=3.15')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('css/auth.min.css')}}" rel="stylesheet" type="text/css" />
         <!------------------------>
         <script src="{{asset('js/jquery.min.js')}}" type="text/javascript"></script>
@@ -50,12 +50,12 @@
                 });
             }
         </script>
-        
+
     </head>
     <body>
 
         @yield('seocontent')
-        
+
         <script>
             var browserWidth = $( window ).width();
             if( browserWidth <= 767 ){
@@ -133,15 +133,15 @@
                         <div data-basket="" data-user="" id="post_cart_toast" class="post_cart_toast">
                             <div class="toast_inner">
                                 <div class="message">Added to cart</div>
-                                <div id="undo" class="each_option">Undo</div> | 
-                                <div id="continue" class="each_option">Continue</div> | 
+                                <div id="undo" class="each_option">Undo</div> |
+                                <div id="continue" class="each_option">Continue</div> |
                                 <div id="checkout" class="each_option">Checkout</div>
                             </div>
                             <div id="close" class="action"><i class="fa fa-times"></i></div>
                         </div>
 
                     </aside>
-                    
+
                 </section>
 
             </section>
@@ -158,7 +158,7 @@
                 <div id="body-overlay"></div>
 
             </aside>
-            
+
         </section>
 
         <input type="hidden" id="platform" value="1">
@@ -174,17 +174,17 @@
             });
 
             function loadDeferredTasks() {
-                
+
                 var browserWidth = $( window ).width();
                 var stylesheetDefer = $('link.switchmediaall');
                 for (var i=0; i<stylesheetDefer.length; i++) {
-                    stylesheetDefer[i].setAttribute('media','all'); 
-                } 
+                    stylesheetDefer[i].setAttribute('media','all');
+                }
                 var imgDefer = $('img.defer_loading');
                 for (var i=0; i<imgDefer.length; i++) {
                     if(imgDefer[i].getAttribute('data-src')) {
                         imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));
-                    } 
+                    }
                 }
                 var backgroundLength = $('.back_inactive').length;
                 if(backgroundLength){
@@ -197,17 +197,17 @@
 
                 if( browserWidth > 767 ){
 
-                
-                } 
+
+                }
             }
-            
+
             document.addEventListener("DOMContentLoaded", function(event) {
 
                 setTimeout(function(){
 
                     loadDeferredTasks();
                 }, 3000);
-                
+
             });
         </script>
     </body>
