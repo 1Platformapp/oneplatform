@@ -490,7 +490,7 @@
             </div>
         </div>
     </div>
-    <div class="ind_con_details_popup pro_page_pop_up new_popup clearfix" style="z-index: 10; max-height:500px; overflow:auto">
+    <div class="ind_con_details_popup pro_page_pop_up new_popup clearfix" style="z-index: 10; max-height:600px; overflow:auto">
 
         <div class="pro_soc_con_face_inner clearfix">
             <div style="padding: 10px 20px;" class="soc_con_top_logo clearfix">
