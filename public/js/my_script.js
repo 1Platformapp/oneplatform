@@ -4703,7 +4703,7 @@ $(document).ready(function() {
 
     $("#body-overlay, .pro_page_pop_up .pro_soc_top_close").click(function() {
 
-        $('.hrd_cart_outer,.tv_slide_out_outer,.hrd_usr_men_outer,.hrd_notif_outer').removeClass('active');
+        $('.hrd_cart_outer,.tv_slide_out_outer,.hrd_usr_men_outer,.hrd_notif_outer,.que_men_outer').removeClass('active');
         $('body').removeClass('lock_page');
 
         if($('.in_progress').is(":visible")){

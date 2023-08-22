@@ -618,6 +618,44 @@ class AgentContactController extends Controller
         }
     }
 
+    public function getQuestionnaire(Request $request){
+
+        $agent = Auth::user();
+
+        if($request->has('skill')){
+
+            $skill = $request->get('skill');
+
+            $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill, 'agent_id' => $agent->id])->first();
+
+            $html = \View::make('parts.agent-questionnaire', ['skill' => $skill, 'questionnaire' => $agentQuestionnaire])->render();
+
+            return json_encode(['data' => $html, 'success' => 1]);
+        }else{
+
+            return json_encode(['data' => '', 'error' => 'not enough data for questionnaire']);
+        }
+    }
+
+    public function getQuestionsBySkill(Request $request){
+
+        $agent = Auth::user();
+
+        if($request->has('skill')){
+
+            $skill = $request->get('skill');
+
+            $agentQuestionnaire = AgentQuestionnaire::where(['agent_id' => $agent->id])->first();
+
+            $html = \View::make('parts.agent-questionnaire', ['skill' => $skill])->render();
+
+            return json_encode(['data' => $html, 'success' => 1]);
+        }else{
+
+            return json_encode(['data' => '', 'error' => 'not enough data for questionnaire']);
+        }
+    }
+
     public function manageQuestionnaire(Request $request){
 
         $agent = Auth::user();

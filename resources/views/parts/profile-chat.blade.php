@@ -50,6 +50,11 @@
                                     </a>
                                 </li>
                                 <li>
+                                    <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </a>
+                                </li>
+                                <li>
                                     <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="my-industry-contacts">
                                         <i class="fas fa-handshake"></i>
                                     </a>
@@ -106,6 +111,39 @@
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-diary">
                             My diary
+                        </div>
+                        <div class="each_dash_section instant_hide" data-value="my-questionnaires">
+                            @php $skills = \App\Models\Skill::all() @endphp
+                            <div class="mt-10">
+                                <div class="flex-1 pro_form_title">Manage Questionnaires</div>
+                                <div class="pro_music_search pro_music_info no_border">
+                                    <div class="pro_note">
+                                        <ul>
+                                            <li>Here you can manage your questionnaire for each skill listed below</li>
+                                            <li>You can add/remove questions from a questionnaire</li>
+                                            <li>The questionnaire can be attached to a contact in edit contact section. The contact person will get a link to that questionnaire in email, can fill it up and when the contact submits, you will get notified</li>
+                                            <li>Questionnaire submission by a contact can be seen individually or a spreadsheet containing all of them can be downloaded</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="que-stages stage-one">
+                                    <ul role="list" class="grid xs2:grid-cols-2 sm:grid-cols-4 gap-x-4">
+                                        @foreach($skills as $skill)
+                                        <li data-skill="{{$skill->value}}" class="relative questionnaire-skill flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200 cursor-pointer">
+                                            <div class="flex w-full items-center text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900">
+                                                {{$skill->value}}
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="que-stages stage-two instant_hide">
+                                    <div class="text-lg cursor-pointer que-stage-nav back">
+                                        <i class="fas fa-arrow-left"></i>
+                                    </div>
+                                    <div class="content"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-industry-contacts">
                         @if($user->hasActivePaidSubscription())
@@ -508,186 +546,8 @@
             @endif
             @if(!$isAgent)
             <div class="sub_cat_data">
-                <div class="pro_music_search pro_music_info no_border">
-                    <!--<div class="pro_inp_list_outer">
-                        <div class="pro_explainer_outer">
-                            <div class="pro_explainer_inner">
-                                <div data-explainer-file="{{base64_encode('1c4BpeAGc83Y5_B5y8l2WgGNmz5Ton0Kh')}}" data-explainer-title="What an agent can do?" data-explainer-description="Connect with professional agent" class="pro_explainer_each">
-                                    <div class="pro_explainer_anim">
-                                        <i class="fa fa-caret-right"></i>
-                                    </div>
-                                    <div class="pro_explainer_body">
-                                        <div class="pro_explainer_title">
-                                            What an agent can do?
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pro_explainer_video instant_hide">
-                                <div class="pro_explainer_video_contain">
-                                    <div id="jwp_get_agent"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>!-->
-                </div>
                 <div class="get_agent_outer">
                     <div class="pro_btm_listing_outer pt-0">
-                        <!--<label class="chat_label chat_label_contacts">My Agent</label>
-                        <label class="chat_label chat_label_personal instant_hide">My Personal Chats
-                            @if(count($user->personalChatPartners()) > 0)
-                                {{'('.count($user->personalChatPartners()).')'}}
-                            @endif
-                        </label>
-                        <div class="m_btm_filters_outer">
-                            <div class="smart_switch_outer switch_personal_chat flex-1 ml-auto">
-                                <div class="smart_switch_txt">Show Personal Chat</div>
-                                <label class="smart_switch">
-                                    <input type="checkbox" />
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="btn_list_outer">
-                            <div class="chat_filter_container">
-                                <div class="chat_filter_tab chat_filter_agent">
-                                    <div class="chat_my_agent">
-                                        @if($agentContact)
-                                        @php $myAgent = $agentContact->agentUser @endphp
-                                        @php $agentPDetails = $commonMethods->getUserRealDetails($myAgent->id) @endphp
-                                        @php $agentContacts = \App\Models\AgentContact::where('agent_id', $myAgent->id)->get() @endphp
-                                        <div class="agents_listing agent_contact_listing music_btm_list no_sorting clearfix">
-                                            <div class="edit_elem_top">
-                                                <div class="m_btm_list_left">
-                                                    <div data-image="{{$agentPDetails['image']}}" class="music_btm_thumb">
-                                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                                    </div>
-                                                    <ul class="music_btm_img_det">
-                                                        <li>
-                                                            <a class="filter_search_target" href="javascript:void(0)">
-                                                                {{$myAgent->name}}
-                                                            </a>
-                                                        </li>
-                                                        <li><br>
-                                                            <p>
-                                                                <i class="fa fa-users"></i>
-                                                                    @if($myAgent->id == 727)
-                                                                        {{number_format(350 + count($agentContacts))}}
-                                                                    @elseif($myAgent->id == 722)
-                                                                        {{number_format(175 + count($agentContacts))}}
-                                                                    @else
-                                                                        {{count($agentContacts)}}
-                                                                    @endif
-                                                                    network contacts
-                                                                @if($agentPDetails['city'] != '')
-                                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> {{$agentPDetails['city']}}
-                                                                @endif
-                                                                @if($agentContact->approved)
-                                                                    <div class="get_agent is_current_agent">Your agent</div>
-                                                                @else
-                                                                    <div class="get_agent is_pending">Pending</div>
-                                                                @endif
-                                                            </p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="m_btm_right_icons">
-                                                    <ul>
-                                                        <li>
-                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$agentContact->id}}">
-                                                                <i class="fas fa-comment-dots"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-open="blank" title="View Submission" data-id="{{route('agent.contact.details',['code' => $agentContact->code])}}" class="m_btn_right_icon_each m_btm_view active">
-                                                                <i class="fa fa-file-text-o"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$myAgent->id}}">
-                                                                <i class="fas fa-file-pdf"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$myAgent->id}}">
-                                                                <i class="fa fa-calendar"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a target="_blank" title="Website" href="{{route('user.home',['params' => $myAgent->username])}}" class="m_btn_right_icon_each m_btm_website active">
-                                                                <i class="fa fa-globe"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="edit_elem_bottom">
-                                                @if($agentContact->approved)
-                                                <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$agent->id}}">
-                                                    @include('parts.agent-contact-calendar', ['contact' => $agentContact])
-                                                </div>
-                                                <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$agent->id}}">
-                                                    @include('parts.agent-contact-agreement', ['contact' => $agentContact, 'contracts' => $contracts, 'myContracts' => $myContracts])
-                                                </div>
-                                                @endif
-                                                <div class="each_dash_section instant_hide" data-id="contact_chat_{{$agentContact->id}}">
-                                                    @include('parts.agent-contact-chat', ['contact' => $agentContact, 'isAgent' => false, 'user' => $user])
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @else
-                                        <div class="no_results">You do not have an agent yet</div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="chat_filter_tab chat_filter_personal instant_hide">
-                                @if(count($user->personalChatPartners()) > 0)
-                                    @foreach($user->personalChatPartners() as $partnerId)
-                                        @php $partner = \App\Models\User::find($partnerId) @endphp
-                                        @if(!$partner)
-                                            @php continue @endphp
-                                        @endif
-                                        @php $partnerPDetails = $commonMethods->getUserRealDetails($partnerId) @endphp
-                                        <div data-form="my-contact-form_{{ $partner->id }}" class="agent_partner_listing music_btm_list no_sorting clearfix">
-                                            <div class="edit_elem_top">
-                                                <div class="m_btm_list_left">
-                                                    <div data-image="{{$partnerPDetails['image']}}" class="music_btm_thumb">
-                                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                                    </div>
-                                                    <ul class="music_btm_img_det">
-                                                        <li>
-                                                            <a class="filter_search_target" href="">
-                                                                {{$partner->name}}
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div class="m_btm_right_icons">
-                                                    <ul>
-                                                        <li>
-                                                            <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$partner->id}}">
-                                                                <i class="fas fa-comment-dots"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="edit_elem_bottom">
-                                                <div class="each_dash_section instant_hide" data-id="partner_chat_{{$partner->id}}">
-                                                    @include('parts.agent-contact-chat', ['isPersonal' => true])
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="no_results">No records yet</div>
-                                @endif
-                                </div>
-                            </div>
-                        </div>!-->
                         <label class="chat_label_contacts mt-36">1Platform Agents</label>
                         <div class="chat_filter_agents">
                         @if(count($agents) > 0)
@@ -842,6 +702,7 @@
 <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
 <script src="{{ asset('select2/select2.min.js') }}"></script>
 <script>
+
     $('select[name="pro_contact_already_user"]').change(function(){
 
         if($(this).val() == '1'){
@@ -973,7 +834,7 @@
         });
     });
 
-    $('.m_btn_add_contact, .m_btn_diary, .m_btn_industry-contacts, .m_btn_transactions').click(function(e){
+    $('.m_btn_add_contact, .m_btn_diary, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires').click(function(e){
 
         var id = $(this).attr('data-id');
         $('.each_dash_section:not(.each_dash_section[data-value="'+id+'"])').addClass('instant_hide');
@@ -1668,6 +1529,39 @@
 
             getIndustryContacts('');
         }
+    });
+
+    $('.que-stage-nav').click(function(){
+
+        if($(this).hasClass('back')){
+            $('.que-stages.stage-one').removeClass('instant_hide');
+            $('.que-stages.stage-two').addClass('instant_hide');
+        }
+    });
+
+    $('.questionnaire-skill').click(function(){
+
+        var skill = $(this).attr('data-skill');
+        var formData = new FormData();
+        formData.append('skill', skill);
+        $.ajax({
+
+            url: '/agent/get-questionnaire',
+            type: 'POST',
+            data: formData,
+            contentType:false,
+            cache: false,
+            processData: false,
+            dataType: 'json',
+            success: function (response) {
+                if(response.success){
+                    $('.que-stages.stage-one').addClass('instant_hide');
+                    $('.que-stages.stage-two').removeClass('instant_hide').find('.content').html(response.data);
+                }else{
+                    console.log(response.error);
+                }
+            }
+        });
     });
 
     function getIndustryContacts(find){
