@@ -81,7 +81,6 @@ if($page != 'chat')
                 @php $skills = \App\Models\Skill::all() @endphp
 
                 @foreach($skills as $skill)
-                    @include('parts.agent-questionnaire', ['skill' => $skill->value])
                 @endforeach
             </div>
         </div>

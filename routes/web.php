@@ -115,6 +115,7 @@ Route::post('agent-contact/save-details/{code}/{action}', [AgentContactControlle
 Route::post('agent-contact/question/delete', [AgentContactController::class, 'deleteQuestion'])->name('agent.contact.delete.question');
 Route::post('agent/manage-questionnaire', [AgentContactController::class, 'manageQuestionnaire'])->name('agent.manage.questionnaire');
 Route::post('agent/get-questionnaire', [AgentContactController::class, 'getQuestionnaire'])->name('agent.get.questionnaire');
+Route::post('agent/monies', [AgencyController::class, 'getMoniesData'])->name('agent.get.monies');
 Route::post('agent-contact-request/send', [AgentContactController::class, 'sendRequestToAgent'])->name('agent.contact.send.request');
 Route::post('agent-contact-request/delete', [AgentContactController::class, 'deleteRequestToAgent'])->name('agent.contact.delete.request');
 

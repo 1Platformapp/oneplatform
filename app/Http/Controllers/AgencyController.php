@@ -596,4 +596,21 @@ class AgencyController extends Controller
 
         return json_encode(['success' => true, 'id' => $id]);
     }
+
+    public function getMoniesData (Request $request){
+
+        $user = Auth::user();
+        $success = false;
+        $commonMethods = new CommonMethods();
+        $error = '';
+        $html = '';
+
+        if($request->has('id') && $request->id != ''){
+
+            $id = $request->get('id');
+            $html = \View::make('parts.agent-monies', ['id' => $id, 'user' => $user, 'commonMethods' => $commonMethods])->render();
+        }
+
+        return json_encode(['success' => true, 'id' => $id, 'data' => $html]);
+    }
 }
