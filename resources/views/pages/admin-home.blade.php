@@ -179,6 +179,141 @@
 
     <div id="body-overlay"></div>
 
+    <div class="pro_page_pop_up clearfix" id="subscription_offers_popup">
+
+        <div class="pro_soc_con_face_inner clearfix">
+            <div class="soc_con_top_logo clearfix">
+                <a style="opacity:0;" class="logo8">
+                    <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
+                </a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="soc_con_face_username clearfix">
+                <div class="subscription_offers_in">
+                    <img src="" class="profile_img" />
+                    <div class="profile_heading"></div>
+                    <div class="bullet_each bullet_one"></div>
+                    <div class="bullet_each bullet_two"></div>
+                    <div class="bullet_each bullet_three"></div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <div class="music_zip_download_popup pro_page_pop_up new_popup clearfix" style="z-index: 10;">
+
+        <div class="pro_soc_con_face_inner clearfix">
+
+        <div class="pro_pop_head">Download details</div>
+            <div class="pro_pop_body">
+                <div class="pro_body_in">
+                    <div data-source-id="" data-path="" data-type="main" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Main File</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="license" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-file-pdf-o"></i></div>
+                        <div class="pro_pop_each_item item_name">License PDF</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="loop_one" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Loop</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="loop_two" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Loop</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="loop_three" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Loop</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_one" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_two" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_three" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_four" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_five" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_six" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_seven" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                    <div data-source-id="" data-path="" data-type="stem_eight" class="pro_pop_download_each instant_hide">
+                        <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
+                        <div class="pro_pop_each_item item_name">Stem</div>
+                        <div class="pro_pop_each_item item_size"></div>
+                        <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pro_pop_foot">
+                <div class="foot_help">
+                    Having problems? Please try again or contact us via online chat
+                </div>
+                <div class="foot_action">
+                    <div id="close_download" class="foot_action_btn">Close</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pro_initiating_download in_progress pro_page_pop_up clearfix" style="z-index: 10;" id="pro_initiating_download">
+
+        <div class="pro_soc_con_face_inner clearfix">
+
+            <div class="soc_con_top_logo clearfix">
+
+                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/logo_black.png') }}">
+            </div>
+            <div class="soc_con_face_username clearfix">
+
+                <h3>We are preparing your download. Do not refresh or navigate away.</h3><br><br><br>
+            </div>
+        </div>
+    </div>
+
     <div class="pro_page_pop_up clearfix" id="chat_purchase_popup">
 
         <div class="pro_soc_con_face_inner clearfix">

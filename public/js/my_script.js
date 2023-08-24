@@ -388,36 +388,6 @@ $(document).ready(function() {
         window.location.href = $(this).attr('data-href');
     });
 
-    $('.purchase_download').click(function(){
-
-        var thiss = $(this);
-        var href = thiss.attr('href');
-        if(href == '' || href == 'javascript:void(0)'){
-            var checkoutItem = thiss.attr('data-checkout-item');
-            var download = thiss.attr('data-download');
-            var downloadAs = thiss.parent().parent().parent().find('.my_purchase_sec a').first().text();
-            $('#body-overlay,.pro_initiating_download').show();
-
-            $.ajax({
-
-                url: '/prepare-zip',
-                type: 'POST',
-                data: {'type': download, 'user': window.currentUserId, 'checkout_item': checkoutItem, 'download_as': downloadAs},
-                cache: false,
-                dataType: 'json',
-                success: function (response) {
-
-                    $('#body-overlay,.pro_initiating_download').hide();
-                    if(response.success == 1 && response.download_link != ''){
-                        window.location.href = response.download_link;
-                    }else if(response.success == 1 && response.cloud_download != ''){
-                        prepareDownloadPopup(response.cloud_download, thiss.attr('data-sourcet'));
-                    }
-                }
-            });
-        }
-    });
-
     $('#go_live_project').click(function(){
 
         $('#pro_confirm_go_live,#body-overlay').show();

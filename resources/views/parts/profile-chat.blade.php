@@ -273,7 +273,7 @@
                                 <div class="text-lg cursor-pointer order-stage-nav back">
                                     <i class="fas fa-arrow-left"></i>
                                 </div>
-                                <div class="content"></div>
+                                <div class="content max-h-[600px] overflow-y-auto overflow-x-hidden"></div>
                             </div>
                         </div>
                     </div>
