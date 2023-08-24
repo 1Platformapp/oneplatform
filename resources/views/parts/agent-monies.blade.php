@@ -311,7 +311,8 @@
                 }
             }
         }
-        $('.pro_pop_download_each').click(function(){
+
+        $('body').delegate( ".pro_pop_download_each", "click", function(e){
 
             if($(this).attr('data-path') != '' && $(this).attr('data-source-id') != ''){
 
@@ -329,7 +330,7 @@
             }
         });
 
-        $('#close_download').click(function(){
+        $('body').delegate( "#close_download", "click", function(e){
 
             $('.music_zip_download_popup,#body-overlay').hide();
         });
@@ -340,7 +341,7 @@
             $('#internal_sub_unsub_popup, #body-overlay').show();
         });
 
-        $('.purchase_download').click(function(){
+        $('body').delegate( ".purchase_download", "click", function(e){
 
             var thiss = $(this);
             var href = thiss.attr('href');
@@ -368,6 +369,50 @@
                     }
                 });
             }
+        });
+        $('body').delegate( ".contact_btn:not(.downloadable)", "click", function(e){
+
+            var thiss = $(this);
+            var checkout = thiss.attr('data-checkout');
+            var find = checkout;
+            var findType = thiss.attr('data-find-type');
+
+            if(findType == 'checkout_user'){
+                var identityType = 'checkout_customer';
+            }else if(findType == 'checkout_customer'){
+                var identityType = 'checkout_user';
+            }
+
+            $.ajax({
+
+                url: "/informationFinder",
+                dataType: "json",
+                type: 'post',
+                data: {'find_type': findType, 'find': find, 'identity_type': identityType, 'identity': checkout},
+                success: function(response) {
+                    if(response.success == 1){
+                        var name = response.data.name;
+                        var email = response.data.email;
+                        if(identityType == 'checkout_user'){
+                            var postcode = response.data.postcode;
+                            var address = response.data.address;
+                            var city = response.data.city;
+                            var country = response.data.country;
+
+                            $("#cont_popup_address").html(address+'<br>'+postcode+'<br>'+city+'<br>'+country);
+                        }else{
+                            $("#cont_popup_address").html('');
+                        }
+
+                        $("#cont_popup_name").text(name);
+                        $("#cont_popup_email").text(email);
+                        $("#contact_popup").show();
+                        $('#body-overlay').show();
+                    }else{
+                        alert(data.error);
+                    }
+                }
+            });
         });
     </script>
 @elseif($id == 'my-premium-videos')

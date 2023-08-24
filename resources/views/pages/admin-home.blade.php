@@ -179,6 +179,28 @@
 
     <div id="body-overlay"></div>
 
+    <div class="pro_orders_tab_contact_details pro_page_pop_up clearfix" style="" id="contact_popup">
+
+        <div class="pro_soc_discon_inner clearfix">
+
+            <div class="soc_con_top_logo clearfix">
+
+                <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="pro_orders_tab_contact_details_inner clearfix">
+
+                <h4 id="cont_popup_name"></h4>
+                <h4 id="cont_popup_email"></h4><br />
+                <h4 id="cont_popup_address"></h4>
+                <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+
+                    <a style="cursor: pointer;" id="submit_button" onclick="$('.pro_soc_top_close').click()">Okay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="pro_page_pop_up clearfix" id="subscription_offers_popup">
 
         <div class="pro_soc_con_face_inner clearfix">
