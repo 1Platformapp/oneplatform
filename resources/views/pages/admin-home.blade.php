@@ -325,14 +325,7 @@
 
         <div class="pro_soc_con_face_inner clearfix">
 
-            <div class="soc_con_top_logo clearfix">
-
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/logo_black.png') }}">
-            </div>
-            <div class="soc_con_face_username clearfix">
-
-                <h3>We are preparing your download. Do not refresh or navigate away.</h3><br><br><br>
-            </div>
+            <h3>We are preparing your download. Do not refresh or navigate away.</h3><br><br><br>
         </div>
     </div>
 
