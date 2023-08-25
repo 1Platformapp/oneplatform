@@ -968,6 +968,12 @@
 
             getIndustryContacts('');
         }
+
+        if($(this).hasClass('m_btn_transactions')){
+
+            $('.order-stages.stage-one').removeClass('instant_hide');
+            $('.order-stages.stage-two').addClass('instant_hide');
+        }
     });
 
     $('body').delegate('.ind_con_each_nav:not(.disabled),.ind_con_search_submit', 'click', function(e){
