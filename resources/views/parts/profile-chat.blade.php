@@ -213,6 +213,18 @@
                         <div class="each_dash_section mt-10 instant_hide" data-value="my-transactions">
                             <div class="order-stages stage-one">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                    <div data-id="financial-summary" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="flex-shrink-0 text-lg">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="focus:outline-none cursor-pointer">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">Financial Summary</p>
+                                                <p class="truncate text-sm text-gray-500">Summary of all of your sales, purchases, subscriptions and crowdfunding</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div data-id="my-subscription-plan" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0">
                                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -228,14 +240,26 @@
                                         </div>
                                     </div>
                                     <div data-id="my-purchases" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-                                        <div class="flex-shrink-0">
+                                        <div class="flex-shrink-0 text-lg">
                                             <i class="fa fa-dollar-sign"></i>
                                         </div>
                                         <div class="min-w-0 flex-1">
                                             <div class="focus:outline-none cursor-pointer">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
-                                                <p class="text-sm font-medium text-gray-900">Purchases</p>
-                                                <p class="truncate text-sm text-gray-500">All your purchases from 1Platform</p>
+                                                <p class="text-sm font-medium text-gray-900">My Purchases</p>
+                                                <p class="truncate text-sm text-gray-500">All your purchases made from 1Platform</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-id="my-sales" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="flex-shrink-0 text-lg">
+                                            <i class="fas fa-hand-holding-usd"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="focus:outline-none cursor-pointer">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">My Sales</p>
+                                                <p class="truncate text-sm text-gray-500">All your sales made through 1Platform</p>
                                             </div>
                                         </div>
                                     </div>
@@ -264,6 +288,43 @@
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">Subscriptions</p>
                                                 <p class="truncate text-sm text-gray-500">View who you are currently subscribed to at 1Platform</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div data-id="my-crowdfund-purchases" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="flex-shrink-0 text-lg">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="focus:outline-none cursor-pointer">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">My Crowdfund Purchases</p>
+                                                <p class="truncate text-sm text-gray-500">All your crowdfunding project purchases made from 1Platform</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-id="my-crowdfund-sales" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="flex-shrink-0 text-lg">
+                                            <i class="fas fa-hand-holding-usd"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="focus:outline-none cursor-pointer">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">My Crowdfund Sales</p>
+                                                <p class="truncate text-sm text-gray-500">All your crowdfunding project sales made through 1Platform</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-id="my-subscribers-donators" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="flex-shrink-0 text-lg">
+                                            <i class="fas fa-hand-holding-heart"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="focus:outline-none cursor-pointer">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">My Subscribers and Donators</p>
+                                                <p class="truncate text-sm text-gray-500">All your subscribers and donators at 1Platform</p>
                                             </div>
                                         </div>
                                     </div>

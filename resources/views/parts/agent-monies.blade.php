@@ -4,10 +4,10 @@
         $upcomingInvoice = null;
     @endphp
 
-    <div class="my_sub_sec_inner">
-        <h3><span class="head_text text-lg">My subscription plan</span></h3>
-    </div>
     <div class="mt-5">
+        <div class="my_sub_sec_inner">
+            <h3><span class="head_text text-lg">My subscription plan</span></h3>
+        </div>
         <div class="current_sub_outer">
 
             @if($user->internalSubscription)
@@ -370,50 +370,6 @@
                 });
             }
         });
-        $('body').delegate( ".contact_btn:not(.downloadable)", "click", function(e){
-
-            var thiss = $(this);
-            var checkout = thiss.attr('data-checkout');
-            var find = checkout;
-            var findType = thiss.attr('data-find-type');
-
-            if(findType == 'checkout_user'){
-                var identityType = 'checkout_customer';
-            }else if(findType == 'checkout_customer'){
-                var identityType = 'checkout_user';
-            }
-
-            $.ajax({
-
-                url: "/informationFinder",
-                dataType: "json",
-                type: 'post',
-                data: {'find_type': findType, 'find': find, 'identity_type': identityType, 'identity': checkout},
-                success: function(response) {
-                    if(response.success == 1){
-                        var name = response.data.name;
-                        var email = response.data.email;
-                        if(identityType == 'checkout_user'){
-                            var postcode = response.data.postcode;
-                            var address = response.data.address;
-                            var city = response.data.city;
-                            var country = response.data.country;
-
-                            $("#cont_popup_address").html(address+'<br>'+postcode+'<br>'+city+'<br>'+country);
-                        }else{
-                            $("#cont_popup_address").html('');
-                        }
-
-                        $("#cont_popup_name").text(name);
-                        $("#cont_popup_email").text(email);
-                        $("#contact_popup").show();
-                        $('#body-overlay').show();
-                    }else{
-                        alert(data.error);
-                    }
-                }
-            });
-        });
     </script>
 @elseif($id == 'my-premium-videos')
     <div class="mt-5">
@@ -480,68 +436,675 @@
                 </div>
             @endif
         @endforeach
-        <script>
-            $(".cancel_subscription").click(function(){
+    </div>
+@elseif($id == 'my-sales')
+    @php
+        $instantSales = \App\Models\StripeCheckout::where('user_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
+    @endphp
+    <div class="mt-5">
+        <div class="my_sub_sec_inner">
+            <h3><span class="head_text text-lg">My sales</span></h3>
+        </div>
+        @foreach($instantSales as $checkout)
+            @if(!($checkout->stripe_subscription_id && !$checkout->amount))
+            @php $currencySymbol = $commonMethods->getCurrencySymbol($checkout->currency) @endphp
+            @php $customerImage = $commonMethods->getUserDisplayImage($checkout->customer ? $checkout->customer->id : 0) @endphp
+            @if($checkout->stripe_charge_id)
+                @php $class = 'badge_success' @endphp
+            @elseif($checkout->paypal_order_id)
+                @php $class = 'badge_success' @endphp
+            @elseif($checkout->error)
+                @php $class = 'badge_error' @endphp
+            @elseif($checkout->amount == 0)
+                @php $class = 'badge_free' @endphp
+            @else
+                @php $class = 'badge_warning' @endphp
+            @endif
+            <div class="my_sub_sec_list clearfix">
+                <div class="upper_sec">
+                    <div class="sub_sec_img_contain smart_badge {{$class}}">
+                        <img class="trans_image" title="{{$checkout->customer_name}}" src="{{$customerImage}}" alt="#" />
+                        <div class="smart_badge_txt">
+                            @if($class == 'badge_success')
+                                <i class="fa fa-check-circle"></i> Paid
+                            @elseif($class == 'badge_warning')
+                                <i class="fa fa-clock-o"></i> Will Pay
+                            @elseif($class == 'badge_free')
+                                <i class="fa fa-clock-o"></i> Free
+                            @else
+                                <i class="fa fa-exclamation-triangle"></i> Failed
+                            @endif
+                        </div>
+                    </div>
+                    <div class="sub_sec_name_desc_contain">
+                        <div class="sub_sec_name">
+                            <a class="trans_name" href="{{$checkout->customer && $checkout->customer->username ? route('user.home', ['params' => $checkout->customer->username]) : 'javascript:void(0)'}}">{{$checkout->customer_name}}</a>
+                        </div>
+                        <div class="sub_sec_desc">{{$checkout->comment}}</div>
+                        <div class="sub_sec_det">
+                            @foreach($checkout->instantCheckoutItems as $checkoutItem)
+                                @if($checkoutItem->type == 'music') @php $info = '('.$checkoutItem->license.')' @endphp
+                                @elseif($checkoutItem->type == 'donation_goalless') @php $info = 'Donation' @endphp
+                                @elseif($checkoutItem->type == 'custom-product') @php $info = ' (Your commission)' @endphp
+                                @else @php  $info = '' @endphp
+                                @endif
+                                <a href="javascript:void(0)">
+                                    {{$checkoutItem->name.$info.' '}}
+                                    @if($checkoutItem->type == 'custom-product')
+                                        {{$currencySymbol.number_format($checkout->amount - ($checkout->application_fee + $checkout->stripe_fee + $checkout->delivery_cost), 2)}}
+                                        @if($checkoutItem->size != 'None')
+                                            <br>{{$checkoutItem->quantity.' x '.$checkoutItem->size.' - '.$checkoutItem->color}}
+                                        @else
+                                            <br>{{$checkoutItem->quantity.' x '.$checkoutItem->color}}
+                                        @endif
+                                    @else
+                                        {{($checkoutItem->price>0)?$currencySymbol.number_format($checkoutItem->price, 2):' - Free'}}
+                                    @endif
 
-                if(confirm('Do you really want to end this subscription?')){
-                    var thiss = $(this);
-                    var identity = thiss.attr('data-identity');
-                    $.ajax({
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="sub_sec_date_contain">
+                        {{date("d/m/y", strtotime($checkout->created_at))}} - {{$currencySymbol.number_format($checkout->amount, 2)}}
+                    </div>
+                </div>
+                <div class="upper_sec">
+                    <div class="sub_sec_img_contain">&nbsp;</div>
+                    <div class="sub_sec_btns_contain">
+                        <a data-checkout="{{$checkout->id}}" data-find-type="checkout_customer" class="contact_btn">Contact Details</a>
+                    </div>
+                    @if($checkout->stripe_payment_id)
+                    <div class="sub_sec_btns_contain transaction_btn">
+                        <a class="contact_btn" target="_blank" href="{{'https://dashboard.stripe.com/payments/'.$checkout->stripe_payment_id}}">
+                            Transaction ID: {{'TSN_'.$checkout->id}}
+                        </a>
+                    </div>
+                    @endif
+                    @if($checkout->paypal_order_id)
+                    <div class="sub_sec_btns_contain transaction_btn">
+                        <a class="contact_btn" target="_blank" href="{{'https://www.paypal.com/activities'}}">
+                            Transaction ID: {{'TSN_'.$checkout->id}}
+                        </a>
+                    </div>
+                    @endif
+                    <div class="sub_sec_date_contain fake_date_sec_contain">
+                        <label>
+                            <input data-identity="{{$checkout->id}}" data-identity-type="checkout_user" type="submit" value="Send Thank You" class="send_thankyou" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+            @endif
+        @endforeach
+    </div>
+@elseif($id == 'my-crowdfund-purchases')
+    @php
+        $crowdfundPurchases = \App\Models\StripeCheckout::where('customer_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
+    @endphp
+    <div class="mt-5">
+        <div class="my_sub_sec_inner">
+            <h3><span class="head_text text-lg">My crowdfund purchases</span></h3>
+        </div>
+        @foreach($crowdfundPurchases as $checkout)
+            @if($checkout->user)
+            @php $currencySymbol = $commonMethods->getCurrencySymbol($checkout->currency) @endphp
+            @php $userImage = $commonMethods->getUserDisplayImage($checkout->user->id) @endphp
+            @if($checkout->stripe_charge_id)
+                @php $class = 'badge_success' @endphp
+            @elseif($checkout->paypal_order_id)
+                @php $class = 'badge_success' @endphp
+            @elseif($checkout->error)
+                @php $class = 'badge_error' @endphp
+            @elseif($checkout->amount == 0)
+                @php $class = 'badge_free' @endphp
+            @else
+                @php $class = 'badge_warning' @endphp
+            @endif
+                <div class="my_sub_sec_list clearfix">
+                    <div class="upper_sec">
+                        <div class="sub_sec_img_contain smart_badge {{$class}}">
+                            <img title="{{'You purchased from '.$checkout->user_name}}" src="{{$userImage}}" alt="" />
+                            <div class="smart_badge_txt">
+                                @if($class == 'badge_success')
+                                    <i class="fa fa-check-circle"></i> Paid
+                                @elseif($class == 'badge_warning')
+                                    <i class="fa fa-clock-o"></i> Will Pay
+                                @elseif($class == 'badge_free')
+                                    <i class="fa fa-clock-o"></i> Free
+                                @else
+                                    <i class="fa fa-exclamation-triangle"></i> Failed
+                                @endif
+                            </div>
+                        </div>
+                        <div class="sub_sec_name_desc_contain">
+                            <div class="sub_sec_name"><a href="#">{{$checkout->user->name}}</a></div>
+                            <div class="sub_sec_desc">{{$checkout->comment}}</div>
+                            <div class="sub_sec_det">
+                                @foreach($checkout->crowdfundCheckoutItems as $checkoutItem)
+                                <a href="javascript:void(0)">
+                                    {{($checkoutItem->type=='donation' ? 'Donation' : '')}}
+                                    {{$checkoutItem->name.' '.$currencySymbol.number_format($checkoutItem->price, 2)}}
+                                    {{($checkoutItem->delivery_cost ? ' - Delivery: '.$currencySymbol.number_format($checkoutItem->delivery_cost, 2) : '')}}
+                                </a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="sub_sec_date_contain">
+                            {{date("d/m/y", strtotime($checkout->created_at))}} - {{$currencySymbol.number_format($checkout->amount)}}
+                        </div>
+                    </div>
+                    <div class="upper_sec">
+                        <div class="sub_sec_img_contain">&nbsp;</div>
+                        <div class="sub_sec_btns_contain">
+                            <a class="contact_btn" data-checkout="{{$checkout->id}}" data-find-type="checkout_user">Contact Details</a>
+                        </div>
+                        <div class="sub_sec_date_contain fake_date_sec_contain"></div>
+                    </div>
+                    @if($class == 'badge_error')
+                        <div data-id="{{$checkout->id}}" class="payment_response_outer">
+                            <div class="payment_response_upper">
+                                This payment has failed with a decline code <a class="pay_response_link" target="_blank" href="https://stripe.com/docs/declines/codes">{{$checkout->error}}</a><br>
+                                Click <a class="pay_response_link" href="{{route('payment.failed.retry', ['id' => $checkout->id])}}">here</a> to let us help you complete this payment.
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            @endif
+        @endforeach
+    </div>
+@elseif($id == 'my-crowdfund-sales')
+    @php
+        $crowdfundSales = \App\Models\StripeCheckout::where('user_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
+    @endphp
+    <div class="mt-5">
+        <div class="my_sub_sec_inner">
+            <h3><span class="head_text text-lg">My crowdfund sales</span></h3>
+        </div>
+        @foreach($crowdfundSales as $checkout)
+            @if($checkout->customer)
+            @php $currencySymbol = $commonMethods->getCurrencySymbol($checkout->currency) @endphp
+            @php $customerImage = $commonMethods->getUserDisplayImage($checkout->customer->id) @endphp
+            @if($checkout->stripe_charge_id)
+                @php $class = 'badge_success' @endphp
+            @elseif($checkout->paypal_order_id)
+                @php $class = 'badge_success' @endphp
+            @elseif($checkout->error)
+                @php $class = 'badge_error' @endphp
+            @elseif($checkout->amount == 0)
+                @php $class = 'badge_free' @endphp
+            @else
+                @php $class = 'badge_warning' @endphp
+            @endif
+                <div class="my_sub_sec_list clearfix">
+                    <div class="upper_sec">
+                        <div class="sub_sec_img_contain smart_badge {{$class}}">
+                            <img title="{{$checkout->customer_name.' purchased from you'}}" src="{{$customerImage}}" alt="" />
+                            <div class="smart_badge_txt">
+                                @if($class == 'badge_success')
+                                    <i class="fa fa-check-circle"></i> Paid
+                                @elseif($class == 'badge_warning')
+                                    <i class="fa fa-clock-o"></i> Will Pay
+                                @elseif($class == 'badge_free')
+                                    <i class="fa fa-clock-o"></i> Free
+                                @else
+                                    <i class="fa fa-exclamation-triangle"></i> Failed
+                                @endif
+                            </div>
+                        </div>
+                        <div class="sub_sec_name_desc_contain">
+                            <div class="sub_sec_name"><a href="#">{{$checkout->customer_name}}</a></div>
+                            <div class="sub_sec_desc">{{$checkout->comment}}</div>
+                            <div class="sub_sec_det">
+                                @foreach($checkout->crowdfundCheckoutItems as $checkoutItem)
+                                <a href="javascript:void(0)">
+                                    {{($checkoutItem->type=='donation' ? 'Donation' : '')}}
+                                    {{$checkoutItem->name.' '.$currencySymbol.number_format($checkoutItem->price, 2)}}
+                                    {{($checkoutItem->delivery_cost ? ' - Delivery: '.$currencySymbol.number_format($checkoutItem->delivery_cost, 2) : '')}}
+                                </a>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="sub_sec_date_contain">
+                            {{date("d/m/y", strtotime($checkout->created_at))}} -  {{$currencySymbol.number_format($checkout->amount)}}
+                        </div>
+                    </div>
+                    <div class="upper_sec">
+                        <div class="sub_sec_img_contain">&nbsp;</div>
+                        <div class="sub_sec_btns_contain">
+                            <a class="contact_btn" data-checkout="{{$checkout->id}}" data-find-type="checkout_customer">Contact Details</a>
+                        </div>
+                        <div class="sub_sec_date_contain fake_date_sec_contain">
+                            <label>
+                                <input data-identity="{{$checkout->id}}" data-identity-type="checkout_user" type="submit" value="Send Thank You" class="send_thankyou" />
+                            </label>
+                        </div>
+                    </div>
+                    @if($class == 'badge_error')
+                        <div data-id="{{$checkout->id}}" class="payment_response_outer">
+                            <div class="payment_response_upper">
+                                This payment has failed with a decline code <a class="pay_response_link" target="_blank" href="https://stripe.com/docs/declines/codes">{{$checkout->error}}</a><br>
+                                Your customer has been notified about this error. However you can resend notification to your customer at <a class="pay_response_link notif_customer notif_at_email" href="javascript:void(0)">email address</a> | <a class="pay_response_link notif_customer notif_at_account" href="javascript:void(0)">1Platform account</a>
+                                <span class="hide_on_desktop">
+                                    | <a class="pay_response_link notif_customer notif_at_whatsapp" href="javascript:void(0)">WhatsApp</a>
+                                </span>. The notification contains a retry button to retry this payment with required information
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            @endif
+        @endforeach
+    </div>
+@elseif($id == 'my-subscribers-donators')
+    <div class="mt-5">
+        <div class="my_sub_sec_inner">
+            <h3><span class="head_text text-lg">My subscribers and donators</span></h3>
+        </div>
+        @foreach($user->stripe_subscriptions as $stripeSubscription)
+            @php $currencySymbol = $commonMethods->getCurrencySymbol($stripeSubscription->plan_currency) @endphp
+            @php $customerImage = $commonMethods->getUserDisplayImage($stripeSubscription->customer->id) @endphp
+            @if($stripeSubscription->customer)
+                <div class="my_sub_sec_list clearfix">
+                    <div class="sub_left_img">
+                        <span>
+                            <img src="{{$customerImage}}" alt="{{$stripeSubscription->customer->name.' has subscribed you'}}" />
+                        </span>
+                    </div>
+                    <div class="sub_right_sec my_date_sec">
+                        <a href="javascript:void(0)">
+                            {{$currencySymbol.number_format($stripeSubscription->plan_amount, 2).'/'.$stripeSubscription->plan_interval.' - '.date('d/m/Y', strtotime($stripeSubscription->created_at)) }}
+                        </a>
+                    </div>
 
-                        url: "/cancelSubscription",
-                        dataType: "json",
-                        type: 'post',
-                        data: {'id': identity},
-                        success: function(response) {
-                            if(response.success == 1){
-                                alert('Subscription has been sucessfully cancelled');
-                                thiss.closest('.my_sub_sec_list').remove();
-                            }else{
-                                alert(response.error);
-                            }
-                        }
-                    });
+                    <div class="sub_right_sec my_sub_right_sec">
+                        <a href="{{$stripeSubscription->customer && $stripeSubscription->customer->username ? route('user.home', ['params' => $stripeSubscription->customer->username]) : 'javascript:void(0)'}}">{{$stripeSubscription->customer->name}}</a>
+                    </div>
+                    <div class="sub_button_sec clearfix">
+                        <label><input data-identity="{{$stripeSubscription->id}}" data-identity-type="subscription_user" type="submit" value="Send Thank You" class="send_thankyou" /></label>
+                        <label class="cancel_subscription no_back" data-identity="{{$stripeSubscription->id}}"><input type="button" value="Cancel Subscription" /></label>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+@elseif($id == 'financial-summary')
+    @php
+        $instantPurchases = \App\Models\StripeCheckout::where('customer_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
+        $instantSales = \App\Models\StripeCheckout::where('user_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
+        $crowdfundPurchases = \App\Models\StripeCheckout::where('customer_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
+        $crowdfundSales = \App\Models\StripeCheckout::where('user_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
+        $topSales = \App\Models\StripeCheckout::where('user_id', $user->id)->orderBy('id' , 'desc')->take(5)->get();
+
+        $singlesSold = $albumsSold = $totalRevenue = $productsSold = 0;
+        $fans = [];
+        foreach ($instantSales as $key => $checkout) {
+            foreach ($checkout->instantCheckoutItems as $key => $instantCheckoutItem) {
+
+                if($instantCheckoutItem->type == 'music'){
+                    $singlesSold++;
                 }
-            });
+                if($instantCheckoutItem->type == 'album'){
+                    $albumsSold++;
+                }
+                if($instantCheckoutItem->type == 'product'){
+                    $productsSold++;
+                }
+                if($instantCheckoutItem->type == 'custom-product'){
+                    $productsSold++;
+                }
+                if($checkout->customer && !in_array($checkout->customer->id, $fans)){
+                	$fans[] = $checkout->customer->id;
+                }
+            }
 
-            $(".details_subscription").click(function(){
+            $checkAmount = $checkout->application_fee ? $checkout->amount - $checkout->application_fee : $checkout->amount;
+            $totalRevenue += $commonMethods->convert($checkout->currency, strtoupper($user->profile->default_currency), $checkAmount);
+        }
+        foreach ($crowdfundSales as $key => $checkout) {
 
-                var thiss = $(this);
-                var identity = thiss.attr('data-identity');
-                var identityType = thiss.attr('data-identity-type');
-                var find = thiss.attr('data-find');
-                var findType = thiss.attr('data-find-type');
+            if($checkout->stripe_charge_id){
 
-                $.ajax({
+                $totalRevenue += $commonMethods->convert($checkout->currency, strtoupper($user->profile->default_currency), $checkout->amount);
+            }
+            if($checkout->customer && !in_array($checkout->customer->id, $fans)){
+                $fans[] = $checkout->customer->id;
+            }
+        }
 
-                    url: "/informationFinder",
-                    dataType: "json",
-                    type: 'post',
-                    data: {'find_type': findType, 'find': find, 'identity_type': identityType, 'identity': identity},
-                    success: function(response) {
-                        if(response.success == 1){
+        $purchaseParticulars['fans'] = $fans;
+        $purchaseParticulars['singles_sold'] = $singlesSold;
+        $purchaseParticulars['albums_sold'] = $albumsSold;
+        $purchaseParticulars['products_sold'] = $productsSold;
+        $purchaseParticulars['total_revenue'] = $totalRevenue;
+        $userCampaignDetails = $commonMethods->getUserRealCampaignDetails($user->id);
+        $userCampaign = $user->campaigns()->where('status', 'active')->orderBy('id', 'desc')->first();
+    @endphp
+    <div class="mt-5">
+        <div class="inside_notic_sec">
+            <div class="inside_notic_left clearfix">
 
-                            var image = response.data.image;
-                            var heading = response.data.heading;
-                            var bulletOne = response.data.bulletOne;
-                            var bulletTwo = response.data.bulletTwo;
-                            var bulletThree = response.data.bulletThree;
+                <div class="inside_notic_head">
+                    <label>My Insights</label>
+                </div>
+                <div class="inside_notic_body">
+                    <div class="ins_not_left">
+                        <p>Singles Sold (inc free)</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{ $purchaseParticulars['singles_sold'] }}</p>
+                    </div>
+                    <div class="ins_not_left">
+                        <p>Albums Sold</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{ $purchaseParticulars['albums_sold'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="inside_notic_right clearfix">
+                <div class="inside_notic_head">
+                    <label>&nbsp;</label>
+                </div>
+                <div class="inside_notic_body">
+                    <div class="ins_not_left">
+                        <p>Products Sold</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{ $purchaseParticulars['products_sold'] }}</p>
+                    </div>
+                    <div class="ins_not_left">
+                        <p>Total of Revenue</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}{{ number_format($purchaseParticulars['total_revenue'], 2) }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inside_notic_sec inside_notic_sec2 mCustomScrollbar">
 
-                            $('#subscription_offers_popup .profile_img').attr('src', image);
-                            $('#subscription_offers_popup .profile_heading').text(heading);
-                            $('#subscription_offers_popup .bullet_one').text(bulletOne);
-                            $('#subscription_offers_popup .bullet_two').text(bulletTwo);
-                            $('#subscription_offers_popup .bullet_three').text(bulletThree);
+            <div class="inside_notic_left clearfix">
 
-                            $('#subscription_offers_popup,#body-overlay').show();
-                        }else{
-                            alert(response.error);
-                        }
-                    }
-                });
-            });
-        </script>
+                <div class="inside_notic_head">
+                    <label>My Crowdfunder Updates</label>
+                </div>
+                <div class="inside_notic_body">
+                    <div class="ins_not_left">
+                        <p>Target Goal</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{ $userCampaignDetails['campaignGoal'] }}</p>
+                    </div>
+                    <div class="ins_not_left">
+                        <p>Amount Raised</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{ $userCampaignDetails['campaignCurrencySymbol'].$userCampaignDetails['amountRaised'] }}</p>
+                    </div>
+                    <div class="ins_not_left">
+                        <p>Fans</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{ $userCampaignDetails['campaignDonators'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="inside_notic_right clearfix">
+
+                <div class="inside_notic_head">
+                    <label>My Bonuses</label>
+                </div>
+                <div class="inside_notic_body profile_order_scroll">
+                    @foreach($userCampaign->perks as $perk)
+                    <div class="ins_not_left">
+                        <p>{{ $perk->title }}</p>
+                    </div>
+                    <div class="ins_not_right">
+                        <p>{{ $perk->items_claimed }}/{{ $perk->items_available }}</p>
+                    </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
     </div>
 @endif
+
+<script>
+    $('body').delegate( ".send_thankyou", "click", function(e){
+
+        var thiss = $(this);
+
+        var identity = thiss.attr('data-identity');
+        var find = identity;
+        var identityType = thiss.attr('data-identity-type');
+        if(identityType == 'checkout_user'){
+            var findType = 'thank_customer';
+        }else if(identityType == 'subscription_user'){
+            var findType = 'thank_subscriber';
+        }
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': findType, 'find': find, 'identity_type': identityType, 'identity': identity},
+            success: function(response) {
+                if(response.success == 1){
+                    var customer = response.data.id;
+                    var email = response.data.email;
+                    var name = response.data.name;
+                    var userHomeLink = response.data.profilePageLink;
+                    var originalImage = response.data.profileImageOriginal;
+
+                    thank_you_user_name = name;
+                    thank_you_user_id = customer;
+                    thank_you_user_email = email;
+                    thank_you_user_photo = originalImage;
+                    thank_you_user_share_url = userHomeLink;
+                    thank_you_type = identityType;
+                    thank_you_id = identity;
+                    type_id = '';
+                    payment_type = '';
+
+                    $(".soc_share_images").show();
+                    $(".soc_share_buttons").show();
+                    $(".email_box").hide();
+                    $(".email_button").hide();
+                    $('.pro_send_email_outer #thank_you_image').attr('src', thank_you_user_photo);
+                    $(".pro_send_email_outer").show();
+                    $('#body-overlay').show();
+                }else{
+                    alert(response.error);
+                }
+            }
+        });
+    });
+    $('body').delegate( "#share_project_popup .hm_fb_icon_share", "click", function(e){
+
+        var baseUrl = $('#base_url').val();
+        var name = encodeURIComponent($(this).closest('#share_project_popup').attr('data-name'));
+        var imageName = $(this).closest('#share_project_popup').attr('data-share-image');
+        var elm = '/'+name+'/'+btoa(imageName);
+
+        $('#url_share_link').val(baseUrl+'url-share/'+'project_'+window.currentUserId+elm);
+        facebookShare('url');
+
+    });
+
+    $('body').delegate( "#share_project_popup .hm_tw_icon_share", "click", function(e){
+
+        var baseUrl = $('#base_url').val();
+        var name = encodeURIComponent($(this).closest('#share_project_popup').attr('data-name'));
+        var imageName = $(this).closest('#share_project_popup').attr('data-share-image');
+        var elm = '/'+name+'/'+btoa(imageName);
+
+        $('#url_share_link').val(baseUrl+'url-share/'+'project_'+window.currentUserId+elm);
+        twitterShare('url');
+    });
+
+    $('body').delegate( "#thank_via_email_btn", "click", function(e){
+
+        $("#thankyou_email_text").text("");
+        $(".soc_share_images").hide();
+        $(".soc_share_buttons").hide();
+        $(".email_box").show();
+        $(".email_button").show();
+    });
+
+    $("#send_thankyou_email").click(function () {
+
+        var message = $("#thankyou_email_text").val();
+
+        if(message != ''){
+
+            var formData = new FormData();
+            formData.append('email', thank_you_user_email);
+            formData.append('name', thank_you_user_name);
+            formData.append('message', message);
+            formData.append('type_id', type_id);
+            formData.append('payment_type', payment_type);
+
+            $.ajax({
+
+                url: '/sendThanksEmail',
+                type: "POST",
+                data: formData,
+                dataType: 'html',
+                contentType:false,
+                cache: false,
+                processData: false,
+
+                success: function(data){
+
+                    $(".pro_send_email_outer").hide();
+                    $('#body-overlay').hide();
+                    $("#thankyou_email_text").val('');
+                }
+            });
+        }
+    });
+
+    $("#facebook_share").click(function () {
+
+        var baseUrl = $('#base_url').val();
+        $('#url_share_user_name').val(thank_you_user_name);
+        $('#url_share_link').val(baseUrl+'url-share/'+'profilethankyou_'+thank_you_user_id+'_'+window.currentUserId+'_'+thank_you_type+'_'+thank_you_id+'/'+encodeURIComponent('Thank You '+thank_you_user_name)+'/'+btoa(thank_you_user_photo));
+        facebookShare('url');
+    });
+
+    $("#twitter_share").click(function () {
+
+        var baseUrl = $('#base_url').val();
+        $('#url_share_user_name').val(thank_you_user_name);
+        $('#url_share_link').val(baseUrl+'url-share/'+'profilethankyou_'+thank_you_user_id+'_'+window.currentUserId+'_'+thank_you_type+'_'+thank_you_id+'/'+encodeURIComponent('Thank You '+thank_you_user_name)+'/'+btoa(thank_you_user_photo));
+        twitterShare('url');
+    });
+
+    $('body').delegate( ".cancel_subscription", "click", function(e){
+
+        if(confirm('Do you really want to end this subscription?')){
+            var thiss = $(this);
+            var identity = thiss.attr('data-identity');
+            $.ajax({
+
+                url: "/cancelSubscription",
+                dataType: "json",
+                type: 'post',
+                data: {'id': identity},
+                success: function(response) {
+                    if(response.success == 1){
+                        alert('Subscription has been sucessfully cancelled');
+                        thiss.closest('.my_sub_sec_list').remove();
+                    }else{
+                        alert(response.error);
+                    }
+                }
+            });
+        }
+    });
+
+    $('body').delegate( ".details_subscription", "click", function(e){
+
+        var thiss = $(this);
+        var identity = thiss.attr('data-identity');
+        var identityType = thiss.attr('data-identity-type');
+        var find = thiss.attr('data-find');
+        var findType = thiss.attr('data-find-type');
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': findType, 'find': find, 'identity_type': identityType, 'identity': identity},
+            success: function(response) {
+                if(response.success == 1){
+
+                    var image = response.data.image;
+                    var heading = response.data.heading;
+                    var bulletOne = response.data.bulletOne;
+                    var bulletTwo = response.data.bulletTwo;
+                    var bulletThree = response.data.bulletThree;
+
+                    $('#subscription_offers_popup .profile_img').attr('src', image);
+                    $('#subscription_offers_popup .profile_heading').text(heading);
+                    $('#subscription_offers_popup .bullet_one').text(bulletOne);
+                    $('#subscription_offers_popup .bullet_two').text(bulletTwo);
+                    $('#subscription_offers_popup .bullet_three').text(bulletThree);
+
+                    $('#subscription_offers_popup,#body-overlay').show();
+                }else{
+                    alert(response.error);
+                }
+            }
+        });
+    });
+    $('body').delegate( ".contact_btn:not(.downloadable)", "click", function(e){
+
+        var thiss = $(this);
+        var checkout = thiss.attr('data-checkout');
+        var find = checkout;
+        var findType = thiss.attr('data-find-type');
+
+        if(findType == 'checkout_user'){
+            var identityType = 'checkout_customer';
+        }else if(findType == 'checkout_customer'){
+            var identityType = 'checkout_user';
+        }
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': findType, 'find': find, 'identity_type': identityType, 'identity': checkout},
+            success: function(response) {
+                if(response.success == 1){
+                    var name = response.data.name;
+                    var email = response.data.email;
+                    if(identityType == 'checkout_user'){
+                        var postcode = response.data.postcode;
+                        var address = response.data.address;
+                        var city = response.data.city;
+                        var country = response.data.country;
+
+                        $("#cont_popup_address").html(address+'<br>'+postcode+'<br>'+city+'<br>'+country);
+                    }else{
+                        $("#cont_popup_address").html('');
+                    }
+
+                    $("#cont_popup_name").text(name);
+                    $("#cont_popup_email").text(email);
+                    $("#contact_popup").show();
+                    $('#body-overlay').show();
+                }else{
+                    alert(data.error);
+                }
+            }
+        });
+    });
+</script>
 
 <link rel="stylesheet" href="{{asset('css/profile.orders.css')}}">

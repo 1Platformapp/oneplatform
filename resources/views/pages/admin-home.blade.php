@@ -173,11 +173,49 @@
 
 @section('miscellaneous-html')
 
+    <input type="hidden" id="url_share_user_name" value="{{$user?$user->name:'1Platform Chart'}}">
+    <input type="hidden" id="url_share_link" value="">
+
     @include('parts.add-form-elements')
 
     @include('parts.basket-popups')
 
     <div id="body-overlay"></div>
+
+    <div class="pro_send_email_outer pro_page_pop_up clearfix" >
+
+        <div class="pro_soc_discon_inner clearfix">
+
+            <div class="soc_discon_text clearfix">
+
+                <h3>Post a Thank You Note</h3>
+                <span class="error"></span>
+            </div>
+            <div class="soc_share_images clearfix">
+                <img id="thank_you_image" class="defer_loading" src="" data-src="{{ asset('images/video_img.png') }}">
+                <img class="dance_icon_right defer_loading" src="" data-src="{{ asset('images/dancing-icon-2.png') }}">
+            </div>
+            <div class="soc_share_buttons clearfix">
+
+                <span>
+                    <div class="social_supp_btns clearfix">
+                            <ul class="clearfix">
+                                <li><a id="facebook_share" class="popup_share_icon ch_sup_fb" href="javascript:void(0)"> Share</a> </li>
+                                <li><a id="twitter_share" class="popup_share_icon ch_sup_tw" href="javascript:void(0)"> Tweet</a></li>
+                            </ul>
+                    </div>
+                </span>
+                <a id="thank_via_email_btn">Or send an Email</a>
+            </div>
+
+            <div class="email_box clearfix">
+                <textarea id="thankyou_email_text"></textarea>
+            </div>
+            <div class="pro_submit_button_outer email_button clearfix">
+                <a id="send_thankyou_email">Send</a>
+            </div>
+        </div>
+    </div>
 
     <div class="pro_orders_tab_contact_details pro_page_pop_up clearfix" style="" id="contact_popup">
 
