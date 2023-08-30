@@ -7316,183 +7316,141 @@ $(document).ready(function() {
         var pageUrl = window.location.href;
         var baseUrl = $('#base_url').val();
 
-        if($(this).hasClass('pro_get_start_each_panel')){
+        if(cat == 'tools' || cat == 'orders' || cat == 'chat'){
 
-            var thiss = $('.usr_men_quick_each:not(.active):not(.disabled)[data-cat="'+cat+'"][data-sub-cat="'+subcat+'"]');
+            window.location.href = '/dashboard';
         }else{
 
-            var thiss = $(this);
+            if($(this).hasClass('pro_get_start_each_panel')){
+
+                var thiss = $('.usr_men_quick_each:not(.active):not(.disabled)[data-cat="'+cat+'"][data-sub-cat="'+subcat+'"]');
+            }else{
+
+                var thiss = $(this);
+            }
+
+            $('.usr_men_quick_each').removeClass('active');
+            thiss.addClass('active');
+
+            if(browserWidth < 767){
+
+                $('.pro_left_sec_outer').hide();
+                $('.pro_right_sec_outer').show();
+            }
+
+            $('.pro_pg_tb_det').hide();
+            sessionStorage.setItem('proCat', cat);
+            sessionStorage.setItem('proSubCat', subcat);
+
+            if(!thiss.hasClass('usr_men_setup_wizard') && pageUrl.indexOf(baseUrl+'profile') !== -1){
+
+                var currentPage = 'profile';
+            }else{
+
+                var currentPage = baseUrl+$(this).attr('data-link');
+            }
+
+            if(cat == 'profile'){
+
+                $('#profile_tab_01').show();
+                $('#profile_tab_01 .sub_cat_data').addClass('instant_hide');
+
+                if(subcat == 'edit'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #personal_section,#profile_tab_01 #email_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'media'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #musical_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'bio'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #bio_section,#profile_tab_01 #bio_video_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'design'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #home_layout_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'domain'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #domain_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'favourites'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #favourites_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'portfolio'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #portfolio_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'services'){
+
+                    currentPage == 'profile' ? $('#profile_tab_01 #services_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }
+            }else if(cat == 'media'){
+
+                $('#profile_tab_02').show();
+                $('#profile_tab_02 .sub_cat_data').addClass('instant_hide');
+
+                if(subcat == 'add_musics'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #add_music_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'song_links'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #song_links_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'edit_musics'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #edit_music_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'my_albums'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #my_albums_section').removeClass('instant_hide') : window.location.href = currentPage;
+                    $('#profile_tab_02 #my_albums_section .pro_tray_tab_content').addClass('instant_hide');
+                    $('#profile_tab_02 #my_albums_section .pro_tray_tab_content[data-value="album_add"]').removeClass('instant_hide');
+                }else if(subcat == 'standard_products'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #my_products_section').removeClass('instant_hide') : window.location.href = currentPage;
+                    $('#profile_tab_02 #my_products_section .pro_tray_tab_content').addClass('instant_hide');
+                    $('#profile_tab_02 #my_products_section .pro_tray_tab_content[data-value="product_add"]').removeClass('instant_hide');
+                    $('#profile_tab_02 #my_products_section .pro_options_each').removeClass('active');
+                    $('#profile_tab_02 #my_products_section .pro_options_each[data-href="pro_option_one"]').addClass('active');
+                    $('#profile_tab_02 #my_products_section .pro_option_body_each').addClass('instant_hide');
+                    $('#profile_tab_02 #my_products_section .pro_option_body_each[data-id="pro_option_one"]').removeClass('instant_hide');
+                }else if(subcat == 'print_products'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #my_products_section').removeClass('instant_hide') : window.location.href = currentPage;
+                    $('#profile_tab_02 #my_products_section .pro_tray_tab_content').addClass('instant_hide');
+                    $('#profile_tab_02 #my_products_section .pro_tray_tab_content[data-value="product_add"]').removeClass('instant_hide');
+                    $('#profile_tab_02 #my_products_section .pro_options_each').removeClass('active');
+                    $('#profile_tab_02 #my_products_section .pro_options_each[data-href="pro_option_two"]').addClass('active');
+                    $('#profile_tab_02 #my_products_section .pro_option_body_each').addClass('instant_hide');
+                    $('#profile_tab_02 #my_products_section .pro_option_body_each[data-id="pro_option_two"]').removeClass('instant_hide');
+                }else if(subcat == 'videos'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #videos_section').removeClass('instant_hide') : window.location.href = currentPage;
+                    $('#profile_tab_02 #videos_section .pro_tray_tab_content').addClass('instant_hide');
+                    $('#profile_tab_02 #videos_section .pro_tray_tab_content[data-value="video_add"]').removeClass('instant_hide');
+                }else if(subcat == 'social'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #social_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'subscribers'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #subscribers_section').removeClass('instant_hide') : window.location.href = currentPage;
+                }else if(subcat == 'live_streams'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #live_streams_section').removeClass('instant_hide') : window.location.href = currentPage;
+                    $('#profile_tab_02 #live_streams_section .pro_tray_tab_content').addClass('instant_hide');
+                    $('#profile_tab_02 #live_streams_section .pro_tray_tab_content[data-value="premium_add"]').removeClass('instant_hide');
+                }else if(subcat == 'news'){
+
+                    currentPage == 'profile' ? $('#profile_tab_02 #news_section').removeClass('instant_hide') : window.location.href = currentPage;
+                    $('#profile_tab_02 #news_section .pro_tray_tab_content').addClass('instant_hide');
+                    $('#profile_tab_02 #news_section .pro_tray_tab_content[data-value="news_add"]').removeClass('instant_hide');
+                }
+            }else if(cat == 'crowdfunds'){
+
+                currentPage == 'profile' ? $('#profile_tab_05').show() : window.location.href = currentPage;
+            }else if(cat == '' && subcat == ''){
+
+                window.location.href = currentPage;
+            }
+
+            $('body').removeClass('lock_page');
+            $('.hrd_cart_outer,.tv_slide_out_outer,.hrd_usr_men_outer,.hrd_notif_outer').removeClass('active');
+            $('#body-overlay').hide();
         }
-
-        $('.usr_men_quick_each').removeClass('active');
-        thiss.addClass('active');
-
-        if(browserWidth < 767){
-
-            $('.pro_left_sec_outer').hide();
-            $('.pro_right_sec_outer').show();
-        }
-
-        $('.pro_pg_tb_det').hide();
-        sessionStorage.setItem('proCat', cat);
-        sessionStorage.setItem('proSubCat', subcat);
-
-        if(!thiss.hasClass('usr_men_setup_wizard') && pageUrl.indexOf(baseUrl+'profile') !== -1){
-
-            var currentPage = 'profile';
-        }else{
-
-            var currentPage = baseUrl+$(this).attr('data-link');
-        }
-
-        if(cat == 'profile'){
-
-            $('#profile_tab_01').show();
-            $('#profile_tab_01 .sub_cat_data').addClass('instant_hide');
-
-            if(subcat == 'edit'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #personal_section,#profile_tab_01 #email_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'media'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #musical_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'bio'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #bio_section,#profile_tab_01 #bio_video_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'design'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #home_layout_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'domain'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #domain_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'favourites'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #favourites_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'portfolio'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #portfolio_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'services'){
-
-                currentPage == 'profile' ? $('#profile_tab_01 #services_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }
-        }else if(cat == 'media'){
-
-            $('#profile_tab_02').show();
-            $('#profile_tab_02 .sub_cat_data').addClass('instant_hide');
-
-            if(subcat == 'add_musics'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #add_music_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'song_links'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #song_links_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'edit_musics'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #edit_music_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'my_albums'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #my_albums_section').removeClass('instant_hide') : window.location.href = currentPage;
-                $('#profile_tab_02 #my_albums_section .pro_tray_tab_content').addClass('instant_hide');
-                $('#profile_tab_02 #my_albums_section .pro_tray_tab_content[data-value="album_add"]').removeClass('instant_hide');
-            }else if(subcat == 'standard_products'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #my_products_section').removeClass('instant_hide') : window.location.href = currentPage;
-                $('#profile_tab_02 #my_products_section .pro_tray_tab_content').addClass('instant_hide');
-                $('#profile_tab_02 #my_products_section .pro_tray_tab_content[data-value="product_add"]').removeClass('instant_hide');
-                $('#profile_tab_02 #my_products_section .pro_options_each').removeClass('active');
-                $('#profile_tab_02 #my_products_section .pro_options_each[data-href="pro_option_one"]').addClass('active');
-                $('#profile_tab_02 #my_products_section .pro_option_body_each').addClass('instant_hide');
-                $('#profile_tab_02 #my_products_section .pro_option_body_each[data-id="pro_option_one"]').removeClass('instant_hide');
-            }else if(subcat == 'print_products'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #my_products_section').removeClass('instant_hide') : window.location.href = currentPage;
-                $('#profile_tab_02 #my_products_section .pro_tray_tab_content').addClass('instant_hide');
-                $('#profile_tab_02 #my_products_section .pro_tray_tab_content[data-value="product_add"]').removeClass('instant_hide');
-                $('#profile_tab_02 #my_products_section .pro_options_each').removeClass('active');
-                $('#profile_tab_02 #my_products_section .pro_options_each[data-href="pro_option_two"]').addClass('active');
-                $('#profile_tab_02 #my_products_section .pro_option_body_each').addClass('instant_hide');
-                $('#profile_tab_02 #my_products_section .pro_option_body_each[data-id="pro_option_two"]').removeClass('instant_hide');
-            }else if(subcat == 'videos'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #videos_section').removeClass('instant_hide') : window.location.href = currentPage;
-                $('#profile_tab_02 #videos_section .pro_tray_tab_content').addClass('instant_hide');
-                $('#profile_tab_02 #videos_section .pro_tray_tab_content[data-value="video_add"]').removeClass('instant_hide');
-            }else if(subcat == 'social'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #social_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'subscribers'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #subscribers_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'live_streams'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #live_streams_section').removeClass('instant_hide') : window.location.href = currentPage;
-                $('#profile_tab_02 #live_streams_section .pro_tray_tab_content').addClass('instant_hide');
-                $('#profile_tab_02 #live_streams_section .pro_tray_tab_content[data-value="premium_add"]').removeClass('instant_hide');
-            }else if(subcat == 'news'){
-
-                currentPage == 'profile' ? $('#profile_tab_02 #news_section').removeClass('instant_hide') : window.location.href = currentPage;
-                $('#profile_tab_02 #news_section .pro_tray_tab_content').addClass('instant_hide');
-                $('#profile_tab_02 #news_section .pro_tray_tab_content[data-value="news_add"]').removeClass('instant_hide');
-            }
-        }else if(cat == 'tools'){
-
-            $('#profile_tab_04').show();
-            $('#profile_tab_04 .sub_cat_data').addClass('instant_hide');
-
-            if(subcat == 'streaming'){
-
-                currentPage == 'profile' ? $('#profile_tab_04 #streaming_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'industry'){
-
-                currentPage == 'profile' ? $('#profile_tab_04 #industry_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'marketing'){
-
-                currentPage == 'profile' ? $('#profile_tab_04 #marketing_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }
-        }else if(cat == 'orders'){
-
-            $('#profile_tab_06').show();
-            $('#profile_tab_06 .sub_cat_data').addClass('instant_hide');
-
-            if(subcat == 'my_purchases'){
-
-                currentPage == 'profile' ? $('#profile_tab_06 #my_purchases_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'my_sales'){
-
-                currentPage == 'profile' ? $('#profile_tab_06 #my_sales_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'summary'){
-
-                currentPage == 'profile' ? $('#profile_tab_06 #summary_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }
-        }else if(cat == 'chat'){
-
-            $('#profile_tab_14').show();
-            $('#profile_tab_14 .sub_cat_data').addClass('instant_hide');
-
-            if(subcat == 'chat_box'){
-
-                currentPage == 'profile' ? $('#profile_tab_14 #chat_box_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'contacts'){
-
-                currentPage == 'profile' ? $('#profile_tab_14 #contacts_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'questionnaires'){
-
-                currentPage == 'profile' ? $('#profile_tab_14 #questionnaire_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }else if(subcat == 'get_agent'){
-
-                currentPage == 'profile' ? $('#profile_tab_14 #get_agent_section').removeClass('instant_hide') : window.location.href = currentPage;
-            }
-        }else if(cat == 'crowdfunds'){
-
-            currentPage == 'profile' ? $('#profile_tab_05').show() : window.location.href = currentPage;
-        }else if(cat == '' && subcat == ''){
-
-            window.location.href = currentPage;
-        }
-
-        $('body').removeClass('lock_page');
-        $('.hrd_cart_outer,.tv_slide_out_outer,.hrd_usr_men_outer,.hrd_notif_outer').removeClass('active');
-        $('#body-overlay').hide();
     });
 
     $('body').delegate('.chat_item', 'click', function(e){

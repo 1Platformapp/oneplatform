@@ -1081,6 +1081,11 @@ class ProfileController extends Controller
 
     public function profileWithTab($tab, $subTab = null){
 
+        if($tab == 'chat' || $tab == 'orders' || $tab == 'tools'){
+
+            return redirect(route('agency.dashboard'));
+        }
+
         Session::flash('page', $tab);
         if($subTab){
             Session::flash('subTab', $subTab);
