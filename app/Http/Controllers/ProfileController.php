@@ -100,8 +100,6 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
 
-        return redirect(route('agency.dashboard'));
-
         $commonMethods = new CommonMethods();
         if(Auth::check()){
 
@@ -185,7 +183,6 @@ class ProfileController extends Controller
         $userSocialAccountDetails = $commonMethods::getUserSocialAccountDetails($userId);
         $story_images = $user->profile->story_images;
         $genres = Genre::orderBy('name', 'asc')->get();
-        $stripeSubscriptions = $user->stripe_subscriptions;
         $liveFlag = count($userCampaign->checkouts) > 0 ? '1' : '0';
         $basket = $commonMethods::getCustomerBasket();
 
@@ -200,60 +197,6 @@ class ProfileController extends Controller
 
         $albums = UserAlbum::all();
 
-        $instantPurchases = StripeCheckout::where('customer_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
-        $instantSales = StripeCheckout::where('user_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
-        $crowdfundPurchases = StripeCheckout::where('customer_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
-        $crowdfundSales = StripeCheckout::where('user_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
-        $topSales = StripeCheckout::where('user_id', $user->id)->orderBy('id' , 'desc')->take(5)->get();
-
-        $singlesSold = $albumsSold = $totalRevenue = $productsSold = 0;
-        $fans = [];
-        foreach ($instantSales as $key => $checkout) {
-            foreach ($checkout->instantCheckoutItems as $key => $instantCheckoutItem) {
-
-                if($instantCheckoutItem->type == 'music'){
-                    $singlesSold++;
-                }
-                if($instantCheckoutItem->type == 'album'){
-                    $albumsSold++;
-                }
-                if($instantCheckoutItem->type == 'product'){
-                    $productsSold++;
-                }
-                if($instantCheckoutItem->type == 'custom-product'){
-                    $productsSold++;
-                }
-                if($checkout->customer && !in_array($checkout->customer->id, $fans)){
-                	$fans[] = $checkout->customer->id;
-                }
-            }
-
-            $checkAmount = $checkout->application_fee ? $checkout->amount - $checkout->application_fee : $checkout->amount;
-            $totalRevenue += $commonMethods->convert($checkout->currency, strtoupper($user->profile->default_currency), $checkAmount);
-        }
-        foreach ($crowdfundSales as $key => $checkout) {
-
-            if($checkout->stripe_charge_id){
-
-                $totalRevenue += $commonMethods->convert($checkout->currency, strtoupper($user->profile->default_currency), $checkout->amount);
-            }
-            if($checkout->customer && !in_array($checkout->customer->id, $fans)){
-                $fans[] = $checkout->customer->id;
-            }
-        }
-
-        $purchaseParticulars['fans'] = $fans;
-        $purchaseParticulars['singles_sold'] = $singlesSold;
-        $purchaseParticulars['albums_sold'] = $albumsSold;
-        $purchaseParticulars['products_sold'] = $productsSold;
-        $purchaseParticulars['total_revenue'] = $totalRevenue;
-
-        if($user->hasActivePaidSubscription()){
-
-            //$stripe = new Stripe(Config('constants.stripe_key_secret'), '2016-07-06');
-            //$upcomingInvoice = $stripe->invoices()->upcomingInvoice($user->internalSubscription->stripe_customer_id);
-        }
-
         if(isset($userCampaignDetails['campaignProjectVideoId']) && $userCampaignDetails['campaignProjectVideoId'] != ''){
 
             $userCampaignVideoId = $commonMethods->getYoutubeVideoId($userCampaignDetails['campaignProjectVideoId']);
@@ -261,18 +204,8 @@ class ProfileController extends Controller
             $userCampaignVideoId = '';
         }
 
-        if($user->hasActivePaidSubscription()){
+        if($user->expert && $user->apply_expert == 2){
 
-            $industryContactRegions = IndustryContactRegion::orderBy('id', 'asc')->get();
-            $industryContactCategoryGroups = IndustryContactCategoryGroup::orderBy('id', 'asc')->get();
-            $industryContact = new IndustryContactController();
-            $industryContactsArray = json_decode($industryContact->browse($request), TRUE);
-            $industryContacts = is_array($industryContactsArray) && isset($industryContactsArray['data']) ? $industryContactsArray['data'] : '';
-        }
-
-        if($user->expert && $user->apply_expertgi295e == 2){
-
-            $agentTransfers = AgentTransfer::where(['agent_id' => $user->id])->orderBy('id', 'desc')->get();
             if($user->expert->pdf == NULL){
                 $pdfName = strtoupper('APA_'.uniqid()).'.pdf';
                 $fileName = 'agent-agreements/'.$pdfName;
@@ -282,10 +215,6 @@ class ProfileController extends Controller
                 $user->expert->save();
             }
         }
-
-        $agents = User::where('apply_expert', 2)->orderBy('name', 'asc')->get()->filter(function ($user){
-            return $user->expert;
-        });
 
         $loginController = new LoginController();
         $userOS = $loginController->getUserOS();
@@ -307,11 +236,7 @@ class ProfileController extends Controller
 
         $data   = [
 
-            'upcomingInvoice' => isset($upcomingInvoice) ? $upcomingInvoice : NULL,
-
             'commonMethods' => $commonMethods,
-
-            'purchaseParticulars' => $purchaseParticulars,
 
             'user' => $user,
 
@@ -329,8 +254,6 @@ class ProfileController extends Controller
 
             'genres' => $genres,
 
-            'stripeSubscriptions' => $stripeSubscriptions,
-
             'userCampaign' => $userCampaign,
 
             'stripeUrl' => $stripeUrl,
@@ -341,29 +264,9 @@ class ProfileController extends Controller
 
             'albums' => $albums,
 
-            'instantPurchases' => $instantPurchases,
-
-            'instantSales' => $instantSales,
-
-            'crowdfundPurchases' => $crowdfundPurchases,
-
-            'crowdfundSales' => $crowdfundSales,
-
             'domain' => $user->customDomainSubscription,
 
-            'icRegions' => isset($industryContactRegions) ? $industryContactRegions : [],
-
-            'icCategoryGroups' => isset($industryContactCategoryGroups) ? $industryContactCategoryGroups : [],
-
-            'industryContacts' => isset($industryContacts) ? $industryContacts : '',
-
-            'agentTransfers' => isset($agentTransfers) ? $agentTransfers : null,
-
-            'agents' => $agents,
-
             'userOS' => $userOS,
-
-            'topSales' => $topSales,
 
             'vouchers' => $vouchers,
 
@@ -391,7 +294,7 @@ class ProfileController extends Controller
             Session::flash('user_has_invalid_email', '1');
         }
 
-        $this->updateUserStripeData($user);
+        //$this->updateUserStripeData($user);
 
         return view( 'pages.profile', $data );
 

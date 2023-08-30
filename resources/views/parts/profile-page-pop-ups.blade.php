@@ -153,10 +153,10 @@ $videoUploadedDisplay = '';
                     </div>
                 </div>
                 !-->
-                @endguest 
+                @endguest
                 @auth
                 <div class="main_headline">Negotiate with the owner</div><br>
-                @endauth 
+                @endauth
                 <textarea id="bispoke_offer" placeholder="Write your proposal here (i.e music name, terms of use, price etc)"></textarea>
                 <div class="instant_hide error" id="bispoke_offer_error">Required</div>
             </div>
@@ -171,7 +171,7 @@ $videoUploadedDisplay = '';
             <div class="soc_con_face_username clearfix">
                 <div class="pro_pop_text_light">
                     Your proposal has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('profile.with.tab', ['tab' => 'chat'])}}" class="pro_text_dark">chat</a> to read replies or send more messages/details about your proposal.
-                </div>  
+                </div>
             </div>
             <br>
         </div>
@@ -309,45 +309,6 @@ $videoUploadedDisplay = '';
 
 
 <!-- Email Popups -->
-<div class="pro_send_email_outer pro_page_pop_up clearfix" >
-
-    <div class="pro_soc_discon_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-
-            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="soc_discon_text clearfix">
-
-            <h3>Post a Thank You Note</h3>
-            <span class="error"></span>
-        </div>
-        <div class="soc_share_images clearfix">
-            <img id="thank_you_image" class="defer_loading" src="" data-src="{{ asset('images/video_img.png') }}">
-            <img class="dance_icon_right defer_loading" src="" data-src="{{ asset('images/dancing-icon-2.png') }}">
-        </div>
-        <div class="soc_share_buttons clearfix">
-
-            <span>
-                <div class="social_supp_btns clearfix">
-                        <ul class="clearfix">
-                            <li><a id="facebook_share" class="popup_share_icon ch_sup_fb" href="javascript:void(0)"> Share</a> </li>
-                            <li><a id="twitter_share" class="popup_share_icon ch_sup_tw" href="javascript:void(0)"> Tweet</a></li>
-                        </ul>
-                </div>
-            </span>
-            <a id="thank_via_email_btn">Or send an Email</a>
-        </div>
-
-        <div class="email_box clearfix">
-            <textarea id="thankyou_email_text"></textarea>
-        </div>
-        <div class="pro_submit_button_outer email_button clearfix">
-            <a id="send_thankyou_email">Send</a>
-        </div>
-    </div>
-</div>
 <!-- Email popups end -->
 
 <!-- Profile Form Error Pop up -->
@@ -520,7 +481,7 @@ $videoUploadedDisplay = '';
         <div class="pro_reset_password_inner stage_three instant_hide clearfix">
             <div class="pro_pop_text_light text_center">
                 Your password has been changed successfully!
-            </div>  
+            </div>
             <br>
         </div>
     </div>
@@ -585,27 +546,7 @@ $videoUploadedDisplay = '';
 <!-- Soundcloud Stay Tuned Popup -->
 
 <!-- Orders Tab Contact Details Pop-up -->
-<div class="pro_orders_tab_contact_details pro_page_pop_up clearfix" style="" id="contact_popup">
 
-    <div class="pro_soc_discon_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-
-            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="pro_orders_tab_contact_details_inner clearfix">
-
-            <h4 id="cont_popup_name"></h4>
-            <h4 id="cont_popup_email"></h4><br />
-            <h4 id="cont_popup_address"></h4>
-            <div class="pro_submit_button_outer soc_con_submit_success clearfix">
-
-                <a style="cursor: pointer;" id="submit_button" onclick="$('.pro_soc_top_close').click()">Okay</a>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Orders Tab Contact Details Pop-up -->
 
 <!-- Cannot Edit Information Pop-up -->
@@ -775,6 +716,7 @@ $videoUploadedDisplay = '';
         </div>
     </div>
 </div>
+
 <div class="pro_uploading_in_progress in_progress pro_page_pop_up clearfix" style="z-index: 10;" id="pro_uploading_in_progress_real">
 
     <div class="pro_soc_con_face_inner clearfix">
@@ -789,6 +731,7 @@ $videoUploadedDisplay = '';
         </div>
     </div>
 </div>
+
 <div class="pro_page_pop_up new_popup clearfix" style="z-index: 10;" id="inline_info_popup">
 
     <div class="pro_soc_con_face_inner clearfix">
@@ -805,68 +748,7 @@ $videoUploadedDisplay = '';
         </div>
     </div>
 </div>
-<div class="ind_con_details_popup pro_page_pop_up new_popup clearfix" style="z-index: 10;">
 
-    <div class="pro_soc_con_face_inner clearfix">
-        <div style="padding: 10px 20px;" class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="pro_pop_head"></div>
-        <div class="pro_pop_body">
-            <div data-type="address" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-home"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="email" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-envelope"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="phone" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-phone"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="website" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-globe"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="facebook" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-facebook-square"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="twitter" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-twitter-square"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="instagram" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-instagram"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="youtube" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-youtube"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="soundcloud" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-soundcloud"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-            <div data-type="information" class="pro_pop_ind_con_each instant_hide">
-                <div class="pro_pop_each_ind_con_item item_type"><i class="fa fa-info-circle"></i></div>
-                <div class="pro_pop_each_ind_con_item item_name"></div>
-            </div>
-        </div>
-        <div class="pro_pop_foot">
-            <div class="foot_help">
-                If the listing details have changed let us know via online chat to the bottom right
-            </div>
-            <div class="foot_action">
-                
-            </div>
-        </div>
-    </div>
-</div>
 <div class="pro_pop_chat_upload in_progress new_popup pro_page_pop_up clearfix" style="z-index: 10;">
 
     <div class="pro_soc_con_face_inner clearfix">
@@ -997,104 +879,6 @@ $videoUploadedDisplay = '';
     </div>
 </div>
 
-<div class="music_zip_download_popup pro_page_pop_up new_popup clearfix" style="z-index: 10;">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="pro_pop_head">Download details</div>
-        <div class="pro_pop_body">
-            <div class="pro_body_in">
-                <div data-source-id="" data-path="" data-type="main" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Main File</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="license" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-file-pdf-o"></i></div>
-                    <div class="pro_pop_each_item item_name">License PDF</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="loop_one" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Loop</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="loop_two" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Loop</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="loop_three" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Loop</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_one" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_two" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_three" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_four" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_five" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_six" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_seven" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-                <div data-source-id="" data-path="" data-type="stem_eight" class="pro_pop_download_each instant_hide">
-                    <div class="pro_pop_each_item item_type"><i class="fa fa-music"></i></div>
-                    <div class="pro_pop_each_item item_name">Stem</div>
-                    <div class="pro_pop_each_item item_size"></div>
-                    <div class="pro_pop_each_item item_download"><i class="fa fa-download"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="pro_pop_foot">
-            <div class="foot_help">
-                Having problems? Please try again or contact us via online chat
-            </div>
-            <div class="foot_action">
-                <div id="close_download" class="foot_action_btn">Close</div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="pro_uploading_in_progress in_progress pro_page_pop_up clearfix" style="z-index: 10;" id="pro_uploading_in_progress">
 
     <div class="pro_soc_con_face_inner clearfix">
@@ -1130,21 +914,6 @@ $videoUploadedDisplay = '';
 </div>
 
 
-<div class="pro_initiating_download in_progress pro_page_pop_up clearfix" style="z-index: 10;" id="pro_initiating_download">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-
-            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
-        </div>
-        <div class="soc_con_face_username clearfix">
-
-            <h3>We are preparing your download. Do not refresh or navigate away.</h3><br><br><br>
-        </div>
-    </div>
-</div>
-
 <div class="pro_confirm_go_live pro_page_pop_up clearfix" style="z-index: 10;" id="pro_confirm_go_live">
 
     <div class="pro_soc_con_face_inner clearfix">
@@ -1165,290 +934,6 @@ $videoUploadedDisplay = '';
     </div>
 </div>
 
-<div class="pro_page_pop_up clearfix" id="add_agreement_popup">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="stage_one">
-            <div class="soc_con_face_username clearfix">
-                <div class="main_headline">You are adding a bespoke license agreement</div><br>
-                <select id="add_agreement_select_customer">
-                    <option value="">Choose customer</option>
-                </select>
-                <div class="instant_hide error" id="add_agreement_select_customer_error">Required</div>
-                @if(Auth::check())
-                <select id="add_agreement_music">
-                    <option value="">Choose music</option>
-                    @if(count(Auth::user()->musics))
-                    @foreach(Auth::user()->musics as $music)
-                    <option value="{{$music->id}}">{{$music->song_name}}</option>
-                    @endforeach
-                    @endif
-                </select>
-                <div class="instant_hide error" id="add_agreement_music_error">Required</div>
-                @endif
-                <div class="pro_pop_multi_row">
-                    <div class="each_col">
-                        <select id="add_agreement_license_end_term">
-                            <option value="">License Term Date</option>
-                            <option value="perpetual">Perpetual</option>
-                            <option value="custom">Let me write end term</option>
-                        </select>
-                        <div class="instant_hide error" id="add_agreement_license_end_term_error">Required</div>
-                    </div>
-                    <div class="each_col">
-                        <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" id="add_agreement_end_term" />
-                        <div class="instant_hide error" id="add_agreement_end_term_error">Required</div>
-                    </div>
-                </div>
-                <select id="add_agreement_license">
-                    <option selected value="bespoke">Bespoke Agreement</option>
-                    @foreach(config('constants.licenses') as $key => $license)
-                    <option value="{{$key}}">{{$license['name']}}</option>
-                    @endforeach
-                </select>
-                <input class="dummy_field" type="text" name="fakeusernameremembered">
-                <input placeholder="Price" type="number" id="add_agreement_price" />
-                <div class="instant_hide error" id="add_agreement_price_error">Required</div>
-                <textarea id="add_agreement_terms" placeholder="Write all terms of use here"></textarea>
-                <div class="instant_hide error" id="add_agreement_terms_error">Required</div>
-            </div>
-            <br>
-            <div id="send_add_agreement" class="pro_button">SUBMIT</div>
-        </div>
-        <div class="stage_two instant_hide">
-            <div class="soc_con_face_username clearfix">
-                <div class="pro_pop_text_light text_center">
-                    An agreement has been sent to <span class="pro_text_dark" id="sender_name"></span>. The user will be offered to accept or reject this agreement.
-                </div>  
-            </div>
-            <br>
-        </div>
-    </div>
-</div>
-
-<div class="pro_page_pop_up clearfix" id="switch_account_popup">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="stage_one">
-            <div class="soc_con_face_username clearfix">
-                <div class="main_headline">Switch to your contact account?</div><br>
-                <div class="pro_pop_text_light">
-                    If you proceed, the system will log you out from your current account and will log into your contact's account
-                </div> 
-            </div>
-            <br>
-            <div id="proceed_switch_account" class="pro_button">Proceed</div>
-        </div>
-    </div>
-</div>
-
-<div class="pro_page_pop_up clearfix" id="get_agent_popup">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="stage_one">
-            <div class="soc_con_face_username clearfix">
-                <div class="primary_headline">Request to have an artist manager</div>
-                <div class="pro_pop_text_light text_normal">
-                    Your request will be sent to <span class="pro_text_dark new_agent_name"></span>
-                </div>
-                <div class="current_agent instant_hide">
-                    <div class="main_headline current_agent_name"></div>
-                    <div class="pro_pop_text_light text_normal">is your current artist manager</div> 
-                </div>
-                <div class="new_agent">
-                    <div class="main_headline new_agent_name"></div>
-                    <div class="pro_pop_text_light text_normal">is the manager you are requesting for</div>  
-                </div>
-            </div>
-            <br><br>
-            <div id="proceed_get_agent" class="pro_button">Send Request</div>
-        </div>
-        <div class="stage_two instant_hide">
-            <div class="soc_con_face_username clearfix">
-                <div class="pro_pop_text_light text_center">
-                    Your request has been sent to <span class="pro_text_dark new_agent_name"></span>. The manager will be resposible to process and reply to this request. Keep checking your email and 1Platform account for any updates regarding this request.
-                </div>  
-            </div>
-            <br>
-        </div>
-    </div>
-</div>
-
-<div class="pro_page_pop_up clearfix" id="add_chat_group_member_popup">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="stage_one">
-            <div class="soc_con_face_username clearfix">
-                <div class="main_headline">Introduce a contact in this chat</div><br>
-                <div class="hide_on_mobile"><br></div>
-                <div class="pro_pop_multi_row">
-                    <div class="each_col">
-                        @if(Auth::check())
-                        <select id="add_chat_group_member">
-                            <option value="">Choose your contact</option>
-                            <option value="add_by_code">Add contact by code</option>
-                            @if(count(Auth::user()->contacts))
-                                @foreach(Auth::user()->contacts as $contact)
-                                    @if(!$contact->contactUser)
-                                        @php continue @endphp
-                                    @endif
-                                    <option value="{{$contact->contactUser->id}}">{{$contact->contactUser->name}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <div class="instant_hide error" id="add_chat_group_member_error">Required</div>
-                        @endif
-                    </div>
-                    <div class="each_col">
-                        <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input disabled="disabled" placeholder="Enter Contact Code" type="text" id="add_chat_group_member_contact_code" />
-                        <div class="instant_hide error" id="add_chat_group_member_contact_code_error">Required</div>
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div id="send_add_chat_group_member" class="pro_button">SUBMIT</div>
-        </div>
-        <div class="stage_two instant_hide">
-            <div class="soc_con_face_username clearfix">
-                <div class="pro_pop_text_light text_center">
-                    An agreement has been sent to <span class="pro_text_dark" id="sender_name"></span>. The user will be offered to accept or reject this agreement.
-                </div>  
-            </div>
-            <br>
-        </div>
-    </div>
-</div>
-
-<div class="pro_page_pop_up clearfix" id="proffer_project_popup">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="stage_one">
-            <div class="soc_con_face_username clearfix">
-                <div class="main_headline">Set up a new Project Agreement</div><br>
-                <select id="proffer_project_select_customer">
-                    <option value="">Choose customer</option>
-                </select>
-                <div class="instant_hide error" id="proffer_project_select_customer_error">Required</div>
-                <input class="dummy_field" type="text" name="fakeusernameremembered">
-                <input placeholder="Title" type="text" id="proffer_project_title" />
-                <div class="instant_hide error" id="proffer_project_title_error">Required</div>
-                <div class="pro_pop_multi_row">
-                    <div class="each_col">
-                        <select id="proffer_project_select_end_term">
-                            <option value="">Term Date</option>
-                            <option value="perpetual">Perpetual</option>
-                            <option value="custom">Let me write end term</option>
-                        </select>
-                        <div class="instant_hide error" id="proffer_project_end_term_select_error">Required</div>
-                    </div>
-                    <div class="each_col">
-                        <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" id="proffer_project_end_term" />
-                        <div class="instant_hide error" id="proffer_project_end_term_error">Required</div>
-                    </div>
-                </div>
-                <input class="dummy_field" type="text" name="fakeusernameremembered">
-                <input placeholder="Price" type="number" id="proffer_project_price" />
-                <div class="instant_hide error" id="proffer_project_price_error">Required</div>
-                <textarea id="proffer_project_description" placeholder="Project description (i.e details/milestones/terms etc)"></textarea>
-                <div class="instant_hide error" id="proffer_project_terms_error">Required</div>
-            </div>
-            <br>
-            <div id="send_proffer_project" class="pro_button">SUBMIT</div>
-        </div>
-        <div class="stage_two instant_hide">
-            <div class="soc_con_face_username clearfix">
-                <div class="pro_pop_text_light text_center">
-                    The project has been sent to <span class="pro_text_dark" id="sender_name"></span>. The user will be offered to accept or reject the project.
-                </div>  
-            </div>
-            <br>
-        </div>
-    </div>
-</div>
-
-<div class="pro_page_pop_up clearfix" id="add_product_popup">
-
-    <div class="pro_soc_con_face_inner clearfix">
-
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="stage_one">
-            <div class="soc_con_face_username clearfix">
-                <div class="main_headline">You are adding a product</div><br>
-                <select id="add_product_select_customer">
-                    <option value="">Choose customer</option>
-                </select>
-                <div class="instant_hide error" id="add_product_select_customer_error">Required</div>
-                <select id="add_product_select_product">
-                    @if(Auth::user())
-                    <option value="">Choose product</option>
-                    @foreach($user->products as $product)
-                    <option value="{{$product->id}}">{{$product->title}}</option>
-                    @endforeach
-                    @endif
-                </select>
-                <div class="instant_hide error" id="add_product_select_product_error">Required</div>
-                <input class="dummy_field" type="text" name="fakeusernameremembered">
-                <input placeholder="Price" type="number" id="add_product_price" />
-                <div class="instant_hide error" id="add_product_price_error">Required</div>
-            </div>
-            <br>
-            <div id="send_add_product" class="pro_button">SUBMIT</div>
-        </div>
-        <div class="stage_two instant_hide">
-            <div class="soc_con_face_username clearfix">
-                <div class="pro_pop_text_light text_center">
-                    Your product will be offered to <span class="pro_text_dark" id="add_product_customer_name"></span>
-                </div>  
-            </div>
-            <br>
-        </div>
-    </div>
-</div>
-
-
 <div class="pro_page_pop_up clearfix" id="internal_sub_unsub_popup">
 
     <div class="pro_soc_con_face_inner clearfix">
@@ -1462,7 +947,7 @@ $videoUploadedDisplay = '';
         <div class="soc_con_face_username clearfix">
             <div class="pro_pop_text_light text_center">
                 If you wish to cancel your account, subscription or change your subscription plan please email us at <a href="mailto:admin@1platform.tv"><span class="pro_text_dark" id="sender_name">admin@1platform.tv</span></a>
-            </div>  
+            </div>
         </div>
         <br>
     </div>
@@ -1730,7 +1215,7 @@ $campUsername = $campUser->username;
             <i class="fa fa-times pro_soc_top_close firsttime_login_close"></i>
         </div>
         <div class="pro_music_career_starts_inner clearfix">
-            
+
             <h3>Your profile has been successfully updated</h3><br />
             <center>
                 <p class="pro_video_upload_txt_2">Tell everyone about 1Platform</p><br />
@@ -1930,58 +1415,4 @@ $campUsername = $campUser->username;
     </div>
 </div>
 
-<div data-currency="{{$commonMethods->getCurrencySymbol(strtoupper($userPersonalDetails['defaultCurrency']))}}" class="pro_page_pop_up clearfix" id="pay_quick_popup">
 
-    <div class="pro_soc_con_face_inner clearfix">
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="stage_one">
-            <div class="soc_con_face_username clearfix">
-                <div class="main_headline"></div>
-                <div class="second_headline"></div>
-                <div id="pay_quick_error" class="instant_hide m_e_card_pop_error"></div>
-                <div id="pay_quick_card_number" class="m_e_card_elem m_e_card_pop"></div>
-                <div class="pro_pop_multi_row">
-                    <div class="each_col">
-                        <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input placeholder="Card Name" type="text" id="pay_quick_card_name" />
-                    </div>
-                    <div class="each_col">
-                        <div id="pay_quick_card_cvc" class="m_e_card_elem m_e_card_pop"></div>
-                    </div>
-                </div>
-                <div class="pro_pop_multi_row">
-                    <div id="pay_quick_card_expiry" class="m_e_card_elem m_e_card_pop"></div>
-                </div>
-            </div>
-            <br>
-            <div id="pay_quick_final" class="pro_button">SUBMIT</div>
-        </div>
-    </div>
-</div>
-
-<div class="pro_page_pop_up clearfix" id="subscription_offers_popup">
-
-    <div class="pro_soc_con_face_inner clearfix">
-        <div class="soc_con_top_logo clearfix">
-            <a style="opacity:0;" class="logo8">
-                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
-            </a>
-            <i class="fa fa-times pro_soc_top_close"></i>
-        </div>
-        <div class="soc_con_face_username clearfix">
-            <div class="subscription_offers_in">
-                <img src="" class="profile_img" />
-                <div class="profile_heading"></div>
-                <div class="bullet_each bullet_one"></div>
-                <div class="bullet_each bullet_two"></div>
-                <div class="bullet_each bullet_three"></div>
-            </div>
-        </div>
-        <br>
-    </div>
-</div>

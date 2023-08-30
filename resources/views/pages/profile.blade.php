@@ -56,7 +56,6 @@
 @section('page-level-js')
 
 	<script src="{{asset('simplepicker/simplepicker.js')}}"></script>
-	<script src="https://js.stripe.com/v3/"></script>
    	<script type="text/javascript">
 
    		window.currentUserId = {{Auth::user()->id}};
@@ -120,68 +119,6 @@
 
     <div class="pro_left_sec_outer">
     	@if(!$user->is_buyer_only)
-    	<div class="pro_acc_stats_outer">
-    		<div class="pro_acc_stat_top">
-    			<div class="pro_acc_stat_head">Account Statistics</div>
-    		</div>
-    		<div class="pro_acc_stat_sep"></div>
-    		<div class="pro_acc_stat_btm">
-    			<div class="pro_acc_stat_each">
-    				<div class="pro_acc_stat_name">
-    					Total Revenue
-    				</div>
-    				<div class="pro_acc_stat_val">
-    					{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}{{ number_format($purchaseParticulars['total_revenue'], 2) }}
-    				</div>
-    			</div>
-                <div class="pro_acc_stat_each">
-                    <div class="pro_acc_stat_name">
-                        Singles Sold
-                    </div>
-                    <div class="pro_acc_stat_val">
-                        {{$purchaseParticulars['singles_sold']}}
-                    </div>
-                </div>
-                <div class="pro_acc_stat_each">
-                    <div class="pro_acc_stat_name">
-                        Albums Sold
-                    </div>
-                    <div class="pro_acc_stat_val">
-                        {{$purchaseParticulars['albums_sold']}}
-                    </div>
-                </div>
-                <div class="pro_acc_stat_each">
-                    <div class="pro_acc_stat_name">
-                        Products Sold
-                    </div>
-                    <div class="pro_acc_stat_val">
-                        {{$purchaseParticulars['products_sold']}}
-                    </div>
-                </div>
-                <div class="pro_acc_stat_each">
-                    <div class="pro_acc_stat_name">
-                        Fans
-                    </div>
-                    <div class="pro_acc_stat_val">
-                        {{count($purchaseParticulars['fans'])}}
-                    </div>
-                </div>
-                @php $agent = \App\Models\AgentContact::where(['contact_id' => $user->id, 'approved' => 1])->whereNotNull('agent_id')->first() @endphp
-    			<div class="pro_acc_stat_each">
-                    <div class="pro_acc_stat_name">
-                        Your Agent
-                    </div>
-                    <div title="{{$agent && $agent->agentUser?$agent->agentUser->activityStatus():''}}" class="pro_acc_stat_val">
-                        @if($agent && $agent->agentUser)
-                            <i class="fa fa-circle {{$agent->agentUser->activityStatus()}}"></i>&nbsp;
-                            {{$agent->agentUser->name}}
-                        @else
-                            N/A
-                        @endif
-                    </div>
-                </div>
-    		</div>
-    	</div>
 
         <div class="pro_get_started">
             <div class="pro_get_start_top">
@@ -240,43 +177,7 @@
             </div>
         </div>
 
-        <div class="pro_lat_sale">
-            <div class="pro_lat_sale_top">
-                <div class="pro_lat_sale_head">Latest Sales</div>
-                <div class="pro_lat_sale_sub_head">Your latest sales</div>
-            </div>
-            <div class="pro_lat_sale_bottom">
-                @if(count($topSales))
-                @foreach($topSales as $key => $checkout)
-                @php $currencySymbol = $commonMethods->getCurrencySymbol($checkout->currency) @endphp
-                @php $customerImage = $commonMethods->getUserDisplayImage($checkout->customer ? $checkout->customer->id : 0) @endphp
-                <div class="pro_lat_sale_each">
-                    <div class="pro_lat_sale_each_left">
-                        <img class="trans_image" title="{{$checkout->customer_name}}" src="{{$customerImage}}" alt="#" />
-                    </div>
-                    <div class="pro_lat_sale_each_center">
-                        <div class="pro_lat_sale_each_name">
-                            {{$checkout->customer_name}}
-                        </div>
-                        <div class="pro_lat_sale_each_desc">
-                            @if($checkout->type == 'crowdfund')
-                                Crowdfund sale
-                            @else
-                                {{count($checkout->instantCheckoutItems)}}
-                                {{count($checkout->instantCheckoutItems) == 1 ? 'item' : 'items'}}
-                            @endif
-                        </div>
-                    </div>
-                    <div class="pro_lat_sale_each_right">
-                        {{($checkout->price>0)?$currencySymbol.number_format($checkout->price, 2):' Free'}}
-                    </div>
-                </div>
-                @endforeach
-                @else
-                <div class="no_results">You do not have any sales yet</div>
-                @endif
-            </div>
-        </div>
+
 
     	<div class="pro_get_started">
     		<div class="pro_get_start_top">
@@ -506,13 +407,7 @@
 
             @include('parts.profile-crowd-funding-section', ['page' => $page])
 
-            @include('parts.profile-tools', ['page' => $page])
-
             @endif
-
-            @include('parts.profile-orders-section', ['page' => $page])
-
-            @include('parts.profile-chat-old', ['page' => $page])
 
         </div>
 
