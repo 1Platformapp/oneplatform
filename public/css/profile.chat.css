@@ -183,7 +183,7 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
 #pay_quick_final.disabled { opacity: 0.5; cursor: auto; }
 .chat_get_help { border: 1px solid #ccc; margin-bottom: 60px; display: flex; align-items: center; padding: 20px 0 20px 6px; cursor: pointer; }
 .chat_get_help i { margin-right: 7px; }
-
+.m_btn_right_icon_each { font-size: 17px; }
 .pro_form_title { color: #818181; font-size: 18px; margin-bottom: 40px; }
 
 @media (min-width:320px) and (max-width: 767px) {
