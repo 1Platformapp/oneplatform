@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.status-submit[data-status="default"] {
+    background-color: #9CA3AF;
+}
+
+.status-submit[data-status="urgent"] {
+    background-color: #DB1E77;
+}
+
+.status-submit[data-status="in-progress"] {
+    background-color: #EAB308;
+}
+
+.status-submit[data-status="completed"] {
+    background-color: #22C55E;
+}

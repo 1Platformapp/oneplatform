@@ -954,6 +954,42 @@
         }
     });
 
+    $('body').delegate('.each-stage-det .status-submit', 'click', function(e){
+
+        var thiss = $(this);
+        var parent = thiss.closest('.each-stage-det');
+        var stageId = parent.attr('data-id');
+        var taskId = thiss.closest('.each-task').attr('data-task');
+
+        var formData = new FormData();
+        formData.append('type', 'status');
+        formData.append('stage', stageId);
+        formData.append('task', taskId);
+        formData.append('data', thiss.attr('data-status'));
+
+        $.ajax({
+
+            url: '/management-plan/submit',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function (response) {
+
+                $('.notification .icon').addClass('instant_hide');
+                if (response.success) {
+                    thiss.attr('data-status', response.value);
+                }else {
+                    $('.notification .icon.error').removeClass('instant_hide');
+                    $('.notification .notification-title').text('Error');
+                    $('.notification .notification-body').text(response.error);
+                    $('.notification').removeClass('hidden');
+                }
+            }
+        });
+    });
+
     $('body').delegate('.ind_con_each_action.details', 'click', function(e){
 
         var find = $(this).closest('.ind_con_each_outer').attr('data-id');

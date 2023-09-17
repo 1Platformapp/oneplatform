@@ -5,9 +5,10 @@
 <div class="mt-12 each-stage-det {{$key == 0 ? '' : 'instant_hide'}}" data-id="{{$stage->id}}" data-stage-ref="{{$stage->name}}">
    <ul role="list" class="mt-3 grid grid-cols-1 gap-5 sm:gap-6">
         @foreach($stage->tasks as $index => $task)
+        @php $status = $commonMethods->getSubmitData($stage->id, $task->id, $user->id, 'status'); @endphp
         <li data-task="{{$task->id}}" class="flex flex-col each-task">
             <div class="col-span-1 flex rounded-md shadow-sm">
-                <div class="cursor-pointer flex w-16 flex-shrink-0 items-center justify-center bg-pink-600 rounded-l-md text-sm font-medium text-white">{{$index+1}}</div>
+                <div data-status="{{$status && $status != '' ? $status : 'default'}}" class="status-submit cursor-pointer flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white">{{$index+1}}</div>
                 <div class="cursor-pointer relative flex flex-1 items-center justify-between md:truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white each-task-det-nav">
                     <div class="flex-1 md:truncate px-4 py-2 text-sm hover:bg-gray-50">
                         <a href="#" class="font-medium text-gray-900 hover:text-gray-600">{{$task->title}}</a>
@@ -28,19 +29,30 @@
                 @if($task->advice)
                 <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
                     <div class="px-4 sm:px-0">
-                        <h2 class="text-base font-semibold leading-7 text-gray-900">Platform advice</h2>
-                        <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+                        <h2 class="text-base leading-7 text-gray-900">Platform advice</h2>
+                        <p class="text-sm text-gray-600">1Platform has an advice for you</p>
                     </div>
                     <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 p-6">
-                        <p class="text-sm leading-6 text-gray-600">{!! $task->advice !!}</p>
+                        <p class="text-sm text-gray-600">{!! $task->advice !!}</p>
+                    </div>
+                </div>
+                @endif
+                @if($task->video_url)
+                <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
+                    <div class="px-4 sm:px-0">
+                        <h2 class="text-base leading-7 text-gray-900">Video</h2>
+                        <p class="text-sm text-gray-600">The video resource helps you understand this task</p>
+                    </div>
+                    <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 p-6">
+                        <iframe width="100%" height="400" src="{{$task->video_url}}"></iframe>
                     </div>
                 </div>
                 @endif
                 @if($task->notes)
                 <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 mb-5">
                     <div class="px-4 sm:px-0">
-                        <h2 class="text-base font-semibold leading-7 text-gray-900">Notes / Storyboard</h2>
-                        <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+                        <h2 class="text-base leading-7 text-gray-900">Notes / Storyboard</h2>
+                        <p class="text-sm text-gray-600">Use this for your own notes</p>
                     </div>
                     <div class="md:col-span-2">
                         <div class="col-span-full flex flex-col">
@@ -55,7 +67,7 @@
                 @if($task->button_text && $task->button_link)
                 <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 mb-5">
                     <div class="px-4 sm:px-0">
-                        <h2 class="text-base font-semibold leading-7 text-gray-900">Button</h2>
+                        <h2 class="text-base leading-7 text-gray-900">Button</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600"></p>
                     </div>
                     <div class="md:col-span-2">
@@ -73,7 +85,6 @@
    </ul>
 </div>
 @endforeach
-
 
 <script>
     const textareas = document.querySelectorAll('.auto-resize-textarea');

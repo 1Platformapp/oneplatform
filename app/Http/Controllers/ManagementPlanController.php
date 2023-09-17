@@ -24,10 +24,23 @@ class ManagementPlanController extends Controller
             $submit->type = $request->type;
         }
 
-        $submit->value = $request->data;
+        if ($request->type == 'notes') {
+            $submit->value = $request->data;
+        } else if ($request->type == 'status') {
+            if ($request->data == 'default') {
+                $submit->value = 'urgent';
+            } else if ($request->data == 'urgent') {
+                $submit->value = 'in-progress';
+            } else if ($request->data == 'in-progress') {
+                $submit->value = 'completed';
+            } else {
+                $submit->value = 'default';
+            }
+        }
+
         $submit->save();
 
-        return json_encode(['success' => true, 'error' => '']);
+        return json_encode(['success' => true, 'error' => '', 'value' => $submit->value]);
     }
 }
 
