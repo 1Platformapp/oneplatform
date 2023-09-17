@@ -27,21 +27,19 @@
             </div>
             <div class="each-task-det md:mx-10 instant_hide">
                 @if($task->advice)
-                <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
-                    <div class="px-4 sm:px-0">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-4 pt-5 md:grid-cols-3">
+                    <div class="md:px-4">
                         <h2 class="text-base leading-7 text-gray-900">Platform advice</h2>
-                        <p class="text-sm text-gray-600">1Platform has an advice for you</p>
                     </div>
                     <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 p-6">
-                        <p class="text-sm text-gray-600">{!! $task->advice !!}</p>
+                        <p class="text-xs text-gray-600">{!! $task->advice !!}</p>
                     </div>
                 </div>
                 @endif
                 @if($task->video_url)
-                <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
-                    <div class="px-4 sm:px-0">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-4 pt-5 md:grid-cols-3">
+                    <div class="md:px-4">
                         <h2 class="text-base leading-7 text-gray-900">Video</h2>
-                        <p class="text-sm text-gray-600">The video resource helps you understand this task</p>
                     </div>
                     <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 p-6">
                         <iframe width="100%" height="400" src="{{$task->video_url}}"></iframe>
@@ -49,14 +47,13 @@
                 </div>
                 @endif
                 @if($task->notes)
-                <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 mb-5">
-                    <div class="px-4 sm:px-0">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-4 pt-5 md:grid-cols-3 mb-5">
+                    <div class="md:px-4">
                         <h2 class="text-base leading-7 text-gray-900">Notes / Storyboard</h2>
-                        <p class="text-sm text-gray-600">Use this for your own notes</p>
                     </div>
                     <div class="md:col-span-2">
                         <div class="col-span-full flex flex-col">
-                            <div class="mt-2">
+                            <div class="">
                                 <textarea rows="3" class="auto-resize-textarea notes block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 outline-none p-2 sm:text-sm sm:leading-6">{{$commonMethods->getSubmitData($stage->id, $task->id, $user->id, 'notes')}}</textarea>
                             </div>
                             <button type="button" class="notes-submit rounded-md ml-auto mt-3 bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
@@ -66,7 +63,7 @@
                 @endif
                 @if($task->button_text && $task->button_link)
                 <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 mb-5">
-                    <div class="px-4 sm:px-0">
+                    <div class="md:px-4">
                         <h2 class="text-base leading-7 text-gray-900">Button</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600"></p>
                     </div>
