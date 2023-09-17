@@ -22,7 +22,7 @@
 
     <link href="/css/style.css?v=3.16" rel="stylesheet" type="text/css" />
 
-    <link href="/css/app.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="/css/app.css?v=1.2" rel="stylesheet" type="text/css" />
 
     <link href="/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 
