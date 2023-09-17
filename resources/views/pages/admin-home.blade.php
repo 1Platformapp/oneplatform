@@ -178,6 +178,8 @@
 
     @include('parts.add-form-elements')
 
+    @include('parts.notification')
+
     @include('parts.basket-popups')
 
     <div id="body-overlay"></div>

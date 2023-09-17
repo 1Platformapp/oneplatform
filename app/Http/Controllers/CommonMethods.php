@@ -10,6 +10,7 @@ use App\Models\Genre;
 use App\Models\StripeCheckout;
 use App\Models\AgentContact;
 use App\Models\CompetitionVideo;
+use App\Models\ManagementPlanSubmit;
 use App\Models\UserChat;
 use App\Models\Country;
 use App\Models\CustomProduct;
@@ -73,6 +74,17 @@ class CommonMethods extends Controller
     }
 
 
+
+    public static function getSubmitData($stage, $task, $user, $type){
+
+        $check = ManagementPlanSubmit::where(['stage_id' => $stage, 'task_id' => $task, 'user_id' => $user, 'type' => $type])->get()->first();
+        if ($check) {
+
+            return $check->value;
+        } else {
+            return null;
+        }
+    }
 
     public static function getItemImage($checkoutItemId, $itemId, $itemType){
 

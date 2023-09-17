@@ -1287,6 +1287,11 @@ class ChartController extends Controller
                 $accessGranted = 1;
             }
 
+            if($identityType == 'subscriber' && $findType == 'management-plan' && $user) {
+
+                $accessGranted = 1;
+            }
+
             if($identityType == 'subscriber' && $findType == 'industry_contact_details' && $user && $user->hasActivePaidSubscription()) {
 
                 $accessGranted = 1;
@@ -1522,6 +1527,11 @@ class ChartController extends Controller
                     }else{
                         $error = 'Error';
                     }
+                }
+                if($findType == 'management-plan'){
+
+                    $data['data'] = \View::make('parts.management-plans', ['commonMethods' => $commonMethods, 'user' => $user])->render();
+                    $success = 1;
                 }
                 if($findType == 'industry_contact_details'){
 
