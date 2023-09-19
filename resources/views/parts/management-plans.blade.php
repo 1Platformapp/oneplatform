@@ -11,7 +11,7 @@
                 <div data-status="{{$status && $status != '' ? $status : 'default'}}" class="status-submit cursor-pointer flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white">{{$index+1}}</div>
                 <div class="cursor-pointer relative flex flex-1 items-center justify-between md:truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white each-task-det-nav">
                     <div class="flex-1 md:truncate px-4 py-2 text-sm hover:bg-gray-50">
-                        <a href="#" class="font-medium text-gray-900 hover:text-gray-600">{{$task->title}}</a>
+                        <div class="font-medium text-gray-900 hover:text-gray-600">{{$task->title}}</div>
                         <p class="text-gray-500">{{$task->sub_title}}</p>
                     </div>
                     @if($task->button_text && $task->button_link)
