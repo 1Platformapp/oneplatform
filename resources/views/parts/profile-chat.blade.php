@@ -79,9 +79,10 @@
                                 <div class="mt-10">
                                     <div class="border-b border-gray-200">
                                         <nav class="-mb-px flex " aria-label="Tabs">
-                                            <div data-stage="one" class="border-indigo-500 text-indigo-600 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage one</div>
-                                            <div data-stage="two" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage two</div>
-                                            <div data-stage="three" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage three</div>
+                                            <div data-stage="one" class="border-indigo-500 text-indigo-600 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 1</div>
+                                            <div data-stage="two" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 2</div>
+                                            <div data-stage="three" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 3</div>
+                                            <div data-stage="four" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 4</div>
                                         </nav>
                                     </div>
                                 </div>
