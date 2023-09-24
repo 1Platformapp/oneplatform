@@ -131,7 +131,7 @@
                             </form>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-diary">
-                            My diary
+                            @include('parts.calendar', [])
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-questionnaires">
                             @php $skills = \App\Models\Skill::all() @endphp
