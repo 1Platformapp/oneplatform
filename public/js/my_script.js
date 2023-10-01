@@ -2016,6 +2016,18 @@ $(document).ready(function() {
 
             });
 
+        }else if( deleteId && deleteItemType == 'calendar-event' ){
+
+
+
+            $.post( "/dashboard/calendar/delete" , { id: deleteId }, function(data) {
+
+
+
+                location.reload();
+
+            });
+
         }
 
     });

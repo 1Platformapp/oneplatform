@@ -50,7 +50,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a title="Diary" class="m_btn_right_icon_each m_btn_diary active" data-id="my-diary">
+                                    <a title="Calendar" class="m_btn_right_icon_each m_btn_calendarr active" data-id="my-calendar">
                                         <i class="fa fa-calendar"></i>
                                     </a>
                                 </li>
@@ -130,8 +130,8 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="each_dash_section instant_hide" data-value="my-diary">
-                            @include('parts.calendar', [])
+                        <div class="each_dash_section instant_hide" data-value="my-calendar">
+                            <div class="calendar-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-questionnaires">
                             @php $skills = \App\Models\Skill::all() @endphp
@@ -1080,20 +1080,38 @@
         });
     });
 
-    $('.m_btn_management_plan, .m_btn_add_contact, .m_btn_diary, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires').click(function(e){
+    $('.m_btn_management_plan, .m_btn_add_contact, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires').click(function(e){
 
         var id = $(this).attr('data-id');
         $('.each_dash_section:not(.each_dash_section[data-value="'+id+'"])').addClass('instant_hide');
         $('.each_dash_section[data-value="'+id+'"]').toggleClass('instant_hide');
 
-        if($(this).hasClass('m_btn_industry-contacts') && !$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')){
+        if ($(this).hasClass('m_btn_industry-contacts')) {
 
-            getIndustryContacts('');
+            if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                getIndustryContacts('');
+            } else {
+                $('.industry-contacts-well').html('');
+            }
         }
 
-        if($(this).hasClass('m_btn_management_plan') && !$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')){
+        if ($(this).hasClass('m_btn_management_plan')) {
 
-            getManagementPlan('');
+            if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                getManagementPlan('');
+            } else {
+                $('.management-plan-well').html('');
+            }
+        }
+
+        if($(this).hasClass('m_btn_calendarr')){
+
+            if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                getCalendar();
+            } else {
+                $('body').off('click', '.dropdown-icon');
+                $('.calendar-well').html('');
+            }
         }
 
         if($(this).hasClass('m_btn_transactions')){
@@ -1868,6 +1886,25 @@
                 }else{
                     console.log(data.error);
                     $('.management-plan-well').html(data.error);
+                }
+            }
+        });
+    }
+
+    function getCalendar(){
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': 'my-calendar', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
+            success: function(response) {
+                if(response.success == 1){
+                    $('.calendar-well').html(response.data.data);
+                }else{
+                    console.log(data.error);
+                    $('.calendar-well').html(data.error);
                 }
             }
         });

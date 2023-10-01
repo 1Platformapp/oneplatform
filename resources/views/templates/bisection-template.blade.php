@@ -22,7 +22,7 @@
 
     <link href="/css/style.css?v=3.16" rel="stylesheet" type="text/css" />
 
-    <link href="/css/app.css?v=2.3" rel="stylesheet" type="text/css" />
+    <link href="/css/app.css?v=2.4" rel="stylesheet" type="text/css" />
 
     <link href="/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 
@@ -32,7 +32,7 @@
 
     <script type="application/javascript" src="/js/jquery.bxslider.min.js"></script>
 
-    <script defer type="application/javascript" src="/js/my_script.js?v=6.71"></script>
+    <script defer type="application/javascript" src="/js/my_script.js?v=6.72"></script>
 
     @yield('page-level-css','')
 

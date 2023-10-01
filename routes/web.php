@@ -36,6 +36,7 @@ use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\ProfileSetupController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ManagementPlanController;
+use App\Http\Controllers\CalendarController;
 
 $domainSubscribers = App\Models\CustomDomainSubscription::where('status', 1)->get();
 foreach ($domainSubscribers as $key => $domainSubscriber) {
@@ -416,6 +417,10 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::post('dashboard/update-contract/{id}', [AgencyController::class, 'updateContract'])->name('agency.contract.update');
         Route::post('dashboard/approve-contract/{id}', [AgencyController::class, 'approveContract'])->name('agency.contract.approve');
         Route::post('management-plan/submit', [ManagementPlanController::class, 'submit'])->name('management.plan.submit');
+        Route::post('dashboard/calendar/create', [CalendarController::class, 'create'])->name('calendar.event.create');
+        Route::post('dashboard/calendar/update', [CalendarController::class, 'update'])->name('calendar.event.update');
+        Route::post('dashboard/calendar/delete', [CalendarController::class, 'delete'])->name('calendar.event.delete');
+        Route::post('dashboard/calendar/read', [CalendarController::class, 'read'])->name('calendar.event.read');
         Route::get('profile/{tab}/{subtab?}', [ProfileController::class, 'profileWithTab'])->name('profile.with.tab');
         Route::post('dashboard/chat', [AgencyController::class, 'userChat'])->name('agency.chat');
         Route::post('dashboard/create-message', [AgencyController::class, 'createMessage'])->name('agency.create.message');

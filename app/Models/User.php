@@ -1607,6 +1607,16 @@ class User extends Authenticatable
 
     }
 
+    public function calendarEventsAsOwner()
+    {
+        return $this->hasMany( CalendarEvent::class );
+    }
+
+    public function calendarEventsAsParticipant()
+    {
+        return $this->hasMany( CalendarEventParticipant::class );
+    }
+
     public function agent()
     {
 
