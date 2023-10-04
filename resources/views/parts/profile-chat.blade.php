@@ -26,7 +26,6 @@
                                 </li>
                             </ul>
                         </div>
-
                         <div class="m_btm_right_icons">
                             <ul>
                                 <li>

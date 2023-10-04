@@ -37,6 +37,7 @@ use App\Http\Controllers\ProfileSetupController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ManagementPlanController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\TestController;
 
 $domainSubscribers = App\Models\CustomDomainSubscription::where('status', 1)->get();
 foreach ($domainSubscribers as $key => $domainSubscriber) {
@@ -279,7 +280,7 @@ Route::prefix('email')->group(function(){
         return new App\Mail\AgentContact(App\Models\User::all()->first(), App\Models\AgentContact::all()->first(), [], 'questionnaire');
     });
     Route::get('agent-contact/approved/agent', function () {
-        return new App\Mail\AgentContact(App\Models\User::all()->first(), App\Models\AgentContact::all()->first(), [''], 'approved-for-agent');
+        return new App\Mail\AgentContact(App\Models\User::all()->first(), App\Models\AgentContact::all()->last(), [''], 'approved-for-agent');
     });
     Route::get('agent-contact/approved/contact', function () {
         return new App\Mail\AgentContact(App\Models\User::all()->first(), App\Models\AgentContact::all()->first(), [''], 'approved-for-contact');
@@ -304,6 +305,9 @@ Route::prefix('email')->group(function(){
     });
     Route::get('cancel-subscription-artist', function () {
         return new App\Mail\CancelSubscription(App\Models\StripeSubscription::all()->first(), 'artist');
+    });
+    Route::get('calendar/participant-added', function () {
+        return new App\Mail\CalendarMail(App\Models\CalendarEventParticipant::all()->first());
     });
 });
 
@@ -410,6 +414,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::post('getUserCompleteInfo', [ChartController::class, 'getUserCompleteInfo'])->name('user-complete-info');
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyController::class, 'index'])->name('agency.dashboard');
+        Route::get('test/send-whatsapp-message', [TestController::class, 'sendWhatsappMessage'])->name('test.send.whatsapp.message');
         Route::get('dashboard/add-contract/{id}/{contact}', [AgencyController::class, 'addContractForm'])->name('agency.contract.add.form');
         Route::get('dashboard/edit-contract/{id}', [AgencyController::class, 'editContractForm'])->name('agency.contract.edit.form');
         Route::get('dashboard/view-contract/{id}', [AgencyController::class, 'viewContractForm'])->name('agency.contract.view.form');

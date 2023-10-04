@@ -40,45 +40,15 @@
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="pro_pop_body">
-                <div class="mx-auto max-w-md sm:max-w-3xl">
+                <div class="event-participants-show mx-auto max-w-md sm:max-w-3xl">
                     <div>
                         <div class="text-center">
-                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 48 48" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M34 40h10v-4a6 6 0 00-10.712-3.714M34 40H14m20 0v-4a9.971 9.971 0 00-.712-3.714M14 40H4v-4a6 6 0 0110.713-3.714M14 40v-4c0-1.313.253-2.566.713-3.714m0 0A10.003 10.003 0 0124 26c4.21 0 7.813 2.602 9.288 6.286M30 14a6 6 0 11-12 0 6 6 0 0112 0zm12 6a4 4 0 11-8 0 4 4 0 018 0zm-28 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
                             <h2 class="mt-2 text-base font-semibold leading-6 text-gray-900">All participants</h2>
-                            <p class="mt-1 text-sm text-gray-500">Recording session</p>
+                            <p class="event-title mt-1 text-sm text-gray-500">Recording session</p>
                         </div>
                     </div>
                     <div class="mt-10">
-                        <ul role="list" class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <li>
-                                <button type="button" class="group flex w-full items-center justify-between space-x-3 rounded-full border border-gray-300 p-2 text-left shadow-sm hover:bg-gray-50 outline-none">
-                                    <span class="flex min-w-0 flex-1 items-center space-x-3">
-                                        <span class="block flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                                        </span>
-                                        <span class="block min-w-0 flex-1">
-                                        <span class="block truncate text-sm font-medium text-gray-900">Lindsay Walton</span>
-                                        <span class="block truncate text-sm font-medium text-gray-500">@AgentDavid</span>
-                                        </span>
-                                    </span>
-                                </button>
-                            </li>
-                            <li>
-                                <button type="button" class="group flex w-full items-center justify-between space-x-3 rounded-full border border-gray-300 p-2 text-left shadow-sm hover:bg-gray-50 outline-none">
-                                    <span class="flex min-w-0 flex-1 items-center space-x-3">
-                                        <span class="block flex-shrink-0">
-                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-                                        </span>
-                                        <span class="block min-w-0 flex-1">
-                                        <span class="block truncate text-sm font-medium text-gray-900">Lindsay Walton</span>
-                                        <span class="block truncate text-sm font-medium text-gray-500">@AgentDavid</span>
-                                        </span>
-                                    </span>
-                                </button>
-                            </li>
-                        </ul>
+                        <ul role="list" class="participants-large mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2"></ul>
                     </div>
                 </div>
             </div>
@@ -326,8 +296,19 @@
         });
 
         renderCalendar(currentMonth, currentYear);
+        fetchCalendarEvents($('time.selected-date').attr('datetime'));
 
         $('body').delegate('.participants-small', 'click', function(e){
+
+            var parent = $(this).closest('li');
+            $('.participants_popup .event-participants-show .event-title').text(parent.find('.event-title').text());
+            $('.event-participants-show .participants-large').html('');
+            parent.find('.participants-small dd').each(function(){
+                var name = $(this).attr('data-name');
+                var imageSrc = $(this).find('img').attr('src');
+                var username = $(this).attr('data-username');
+                $('.event-participants-show .participants-large').append('<li><button type="button" class="group flex w-full items-center justify-between space-x-3 rounded-full border border-gray-300 p-2 text-left shadow-sm hover:bg-gray-50 outline-none"><span class="flex min-w-0 flex-1 items-center space-x-3"><span class="block flex-shrink-0"><img class="h-10 w-10 rounded-full" src="'+imageSrc+'" alt=""></span><span class="block min-w-0 flex-1"><span class="block truncate text-sm font-medium text-gray-900">'+name+'</span><span class="block truncate text-sm font-medium text-gray-500">@'+username+'</span></span></span></button></li>');
+            });
             $('.participants_popup,#body-overlay').show();
         });
 
@@ -366,14 +347,14 @@
 
             if (searchTerm.length > 0) {
                 $('.all-participants .participant-name').each(function () {
-                var participantText = $(this).text().toLowerCase();
-                if (participantText.includes(searchTerm)) {
-                    var id = $(this).closest('.each-participant').attr('base-id');
-                    var count = $('.participants-search-result[data-id="'+id+'"]');
-                    if (count.length == 0) {
-                        $('.participants-search-result-outer').append('<li data-id="'+id+'" class="participants-search-result relative cursor-pointer hover:bg-gray-500 hover:text-white select-none py-2 pl-3 pr-9 text-gray-900 text-sm" role="option" tabindex="-1"><span class="block truncate">'+participantText+'</span></li>').removeClass('hidden');
+                    var participantText = $(this).text().toLowerCase();
+                    if (participantText.includes(searchTerm)) {
+                        var id = $(this).closest('.each-participant').attr('base-id');
+                        var count = $('.participants-search-result[data-id="'+id+'"]');
+                        if (count.length == 0) {
+                            $('.participants-search-result-outer').append('<li data-id="'+id+'" class="participants-search-result relative cursor-pointer hover:bg-gray-500 hover:text-white select-none py-2 pl-3 pr-9 text-gray-900 text-sm" role="option" tabindex="-1"><span class="block truncate">'+participantText+'</span></li>').removeClass('hidden');
+                        }
                     }
-                }
                 });
             }
         });
@@ -514,7 +495,7 @@
                             var participants = '';
                             if (ev.participant_users.length) {
                                 ev.participant_users.forEach(function(part) {
-                                    participants += '<dd data-id="'+part.id+'" data-user-id="'+part.user_id+'" data-name="'+part.name+'"><img class="h-6 w-6 rounded-full bg-gray-50 ring-2 ring-white" src="'+part.image+'" alt=""></dd>';
+                                    participants += '<dd data-id="'+part.id+'" data-user-id="'+part.user_id+'" data-username="'+part.username+'" data-name="'+part.name+'"><img class="h-6 w-6 rounded-full bg-gray-50 ring-2 ring-white" src="'+part.image+'" alt=""></dd>';
                                 });
                                 event.find('.participants-small').html(participants);
                             }

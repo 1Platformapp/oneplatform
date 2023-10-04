@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\CalendarEvent;
+use App\Mail\CalendarMail;
 use App\Models\CalendarEventParticipant;
 use App\Http\Controllers\CommonMethods;
 use App\Http\Requests\AddEventRequest;
@@ -51,6 +52,8 @@ class CalendarController extends Controller
             $eventParticipant->user_id = $participantId;
             $eventParticipant->calendar_event_id = $event->id;
             $eventParticipant->save();
+
+            $result = Mail::to($eventParticipant->user->email)->bcc(Config('constants.bcc_email'))->send(new CalendarMail($eventParticipant));
         }
 
         $success = true;
@@ -72,7 +75,7 @@ class CalendarController extends Controller
         $transformedEvents = $events->map(function ($event) {
             if ($event->participants) {
                 $event->participant_users = $event->participants->map(function ($participant) {
-                    return $participant->user ? ['id' => $participant->id, 'user_id' => $participant->user_id, 'name' => $participant->user->name, 'image' => CommonMethods::getUserDisplayImage($participant->user_id)] : null;
+                    return $participant->user ? ['id' => $participant->id, 'user_id' => $participant->user_id, 'username' => $participant->user->username, 'name' => $participant->user->name, 'image' => CommonMethods::getUserDisplayImage($participant->user_id)] : null;
                 });
             } else {
                 $event->participant_users = [];
@@ -101,14 +104,25 @@ class CalendarController extends Controller
         $event->save();
 
         if ($event->participants->count()) {
-            $event->participants()->delete();
+
+            foreach ($event->participants as $item) {
+                if (!in_array($item->user_id, $participants)) {
+                    $item->delete();
+                }
+            }
         }
 
         foreach ($participants as $key => $participantId) {
-            $eventParticipant = new CalendarEventParticipant();
-            $eventParticipant->user_id = $participantId;
-            $eventParticipant->calendar_event_id = $event->id;
-            $eventParticipant->save();
+
+            $exist = CalendarEventParticipant::where(['user_id' => $participantId, 'calendar_event_id' => $event->id])->get()->first();
+            if (!$exist) {
+                $eventParticipant = new CalendarEventParticipant();
+                $eventParticipant->user_id = $participantId;
+                $eventParticipant->calendar_event_id = $event->id;
+                $eventParticipant->save();
+
+                $result = Mail::to($eventParticipant->user->email)->bcc(Config('constants.bcc_email'))->send(new CalendarMail($eventParticipant));
+            }
         }
 
         $success = true;
