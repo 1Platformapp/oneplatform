@@ -26,7 +26,7 @@
                 <div>S</div>
             </div>
             <div class="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200 calendar-dates"></div>
-            <div class="flex md:flex-row gap-x-2 flex-col mt-8">
+            <div class="flex md:flex-row gap-x-2 gap-y-4 flex-col mt-8">
                 <button type="button" class="add-event w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 outline-none">Add event</button>
                 <button type="button" class="show-all-events w-full rounded-md bg-white px-3 py-2 text-sm font-semibold border text-indigo-600 shadow outline-none">Show all events</button>
             </div>
