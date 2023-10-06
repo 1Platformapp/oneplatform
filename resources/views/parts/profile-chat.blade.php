@@ -3,6 +3,7 @@
         <div id="contacts_section" class="sub_cat_data">
             <div class="flex flex-row bg-[#666] text-white">
                 <div class="pro_tray_title">{{$isAgent ? 'Agency' : ''}} Dashboard</div>
+				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
             </div>
             @php $userPDetails = $commonMethods->getUserRealDetails($user->id) @endphp
             <div class="">
@@ -1108,7 +1109,6 @@
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
                 getCalendar();
             } else {
-                $('body').off('click', '.dropdown-icon');
                 $('.calendar-well').html('');
             }
         }

@@ -1,4 +1,4 @@
-<div>
+<div id="calendar-container">
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <div class="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
             <div class="flex items-center text-gray-900">
@@ -166,7 +166,7 @@
                     </dl>
                     <div class="participants-container relative mt-2 flex flex-col justify-center space-y-3 w-full">
                         <dl class="flex flex-none sm:w-auto">
-                            <div class="participants-small flex -space-x-0.5"></div>
+                            <div class="participants-small cursor-pointer flex -space-x-0.5"></div>
                         </dl>
                     </div>
                 </div>
@@ -182,19 +182,19 @@
 
                 <div class="hidden dropdown-menu absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-0-button" tabindex="-1">
                     <div class="py-1" role="none">
-                        <div class="event-edit text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-0-item-0">Edit</div>
-                        <div class="event-delete text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-0-item-1">Delete</div>
+                        <div class="event-edit cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-0-item-0">Edit</div>
+                        <div class="event-delete cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-0-item-1">Delete</div>
                     </div>
                 </div>
             </div>
         </li>
     </div>
+    <input id="current-user" type="hidden" value="{{$user->id}}" />
 </div>
 
 <script>
 
    $(document).ready(function () {
-
         $(document).click(function (event) {
             if (!$(event.target).closest('.dropdown-menu').length) {
                 $('.dropdown-menu').addClass('hidden');
@@ -277,7 +277,7 @@
             }
         }
 
-        $('#prev-month').on('click', function() {
+        $('#prev-month').off('click').on('click', function() {
             currentMonth--;
             if (currentMonth < 0) {
                 currentMonth = 11;
@@ -286,7 +286,7 @@
             renderCalendar(currentMonth, currentYear);
         });
 
-        $('#next-month').on('click', function() {
+        $('#next-month').off('click').on('click', function() {
             currentMonth++;
             if (currentMonth > 11) {
                 currentMonth = 0;
@@ -298,7 +298,7 @@
         renderCalendar(currentMonth, currentYear);
         fetchCalendarEvents($('time.selected-date').attr('datetime'));
 
-        $('body').delegate('.participants-small', 'click', function(e){
+        $('body').undelegate('.participants-small', 'click').delegate('.participants-small', 'click', function(e){
 
             var parent = $(this).closest('li');
             $('.participants_popup .event-participants-show .event-title').text(parent.find('.event-title').text());
@@ -307,41 +307,41 @@
                 var name = $(this).attr('data-name');
                 var imageSrc = $(this).find('img').attr('src');
                 var username = $(this).attr('data-username');
-                $('.event-participants-show .participants-large').append('<li><button type="button" class="group flex w-full items-center justify-between space-x-3 rounded-full border border-gray-300 p-2 text-left shadow-sm hover:bg-gray-50 outline-none"><span class="flex min-w-0 flex-1 items-center space-x-3"><span class="block flex-shrink-0"><img class="h-10 w-10 rounded-full" src="'+imageSrc+'" alt=""></span><span class="block min-w-0 flex-1"><span class="block truncate text-sm font-medium text-gray-900">'+name+'</span><span class="block truncate text-sm font-medium text-gray-500">@'+username+'</span></span></span></button></li>');
+                $('.event-participants-show .participants-large').append('<li><button type="button" class="group flex w-full items-center justify-between space-x-3 rounded-full border border-gray-300 p-2 text-left shadow-sm outline-none"><span class="flex min-w-0 flex-1 items-center space-x-3"><span class="block flex-shrink-0"><img class="h-10 w-10 rounded-full" src="'+imageSrc+'" alt=""></span><span class="block min-w-0 flex-1"><span class="block truncate text-sm font-medium text-gray-900">'+name+'</span><span class="block truncate text-sm font-medium text-gray-500">@'+username+'</span></span></span></button></li>');
             });
             $('.participants_popup,#body-overlay').show();
         });
 
-        $('.add-event').on('click', function() {
+        $('.add-event').off('click').on('click', function() {
             $('.add_event_popup').removeAttr('edit');
             $('.add_event_popup #title').val('');
             $('.add_event_popup #date-time').val('');
             $('.add_event_popup #location').val('');
             $('.all-participants .each-participant').addClass('hidden');
 
-            $('.add_event_popup #current-date').text('Date' + $('.isolate button.current-month time.selected-date').attr('datetime'));
+            $('.add_event_popup #current-date').text('Date: ' + $('.isolate button.current-month time.selected-date').attr('datetime'));
             $('.add_event_popup,#body-overlay').show();
         });
 
-        $('body').delegate('.participants-search-result', 'click', function(e){
+        $('body').undelegate('.participants-search-result', 'click').delegate('.participants-search-result', 'click', function(e){
             var id = $(this).attr('data-id');
             $('.all-participants .each-participant[base-id="'+id+'"]').removeClass('hidden');
             $('.participants-search-result-outer').addClass('hidden');
             $('#search-participants').val('');
         });
 
-        $('body').delegate('.pro_soc_top_close', 'click', function(e){
+        $('body').undelegate('.pro_soc_top_close', 'click').delegate('.pro_soc_top_close', 'click', function(e){
             $('#body-overlay').click();
         });
 
-        $('body').delegate('.participant-remove', 'click', function(e){
+        $('body').undelegate('.participant-remove', 'click').delegate('.participant-remove', 'click', function(e){
             var target = $(this).closest('.each-participant');
             if (target.length > 0) {
                 target.addClass('hidden');
             }
         });
 
-        $('#search-participants').on('input', function () {
+        $('#search-participants').off('input').on('input', function () {
             var searchTerm = $(this).val();
             $('.participants-search-result-outer').html('').addClass('hidden');
 
@@ -352,14 +352,14 @@
                         var id = $(this).closest('.each-participant').attr('base-id');
                         var count = $('.participants-search-result[data-id="'+id+'"]');
                         if (count.length == 0) {
-                            $('.participants-search-result-outer').append('<li data-id="'+id+'" class="participants-search-result relative cursor-pointer hover:bg-gray-500 hover:text-white select-none py-2 pl-3 pr-9 text-gray-900 text-sm" role="option" tabindex="-1"><span class="block truncate">'+participantText+'</span></li>').removeClass('hidden');
+                            $('.participants-search-result-outer').append('<li data-id="'+id+'" class="participants-search-result relative cursor-pointer hover:bg-gray-200 select-none py-2 pl-3 pr-9 text-gray-900 text-sm" role="option" tabindex="-1"><span class="block truncate">'+participantText+'</span></li>').removeClass('hidden');
                         }
                     }
                 });
             }
         });
 
-        $('.isolate button.current-month').click(function(){
+        $('body').undelegate('.isolate button.current-month', 'click').delegate('.isolate button.current-month', 'click', function(e){
             var thiss = $(this);
             $('.isolate button.current-month time.selected-date').removeClass('selected-date font-semibold bg-gray-900 text-white').addClass('text-gray-900 bg-white');
             $('.isolate button.current-month time.today').addClass('font-semibold');
@@ -368,7 +368,9 @@
             fetchCalendarEvents(thiss.find('time').attr('datetime'));
         });
 
-        $('.participant-form .add-participant-submit').click(function(){
+        $('body').undelegate('.participant-form .add-participant-submit:not(.busy)', 'click').delegate('.participant-form .add-participant-submit:not(.busy)', 'click', function(e){
+
+            var thiss = $(this);
             var error = false;
             var title = $('.participant-form #title');
             var dateTimeInput = $('.participant-form #date-time');
@@ -393,6 +395,7 @@
 
             if (!error) {
 
+                thiss.addClass('busy');
                 var formData = new FormData();
                 formData.append('title', title.val());
                 formData.append('location', location.val());
@@ -419,18 +422,21 @@
                             $('.pro_page_pop_up,#body-overlay').hide();
                             fetchCalendarEvents(dateTime.attr('datetime'));
                         }
+                    },
+                    complete: function () {
+                        thiss.removeClass('busy');
                     }
                 });
             }
         });
 
-        $('body').delegate('.dropdown-icon', 'click', function(event){
+        $('body').undelegate('.dropdown-icon', 'click').delegate('.dropdown-icon', 'click', function(event){
             event.stopPropagation();
             const dropdownMenu = $(this).parent().find('.dropdown-menu');
             dropdownMenu.toggleClass('hidden');
         });
 
-        $('body').delegate('.event-edit', 'click', function(event){
+        $('body').undelegate('.event-edit', 'click').delegate('.event-edit', 'click', function(event){
             var event = $(this).closest('li');
             var edit = event.find('.event-title').attr('data-id');
             var title = event.find('.event-title').text();
@@ -452,7 +458,7 @@
             $('.add_event_popup,#body-overlay').show();
         });
 
-        $('body').delegate('.event-delete', 'click', function(e){
+        $('body').undelegate('.event-delete', 'click').delegate('.event-delete', 'click', function(e){
 
             e.preventDefault();
             var event = $(this).closest('li');
@@ -466,6 +472,7 @@
         });
 
         function fetchCalendarEvents(date){
+            var currentUser = $('#current-user');
             var formData = new FormData();
             formData.append('date', date);
 
@@ -486,6 +493,11 @@
                             var event = $('.element_sample#event-summary').clone();
                             event.find('.event-title').attr('data-id', ev.id);
                             event.find('.event-title').text(ev.title);
+
+                            if(ev.user_id != currentUser.val()) {
+                                event.find('.dropdown-icon').parent().addClass('hidden');
+                            }
+
                             if (ev.date_time_input) {
                                 event.find('.event-date-time').text(ev.date_time_input);
                             } else {

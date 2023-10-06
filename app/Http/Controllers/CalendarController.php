@@ -68,8 +68,8 @@ class CalendarController extends Controller
         $user = Auth::user();
         $date = date('Y-m-d', strtotime($request->date));
 
-        $events = CalendarEvent::where(['user_id' => $user->id, 'date' => $date])->orWhereHas('participants', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
+        $events = CalendarEvent::where(['user_id' => $user->id, 'date' => $date])->orWhereHas('participants', function ($query) use ($user, $date) {
+            $query->where(['user_id' => $user->id, 'date' => $date]);
         })->with('participants')->orderBy('id', 'asc')->get();
 
         $transformedEvents = $events->map(function ($event) {
