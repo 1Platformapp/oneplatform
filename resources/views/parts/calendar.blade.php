@@ -26,7 +26,10 @@
                 <div>S</div>
             </div>
             <div class="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200 calendar-dates"></div>
-            <button type="button" class="add-event mt-8 w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add event</button>
+            <div class="flex md:flex-row gap-x-2 flex-col mt-8">
+                <button type="button" class="add-event w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 outline-none">Add event</button>
+                <button type="button" class="show-all-events w-full rounded-md bg-white px-3 py-2 text-sm font-semibold border text-indigo-600 shadow outline-none">Show all events</button>
+            </div>
         </div>
         <ol id="selected-date-events" class="mt-4 divide-y divide-gray-200 text-sm leading-6 lg:col-span-7 xl:col-span-8"></ol>
     </div>
@@ -313,14 +316,27 @@
         });
 
         $('.add-event').off('click').on('click', function() {
-            $('.add_event_popup').removeAttr('edit');
-            $('.add_event_popup #title').val('');
-            $('.add_event_popup #date-time').val('');
-            $('.add_event_popup #location').val('');
-            $('.all-participants .each-participant').addClass('hidden');
+            var selectedDate = $('.isolate button.current-month time.selected-date');
 
-            $('.add_event_popup #current-date').text('Date: ' + $('.isolate button.current-month time.selected-date').attr('datetime'));
-            $('.add_event_popup,#body-overlay').show();
+            if (!selectedDate.length) {
+                alert('Please select a date');
+            } else {
+
+                $('.add_event_popup').removeAttr('edit');
+                $('.add_event_popup #title').val('');
+                $('.add_event_popup #date-time').val('');
+                $('.add_event_popup #location').val('');
+                $('.all-participants .each-participant').addClass('hidden');
+
+                $('.add_event_popup #current-date').text('Date: ' + $('.isolate button.current-month time.selected-date').attr('datetime'));
+                $('.add_event_popup,#body-overlay').show();
+            }
+        });
+
+        $('.show-all-events').off('click').on('click', function() {
+
+            fetchCalendarEvents('*');
+            $('.isolate button.current-month time.selected-date').removeClass('text-white bg-gray-900 selected-date font-semibold');
         });
 
         $('body').undelegate('.participants-search-result', 'click').delegate('.participants-search-result', 'click', function(e){
