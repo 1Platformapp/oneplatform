@@ -5,7 +5,7 @@
 
 @section('page-level-css')
 
-    <link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.21')}}" />
+    <link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.22')}}" />
 @stop
 
 @section('page-level-js')
@@ -383,16 +383,16 @@
                 <div class="project stage">
                     <div class="soc_con_face_username clearfix">
                         <div class="main_headline">Set up a new Project Agreement</div><br>
-                        <select class="choose_customer_dropdown">
+                        <select class="choose_customer_dropdown border-2 border-input-b">
                             <option value="">Choose recipient</option>
                         </select>
                         <div class="instant_hide error choose_customer_error">Required</div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input placeholder="Title" type="text" class="title" />
+                        <input class="border-solid border-2 border-input-b" placeholder="Title" type="text" class="title" />
                         <div class="instant_hide error title_error">Required</div>
                         <div class="pro_pop_multi_row">
                             <div class="each_col">
-                                <select class="choose_end_term_dropdown">
+                                <select class="choose_end_term_dropdown border-solid border-2 border-input-b">
                                     <option value="">Term Date</option>
                                     <option value="perpetual">Perpetual</option>
                                     <option value="custom">Let me write end term</option>
@@ -401,12 +401,12 @@
                             </div>
                             <div class="each_col">
                                 <input class="dummy_field" type="text" name="fakeusernameremembered">
-                                <input disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
+                                <input class="border-solid border-2 border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
                                 <div class="instant_hide error end_term_error">Required</div>
                             </div>
                         </div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input placeholder="Price" type="number" class="price" />
+                        <input class="border-solid border-2 border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                         <textarea class="description" placeholder="Project description (i.e details/milestones/terms etc)"></textarea>
                         <div class="instant_hide error description_error">Required</div>
@@ -415,12 +415,12 @@
                 <div class="license stage">
                     <div class="soc_con_face_username clearfix">
                         <div class="main_headline">You are adding a bespoke license agreement</div><br>
-                        <select class="choose_customer_dropdown">
+                        <select class="choose_customer_dropdown border-solid border-2 border-input-b">
                             <option value="">Choose recipient</option>
                         </select>
                         <div class="instant_hide error choose_customer_error">Required</div>
                         @if(Auth::check())
-                        <select class="choose_agreement_music">
+                        <select class="choose_agreement_music border-solid border-2 border-input-b" >
                             <option value="">Choose music</option>
                             @if(count(Auth::user()->musics))
                                 @foreach(Auth::user()->musics as $music)
@@ -432,7 +432,7 @@
                         @endif
                         <div class="pro_pop_multi_row">
                             <div class="each_col">
-                                <select class="choose_end_term_dropdown">
+                                <select class="choose_end_term_dropdown border-solid border-2 border-input-b">
                                     <option value="">Term Date</option>
                                     <option value="perpetual">Perpetual</option>
                                     <option value="custom">Let me write end term</option>
@@ -441,18 +441,18 @@
                             </div>
                             <div class="each_col">
                                 <input class="dummy_field" type="text" name="fakeusernameremembered">
-                                <input disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
+                                <input class="border-solid border-2 border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
                                 <div class="instant_hide error end_term_error">Required</div>
                             </div>
                         </div>
-                        <select class="choose_agreement_license">
+                        <select class="choose_agreement_license border-solid border-2 border-input-b">
                             <option selected value="bespoke">Bespoke Agreement</option>
                             @foreach(config('constants.licenses') as $key => $license)
                             <option value="{{$key}}">{{$license['name']}}</option>
                             @endforeach
                         </select>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input placeholder="Price" type="number" class="price" />
+                        <input class="border-solid border-2 border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                         <textarea class="license_terms" placeholder="Write all terms of use here"></textarea>
                         <div class="license_terms_error instant_hide error">Required</div>
@@ -461,11 +461,11 @@
                 <div class="product stage">
                     <div class="soc_con_face_username clearfix">
                         <div class="main_headline">You are adding a product</div><br>
-                        <select class="choose_customer_dropdown">
+                        <select class="choose_customer_dropdown border-solid border-2 border-input-b">
                             <option value="">Choose recipient</option>
                         </select>
                         <div class="instant_hide error choose_customer_error">Required</div>
-                        <select class="choose_product">
+                        <select class="choose_product border-solid border-2 border-input-b">
                             @if(Auth::user())
                             <option value="">Choose product</option>
                             @foreach(Auth::user()->products as $product)
@@ -475,7 +475,7 @@
                         </select>
                         <div class="instant_hide error choose_product_error">Required</div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input placeholder="Price" type="number" class="price" />
+                        <input class="border-solid border-2 border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                     </div>
                 </div>

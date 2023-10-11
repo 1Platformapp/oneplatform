@@ -95,7 +95,7 @@
 .music_btm_img_det p { font-size: 14px; color: #818181; font-family: Open sans, sans-serif; }
 .m_btm_right_icons {  margin-left: auto; }
 .m_btm_right_icons ul { display: flex; flex-direction: row; }
-.m_btm_right_icons ul li { padding-right:20px; }
+.m_btm_right_icons ul li { padding-right:40px; }
 .m_btm_right_icons ul li:last-child { padding-right:0px; }
 .m_btm_right_icons ul li a {display: block; }
 .m_btm_right_icons .m_btn_right_icon_each.active { color: #000; }
@@ -282,7 +282,7 @@
 .section_note { color: #818181; font-size: 14px; font-family: Open sans, sans-serif; margin: 20px 0; }
 #musical_section hr { margin-top: 30px; }
 
-.pro_note { margin-bottom: 30px; padding-left: 15px; } 
+.pro_note { margin-bottom: 30px; padding-left: 15px; }
 .pro_note h4 { font-size: 20px; margin-top: 10px; font-family: Open sans, sans-serif; color: #27282A; }
 .pro_note p { margin-top: 10px; font-family: Open sans, sans-serif; color: #27282A; }
 .pro_note ul { font-family: Open sans, sans-serif; font-size: 14px; color: #818181; line-height: 25px; }
@@ -361,7 +361,7 @@
 .upload_new_banner, .display_current { position: relative;font-family: Open sans, sans-serif; margin: 0 auto; width: 50%; background-color: #444; color: #fff; border-radius: 6px; border: 0px solid #aaa; text-align: center; cursor: pointer; font-size: 19px; height: 150px; overflow: hidden; }
 .pro_seo_head { font-family: Open sans, sans-serif; padding-top: 30px; }
 .seo_field_label { display: flex; flex-direction: row; margin-bottom: 10px; color: #444; justify-content: space-between; align-items: center; font-size: 15px; }
-.seo_each_field { margin-bottom: 15px; } 
+.seo_each_field { margin-bottom: 15px; }
 .seo_field_textarea { font-family: Open sans, sans-serif; margin-bottom: 15px; width: 100%; border: 1px solid #ccc; padding: 5px; color: #444; height: 150px; }
 .seo_field_text { margin-bottom: 15px; width: 100%; border: 1px solid #ccc; padding: 5px; color: #444; height: 35px; }
 .pro_edit_profile_image { display: flex; align-items: center; flex-direction: column; margin-top: 20px; width: 200px; }
@@ -397,7 +397,7 @@
 
 .pro_h_l_btn_each_outer { border: 1px solid #ccc; margin-bottom: 30px; display: flex; flex-direction: column; }
 .pro_h_l_btn_each { margin: 0 !important; }
-.each_h_l_content { padding-bottom: 25px; position: relative; } 
+.each_h_l_content { padding-bottom: 25px; position: relative; }
 .pro_content_closer { top: 8px; right: 8px; }
 .check_each_outer { padding: 8px;  }
 .pro_h_l_btn_each.active .check_each_outer,.pro_h_logo_btn_each.active .check_each_outer,.pro_h_dt_btn_each.active .check_each_outer { color: #fff; }
@@ -559,8 +559,8 @@
 	.app_dialog_each { margin-bottom: 15px; margin-right: unset; line-height: 22px; }
 
     .pro_pg_tb_sub_outer { overflow: scroll; }
-    .pro_pg_tb_sub_outer .tb_sub_each { min-width: 120px; }   
-    .cancel_subscription { margin-right: 0 !important; margin-top: 20px !important; } 
+    .pro_pg_tb_sub_outer .tb_sub_each { min-width: 120px; }
+    .cancel_subscription { margin-right: 0 !important; margin-top: 20px !important; }
     .pro_news_textarea { font-size: 12px; line-height: 18px; }
     .pro_stream_input { font-size: 12px; }
 
@@ -607,7 +607,7 @@
     .music_btm_list .edit_elem_top { align-items: flex-start; }
     .m_btm_right_icons { width:fit-content; padding-top:5px; }
     .m_btm_right_icons ul { float: none !important; }
-    .m_btm_right_icons ul li { padding-right:3px; }
+    .m_btm_right_icons ul li { padding-right:15px; }
     .m_btm_right_icons .m_btm_edit { background-size:100% 100%; }
     .m_btm_right_icons .m_btm_del { background-size: 100% 100%; }
     .m_btm_right_icons .m_btn_right_icon_each { width: 25px; height: auto; }
@@ -654,7 +654,7 @@
 }
 
 @media (min-width:768px) and (max-width: 1024px) {
-	
+
 	.proj_pi_flt_right { width:76%; }
 	.proj_insp_wid { width:44%; }
 	.my_sub_sec_list .sub_sec_date_contain { float: none; text-align: right; }

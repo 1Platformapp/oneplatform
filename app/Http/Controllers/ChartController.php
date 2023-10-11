@@ -1292,6 +1292,11 @@ class ChartController extends Controller
                 $accessGranted = 1;
             }
 
+            if($identityType == 'subscriber' && $findType == 'contact-management' && $user) {
+
+                $accessGranted = 1;
+            }
+
             if($identityType == 'subscriber' && $findType == 'my-calendar' && $user) {
 
                 $accessGranted = 1;
@@ -1536,6 +1541,11 @@ class ChartController extends Controller
                 if($findType == 'management-plan'){
 
                     $data['data'] = \View::make('parts.management-plans', ['commonMethods' => $commonMethods, 'user' => $user])->render();
+                    $success = 1;
+                }
+                if($findType == 'contact-management'){
+
+                    $data['data'] = \View::make('parts.contact-management.index', ['commonMethods' => $commonMethods, 'user' => $user])->render();
                     $success = 1;
                 }
                 if($findType == 'my-calendar'){
