@@ -46,7 +46,12 @@
                                 </li>
                                 <li>
                                     <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires">
-                                        <i class="fas fa-file-pdf"></i>
+                                        <i class="far fa-question-circle"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a title="Contracts" class="m_btn_right_icon_each m_btn_contracts active" data-id="my-contracts">
+                                        <i class="far fa-file-pdf"></i>
                                     </a>
                                 </li>
                                 <li>
@@ -60,7 +65,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-open="blank" title="Edit profile" data-id="{{route('profile.setup', ['page' => 'welcome'])}}" title="Edit Profile" class="m_btn_right_icon_each m_btm_view active">
+                                    <a title="Edit profile" title="Edit Profile" class="m_btn_right_icon_each m_btm_profile active" data-id="my-profile">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </li>
@@ -112,6 +117,7 @@
                                 <div class="pro_music_search pro_music_info no_border">
                                     <div class="pro_note">
                                         <ul>
+                                            <li>Utilizing questionnaires to obtain accurate information fro your contacts can be highly effective</li>
                                             <li>Here you can manage your questionnaire for each skill listed below</li>
                                             <li>You can add/remove questions from a questionnaire</li>
                                             <li>The questionnaire can be attached to a contact in edit contact section. The contact person will get a link to that questionnaire in email, can fill it up and when the contact submits, you will get notified</li>
@@ -138,9 +144,83 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="each_dash_section instant_hide" data-value="my-contracts">
+                            <div>
+                                <div class="mt-10">
+                                    <div class="pb-4">
+                                        You can send contracts to your contacts, edit details, and with one click, they receive an email and app notification to read and sign the digital contract. You both get the completed contract in your portal
+                                    </div>
+                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                            <div class="min-w-0 flex-1">
+                                                <a href="#" class="focus:outline-none">
+                                                    <span class="absolute inset-0" aria-hidden="true"></span>
+                                                    <p class="text-sm font-medium text-gray-900">One Time Contract</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                            <div class="min-w-0 flex-1">
+                                                <a href="#" class="focus:outline-none">
+                                                    <span class="absolute inset-0" aria-hidden="true"></span>
+                                                    <p class="text-sm font-medium text-gray-900">Contract Subscription</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form>
+                                        <div class="pro_stream_input_outer">
+                                            <ul role="list" class="new_contracts grid sm:grid-cols-1 md:grid-cols-2 gap-x-8">
+                                                <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
+                                                    <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="http://127.0.0.1:8000/dashboard/add-contract/1/142">
+                                                    <i class="fas fa-file-pdf text-lg"></i>
+                                                    Artist Master Producer Contract
+                                                    </a>
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
+                                                    <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="http://127.0.0.1:8000/dashboard/add-contract/2/142">
+                                                    <i class="fas fa-file-pdf text-lg"></i>
+                                                    Artist Recording Contract
+                                                    </a>
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
+                                                    <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="http://127.0.0.1:8000/dashboard/add-contract/3/142">
+                                                    <i class="fas fa-file-pdf text-lg"></i>
+                                                    Artist Producer Contract
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="management-plan-well"></div>
+                        </div>
                         <div class="each_dash_section instant_hide" data-value="my-industry-contacts">
                         @if($user->hasActivePaidSubscription())
                             <div class="pro_music_info mt-10">
+                                <div class="pb-4">
+                                1Platform connects the world's most extensive industry network, encompassing labels, publishers, pluggers, producers, skilled songwriters, and many more valuable contacts. You'll find a treasure trove of information, including phone numbers, emails, websites, and social media profiles, all at your fingertips!"
+                                </div>
+                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-8">
+                                    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="min-w-0 flex-1">
+                                            <a href="#" class="focus:outline-none">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">One Time Contract</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="min-w-0 flex-1">
+                                            <a href="#" class="focus:outline-none">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">Contract Subscription</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="pro_form_title flex flex-col">
                                     <div class="flex flex-col md:flex-row md:items-center">
                                         <div class="flex-1"><span class="ind_con_count">{{count(\App\Models\IndustryContact::all())}}</span> Industry Contacts Found</div>
@@ -328,6 +408,68 @@
                                     <i class="fas fa-arrow-left"></i>
                                 </div>
                                 <div class="content max-h-[600px] overflow-y-auto overflow-x-hidden"></div>
+                            </div>
+                        </div>
+                        <div class="each_dash_section instant_hide" data-value="my-profile">
+                            <div>
+                                <div class="mt-10">
+                                    <div class="bg-white shadow sm:rounded-lg mb-8">
+                                        <div class="px-4 py-5 sm:p-6">
+                                            <h3 class="text-base font-semibold leading-6 text-gray-900 mb-12">What we offer</h3>
+                                            <ul role="list" class="grid xs2:grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6">
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Create a website, build a portfolio
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Establish an e-shop
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Share song links
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    List services
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Provide news updates
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Connect your domain
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Link your social media accounts
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Add music, create events
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Setup licensing options
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Connect your stripe account
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Confiure patreon
+                                                </li>
+                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
+                                                    Launch crowdfunding and much more
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white shadow sm:rounded-lg">
+                                        <div class="px-4 py-5 sm:p-6">
+                                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                                <p>Please click on the link below to edit your profile using our profile management wizard</p>
+                                            </div>
+                                            <div class="mt-3 text-sm leading-6">
+                                                <a href="{{route('profile.setup', ['page' => 'welcome'])}}" class="font-semibold text-indigo-600 hover:text-indigo-500">
+                                                    Edit profile
+                                                    <i style="font-size: 11px;" class="fa fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -683,7 +825,7 @@
         });
     });
 
-    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires').click(function(e){
+    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
 
         var id = $(this).attr('data-id');
         $('.each_dash_section:not(.each_dash_section[data-value="'+id+'"])').addClass('instant_hide');
