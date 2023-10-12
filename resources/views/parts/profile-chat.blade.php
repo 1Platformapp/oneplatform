@@ -40,16 +40,6 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a data-open="blank" title="Home page" data-id="{{route('my.user.home')}}" class="m_btn_right_icon_each m_btm_view active">
-                                        <i class="fa fa-globe"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-open="blank" title="Edit profile" data-id="{{route('profile.setup', ['page' => 'welcome'])}}" title="Edit Profile" class="m_btn_right_icon_each m_btm_view active">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                </li>
-                                <li>
                                     <a title="Calendar" class="m_btn_right_icon_each m_btn_calendarr active" data-id="my-calendar">
                                         <i class="fa fa-calendar"></i>
                                     </a>
@@ -69,11 +59,17 @@
                                         <i class="fas fa-dollar-sign"></i>
                                     </a>
                                 </li>
+                                <li>
+                                    <a data-open="blank" title="Edit profile" data-id="{{route('profile.setup', ['page' => 'welcome'])}}" title="Edit Profile" class="m_btn_right_icon_each m_btm_view active">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="edit_elem_bottom">
+                        <div class="loading text-center py-12 font-bold instant_hide">...Loading please wait</div>
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
                                 <div class="mt-10">
@@ -95,8 +91,8 @@
                                 <div class="mt-10">
                                     <div class="border-b border-gray-200">
                                         <nav class="-mb-px flex " aria-label="Tabs">
-                                            <div data-stage="add-contact" class="border-indigo-500 text-indigo-600 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Add contact</div>
-                                            <div data-stage="my-contacts" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Contacts</div>
+                                            <div data-stage="my-contacts" class="border-indigo-500 text-indigo-600 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Contacts</div>
+                                            <div data-stage="add-contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Add contact</div>
                                             <div data-stage="contact-requests" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Requests</div>
                                             <div data-stage="my-groups" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Groups</div>
                                         </nav>
@@ -696,6 +692,7 @@
         if ($(this).hasClass('m_btn_industry-contacts')) {
 
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                $('.loading').removeClass('instant_hide');
                 getIndustryContacts('');
             } else {
                 $('.industry-contacts-well').html('');
@@ -705,6 +702,7 @@
         if ($(this).hasClass('m_btn_management_plan')) {
 
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                $('.loading').removeClass('instant_hide');
                 getManagementPlan('');
             } else {
                 $('.management-plan-well').html('');
@@ -714,6 +712,7 @@
         if ($(this).hasClass('m_btn_contact_management')) {
 
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                $('.loading').removeClass('instant_hide');
                 getContactManagement();
             } else {
                 $('.contact-management-well').html('');
@@ -725,6 +724,7 @@
         if($(this).hasClass('m_btn_calendarr')){
 
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                $('.loading').removeClass('instant_hide');
                 getCalendar();
             } else {
                 $('.calendar-well').html('');
@@ -922,6 +922,8 @@
             type: 'post',
             data: {'find_type': 'management-plan', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
             success: function(response) {
+
+                removeLoading();
                 if(response.success == 1){
                     $('.management-plan-well').html(response.data.data);
                 }else{
@@ -941,6 +943,8 @@
             type: 'post',
             data: {'find_type': 'contact-management', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
             success: function(response) {
+
+                removeLoading();
                 if(response.success == 1){
                     $('.contact-management-well').html(response.data.data);
                     $('.each_dash_section[data-value="contact-management"] .each-stage').removeClass('disabled');
@@ -961,6 +965,8 @@
             type: 'post',
             data: {'find_type': 'my-calendar', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
             success: function(response) {
+
+                removeLoading();
                 if(response.success == 1){
                     $('.calendar-well').html(response.data.data);
                 }else{
@@ -980,6 +986,8 @@
             type: 'post',
             data: {'find_type': 'industry_contacts', 'find': find, 'identity_type': 'subscriber', 'identity': ''},
             success: function(response) {
+
+                removeLoading();
                 if(response.success == 1){
                     $('.industry-contacts-well').html(response.data.data);
                     $('select[data-type="ind_cont_drop"]').select2();
@@ -996,5 +1004,9 @@
                 $(this).removeClass('disabled');
             }
         });
+    }
+
+    function removeLoading () {
+        $('.loading').addClass('instant_hide');
     }
 </script>

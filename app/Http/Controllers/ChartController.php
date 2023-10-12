@@ -33,6 +33,7 @@ use App\Models\Country;use App\Models\Competition;
 use App\Models\CompetitionVideo;
 use App\Models\VideoStream;
 use App\Models\User;
+use App\Models\Skill;
 
 use App\Http\Controllers\IndustryContactController;
 use App\Http\Controllers\Auth\AuthController;
@@ -1539,13 +1540,14 @@ class ChartController extends Controller
                     }
                 }
                 if($findType == 'management-plan'){
-
+                    $skills =
                     $data['data'] = \View::make('parts.management-plans', ['commonMethods' => $commonMethods, 'user' => $user])->render();
                     $success = 1;
                 }
                 if($findType == 'contact-management'){
 
-                    $data['data'] = \View::make('parts.contact-management.index', ['commonMethods' => $commonMethods, 'user' => $user])->render();
+                    $skills = Skill::all();
+                    $data['data'] = \View::make('parts.contact-management.index', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills])->render();
                     $success = 1;
                 }
                 if($findType == 'my-calendar'){

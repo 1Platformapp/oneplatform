@@ -286,7 +286,7 @@
 .pro_note h4 { font-size: 20px; margin-top: 10px; font-family: Open sans, sans-serif; color: #27282A; }
 .pro_note p { margin-top: 10px; font-family: Open sans, sans-serif; color: #27282A; }
 .pro_note ul { font-family: Open sans, sans-serif; font-size: 14px; color: #818181; line-height: 25px; }
-.pro_note ul li { list-style: disc; color: #666; line-height: 37px; }
+.pro_note ul li { list-style: disc; color: #666; line-height: 30px; }
 .pro_note ul li a { color: #000; }
 .pro_note ul li a:hover { text-decoration: underline; }
 

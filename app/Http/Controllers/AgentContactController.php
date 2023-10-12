@@ -199,6 +199,11 @@ class AgentContactController extends Controller
         $error = '';
         $success = '';
 
+        $hasCommission = $request->has('pro_contact_commission');
+        $hasTerms = $request->has('pro_contact_terms');
+        $hasEmail = $request->has('pro_contact_email');
+        $hasQuestionnaire = $request->has('pro_contact_questionnaireId');
+
         $commission = $request->get('pro_contact_commission');
         $terms = $request->get('pro_contact_terms');
         $email = $request->get('pro_contact_email');
@@ -222,12 +227,19 @@ class AgentContactController extends Controller
             $contactCTerms = $contact->terms;
             $contactCEmail = $contact->email;
 
-            $contact->email = $email;
-            $contact->terms = $terms;
-            $contact->commission = $commission;
+            if ($hasEmail) {
+                $contact->email = $email;
+            }
+            if ($hasTerms) {
+                $contact->terms = $terms;
+            }
+            if ($hasCommission) {
+                $contact->commission = $commission;
+            }
+
             $contact->save();
 
-            if($contact->approved == 1 && ($commission != $contactCCommission || $terms != $contactCTerms)){
+            if($contact->approved == 1 && (($commission != $contactCCommission && $hasCommission) || ($terms != $contactCTerms && $hasTerms))){
 
                 $result = Mail::to($contact->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($contact->agentUser, $contact, [], 'update'));
                 $contact->c_commission = $commission;

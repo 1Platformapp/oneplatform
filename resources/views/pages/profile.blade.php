@@ -47,7 +47,7 @@
         input::-webkit-input-placeholder { font-size: 12px; }
     </style>
 
-    <link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.21')}}" />
+    <link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.22')}}" />
     <link rel="stylesheet" href="{{asset('simplepicker/simplepicker.css')}}">
 
 @stop

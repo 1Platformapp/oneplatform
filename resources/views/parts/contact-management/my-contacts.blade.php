@@ -1,5 +1,5 @@
 
-<div class="mt-12 each-stage-det instant_hide" data-stage-ref="my-contacts">
+<div class="mt-12 each-stage-det" data-stage-ref="my-contacts">
     <div class="m_btm_filters_outer items-end md:items-center">
         <div class="m_btm_filter_search flex-1">
             <input data-target="agent_contact_listing" placeholder="Search your contacts by name" type="text" class="m_btm_filter_search_field" />

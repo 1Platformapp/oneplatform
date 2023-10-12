@@ -1,5 +1,5 @@
 
-<div class="mt-12 each-stage-det" data-stage-ref="add-contact">
+<div class="mt-12 each-stage-det instant_hide" data-stage-ref="add-contact">
     <div class="hidden pro_music_search pro_music_info no_border">
         <div class="pro_note">
             <ul>
@@ -14,8 +14,13 @@
     <form id="add-contact-form" action="{{route('agent.contact.create')}}" method="POST">
         {{ csrf_field() }}
         <div class="pro_stream_input_outer">
-            <div class="pro_stream_input_each">
-                <input placeholder="Name" type="text" class="pro_stream_input" name="pro_contact_name" />
+            <div class="pro_stream_input_row">
+                <div class="pro_stream_input_each">
+                    <input placeholder="First Name" type="text" class="pro_stream_input" name="pro_contact_name" />
+                </div>
+                <div class="pro_stream_input_each">
+                    <input placeholder="Last Name" type="text" class="pro_stream_input" name="pro_contact_last_name" />
+                </div>
             </div>
             <div class="pro_stream_input_row">
                 <div class="pro_stream_input_each">
@@ -29,6 +34,21 @@
                 </div>
                 <div class="pro_stream_input_each">
                     <input disabled="" placeholder="Email of user registered at 1Platform" type="text" class="pro_stream_input" name="pro_contact_already_user_email">
+                </div>
+            </div>
+            <div class="pro_stream_input_row">
+                <div class="pro_stream_input_each">
+                    <div class="stream_sec_opt_outer">
+                        <select name="pro_contact_skill">
+                            <option value="">Choose a skill</option>
+                            @foreach($skills as $skill)
+                            <option value="{{$skill->id}}">{{$skill->value}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="pro_stream_input_each">
+                    <input placeholder="Phone number" type="text" class="pro_stream_input" name="pro_contact_phone" />
                 </div>
             </div><br><br>
             <div class="pro_m_chech_outer flex">

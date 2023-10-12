@@ -6,9 +6,9 @@
     $myContracts = count($contacts) ? \App\Models\AgencyContract::whereIn('contact_id', $contacts->pluck('id')->all())->get() : [];
 @endphp
 
-@include('parts.contact-management.add-contact', ['commonMethods' => $commonMethods, 'user' => $user])
+@include('parts.contact-management.add-contact', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills])
 
-@include('parts.contact-management.my-contacts', ['commonMethods' => $commonMethods, 'user' => $user, 'contracts' => $contracts, 'contacts' => $contacts, 'myContracts' => $myContracts])
+@include('parts.contact-management.my-contacts', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills, 'contracts' => $contracts, 'contacts' => $contacts, 'myContracts' => $myContracts])
 
 @include('parts.contact-management.contact-requests', ['commonMethods' => $commonMethods, 'user' => $user])
 
