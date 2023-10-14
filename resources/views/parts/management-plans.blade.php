@@ -27,12 +27,14 @@
             </div>
             <div class="each-task-det md:mx-10 instant_hide">
                 @if($task->advice)
+                @php $url = '@(http)?(s)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@' @endphp
+                @php $advice = preg_replace($url, '<a class="hover:underline" href="$0" target="_blank" title="Click here">$0</a>', $task->advice); @endphp
                 <div class="grid grid-cols-1 gap-x-8 gap-y-4 pt-5 md:grid-cols-3">
                     <div class="md:px-4">
                         <h2 class="text-base leading-7 text-gray-900">Platform advice</h2>
                     </div>
                     <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 p-6">
-                        <p class="text-xs text-gray-600">{!! $task->advice !!}</p>
+                        <p class="text-sm leading-6 text-gray-600">{!! nl2br($advice) !!}</p>
                     </div>
                 </div>
                 @endif

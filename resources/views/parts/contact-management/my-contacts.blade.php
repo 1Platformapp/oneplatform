@@ -64,11 +64,6 @@
 
                             <div class="m_btm_right_icons">
                                 <ul>
-                                    <li>
-                                        <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$contact->id}}">
-                                            <i class="fas fa-comment-dots"></i>
-                                        </a>
-                                    </li>
                                     @if($isAgentUser)
                                     <li>
                                         <div title="Edit" data-id="{{$contact->id}}" class="m_btn_right_icon_each m_btm_edit active">
@@ -77,27 +72,21 @@
                                     </li>
                                     @endif
                                     <li>
-                                        @if($partnerUser->username)
-                                        <a target="_blank" title="Website" href="{{route('user.home',['params' => $partnerUser->username])}}" class="m_btn_right_icon_each m_btm_website active">
-                                            <i class="fa fa-globe"></i>
+                                        <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$contact->id}}">
+                                            <i class="fas fa-comment-dots"></i>
                                         </a>
-                                        @else
-                                        <a title="Website" href="javascript:void(0)" class="m_btn_right_icon_each m_btm_website">
-                                            <i class="fa fa-globe"></i>
-                                        </a>
-                                        @endif
                                     </li>
-                                    @if($isAgentUser)
+                                    @if($contact->approved)
                                     <li>
-                                        @if(!$contact->is_already_user || ($contact->is_already_user && $contact->approved))
-                                        <a title="Switch account" data-id="{{route('agent.contact.switch.account',['code' => $contact->code])}}" class="m_btn_right_icon_each m_btm_switch_account active">
-                                            <i class="fa fa-cog"></i>
+                                        <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$contact->id}}">
+                                            <i class="fa fa-calendar"></i>
                                         </a>
-                                        @else
-                                        <a title="Switch account" data-id="" class="m_btn_right_icon_each m_btm_view">
-                                            <i class="fa fa-cog"></i>
+                                    </li>
+                                    @else
+                                    <li>
+                                        <a title="Calendar" class="m_btn_right_icon_each">
+                                            <i class="fa fa-calendar"></i>
                                         </a>
-                                        @endif
                                     </li>
                                     @endif
                                     <li>
@@ -105,22 +94,10 @@
                                             <i class="fa fa-file-text-o"></i>
                                         </a>
                                     </li>
-                                    @if($isAgentUser)
-                                    <li>
-                                        <a title="Delete" class="m_btn_right_icon_each m_btm_del active" data-del-id="{{$contact->id}}">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </li>
-                                    @endif
                                     @if($contact->approved)
                                     <li>
                                         <a title="Agreements" class="m_btn_right_icon_each m_btn_files active" data-id="{{$contact->id}}">
                                             <i class="fas fa-file-pdf"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$contact->id}}">
-                                            <i class="fa fa-calendar"></i>
                                         </a>
                                     </li>
                                     @else
@@ -129,9 +106,24 @@
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
                                     </li>
+                                    @endif
+
                                     <li>
-                                        <a title="Calendar" class="m_btn_right_icon_each">
-                                            <i class="fa fa-calendar"></i>
+                                        @if($partnerUser->username)
+                                        <a target="_blank" title="Website" href="{{route('user.home',['params' => $partnerUser->username])}}" class="m_btn_right_icon_each m_btm_website active">
+                                            <i class="fa fa-home"></i>
+                                        </a>
+                                        @else
+                                        <a title="Website" href="javascript:void(0)" class="m_btn_right_icon_each m_btm_website">
+                                            <i class="fa fa-home"></i>
+                                        </a>
+                                        @endif
+                                    </li>
+
+                                    @if($isAgentUser)
+                                    <li>
+                                        <a title="Delete" class="m_btn_right_icon_each m_btm_del active" data-del-id="{{$contact->id}}">
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </li>
                                     @endif
@@ -142,7 +134,7 @@
                         <div class="edit_elem_bottom">
                             @if($isAgentUser)
                             <div class="each_dash_section instant_hide" data-id="contact_edit_{{$contact->id}}">
-                                @include('parts.agent-contact-edit-template', ['contact' => $contact])
+                                @include('parts.agent-contact-edit-template', ['contact' => $contact, 'partnerUser' => $partnerUser])
                             </div>
                             @endif
                             @if($contact->approved)
@@ -291,17 +283,23 @@
             }
             });
 
-            $('.m_btm_right_icons .m_btm_switch_account').click(function(e) {
+            $('.m_btm_switch_account').click(function(e) {
 
-            var id = $(this).attr('data-id');
-            $('#switch_account_popup').attr('data-id', id);
-            $('#switch_account_popup,#body-overlay').show();
+                var id = $(this).attr('data-id');
+                $('#switch_account_popup').attr('data-id', id);
+                $('#switch_account_popup,#body-overlay').show();
+            });
+
+            $('.m_btm_navigate_contact_home').click(function(e) {
+
+                var id = $(this).attr('data-id');
+                window.location.href = id
             });
 
             $('#proceed_switch_account').click(function(e) {
 
-            var id = $('#switch_account_popup').attr('data-id');
-            window.location = id;
+                var id = $('#switch_account_popup').attr('data-id');
+                window.location = id;
             });
 
             $('.m_btm_right_icons .m_btm_view').click(function(e) {

@@ -135,7 +135,8 @@
         </div>
 
         <div class="md:col-span-2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
-            <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+            @php $canSwitchAccount = !$contact->is_already_user || ($contact->is_already_user && $contact->approved) ? true : false @endphp
+            <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 {{$canSwitchAccount ? 'm_btm_switch_account cursor-pointer' : 'opacity-60 cursor-not-allowed'}}" data-id="{{$canSwitchAccount ? route('agent.contact.switch.account',['code' => $contact->code]) : ''}}">
                 <div>
                     <span class="inline-flex rounded-lg p-3 bg-teal-50 text-teal-700 ring-4 ring-white">
                         <svg class="h-6 w-6 shrink-0 text-black" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -146,15 +147,16 @@
                 </div>
                 <div class="mt-8">
                     <h3 class="text-base font-semibold leading-6 text-gray-900">
-                        <a href="#" class="focus:outline-none">
+                        <div class="focus:outline-none">
                             <span class="absolute inset-0" aria-hidden="true"></span>
                             Edit User Home
-                        </a>
+                        </div>
                     </h3>
-                    <p class="mt-2 text-sm text-gray-500">Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et quo et molestiae.</p>
+                    <p class="mt-2 text-sm text-gray-500">Login to your contact's account and manage the profile</p>
                 </div>
             </div>
-            <div class="sm:rounded-tr-lg group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+            @php $hasHomePage = $partnerUser->username ? true : false @endphp
+            <div class="sm:rounded-tr-lg group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 {{$hasHomePage ? 'cursor-pointer m_btm_navigate_contact_home' : 'cursor-not-allowed opacity-60'}}" data-id="{{$hasHomePage ? route('user.home',['params' => $partnerUser->username]) : ''}}">
                 <div>
                     <span class="inline-flex rounded-lg p-3 bg-purple-50 text-purple-700 ring-4 ring-white">
                         <svg class="h-6 w-6 shrink-0 text-black" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -164,12 +166,12 @@
                 </div>
                 <div class="mt-8">
                     <h3 class="text-base font-semibold leading-6 text-gray-900">
-                        <a href="#" class="focus:outline-none">
+                        <div class="focus:outline-none">
                             <span class="absolute inset-0" aria-hidden="true"></span>
                             Home Page
-                        </a>
+                        </div>
                     </h3>
-                    <p class="mt-2 text-sm text-gray-500">Doloribus dolores nostrum quia qui natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et quo et molestiae.</p>
+                    <p class="mt-2 text-sm text-gray-500">Click to visit the home page of your contact</p>
                 </div>
             </div>
         </div>
