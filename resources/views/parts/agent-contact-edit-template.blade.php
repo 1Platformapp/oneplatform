@@ -1,12 +1,15 @@
 
-<div class="space-y-10 divide-y divide-gray-900/10 mt-12">
-    <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3">
-        <div class="px-4 sm:px-0">
+<div class="space-y-10 divide-y divide-gray-900/10 mt-12 contact-edit-container pb-12">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
+        <div class="px-4 sm:px-0 relative">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Edit contact</h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">You can edit your contact's basic information</p>
+            <p class="contact-edit-section-comp mt-1 text-sm leading-6 text-gray-600">You can edit your contact's basic information</p>
+            <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
+                <i class="fa fa-chevron-down"></i>
+            </span>
         </div>
 
-        <form action="{{route('agent.contact.update')}}" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+        <form action="{{route('agent.contact.update')}}" method="POST" class="contact-edit-section-right bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 !m-0">
             {{ csrf_field() }}
             <input type="hidden" name="edit" value="{{$contact->id}}">
             <input type="hidden" name="send_email" value="0">
@@ -46,10 +49,10 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
-        <div class="px-4 sm:px-0">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 contact-edit-section">
+        <div class="px-4 sm:px-0 relative">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Join my network</h2>
-            <div class="pro_music_search pro_music_info no_border">
+            <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
                     <ul>
                         <li>This area will send the user a link to join 1Platform and become your network contact</li>
@@ -58,9 +61,12 @@
                     </ul>
                 </div>
             </div>
+            <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
+                <i class="fa fa-chevron-down"></i>
+            </span>
         </div>
 
-        <form action="{{route('agent.contact.update')}}" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+        <form action="{{route('agent.contact.update')}}" method="POST" class="contact-edit-section-right bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
             {{ csrf_field() }}
             <input type="hidden" name="edit" value="{{$contact->id}}">
             <input type="hidden" name="send_email" value="0">
@@ -82,10 +88,10 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
-        <div class="px-4 sm:px-0">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 contact-edit-section">
+        <div class="px-4 sm:px-0 relative">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Questionnaire</h2>
-            <div class="pro_music_search pro_music_info no_border">
+            <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
                     <ul>
                         <li>Dispatch a pertinent question form to your contact</li>
@@ -94,9 +100,12 @@
                     </ul>
                 </div>
             </div>
+            <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
+                <i class="fa fa-chevron-down"></i>
+            </span>
         </div>
 
-        <form action="{{route('agent.contact.update')}}" method="POST" class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+        <form action="{{route('agent.contact.update')}}" method="POST" class="contact-edit-section-right bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
             {{ csrf_field() }}
             <input type="hidden" name="edit" value="{{$contact->id}}">
             <input type="hidden" name="send_email" value="0">
@@ -120,10 +129,10 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
-        <div class="px-4 sm:px-0">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 contact-edit-section">
+        <div class="px-4 sm:px-0 relative">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Manage contact account</h2>
-            <div class="pro_music_search pro_music_info no_border">
+            <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
                     <ul>
                         <li>If you are a manager and want to manage the account of your contact</li>
@@ -132,9 +141,12 @@
                     </ul>
                 </div>
             </div>
+            <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
+                <i class="fa fa-chevron-down"></i>
+            </span>
         </div>
 
-        <div class="md:col-span-2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
+        <div class="contact-edit-section-right md:col-span-2 divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
             @php $canSwitchAccount = !$contact->is_already_user || ($contact->is_already_user && $contact->approved) ? true : false @endphp
             <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 {{$canSwitchAccount ? 'm_btm_switch_account cursor-pointer' : 'opacity-60 cursor-not-allowed'}}" data-id="{{$canSwitchAccount ? route('agent.contact.switch.account',['code' => $contact->code]) : ''}}">
                 <div>

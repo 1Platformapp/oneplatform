@@ -221,6 +221,11 @@
             }
         });
 
+        $('.contact-edit-nav').click(function(){
+            $(this).closest('.contact-edit-section').find('.contact-edit-section-right,.contact-edit-section-comp').slideToggle();
+            $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up');
+        });
+
         $('.m_btm_edit, .m_btn_files, .m_btn_calendar, .m_btn_chat').click(function(e) {
 
             e.preventDefault();
