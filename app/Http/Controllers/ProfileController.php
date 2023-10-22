@@ -1787,7 +1787,7 @@ class ProfileController extends Controller
             }
         }
 
-        if($request->has('username')){
+        if($request->has('username') && (!$user->username || $user->username == '')){
 
             $username = $request->get('username');
             $duplication = User::where('id', '!=' , $user->id)->where('username', $username)->first();

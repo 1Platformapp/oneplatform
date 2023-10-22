@@ -493,6 +493,7 @@ class CommonMethods extends Controller
         $userDetails['first_name'] = $user->first_name;
         $userDetails['surname'] = $user->surname;
         $userDetails['email'] = $user->email;
+        $userDetails['username'] = $user->username;
         $userDetails['profilePageLink'] = isset($emailExplode[0]) && $emailExplode[0] != '' ? route('user.home',['params' => $emailExplode[0]]) : '';
         $userDetails['image'] = self::getUserDisplayImage($user->id);
         $userDetails['address'] = ($user->address) ? $user->address->address_01 : '';

@@ -32,20 +32,7 @@ class Agency
 
         if($user->profile->basic_setup != 1){
 
-            if(Session::has('forceNext')){
-
-                $forceN = Session::get('forceNext');
-                Session::forget('forceNext');
-                return redirect(route('profile.setup', ['page' => $forceN]));
-            }else{
-
-                $setupProfileWizard = $user->setupProfileWizard();
-
-                if($setupProfileWizard['error'] != ''){
-
-                    return redirect(route('profile.setup', ['page' => $setupProfileWizard['error']]));
-                }
-            }
+            return redirect(route('profile.setup'));
         }
 
         return $next($request);
