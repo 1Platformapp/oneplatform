@@ -3,11 +3,11 @@
 
 @section('pagetitle') 1 Platform | Artists, Producers, Musicians, Content Creators @endsection
 
-@section('pagekeywords') 
+@section('pagekeywords')
     <meta name="keywords" content="artists,musicians,discover music,songs,songwriters,producers,filmmakers,raise money,promote music,sell music, content creators,connect people,networking,distribution,premium streams,creative,business,sell,music,music license,crowdfunding,studios,online store,gigs,merchandise,bespoke license,music industry" />
 @endsection
 
-@section('pagedescription') 
+@section('pagedescription')
     <meta name="description" content="1Platform is for artists to sell music licenses,products,tickets or raise money through crowdfunding. Discover music and support its creators"/>
 @endsection
 
@@ -71,8 +71,8 @@
 	                        <div class="dsk_tools">
 	                            @if(!Auth::check())
 	                            <a href="{{route('register')}}" id="dsk_signup">
-	                            	<i class="fa fa-comment-dots"></i> 
-	                            	Chat With A Manager Now
+	                            	<i class="fa fa-comment-dots"></i>
+	                            	Create an account
 	                            </a>
 	                            <a href="{{route('login')}}" id="dsk_signin">Sign in</a>
 	                            @else
@@ -113,7 +113,7 @@
                         		if($slide->type == 'user' and $slide->user and $slide->user->active == 1){
                         			$details = $commonMethods->getUserRealCampaignDetails($slide->user_id);
                         			$thumb = $details['campaignUserInfo']['profileImageCarosel'];
-                        			
+
                         	        if($details['campaignIsLive'] == '1' && $details['campaignStatus'] == 'active'){
                         	            $hasCrowdFundd = 1;
                         	            $link = $details['campaignUserInfo']['projectPage'];
@@ -200,7 +200,7 @@
                     	            <div class="int_sub_head">
                     	                <div class="int_sub_head_up">Subscriptions</div>
                     	            </div>
-                    	            
+
                     	            <div class="int_sub_dhead">Price</div>
                     	            <div class="int_sub_offer_outer">
                     	                <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
@@ -226,7 +226,7 @@
                     	            </div>
                     	        </div>
                     	        <div class="int_sub_act_outer">
-                    	            
+
                     	            <div class="int_sub_each pro_hover">
                     	                <div class="int_sub_head">
                     	                    <div class="int_sub_head_up">{{ucfirst($packages[0]['name'])}}</div>
@@ -291,7 +291,7 @@
                     	                        <div class="int_sub_confirm int_sub_pay">Sign Up</div>
                     	                    </div>
                     	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[1]['application_fee']}}% 
+                    	                        {{$packages[1]['application_fee']}}%
                     	                    </div>
                     	                    <div class="int_sub_offer_each">
                     	                        <div class="int_sub_offer_yes">
@@ -340,7 +340,7 @@
                     	                        <div class="int_sub_confirm int_sub_pay">Sign Up</div>
                     	                    </div>
                     	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[2]['application_fee']}}%  
+                    	                        {{$packages[2]['application_fee']}}%
                     	                    </div>
                     	                    <div class="int_sub_offer_each">
                     	                        <div class="int_sub_offer_yes">
