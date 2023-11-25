@@ -22,6 +22,7 @@
 
 @section('page-level-js')
 
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
 
         function activateStep(step) {
@@ -50,6 +51,86 @@
                 .find('.each-step-title').addClass('cursor-pointer text-indigo-600 group-hover:text-indigo-800').removeClass('text-gray-500 group-hover:text-gray-700');
         }
 
+        function isValidEmail (email) {
+            const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+            return emailRegex.test(email)
+        }
+
+        async function validateStep(step) {
+
+            const username = $('#fake_username').val();
+            const firstName = $('#firstname').val();
+            const surname = $('#surname').val();
+            const artistName = $('#artistname').val();
+            const email = $('#emailaddress').val();
+            const password = $('#fake_password').val();
+            const country = $('#country_id').val();
+            const city = $('#city_id').val();
+            const mainSkill = $('#main_skill_name').val();
+            var regex = /\s/;
+
+            if (step == 'one') {
+
+                if (username == '' || username.length < 8 || username.length > 20 || regex.test(username)) {
+                    return true;
+                }
+
+                const isAvailable = await checkAvailability('username', username);
+                return !isAvailable;
+            } else if (step == 'two') {
+
+                if (firstName == '' || surname == '' || artistName == '' || email == '' || password == '' || password.length < 6 || country == '' || city == '') {
+                    return true;
+                }
+
+                if (!isValidEmail(email)) {
+                    return true;
+                }
+
+                const isAvailable = await checkAvailability('email', email);
+                return !isAvailable;
+            }else if (step == 'three') {
+
+                if (mainSkill == '') {
+                    return true;
+                }
+            }
+        }
+
+        async function checkAvailability (type, value) {
+
+            return new Promise((resolve, reject) => {
+                let find = value;
+                let findType = null;
+
+                if (type == 'username') {
+                    findType = 'username-availability';
+                } else if (type == 'email') {
+                    findType = 'email-availability';
+                }
+
+                if (findType) {
+                    $.ajax({
+                        url: '/informationFinder',
+                        dataType: "json",
+                        type: 'post',
+                        data: {'find_type': findType, 'find': find, 'identity_type': 'guest', 'identity': ''},
+                        success: function(response) {
+                            console.log(response);
+                            if (response.success !== 1) {
+                                resolve(false);
+                            } else {
+                                resolve(true);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            reject(error);
+                        }
+                    });
+                }
+            });
+        }
+
         $('document').ready(function(){
 
             $.ajaxSetup({
@@ -58,18 +139,47 @@
                 }
             });
 
-            var step = $('#current-step').val();
+            var step = 'one';
             activateStep(step);
             $('.each-step[data-step="'+step+'"]').prevAll().each(function(){
                 filledStep($(this).attr('data-step'));
             });
 
-            $('.next-btn').click(function(){
+            $('.next-btn').click(async function () {
+                const username = $('#username');
+                var regex = /\s/;
+                let error = false;
                 var currentStep = $('.each-step.current-step');
+                $('#error-span').addClass('hidden');
 
                 if (currentStep.length) {
-                    var form = $('form[form-step="'+currentStep.attr('data-step')+'"]');
-                    form.submit();
+                    if (currentStep.attr('data-step') == 'one') {
+
+                        if (await validateStep('one')) {
+                            console.log('Validation failed');
+                            $('#error-span').removeClass('hidden');
+                            return;
+                        }
+
+                        activateStep('two');
+                    } else if (currentStep.attr('data-step') == 'two') {
+                        if (await validateStep('two')) {
+                            console.log('Validation failed');
+                            $('#error-span').removeClass('hidden');
+                            return;
+                        }
+
+                        activateStep('three');
+                        $('.google-recaptcha').removeClass('hidden');
+                    } else if (currentStep.attr('data-step') == 'three') {
+                        if (await validateStep('three')) {
+                            console.log('Validation failed');
+                            $('#error-span').removeClass('hidden');
+                            return;
+                        }
+
+                        $('#register-form').submit();
+                    }
                 }
             });
 
@@ -192,45 +302,43 @@
         </div>
     @endif
     <div class="bg-white rounded-lg">
-        <div class="mx-6 py-12">
-            <h2 class="text-base font-semibold leading-7 text-gray-900 mb-2"><span id="step-name"></span></h2>
-            <div data-step="one" class="each-step-body space-y-12 sm:space-y-16 hidden">
-                <form form-step="one" action="{{route('save.user.profile')}}" method="POST">
-                {{csrf_field()}}
+        <form id="register-form" action="{{route('register.user')}}" method="POST">
+            {{csrf_field()}}
+            <div class="mx-6 py-12">
+                <h2 class="text-base font-semibold leading-7 text-gray-900 mb-2"><span id="step-name"></span></h2>
+                <div data-step="one" class="each-step-body space-y-12 sm:space-y-16 hidden">
                     <div class="space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label for="username" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Username</label>
+                            <label for="fake_username" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Username</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
                                     <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">1platform.tv/</span>
-                                    <input type="text" name="username" id="username" value="{{$userPersonalDetails['username']}}" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="janesmith">
+                                    <input type="email" id="username" name="username" autocomplete="on" class="w-0 h-0">
+                                    <input type="text" name="fake_username" id="fake_username" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="janesmith">
                                 </div>
-                                <p class="mt-3 text-sm leading-6 text-gray-600">A suitable username has been filled already. The username must be at least 8 characters long and must not contain white spaces</p>
+                                <p class="mt-3 text-sm leading-6 text-gray-600">The username must be between 8 and 20 characters long and must not contain white spaces</p>
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="currency" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Currency</label>
                             <div class="mt-2 sm:col-span-2 ring-1 ring-inset rounded-md ring-gray-300 sm:mt-0">
                                 <select id="currency" name="currency" autocomplete="off" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
-                                    <option {{$userPersonalDetails['defaultCurrency'] == 'gbp' ? 'selected' : ''}} value="gbp">GBP</option>
-                                    <option {{$userPersonalDetails['defaultCurrency'] == 'eur' ? 'selected' : ''}} value="eur">EUR</option>
-                                    <option {{$userPersonalDetails['defaultCurrency'] == 'usd' ? 'selected' : ''}} value="usd">USD</option>
+                                    <option value="gbp">GBP</option>
+                                    <option value="eur">EUR</option>
+                                    <option value="usd">USD</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <div data-step="two" class="each-step-body space-y-12 sm:space-y-16 hidden">
-                <form form-step="two" action="{{route('save.user.profile')}}" method="POST">
-                {{csrf_field()}}
+                <div data-step="two" class="each-step-body space-y-12 sm:space-y-16 hidden">
                     <div class="space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">First name</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input type="text" id="firstname" name="first_name" value="{{$userPersonalDetails['first_name']}}" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                    <input type="text" id="firstname" name="firstName" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>
@@ -238,7 +346,7 @@
                             <label for="surname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Surname</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input type="text" id="surname" name="surname" value="{{$userPersonalDetails['surname']}}" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                    <input type="text" id="surname" name="lastName" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>
@@ -246,17 +354,35 @@
                             <label for="artistname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Artist name</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input type="text" id="artistname" name="name" value="{{$userPersonalDetails['name']}}" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                    <input type="text" id="artistname" name="name" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">This will be your public name</p>
+                            </div>
+                        </div>
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label for="emailaddress" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Email</label>
+                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                                    <input type="text" id="emailaddress" name="email" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label for="fake_password" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Password</label>
+                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                                    <input type="password" id="password" name="password" autocomplete="off" class="hidden">
+                                    <input type="password" id="fake_password" name="password" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                </div>
+                                <p class="mt-3 text-sm leading-6 text-gray-600">Must be at least 6 characters long</p>
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="countryname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Country</label>
                             <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input type="hidden" id="country_id" name="country_id" value="{{$userPersonalDetails['countryId']}}">
-                                    <input data-uri="/searchCountries" data-well="country-dropdown" id="country_name" type="text" value="{{$userPersonalDetails['country']}}" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                                    <input type="hidden" id="country_id" name="country_id" value="">
+                                    <input data-uri="/searchCountries" data-well="country-dropdown" id="country_name" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
                                 </div>
                                 <div class="hidden my-dropdown country-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
@@ -267,8 +393,8 @@
                             <label for="cityname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">City</label>
                             <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input type="hidden" id="city_id" name="city_id" value="{{$userPersonalDetails['cityId']}}">
-                                    <input data-uri="/searchCities" data-well="city-dropdown" id="city_name" type="text" value="{{$userPersonalDetails['city']}}" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                                    <input type="hidden" id="city_id" name="city_id" value="">
+                                    <input data-uri="/searchCities" data-well="city-dropdown" id="city_name" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
                                 </div>
                                 <div class="hidden my-dropdown city-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
@@ -276,18 +402,15 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <div data-step="three" class="each-step-body space-y-12 sm:space-y-16 hidden">
-                <form form-step="three" action="{{route('save.user.profile')}}" method="POST">
-                {{csrf_field()}}
+                <div data-step="three" class="each-step-body space-y-12 sm:space-y-16 hidden">
                     <div class="space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="skillname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Main skill</label>
                             <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input data-uri="/searchSkills" data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" value="{{$userPersonalDetails['skills']}}" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                                    <input data-uri="/searchSkills" data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
                                 </div>
                                 <div class="hidden my-dropdown main-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
@@ -298,7 +421,7 @@
                             <label for="otherskillname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Other skill</label>
                             <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input data-uri="/searchSkills" data-well="other-skill-dropdown" id="other_skill_name" name="sec_skill" type="text" value="{{$userPersonalDetails['sec_skill']}}" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                                    <input data-uri="/searchSkills" data-well="other-skill-dropdown" id="other_skill_name" name="sec_skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
                                 </div>
                                 <div class="hidden my-dropdown other-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
@@ -311,7 +434,7 @@
                                 <select id="genre" name="genre_id" autocomplete="off" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
                                     <option value="">Choose an option</option>
                                     @foreach($genres as $key => $genre)
-                                        <option {{($genre->id == $userPersonalDetails['genreId']) ? 'selected' : ''}} value="{{ $genre->id }}">{{ $genre->name }}</option>
+                                        <option value="{{ $genre->id }}">{{ $genre->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -321,22 +444,28 @@
                             <div class="mt-2 sm:col-span-2 ring-1 ring-inset rounded-md ring-gray-300 sm:mt-0">
                                 <select id="level" name="level" autocomplete="off" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
                                     <option value="">Choose an option</option>
-                                    <option {{($userPersonalDetails['level'] == 'Beginner') ? 'selected' : ''}} value="Beginner">Beginner</option>
-                                    <option {{($userPersonalDetails['level'] == 'Intermediate') ? 'selected' : ''}} value="Intermediate">Intermediate</option>
-                                    <option {{($userPersonalDetails['level'] == 'Professional') ? 'selected' : ''}} value="Professional">Professional</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Professional">Professional</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <div class="mt-6 flex items-center justify-end gap-x-6">
-                <button type="button" class="next-btn inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 outline-none">Next</button>
+                <div class="flex items-end justify-between">
+                    <div class="mt-6 google-recaptcha hidden">
+                        <div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div>
+                    </div>
+                    <div class="mt-6 flex flex-col justify-end gap-x-6 ml-auto">
+                        <button type="button" class="next-btn inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 outline-none">Next</button>
+                    </div>
+                </div>
+                <div class="flex">
+                    <p id="error-span" class="mt-3 text-sm leading-6 text-red-600 hidden ml-auto">There is some validation error</p>
+                </div>
             </div>
-        </div>
-
-        <input id="current-step" type="hidden" value="{{$step}}">
+        </form>
     </div>
 
 @endsection

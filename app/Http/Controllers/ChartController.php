@@ -1192,6 +1192,10 @@ class ChartController extends Controller
                 }
             }
 
+            if($findType == 'username-availability' || $findType == 'email-availability'){
+                $accessGranted = 1;
+            }
+
             if($identityType == 'free_buyer' && $findType == 'user_free_seller_information'){
                 $accessGranted = 1;
             }
@@ -1340,6 +1344,26 @@ class ChartController extends Controller
             }
 
             if($accessGranted == 1){
+                if($findType == 'username-availability'){
+                    $user = User::where('username', $find)->get()->first();
+                    $data = '';
+                    $error = '';
+                    if ($user) {
+                        $success = 0;
+                    } else {
+                        $success = 1;
+                    }
+                }
+                if($findType == 'email-availability'){
+                    $user = User::where('email', $find)->get()->first();
+                    $data = '';
+                    $error = '';
+                    if ($user) {
+                        $success = 0;
+                    } else {
+                        $success = 1;
+                    }
+                }
                 if(strpos($findType, 'user_personal_information') !== false){
                     $userr = User::find($find);
                     if($userr){

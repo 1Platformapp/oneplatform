@@ -81,28 +81,9 @@ class ProfileSetupController extends Controller
 
         $user = Auth::user();
         $commonMethods = new CommonMethods();
-        $personal = $commonMethods::getUserRealDetails($user->id);
         $genres = Genre::all();
 
-        if ($this->isNotFilled($personal['username']) || $this->isNotFilled($personal['defaultCurrency'])) {
-
-            $step = 'one';
-        } else if ($this->isNotFilled($personal['first_name']) || $this->isNotFilled($personal['surname']) || $this->isNotFilled($personal['cityId']) || $this->isNotFilled($personal['countryId'])) {
-
-            $step = 'two';
-        } else if($this->isNotFilled($personal['skills']) || $this->isNotFilled($personal['genreId']) || $this->isNotFilled($personal['level'])) {
-
-            $step = 'three';
-        } else {
-
-            $user->profile->basic_setup = 1;
-            $user->profile->save();
-            return redirect(route('agency.dashboard'));
-        }
-
         $data = [
-            'userPersonalDetails' => $personal,
-            'step' => $step,
             'genres' => $genres
         ];
 

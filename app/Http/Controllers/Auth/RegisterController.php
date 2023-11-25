@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Controllers\PushNotificationController;
 use App\Models\Address;
 use App\Models\Profile;
+use App\Models\Genre;
 use Carbon\Carbon;
 use Mail;
 use Illuminate\Http\Request;
@@ -106,7 +107,7 @@ class RegisterController extends Controller
                 'email'     => $request->email,
                 'contact'  => $request->contact_number,
             ];
-            return redirect()->back()->with(['error' => 'The verification is required', 'register.data' => $data]);
+            return redirect()->back()->with(['error' => 'The google verification is required', 'register.data' => $data]);
         }
 
         $user = User::where("email", $request->email)->first();
@@ -139,14 +140,28 @@ class RegisterController extends Controller
             $user->active = 1;
             $user->api_token = str_random(60);
             $user->manager_chat = isset($request->managerChat) && $request->managerChat == 1 ? 1 : NULL;
+            $user->skills = $request->has('skill') ? $request->skill : '';
+            $user->sec_skill = $request->has('sec_skill') ? $request->sec_skill : '';
+            $user->sec_skill = $request->has('level') ? $request->level : '';
+            $user->username = $request->has('fake_username') ? $request->fake_username : NULL;
             $user->save();
 
             $address->alias = 'main address';
             $address->user_id = $user->id;
+            if ($request->has('city_id')) {
+                $address->city_id = $request->city_id;
+            }
+            if ($request->has('country_id')) {
+                $address->country_id = $request->country_id;
+            }
             $address->save();
 
             $profile->birth_date = Carbon::now();
             $profile->user_id = $user->id;
+            if ($request->has('currency')) {
+                $profile->default_currency = $request->currency;
+            }
+            $profile->basic_setup = 1;
             $profile->save();
 
             $agentContact = AgentContact::where(['contact_id' => $user->id])->first();
@@ -212,7 +227,7 @@ class RegisterController extends Controller
             $response = json_decode($userNotification->create($request), true);
             Auth::login($user);
             $loginController = new LoginController();
-            $url = $loginController->handleUserProAppRedirect($user, route('profile'));
+            $url = $loginController->handleUserProAppRedirect($user, route('agency.dashboard'));
 
             $userInternalSubscription = new InternalSubscription();
             $userInternalSubscription->user_id = $user->id;
@@ -226,32 +241,16 @@ class RegisterController extends Controller
 
     public function showRegistrationForm(Request $request)
     {
-        if(session::has('register.data')){
+        $user = Auth::user();
 
-            $data = Session::get('register.data');
-            Session::forget('register.data');
-            $name = $data['name'];
-            $firstName = $data['firstName'];
-            $lastName = $data['lastName'];
-            $email = $data['email'];
-            $contact = $data['contact'];
-        }
-
-        if(Session::has('register.with.user')){
-
-            $userId = Session::get('register.with.user');
-            Session::forget('register.with.user');
-        }
+        $commonMethods = new CommonMethods();
+        $genres = Genre::all();
 
         $data = [
-            'name'       => isset($name) ? $name : '',
-            'lastName'   => isset($lastName) ? $lastName : '',
-            'firstName'  => isset($firstName) ? $firstName : '',
-            'email'      => isset($email) ? $email : '',
-            'contact'    => isset($contact) ? $contact : '',
-            'userId'     => isset($userId) ? $userId : null,
+            'genres' => $genres
         ];
-        return view( 'auth.register', $data );
+
+        return view('pages.setup.simple.index', $data);
     }
 
     public function getActivate($token){

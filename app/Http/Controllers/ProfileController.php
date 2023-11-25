@@ -7671,6 +7671,23 @@ class ProfileController extends Controller
         return json_encode(['success' => $success, 'error' => $error]);
     }
 
+    public function checkUserNameAvailability(Request $request)
+    {
+        $error = '';
+        $success = 0;
+        if($request->isMethod('post') && $request->has('username')){
+
+            $user = User::where('username', $request->get('username'))->get()->first();
+            if ($user) {
+                return json_encode(['success' => false, 'error' => 'username already exists']);
+            }
+        }else{
+            $error = 'inappropraite request';
+        }
+
+        return json_encode(['success' => true]);
+    }
+
     public function userActionRequired(Request $request, $type)
     {
         $commonMethods = new CommonMethods();
