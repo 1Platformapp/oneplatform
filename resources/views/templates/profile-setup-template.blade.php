@@ -20,7 +20,7 @@
 
     <body>
 
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto w-full px-4 lg:px-8">
             <div class="mx-auto max-w-4xl mb-72">
                 @yield('page-content','')
             </div>

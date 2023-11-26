@@ -145,7 +145,8 @@
                 filledStep($(this).attr('data-step'));
             });
 
-            $('.next-btn').click(async function () {
+            $('body').delegate('.next-btn:not(.is-busy)', 'click', async function(e){
+                $(this).addClass('is-busy');
                 const username = $('#username');
                 var regex = /\s/;
                 let error = false;
@@ -158,19 +159,23 @@
                         if (await validateStep('one')) {
                             console.log('Validation failed');
                             $('#error-span').removeClass('hidden');
+                            $(this).removeClass('is-busy');
                             return;
                         }
 
                         activateStep('two');
+                        $(this).removeClass('is-busy');
                     } else if (currentStep.attr('data-step') == 'two') {
                         if (await validateStep('two')) {
                             console.log('Validation failed');
                             $('#error-span').removeClass('hidden');
+                            $(this).removeClass('is-busy');
                             return;
                         }
 
                         activateStep('three');
                         $('.google-recaptcha').removeClass('hidden');
+                        $(this).removeClass('is-busy');
                     } else if (currentStep.attr('data-step') == 'three') {
                         if (await validateStep('three')) {
                             console.log('Validation failed');
@@ -453,7 +458,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-end justify-between">
+                <div class="flex flex-col lg:flex-row items-end justify-between">
                     <div class="mt-6 google-recaptcha hidden">
                         <div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div>
                     </div>
