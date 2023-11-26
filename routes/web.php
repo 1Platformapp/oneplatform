@@ -355,10 +355,10 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
 
     Route::prefix('profile-setup')->group(function(){
 
-        Route::get('/', [ProfileSetupController::class, 'index'])->name('profile.setup');
-        // Route::get('next/{page}', [ProfileSetupController::class, 'forceNext'])->name('profile.setup.with.next');
-        // Route::post('save-next', [ProfileSetupController::class, 'saveNext'])->name('profile.setup.save.next');
-        // Route::any('{page}', [ProfileSetupController::class, 'index'])->name('profile.setup');
+        Route::get('/', [ProfileSetupController::class, 'fullWizard'])->name('profile.setup');
+        Route::get('next/{page}', [ProfileSetupController::class, 'forceNext'])->name('profile.setup.with.next');
+        Route::post('save-next', [ProfileSetupController::class, 'saveNext'])->name('profile.setup.save.next');
+        Route::any('{page}', [ProfileSetupController::class, 'fullWizard'])->name('profile.setup');
     });
 
     Route::group( [ 'middleware' => [ 'web' ] ], function () {
