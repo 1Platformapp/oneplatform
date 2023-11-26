@@ -16,6 +16,8 @@ use App\Models\Contract;
 use App\Models\AgencyContract;
 use App\Models\IndustryContactRegion;
 use App\Models\IndustryContactCategoryGroup;
+use App\Models\SkillManagementPlanTask;
+use App\Models\Skill;
 
 use App\Mail\AgencyContract as AgencyContractMailer;
 

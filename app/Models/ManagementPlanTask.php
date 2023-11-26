@@ -9,4 +9,9 @@ class ManagementPlanTask extends Authenticatable
     {
         return $this->belongsTo(ManagementPlanStage::class);
     }
+
+    public function skillTask()
+    {
+        return $this->hasMany(SkillManagementPlanTask::class);
+    }
 }

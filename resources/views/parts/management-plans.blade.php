@@ -1,10 +1,14 @@
 @php
     $stages = \App\Models\ManagementPlanStage::all();
+    $skillName = $user->skills;
+    $skill = \App\Models\Skill::where(['value' => $skillName])->get()->first();
+    $skillTasks = $skill ? \App\Models\SkillManagementPlanTask::where(['skill_id' => $skill->id])->get()->pluck('management_plan_task_id')->toArray() : [];
 @endphp
 @foreach($stages as $key => $stage)
 <div class="mt-12 each-stage-det {{$key == 0 ? '' : 'instant_hide'}}" data-id="{{$stage->id}}" data-stage-ref="{{$stage->name}}">
    <ul role="list" class="mt-3 grid grid-cols-1 gap-5 sm:gap-6">
         @foreach($stage->tasks as $index => $task)
+        @if(!in_array($task->id, $skillTasks)) @php continue @endphp @endif
         @php $status = $commonMethods->getSubmitData($stage->id, $task->id, $user->id, 'status'); @endphp
         <li data-task="{{$task->id}}" class="flex flex-col each-task">
             <div class="col-span-1 flex rounded-md shadow-sm">
