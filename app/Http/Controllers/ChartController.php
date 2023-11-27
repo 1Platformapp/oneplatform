@@ -1565,7 +1565,7 @@ class ChartController extends Controller
                 }
                 if($findType == 'management-plan'){
                     $skills =
-                    $data['data'] = \View::make('parts.management-plans', ['commonMethods' => $commonMethods, 'user' => $user])->render();
+                    $data['data'] = \View::make('parts.management-plans', ['commonMethods' => $commonMethods, 'user' => $user, 'skill' => $find])->render();
                     $success = 1;
                 }
                 if($findType == 'contact-management'){

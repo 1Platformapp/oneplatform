@@ -6,6 +6,7 @@
 				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
             </div>
             @php $userPDetails = $commonMethods->getUserRealDetails($user->id) @endphp
+            @php $skills = \App\Models\Skill::all() @endphp
             <div class="">
                 <div class="music_btm_list no_sorting clearfix">
                     <div class="edit_elem_top">
@@ -77,7 +78,15 @@
                         <div class="loading text-center py-12 font-bold instant_hide">...Loading please wait</div>
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
-                                <div class="mt-10">
+                                <div class="mt-10 flex flex-col">
+                                    <div class="flex flex-row items-end gap-3 mb-12">
+                                        <div class="font-bold text-black">Listing tasks for : </div>
+                                        <select class="todo-select w-[16rem]">
+                                            @foreach($skills as $skill)
+                                                <option {{$userPDetails['skills'] == $skill->value ? 'selected' : ''}} value="{{$skill->id}}">{{$skill->value}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="border-b border-gray-200">
                                         <nav class="-mb-px flex " aria-label="Tabs">
                                             <div data-stage="one" class="border-indigo-500 text-indigo-600 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 1</div>
@@ -111,7 +120,6 @@
                             <div class="calendar-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-questionnaires">
-                            @php $skills = \App\Models\Skill::all() @endphp
                             <div class="mt-10">
                                 <div class="flex-1 pro_form_title">Manage Questionnaires</div>
                                 <div class="pro_music_search pro_music_info no_border">
@@ -475,158 +483,6 @@
                     </div>
                 </div>
             </div>
-
-            @if(!$isAgent)
-            <div class="sub_cat_data">
-                <div class="get_agent_outer">
-                    <div class="pro_btm_listing_outer pt-0">
-                        <label class="chat_label_contacts mt-36">1Platform Agents</label>
-                        <div class="chat_filter_agents">
-                        @if(count($agents) > 0)
-                            @foreach($agents as $agent)
-                                @php $agentPDetails = $commonMethods->getUserRealDetails($agent->id) @endphp
-                                @php $agentContacts = \App\Models\AgentContact::where('agent_id', $agent->id)->get() @endphp
-                                @php $requestSent = \App\Models\AgentContactRequest::where(['agent_user_id' => $agent->id, 'contact_user_id' => $user->id])->first() @endphp
-                                <div class="agents_listing agent_contact_listing music_btm_list no_sorting clearfix">
-                                    <div class="m_btm_list_left">
-                                        <div data-image="{{$agentPDetails['image']}}" class="music_btm_thumb">
-                                            <div class="music_bottom_load_thumb">Load Image</div>
-                                        </div>
-                                        <ul class="music_btm_img_det">
-                                            <li class="flex flex-row items-center gap-2">
-                                                <a target="_blank" title="Website" href="{{route('user.home',['params' => $agent->username])}}" class="m_btn_right_icon_each m_btm_website active">
-                                                    <i class="fa fa-globe"></i>
-                                                </a>
-                                                <a class="filter_search_target" href="javascript:void(0)">
-                                                    {{$agent->name}}
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <p>
-                                                    <i class="fa fa-users"></i>
-                                                        @if($agent->id == 727)
-                                                            {{number_format(350 + count($agentContacts))}}
-                                                        @elseif($agent->id == 722)
-                                                            {{number_format(175 + count($agentContacts))}}
-                                                        @else
-                                                            {{count($agentContacts)}}
-                                                        @endif
-                                                        network contacts
-                                                    @if($agentPDetails['city'] != '')
-                                                    &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> {{$agentPDetails['city']}}
-                                                    @endif
-                                                    @if($requestSent)
-                                                    <div class="get_agent is_pending">Request sent</div>
-                                                    @else
-                                                    <div data-id="{{$agent->id}}" class="get_agent">Get this agent</div>
-                                                    @endif
-                                                </p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">Bradley Kendal</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 500 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Birmingham
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">The billingham Agency</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 450 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Liverpool
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">New York Agency</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 800 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> New York City
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">Connections</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 300 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Bristol
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="agents_listing music_btm_list no_sorting clearfix">
-                                <div class="m_btm_list_left">
-                                    <div data-image="" class="music_btm_thumb">
-                                        <div class="music_bottom_load_thumb">Load Image</div>
-                                    </div>
-                                    <ul class="music_btm_img_det">
-                                        <li>
-                                            <a class="filter_search_target" href="javascript:void(0)">Taxi agency</a>
-                                        </li>
-                                        <li><br>
-                                            <p>
-                                                <i class="fa fa-users"></i> 250 network contacts
-                                                &nbsp;&nbsp;<i style="font-size: 17px;" class="fa fa-map-marker"></i> Cambridge
-                                                <div data-id="" class="get_agent fully_booked">Fully booked</div>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
         </div>
     </div>
 </div>
@@ -634,6 +490,14 @@
 <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
 <script src="{{ asset('select2/select2.min.js') }}"></script>
 <script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('select.todo-select').select2();
 
     $('body').delegate('.each-task .each-task-det-nav .nav', "click", function(e){
         e.stopPropagation();
@@ -726,6 +590,9 @@
                 $('.notification .icon').addClass('instant_hide');
                 if (response.success) {
                     thiss.attr('data-status', response.value);
+                    thiss.find('i').attr("class", function(index, existingClasses) {
+                        return response.icon;
+                    });
                 }else {
                     $('.notification .icon.error').removeClass('instant_hide');
                     $('.notification .notification-title').text('Error');
@@ -880,6 +747,8 @@
         }
     });
 
+    $('.m_btn_management_plan').trigger('click');
+
     $('body').delegate('.ind_con_each_nav:not(.disabled),.ind_con_search_submit', 'click', function(e){
 
         if($(this).hasClass('ind_con_each_nav')){
@@ -922,7 +791,10 @@
         $('#get_agent_popup,#body-overlay').show();
     });
 
-
+    $('body').delegate('.todo-select', 'change', function(){
+        var skill = $(this).find(':selected').text();
+        getManagementPlan(skill);
+    });
 
     $('body').delegate('#send_add_chat_group_member', 'click', function(e){
 
@@ -1055,14 +927,14 @@
         });
     });
 
-    function getManagementPlan(){
+    function getManagementPlan(skill = ''){
 
         $.ajax({
 
             url: "/informationFinder",
             dataType: "json",
             type: 'post',
-            data: {'find_type': 'management-plan', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
+            data: {'find_type': 'management-plan', 'find': skill, 'identity_type': 'subscriber', 'identity': ''},
             success: function(response) {
 
                 removeLoading();

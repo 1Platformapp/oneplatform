@@ -86,6 +86,21 @@ class CommonMethods extends Controller
         }
     }
 
+    public static function getManagementPlanStatusIcon($status){
+
+        if (!$status || $status == '' || $status == 'default'){
+            return 'far fa-star';
+        } else if ($status == 'in-progress'){
+            return 'fas fa-running';
+        } else if ($status == 'completed'){
+            return 'fas fa-star';
+        } else if ($status == 'urgent'){
+            return 'fas fa-exclamation';
+        }
+
+        return '';
+    }
+
     public static function getItemImage($checkoutItemId, $itemId, $itemType){
 
         $thumb = asset('img/url-thumb-profile.jpg');

@@ -45,7 +45,7 @@ class AgencyController extends Controller
 
         $fans = $topSales = [];
         $singlesSold = $albumsSold = $totalRevenue = $productsSold = 0;
-        $instantPurchases = StripeCheckout::where('customer_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
+        /*$instantPurchases = StripeCheckout::where('customer_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
         $instantSales = StripeCheckout::where('user_id', $user->id)->where(function($q) { $q->where('type', 'instant')->orWhere('type', 'custom-product');})->orderBy('id' , 'desc')->get();
         $crowdfundPurchases = StripeCheckout::where('customer_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
         $crowdfundSales = StripeCheckout::where('user_id', $user->id)->where('type', 'crowdfund')->orderBy('id' , 'desc')->get();
@@ -82,7 +82,7 @@ class AgencyController extends Controller
             if($checkout->customer && !in_array($checkout->customer->id, $fans)){
                 $fans[] = $checkout->customer->id;
             }
-        }
+        }*/
 
         $contacts = AgentContact::where(function($q) use ($user) {
             $q->where('contact_id', $user->id)->orWhere('agent_id', $user->id);

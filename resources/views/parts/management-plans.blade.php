@@ -1,6 +1,6 @@
 @php
     $stages = \App\Models\ManagementPlanStage::all();
-    $skillName = $user->skills;
+    $skillName = $skill == '' ? $user->skills : $skill;
     $skill = \App\Models\Skill::where(['value' => $skillName])->get()->first();
     $skillTasks = $skill ? \App\Models\SkillManagementPlanTask::where(['skill_id' => $skill->id])->get()->pluck('management_plan_task_id')->toArray() : [];
 @endphp
@@ -12,7 +12,9 @@
         @php $status = $commonMethods->getSubmitData($stage->id, $task->id, $user->id, 'status'); @endphp
         <li data-task="{{$task->id}}" class="flex flex-col each-task">
             <div class="col-span-1 flex rounded-md shadow-sm">
-                <div data-status="{{$status && $status != '' ? $status : 'default'}}" class="status-submit cursor-pointer flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white">{{$index+1}}</div>
+                <div data-status="{{$status && $status != '' ? $status : 'default'}}" class="status-submit cursor-pointer flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white">
+                    <i class="{{ $commonMethods->getManagementPlanStatusIcon($status) }}"></i>
+                </div>
                 <div class="cursor-pointer relative flex flex-1 items-center justify-between md:truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white each-task-det-nav">
                     <div class="flex-1 md:truncate px-4 py-2 text-sm hover:bg-gray-50">
                         <div class="font-medium text-gray-900 hover:text-gray-600">{{$task->title}}</div>

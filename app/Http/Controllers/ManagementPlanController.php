@@ -13,6 +13,7 @@ class ManagementPlanController extends Controller
 {
     public static function submit(ManagementPlanSubmitRequest $request){
 
+        $commonMethods = new commonMethods();
         $user = Auth::user();
 
         $submit = ManagementPlanSubmit::where(['stage_id' => $request->stage, 'task_id' => $request->task, 'user_id' => $user->id, 'type' => $request->type])->get()->first();
@@ -40,7 +41,7 @@ class ManagementPlanController extends Controller
 
         $submit->save();
 
-        return json_encode(['success' => true, 'error' => '', 'value' => $submit->value]);
+        return json_encode(['success' => true, 'error' => '', 'value' => $submit->value, 'icon' => $commonMethods->getManagementPlanStatusIcon($submit->value)]);
     }
 }
 
