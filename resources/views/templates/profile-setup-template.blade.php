@@ -8,12 +8,11 @@
         <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('pagetitle')</title>
-        <link href="/css/app.css?v=3.15" rel="stylesheet" type="text/css" />
+        <link href="/css/app.css?v=3.16" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
         <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <script src="/js/jquery.min.js" type="text/javascript"></script>
-        <link href="/css/app.css?v=3.14" rel="stylesheet" type="text/css" />
         @yield('page-level-css','')
         @yield('page-level-js','')
     </head>
