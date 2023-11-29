@@ -154,7 +154,7 @@
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-contracts">
                             <div class="mt-10">
-                                <div class="border-l-4 border-[#666] bg-[#dbdbdb] p-4">
+                                <div class="px-2 py-4">
                                     <div class="flex items-center mb-3">
                                         <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
                                             <i class="fa fa-info-circle"></i>
@@ -176,7 +176,7 @@
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">2.</div>
-                                                    <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer">here</span>, attach contract</div>
+                                                    <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer text-[#fc064c]">here</span>, attach contract</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,20 +215,7 @@
                                     </div>
                                 </div>
                                 @if($user->hasActivePaidSubscription())
-                                <form>
-                                    <div class="pro_stream_input_outer">
-                                        <ul role="list" class="new_contracts grid sm:grid-cols-1 md:grid-cols-2 gap-x-8">
-                                            @foreach(\App\Models\Contract::all() as $contract)
-                                            <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
-                                                <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}">
-                                                    <i class="fas fa-file-pdf text-lg"></i>
-                                                    {{$contract->title}}
-                                                </a>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </form>
+
                                 @else
                                 <div class="flex flex-col gap-4 mt-4">
                                     <div class="bg-white sm:rounded-lg">
@@ -245,6 +232,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form>
+                                    <div class="pro_stream_input_outer">
+                                        <ul role="list" class="new_contracts grid sm:grid-cols-1 md:grid-cols-2 gap-x-8">
+                                            @foreach(\App\Models\Contract::all() as $contract)
+                                            <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
+                                                <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}">
+                                                    <i class="fas fa-file-pdf text-lg"></i>
+                                                    {{$contract->title}}
+                                                </a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </form>
                                 @endif
                             </div>
                         </div>
