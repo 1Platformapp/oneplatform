@@ -46,7 +46,8 @@
     $variables = explode("<<var>>", $details);
 @endphp
 
-<div class="contact_details_outer">
+<div class="contact_details_outer relative">
+    <img class="absolute top-1/2 z-50 left-1/2 tranform -translate-x-[50%] -translate-y-[50%] -rotate-45" src="{{asset('images/preview.png')}}" alt="">
     <div class="contact_details_inner">
         @if(Auth::check())
         <div class="back_to_profile">
@@ -56,16 +57,15 @@
         @endif
         <div class="contact_details_section">
             <div class="contact_section_head">
-                {{$contract->title}} (PREVIEW)
+                {{ $contract->title }}
             </div>
             <div class="contact_section_body">
                 <form class="flex flex-col" id="signature-form" action="#" method="POST">
-
                     <div class="element_container mt-8">
                     @php $totalLength = 0 @endphp
                     @foreach ($variables as $index => $variable)
                         @php $totalLength = $totalLength + strlen($variable) @endphp
-                        @php if($totalLength > 300) continue @endphp
+                        @php if($totalLength > 500) continue @endphp
                         <span class="text-sm font-normal">{!!$variable!!}</span>
                         @if($index + 1 < count($variables))
                         <input disabled class="border-b border-solid border-black text-theme-red mb-2" type="text" />

@@ -168,7 +168,7 @@
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">1.</div>
-                                                    <div>Subscribe for access or keep nice large button</div>
+                                                    <div>Subscribe For legal Industry Contracts</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,15 +217,15 @@
                                 @if($user->hasActivePaidSubscription())
 
                                 @else
-                                <div class="flex flex-col gap-4 mt-4">
-                                    <div class="bg-white sm:rounded-lg">
+                                <div class="flex flex-col gap-4 mt-4 mx-2">
+                                    <div class="border border-[#666] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
-                                            <h3 class="text-base font-semibold leading-6 text-gray-900">Upgrade subscription</h3>
-                                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                            <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
+                                            <div class="mt-2 max-w-xl text-sm text-[#333]">
                                                 <p>You are currently subscribed to a free plan. Upgrade your subscription to unlock this feature</p>
                                             </div>
                                             <div class="mt-5">
-                                                <a type="button" href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                                <a type="button" href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="inline-flex items-center bg-[#fc064c] rounded-md bg-white px-3 py-2 text-sm font-semibold text-white shadow-sm">
                                                     Click here
                                                 </a>
                                             </div>
@@ -233,17 +233,26 @@
                                     </div>
                                 </div>
                                 <form>
-                                    <div class="pro_stream_input_outer">
-                                        <ul role="list" class="new_contracts grid sm:grid-cols-1 md:grid-cols-2 gap-x-8">
+                                    <div class="px-2 py-4">
+                                        <div class="flex items-center mb-3">
+                                            <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
+                                                <i class="fa fa-info-circle"></i>
+                                            </div>
+                                            <div class="lg:ml-3 flex-1 md:flex md:justify-between">
+                                                <p class="text-sm text-[#333] font-bold">Previews for the contracts are available</p>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
                                             @foreach(\App\Models\Contract::all() as $contract)
-                                            <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
-                                                <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}">
-                                                    <i class="fas fa-file-pdf text-lg"></i>
-                                                    {{$contract->title}}
-                                                </a>
-                                            </li>
+                                            <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                                <div class="min-w-0 flex-1">
+                                                    <a target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}" class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                        <div>{{$contract->title}}</div>
+                                                    </a>
+                                                </div>
+                                            </div>
                                             @endforeach
-                                        </ul>
+                                        </div>
                                     </div>
                                 </form>
                                 @endif
