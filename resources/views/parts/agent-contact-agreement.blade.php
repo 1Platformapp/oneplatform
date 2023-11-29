@@ -1,5 +1,5 @@
 @php $counter = 0 @endphp
-<form data-id="{{$contact->id}}">
+<form data-id="{{$contact->id}}" class="{{ $hasActiveSub ? 'has-active-subscription' : 'has-free-subscription' }}">
     <div class="pro_music_info">
         <div class="pro_form_title flex items-center">
             <div>Contracts</div>
@@ -53,8 +53,8 @@
                                     </a>
                                 </div>
                                 @else
-                                <div class="flex w-0 flex-1">
-                                    <a href="{{route('agency.contract.add.form', ['id' => $myContract->contract_id, 'contact' => $myContract->contact_id])}}" target="_blank" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                                <div class="flex w-0 flex-1 create-new-contract-btn">
+                                    <a href="{{$hasActiveSub ? route('agency.contract.add.form', ['id' => $myContract->contract_id, 'contact' => $myContract->contact_id]) : 'javascript:void(0)'}}" target="_blank" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
                                         <i class="fa fa-plus text-gray-400"></i>&nbsp;Create new
                                     </a>
                                 </div>
@@ -75,15 +75,21 @@
                 @endif
             </ul>
             <ul role="list" class="instant_hide new_contracts grid sm:grid-cols-1 md:grid-cols-2 gap-x-8">
-                @foreach($contracts as $key => $contract)
-                <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
-                    <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="{{route('agency.contract.add.form', ['id' => $contract->id, 'contact' => $contact->id])}}">
-                        <i class="fas fa-file-pdf text-lg"></i>
-                        {{$contract->title}}
-                    </a>
-                </li>
-                @endforeach
+                @if($hasActiveSub)
+                    @foreach($contracts as $key => $contract)
+                    <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
+                        <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="{{route('agency.contract.add.form', ['id' => $contract->id, 'contact' => $contact->id])}}">
+                            <i class="fas fa-file-pdf text-lg"></i>
+                            {{$contract->title}}
+                        </a>
+                    </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
     </div>
 </form>
+
+<style>
+    .has-free-subscription .create-new-contract-btn a { opacity: 0.7; cursor: not-allowed; }
+</style>

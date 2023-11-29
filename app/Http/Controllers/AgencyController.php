@@ -141,8 +141,14 @@ class AgencyController extends Controller
 
     public function addContractForm(Request $request, $id, $contactId)
     {
-        $commonMethods = new CommonMethods();
         $user = Auth::user();
+
+        if(!$user->hasActivePaidSubscription()){
+
+            return redirect(route('agency.dashboard'));
+        }
+
+        $commonMethods = new CommonMethods();
         $contract = Contract::find($id);
         $agentContact = AgentContact::find($contactId);
         if($contract){
@@ -160,10 +166,36 @@ class AgencyController extends Controller
         }
     }
 
+    public function addContractFormPreview(Request $request, $id)
+    {
+        $user = Auth::user();
+
+        $commonMethods = new CommonMethods();
+        $contract = Contract::find($id);
+        if($contract){
+
+            $data   = [
+
+                'commonMethods' => $commonMethods,
+                'contract' => $contract,
+                'user' => $user,
+                'action' => 'add'
+            ];
+
+            return view('pages.admin-add-contract-preview', $data);
+        }
+    }
+
     public function editContractForm(Request $request, $id)
     {
-        $commonMethods = new CommonMethods();
         $user = Auth::user();
+
+        if(!$user->hasActivePaidSubscription()){
+
+            return redirect(route('agency.dashboard'));
+        }
+
+        $commonMethods = new CommonMethods();
         $agencyContract = AgencyContract::find($id);
         $contract = Contract::find($agencyContract->contract_id);
         if($agencyContract && $agencyContract->contact && count($agencyContract->signatures) < 2){
@@ -214,8 +246,14 @@ class AgencyController extends Controller
 
     public function createContract(Request $request, $id, $contactId)
     {
-        $commonMethods = new CommonMethods();
         $user = Auth::user();
+
+        if(!$user->hasActivePaidSubscription()){
+
+            return 'Unauthorized access';
+        }
+
+        $commonMethods = new CommonMethods();
         $contract = Contract::find($id);
         $agentContact = AgentContact::where(['id' => $contactId, 'approved' => 1])->get()->first();
 
@@ -280,8 +318,14 @@ class AgencyController extends Controller
 
     public function updateContract(Request $request, $id)
     {
-        $commonMethods = new CommonMethods();
         $user = Auth::user();
+
+        if(!$user->hasActivePaidSubscription()){
+
+            return 'Unauthorized access';
+        }
+
+        $commonMethods = new CommonMethods();
         $agencyContract = AgencyContract::find($id);
         $contract = Contract::find($agencyContract->contract_id);
         if($agencyContract->contact && ($agencyContract->creator == 'agent' && $agencyContract->contact->agentUser->id == $user->id) || ($agencyContract->creator == 'artist' && $agencyContract->contact->contactUser->id == $user->id)){

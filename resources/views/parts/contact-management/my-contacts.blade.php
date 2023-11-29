@@ -1,4 +1,6 @@
 
+@php $hasActiveSub = $user->hasActivePaidSubscription() @endphp
+
 <div class="mt-12 each-stage-det" data-stage-ref="my-contacts">
     <div class="m_btm_filters_outer items-end md:items-center">
         <div class="m_btm_filter_search flex-1">
@@ -142,7 +144,7 @@
                                 @include('parts.agent-contact-calendar', ['contact' => $contact])
                             </div>
                             <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
-                                @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts])
+                                @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'hasActiveSub' => $hasActiveSub])
                             </div>
                             @endif
                             <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">

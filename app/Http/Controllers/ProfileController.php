@@ -347,7 +347,7 @@ class ProfileController extends Controller
 
             if($user->internalSubscription && $user->profile->stripe_secret_key != '' && $user->profile->stripe_secret_key != NULL && $user->profile->paypal_merchant_id != '' && $user->profile->paypal_merchant_id != NULL){
 
-                return redirect(route('profile'));
+                return redirect(route('agency.dashboard'));
             }else{
 
                 if($user->profile->stripe_secret_key == '' || $user->profile->stripe_secret_key == NULL){
@@ -390,13 +390,13 @@ class ProfileController extends Controller
 
             if(!$user->internalSubscription){
 
-                return redirect(route('profile'));
+                return redirect(route('agency.dashboard'));
             }
 
             $package = explode('_', $user->internalSubscription->subscription_package);
             if($package[0] != 'silver'){
 
-                return redirect(route('profile'));
+                return redirect(route('agency.dashboard'));
             }
 
             $data = [
@@ -7123,7 +7123,7 @@ class ProfileController extends Controller
                         $message = 'Successfully sent money to ' . $seller->name;
                         Session::flash('success', $message);
                         Session::flash('page', 'orders');
-                        $redirectUrl = route('profile');
+                        $redirectUrl = route('agency.dashboard');
 
                         if(count($seller->devices)){
 

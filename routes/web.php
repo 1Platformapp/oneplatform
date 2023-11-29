@@ -416,6 +416,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyController::class, 'index'])->name('agency.dashboard');
         Route::get('test/send-whatsapp-message', [TestController::class, 'sendWhatsappMessage'])->name('test.send.whatsapp.message');
+        Route::get('dashboard/add-contract/preview/{id}', [AgencyController::class, 'addContractFormPreview'])->name('agency.contract.preview');
         Route::get('dashboard/add-contract/{id}/{contact}', [AgencyController::class, 'addContractForm'])->name('agency.contract.add.form');
         Route::get('dashboard/edit-contract/{id}', [AgencyController::class, 'editContractForm'])->name('agency.contract.edit.form');
         Route::get('dashboard/view-contract/{id}', [AgencyController::class, 'viewContractForm'])->name('agency.contract.view.form');

@@ -153,57 +153,100 @@
                             </div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-contracts">
-                            <div>
-                                <div class="mt-10">
-                                    <div class="pb-4">
-                                        You can send contracts to your contacts, edit details, and with one click, they receive an email and app notification to read and sign the digital contract. You both get the completed contract in your portal
-                                    </div>
-                                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-                                            <div class="min-w-0 flex-1">
-                                                <a href="#" class="focus:outline-none">
-                                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                                    <p class="text-sm font-medium text-gray-900">One Time Contract</p>
-                                                </a>
-                                            </div>
+                            <div class="mt-10">
+                                <div class="border-l-4 border-[#666] bg-[#dbdbdb] p-4">
+                                    <div class="flex items-center mb-3">
+                                        <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
+                                            <i class="fa fa-info-circle"></i>
                                         </div>
-                                        <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-                                            <div class="min-w-0 flex-1">
-                                                <a href="#" class="focus:outline-none">
-                                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                                    <p class="text-sm font-medium text-gray-900">Contract Subscription</p>
-                                                </a>
-                                            </div>
+                                        <div class="lg:ml-3 flex-1 md:flex md:justify-between">
+                                            <p class="text-sm text-[#333] font-bold">Our groundbreaking digital platform is the world's first to facilitate person-to-person contracts</p>
                                         </div>
                                     </div>
-                                    <form>
-                                        <div class="pro_stream_input_outer">
-                                            <ul role="list" class="new_contracts grid sm:grid-cols-1 md:grid-cols-2 gap-x-8">
-                                                <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
-                                                    <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="http://127.0.0.1:8000/dashboard/add-contract/1/142">
-                                                    <i class="fas fa-file-pdf text-lg"></i>
-                                                    Artist Master Producer Contract
-                                                    </a>
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
-                                                    <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="http://127.0.0.1:8000/dashboard/add-contract/2/142">
-                                                    <i class="fas fa-file-pdf text-lg"></i>
-                                                    Artist Recording Contract
-                                                    </a>
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
-                                                    <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="http://127.0.0.1:8000/dashboard/add-contract/3/142">
-                                                    <i class="fas fa-file-pdf text-lg"></i>
-                                                    Artist Producer Contract
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                            <div class="min-w-0 flex-1">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">1.</div>
+                                                    <div>Subscribe for access or keep nice large button</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </form>
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                            <div class="min-w-0 flex-1">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">2.</div>
+                                                    <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer">here</span>, attach contract</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                            <div class="min-w-0 flex-1">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">3.</div>
+                                                    <div>Add details and requirements and submit</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                            <div class="min-w-0 flex-1">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">4.</div>
+                                                    <div>Contact will receive an email/app notification</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                            <div class="min-w-0 flex-1">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">5.</div>
+                                                    <div>They review and sign</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                            <div class="min-w-0 flex-1">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">6.</div>
+                                                    <div>Both parties recieve legally binding digital copy</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                @if($user->hasActivePaidSubscription())
+                                <form>
+                                    <div class="pro_stream_input_outer">
+                                        <ul role="list" class="new_contracts grid sm:grid-cols-1 md:grid-cols-2 gap-x-8">
+                                            @foreach(\App\Models\Contract::all() as $contract)
+                                            <li class="relative flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200">
+                                                <a class="flex w-full items-center  text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900" target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}">
+                                                    <i class="fas fa-file-pdf text-lg"></i>
+                                                    {{$contract->title}}
+                                                </a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </form>
+                                @else
+                                <div class="flex flex-col gap-4 mt-4">
+                                    <div class="bg-white sm:rounded-lg">
+                                        <div class="px-4 py-5 sm:p-6">
+                                            <h3 class="text-base font-semibold leading-6 text-gray-900">Upgrade subscription</h3>
+                                            <div class="mt-2 max-w-xl text-sm text-gray-500">
+                                                <p>You are currently subscribed to a free plan. Upgrade your subscription to unlock this feature</p>
+                                            </div>
+                                            <div class="mt-5">
+                                                <a type="button" href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                                                    Click here
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
-
-                            <div class="management-plan-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-industry-contacts">
                         @if($user->hasActivePaidSubscription())
@@ -748,6 +791,11 @@
     });
 
     $('.m_btn_management_plan').trigger('click');
+
+
+    $('body').delegate('.open-contacts-section', 'click', function(e){
+        $('.m_btn_contact_management').trigger('click');
+    });
 
     $('body').delegate('.ind_con_each_nav:not(.disabled),.ind_con_search_submit', 'click', function(e){
 

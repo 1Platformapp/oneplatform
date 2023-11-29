@@ -1,6 +1,6 @@
 
-body,.content_outer { background-color: #ccc; font-family: Montserrat; }
-.contact_details_outer { background-color: #ccc; }
+body,.content_outer { font-family: Montserrat; }
+.contact_details_outer { }
 .contact_details_inner { width: 47%; margin: 0 auto; }
 .contact_details_section { padding-top: 30px; }
 .back_to_profile { margin-top: 20px; }
@@ -73,7 +73,7 @@ body,.content_outer { background-color: #ccc; font-family: Montserrat; }
 .edit_elem_sort { top: -23px; right: 5px; color: #fff; }
 .que_tools_each.edit_elem_sort_up { margin-right: 0; }
 
-@media (min-width:320px) and (max-width: 767px) { 
+@media (min-width:320px) and (max-width: 767px) {
 
     .contact_details_inner { width: 95% !important; }
     .contact_details_outer h2 { font-size: 22px !important; margin-bottom: 15px !important; }
