@@ -84,8 +84,8 @@
                             <textarea placeholder="Enter terms on top of above..." rows="4" name="terms" class="px-2 outline-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">{{$action == 'edit' ? $agencyContract->custom_terms : ''}}</textarea>
                         </div>
                     </div>
-                    <div class="flex items-end justify-between mt-24 mb-12 gap-20">
-                        <div class="flex flex-col w-1/2">
+                    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mt-24 mb-12 gap-20">
+                        <div class="flex flex-col w-full lg:w-1/2">
                             @if($isAgent)
                                 @if($action == 'edit' && count($agencyContract->signatures) && isset($agencyContract->signatures['agent']))
                                     <img class="mb-2" src="{{asset('signatures/'.$agencyContract->signatures['agent'])}}">
@@ -116,7 +116,7 @@
                                 <div class="border-t border-solid pt-1 border-black text-center font-medium">Producer</div>
                             @endif
                         </div>
-                        <div class="flex flex-col w-1/2">
+                        <div class="flex flex-col w-full lg:w-1/2">
                             @if($isContact)
                                 @if($action == 'edit' && count($agencyContract->signatures) && isset($agencyContract->signatures['artist']))
                                     <img class="mb-2" src="{{asset('signatures/'.$agencyContract->signatures['artist'])}}">

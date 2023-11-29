@@ -83,8 +83,8 @@
                             <textarea disabled placeholder="Enter terms on top of above..." rows="4" class="px-2 outline-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"></textarea>
                         </div>
                     </div>
-                    <div class="flex items-end justify-between mt-24 mb-12 gap-20">
-                        <div class="flex flex-col w-1/2">
+                    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mt-24 mb-12 gap-20">
+                        <div class="flex flex-col w-full lg:w-1/2">
                             <button id="signature-prompt" type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 px-12 py-4 mb-2 text-center hover:border-gray-400">
                                 <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
@@ -103,7 +103,7 @@
                                 <input id="legal-name" class="border-b border-solid pt-1 border-black text-center font-medium" type="text" placeholder="Enter your legal name" />
                             </div>
                         </div>
-                        <div class="flex flex-col w-1/2">
+                        <div class="flex flex-col w-full lg:w-1/2">
                             <div class="border-t border-solid pt-1 border-black text-center font-medium">Artist</div>
                         </div>
                     </div>
