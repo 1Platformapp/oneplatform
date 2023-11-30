@@ -97,6 +97,8 @@ class ProfileSetupController extends Controller
 
     public function fullWizard(Request $request, $page){
 
+        $currentUrl = $request->url();
+        $isStandalone = (strpos($currentUrl, 'standalone') !== false) ? true : false;
 
     	if(Auth::check() && !Auth::user()->is_buyer_only){
 
@@ -374,7 +376,8 @@ class ProfileSetupController extends Controller
                 'commonMethods' => $commonMethods,
                 'domain' => $user->customDomainSubscription,
                 'stripeUrl' => $stripeUrl,
-                'agents' => $agents
+                'agents' => $agents,
+                'isStandalone' => $isStandalone
             ];
 
             return view('pages.setup.index', $data);

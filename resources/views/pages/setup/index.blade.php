@@ -353,11 +353,13 @@
 						Add username
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
 					<div class="setup_tray_btn setup_next_btn">
 						<a href="{{route('profile.setup', ['page' => 'currency'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
 					</div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -399,6 +401,7 @@
 						Choose currency
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
 					<div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'username'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -407,6 +410,7 @@
                         <a href="{{route('profile.setup', ['page' => 'personal'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
@@ -451,6 +455,7 @@
 						Personal information
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
 					<div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'currency'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -459,6 +464,7 @@
                         <a href="{{route('profile.setup', ['page' => 'media'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
@@ -481,6 +487,7 @@
 						Media information
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
 					<div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'personal'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -489,6 +496,7 @@
                         <a href="{{route('profile.setup', ['page' => 'design'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -509,6 +517,7 @@
 						Design your website
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'media'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -517,6 +526,7 @@
                         <a href="{{route('profile.setup', ['page' => 'bio'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
@@ -539,6 +549,7 @@
 						Add your bio
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'design'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -547,6 +558,7 @@
                         <a href="{{route('profile.setup', ['page' => 'portfolio'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
@@ -569,6 +581,7 @@
 						Add your portfolio
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'bio'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -577,6 +590,7 @@
                         <a href="{{route('profile.setup', ['page' => 'service'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -597,6 +611,7 @@
 						Add your services
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'portfolio'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -605,6 +620,7 @@
                         <a href="{{route('profile.setup', ['page' => 'domain'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -625,6 +641,7 @@
 						Connect your domain
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'service'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -633,6 +650,7 @@
                         <a href="{{route('profile.setup', ['page' => 'news'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -672,6 +690,7 @@
 						Add news
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'domain'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -680,6 +699,7 @@
                         <a href="{{route('profile.setup', ['page' => 'social'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -700,6 +720,7 @@
 						Connect social media accounts
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'news'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -708,6 +729,7 @@
                         <a href="{{route('profile.setup', ['page' => 'video'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
@@ -734,6 +756,7 @@
 						Add YouTube URLs
 					</div>
 				</div>
+                @if(!$isStandalone)
                 <div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
                         <a href="{{route('profile.setup', ['page' => 'social'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -742,6 +765,7 @@
                         <a href="{{route('profile.setup', ['page' => 'product'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -762,6 +786,7 @@
 						Add product
 					</div>
 				</div>
+                @if(!$isStandalone)
                 <div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
                         <a href="{{route('profile.setup', ['page' => 'video'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -770,6 +795,7 @@
                         <a href="{{route('profile.setup', ['page' => 'music'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -790,6 +816,7 @@
 						Add music
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
                         <a href="{{route('profile.setup', ['page' => 'product'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -798,6 +825,7 @@
                         <a href="{{route('profile.setup', ['page' => 'agent'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -818,6 +846,7 @@
 			            Get an artist manager
 			        </div>
 			    </div>
+                @if(!$isStandalone)
 			    <div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
                         <a href="{{route('profile.setup', ['page' => 'music'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -826,6 +855,7 @@
                         <a href="{{route('profile.setup', ['page' => 'subscription'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
@@ -847,6 +877,7 @@
 			            Upgrade your subscription plan
 			        </div>
 			    </div>
+                @if(!$isStandalone)
 			    <div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
                         <a href="{{route('profile.setup', ['page' => 'agent'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -855,6 +886,7 @@
                         <a href="{{route('profile.setup', ['page' => 'stripe'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -883,6 +915,7 @@
 						Connect your stripe account
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
                         <a href="{{route('profile.setup', ['page' => 'subscription'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
@@ -891,6 +924,7 @@
                         <a href="{{route('profile.setup', ['page' => 'finish'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 
@@ -928,11 +962,13 @@
 						Well done
 					</div>
 				</div>
+                @if(!$isStandalone)
 				<div class="setup_tray_right">
 					<div class="setup_tray_btn setup_back_btn">
 						<a href="{{route('profile.setup', ['page' => 'stripe'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
 				</div>
+                @endif
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
