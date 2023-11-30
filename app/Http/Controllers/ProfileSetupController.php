@@ -180,185 +180,185 @@ class ProfileSetupController extends Controller
                 return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
             }
 
-            $setup = $user->setupProfileWizard();
-            if($page == 'username'){
+            //$setup = $user->setupProfileWizard();
+            // if($page == 'username'){
 
-                // step 2 of 19
-                $title = 'Choose Your Username';
-                $back = NULL;
-                $next = NULL;
-                //$forceNext = 'currency';
-            }else if($page == 'currency'){
+            //     // step 2 of 19
+            //     $title = 'Choose Your Username';
+            //     $back = NULL;
+            //     $next = NULL;
+            //     //$forceNext = 'currency';
+            // }else if($page == 'currency'){
 
-                // step 3 of 19
-                if(!$forceNext && $setup['username'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'username']));
-                }
-                $title = 'Choose Your Currency';
-                $back = route('profile.setup.with.next', ['page' => 'username']);
-                $next = NULL;
-                //$forceNext = 'personal';
-            }else if($page == 'personal'){
+            //     // step 3 of 19
+            //     if(!$forceNext && $setup['username'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'username']));
+            //     }
+            //     $title = 'Choose Your Currency';
+            //     $back = route('profile.setup.with.next', ['page' => 'username']);
+            //     $next = NULL;
+            //     //$forceNext = 'personal';
+            // }else if($page == 'personal'){
 
-                // step 4 of 19
-                if(!$forceNext && $setup['currency'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'currency']));
-                }
-                $title = 'Your Personal Information';
-                $back = route('profile.setup.with.next', ['page' => 'currency']);
-                $next = NULL;
-                //$forceNext = 'media';
-            }else if($page == 'media'){
+            //     // step 4 of 19
+            //     if(!$forceNext && $setup['currency'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'currency']));
+            //     }
+            //     $title = 'Your Personal Information';
+            //     $back = route('profile.setup.with.next', ['page' => 'currency']);
+            //     $next = NULL;
+            //     //$forceNext = 'media';
+            // }else if($page == 'media'){
 
-                // step 5 of 19
-                if(!$forceNext && $setup['personal'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'personal']));
-                }
-                $title = 'Add Media Information';
-                $back = route('profile.setup.with.next', ['page' => 'personal']);
-                $next = NULL;
-                //$forceNext = 'design';
-            }else if($page == 'design'){
+            //     // step 5 of 19
+            //     if(!$forceNext && $setup['personal'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'personal']));
+            //     }
+            //     $title = 'Add Media Information';
+            //     $back = route('profile.setup.with.next', ['page' => 'personal']);
+            //     $next = NULL;
+            //     //$forceNext = 'design';
+            // }else if($page == 'design'){
 
-                // step 6 of 19
-                if(!$forceNext && $setup['media'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'media']));
-                }
-                $title = 'Your Website Design';
-                $back = route('profile.setup.with.next', ['page' => 'media']);
-                $next = NULL;
-                //$forceNext = 'bio';
-            }else if($page == 'bio'){
+            //     // step 6 of 19
+            //     if(!$forceNext && $setup['media'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'media']));
+            //     }
+            //     $title = 'Your Website Design';
+            //     $back = route('profile.setup.with.next', ['page' => 'media']);
+            //     $next = NULL;
+            //     //$forceNext = 'bio';
+            // }else if($page == 'bio'){
 
-                // step 7 of 19
-                if(!$forceNext && $setup['design'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'design']));
-                }
-                $title = 'Add Bio Information';
-                $back = route('profile.setup.with.next', ['page' => 'design']);
-                $next = NULL;
-                //$forceNext = 'portfolio';
-            }else if($page == 'portfolio'){
+            //     // step 7 of 19
+            //     if(!$forceNext && $setup['design'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'design']));
+            //     }
+            //     $title = 'Add Bio Information';
+            //     $back = route('profile.setup.with.next', ['page' => 'design']);
+            //     $next = NULL;
+            //     //$forceNext = 'portfolio';
+            // }else if($page == 'portfolio'){
 
-                // step 8 of 19
-                if(!$forceNext && $setup['bio'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'bio']));
-                }
-                $title = 'Add Portfolios';
-                $back = route('profile.setup.with.next', ['page' => 'bio']);
-                $next = NULL;
-                //$forceNext = 'service';
-            }else if($page == 'service'){
+            //     // step 8 of 19
+            //     if(!$forceNext && $setup['bio'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'bio']));
+            //     }
+            //     $title = 'Add Portfolios';
+            //     $back = route('profile.setup.with.next', ['page' => 'bio']);
+            //     $next = NULL;
+            //     //$forceNext = 'service';
+            // }else if($page == 'service'){
 
-                // step 9 of 19
-                if(!$forceNext && $setup['portfolio'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'portfolio']));
-                }
-                $title = 'Add Services';
-                $back = route('profile.setup.with.next', ['page' => 'portfolio']);
-                $next = route('profile.setup.with.next', ['page' => 'domain']);
-                //$forceNext = 'domain';
-            }else if($page == 'domain'){
+            //     // step 9 of 19
+            //     if(!$forceNext && $setup['portfolio'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'portfolio']));
+            //     }
+            //     $title = 'Add Services';
+            //     $back = route('profile.setup.with.next', ['page' => 'portfolio']);
+            //     $next = route('profile.setup.with.next', ['page' => 'domain']);
+            //     //$forceNext = 'domain';
+            // }else if($page == 'domain'){
 
-                // step 10 of 19
-                if(!$forceNext && $setup['service'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'service']));
-                }
-                $title = 'Connect Personal Domain';
-                $back = route('profile.setup.with.next', ['page' => 'service']);
-                $next = route('profile.setup.with.next', ['page' => 'news']);
-                //$forceNext = 'domain';
-            }else if($page == 'news'){
+            //     // step 10 of 19
+            //     if(!$forceNext && $setup['service'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'service']));
+            //     }
+            //     $title = 'Connect Personal Domain';
+            //     $back = route('profile.setup.with.next', ['page' => 'service']);
+            //     $next = route('profile.setup.with.next', ['page' => 'news']);
+            //     //$forceNext = 'domain';
+            // }else if($page == 'news'){
 
-                // step 11 of 19
-                if(!$forceNext && $setup['domain'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'domain']));
-                }
-                $title = 'Add News';
-                $back = route('profile.setup.with.next', ['page' => 'domain']);
-                $next = route('profile.setup.with.next', ['page' => 'social']);
-                //$forceNext = 'social';
-            }else if($page == 'social'){
+            //     // step 11 of 19
+            //     if(!$forceNext && $setup['domain'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'domain']));
+            //     }
+            //     $title = 'Add News';
+            //     $back = route('profile.setup.with.next', ['page' => 'domain']);
+            //     $next = route('profile.setup.with.next', ['page' => 'social']);
+            //     //$forceNext = 'social';
+            // }else if($page == 'social'){
 
-                // step 12 of 19
-                if(!$forceNext && $setup['news'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'news']));
-                }
-                $title = 'Connect Social Accounts';
-                $back = route('profile.setup.with.next', ['page' => 'news']);
-                $next = NULL;
-                //$forceNext = 'video';
-            }else if($page == 'video'){
+            //     // step 12 of 19
+            //     if(!$forceNext && $setup['news'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'news']));
+            //     }
+            //     $title = 'Connect Social Accounts';
+            //     $back = route('profile.setup.with.next', ['page' => 'news']);
+            //     $next = NULL;
+            //     //$forceNext = 'video';
+            // }else if($page == 'video'){
 
-                // step 13 of 19
-                if(!$forceNext && $setup['social'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'social']));
-                }
-                $title = 'Add YouTube Videos';
-                $back = route('profile.setup.with.next', ['page' => 'social']);
-                $next = route('profile.setup.with.next', ['page' => 'product']);
-                //$forceNext = 'product';
-            }else if($page == 'product'){
+            //     // step 13 of 19
+            //     if(!$forceNext && $setup['social'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'social']));
+            //     }
+            //     $title = 'Add YouTube Videos';
+            //     $back = route('profile.setup.with.next', ['page' => 'social']);
+            //     $next = route('profile.setup.with.next', ['page' => 'product']);
+            //     //$forceNext = 'product';
+            // }else if($page == 'product'){
 
-                // step 14 of 19
-                if(!$forceNext && $setup['videos'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'video']));
-                }
-                $title = 'Add Products';
-                $back = route('profile.setup.with.next', ['page' => 'video']);
-                $next = route('profile.setup.with.next', ['page' => 'music']);
-                //$forceNext = 'music';
-            }else if($page == 'music'){
+            //     // step 14 of 19
+            //     if(!$forceNext && $setup['videos'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'video']));
+            //     }
+            //     $title = 'Add Products';
+            //     $back = route('profile.setup.with.next', ['page' => 'video']);
+            //     $next = route('profile.setup.with.next', ['page' => 'music']);
+            //     //$forceNext = 'music';
+            // }else if($page == 'music'){
 
-                // step 15 of 19
-                if(!$forceNext && $setup['product'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'product']));
-                }
-                $title = 'Upload Music';
-                $back = route('profile.setup.with.next', ['page' => 'product']);
-                $next = route('profile.setup.with.next', ['page' => 'agent']);
-                //$forceNext = 'agent';
-            }else if($page == 'agent'){
+            //     // step 15 of 19
+            //     if(!$forceNext && $setup['product'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'product']));
+            //     }
+            //     $title = 'Upload Music';
+            //     $back = route('profile.setup.with.next', ['page' => 'product']);
+            //     $next = route('profile.setup.with.next', ['page' => 'agent']);
+            //     //$forceNext = 'agent';
+            // }else if($page == 'agent'){
 
-                // step 16 of 19
-                if(!$forceNext && $setup['music'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'music']));
-                }
-                $title = 'Choose Your Agent';
-                $back = route('profile.setup.with.next', ['page' => 'music']);
-                $next = route('profile.setup.with.next', ['page' => 'subscription']);
-                //$forceNext = 'subscription';
-            }else if($page == 'subscription'){
+            //     // step 16 of 19
+            //     if(!$forceNext && $setup['music'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'music']));
+            //     }
+            //     $title = 'Choose Your Agent';
+            //     $back = route('profile.setup.with.next', ['page' => 'music']);
+            //     $next = route('profile.setup.with.next', ['page' => 'subscription']);
+            //     //$forceNext = 'subscription';
+            // }else if($page == 'subscription'){
 
-                // step 17 of 19
-                if(!$forceNext && $setup['getAgent'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'agent']));
-                }
-                $title = 'Choose Your Subscription Plan';
-                $back = route('profile.setup.with.next', ['page' => 'agent']);
-                $next = route('profile.setup.with.next', ['page' => 'stripe']);
-                //$forceNext = 'stripe';
-            }else if($page == 'stripe'){
+            //     // step 17 of 19
+            //     if(!$forceNext && $setup['getAgent'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'agent']));
+            //     }
+            //     $title = 'Choose Your Subscription Plan';
+            //     $back = route('profile.setup.with.next', ['page' => 'agent']);
+            //     $next = route('profile.setup.with.next', ['page' => 'stripe']);
+            //     //$forceNext = 'stripe';
+            // }else if($page == 'stripe'){
 
-                // step 18 of 19
-                if(!$forceNext && $setup['subscription'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'subscription']));
-                }
-                $title = 'Connect Stripe Account';
-                $back = route('profile.setup.with.next', ['page' => 'subscription']);
-                $next = route('profile.setup.with.next', ['page' => 'finish']);
-                //$forceNext = 'finish';
-            }else{
+            //     // step 18 of 19
+            //     if(!$forceNext && $setup['subscription'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'subscription']));
+            //     }
+            //     $title = 'Connect Stripe Account';
+            //     $back = route('profile.setup.with.next', ['page' => 'subscription']);
+            //     $next = route('profile.setup.with.next', ['page' => 'finish']);
+            //     //$forceNext = 'finish';
+            // }else{
 
-                // step 19 of 19
-                if(!$forceNext && $setup['stripe'] == 0){
-                    return redirect(route('profile.setup', ['page' => 'stripe']));
-                }
-                $title = 'Finishing';
-                $back = route('profile.setup', ['page' => 'stripe']);
-                $next = NULL;
-                //$forceNext = NULL;
-            }
+            //     // step 19 of 19
+            //     if(!$forceNext && $setup['stripe'] == 0){
+            //         return redirect(route('profile.setup', ['page' => 'stripe']));
+            //     }
+            //     $title = 'Finishing';
+            //     $back = route('profile.setup', ['page' => 'stripe']);
+            //     $next = NULL;
+            //     //$forceNext = NULL;
+            // }
 
             //Session::put('forceNext', $forceNext);
 
@@ -368,17 +368,13 @@ class ProfileSetupController extends Controller
                 'userPersonalDetails' => $userPersonalDetails,
                 'userSocialAccountDetails' => $userSocialAccountDetails,
                 'page' => $page,
-                'title' => $title,
+                'title' => 'Profile setup wizard',
                 'genres' => $genres,
                 'story_images' => $story_images,
                 'commonMethods' => $commonMethods,
                 'domain' => $user->customDomainSubscription,
                 'stripeUrl' => $stripeUrl,
-                'agents' => $agents,
-                'back' => $back,
-                'next' => $next,
-                'forceNext' => $forceNext,
-                'setup' => $setup
+                'agents' => $agents
             ];
 
             return view('pages.setup.index', $data);

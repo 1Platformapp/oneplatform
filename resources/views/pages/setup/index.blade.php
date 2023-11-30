@@ -354,18 +354,9 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					@if($setup['username'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'currency'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@endif
+					<div class="setup_tray_btn setup_next_btn">
+						<a href="{{route('profile.setup', ['page' => 'currency'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+					</div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -409,27 +400,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
 					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+						<a href="{{route('profile.setup', ['page' => 'username'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['currency'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'personal'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'personal'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -476,27 +452,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
 					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+						<a href="{{route('profile.setup', ['page' => 'currency'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['personal'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'media'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+					<div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'media'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -521,27 +482,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
 					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+						<a href="{{route('profile.setup', ['page' => 'personal'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['media'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'design'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+					<div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'design'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -564,27 +510,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <div class="setup_tray_btn setup_back_btn">
+						<a href="{{route('profile.setup', ['page' => 'media'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['design'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'bio'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'bio'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -609,27 +540,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <div class="setup_tray_btn setup_back_btn">
+						<a href="{{route('profile.setup', ['page' => 'design'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['bio'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'portfolio'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'portfolio'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -654,27 +570,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <div class="setup_tray_btn setup_back_btn">
+						<a href="{{route('profile.setup', ['page' => 'bio'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['portfolio'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'service'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'service'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -697,27 +598,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <div class="setup_tray_btn setup_back_btn">
+						<a href="{{route('profile.setup', ['page' => 'portfolio'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['service'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'domain'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'domain'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -740,27 +626,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <div class="setup_tray_btn setup_back_btn">
+						<a href="{{route('profile.setup', ['page' => 'service'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['domain'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'news'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'news'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -802,27 +673,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <div class="setup_tray_btn setup_back_btn">
+						<a href="{{route('profile.setup', ['page' => 'domain'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['news'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'social'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'social'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -845,27 +701,12 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    <div class="setup_tray_btn setup_back_btn">
+						<a href="{{route('profile.setup', ['page' => 'news'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
-					@if($setup['social'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'video'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'video'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
 				</div>
 			</div>
 			<div class="setup_tray_foot">
@@ -893,29 +734,14 @@
 						Add YouTube URLs
 					</div>
 				</div>
-				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-					</div>
-					@if($setup['videos'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'product'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
-				</div>
+                <div class="setup_tray_right">
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'social'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'product'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
 			</div>
 			<div class="setup_tray_foot">
 
@@ -936,29 +762,14 @@
 						Add product
 					</div>
 				</div>
-				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-					</div>
-					@if($setup['product'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'music'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
-				</div>
+                <div class="setup_tray_right">
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'video'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'music'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
 			</div>
 			<div class="setup_tray_foot">
 
@@ -980,28 +791,13 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-					</div>
-					@if($setup['music'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'agent'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
-				</div>
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'product'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'agent'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
 			</div>
 			<div class="setup_tray_foot">
 
@@ -1023,28 +819,13 @@
 			        </div>
 			    </div>
 			    <div class="setup_tray_right">
-			    	@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-			        <div class="setup_tray_btn setup_back_btn">
-			            <a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-			        </div>
-			        @if($setup['getAgent'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'subscription'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
-			    </div>
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'music'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'subscription'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
@@ -1067,28 +848,13 @@
 			        </div>
 			    </div>
 			    <div class="setup_tray_right">
-			    	@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-			        <div class="setup_tray_btn setup_back_btn">
-			            <a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-			        </div>
-			        @if($setup['subscription'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'stripe'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
-			    </div>
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'agent'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'stripe'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
 			</div>
 			<div class="setup_tray_foot">
 
@@ -1118,28 +884,13 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
-					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-					</div>
-					@if($setup['stripe'] == 1)
-						<div class="setup_tray_btn setup_next_btn">
-							<a href="{{route('profile.setup', ['page' => 'finish'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-						</div>
-					@else
-						@if($next)
-							<div class="setup_tray_btn setup_skip_btn">
-								<a href="{{$next}}">Skip&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
-							</div>
-						@endif
-					@endif
-				</div>
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'subscription'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'finish'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
 			</div>
 			<div class="setup_tray_foot">
 
@@ -1178,15 +929,8 @@
 					</div>
 				</div>
 				<div class="setup_tray_right">
-					@if($setup['personal'] == 1 && $user->manager_chat == 1)
-						<div class="setup_tray_btn setup_chat_btn" data-page="{{$page}}">
-							<a href="#">
-								<i class="fas fa-comment-dots"></i>&nbsp;Chat
-							</a>
-						</div>
-					@endif
 					<div class="setup_tray_btn setup_back_btn">
-						<a href="{{$back}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+						<a href="{{route('profile.setup', ['page' => 'stripe'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
 					</div>
 				</div>
 			</div>
