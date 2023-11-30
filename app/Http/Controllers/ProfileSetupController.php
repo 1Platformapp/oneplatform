@@ -179,7 +179,10 @@ class ProfileSetupController extends Controller
                     }
                 }
 
-                return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
+                if (!$isStandalone) {
+
+                    return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
+                }
             }
 
             //$setup = $user->setupProfileWizard();
