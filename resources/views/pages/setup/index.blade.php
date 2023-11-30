@@ -346,9 +346,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 2 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add username
 					</div>
@@ -394,9 +396,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 3 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Choose currency
 					</div>
@@ -448,9 +452,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 4 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Personal information
 					</div>
@@ -480,9 +486,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 5 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Media information
 					</div>
@@ -510,9 +518,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 6 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Design your website
 					</div>
@@ -542,9 +552,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 7 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add your bio
 					</div>
@@ -574,9 +586,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 8 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add your portfolio
 					</div>
@@ -604,9 +618,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 9 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add your services
 					</div>
@@ -634,9 +650,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 10 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Connect your domain
 					</div>
@@ -683,9 +701,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 11 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add news
 					</div>
@@ -713,9 +733,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 12 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Connect social media accounts
 					</div>
@@ -749,9 +771,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 13 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add YouTube URLs
 					</div>
@@ -779,9 +803,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 14 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add product
 					</div>
@@ -809,9 +835,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 15 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Add music
 					</div>
@@ -839,9 +867,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 			        <div class="setup_tray_step">
 			            Step 16 of 19
 			        </div>
+                    @endif
 			        <div class="setup_tray_head">
 			            Get an artist manager
 			        </div>
@@ -870,9 +900,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 			        <div class="setup_tray_step">
 			            Step 17 of 19
 			        </div>
+                    @endif
 			        <div class="setup_tray_head">
 			            Upgrade your subscription plan
 			        </div>
@@ -908,9 +940,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 18 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Connect your stripe account
 					</div>
@@ -955,9 +989,11 @@
 		<div class="setup_tray_main">
 			<div class="setup_tray_top">
 				<div class="setup_tray_left">
+                    @if(!$isStandalone)
 					<div class="setup_tray_step">
 						Step 19 of 19
 					</div>
+                    @endif
 					<div class="setup_tray_head">
 						Well done
 					</div>
