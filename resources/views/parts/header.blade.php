@@ -46,7 +46,7 @@
                 @php $notStandardLogo = 1 @endphp
             @endif
 
-            @if(isset($userParams))      
+            @if(isset($userParams))
     	        @if($userParams == 'customDomain')
     	            @php $showAdvertMenus = 0 @endphp
     	        @else
@@ -106,8 +106,8 @@
                     </li>
                     @if(!isset($user) || !$user->isCotyso())
                     <li class="hdr_left_menu_item hide_on_mobile">
-                        <div class="chat_item header_left_item">
-                        	<span data-link="{{route('profile.with.tab',['tab' => 'chat'])}}">
+                        <div class="chat_item header_left_item" data-link="{{route('agency.dashboard.tab',['tab' => 'contacts'])}}">
+                        	<span>
                         	    <i class="fa fa-comments"></i>
                         	</span>
                         </div>

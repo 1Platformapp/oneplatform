@@ -139,6 +139,11 @@ class AgencyController extends Controller
         return view('pages.admin-home', $data);
     }
 
+    public function dashboardWithTab(Request $request, $tab)
+    {
+        return redirect(route('agency.dashboard'));
+    }
+
     public function addContractForm(Request $request, $id, $contactId)
     {
         $user = Auth::user();

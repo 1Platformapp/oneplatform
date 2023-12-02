@@ -7467,8 +7467,6 @@ $(document).ready(function() {
 
     $('body').delegate('.chat_item', 'click', function(e){
 
-        sessionStorage.setItem('proCat', 'chat');
-        sessionStorage.setItem('proSubCat', 'chat_box');
         window.location.href = $(this).attr('data-link');
     });
 
