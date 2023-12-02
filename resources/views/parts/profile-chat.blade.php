@@ -498,59 +498,16 @@
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-profile">
                             <div>
-                                <div class="mt-10">
-                                    <div class="bg-white shadow sm:rounded-lg mb-8">
-                                        <div class="px-4 py-5 sm:p-6">
-                                            <h3 class="text-base font-semibold leading-6 text-gray-900 mb-12">What we offer</h3>
-                                            <ul role="list" class="grid xs2:grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6">
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Create a website, build a portfolio
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Establish an e-shop
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Share song links
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    List services
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Provide news updates
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Connect your domain
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Link your social media accounts
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Add music, create events
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Setup licensing options
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Connect your stripe account
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Confiure patreon
-                                                </li>
-                                                <li class="relative flex justify-between gap-x-6 border-b border-gray-200 pb-2">
-                                                    Launch crowdfunding and much more
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white shadow sm:rounded-lg">
-                                        <div class="px-4 py-5 sm:p-6">
-                                            <div class="mt-2 max-w-xl text-sm text-gray-500">
-                                                <p>Please click on the link below to edit your profile using our profile management wizard</p>
+                                <div class="mt-5">
+                                    <div class="">
+                                        <div class="py-5">
+                                            <div class="mt-2 max-w-full text-md text-gray-500">
+                                                <p class="font-bold">Access the 1Platform Wizard to simplify your tasks effortlessly</p>
+                                                <p>Accomplish various goals: website creation, portfolio development, product listings, music projects, crowdfunding, setup Stripe, domain connection, music licensing and so much more</p>
                                             </div>
-                                            <div class="mt-3 text-sm leading-6">
-                                                <a href="{{route('profile.setup', ['page' => 'welcome'])}}" class="font-semibold text-indigo-600 hover:text-indigo-500">
-                                                    Edit profile
-                                                    <i style="font-size: 11px;" class="fa fa-arrow-right"></i>
+                                            <div class="mt-6 text-sm leading-6">
+                                                <a href="{{route('profile.setup', ['page' => 'welcome'])}}" class="font-semibold text-white bg-[#fc064c] px-2 py-2 rounded-md">
+                                                    Access
                                                 </a>
                                             </div>
                                         </div>
