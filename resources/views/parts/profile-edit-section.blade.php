@@ -138,7 +138,7 @@
                         <div class="pro_inp_list_outer">
                             <div class="pro_note">
                                 <ul>
-                                    
+
                                     <li>This will help people find you</li>
                                     <li>If you want to be an agent tick the option below. <a target="_blank" href="{{route('faq')}}">Click here</a> to learn more about 1platform agents</li>
                                 </ul>
@@ -189,7 +189,7 @@
                                     @endforeach
                                 @endif
                             </div>
-                            
+
                             <div class="pro_inp_outer clearfix">
                                 <label>Genre</label>
                                 <div class="pro_inp_right music_sec_opt_outer simple_custom_dropdown">
@@ -203,7 +203,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="pro_inp_outer clearfix">
                                 <label>Level *</label>
                                 <div class="pro_inp_right music_sec_opt_outer simple_custom_dropdown">
@@ -232,12 +232,12 @@
                                         <ul class="clearfix">
                                             <li>
                                                 <text class="{{$user->apply_expert==1?'pro_gander_active':''}}">Apply to be a 1Platform agent
-                                                    <input name="apply_for_expert" type="radio" value="1"> 
+                                                    <input name="apply_for_expert" type="radio" value="1">
                                                 </text>
                                             </li>
                                             <li>
                                                 <text class="{{$user->apply_expert==1?'':'pro_gander_active'}}">No Thanks
-                                                    <input name="apply_for_expert" type="radio" value="0"> 
+                                                    <input name="apply_for_expert" type="radio" value="0">
                                                 </text>
                                             </li>
                                         </ul>
@@ -331,7 +331,7 @@
                     <div id="">
                         @if(count($user->services))
                         @foreach($user->services as $userService)
-                            
+
                             <div class="music_btm_list">
                                 <div class="edit_elem_top">
                                     <div class="m_btm_list_left">
@@ -411,7 +411,7 @@
                 <div data-value="portfolio_add" class="music_btm_listing_outer_edit pro_tray_tab_content">
                     <form enctype="multipart/form-data" class="add_port_form" action="{{isset($setupWizard) ? '' : route('save.user.portfolio')}}" method="post">
                         {{csrf_field()}}
-                        
+
                         <div class="element_container">
                             <div class="port_each_field">
                                 <div class="port_field_label">
@@ -450,24 +450,24 @@
                                             <span>Choose widget</span>
                                             <i class="fa fa-times"></i>
                                         </div>
-                                        <div data-id="heading" class="port_wid_drop_each add_element"> 
+                                        <div data-id="heading" class="port_wid_drop_each add_element">
                                             <i class="fa fa-header"></i>
                                             <span>Add Heading</span>
                                         </div>
                                         <div data-id="paragraph" class="port_wid_drop_each add_element">
-                                            <i class="fa fa-paragraph"></i> 
+                                            <i class="fa fa-paragraph"></i>
                                             <span>Add Paragraph</span>
                                         </div>
                                         <div data-id="image" class="port_wid_drop_each add_element">
-                                            <i class="fa fa-image"></i> 
+                                            <i class="fa fa-image"></i>
                                             <span>Add Image</span>
                                         </div>
                                         <div data-id="youtube" class="port_wid_drop_each add_element">
-                                            <i class="fa fa-youtube"></i> 
+                                            <i class="fa fa-youtube"></i>
                                             <span>Add YouTube Video</span>
                                         </div>
                                         <div data-id="spotify" class="port_wid_drop_each add_element">
-                                            <i class="fa fa-spotify"></i> 
+                                            <i class="fa fa-spotify"></i>
                                             <span>Add Spotify URL</span>
                                         </div>
                                     </div>
@@ -561,7 +561,7 @@
                     @endif
                 </div>
             </div>
-            
+
             <div id="bio_section" class="each_pro_edit_section sub_cat_data {{$subTab == 'bio' ? '' : 'instant_hide'}}">
                 <div class="pro_main_tray">
                     <div class="pro_tray_title">Add Bio</div>
@@ -587,7 +587,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                         @php $storyImages = explode(',', $story_images) @endphp
                         <div class="story_images_outer">
                             <div class="story_image_each">
@@ -668,7 +668,7 @@
                     @include('parts.pro-stripeless-content', ['page' => 'website_design'])
                 @endif
                 <div class="pro_inp_list_outer">
-                    
+
                 </div>
                 <h3 class="pro_edit_sub_head">Add profile image</h3>
                 <div class="pro_edit_profile_image">
@@ -678,10 +678,10 @@
                 <h3 class="pro_edit_sub_head">Choose layout</h3>
                 <div class="pro_inp_list_outer">
                     <div class="pro_note">
-                        <ul>  
+                        <ul>
                             <li>Choose from 3 design layouts</li>
                         </ul>
-                        <ul class="no_bullet"> 
+                        <ul class="no_bullet">
                             <li>Background recommended size: 1920px x 1267px</li>
                             <li>Banner recommended size: 1920px x 300px</li>
                         </ul>
@@ -689,7 +689,7 @@
                 </div>
                 <div class="pro_h_l_outer clearfix">
                     <div class="pro_h_l_head">
-                        
+
                         <div class="pro_h_l_btn_each_outer">
                             <div data-id="h_l_background_content" class="pro_h_l_btn_each {{$user->home_layout == 'background' ? 'active' : ''}}">
                                 <div class="pro_h_l_btn_top">
@@ -714,7 +714,7 @@
                                         <div class="banner_sub_head">Upload new background</div>
                                         <div class="upload_new_banner">
                                             <div class="banner_inner">
-                                                <i class="fa fa-upload"></i> 
+                                                <i class="fa fa-upload"></i>
                                                 <span class="text_nop">Choose new background</span>
                                                 <input data-type="custom_background" data-id="display_new_background" class="instant_hide custom_media_file" type="file" id="background_file" accept="image/*" />
                                                 <img src="" id="display_new_background" />
@@ -756,7 +756,7 @@
                                         <div class="banner_sub_head">Upload new banner</div>
                                         <div class="upload_new_banner">
                                             <div class="banner_inner">
-                                                <i class="fa fa-upload"></i> 
+                                                <i class="fa fa-upload"></i>
                                                 <span class="text_nop">Choose New Banner</span>
                                                 <input data-type="custom_banner" data-id="display_new_banner" class="instant_hide custom_media_file" type="file" id="banner_file" accept="image/*" />
                                                 <img src="" id="display_new_banner" />
@@ -797,15 +797,15 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <h3 class="pro_edit_sub_head">Your Bio Video</h3>
                 <div class="pro_inp_list_outer">
                     <div class="pro_note">
-                        <ul>  
+                        <ul>
                             <li>You can only add a YouTube video url here</li>
                         </ul>
-                        <ul class="no_bullet">  
+                        <ul class="no_bullet">
                             <li>A promo video is only visible on banner  or standard layout</li>
                         </ul>
                     </div>
@@ -856,7 +856,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="pro_h_logo_content instant_hide">
                         <div class="pro_content_closer">
                             <i class="fa fa-times"></i>
@@ -868,7 +868,7 @@
                                         <div class="banner_sub_head">Upload new logo</div>
                                         <div class="upload_new_banner">
                                             <div class="banner_inner">
-                                                <i class="fa fa-upload"></i> 
+                                                <i class="fa fa-upload"></i>
                                                 <span class="text_nop">Choose new logo</span>
                                                 <input data-type="custom_logo" data-id="display_new_logo" class="instant_hide custom_media_file" type="file" id="logo_file" accept="image/*" />
                                                 <img src="" id="display_new_logo" />
@@ -892,7 +892,7 @@
                 <h3 class="pro_edit_sub_head">Your website tabs</h3>
                 <div class="pro_inp_list_outer">
                     <div class="pro_note">
-                        <ul>  
+                        <ul>
                             <li>Choose which tab you want to display open on your website by default</li>
                             <li>Click on eye icon to hide tab that you don't want to show</li>
                             <li>Click on star icon to feature a tab on your page (one tab can be featured at one time)</li>
@@ -975,7 +975,7 @@
                 <h3 class="pro_edit_sub_head">Your Website Icon</h3>
                 <div class="pro_inp_list_outer">
                     <div class="pro_note">
-                        <ul>  
+                        <ul>
                             <li>This icon will get displayed in the address bar on your visitor's browser</li>
                             <li>1 Platform will use a default icon if its not provided</li>
                             <li>It should be a valid favicon icon having extension .ico</li>
@@ -995,11 +995,11 @@
                     </div>
                 </div>
                 @endif
-                
+
                 <h3 class="pro_edit_sub_head">Splash Area</h3>
                 <div class="pro_inp_list_outer">
                     <div class="pro_note">
-                        <ul>  
+                        <ul>
                             <li>Splash area loads on your website page as a transparent foreground. It is an optional feature</li>
                             <li>You can choose a product or music track to display in it</li>
                         </ul>
@@ -1036,7 +1036,7 @@
                 <h3 class="pro_edit_sub_head">Search Engine Optimization</h3>
                 <div class="pro_inp_list_outer">
                     <div class="pro_note">
-                        <ul>  
+                        <ul>
                             <li>Page title is displayed on search engine results pages (SERPs) as the clickable headline for your website. It is meant to be accurate and concise. It can be your name, skills, band name or a company name you represent or their combination. Its default value is your name</li>
                             <li>Page keywords includes popular phrases separated by comma that best represent your website page content</li>
                             <li>Page description provides a brief summary of your webpage. This also get displayed by the search engine beneath the page title on SERPs. Its default value is your bio</li>
@@ -1125,8 +1125,8 @@
                     After completing all the below steps, 1Platform TV team will be automatically notified about this and it can take up to two days for the changes to “propagate” out to your many fans around the world. During this transition phase, some people visiting your custom domain might see your 1Platform TV home page, while others see your old site (if you have one). This is normal. You’ll know things are set up correctly when entering your custom domain into your web browser brings up your 1Platform TV site.
                 </p><br>
                 <div class="each_order_tab">
-                    <i class="fa fa-globe"></i> 
-                    Add Your Domain URL 
+                    <i class="fa fa-globe"></i>
+                    Add Your Domain URL
                     <div id="my_url" class="each_submit vertical_center proceed_submit">
                         @if($domain && $domain->domain_url != '')
                         <i class="fa fa-check"></i> Save
@@ -1206,7 +1206,7 @@
             	<div class="pro_main_tray">
                     <div class="pro_tray_title">Your Favourite Music</div>
                 </div>
-                <div class="each_tab_content user_musics_outer"> 
+                <div class="each_tab_content user_musics_outer">
                     @php $favourites = (is_array($user->favourite_musics)) ? array_filter($user->favourite_musics) : array() @endphp
                     @if(count($favourites))
                         @foreach($favourites as $key => $musicId)
@@ -1222,7 +1222,7 @@
                             	    @include('parts.user-channel-music-template',['music'=>$music])
                             	    @php $musicLiked = 1; @endphp
                             	@endif
-                             
+
                             @endif
                         @endforeach
 
@@ -1240,14 +1240,14 @@
                 <div class="pro_main_tray">
                     <div class="pro_tray_title">Your Favourite Industry Contacts</div>
                 </div>
-                <div class="each_tab_content"> 
+                <div class="each_tab_content">
                     @php $favCon = (is_array($user->favourite_industry_contacts)) ? array_filter($user->favourite_industry_contacts) : array() @endphp
                     @if(count($favCon))
                         <div class="ind_con_result_outer">
                             @foreach($favCon as $key => $favConId)
                                 @php $contact = \App\Models\IndustryContact::find($favConId) @endphp
                                 @if($contact)
-                                    @include('parts.industry-contact-template',['contact'=>$contact, 'isFav' => 1])
+                                    @include('parts.industry-contact-template',['hasActiveSub' => Auth::user() && Auth::user()->hasActivePaidSubscription(), 'contact'=>$contact, 'isFav' => 1])
                                     @php $contactfav = 1; @endphp
                                 @endif
                             @endforeach
@@ -1265,7 +1265,7 @@
                 <div class="pro_main_tray">
                     <div class="pro_tray_title">Your Favourite Videos From TV</div>
                 </div>
-                <div class="each_tab_content tv_center_outer"> 
+                <div class="each_tab_content tv_center_outer">
                     @php $tvFavourites = (is_array($user->favourite_streams)) ? array_filter($user->favourite_streams) : array() @endphp
                     @php $past_blacklist = array() @endphp
                     @if(count($tvFavourites))
@@ -1285,7 +1285,7 @@
                                         @else
                                             @php $file = 'https://drive.google.com/thumbnail?id='.$stream->google_file_id.'&authuser=0&sz=w320-h180-n-k-rw' @endphp
                                         @endif
-                                    @endif  
+                                    @endif
                                     <div class="each_stream_inner tv_page_stream">
                                         <div class="each_stream_left">
                                             <a class="stream_thumb" href="javascript:void(0)">
@@ -1433,7 +1433,7 @@
             var input = $(this).closest('.upload_new_banner').find('input');
             if(!input.closest('.banner_inner').hasClass('busy')){
                 input.trigger('click');
-            } 
+            }
         });
 
         $('.pro_h_l_btn_top').click(function(){
@@ -1456,7 +1456,7 @@
                 contentType: false,
                 dataType: "json",
                 success: function (response) {
-                    
+
                 }
             });
         });
@@ -1481,7 +1481,7 @@
                 contentType: false,
                 dataType: "json",
                 success: function (response) {
-                    
+
                 }
             });
         });
@@ -1570,7 +1570,7 @@
                     if(this.width >= 650){
                         $('#body-overlay,#pro_uploading_in_progress_real').show();
                         setTimeout(function() {
-                            
+
                             $('.top_img_profile img,.pro_edit_profile_image img').attr('src', this.src);
                             $('#personal_section .save_profile_outer').trigger('click');
                         }, 500);
@@ -1593,11 +1593,11 @@
             }else{
 
                 setTimeout(function() {
-                    
+
                     $('#pro_uploading_in_progress_real, #body-overlay').show();
                     $('#pro_favicon_form').submit();
                 }, 500);
-                
+
             }
         });
 
@@ -1625,7 +1625,7 @@
                     $(this).slideUp('slow');
                     $(this).closest('.multi_level_member_each').find('.multi_level_member_ic i').removeClass('fa-chevron-down').addClass('fa-chevron-right');
                 });
-            
+
                 target.slideToggle('slow');
                 thiss.find('.multi_level_member_ic i').toggleClass('fa-chevron-right fa-chevron-down');
             }
@@ -1672,7 +1672,7 @@
         });
 
         $('.port_thumb_upload').on('change', function () { readCroppedFile(this); });
-        
+
         $('body').delegate('.save_portfolio_outer', 'click', function(e){
 
             var form = $(this).closest('form');
@@ -1685,7 +1685,7 @@
                 error = 1;
                 title.addClass('has-danger');
             }
-            
+
             if(!error){
 
                 $('#body-overlay,#pro_uploading_in_progress_real').show();
@@ -1697,7 +1697,7 @@
                             type: 'canvas',
                             size: 'viewport'
                         }).then(function (resp) {
-                            
+
                             $(form).find('.port_thumb_data').val(resp);
                             form.submit();
                         });
@@ -1788,7 +1788,7 @@
                 }
             });
         }
-        
+
         function readCroppedFile(input) {
             var id = $(input).closest('.upload-demo').attr('data-id');
             if (input.files && input.files[0]) {
