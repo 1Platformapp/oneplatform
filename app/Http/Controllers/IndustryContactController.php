@@ -67,6 +67,7 @@ class IndustryContactController extends Controller
         $page = 1;
         $where = [];
         $user = Auth::user();
+        $commonMethods = new CommonMethods();
 
         if($request->has('page') && $request->page != ''){
 
@@ -110,7 +111,7 @@ class IndustryContactController extends Controller
         $pageInfo = ['first' => $firstPage, 'prev' => $prevPage, 'current' => $currentPage, 'next' => $nextPage, 'last' => $lastPage, 'total_pages' => $totalPages];
 
         $contacts = $favsOnly ? IndustryContact::where($where)->whereIn('id', $user->favourite_industry_contacts)->skip($offset)->take($limit)->get() : IndustryContact::where($where)->skip($offset)->take($limit)->get();
-        $html = \View::make('parts.industry-contacts', ['contacts' => $contacts, 'pageInfo' => $pageInfo, 'pageInfoEncrypted' => $pageInfoEncrypted, 'filters' => $where])->render();
+        $html = \View::make('parts.industry-contacts', ['contacts' => $contacts, 'pageInfo' => $pageInfo, 'pageInfoEncrypted' => $pageInfoEncrypted, 'filters' => $where, 'commonMethods' => $commonMethods])->render();
 
         return json_encode(['success' => $success, 'error' => $error, 'data' => $html, 'next_page' => $nextPage, 'prev_page' => $prevPage, 'current_page' => $currentPage, 'total_records' => $totalRecords]);
     }

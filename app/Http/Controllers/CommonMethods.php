@@ -86,6 +86,24 @@ class CommonMethods extends Controller
         }
     }
 
+    public function maskString($inputString) {
+        $length = strlen($inputString);
+
+        if ($length <= 3) {
+            return $inputString;
+        }
+
+        $firstThree = substr($inputString, 0, 3);
+
+        $lastCharacter = substr($inputString, -3);
+
+        $maskedMiddle = str_repeat('*', $length - 4);
+
+        $maskedString = $firstThree . $maskedMiddle . $lastCharacter;
+
+        return $maskedString;
+    }
+
     public static function getManagementPlanStatusIcon($status){
 
         if (!$status || $status == '' || $status == 'default'){

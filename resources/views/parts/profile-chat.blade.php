@@ -225,7 +225,7 @@
                                                 <p>You are currently subscribed to a free plan. Upgrade your subscription to unlock this feature</p>
                                             </div>
                                             <div class="mt-5">
-                                                <a type="button" href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="inline-flex items-center bg-[#fc064c] rounded-md bg-white px-3 py-2 text-sm font-semibold text-white shadow-sm">
+                                                <a type="button" href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="inline-flex items-center bg-[#fc064c] rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm">
                                                     Click here
                                                 </a>
                                             </div>
@@ -259,46 +259,88 @@
                             </div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-industry-contacts">
-                        @if($user->hasActivePaidSubscription())
-                            <div class="pro_music_info mt-10">
-                                <div class="pb-4">
-                                1Platform connects the world's most extensive industry network, encompassing labels, publishers, pluggers, producers, skilled songwriters, and many more valuable contacts. You'll find a treasure trove of information, including phone numbers, emails, websites, and social media profiles, all at your fingertips!"
+                            <div class="mt-10">
+                                <div class="px-2 py-4">
+                                    <div class="flex items-center mb-3">
+                                        <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
+                                            <i class="fa fa-info-circle"></i>
+                                        </div>
+                                        <div class="lg:ml-3 flex-1 md:flex md:justify-between">
+                                            <p class="text-sm text-[#333] font-bold">
+                                            1Platform has a network of over <span class="text-[#fc064c]">{{count(\App\Models\IndustryContact::all())}}</span> industry contacts, encompassing labels, publishers, pluggers, producers, skilled songwriters, and many more valuable contacts
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <ul role="list" class="mt-3 grid grid-cols-1 gap-5 md:grid-cols-3 sm:grid-cols-1 sm:gap-6 lg:grid-cols-4">
+                                        <li class="col-span-1 flex rounded-md shadow-sm">
+                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
+                                                <i class="text-white text-lg fa fa-phone"></i>
+                                            </div>
+                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
+                                                <div class="flex-1 truncate px-4 py-2 text-sm">
+                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Phone numbers</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-span-1 flex rounded-md shadow-sm">
+                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
+                                                <i class="text-white text-lg fa fa-envelope"></i>
+                                            </div>
+                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
+                                                <div class="flex-1 truncate px-4 py-2 text-sm">
+                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Emails</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-span-1 flex rounded-md shadow-sm">
+                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
+                                                <i class="text-white text-lg fas fa-globe"></i>
+                                            </div>
+                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
+                                                <div class="flex-1 truncate px-4 py-2 text-sm">
+                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Websites</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="col-span-1 flex rounded-md shadow-sm">
+                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
+                                                <i class="text-white text-lg fas fa-id-badge"></i>
+                                            </div>
+                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
+                                                <div class="flex-1 truncate px-4 py-2 text-sm">
+                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Social media profiles</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-8">
-                                    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-                                        <div class="min-w-0 flex-1">
-                                            <a href="#" class="focus:outline-none">
-                                                <span class="absolute inset-0" aria-hidden="true"></span>
-                                                <p class="text-sm font-medium text-gray-900">One Time Contract</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
-                                        <div class="min-w-0 flex-1">
-                                            <a href="#" class="focus:outline-none">
-                                                <span class="absolute inset-0" aria-hidden="true"></span>
-                                                <p class="text-sm font-medium text-gray-900">Contract Subscription</p>
-                                            </a>
+                                @if($user->hasActivePaidSubscription())
+
+                                @else
+                                <div class="flex flex-col gap-4 my-4 mx-2">
+                                    <div class="border border-[#666] sm:rounded-lg">
+                                        <div class="px-4 py-5 sm:p-6">
+                                            <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
+                                            <div class="mt-2 text-sm text-[#333]">
+                                                <p>You are currently subscribed to a free plan. The details of industry contacts will be masked. Upgrade your subscription to unlock this feature</p>
+                                            </div>
+                                            <div class="mt-5">
+                                                <a type="button" href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="inline-flex items-center bg-[#fc064c] rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm">
+                                                    Click here
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pro_form_title flex flex-col">
-                                    <div class="flex flex-col md:flex-row md:items-center">
-                                        <div class="flex-1"><span class="ind_con_count">{{count(\App\Models\IndustryContact::all())}}</span> Industry Contacts Found</div>
-                                        <div class="smart_switch_outer flex-1 switch_industry_contacts mt-10 md:mt-0 md:ml-auto">
-                                            <div class="smart_switch_txt">Show Favourite Only</div>
-                                            <label class="smart_switch">
-                                                <input type="checkbox" />
-                                                <span class="slider"></span>
-                                            </label>
-                                        </div>
-                                    </div>
+                                @endif
+                                <div class="pro_form_title flex flex-col border border-[#666] mx-2 rounded-lg px-3 py-2 lg:px-6 lg:py-3">
                                     <div>
                                         @php
                                             $industryContactRegions = \App\Models\IndustryContactRegion::orderBy('id', 'asc')->get();
                                             $industryContactCategoryGroups = \App\Models\IndustryContactCategoryGroup::orderBy('id', 'asc')->get();
                                         @endphp
-                                        <div class="ind_con_search_outer flex flex-col space-y-2 md:space-y-0 md:flex-row md:items-center mb-5 border-b border-gray-200 py-4">
+                                        <div class="ind_con_search_outer flex flex-col space-y-2 md:space-y-0 md:flex-row md:items-center mb-5 border-b border-gray-200 py-8">
                                             <div class="flex flex-row items-center">
                                                 <div class="ind_con_search_by overflow-hidden w-1/2 inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0">
                                                     <select data-type="ind_cont_drop" id="ind_con_search_by_category">
@@ -334,7 +376,14 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="ind_con_search_submit inline-flex items-center justify-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 cursor-pointer">Search</div>
+                                            <div class="ind_con_search_submit ml-auto inline-flex items-center justify-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 cursor-pointer">Search</div>
+                                            <div class="smart_switch_outer flex-1 switch_industry_contacts mt-10 md:mt-0 md:ml-auto">
+                                                <div class="smart_switch_txt">Show Favourite Only</div>
+                                                <label class="smart_switch">
+                                                    <input type="checkbox" />
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="mt-5 industry-contacts-well">
                                             <div class="text-center text-md mt-10">...Loading</div>
@@ -342,7 +391,6 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
                         </div>
                         <div class="each_dash_section mt-10 instant_hide" data-value="my-transactions">
                             <div class="order-stages stage-one">
@@ -664,7 +712,7 @@
             url: "/informationFinder",
             dataType: "json",
             type: 'post',
-            data: {'find_type': 'industry_contact_details', 'find': find, 'identity_type': 'subscriber', 'identity': ''},
+            data: {'find_type': 'industry_contact_details', 'find': find, 'identity_type': 'guest', 'identity': ''},
             success: function(response) {
                 if(response.success == 1){
 
@@ -1056,7 +1104,7 @@
             url: "/informationFinder",
             dataType: "json",
             type: 'post',
-            data: {'find_type': 'industry_contacts', 'find': find, 'identity_type': 'subscriber', 'identity': ''},
+            data: {'find_type': 'industry_contacts', 'find': find, 'identity_type': 'guest', 'identity': ''},
             success: function(response) {
 
                 removeLoading();

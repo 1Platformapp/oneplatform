@@ -4,7 +4,7 @@
 	@php $conFavs = (is_array(Auth::user()->favourite_industry_contacts)) ? array_filter(Auth::user()->favourite_industry_contacts) : array() @endphp
     <ul role="list" class="contracts_list grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 	@foreach($contacts as $key => $contact)
-		@include('parts.industry-contact-template',['contact' => $contact, 'isFav' => in_array($contact->id, $conFavs) ? 1 : 0])
+		@include('parts.industry-contact-template',['hasActiveSub' => Auth::user() && Auth::user()->hasActivePaidSubscription(), 'contact' => $contact, 'isFav' => in_array($contact->id, $conFavs) ? 1 : 0, 'commonMethods' => $commonMethods])
 	@endforeach
     </ul>
 

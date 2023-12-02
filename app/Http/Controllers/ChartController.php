@@ -1287,7 +1287,7 @@ class ChartController extends Controller
                 }
             }
 
-            if($identityType == 'subscriber' && $findType == 'industry_contacts' && $user && $user->hasActivePaidSubscription()) {
+            if($identityType == 'guest' && $findType == 'industry_contacts') {
 
                 $accessGranted = 1;
             }
@@ -1307,7 +1307,7 @@ class ChartController extends Controller
                 $accessGranted = 1;
             }
 
-            if($identityType == 'subscriber' && $findType == 'industry_contact_details' && $user && $user->hasActivePaidSubscription()) {
+            if($identityType == 'guest' && $findType == 'industry_contact_details') {
 
                 $accessGranted = 1;
             }
@@ -1581,63 +1581,65 @@ class ChartController extends Controller
                 }
                 if($findType == 'industry_contact_details'){
 
+                    $hasActiveSub = $user && $user->hasActivePaidSubscription() ? true : false;
                     $contact = IndustryContact::find($find);
-                    $data['name'] = $contact->name;
-                    $data['phone'] = $contact->telephone;
-                    $data['email'] = $contact->email;
+                    $data['name'] = $hasActiveSub == false ? $commonMethods->maskString($contact->name) : $contact->name;
+                    $data['phone'] = $hasActiveSub == false ? $commonMethods->maskString($contact->telephone) : $contact->telephone;
+                    $data['email'] = $hasActiveSub == false ? $commonMethods->maskString($contact->email) : $contact->email;
 
                     $data['website'] = '';
+
                     if($contact->website != ''){
-                        $data['website'] = '<a target="_blank" href="http://'.$contact->website.'">http://'.$contact->website.'</a>';
+                        $data['website'] = $hasActiveSub ? '<a target="_blank" href="http://'.$contact->website.'">http://'.$contact->website.'</a>' : $commonMethods->maskString($contact->website);
                     }
-                    if($contact->website2 != ''){
+                    if($contact->website2 != '' && $hasActiveSub){
                         $data['website'] .= ' - '.'<a target="_blank" href="http://'.$contact->website2.'">http://'.$contact->website2.'</a>';
                     }
                     $data['website'] = trim($data['website'], ' - ');
 
                     $data['address'] = '';
                     if($contact->address != ''){
-                        $data['address'] = $contact->address;
+                        $data['address'] = $hasActiveSub ? $contact->address : $commonMethods->maskString($contact->address);
                     }
-                    if($contact->address2 != ''){
+                    if($contact->address2 != '' && $hasActiveSub){
                         $data['address'] .= ', '.$contact->address2;
                     }
-                    if($contact->address3 != ''){
+                    if($contact->address3 != '' && $hasActiveSub){
                         $data['address'] .= ', '.$contact->address3;
                     }
-                    if($contact->address4 != ''){
+                    if($contact->address4 != '' && $hasActiveSub){
                         $data['address'] .= ', '.$contact->address4;
                     }
-                    if($contact->address5 != ''){
+                    if($contact->address5 != '' && $hasActiveSub){
                         $data['address'] .= ', '.$contact->address5;
                     }
-                    if($contact->postcode != ''){
+                    if($contact->postcode != '' && $hasActiveSub){
                         $data['address'] .= ', '.$contact->postcode;
                     }
                     $data['address'] = trim($data['address'], ', ');
 
                     $data['twitter'] = '';
                     if($contact->twitter != ''){
-                        $data['twitter'] = '<a target="_blank" href="https://www.twitter.com/'.$contact->twitter.'">https://www.twitter.com/'.$contact->twitter.'</a>';
+                        $data['twitter'] = $hasActiveSub ? '<a target="_blank" href="https://www.twitter.com/'.$contact->twitter.'">https://www.twitter.com/'.$contact->twitter.'</a>' : $commonMethods->maskString($contact->twitter);
                     }
                     $data['facebook'] = '';
                     if($contact->facebook != ''){
-                        $data['facebook'] = '<a target="_blank" href="https://www.facebook.com/'.$contact->facebook.'">https://www.facebook.com/'.$contact->facebook.'</a>';
+                        $data['facebook'] = $hasActiveSub ? '<a target="_blank" href="https://www.facebook.com/'.$contact->facebook.'">https://www.facebook.com/'.$contact->facebook.'</a>' : $commonMethods->maskString($contact->facebook);
                     }
                     $data['youtube'] = '';
                     if($contact->youtube != ''){
-                        $data['youtube'] = '<a target="_blank" href="https://www.youtube.com/'.$contact->youtube.'">https://www.youtube.com/'.$contact->youtube.'</a>';
+                        $data['youtube'] = $hasActiveSub ? '<a target="_blank" href="https://www.youtube.com/'.$contact->youtube.'">https://www.youtube.com/'.$contact->youtube.'</a>' : $commonMethods->maskString($contact->youtube);
                     }
                     $data['instagram'] = '';
                     if($contact->instagram != ''){
-                        $data['instagram'] = '<a target="_blank" href="https://www.instagram.com/'.$contact->instagram.'">https://www.instagram.com/'.$contact->instagram.'</a>';
+                        $data['instagram'] = $hasActiveSub ? '<a target="_blank" href="https://www.instagram.com/'.$contact->instagram.'">https://www.instagram.com/'.$contact->instagram.'</a>' : $commonMethods->maskString($contact->instagram);
                     }
                     $data['soundcloud'] = '';
                     if($contact->soundcloud != ''){
-                        $data['soundcloud'] = '<a target="_blank" href="https://www.soundcloud.com/'.$contact->soundcloud.'">https://www.soundcloud.com/'.$contact->soundcloud.'</a>';
+                        $data['soundcloud'] = $hasActiveSub ? '<a target="_blank" href="https://www.soundcloud.com/'.$contact->soundcloud.'">https://www.soundcloud.com/'.$contact->soundcloud.'</a>' : $commonMethods->maskString($contact->soundcloud);
                     }
 
-                    $data['information'] = $contact->notes;
+                    $data['information'] = $hasActiveSub ? $contact->notes : '**********';
                     $success = 1;
                 }
                 if($findType == 'stripe_card_expiration'){
