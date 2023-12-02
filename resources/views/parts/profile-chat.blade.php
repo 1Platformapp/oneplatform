@@ -1,86 +1,64 @@
 <div class="pro_pg_tb_det" style="display: block">
     <div class="pro_pg_tb_det_inner">
         <div id="contacts_section" class="sub_cat_data">
-            <div class="flex flex-row bg-[#666] text-white">
-                <div class="pro_tray_title">{{$isAgent ? 'Agency' : ''}} Dashboard</div>
+            <div class="flex flex-row bg-[#666] text-white px-2">
+                <div class="pro_tray_title hidden lg:flex main-tab-head">Management Plan</div>
 				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
+                <div class="flex flex-row items-center justify-between lg:ml-auto lg:mr-4 text-[#b2b2b2] gap-2 lg:gap-8 w-full lg:w-fit">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8 py-2">
+                        <div title="Management Plan" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan" data-head="Management Plan">
+                            <i class="fas fa-list-ul"></i>
+                        </div>
+                    </div>
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                        <a title="Contact Management" class="m_btn_right_icon_each m_btn_contact_management active" data-id="contact-management" data-head="Contact Management">
+                            <i class="fas fa-users"></i>
+                        </a>
+                    </div>
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                        <a title="Calendar" class="m_btn_right_icon_each m_btn_calendarr active" data-id="my-calendar" data-head="My Calendar">
+                            <i class="fa fa-calendar"></i>
+                        </a>
+                    </div>
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                        <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires" data-head="My Questionnaires">
+                            <i class="far fa-question-circle"></i>
+                        </a>
+                    </div>
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                        <a title="Contracts" class="m_btn_right_icon_each m_btn_contracts active" data-id="my-contracts" data-head="My Contracts">
+                            <i class="far fa-file-pdf"></i>
+                        </a>
+                    </div>
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                        <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="my-industry-contacts" data-head="Industry Contacts">
+                            <i class="fas fa-handshake"></i>
+                        </a>
+                    </div>
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                        <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions" data-head="My Transactions">
+                            <i class="fas fa-dollar-sign"></i>
+                        </a>
+                    </div>
+                    <div class="h-full flex-grow flex items-center justify-center">
+                        <a title="Edit profile" title="Edit Profile" class="m_btn_right_icon_each m_btm_profile active" data-id="my-profile" data-head="My Profile">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
             @php $userPDetails = $commonMethods->getUserRealDetails($user->id) @endphp
             @php $skills = \App\Models\Skill::all() @endphp
             <div class="">
-                <div class="music_btm_list no_sorting clearfix">
-                    <div class="edit_elem_top">
-                        <div class="m_btm_list_left">
-                            <div class="music_btm_thumb">
-                                <img src="{{$userPDetails['image']}}" />
-                            </div>
-                            <ul class="music_btm_img_det">
-                                <li>
-                                    <a class="filter_search_target" href="">
-                                        {{$user->name}}
-                                    </a>
-                                </li>
-                                <li>
-                                    <p>
-                                    {{$userPDetails['city'] != '' ? $userPDetails['city'] : ''}}
-                                    {{$userPDetails['skills'] != '' ? ' - '.$userPDetails['skills'] : ''}}
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="m_btm_right_icons">
-                            <ul>
-                                <li>
-                                    <a title="Management Plan" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan">
-                                        <i class="fas fa-list-ul"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Contact Management" class="m_btn_right_icon_each m_btn_contact_management active" data-id="contact-management">
-                                        <i class="fas fa-users"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Calendar" class="m_btn_right_icon_each m_btn_calendarr active" data-id="my-calendar">
-                                        <i class="fa fa-calendar"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires">
-                                        <i class="far fa-question-circle"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Contracts" class="m_btn_right_icon_each m_btn_contracts active" data-id="my-contracts">
-                                        <i class="far fa-file-pdf"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="my-industry-contacts">
-                                        <i class="fas fa-handshake"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions">
-                                        <i class="fas fa-dollar-sign"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a title="Edit profile" title="Edit Profile" class="m_btn_right_icon_each m_btm_profile active" data-id="my-profile">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
+                <div class="music_btm_list no_sorting p-0 clearfix">
+                    <div class="md:hidden border-b border-[#ccc] pt-4 pb-2 font-bold main-tab-head">Management Plan</div>
                     <div class="edit_elem_bottom">
                         <div class="loading text-center py-12 font-bold instant_hide">...Loading please wait</div>
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
                                 <div class="mt-10 flex flex-col">
-                                    <div class="flex flex-row items-end gap-3 mb-12">
-                                        <div class="font-bold text-black">Listing tasks for : </div>
+                                    <div class="flex flex-col lg:flex-row items-start lg:items-end gap-3 mb-4 lg:mb-12">
+                                        <div class="text-black">Listing tasks for : </div>
                                         <select class="todo-select w-[16rem]">
                                             @foreach($skills as $skill)
                                                 <option {{$userPDetails['skills'] == $skill->value ? 'selected' : ''}} value="{{$skill->id}}">{{$skill->value}}</option>
@@ -121,7 +99,6 @@
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-questionnaires">
                             <div class="mt-10">
-                                <div class="flex-1 pro_form_title">Manage Questionnaires</div>
                                 <div class="pro_music_search pro_music_info no_border">
                                     <div class="pro_note">
                                         <ul>
@@ -164,7 +141,7 @@
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">1.</div>
@@ -172,7 +149,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">2.</div>
@@ -180,7 +157,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">3.</div>
@@ -188,7 +165,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">4.</div>
@@ -196,7 +173,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">5.</div>
@@ -204,11 +181,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                             <div class="min-w-0 flex-1">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">6.</div>
-                                                    <div>Both parties recieve legally binding digital copy</div>
+                                                    <div>Both parties receive legally binding digital copy</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +195,7 @@
 
                                 @else
                                 <div class="flex flex-col gap-4 mt-4 mx-2">
-                                    <div class="border border-[#666] sm:rounded-lg">
+                                    <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
                                             <div class="mt-2 max-w-xl text-sm text-[#333]">
@@ -244,7 +221,7 @@
                                         </div>
                                         <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
                                             @foreach(\App\Models\Contract::all() as $contract)
-                                            <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#666] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                            <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                                 <div class="min-w-0 flex-1">
                                                     <a target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}" class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                         <div>{{$contract->title}}</div>
@@ -319,7 +296,7 @@
 
                                 @else
                                 <div class="flex flex-col gap-4 my-4 mx-2">
-                                    <div class="border border-[#666] sm:rounded-lg">
+                                    <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
                                             <div class="mt-2 text-sm text-[#333]">
@@ -334,7 +311,7 @@
                                     </div>
                                 </div>
                                 @endif
-                                <div class="pro_form_title flex flex-col border border-[#666] mx-2 rounded-lg px-3 py-2 lg:px-6 lg:py-3">
+                                <div class="pro_form_title flex flex-col border border-[#ccc] mx-2 rounded-lg px-3 py-2 lg:px-6 lg:py-3">
                                     <div>
                                         @php
                                             $industryContactRegions = \App\Models\IndustryContactRegion::orderBy('id', 'asc')->get();
@@ -377,7 +354,7 @@
                                                 </div>
                                             </div>
                                             <div class="ind_con_search_submit ml-auto inline-flex items-center justify-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 cursor-pointer">Search</div>
-                                            <div class="smart_switch_outer flex-1 switch_industry_contacts mt-10 md:mt-0 md:ml-auto">
+                                            <div class="!mt-12 md:!mt-0 smart_switch_outer flex-1 switch_industry_contacts md:ml-auto">
                                                 <div class="smart_switch_txt">Show Favourite Only</div>
                                                 <label class="smart_switch">
                                                     <input type="checkbox" />
@@ -590,6 +567,14 @@
 <link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.15')}}">
 <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
 <script src="{{ asset('select2/select2.min.js') }}"></script>
+<style>
+
+    .m_btn_right_icon_each.real-active {
+
+        color: white;
+    }
+
+</style>
 <script>
 
     $.ajaxSetup({
@@ -796,8 +781,15 @@
     $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
 
         var id = $(this).attr('data-id');
+
+        var heading = $(this).attr('data-head');
+        $('.main-tab-head').text(heading);
+
         $('.each_dash_section:not(.each_dash_section[data-value="'+id+'"])').addClass('instant_hide');
         $('.each_dash_section[data-value="'+id+'"]').toggleClass('instant_hide');
+
+        $('.m_btn_right_icon_each').removeClass('real-active');
+        $(this).addClass('real-active');
 
         if ($(this).hasClass('m_btn_industry-contacts')) {
 
