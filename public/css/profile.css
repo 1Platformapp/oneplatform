@@ -510,12 +510,12 @@
 .pro_acc_stat_top { display: flex; flex-direction: row; align-items: center; justify-content: center; border: 1px solid #1b1b1b; color: #1b1b1b; font-size: 18px; padding: 7px 5px; line-height: 28px; }
 .pro_acc_stat_sep { height: 10px; width: 80%; margin: 0 auto; border-right: 1px solid #1a1a1a; border-left: 1px solid #1a1a1a; }
 .pro_acc_stat_btm { display: flex; flex-wrap: wrap; flex-direction: row; justify-content: space-between; }
-.pro_acc_stat_each { flex: 0 1 100%; margin-bottom: 2px; padding: 15px 10px; font-size: 12px; background: #666; display: flex; flex-direction: row; align-items: center; justify-content: space-between; border-radius: 3px; color: #fff; }
+.pro_acc_stat_each { flex: 0 1 100%; margin-bottom: 2px; padding: 15px 10px; font-size: 12px; background: #333; display: flex; flex-direction: row; align-items: center; justify-content: space-between; border-radius: 3px; color: #fff; }
 .pro_acc_stat_val i.online { color: #28a745; }
 .pro_acc_stat_val i.inactive { color: #f2aa2d; }
 .pro_acc_stat_val i.offline { color: #818181; }
 
-.pro_get_started,.pro_build_acc,.pro_lat_sale { display: flex; flex-direction: column; margin-bottom: 50px; background: #666; padding: 15px 5px; }
+.pro_get_started,.pro_build_acc,.pro_lat_sale { display: flex; flex-direction: column; margin-bottom: 50px; background: #333; padding: 15px 5px; }
 .pro_get_start_top,.pro_build_acc_top,.pro_lat_sale_top { color: #fff; font-size: 18px; margin-bottom: 10px; }
 .pro_get_start_head,.pro_build_acc_head,.pro_lat_sale_head { text-align: center; border-bottom: 1px solid #888; padding-bottom: 10px; }
 .pro_get_start_sub_head,.pro_build_acc_sub_head,.pro_lat_sale_sub_head { font-size: 12px; margin-top: 10px; text-align: center; }

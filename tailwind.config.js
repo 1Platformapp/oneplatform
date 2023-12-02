@@ -13,7 +13,8 @@ module.exports = {
             },
             colors: {
                 'theme-red': '#fc064c',
-                'input-b': 'rgb(230, 230, 230)'
+                'input-b': 'rgb(230, 230, 230)',
+                'main-icons': '#989898'
             },
         }
     },

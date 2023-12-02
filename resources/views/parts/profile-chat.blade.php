@@ -1,41 +1,41 @@
 <div class="pro_pg_tb_det" style="display: block">
     <div class="pro_pg_tb_det_inner">
         <div id="contacts_section" class="sub_cat_data">
-            <div class="flex flex-row bg-[#666] text-white px-2">
+            <div class="flex flex-row bg-[#333] text-white px-2">
                 <div class="pro_tray_title hidden lg:flex main-tab-head">Management Plan</div>
 				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
-                <div class="flex flex-row items-center justify-between lg:ml-auto lg:mr-4 text-[#b2b2b2] gap-2 lg:gap-8 w-full lg:w-fit">
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8 py-2">
+                <div class="flex flex-row items-center justify-between lg:ml-auto lg:mr-4 text-main-icons gap-2 lg:gap-8 w-full lg:w-fit">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8 py-2">
                         <div title="Management Plan" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan" data-head="Management Plan">
                             <i class="fas fa-list-ul"></i>
                         </div>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
                         <a title="Contact Management" class="m_btn_right_icon_each m_btn_contact_management active" data-id="contact-management" data-head="Contact Management">
                             <i class="fas fa-users"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
                         <a title="Calendar" class="m_btn_right_icon_each m_btn_calendarr active" data-id="my-calendar" data-head="My Calendar">
                             <i class="fa fa-calendar"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
                         <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires" data-head="My Questionnaires">
                             <i class="far fa-question-circle"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
                         <a title="Contracts" class="m_btn_right_icon_each m_btn_contracts active" data-id="my-contracts" data-head="My Contracts">
                             <i class="far fa-file-pdf"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
                         <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="my-industry-contacts" data-head="Industry Contacts">
                             <i class="fas fa-handshake"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-[#b2b2b2] pr-2 lg:pr-8">
+                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
                         <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions" data-head="My Transactions">
                             <i class="fas fa-dollar-sign"></i>
                         </a>
@@ -569,10 +569,7 @@
 <script src="{{ asset('select2/select2.min.js') }}"></script>
 <style>
 
-    .m_btn_right_icon_each.real-active {
-
-        color: white;
-    }
+    .m_btn_right_icon_each.real-active { color: lightgreen; }
 
 </style>
 <script>

@@ -5,7 +5,7 @@
 
 @section('page-level-css')
 
-    <link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.22')}}" />
+    <link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.23')}}" />
 @stop
 
 @section('page-level-js')
