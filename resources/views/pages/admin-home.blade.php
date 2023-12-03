@@ -175,6 +175,7 @@
 
     <input type="hidden" id="url_share_user_name" value="{{$user?$user->name:'1Platform Chart'}}">
     <input type="hidden" id="url_share_link" value="">
+    <input type="hidden" id="default-dash-tab" value="{{$tab}}">
 
     @include('parts.add-form-elements')
 

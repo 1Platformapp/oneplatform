@@ -31,7 +31,7 @@
                         </a>
                     </div>
                     <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
-                        <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="my-industry-contacts" data-head="Industry Contacts">
+                        <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="industry-contacts" data-head="Industry Contacts">
                             <i class="fas fa-handshake"></i>
                         </a>
                     </div>
@@ -235,7 +235,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="each_dash_section instant_hide" data-value="my-industry-contacts">
+                        <div class="each_dash_section instant_hide" data-value="industry-contacts">
                             <div class="mt-10">
                                 <div class="px-2 py-4">
                                     <div class="flex items-center mb-3">
@@ -537,6 +537,19 @@
         }
     });
 
+    $('document').ready(function (){
+
+        const defaultTab = $('#default-dash-tab').val();
+
+        if (defaultTab != '') {
+
+            $('.m_btn_right_icon_each[data-id="'+defaultTab+'"]').trigger('click');
+        } else {
+
+            $('.m_btn_management_plan').trigger('click');
+        }
+    });
+
     $('select.todo-select').select2();
 
     $('body').delegate('.each-task .each-task-det-nav .nav', "click", function(e){
@@ -736,6 +749,10 @@
 
         var id = $(this).attr('data-id');
 
+        (async function() {
+            await setSession(id);
+        })();
+
         var heading = $(this).attr('data-head');
         $('.main-tab-head').text(heading);
 
@@ -793,9 +810,6 @@
             $('.order-stages.stage-two').addClass('instant_hide');
         }
     });
-
-    $('.m_btn_management_plan').trigger('click');
-
 
     $('body').delegate('.open-contacts-section', 'click', function(e){
         $('.m_btn_contact_management').trigger('click');
@@ -978,6 +992,23 @@
             }
         });
     });
+
+    async function setSession(tab){
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: "/dashboard/set-session/" + tab,
+                dataType: "json",
+                type: 'post',
+                data: {},
+                success: function(response) {
+                    resolve(true);
+                },
+                error: function(xhr, status, error) {
+                    reject(error);
+                }
+            });
+        });
+    }
 
     function getManagementPlan(skill = ''){
 

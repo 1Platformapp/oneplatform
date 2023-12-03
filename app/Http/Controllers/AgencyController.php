@@ -25,6 +25,7 @@ use Auth;
 use Image;
 use Mail;
 use PDF;
+use Session;
 
 class AgencyController extends Controller
 {
@@ -120,6 +121,14 @@ class AgencyController extends Controller
         $purchaseParticulars['products_sold'] = $productsSold;
         $purchaseParticulars['total_revenue'] = $totalRevenue;
 
+        if (Session::has('dash-tab')) {
+
+            $tab = Session::get('dash-tab');
+        } else {
+
+            $tab = 'management-plan';
+        }
+
         $data   = [
 
             'commonMethods' => $commonMethods,
@@ -133,7 +142,8 @@ class AgencyController extends Controller
             'myContracts' => $myContracts,
             'chatGroups' => $chatGroups,
             'agentContact' => $agentContact,
-            'contacts' => $contacts
+            'contacts' => $contacts,
+            'tab' => $tab
         ];
 
         return view('pages.admin-home', $data);
@@ -141,7 +151,14 @@ class AgencyController extends Controller
 
     public function dashboardWithTab(Request $request, $tab)
     {
+        Session::flash('dash-tab', $tab);
         return redirect(route('agency.dashboard'));
+    }
+
+    public function setSession(Request $request, $tab){
+
+        Session::put('dash-tab', $tab);
+        return json_encode(['success' => $tab]);
     }
 
     public function addContractForm(Request $request, $id, $contactId)
