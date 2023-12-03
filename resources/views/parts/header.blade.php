@@ -106,7 +106,7 @@
                     </li>
                     @if(!isset($user) || !$user->isCotyso())
                     <li class="hdr_left_menu_item hide_on_mobile">
-                        <div class="chat_item header_left_item" data-link="{{route('agency.dashboard.tab',['tab' => 'contacts'])}}">
+                        <div class="chat_item header_left_item" data-link="{{route('agency.dashboard.tab',['tab' => 'contact-management'])}}">
                         	<span>
                         	    <i class="fa fa-comments"></i>
                         	</span>
