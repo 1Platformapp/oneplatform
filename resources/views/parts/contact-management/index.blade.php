@@ -1,7 +1,8 @@
 @php
     $contacts = \App\Models\AgentContact::where(function($q) use ($user) {
         $q->where('contact_id', $user->id)->orWhere('agent_id', $user->id);
-    })->orderBy('id', 'desc')->get();
+    })->orderBy('latest_message_at', 'desc')->get();
+
     $contracts = \App\Models\Contract::all();
     $myContracts = count($contacts) ? \App\Models\AgencyContract::whereIn('contact_id', $contacts->pluck('id')->all())->get() : [];
 @endphp

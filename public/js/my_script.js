@@ -7321,7 +7321,7 @@ $(document).ready(function() {
         }
     });
 
-    $('body').delegate('.usr_men_quick_each:not(.active):not(.disabled),.pro_get_start_each_panel,.chat_get_help', 'click', function(e){
+    $('body').delegate('.pro_get_start_each_panel,.chat_get_help', 'click', function(e){
 
         var cat = $(this).attr('data-cat');
         var subcat = $(this).attr('data-sub-cat');

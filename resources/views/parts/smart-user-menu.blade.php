@@ -20,7 +20,7 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile-setup/welcome" data-cat="" data-sub-cat="" class="usr_men_quick_each usr_men_setup_wizard">
+                                <div class="usr_men_quick_each usr_men_setup_wizard">
                                     <img src="{{asset('images/setup_recommend.gif')}}">
                                     <div class="usr_men_quick_txt">
                                         <div class="usr_men_quick_ic">
@@ -29,7 +29,7 @@
                                     </div>
                                 </div>
                                 @if(!Auth::user()->expert && Auth::user()->apply_expert != 2 && !Auth::user()->agent)
-                                <div data-link="profile/chat/get-agent" data-cat="chat" data-sub-cat="get_agent" class="usr_men_quick_each usr_men_setup_wizard">
+                                <div class="usr_men_quick_each usr_men_setup_wizard">
                                     <img src="{{asset('images/hire_recommend.gif')}}">
                                     <div class="usr_men_quick_txt">
                                         <div class="usr_men_quick_ic">
@@ -42,85 +42,85 @@
                         </div>
                     </div>
                     @endif
-                    <div data-cat="profile" class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Website
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile/edit/info" data-cat="profile" data-sub-cat="edit" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-user"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'personal'])}}" class="usr_men_quick_txt">
                                         Add Personal Info
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/edit/media" data-cat="profile" data-sub-cat="media" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-user-cog"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'media'])}}" class="usr_men_quick_txt">
                                         Add Media Info
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/edit/design" data-cat="profile" data-sub-cat="design" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-paint-brush"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'design'])}}" class="usr_men_quick_txt">
                                         Design & Layout
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/edit/bio" data-cat="profile" data-sub-cat="bio" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-user-edit"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'bio'])}}" class="usr_men_quick_txt">
                                         Add Bio
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/edit/portfolio" data-cat="profile" data-sub-cat="portfolio" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-briefcase"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'portfolio'])}}" class="usr_men_quick_txt">
                                         My Portfolio
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/edit/services" data-cat="profile" data-sub-cat="services" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-user-tie"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'service'])}}" class="usr_men_quick_txt">
                                         My Services
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/edit/domain" data-cat="profile" data-sub-cat="domain" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-globe"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'domain'])}}" class="usr_men_quick_txt">
                                         Connect Domain
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/media/news" data-cat="media" data-sub-cat="news" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-bullhorn"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'news'])}}" class="usr_men_quick_txt">
                                         News
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/media/social-media" data-cat="media" data-sub-cat="social" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-connectdevelop"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'social'])}}" class="usr_men_quick_txt">
                                         Social Media
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/media/subscribers" data-cat="media" data-sub-cat="subscribers" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-donate"></i>
                                     </div>
@@ -131,29 +131,29 @@
                             </div>
                         </div>
                     </div>
-                    <div data-cat="media" class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Music
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile/media/add-music" data-cat="media" data-sub-cat="add_musics" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-headphones"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'music'])}}" class="usr_men_quick_txt">
                                         Upload Music
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/media/edit-music" data-cat="media" data-sub-cat="edit_musics" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-edit"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'music'])}}" class="usr_men_quick_txt">
                                         Edit Music
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/media/albums" data-cat="media" data-sub-cat="my_albums" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-compact-disc"></i>
                                     </div>
@@ -161,7 +161,7 @@
                                         My Albums
                                     </div>
                                 </div>
-                                <div data-link="profile/media/song-links" data-cat="media" data-sub-cat="song_links" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fab fa-staylinked"></i>
                                     </div>
@@ -172,106 +172,106 @@
                             </div>
                         </div>
                     </div>
-                    <div data-cat="media" class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Videos
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile/media/videos" data-cat="media" data-sub-cat="videos" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-youtube"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
                                         YouTube Videos
-                                    </div>
+                                    </a>
                                 </div>
 
-                                <div data-link="profile/media/premium-videos" data-cat="media" data-sub-cat="live_streams" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-video"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
                                         Premium Videos
-                                    </div>
+                                    </a>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <div data-cat="media" class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Products
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile/media/products" data-cat="media" data-sub-cat="standard_products" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-store-alt"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'product'])}}" class="usr_men_quick_txt">
                                         Standard Products
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/media/products" data-cat="media" data-sub-cat="print_products" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-paint-roller"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'product'])}}" class="usr_men_quick_txt">
                                         Print on Demand
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div data-cat="orders" class="usr_men_cat_each {{isset($page)&&$page=='orders'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='orders'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Finances
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile/orders/purchases" data-cat="orders" data-sub-cat="my_purchases" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-shopping-bag"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
                                         Purchases
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/orders/sales" data-cat="orders" data-sub-cat="my_sales" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-pound-sign"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
                                         Sales
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/orders/summary" data-cat="orders" data-sub-cat="summary" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-clipboard-list"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
                                         Summary
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div data-cat="tools" class="usr_men_cat_each {{isset($page)&&$page=='tools'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='tools'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             Artist Tools
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile/tools/industry-contacts" data-cat="tools" data-sub-cat="industry" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-users"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'industry-contacts'])}}" class="usr_men_quick_txt">
                                         Industry Contacts
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/tools/streaming-distribution" data-cat="tools" data-sub-cat="streaming" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-outdent"></i>
                                     </div>
@@ -279,7 +279,7 @@
                                         Distribution
                                     </div>
                                 </div>
-                                <div data-link="profile/tools/marketing" data-cat="tools" data-sub-cat="marketing" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-search-location"></i>
                                     </div>
@@ -290,13 +290,13 @@
                             </div>
                         </div>
                     </div>
-                    <div data-cat="crowdfunds" class="usr_men_cat_each {{isset($page)&&$page=='crowdfunds'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='crowdfunds'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             Crowdfunding
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <a data-link="profile/crowdfunds" data-cat="crowdfunds" data-sub-cat="crowdfunds" class="usr_men_quick_each">
+                                <a class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-donate"></i>
                                     </div>
@@ -307,38 +307,28 @@
                             </div>
                         </div>
                     </div>
-                    <div data-cat="chat" class="usr_men_cat_each {{isset($page)&&$page=='chat'?'pro_tb_active':''}}">
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='chat'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             Networking
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div data-link="profile/chat/box" data-cat="chat" data-sub-cat="chat_box" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-comment-dots"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'contact-management'])}}" class="usr_men_quick_txt">
                                         Chat
-                                    </div>
+                                    </a>
                                 </div>
-                                <div data-link="profile/chat/questionnaires" data-cat="chat" data-sub-cat="questionnaires" class="usr_men_quick_each">
+                                <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-question-circle"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-questionnaires'])}}" class="usr_men_quick_txt">
                                         Agent Questionnaires
-                                    </div>
+                                    </a>
                                 </div>
-                                @if(!Auth::user()->expert && Auth::user()->apply_expert != 2)
-                                <div data-link="profile/chat/get-agent" data-cat="chat" data-sub-cat="get_agent" class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-handshake"></i>
-                                    </div>
-                                    <div class="usr_men_quick_txt">
-                                        Get an Agent
-                                    </div>
-                                </div>
-                                @endif
                             </div>
                         </div>
                     </div>

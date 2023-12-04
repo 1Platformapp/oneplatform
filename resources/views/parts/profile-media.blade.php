@@ -120,7 +120,7 @@
                             </div>
                             <div class="music_instruments_saved clearfix"></div>
                         </li>
-                        
+
                         <li>
                             <div class="music_sec_opt_outer">
                                 <span>Genre</span>
@@ -182,7 +182,7 @@
                         	</div>
                         	<div class="each_license_terms">
                         		<div class="each_license_terms_handle">
-                        		    <i class="fa fa-angle-down"></i> 
+                        		    <i class="fa fa-angle-down"></i>
                         		</div>
                         		<div class="each_license_terms_each">
                         		    <div class="each_license_topen">
@@ -337,7 +337,7 @@
 	            			</div>
 	            		</div>
 	            	</div>
-	            	
+
 	            	<div class="music_license_rail_each">
 	            		<div class="music_license_rail_button">
 	            			<div class="music_license_rail_head">License Prices</div>
@@ -372,7 +372,7 @@
 	            			    <div class="music_ice_listing">
 	            			        <ul>
 	            			        	@foreach(config('constants.licenses') as $key => $license)
-	            			        	
+
 	            			            <li class="clearfix each_license optional" data-price="{{$license['price']}}">
 	            			                <div class="each_license_body">
 	            			                	<div class="license_check_outer">
@@ -383,7 +383,7 @@
 	            			                </div>
 	            			                <div class="each_license_terms">
 	            			                	<div class="each_license_terms_handle">
-	            			                	    <i class="fa fa-angle-down"></i> 
+	            			                	    <i class="fa fa-angle-down"></i>
 	            			                	</div>
 	            			                	<div class="each_license_terms_each">
 	            			                	    @php $licenseTermRec = \App\Models\LicenseTerms::find($license['terms_id']) @endphp
@@ -467,10 +467,10 @@
                             <div class="pro_options_outer">
                                 <div data-href="pro_option_one" class="pro_options_each active">
                                     <div class="pro_option_name">
-                                        Product 
+                                        Product
                                     </div>
                                     <div class="pro_option_desc">
-                                        Ideal for your ready made products  
+                                        Ideal for your ready made products
                                     </div>
                                 </div>
                                 <div data-href="pro_option_two" class="pro_options_each">
@@ -1145,7 +1145,7 @@
                                 !-->
                                 <div class="proj_cont_flt_outer proj_bottom_description">
                                     <p>
-                                        By clicking Submit, you agree to our 
+                                        By clicking Submit, you agree to our
                                         <a target="_blank" href="{{route('tc')}}">terms and conditions</a>
                                     </p>
                                 </div>
@@ -1310,9 +1310,9 @@
                     @if(count($user->liveStreams))
                     @foreach($user->liveStreams as $stream)
                     @if($stream->thumbnail && $stream->thumbnail != '')
-                        @php $editProdThumb = asset('user-stream-thumbnails/'.$stream->thumbnail) @endphp 
+                        @php $editProdThumb = asset('user-stream-thumbnails/'.$stream->thumbnail) @endphp
                     @else
-                        @php $editProdThumb = asset('img/url-thumb-profile.jpg') @endphp 
+                        @php $editProdThumb = asset('img/url-thumb-profile.jpg') @endphp
                     @endif
                     <div data-form="my-stream-form_{{ $stream->id }}" class="music_btm_list no_sorting clearfix">
 
@@ -1478,7 +1478,7 @@
                         @if($userMusic->thumbnail_left != '')
                             @php $music_thumb = asset('user-music-thumbnails/' . $userMusic->thumbnail_left) @endphp
                         @else
-                            @php $music_thumb = asset('img/url-thumb-profile.jpg') @endphp 
+                            @php $music_thumb = asset('img/url-thumb-profile.jpg') @endphp
                         @endif
                         <div data-sort="music_{{ $userMusic->id }}" class="music_btm_list elem_sortable">
                             <div class="edit_elem_sort">
@@ -1561,7 +1561,7 @@
                     @include('parts.pro-stripeless-content', ['page' => 'add albums'])
                 @endif
                 <div class="pro_note">
-                    <ul>   
+                    <ul>
                         <li>Promote your album by clicking the star icon next to it</li>
                         <li>Add your album as a product which means the album will also showup in your store tab</li>
                         <li>You can optionally choose to show an album in your store tab to increase its visibility</li>
@@ -1595,7 +1595,7 @@
                         <div class="pro_stream_input_each">
                             <div class="stream_sec_opt_outer">
                                 <select name="pro_album_product">
-                                    <option value="">Do you want to show this album in your store tab?</option> 
+                                    <option value="">Do you want to show this album in your store tab?</option>
                                     <option value="0">No</option>
                                     <option value="1">Yes</option>
                                 </select>
@@ -1633,12 +1633,12 @@
                         <div data-form="my-album-form_{{ $album->id }}" class="music_btm_list no_sorting clearfix">
                             <div class="edit_elem_top">
                                 <div class="m_btm_list_left">
-                                    @php 
+                                    @php
                                         $albumThumb = asset('images/p_music_thum_img.png?v=1.2');
                                         if($album->thumbnail != null && $album->thumbnail != ''){
                                             $albumThumb = asset('user-album-thumbnails/'.$album->thumbnail);
                                         }
-                                    @endphp 
+                                    @endphp
                                     <img src="{{$albumThumb}}" alt="#">
                                     <ul class="music_btm_img_det">
                                         <li>
@@ -1787,7 +1787,7 @@
             @endif
         </div>
     </div>
-</div>   
+</div>
 <script type="text/javascript" src="{{asset('js/jquery.overflowing.js')}}" ></script>
 <script type="text/javascript" src="{{asset('js/jquery.draggableTouch.min.js')}}" ></script>
 <script type="text/javascript" src="{{asset('js/bpm_finder.js?v=1.1')}}"></script>

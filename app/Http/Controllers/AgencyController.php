@@ -632,6 +632,9 @@ class AgencyController extends Controller
                     $partner = $user->isAgentOfContact($agentContact) ? $artist : $agent;
                     $chat->recipient_id = $partner->id;
                 }
+
+                $agentContact->latest_message_at = date('Y-m-d H:i:s');
+                $agentContact->save();
             }else if($request->has('partner')){
 
                 $partner = User::find($partnerId);

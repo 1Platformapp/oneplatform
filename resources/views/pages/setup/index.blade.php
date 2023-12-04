@@ -186,7 +186,7 @@
 			$('.pro_tray_tab_content').removeClass('instant_hide');
 
 			var pageUrl = window.location.href;
-			if(pageUrl.indexOf('profile-setup/music') !== -1){
+			if(pageUrl.indexOf('profile-setup/music') !== -1 || pageUrl.indexOf('profile-setup/standalone/music') !== -1){
 
 				$('#edit_music_section').removeClass('instant_hide');
 			}
@@ -319,8 +319,6 @@
 
 
 @section('page-content')
-
-	@if(!Session::has('managerChat'))
 
 	@if($page == 'welcome')
 
@@ -1017,65 +1015,6 @@
             <a id="setup_finish" href="javascript:void(0)">My Profile</a>
         </div>
 
-	@endif
-
-	@elseif(Session::has('managerChat'))
-	<div class="setup_tray_main">
-		<div class="setup_tray_top">
-			<div class="setup_tray_left">
-				<div class="setup_tray_head">
-					Need a little help?
-				</div>
-			</div>
-			<div class="setup_tray_right">
-				<div class="setup_tray_btn setup_back_btn">
-					<a href="{{route('profile.setup.with.next', ['page' => $page])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
-				</div>
-				@if($next)
-				<div class="setup_tray_btn setup_next_btn">
-					<a href="{{$next}}">
-						Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>
-					</a>
-				</div>
-				@endif
-			</div>
-		</div>
-		<div class="setup_tray_foot">
-			<div class="setup_tray_info">
-				Have a question? Get live answers here. Type your question and press send
-			</div>
-		</div>
-	</div>
-	<div class="manager_chat">
-		@if(count($user->chatWithUser(\App\Models\User::find(config('constants.admins')['1platformagent']['user_id']))))
-			<div class="notif_service" data-id="{{count($user->notifications) ? $user->notifications->first()->id : 0}}"></div>
-			@include('parts.profile-chat', ['page' => 'chat', 'subTab' => 'box', 'setupWizard' => ''])
-		@else
-		<div class="manager_chat_init">
-			<div class="chat_left">
-				<div class="chat_each_user">
-				    <div class="chat_user_pic">
-				        <img src="{{$commonMethods->getUserDisplayImage(config('constants.admins')['1platformagent']['user_id'])}}">
-				    </div>
-				    <div class="chat_user_det">
-				        <div class="chat_user_name">
-				            {{config('constants.admins')['1platformagent']['name']}}
-				        </div>
-				    </div>
-				</div>
-			</div>
-			<div class="chat_right">
-				<div class="chat_main_body"></div>
-				<div class="manager_chat_foot">
-					<textarea id="first_message" placeholder="Type your message here to start chatting"></textarea>
-					<div class="manager_chat_actions">
-						<div id="first_submit_btn" class="foot_action_btn"><i class="fa fa-paper-plane"></i> Send</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		@endif
-	</div>
 	@endif
 
 @endsection
