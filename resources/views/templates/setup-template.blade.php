@@ -17,7 +17,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <script src="/js/jquery.min.js" type="text/javascript"></script>
         <script type="application/javascript" src="/js/jquery.bxslider.min.js"></script>
-        <script defer type="application/javascript" src="/js/my_script.min.js?v=6.73"></script>
+        <script defer type="application/javascript" src="/js/my_script.min.js?v=6.74"></script>
         @yield('page-level-css','')
         @yield('page-level-js','')
     </head>
@@ -45,6 +45,12 @@
 
                     @yield('flash-message-container','')
 
+                    <div style="max-width: 55%; margin: 40px auto 0 auto;">
+                        <div class="back_to_profile">
+                            <i class="fa fa-arrow-left"></i>
+                            <a style="color: #000;" href="{{route('agency.dashboard')}}">Back to dashboard</a>
+                        </div>
+                    </div>
                     <div class="setup_inner clearfix">
                         @yield('page-content')
                     </div>

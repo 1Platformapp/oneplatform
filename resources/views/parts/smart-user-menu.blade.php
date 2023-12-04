@@ -20,14 +20,14 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each usr_men_setup_wizard">
+                                <a href="{{route('profile.setup', ['page' => 'welcome'])}}" class="usr_men_quick_each usr_men_setup_wizard">
                                     <img src="{{asset('images/setup_recommend.gif')}}">
                                     <div class="usr_men_quick_txt">
                                         <div class="usr_men_quick_ic">
                                             <i class="fa fa-cog"></i>
                                         </div>Profile Setup Wizard
                                     </div>
-                                </div>
+                                </a>
                                 @if(!Auth::user()->expert && Auth::user()->apply_expert != 2 && !Auth::user()->agent)
                                 <div class="usr_men_quick_each usr_men_setup_wizard">
                                     <img src="{{asset('images/hire_recommend.gif')}}">
