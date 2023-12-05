@@ -315,6 +315,10 @@
     	@php Illuminate\Support\Facades\Session::forget('error'); @endphp
     @endif
 
+    <div class="js_message_contain instant_hide">
+        <div class="error_span"></div>
+    </div>
+
 @endsection
 
 
@@ -859,6 +863,22 @@
 		</div>
 
 		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'add-music', 'setupWizard' => ''])
+	@elseif($page == 'crowdfunding')
+
+		<div class="setup_tray_main">
+			<div class="setup_tray_top">
+				<div class="setup_tray_left">
+                    <div class="setup_tray_head">
+						Crowdfunding
+					</div>
+				</div>
+			</div>
+			<div class="setup_tray_foot">
+
+			</div>
+		</div>
+
+		@include('parts.profile-crowd-funding-section', ['page' => 'crowdfunds', 'commonMethods' => $commonMethods, 'setupWizard' => ''])
 
 	@elseif($page == 'agent')
 
@@ -1426,5 +1446,106 @@
 	        </div>
 	    </div>
 	</div>
+
+    <div class="pro_add_edit_bonus_outer pro_page_pop_up clearfix" >
+        <div class="pro_confirm_delete_inner clearfix">
+            <div class="soc_con_top_logo clearfix">
+                <a style="opacity: 0;" class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="main_headline"><span class="add_edit_text">Add</span> Bonus</div><br>
+            <form id="add_edit_bonus_form" action="{{ route('add.edit.bonus') }}" method="POST" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="pro_add_bonus_row_outer clearfix cant_edit_fields">
+
+                    <label>Bonus Thumbnail (Optional)</label><br>
+                    <img class="pop_up_bonus_thumb defer_loading" src="" data-src="{{ asset('images/p_music_thum_img.png') }}"><br>
+                    <div class="pro_input_group">
+                        <label>Title *</label><br>
+                        <input class="pop_up_bonus_field groupon ring-1 ring-gray-300" placeholder="Bonus Title" type="text" id="pop_up_bonus_title" name="bonus_title" value="" />
+                        <div class="error instant_hide" id="pop_up_bonus_title_error">Required</div>
+                    </div>
+                    <div class="pro_input_group">
+                        <label>Description *</label><br>
+                        <textarea class="pop_up_bonus_field groupon" name="bonus_description" id="pop_up_bonus_description"></textarea>
+                        <div class="error instant_hide" id="pop_up_bonus_description_error">Required</div>
+                    </div>
+                    <div class="pro_input_group">
+                        <label>Amount Of Bonuses Available (leave blank if unlimited)</label><br>
+                        <input class="pop_up_bonus_field groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_quantity" name="bonus_quantity" value="" />
+                        <div class="error instant_hide" id="pop_up_bonus_quantity_error">Required</div>
+                    </div>
+                    <div class="pro_input_group">
+                        <label>Bonus Items * (separate each item by comma i.e item 1,item 2)</label><br>
+                        <input class="pop_up_bonus_field groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_items" name="bonus_items" value="" />
+                        <div class="error instant_hide" id="pop_up_bonus_items_error">Required</div>
+                    </div>
+                    <div class="pro_input_group">
+                        <label>Bonus Price *</label><br>
+                        <div class="proj_bonus_curr_crop_outer">
+                            <div class="">
+                                <div class="proj_cont_right_inner drop_substi_bon_inner clearfix">
+                                    <div class="drop_substi_curr">{{$user->profile->default_currency}}</div>
+                                    <input value="" class="pop_up_bonus_field drop_substi_val groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_price" name="bonus_price" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error instant_hide" id="pop_up_bonus_price_error">Required</div>
+                    </div>
+                    <div class="pro_input_group">
+                        <label>Worldwide Shipping</label><br>
+                        <div class="proj_bonus_curr_crop_outer">
+                            <div class="">
+                                <div class="proj_cont_right_inner drop_substi_bon_inner clearfix">
+                                    <div class="drop_substi_curr">{{$user->profile->default_currency}}</div>
+                                    <input value="" class="pop_up_bonus_field drop_substi_val groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_shipping_worldwide" name="bonus_shipping_worldwide" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error instant_hide" id="pop_up_bonus_shipping_worldwide_error">Required</div>
+                    </div>
+                    <div class="pro_input_group">
+                        <label>My Country Shipping</label><br>
+                        <div class="proj_bonus_curr_crop_outer">
+                            <div class="">
+                                <div class="proj_cont_right_inner drop_substi_bon_inner clearfix">
+                                    <div class="drop_substi_curr">{{$user->profile->default_currency}}</div>
+                                    <input value="" class="pop_up_bonus_field drop_substi_val groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_shipping_my_country" name="bonus_shipping_my_country" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error instant_hide" id="pop_up_bonus_shipping_my_country_error">Required</div>
+                    </div>
+                </div>
+                <div class="pro_submit_button_outer soc_submit_success clearfix">
+
+                    <input type="hidden" id="pop_up_bonus_id" name="bonus_id" value="0" />
+                    <input type="hidden" id="pop_up_campaign_id" name="bonus_campaign_id" value="0" />
+                    <input accept="image/*" type="file" id="pop_up_bonus_file" name="bonus_thumbnail" style="display: none;" onchange="setBonusThumb(this)" />
+                    <div id="submit_bonus_form" class="pro_button">SUBMIT</div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="pro_confirm_go_live pro_page_pop_up clearfix" style="z-index: 10;" id="pro_confirm_go_live">
+
+        <div class="pro_soc_con_face_inner clearfix">
+
+            <div class="soc_con_top_logo clearfix">
+
+                <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
+                <i class="pro_soc_top_close fa fa-close"></i>
+                <br>
+            </div>
+            <div class="soc_con_face_username clearfix">
+
+                <h3>You are about to go live on 1Platform TV. Once you are live you cannot undo this action</h3><br>
+            </div>
+            <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+                <a href="javascript:void(0)" id="pro_go_live_confirm">Proceed</a>
+            </div>
+        </div>
+    </div>
 
 @endsection

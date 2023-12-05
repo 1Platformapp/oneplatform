@@ -1701,6 +1701,19 @@ class User extends Authenticatable
         return $return;
     }
 
+    public function userActiveCampaign(){
+
+        $userCampaign = $this->campaigns()->where('status', 'active')->orderBy('id', 'desc')->first();
+
+        if(!$userCampaign){
+
+            $userCampaign = new UserCampaign;
+            $userCampaign->user_id = $this->id;
+            $userCampaign->save();
+        }
+
+        return $userCampaign;
+    }
     public function recommendedUsername(){
 
         if($this->email != ''){

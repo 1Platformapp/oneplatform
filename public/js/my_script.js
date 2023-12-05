@@ -4148,7 +4148,7 @@ $(document).ready(function() {
 
         $.ajax({
 
-            url: 'addEditBonus',
+            url: '/addEditBonus',
 
             type: 'POST',
 

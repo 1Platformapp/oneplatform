@@ -52,7 +52,7 @@
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-user"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'personal'])}}" class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'personal'])}}" class="text-black usr_men_quick_txt">
                                         Add Personal Info
                                     </a>
                                 </div>
@@ -124,9 +124,9 @@
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-donate"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
                                         My Subscribers
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -296,13 +296,11 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <a class="usr_men_quick_each">
+                                <a href="{{route('profile.setup', ['page' => 'crowdfunding'])}}" class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-donate"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
-                                        View
-                                    </div>
+                                    View
                                 </a>
                             </div>
                         </div>

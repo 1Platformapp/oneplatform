@@ -1,5 +1,12 @@
 
-@php $display = 'display: block;' @endphp
+@php
+    $display = 'display: block;';
+    $user = Auth::user();
+    $userCampaign = $user->userActiveCampaign();
+    $liveFlag = count($userCampaign->checkouts) > 0 ? '1' : '0';
+    $userCampaignDetails = $commonMethods->getUserRealCampaignDetails($user->id);
+
+@endphp
 
 @if($page != 'crowdfunds')
     @php $display = 'display: none;' @endphp
@@ -59,9 +66,10 @@
                             <input value="{{ $userCampaign->title }}" name="project_title" type="text" value="" placeholder="What Is The Title Of Your Project?" />
                         </div>
                     </div>
+                    <br><br><br>
                     <div class="proj_pi_flt_top clearfix">
                         <div class="proj_pi_flt_left">
-                            <span><img src="images/youtube_img.png" alt="#" /></span>
+                            <span><img src="{{asset('images/youtube_img.png')}}" alt="#" /></span>
                         </div>
                         <div class="proj_pi_flt_right clearfix" >
                             <p> Add a youtube video to your project to explain what it is all about </p>
@@ -69,16 +77,17 @@
                             <input id="profile_video_form_submit" type="submit" value="Post" />
                         </div>
                     </div>
+                    <br><br><br>
                     <input type="hidden" name="project_story_text" value="" id="project_story_text">
                     <div class="proj_bord_sec" style="border: none; padding: 0px;">
                         <!-- FLORA EDITOR HERE -->
                         <iframe onload="setIframeHeight(this.id)" id="full-screen-me" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%" frameborder="0" wmode="transparent" src="{{ route('save.user.story.text', ['id' => $user->id]) }}"></iframe>
-                        
+
                         <script type="text/javascript">
                                 function getDocHeight(doc) {
                                     doc = doc || document;
                                     var body = doc.body, html = doc.documentElement;
-                                    var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                                    var height = Math.max( body.scrollHeight, body.offsetHeight,
                                     html.clientHeight, html.scrollHeight, html.offsetHeight );
                                     $('#project_story_text').val(doc.getElementsByClassName("ck-editor__editable_inline")[0].innerHTML);
                                     return height;
