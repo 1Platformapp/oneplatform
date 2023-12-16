@@ -257,7 +257,7 @@ class AgentContactController extends Controller
             }
             if ($hasName || $hasLastName) {
                 $contact->name = trim($name.' '.$lastName);
-                $contact->contactUser->name = $name;
+                $contact->contactUser->first_name = $name;
                 $contact->contactUser->surname = $lastName;
             }
             if ($hasPhone) {
