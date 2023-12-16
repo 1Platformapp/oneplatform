@@ -22,7 +22,6 @@
 
 @section('page-level-js')
 
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
 
         function activateStep(step) {
@@ -174,7 +173,7 @@
                         }
 
                         activateStep('three');
-                        $('.google-recaptcha').removeClass('hidden');
+                        $('.google-recaptcha').html('<div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div><script src="https://www.google.com/recaptcha/api.js"></script>');
                         $(this).removeClass('is-busy');
                     } else if (currentStep.attr('data-step') == 'three') {
                         if (await validateStep('three')) {
@@ -459,9 +458,7 @@
                 </div>
 
                 <div class="flex flex-col lg:flex-row items-end justify-between">
-                    <div class="mt-6 google-recaptcha hidden">
-                        <div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div>
-                    </div>
+                    <div class="mt-6 google-recaptcha"></div>
                     <div class="mt-6 flex flex-col justify-end gap-x-6 ml-auto">
                         <button type="button" class="next-btn inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 outline-none">Next</button>
                     </div>
