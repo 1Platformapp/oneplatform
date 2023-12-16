@@ -3,8 +3,9 @@
 
 <div class="mt-12 each-stage-det" data-stage-ref="my-contacts">
     <div class="m_btm_filters_outer items-end md:items-center">
-        <div class="m_btm_filter_search flex-1">
-            <input data-target="agent_contact_listing" placeholder="Search your contacts by name" type="text" class="m_btm_filter_search_field" />
+        <div class="m_btm_filter_search flex-1 flex items-center m_btm_filter_search_field">
+            <i class="ml-2 text-gray-500 fa fa-search"></i>
+            <div data-target="agent_contact_listing" class="flex-1 ml-2" contenteditable="true" placeholder="Search your contacts by name"></div>
         </div>
         <div class="m_btm_filter_drop flex-1">
             <select data-target="agent_contact_listing" class="m_btm_filter_dropdown">
@@ -461,6 +462,22 @@
             parent.find('.chat_attachments').val('');
             parent.find('.attachment_area .each_attach').remove();
             parent.find('.chat_main_body_foot').removeClass('attachment');
+        });
+
+        $('body').delegate('.m_btm_filter_search_field div', 'input', function(e){
+            var searchStr = $(this).text().toLowerCase();
+            var target = $(this).attr('data-target');
+            if(searchStr.length > 0){
+                $('.'+target).each(function(e){
+                    if($(this).find('.filter_search_target').text().toLowerCase().indexOf(searchStr) == -1){
+                        $(this).addClass('instant_hide');
+                    }else{
+                        $(this).removeClass('instant_hide');
+                    }
+                });
+            }else if(searchStr.length == 0){
+                $('.'+target).removeClass('instant_hide');
+            }
         });
 
         $('.chat_attachments').change(function(){
