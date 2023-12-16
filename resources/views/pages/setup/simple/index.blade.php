@@ -22,7 +22,16 @@
 
 @section('page-level-js')
 
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
+
+        function loadScript(src, callback) {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = src;
+            script.onload = callback;
+            document.head.appendChild(script);
+        }
 
         function activateStep(step) {
             var parent = $('.each-step[data-step="'+step+'"]');
@@ -173,7 +182,9 @@
                         }
 
                         activateStep('three');
-                        $('.google-recaptcha').html('<div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div><script src="https://www.google.com/recaptcha/api.js"></script>');
+                        var recaptchaScriptUrl = 'https://www.google.com/recaptcha/api.js';
+                        $('.google-recaptcha').html('<div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div>');
+                        loadScript(recaptchaScriptUrl, function () {});
                         $(this).removeClass('is-busy');
                     } else if (currentStep.attr('data-step') == 'three') {
                         if (await validateStep('three')) {
