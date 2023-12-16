@@ -17,7 +17,7 @@
                 <div class="pro_stream_input_outer">
                     <div class="pro_stream_input_row">
                         <div class="pro_stream_input_each">
-                            <input value="{{$contact->contactUser->name}}" placeholder="First Name" type="text" class="pro_stream_input" name="pro_contact_name" />
+                            <input value="{{$contact->contactUser->first_name}}" placeholder="First Name" type="text" class="pro_stream_input" name="pro_contact_name" />
                         </div>
                         <div class="pro_stream_input_each">
                             <input value="{{$contact->contactUser->surname}}" placeholder="Last Name" type="text" class="pro_stream_input" name="pro_contact_last_name" />
