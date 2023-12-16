@@ -539,13 +539,11 @@
 
     $('document').ready(function (){
 
-        const defaultTab = $('#default-dash-tab').val();
+        const activeTab = localStorage.getItem('dash-tab-active');
 
-        if (defaultTab != '') {
-
-            $('.m_btn_right_icon_each[data-id="'+defaultTab+'"]').trigger('click');
+        if (activeTab !== null && activeTab != '') {
+            $('.m_btn_right_icon_each[data-id="'+activeTab+'"]').trigger('click');
         } else {
-
             $('.m_btn_management_plan').trigger('click');
         }
     });
@@ -748,13 +746,9 @@
     $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
 
         var id = $(this).attr('data-id');
-
-        (async function() {
-            await setSession(id);
-        })();
-
         var heading = $(this).attr('data-head');
         $('.main-tab-head').text(heading);
+        localStorage.setItem('dash-tab-active', id);
 
         $('.each_dash_section:not(.each_dash_section[data-value="'+id+'"])').addClass('instant_hide');
         $('.each_dash_section[data-value="'+id+'"]').toggleClass('instant_hide');
