@@ -17,14 +17,14 @@
                 <div class="pro_stream_input_outer">
                     <div class="pro_stream_input_row">
                         <div class="pro_stream_input_each">
-                            <input value="{{$contact->name}}" placeholder="First Name" type="text" class="pro_stream_input" name="pro_contact_name" />
+                            <input value="{{$contact->contactUser->name}}" placeholder="First Name" type="text" class="pro_stream_input" name="pro_contact_name" />
                         </div>
                         <div class="pro_stream_input_each">
-                            <input placeholder="Last Name" type="text" class="pro_stream_input" name="pro_contact_last_name" />
+                            <input value="{{$contact->contactUser->surname}}" placeholder="Last Name" type="text" class="pro_stream_input" name="pro_contact_last_name" />
                         </div>
                     </div>
                     <div class="pro_stream_input_each">
-                        <input {{$contact->approved || $contact->is_already_user ? 'readonly' : ''}} value="{{$contact->email}}" placeholder="Email of user registered at 1Platform" type="text" class="pro_stream_input" name="pro_contact_already_user_email">
+                        <input {{$contact->approved || $contact->is_already_user ? 'readonly' : ''}} value="{{$contact->email}}" placeholder="Email" type="text" class="pro_stream_input" name="pro_contact_email">
                     </div>
                     <div class="pro_stream_input_row">
                         <div class="pro_stream_input_each">
@@ -32,13 +32,13 @@
                                 <select name="pro_contact_skill">
                                     <option value="">Choose a skill</option>
                                     @foreach($skills as $skill)
-                                    <option value="{{$skill->id}}">{{$skill->value}}</option>
+                                    <option {{$contact->contactUser->skills == $skill->value ? 'selected' : ''}} value="{{$skill->value}}">{{$skill->value}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="pro_stream_input_each">
-                            <input placeholder="Phone number" type="text" class="pro_stream_input" name="pro_contact_phone" />
+                            <input value="{{$contact->contactUser->contact_number}}" placeholder="Phone number" type="text" class="pro_stream_input" name="pro_contact_phone" />
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <ul>
                         <li>This area will send the user a link to join 1Platform and become your network contact</li>
                         <li>You can send agreements, discussions along</li>
-                        <li>Agree on a commission percentage foor any work coming through this contact</li>
+                        <li>Agree on a commission percentage or any work coming through this contact</li>
                     </ul>
                 </div>
             </div>

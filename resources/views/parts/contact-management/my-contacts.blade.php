@@ -47,7 +47,7 @@
                                 <ul class="music_btm_img_det">
                                     <li>
                                         <a class="filter_search_target" href="">
-                                            {{$partnerUser->name}}
+                                            {{$partnerUser->name.' '.$partnerUser->surname}}
                                         </a>
                                     </li>
                                     <li>
@@ -329,23 +329,14 @@
             var thiss = $(this);
             var error = 0;
             var form = thiss.closest('form');
-            var email = form.find('input[name="pro_contact_email"]');
+            var email = form.closest('.contact-edit-container').find('input[name="pro_contact_email"]');
             var questionId = form.find('select[name="pro_contact_questionnaireId"]');
             form.find('.has-danger').removeClass('has-danger');
             if ($(this).hasClass('edit_and_send_agree')) {
-
-                if (email.val() == '') {
-                    error = 1;
-                    email.closest('.pro_stream_input_each').addClass('has-danger');
-                } else {
-                    form.find('input[name="send_email"]').val('1');
-                }
+                form.find('input[name="send_email"]').val('1');
             } else if ($(this).hasClass('edit_and_send_question')) {
 
-                if (email.val() == '') {
-                    error = 1;
-                    email.closest('.pro_stream_input_each').addClass('has-danger');
-                } else if (questionId.val() == '') {
+                if (questionId.val() == '') {
                     error = 1;
                     questionId.closest('.pro_stream_input_each').addClass('has-danger');
                 } else {

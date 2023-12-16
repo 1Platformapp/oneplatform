@@ -130,6 +130,9 @@ class AgentContactController extends Controller
         $success = '';
 
         $name = $request->get('pro_contact_name');
+        $lastName = $request->get('pro_contact_last_name');
+        $skill = $request->get('pro_contact_skill');
+        $phone = $request->get('pro_contact_phone');
         $commission = $request->get('pro_contact_commission');
         $terms = $request->get('pro_contact_terms');
         $isAlreadyUser = $request->get('pro_contact_already_user');
@@ -152,9 +155,12 @@ class AgentContactController extends Controller
         }else{
 
             $contactUser = new User();
-            $contactUser->name = $name;
+            $contactUser->name = trim($name.' '.$lastName);
+            $contactUser->first_name = $name;
+            $contactUser->surname = $lastName;
+            $contactUser->skills = $skill;
+            $contactUser->contact_number = $phone;
             $contactUser->email = NULL;
-            $contactUser->contact_number = NULL;
             $contactUser->password = NULL;
             $contactUser->subscription_id = 0;
             $contactUser->active          = 1;
@@ -181,7 +187,7 @@ class AgentContactController extends Controller
         $agentContact = new AgentContact();
         $agentContact->agent_id = $user->id;
         $agentContact->contact_id = $contactUser->id;
-        $agentContact->name = $name;
+        $agentContact->name = trim($name.' '.$lastName);
         $agentContact->terms = $terms;
         $agentContact->commission = $commission;
         $agentContact->code = $agentContact->generateCode();
@@ -203,6 +209,10 @@ class AgentContactController extends Controller
         $hasTerms = $request->has('pro_contact_terms');
         $hasEmail = $request->has('pro_contact_email');
         $hasQuestionnaire = $request->has('pro_contact_questionnaireId');
+        $hasName = $request->has('pro_contact_name');
+        $hasLastName = $request->has('pro_contact_last_name');
+        $hasSkill = $request->has('pro_contact_skill');
+        $hasPhone = $request->has('pro_contact_phone');
 
         $commission = $request->get('pro_contact_commission');
         $terms = $request->get('pro_contact_terms');
@@ -211,6 +221,11 @@ class AgentContactController extends Controller
         $contactId = $request->get('edit');
         $contact = AgentContact::where(['id' => $contactId, 'agent_id' => $user->id])->first();
         $sendEmail = $request->get('send_email');
+        $name = $request->get('pro_contact_name');
+        $lastName = $request->get('pro_contact_last_name');
+        $skill = $request->get('pro_contact_skill');
+        $phone = $request->get('pro_contact_phone');
+
 
         if($contact){
 
@@ -221,6 +236,10 @@ class AgentContactController extends Controller
                 if($userExist || ($agentContact && $agentContact->id != $contactId)){
                     return redirect()->back()->with(['error' => 'Error: cannot duplicate email for un-registered contacts (ref: email_already_exist - '.$email.')']);
                 }
+            }
+
+            if (($sendEmail == '1' || $sendEmail == '2') && ($contact->email == NULL || $contact->email == '')) {
+                return redirect()->back()->with(['error' => 'Your contact information is missing email address. Please add email and try again (ref: email_empty)']);
             }
 
             $contactCCommission = $contact->commission;
@@ -236,8 +255,20 @@ class AgentContactController extends Controller
             if ($hasCommission) {
                 $contact->commission = $commission;
             }
+            if ($hasName || $hasLastName) {
+                $contact->name = trim($name.' '.$lastName);
+                $contact->contactUser->name = $name;
+                $contact->contactUser->surname = $lastName;
+            }
+            if ($hasPhone) {
+                $contact->contactUser->contact_number = $phone;
+            }
+            if ($hasSkill) {
+                $contact->contactUser->skills = $skill;
+            }
 
             $contact->save();
+            $contact->contactUser->save();
 
             if($contact->approved == 1 && (($commission != $contactCCommission && $hasCommission) || ($terms != $contactCTerms && $hasTerms))){
 
@@ -264,21 +295,21 @@ class AgentContactController extends Controller
                 $questions = ContactQuestion::where('agent_contact_id' , $contact->id)->get();
                 if(count($questions)){
                     foreach($questions as $question) {
-                    	$question->elements->each(function($element) {
-                    	    $element->delete();
-                    	});
-                    	$question->delete();
+                        $question->elements->each(function($element) {
+                            $element->delete();
+                        });
+                        $question->delete();
                     }
                 }
 
                 $agentQuestionnaire = AgentQuestionnaire::find($questionnaireId);
                 foreach($agentQuestionnaire->questions as $key => $question){
 
-                	$contactQuestion = new ContactQuestion();
-                	$contactQuestion->agent_contact_id = $contact->id;
-                	$contactQuestion->value = $question->value;
-                	$contactQuestion->order = $key + 1;
-                	$contactQuestion->save();
+                    $contactQuestion = new ContactQuestion();
+                    $contactQuestion->agent_contact_id = $contact->id;
+                    $contactQuestion->value = $question->value;
+                    $contactQuestion->order = $key + 1;
+                    $contactQuestion->save();
                 }
 
                 $userNotification = new UserNotificationController();

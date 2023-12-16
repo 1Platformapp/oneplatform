@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="pro_stream_input_each">
-                    <input disabled="" placeholder="Email of user registered at 1Platform" type="text" class="pro_stream_input" name="pro_contact_already_user_email">
+                    <input disabled="" placeholder="Email (if contact is already registered at 1platform)" type="text" class="pro_stream_input" name="pro_contact_already_user_email">
                 </div>
             </div>
             <div class="pro_stream_input_row">
@@ -42,7 +42,7 @@
                         <select name="pro_contact_skill">
                             <option value="">Choose a skill</option>
                             @foreach($skills as $skill)
-                            <option value="{{$skill->id}}">{{$skill->value}}</option>
+                            <option value="{{$skill->value}}">{{$skill->value}}</option>
                             @endforeach
                         </select>
                     </div>
