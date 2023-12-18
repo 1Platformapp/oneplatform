@@ -48,7 +48,7 @@
                                 <ul class="music_btm_img_det">
                                     <li>
                                         <a class="filter_search_target" href="">
-                                            {{$contact->name}}
+                                            {{$partnerUser->first_name.' '.$partnerUser->surname}}
                                         </a>
                                     </li>
                                     <li>
