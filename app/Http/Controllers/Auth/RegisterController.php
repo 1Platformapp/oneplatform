@@ -202,7 +202,7 @@ class RegisterController extends Controller
                 $response = json_decode($userNotification->create($request), true);
 
                 Auth::login($user);
-                return redirect(route('user.startup.wizard'));
+                return redirect(route('agency.dashboard'));
             }
 
             //$result = Mail::to($user->email)->send(new MailUser('emailVerification', $user));
@@ -245,9 +245,11 @@ class RegisterController extends Controller
 
         $commonMethods = new CommonMethods();
         $genres = Genre::all();
+        $userData = Session::get('register.data');
 
         $data = [
-            'genres' => $genres
+            'genres' => $genres,
+            'prefill' => $userData
         ];
 
         return view('pages.setup.simple.index', $data);

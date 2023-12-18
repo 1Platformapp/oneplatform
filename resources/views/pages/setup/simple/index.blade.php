@@ -369,11 +369,12 @@
                             <label for="artistname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Artist name</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input type="text" id="artistname" name="name" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                    <input value="{{$prefill ? $prefill['name'] : ''}}" type="text" id="artistname" name="name" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">This will be your public name</p>
                             </div>
                         </div>
+                        @if(!$prefill)
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="emailaddress" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Email</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
@@ -382,6 +383,10 @@
                                 </div>
                             </div>
                         </div>
+                        @else
+                        <input type="hidden" id="emailaddress" name="email" autocomplete="off" value="{{$prefill['email']}}">
+                        @endif
+                        <input type="hidden" name="user_id" autocomplete="off" value="{{$prefill['id']}}">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="fake_password" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Password</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">

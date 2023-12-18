@@ -445,6 +445,7 @@ class AgentContactController extends Controller
                 if($contact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$contact->agreement_pdf)){
                     unlink(public_path('agent-agreements/').$contact->agreement_pdf);
                 }
+
                 $pdfName = strtoupper('aca_'.uniqid()).'.pdf';
                 $fileName = 'agent-agreements/'.$pdfName;
                 $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $contact->terms);
@@ -473,9 +474,8 @@ class AgentContactController extends Controller
                 return redirect(route('login'));
             }else{
 
-                $data = ['name' => $contact->contactUser->name, 'firstName' => '', 'lastName' => '', 'email' => $contact->email, 'contact' => $contact->contactUser->contact_number];
+                $data = ['id' => $contact->contactUser->id, 'name' => $contact->contactUser->name, 'firstName' => '', 'lastName' => '', 'email' => $contact->email, 'contact' => $contact->contactUser->contact_number];
                 Session::put('register.data', $data);
-                Session::put('register.with.user', $contact->contactUser->id);
                 return redirect(route('register'));
             }
         }else{
