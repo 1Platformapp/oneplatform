@@ -539,7 +539,8 @@
 
     $('document').ready(function (){
 
-        const activeTab = localStorage.getItem('dash-tab-active');
+        const defaultTab = $('#default-dash-tab').val();
+        const activeTab = defaultTab != '' ? defaultTab : localStorage.getItem('dash-tab-active');
 
         if (activeTab !== null && activeTab != '') {
             $('.m_btn_right_icon_each[data-id="'+activeTab+'"]').trigger('click');

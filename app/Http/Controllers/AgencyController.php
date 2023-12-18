@@ -122,11 +122,7 @@ class AgencyController extends Controller
         $purchaseParticulars['total_revenue'] = $totalRevenue;
 
         if (Session::has('dash-tab')) {
-
             $tab = Session::get('dash-tab');
-        } else {
-
-            $tab = 'management-plan';
         }
 
         $data   = [
@@ -143,7 +139,7 @@ class AgencyController extends Controller
             'chatGroups' => $chatGroups,
             'agentContact' => $agentContact,
             'contacts' => $contacts,
-            'tab' => $tab
+            'tab' => isset($tab) ? $tab : ''
         ];
 
         return view('pages.admin-home', $data);
