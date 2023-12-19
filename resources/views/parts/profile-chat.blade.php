@@ -4,7 +4,7 @@
             <div class="flex flex-row bg-[#333] text-white px-2">
                 <div class="pro_tray_title hidden lg:flex main-tab-head">Management Plan</div>
 				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
-                <div class="flex flex-row items-center justify-between lg:ml-auto lg:mr-4 text-main-icons gap-2 lg:gap-8 w-full lg:w-fit">
+                <div class="m_btn_right_icons flex flex-row items-center justify-between lg:ml-auto lg:mr-4 text-main-icons gap-2 lg:gap-8 w-full lg:w-fit">
                     <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8 py-2">
                         <div title="Management Plan" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan" data-head="Management Plan">
                             <i class="fas fa-list-ul"></i>
