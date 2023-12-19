@@ -35,7 +35,7 @@ $(document).ready(function() {
         if($('#platform').length && $('#platform').val() == '1'){
 
             $('.usr_men_cat_each:not(.usr_men_recommend,.usr_men_logout)').addClass('instant_hide');
-            $('.m_btn_right_icons)').addClass('instant_hide');
+            $('.m_btn_right_icons').addClass('instant_hide');
         }
 
     }, 200);
