@@ -265,6 +265,12 @@
                                 <div class="auth_btn_helper">
                                     <a href="{{ route('register') }}">Create an account</a>
                                 </div>
+                                <div class="cursor-pointer bg-black h-[28px] mt-4 rounded-lg gap-3 flex flex-row items-center justify-center">
+                                    <span class="text-white mt-[1px]">
+                                        <i class="fab fa-google"></i>
+                                    </span>
+                                    <span class="text-white">Continue with google</span>
+                                </div>
                             </div>
                         </form>
                     </div>
