@@ -34,9 +34,6 @@ class Agency
 
             $data = ['id' => $user->id, 'name' => $user->name, 'firstName' => '', 'lastName' => '', 'email' => $user->email, 'contact' => $user->contact_number];
             Session::put('register.data', $data);
-            $user->email = NULL;
-            $user->password = NULL;
-            $user->save();
             return redirect(route('profile.simple.setup'));
         }
 

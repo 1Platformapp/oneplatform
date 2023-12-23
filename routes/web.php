@@ -356,6 +356,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
     Route::prefix('profile-setup')->group(function(){
 
         Route::get('simple', [ProfileSetupController::class, 'index'])->name('profile.simple.setup');
+        Route::post('simple', [ProfileSetupController::class, 'index'])->name('profile.simple.setup');
         Route::get('/', [ProfileSetupController::class, 'fullWizard'])->name('profile.setup');
         Route::get('next/{page}', [ProfileSetupController::class, 'forceNext'])->name('profile.setup.with.next');
         Route::post('save-next', [ProfileSetupController::class, 'saveNext'])->name('profile.setup.save.next');

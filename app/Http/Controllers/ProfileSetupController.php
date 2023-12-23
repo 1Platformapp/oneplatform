@@ -79,17 +79,65 @@ class ProfileSetupController extends Controller
 
     public function index(Request $request){
 
-        $user = Auth::user();
-        $commonMethods = new CommonMethods();
-        $genres = Genre::all();
-        $userData = Session::get('register.data');
+        if ($request->isMethod('post')) {
 
-        $data = [
-            'genres' => $genres,
-            'prefill' => $userData
-        ];
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET_KEY'),
+                'response' => $request->input('g-recaptcha-response'),
+            ]);
 
-        return view('pages.setup.simple.index', $data);
+            $verification = $response->json();
+
+            if (!$verification['success']) {
+
+                $data = [
+                    'name'      => $request->name,
+                    'firstName' => $request->firstName,
+                    'lastName'  => $request->lastName,
+                    'email'     => $request->email,
+                    'contact'  => $request->contact_number,
+                ];
+                return redirect()->back()->with(['error' => 'The google verification is required', 'register.data' => $data]);
+            } else if (!$request->has('user_id')) {
+                return redirect()->back()->with(['error' => 'Some error in request']);
+            }
+
+            $userId = $request->user_id;
+            $user = User::find($userId);
+            $address = $user->address;
+            $profile = $user->profile;
+
+            $user->name = isset($request->name) ? $request->name : trim($request->firstName.' '.$request->lastName);
+            $user->first_name = $request->firstName;
+            $user->surname = $request->lastName;
+            $user->email = $request->email;
+            $user->skills = $request->has('skill') ? $request->skill : '';
+            $user->sec_skill = $request->has('sec_skill') ? $request->sec_skill : '';
+            $user->level = $request->has('level') ? $request->level : '';
+            $user->username = $request->has('fake_username') ? $request->fake_username : NULL;
+            $user->save();
+
+            $profile->default_currency = $request->currency;
+            $profile->save();
+
+            $address->city_id = $request->city_id;
+            $address->country_id = $request->country_id;
+            $address->save();
+
+        } else {
+
+            $user = Auth::user();
+            $commonMethods = new CommonMethods();
+            $genres = Genre::all();
+            $userData = Session::get('register.data');
+
+            $data = [
+                'genres' => $genres,
+                'prefill' => $userData
+            ];
+
+            return view('pages.setup.simple.index', $data);
+        }
     }
 
     function isNotFilled($value) {

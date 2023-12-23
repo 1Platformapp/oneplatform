@@ -317,7 +317,7 @@
         </div>
     @endif
     <div class="bg-white rounded-lg">
-        <form id="register-form" action="{{route('register.user')}}" method="POST">
+        <form id="register-form" action="{{auth::user() ? route('profile.simple.setup') : route('register.user')}}" method="POST">
             {{csrf_field()}}
             <div class="mx-6 py-12">
                 <h2 class="text-base font-semibold leading-7 text-gray-900 mb-2"><span id="step-name"></span></h2>
