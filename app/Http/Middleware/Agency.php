@@ -32,7 +32,9 @@ class Agency
 
         if($user->profile->basic_setup != 1){
 
-            return redirect(route('profile.setup'));
+            $data = ['id' => $user->id, 'name' => $user->name, 'firstName' => '', 'lastName' => '', 'email' => $user->email, 'contact' => $user->contact_number];
+            Session::put('register.data', $data);
+            return redirect(route('profile.simple.setup'));
         }
 
         return $next($request);

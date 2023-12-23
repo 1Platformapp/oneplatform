@@ -116,7 +116,7 @@ class RegisterController extends Controller
             return redirect()->back();
         }else{
 
-            if($request->has('user_id')){
+            if($request->has('user_id') && $request->user_id > 0){
 
                 $userId = $request->user_id;
                 $user = User::find($userId);

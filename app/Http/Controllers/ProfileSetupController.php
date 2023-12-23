@@ -82,9 +82,11 @@ class ProfileSetupController extends Controller
         $user = Auth::user();
         $commonMethods = new CommonMethods();
         $genres = Genre::all();
+        $userData = Session::get('register.data');
 
         $data = [
-            'genres' => $genres
+            'genres' => $genres,
+            'prefill' => $userData
         ];
 
         return view('pages.setup.simple.index', $data);

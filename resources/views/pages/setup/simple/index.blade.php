@@ -386,7 +386,7 @@
                         @else
                         <input type="hidden" id="emailaddress" name="email" autocomplete="off" value="{{$prefill['email']}}">
                         @endif
-                        <input type="hidden" name="user_id" autocomplete="off" value="{{$prefill['id']}}">
+                        <input type="hidden" name="user_id" autocomplete="off" value="{{$prefill ? $prefill['id'] : 0}}">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="fake_password" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Password</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
