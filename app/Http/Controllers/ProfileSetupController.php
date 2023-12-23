@@ -125,6 +125,8 @@ class ProfileSetupController extends Controller
             $address->country_id = $request->country_id;
             $address->save();
 
+            return redirect(route('agency.dashboard'));
+
         } else {
 
             $user = Auth::user();
