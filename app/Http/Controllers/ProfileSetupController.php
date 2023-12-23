@@ -118,12 +118,13 @@ class ProfileSetupController extends Controller
             $user->username = $request->has('fake_username') ? $request->fake_username : NULL;
             $user->save();
 
-            $profile->default_currency = $request->currency;
-            $profile->save();
-
             $address->city_id = $request->city_id;
             $address->country_id = $request->country_id;
             $address->save();
+
+            $profile->default_currency = $request->currency;
+            $profile->basic_setup = 1;
+            $profile->save();
 
             return redirect(route('agency.dashboard'));
 
