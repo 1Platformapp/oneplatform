@@ -1355,7 +1355,8 @@ class ChartController extends Controller
                     }
                 }
                 if($findType == 'email-availability'){
-                    $user = User::where('email', $find)->get()->first();
+                    $currentUserEmail = Auth::user() ? Auth::user()->email : NULL;
+                    $user = User::where('email', $find)->where('email', '!=', $currentUserEmail)->get()->first();
                     $data = '';
                     $error = '';
                     if ($user) {
