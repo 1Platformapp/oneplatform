@@ -655,7 +655,7 @@ class AgentContactController extends Controller
             Auth::logout();
 
             Auth::login($contact->contactUser);
-            return redirect('agency.dashboard');
+            return redirect(route('agency.dashboard'));
         }else{
 
             return 'Invalid code or authorization issue detected';
