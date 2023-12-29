@@ -87,11 +87,11 @@
                 return !isAvailable;
             } else if (step == 'two') {
 
-                if (firstName == '' || surname == '' || artistName == '' || email == '' || password == '' || password.length < 6 || country == '' || city == '') {
+                if (firstName == '' || surname == '' || artistName == '' || ($('#emailaddress').length && email == '') || password == '' || password.length < 6 || country == '' || city == '') {
                     return true;
                 }
 
-                if (!isValidEmail(email)) {
+                if ($('#emailaddress').length && email != '' && !isValidEmail(email)) {
                     return true;
                 }
 
@@ -383,7 +383,7 @@
                                 </div>
                             </div>
                         </div>
-                        @else
+                        @elseif(isset($prefill['email']))
                         <input type="hidden" id="emailaddress" name="email" autocomplete="off" value="{{$prefill['email']}}">
                         @endif
                         <input type="hidden" name="user_id" autocomplete="off" value="{{$prefill ? $prefill['id'] : 0}}">

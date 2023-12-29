@@ -111,7 +111,7 @@ class ProfileSetupController extends Controller
             $user->name = isset($request->name) ? $request->name : trim($request->firstName.' '.$request->lastName);
             $user->first_name = $request->firstName;
             $user->surname = $request->lastName;
-            $user->email = $request->email;
+            $user->email = $request->has('email') ? $request->email : NULL;
             $user->skills = $request->has('skill') ? $request->skill : '';
             $user->sec_skill = $request->has('sec_skill') ? $request->sec_skill : '';
             $user->level = $request->has('level') ? $request->level : '';
