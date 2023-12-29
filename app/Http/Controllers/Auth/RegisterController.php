@@ -249,7 +249,8 @@ class RegisterController extends Controller
 
         $data = [
             'genres' => $genres,
-            'prefill' => $userData
+            'prefill' => $userData,
+            'user' => $userData && isset($userData['id']) ? User::find($userData['id']) : null
         ];
 
         return view('pages.setup.simple.index', $data);

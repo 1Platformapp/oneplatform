@@ -137,7 +137,8 @@ class ProfileSetupController extends Controller
 
             $data = [
                 'genres' => $genres,
-                'prefill' => $userData
+                'prefill' => $userData,
+                'user' => $user
             ];
 
             return view('pages.setup.simple.index', $data);
