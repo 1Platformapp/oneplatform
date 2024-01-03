@@ -547,6 +547,19 @@
         } else {
             $('.m_btn_management_plan').trigger('click');
         }
+
+        // render me page content
+
+        const mePage = $('#me-page').val();
+        if (mePage == 'notifications') {
+            $('.hrd_notif_outer').toggleClass('active');
+            $('body').toggleClass('lock_page');
+            $('#body-overlay').toggle();
+        } else if (mePage == 'cart') {
+            $('.hrd_cart_outer').toggleClass('active');
+            $('body').toggleClass('lock_page');
+            $('#body-overlay').toggle();
+        }
     });
 
     $('select.todo-select').select2();

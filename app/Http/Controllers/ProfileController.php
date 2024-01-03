@@ -300,6 +300,14 @@ class ProfileController extends Controller
 
     }
 
+    public function loadMyPage(Request $request, $page = '')
+    {
+        if ($page != '') {
+            Session::flash('me-page', $page);
+        }
+        return redirect(route('agency.dashboard'));
+    }
+
     public function adminChat(Request $request){
 
         if(Auth::check() && Auth::user()->id == 1){

@@ -125,6 +125,10 @@ class AgencyController extends Controller
             $tab = Session::get('dash-tab');
         }
 
+        if (Session::has('me-page')) {
+            $mePage = Session::get('me-page');
+        }
+
         $data   = [
 
             'commonMethods' => $commonMethods,
@@ -139,7 +143,8 @@ class AgencyController extends Controller
             'chatGroups' => $chatGroups,
             'agentContact' => $agentContact,
             'contacts' => $contacts,
-            'tab' => isset($tab) ? $tab : ''
+            'tab' => isset($tab) ? $tab : '',
+            'mePage' => isset($mePage) ? $mePage : '',
         ];
 
         return view('pages.admin-home', $data);

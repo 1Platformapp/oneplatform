@@ -394,6 +394,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::get('search', [SearchController::class, 'index'])->name('search');
         Route::post('search', [SearchController::class, 'index'])->name('search');
         Route::get('chart/{videoId?}', [ChartController::class, 'index'])->name('chart');
+        Route::get('me/{page}', [ProfileController::class, 'loadMyPage'])->name('load.my.page');
         Route::get('chart/autoshare/{type}', [ChartController::class, 'autoShare'])->name('chart.auto.share');
         Route::get('tv/{videoId?}', [TvController::class, 'index'])->name('tv');
         Route::get('tv', [TvController::class, 'autoShare'])->name('tv');
