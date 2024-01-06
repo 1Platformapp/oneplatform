@@ -465,7 +465,7 @@
                         <form id="prod_gig_form" action="{{isset($setupWizard) ? '' : route('save.user.profile_prod_gigs')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="pro_options_outer">
-                                <div data-href="pro_option_one" class="pro_options_each active">
+                                <div data-href="pro_option_one" class="pro_options_each {{$content == null || $content == 'product' ? 'active' : ''}}">
                                     <div class="pro_option_name">
                                         Product
                                     </div>
@@ -473,7 +473,7 @@
                                         Ideal for your ready made products
                                     </div>
                                 </div>
-                                <div data-href="pro_option_two" class="pro_options_each">
+                                <div data-href="pro_option_two" class="pro_options_each {{$content == 'pod' ? 'active' : ''}}">
                                     <div class="pro_option_name">
                                         Print
                                     </div>
@@ -482,7 +482,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-id="pro_option_two" class="pro_option_body_each pro_m_license_pric_sec instant_hide">
+                            <div data-id="pro_option_two" class="pro_option_body_each pro_m_license_pric_sec {{$content == 'pod' ? '' : 'instant_hide'}}">
                                 @if($userPersonalDetails['countryId'] == 213 || $userPersonalDetails['countryId'] == 214)
                                 <div data-id="pro_design_st1" class="pro_design_expand enabled">
                                     <div class="music_license_button">
@@ -936,7 +936,7 @@
                                 <img src="{{asset('images/printed-4.jpg')}}">
                                 @endif
                             </div>
-                            <div data-id="pro_option_one" class="pro_option_body_each">
+                            <div data-id="pro_option_one" class="pro_option_body_each {{$content == null || $content == 'product' ? '' : 'instant_hide'}}">
                                 <div class="pro_upload_video music_thum_sec clearfix">
                                     <div class="pro_left_video_img">
                                         <span class="upload_vieo_img" onclick="$('#product_thumb').trigger('click'); return false;"> <img src="{{asset('images/p_music_thum_img.png?v=1.2')}}" alt="#" id="display-product-thumb" /></span>

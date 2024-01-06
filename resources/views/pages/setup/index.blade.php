@@ -830,7 +830,11 @@
 			</div>
 		</div>
 
-		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'products', 'setupWizard' => ''])
+		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'products', 'setupWizard' => '', 'content' => $content])
+
+    @elseif($page == 'song-links')
+
+        @include('parts.profile-media', ['page' => 'media', 'subTab' => 'song-links', 'setupWizard' => ''])
 
 	@elseif($page == 'music')
 

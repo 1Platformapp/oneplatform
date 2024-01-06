@@ -150,7 +150,7 @@ class ProfileSetupController extends Controller
         return ($value == '' || $value == null) ? true : false;
     }
 
-    public function fullWizard(Request $request, $page){
+    public function fullWizard(Request $request, $page, $content = null){
 
         $currentUrl = $request->url();
         $isStandalone = (strpos($currentUrl, 'standalone') !== false) ? true : false;
@@ -246,6 +246,7 @@ class ProfileSetupController extends Controller
                 'userPersonalDetails' => $userPersonalDetails,
                 'userSocialAccountDetails' => $userSocialAccountDetails,
                 'page' => $page,
+                'content' => $content,
                 'title' => 'Profile setup wizard',
                 'genres' => $genres,
                 'story_images' => $story_images,

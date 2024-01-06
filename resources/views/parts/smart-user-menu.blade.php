@@ -165,9 +165,9 @@
                                     <div class="usr_men_quick_ic">
                                         <i class="fab fa-staylinked"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'song-links'])}}" class="usr_men_quick_txt">
                                         Song Links
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,7 @@
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-paint-roller"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'product'])}}" class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'product', 'content' => 'pod'])}}" class="usr_men_quick_txt">
                                         Print on Demand
                                     </a>
                                 </div>
