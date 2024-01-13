@@ -562,7 +562,7 @@
         }
     });
 
-    $('select.todo-select').select2();
+    const select2Todo = $('select.todo-select').select2();
 
     $('body').delegate('.each-task .each-task-det-nav .nav', "click", function(e){
         e.stopPropagation();
@@ -788,7 +788,7 @@
                 getManagementPlan(activeSkill);
 
                 if (activeSkill != '') {
-                    $('select.todo-select').val(localStorage.getItem('todo-skill-value'));
+                    select2Todo.val(localStorage.getItem('todo-skill-value')).trigger('change');
                 }
             } else {
                 $('.management-plan-well').html('');
