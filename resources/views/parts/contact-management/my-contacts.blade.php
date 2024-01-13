@@ -212,6 +212,34 @@
 
     $('document').ready(function(){
 
+        $('.m_btm_filter_dropdown').change(function(){
+
+            var val = $(this).val();
+            var target = $(this).attr('data-target');
+            if(val == 'all' || val == ''){
+
+                $('.'+target).removeClass('instant_hide');
+            }else if(val == 'All Approved'){
+
+                $('.'+target).each(function(e){
+                    if($(this).attr('data-approved') == '1'){
+                        $(this).removeClass('instant_hide');
+                    }else{
+                        $(this).addClass('instant_hide');
+                    }
+                });
+            }else if(val == 'All Unapproved'){
+
+                $('.'+target).each(function(e){
+                    if($(this).attr('data-approved') == ''){
+                        $(this).removeClass('instant_hide');
+                    }else{
+                        $(this).addClass('instant_hide');
+                    }
+                });
+            }
+        });
+
         $('.switch_personal_chat .smart_switch input').change(function(){
 
             $('.chat_filter_tab, .m_btm_filter_search, .m_btm_filter_drop, .chat_label').addClass('instant_hide');

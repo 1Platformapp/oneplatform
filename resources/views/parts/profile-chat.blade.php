@@ -61,7 +61,7 @@
                                         <div class="text-black">Listing tasks for : </div>
                                         <select class="todo-select w-[16rem]">
                                             @foreach($skills as $skill)
-                                                <option {{$userPDetails['skills'] == $skill->value ? 'selected' : ''}} value="{{$skill->id}}">{{$skill->value}}</option>
+                                                <option value="{{$skill->id}}">{{$skill->value}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -784,7 +784,12 @@
 
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
                 $('.loading').removeClass('instant_hide');
-                getManagementPlan('');
+                const activeSkill = localStorage.getItem('todo-skill-text') != '' ? localStorage.getItem('todo-skill-text') : '';
+                getManagementPlan(activeSkill);
+
+                if (activeSkill != '') {
+                    $('select.todo-select').val(localStorage.getItem('todo-skill-value'));
+                }
             } else {
                 $('.management-plan-well').html('');
             }
@@ -867,6 +872,8 @@
 
     $('body').delegate('.todo-select', 'change', function(){
         var skill = $(this).find(':selected').text();
+        localStorage.setItem('todo-skill-text', skill);
+        localStorage.setItem('todo-skill-value', $(this).val());
         getManagementPlan(skill);
     });
 
