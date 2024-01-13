@@ -73,7 +73,7 @@ class ProjectController extends Controller
         if( $username ){
 
             $user = User::where('username', $username)->where('active' , '1')->first();
-            
+
             if(!$user){
 
                 return redirect(route('site.home'));
@@ -99,12 +99,12 @@ class ProjectController extends Controller
             Session::put('crowdfundCustomerId', 'guest_'.(time()+rand(10000, 99999)));
             $customerId = Session::get('crowdfundCustomerId');
         }
-        
+
         $cartItems = CrowdfundBasket::where(['customer_id' => $customerId, 'user_id' => $user->id])->get();
 
         $commonMethods = new CommonMethods();
 
-        
+
 
         $subtotal = $donation = 0;
         $currency = strtoupper($user->profile->default_currency);
@@ -162,7 +162,7 @@ class ProjectController extends Controller
             return redirect(route('user.home', ['params' => $user->username]));
         }
 
-    
+
         $userCampaignDetails = $loadCampaign ? $commonMethods->getCampaignRealDetails($userCampaign) : $commonMethods->getUserRealCampaignDetails($user->id);
 
         $userPersonalDetails = $commonMethods->getUserRealDetails($user->id);
@@ -267,7 +267,7 @@ class ProjectController extends Controller
     }
 
 
-    public function preview($userId, Request $request)
+    public function preview(Request $request, $username)
     {
 
         $basketFlag = "0";
@@ -282,17 +282,19 @@ class ProjectController extends Controller
 
         $commonMethods = new CommonMethods();
 
-        if(!Auth::check() || $userId == null){
+        if(!Auth::check() || $username == null){
 
             return redirect('login');
         }
 
-        $user = User::find($userId);
+        $user = User::where(['username' => $username])->get()->first();
 
         if ( $user->id != Auth::user()->id ) {
 
             return redirect('profile');
         }
+
+        $userId = $user->id;
 
         $userCampaign = $user->campaigns()->where('status', 'active')->where('title', '<>', '')->orderBy('id', 'desc')->first();
 
@@ -306,7 +308,7 @@ class ProjectController extends Controller
             return redirect(route('user.project', ['username' => $user->username]));
         }
 
-    
+
         $userCampaignDetails = $commonMethods->getUserRealCampaignDetails($user->id);
 
         $userPersonalDetails = $commonMethods->getUserRealDetails($user->id);
@@ -490,7 +492,7 @@ class ProjectController extends Controller
 
         	return redirect(route('login'));
         }
-        
+
         if(count($basket) <= 0){
 
             return redirect(route('user.home', ['params' => $user->username]));
@@ -645,7 +647,7 @@ class ProjectController extends Controller
 
         //$commonMethods->deleteCustomerBasket();
         foreach ($mergeCartItems as $key => $mergeCartItem) {
-            
+
             $_SESSION['basket_customer_id'] = $mergeCartItem->customer_id;
             $user = User::find($mergeCartItem->user_id);
             $mergeCartItem->sold_out = 0;
@@ -740,10 +742,10 @@ class ProjectController extends Controller
             $instantCheckoutItem->name = $album->name;
 
         }else if($b->purchase_type == 'donation_goalless'){
-            
+
 
         }else if($b->purchase_type == 'project'){
-            
+
             $instantCheckoutItem->name = $b->instantItemTitle();
 
             $instantCheckoutItem->description = $b->instantItemDescription();
@@ -758,7 +760,7 @@ class ProjectController extends Controller
             if(is_array($b->album->musics) && count($b->album->musics)){
 
                 foreach ($b->album->musics as $key2 => $musicId) {
-                    
+
                     $music = UserMusic::find($musicId);
 
                     if($music){
@@ -815,8 +817,8 @@ class ProjectController extends Controller
 
                         $instantCheckoutItemDetail->license = null;
 
-                        $instantCheckoutItemDetail->save(); 
-                    }  
+                        $instantCheckoutItemDetail->save();
+                    }
                 }
             }
         }
@@ -854,7 +856,7 @@ class ProjectController extends Controller
                         $instantCheckoutItemDetail->license = null;
 
                         $instantCheckoutItemDetail->save();
-                    }   
+                    }
                 }
             }
         }
@@ -906,15 +908,15 @@ class ProjectController extends Controller
         $commonMethods = new CommonMethods();
         $tablePrefix = Config('database.connections.mysql.prefix');
         $except = [
-            $tablePrefix.'cities', 
-            $tablePrefix.'countries', 
+            $tablePrefix.'cities',
+            $tablePrefix.'countries',
             $tablePrefix.'regions',
-            $tablePrefix.'industry_contacts', 
-            $tablePrefix.'industry_contact_categories', 
-            $tablePrefix.'industry_contact_cities', 
-            $tablePrefix.'industry_contact_category_groups', 
+            $tablePrefix.'industry_contacts',
+            $tablePrefix.'industry_contact_categories',
+            $tablePrefix.'industry_contact_cities',
+            $tablePrefix.'industry_contact_category_groups',
             $tablePrefix.'industry_contact_regions',
-            $tablePrefix.'user_further_skills', 
+            $tablePrefix.'user_further_skills',
             $tablePrefix.'music_instrument',
         ];
         $return = $commonMethods->createDatabaseBackup(env('DB_HOST'), env('DB_USERNAME'), env('DB_PASSWORD'), env('DB_DATABASE'), '*', $except);
@@ -932,7 +934,7 @@ class ProjectController extends Controller
         $users = User::all();
 
         foreach ($users as $user) {
-            
+
 
             if($user->active == 1 && filter_var($user->email, FILTER_VALIDATE_EMAIL)){
 
@@ -976,7 +978,7 @@ class ProjectController extends Controller
         $commonMethods = new CommonMethods;
 
         $campaigns = UserCampaign::where('amount', '>', 0)->where('duration', '>', 0)->get();
-        
+
         foreach($campaigns as $campaign){
 
             if($campaign->user){
@@ -1227,7 +1229,7 @@ class ProjectController extends Controller
 
                         if($type == 'crowdfund'){
                             foreach ($checkout->crowdfundCheckoutItems as $key => $crowdfundItem) {
-                                
+
                                 if($type == 'bonus' && !$crowdfundItem->bonus){
                                     continue;
                                 }
@@ -1325,8 +1327,8 @@ class ProjectController extends Controller
                         foreach($customerBasket as $basketItem){
                             if($basketItem->type == 'bonus'){
                                 $bonusTotal += $basketItem->amount;
-                                if($basketItem->shipping > 0){ 
-                                    $shippingCost += $basketItem->shipping; 
+                                if($basketItem->shipping > 0){
+                                    $shippingCost += $basketItem->shipping;
                                 }
                                 $bonusCount++;
                                 $itemIds[] = 'B_'.base64_encode($basketItem->bonus->id);
@@ -1553,7 +1555,7 @@ class ProjectController extends Controller
                 }
             }
             $finalData['country'] = Country::find($finalData['country'])->code;
-            
+
             if($type == 'instant'){
                 $customerBasket = CommonMethods::getCustomerBasket();
                 if($customerBasket->first() && $customerBasket->first()->user){
@@ -1585,8 +1587,8 @@ class ProjectController extends Controller
                         foreach($customerBasket as $basketItem){
                             if($basketItem->type == 'bonus'){
                                 $bonusTotal += $basketItem->amount;
-                                if($basketItem->shipping > 0){ 
-                                    $shippingCost += $basketItem->shipping; 
+                                if($basketItem->shipping > 0){
+                                    $shippingCost += $basketItem->shipping;
                                 }
                                 $bonusCount++;
                                 $itemIds[] = 'B_'.base64_encode($basketItem->bonus->id);
@@ -1607,7 +1609,7 @@ class ProjectController extends Controller
                     echo json_encode(['error' => 'No buyer']);
                 }
             }
-            
+
             if($request->has('intent')){
 
                 // proceed with stripe's payment intent
@@ -1621,10 +1623,10 @@ class ProjectController extends Controller
                     }else{
                         $url = 'https://api.stripe.com/v1/payment_intents/'.$id;
                     }
-                    
+
                     $fields = [];
                     $paymentIntent = $commonMethods->stripeCall($url, $headers, $fields, 'GET');
-                    
+
                     if($paymentIntent && isset($paymentIntent['id'])){
                         if($paymentIntent['status'] == 'succeeded'){
 
@@ -1662,7 +1664,7 @@ class ProjectController extends Controller
                                 'applicationfeeid' => $applicationFeeId,
                                 'failedcheckout' => $request->has('failedcheckout') ? $request->get('failedcheckout') : 0,
                                 'free' => '0'
-                            ];  
+                            ];
 
                             $buyerUserResponse = $this->createBuyerUser($sellerUser, $paymentData);
                             $buyerUser = Auth::user();
@@ -1720,7 +1722,7 @@ class ProjectController extends Controller
                                 }else{
                                     $subscription = null;
                                 }
-                                
+
                                 $response = $this->proceedSavingPayment($request, $customerBasket, $paymentIntent, $paymentData, $subscription);
                                 $redirectUrl = $response['redirectUrl'];
                                 $checkoutId = $response['checkoutId'];
@@ -1785,7 +1787,7 @@ class ProjectController extends Controller
                 		$buyerUser = Auth::user();
                 		$headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
                 		array_push($headers, 'Stripe-Account: '.$sellerUser->profile->stripe_user_id);
-                		
+
                 		$url = 'https://api.stripe.com/v1/products';
                 		$fields = [
                 		    'name' => $buyerUser->name.' subscribes to '.$sellerUser->name,
@@ -1847,7 +1849,7 @@ class ProjectController extends Controller
             $data = [];
             $commonMethods = new CommonMethods();
 
-            if($request->has('action') && $request->has('user') && $request->has('type') && $request->has('value') && $request->has('currency')){ 
+            if($request->has('action') && $request->has('user') && $request->has('type') && $request->has('value') && $request->has('currency')){
 
                 $action = $data['action'] = $request->get('action');
                 $type = $data['type'] = $request->get('type');
@@ -1893,7 +1895,7 @@ class ProjectController extends Controller
                                 $crowdfundBasket->save();
 
                                 $success = 1;
-                            }   
+                            }
                         }else if($action == 'remove'){
                             if(CrowdfundBasket::where(['customer_id' => $customerId, 'user_id' => $userId, 'type' => 'bonus', 'bonus_id' => $bonus->id])->exists()){
 
@@ -1995,7 +1997,7 @@ class ProjectController extends Controller
             $agentFeeSkipped = $appFee['agent']['skipped'];
             $applicationFee = $fee+$agentFee;
             if($agent && $agentFee > 0){
-                
+
                 $agentTransferDetails = 'Agent checkout fee from platform. Agent: '.$agent->id.' - '.$agent->name.' - '.$appFee['agent']['percent'].'%'.'. Buyer: '.$buyerUser->id.' - '.$buyerUser->name.'. Seller: '.$sellerUser->id.' - '.$sellerUser->name.'. Intent: '.$paymentIntent['id']?$paymentIntent['id']:''.'. Application Fee: '.$applicationFee;
                 $agentTransfer = new AgentTransfer();
                 $agentTransfer->agent_id = $agent->id;
@@ -2110,7 +2112,7 @@ class ProjectController extends Controller
                 VALUES ("'.trim($paymentData['firstname'].' '.$paymentData['surname']).'", "'.$vPhoneNumber.'", "0", "'.$vEmail.'", "'.$vProduct->voucher_id.'", "1", "1", "'.$voucherName.'")';
 
                 if($clientsPortalCon && mysqli_query($clientsPortalCon, $sql)){
-                    
+
                     $lastId = mysqli_insert_id($clientsPortalCon);
                     if($result && mysqli_num_rows($result) > 0){
 
@@ -2142,7 +2144,7 @@ class ProjectController extends Controller
                 $m->from(Config('constants.from_email'), ($buyerObj->user->isCotyso() ? 'Singing Experience' : '1Platform TV'));
                 $m->bcc($buyerObj->bcc);
                 $m->to($buyerObj->customer->email ? $buyerObj->customer->email : $buyerObj->emaill, $buyerObj->customer->name);
-                
+
                 foreach($buyerObj->customerBasket as $b){
                     if($b->purchase_type == 'music' || $b->purchase_type == 'instant-license'){
                         if(strpos($b->license, 'bespoke_') !== false){
@@ -2228,7 +2230,7 @@ class ProjectController extends Controller
             if(count($sellerUser->devices)){
 
                 foreach ($sellerUser->devices as $device) {
-                    
+
                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         $fcm = new PushNotificationController();
@@ -2276,7 +2278,7 @@ class ProjectController extends Controller
             if(count($sellerUser->devices)){
 
                 foreach ($sellerUser->devices as $device) {
-                    
+
                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         $fcm = new PushNotificationController();
@@ -2291,7 +2293,7 @@ class ProjectController extends Controller
         }else{
             $checkoutMessage = 'Successfully sent money to ' . $sellerUser->name;
         }
-        
+
         if($sellerUser->isCotyso() && !Auth::check()){
             $domain = parse_url($request->root())['host'];
             if($paymentData['free'] == '1'){
@@ -2300,7 +2302,7 @@ class ProjectController extends Controller
                     $redirectUrl = route('user.home', ['params' => $sellerUser->username]);
                 }else{
                     if($sellerUser->customDomainSubscription){
-                        $redirectUrl = $sellerUser->customDomainSubscription->domain_url; 
+                        $redirectUrl = $sellerUser->customDomainSubscription->domain_url;
                     }else{
                         $redirectUrl = route('user.home', ['params' => $sellerUser->username]);
                     }
@@ -2318,17 +2320,17 @@ class ProjectController extends Controller
                     }else{
                         $redirectUrl = route('user.home', ['params' => $sellerUser->username]);
                     }
-                } 
+                }
             }
         }else{
             if($paymentData['free'] == '1'){
                 $message = 'Successfully finished';
                 Session::flash('page', 'orders');
-                $redirectUrl = route('profile'); 
+                $redirectUrl = route('profile');
             }else{
                 $message = $checkoutMessage;
                 Session::flash('page', 'orders');
-                $redirectUrl = route('profile'); 
+                $redirectUrl = route('profile');
             }
         }
 
@@ -2472,7 +2474,7 @@ class ProjectController extends Controller
 
     				if(isset($paymentIntent['id'])){
     					if($paymentIntent['status'] == 'succeeded'){
-    						
+
     						$charge = $paymentIntent['charges']['data'][0];
     						$checkout->error = NULL;
     						$checkout->error_date_time = NULL;
@@ -2480,7 +2482,7 @@ class ProjectController extends Controller
     						Session::flash('success', 'Your payment has been sent to '.$checkout->user->name);
     						$url = route('profile.with.tab', ['tab' => 'orders']);
     					}else if($paymentIntent['last_payment_error'] && isset($paymentIntent['last_payment_error']['decline_code']) && $paymentIntent['last_payment_error']['decline_code'] != ''){
-    						
+
     						$checkout->error = $paymentIntent['last_payment_error']['decline_code'];
     						$checkout->error_date_time = date('Y-m-d H:i:s');
   							Session::flash('error', $paymentIntent['last_payment_error']['message']);

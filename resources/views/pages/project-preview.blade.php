@@ -6,10 +6,10 @@
 
 
 @section('page-level-css')
-    
+
     <link rel="stylesheet" href="{{asset('css/project.css?v=2.2')}}"></link>
     <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
-    
+
     @if($user->home_layout == 'background')
         <link rel="stylesheet" href="{{asset('css/user_home_background.min.css')}}"></link>
     @endif
@@ -52,7 +52,7 @@
     <script type="application/javascript">
 
         $('.hdr_shop_cart_otr').addClass('instant_hide');
-        
+
         $('#read_more_less_btns').hide();
 
         $('.read_less_actual').hide();
@@ -68,7 +68,7 @@
             $('select[name="country"]').select2();
 
             $('#not_logged_in').remove();
-            
+
             var browserWidth = $( window ).width();
 
             if( browserWidth <= 767 ){
@@ -93,9 +93,9 @@
         }
 
         $(".mobile-only .project_rit_btm_list").hide().slice(0, mobileBonusPaginate).show();
-        
+
         $(".show_more_bonuses_btn input").on('click', function (e) {
-            
+
             e.preventDefault();
             $(".mobile-only .project_rit_btm_list:hidden").slice(0, 1).slideDown( "slow", function() {
 
@@ -115,18 +115,18 @@
 
 
 @section('preheader')
-    
+
     @if($user->home_layout == 'banner' && $user->custom_banner != '')
         <div style="background: none; width: 100%;" class="pre_header_banner">
             <img style="width: 100%;" src="{{asset('user-media/banner/'.$user->custom_banner)}}">
         </div>
     @endif
-    
+
 @stop
 
 
 @section('page-background')
-    
+
     @if($user->home_layout == 'background')
         <div data-url="/user-media/background/{{$user->custom_background}}" class="pg_back back_inactive"></div>
     @endif
@@ -169,7 +169,7 @@
         $url = 'project_'.$user->id;
         $userImageName = $user->profile->profile_display_image_original == '' ? 'user-general-display-image.png' : $user->profile->profile_display_image_original;
         $shareVideoURL = route('vid.share', ['videoId' => $defaultVideoId, 'userName' => $user->name, 'url' => $url]);
-        $shareURL = route('url.share', ['userName' => $user->name, 'userImage' => base64_encode($userImageName), 'url' => $url]);
+        $shareURL = route('url.share', ['userName' => $user->name, 'imageName' => base64_encode($userImageName), 'url' => $url]);
     @endphp
 
     <input type="hidden" id="video_share_id" value="{{$defaultVideoId}}">
@@ -199,10 +199,10 @@
     <div class="ch_center_outer user_hm_center">
 
         <div class="top_info_box hide_on_mobile">
-            <div class="page_title">My Crowd Funder </div> 
+            <div class="page_title">My Crowd Funder </div>
             <div onclick="return false;" class="top_info_right_icon">
                 <i class="fa fa-share"></i>
-            </div> 
+            </div>
         </div>
 
         <div class="tp_center_video_outer">
@@ -217,7 +217,7 @@
 
                             <iframe class="{{$user->home_layout == 'background' ? 'instant_hide' : ''}}" id="soundcloudPlayer" width="100%" height="319" scrolling="no" frameborder="no" src="">
                             </iframe>
-                            
+
                             <video width="578" height="325" style="width: 100%; height: 100%;" class="vid_preloader {{$user->home_layout == 'background' && $defaultVideoId == '' ? 'instant_hide' : ''}}" preload="none">
 
                                 <source type="video/youtube" src="https://www.youtube.com/watch?v={{ $defaultVideoId }}" />
@@ -225,13 +225,13 @@
                             </video>
                             @php $videoUrl = $userCampaignDetails['campaignProjectVideoId'] @endphp
                             @php $projectVideoId = ($videoUrl != '') ? $commonMethods->getYoutubeIdFromUrl($videoUrl) : '' @endphp
-                            
+
 
                             <div class="tab_btns_outer tab_dsk hide_on_mobile clearfix">
 
                                 <div class="each_tab_btn tab_btn_user_bio fly_user_home disabled" data-show="" data-initials="">
                                     <div class="border"></div>
-                                </div>  
+                                </div>
                                 <div class="each_tab_btn tab_btn_music disabled" data-show="#tabd2">
                                     <div class="border"></div>
                                 </div>
@@ -243,7 +243,7 @@
                                 </div>
                                 <div class="each_tab_btn tab_btn_crowd_fund true_active" data-show="#tabd1">
                                     <div class="border_alter">
-                                        Target<br> 
+                                        Target<br>
                                         {{$userCampaignDetails['campaignGoal'] }}
                                     </div>
                                     <div class="border"></div>
@@ -261,7 +261,7 @@
 
                                 <div class="each_tab_btn tab_btn_user_bio fly_user_home disabled" data-show="" data-initials="{{$user->username}}">
                                     <div class="border"></div>
-                                </div>  
+                                </div>
                                 <div class="each_tab_btn tab_btn_music disabled" data-show="#tabd2">
                                     <div class="border"></div>
                                 </div>
@@ -273,7 +273,7 @@
                                 </div>
                                 <div class="each_tab_btn tab_btn_crowd_fund true_active" data-show="#tabd1">
                                     <div class="border_alter">
-                                        Target<br> 
+                                        Target<br>
                                         {{$userCampaignDetails['campaignGoal'] }}
                                     </div>
                                 </div>
@@ -304,7 +304,7 @@
                                             function getDocHeight(doc) {
                                                 doc = doc || document;
                                                 var body = doc.body, html = doc.documentElement;
-                                                var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                                                var height = Math.max( body.scrollHeight, body.offsetHeight,
                                                     html.clientHeight, html.scrollHeight, html.offsetHeight );
                                                 return height;
                                             }
@@ -392,7 +392,7 @@
                                                                     <b>Your Email *</b>
 
                                                                     <input type="text" placeholder="Your Email" name="email" id="email" class="evade_auto_fill" />
-                                                                 
+
 
                                                                     <span id="email_error" class="instant_hide"></span>
 
@@ -431,10 +431,10 @@
                                                     <input type="hidden" name="is_create_new_user" id="is_create_new_user" value="0">
 
                                                 @endif
-                                                
+
                                                 <li class="proj_first_surname_outer add_margin">
 
-                                                    
+
 
                                                     <div class="proj_cont_flt_outer clearfix">
 
@@ -667,7 +667,7 @@
                                                 <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
                                                     <p>
                                                         If you are not paying in your native currency there may be fees for conversion. The actual amount charged by your card issuer may differ from our estimate shown here. This depends on their exchange rate and any applicable fees.
-                                                    </p>    
+                                                    </p>
                                                 </li>
 
                                                 <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
@@ -676,7 +676,7 @@
                                                         <span class="terms_agree_outer">
                                                             <input type="checkbox" class="terms_agree" name="terms_agree" id="checkout_terms_agree">
                                                         </span>
-                                                    </p>    
+                                                    </p>
                                                 </li>
 
                                                 <li class="proj_confirm_payment_btn_outer">
@@ -724,7 +724,7 @@
                                 </div>
 
                                 <div id="tabd3" class="ch_tab_det_sec fans_sec ">
- 
+
                                     <br><br>
                                     <div class="lazy_tab_content"></div>
                                 </div>
@@ -774,7 +774,7 @@
 
             @if($user->home_layout != 'background')
             <div class="desktop-only panel_head">
-                
+
                 <h2 class="project_name">{{$userCampaignDetails['projectTitle']}}</h2>
 
             </div>
@@ -869,17 +869,17 @@
                     <li>
                         <a id="facebook_share_url" onclick="return false;" class="ch_sup_fb" href="javascript:void(0)">
                             <i class="fab fa-facebook-f"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a id="twitter_share_url" onclick="return false;" class="ch_sup_tw" href="javascript:void(0)">
                             <i class="fab fa-twitter"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a class="ch_sup_feature_tab full_support_me" href="javascript:void(0)">
                             <i class="fas fa-music"></i>
-                        </a> 
+                        </a>
                     </li>
                 </ul>
 
@@ -1060,7 +1060,7 @@
 
 @section('slide')
 
-    
+
 
 @stop
 
