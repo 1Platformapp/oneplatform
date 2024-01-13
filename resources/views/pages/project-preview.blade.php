@@ -887,7 +887,7 @@
 
         </div>
 
-        @if($user->profile->stripe_secret_key != '' && $userCampaign->amount > 0 && ($userCampaignDetails['campaignUnsuccessful'] == false||$userCampaign->is_charity == 1))
+        @if($userCampaign->amount > 0 && ($userCampaignDetails['campaignUnsuccessful'] == false||$userCampaign->is_charity == 1))
 
         @if($crowdfundCart['donation'])
         @php $donationAdded = 1; @endphp
@@ -917,116 +917,113 @@
         </div>
         @endif
 
-        @if($user->profile->stripe_secret_key != '')
-            @foreach($userCampaign->perks as $perk)
+        @foreach($userCampaign->perks as $perk)
 
-            <div class="panel each_fro_bonus colio_outer colio_dark">
-                <div class="colio_header">Bonus</div>
-                <div class="project_rit_btm_bns_otr">
+        <div class="panel each_fro_bonus colio_outer colio_dark">
+            <div class="colio_header">Bonus</div>
+            <div class="project_rit_btm_bns_otr">
 
-                    <?php $perkThumb = ""; ?>
+                <?php $perkThumb = ""; ?>
 
-                        @if($perk->thumbnail != "")
+                    @if($perk->thumbnail != "")
 
-                            <?php $perkThumb = asset("user-bonus-thumbnails/" . $perk->thumbnail)?>
+                        <?php $perkThumb = asset("user-bonus-thumbnails/" . $perk->thumbnail)?>
 
+                    @endif
+
+                    @if(($perk->items_available > $perk->items_claimed && $perk->status == "available" && $userCampaignDetails['campaignUnsuccessful'] == false && $userCampaign->amount > 0) || ($userCampaign->is_charity == 1 && $perk->items_available > $perk->items_claimed && $userCampaign->amount > 0) || ($perk->items_available == null && $userCampaignDetails['campaignUnsuccessful'] == false ) )
+
+                        @if(in_array($perk->id, $crowdfundCart['bonuses']))
+                        @php $bonusAdded = 1; @endphp
+                        @else
+                        @php $bonusAdded = 0; @endphp
                         @endif
+                        <div class="{{$bonusAdded?'proj_rit_btm_list_gray':'project_rit_btm_list'}}" id="perk_list_{{ $perk->id }}">
 
-                        @if(($perk->items_available > $perk->items_claimed && $perk->status == "available" && $userCampaignDetails['campaignUnsuccessful'] == false && $userCampaign->amount > 0) || ($userCampaign->is_charity == 1 && $perk->items_available > $perk->items_claimed && $userCampaign->amount > 0) || ($perk->items_available == null && $userCampaignDetails['campaignUnsuccessful'] == false ) )
-
-                            @if(in_array($perk->id, $crowdfundCart['bonuses']))
-                            @php $bonusAdded = 1; @endphp
-                            @else
-                            @php $bonusAdded = 0; @endphp
+                            @if($perkThumb != "")
+                                <span class="project_rit_img">
+                                    <img class="defer_loading" src="" data-src="{{ $perkThumb }}" alt="#" />
+                                </span>
                             @endif
-                            <div class="{{$bonusAdded?'proj_rit_btm_list_gray':'project_rit_btm_list'}}" id="perk_list_{{ $perk->id }}">
 
-                                @if($perkThumb != "")
-                                    <span class="project_rit_img">
-                                        <img class="defer_loading" src="" data-src="{{ $perkThumb }}" alt="#" />
-                                    </span>
-                                @endif
+                            <h4>{{ $perk->title }}</h4>
 
-                                <h4>{{ $perk->title }}</h4>
+                            <p>{{ $perk->description }}</p>
 
-                                <p>{{ $perk->description }}</p>
+                            @if($perk->items_included != "")
 
-                                @if($perk->items_included != "")
+                                <ul>
 
-                                    <ul>
+                                    <li><p>Items Included</p></li>
 
-                                        <li><p>Items Included</p></li>
+                                    <?php $includedArray = explode(",", $perk->items_included); ?>
 
-                                        <?php $includedArray = explode(",", $perk->items_included); ?>
+                                    @foreach($includedArray as $included)
 
-                                        @foreach($includedArray as $included)
+                                        <li><p>{{ trim($included) }}</p></li>
 
-                                            <li><p>{{ trim($included) }}</p></li>
+                                    @endforeach
 
-                                        @endforeach
+                                </ul>
 
-                                    </ul>
+                            @endif
 
-                                @endif
+                            <strong>{{ $perk->items_claimed }} out of {{ $perk->items_available }} sold</strong>
 
-                                <strong>{{ $perk->items_claimed }} out of {{ $perk->items_available }} sold</strong>
+                            <label class="add_bonus_btn {{$bonusAdded?'proj_add_sec_added':'proj_add_sec'}}" data-perkid="{{ $perk->id }}">
+                                <text class="buy_remove_txt">{{$bonusAdded?'Remove Bonus':'Buy Bonus'}}</text>
+                                <b>{{$commonMethods::getCurrencySymbol(strtoupper($user->profile->default_currency))}}{{ $perk->amount }}</b>
+                            </label>
 
-                                <label class="add_bonus_btn {{$bonusAdded?'proj_add_sec_added':'proj_add_sec'}}" data-perkid="{{ $perk->id }}">
-                                    <text class="buy_remove_txt">{{$bonusAdded?'Remove Bonus':'Buy Bonus'}}</text>
-                                    <b>{{$commonMethods::getCurrencySymbol(strtoupper($user->profile->default_currency))}}{{ $perk->amount }}</b>
-                                </label>
+                        </div>
 
-                            </div>
+                    @elseif($userCampaign->amount > 0)
 
-                        @elseif($userCampaign->amount > 0)
+                        <hr>
 
-                            <hr>
+                        <div class="proj_rit_btm_list_gray">
 
-                            <div class="proj_rit_btm_list_gray">
+                            @if($perkThumb != "")
+                                <span class="project_rit_img">
+                                    <img class="defer_loading" src="" data-src="{{ $perkThumb }}" alt="#" />
+                                </span>
+                            @endif
 
-                                @if($perkThumb != "")
-                                    <span class="project_rit_img">
-                                        <img class="defer_loading" src="" data-src="{{ $perkThumb }}" alt="#" />
-                                    </span>
-                                @endif
+                            <h4 style="background-image: none;">{{ $perk->title }}</h4>
 
-                                <h4 style="background-image: none;">{{ $perk->title }}</h4>
+                            <p>{{ $perk->description }}</p>
 
-                                <p>{{ $perk->description }}</p>
+                            @if($perk->items_included != "")
 
-                                @if($perk->items_included != "")
+                                <ul>
 
-                                    <ul>
+                                    <li><p>Items Included</p></li>
 
-                                        <li><p>Items Included</p></li>
+                                    <?php $includedArray = explode(",", $perk->items_included); ?>
 
-                                        <?php $includedArray = explode(",", $perk->items_included); ?>
+                                    @foreach($includedArray as $included)
 
-                                        @foreach($includedArray as $included)
+                                        <li><p>{{ trim($included) }}</p></li>
 
-                                            <li><p>{{ trim($included) }}</p></li>
+                                    @endforeach
 
-                                        @endforeach
+                                </ul>
 
-                                    </ul>
+                            @endif
 
-                                @endif
+                            <strong>{{ $perk->items_claimed }} out of {{ $perk->items_available }} sold</strong>
 
-                                <strong>{{ $perk->items_claimed }} out of {{ $perk->items_available }} sold</strong>
+                            <label class="proj_add_sec_added perk_sold_out" style="background: #4d4d4d;">Sold Out</label>
 
-                                <label class="proj_add_sec_added perk_sold_out" style="background: #4d4d4d;">Sold Out</label>
+                        </div>
 
-                            </div>
-
-                        @endif
-
-                </div>
+                    @endif
 
             </div>
 
-            @endforeach
+        </div>
 
-        @endif
+        @endforeach
 
         <!--<div class="story_read_more_btn return_to_top clearfix"><br>
 
