@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class UserCampaign extends Authenticatable 
+class UserCampaign extends Authenticatable
 
 {
 
@@ -53,21 +53,21 @@ class UserCampaign extends Authenticatable
 
         public function perks()
         {
-            
-            return $this->hasMany(CampaignPerks::class, 'campaign_id')->orderBy('id', 'desc');
+
+            return $this->hasMany(CampaignPerks::class, 'campaign_id')->orderBy('id', 'asc');
         }
 
-        
-        
+
+
         public function checkouts()
         {
-            
+
             return $this->hasMany(StripeCheckout::class, 'campaign_id');
         }
 
         public function amountRaised()
         {
-            
+
             $amountRaised = 0;
             $commonMethods = new \App\Http\Controllers\CommonMethods();
 
@@ -94,7 +94,7 @@ class UserCampaign extends Authenticatable
 
         public function daysLeft()
         {
-            
+
             $daysLeft = ($this->duration + $this->extend_duration) - ($this->created_at->diffInDays());
             return $daysLeft < 0 ? 0 : $daysLeft;
         }
@@ -102,7 +102,7 @@ class UserCampaign extends Authenticatable
 
         public function willExpireOn()
         {
-            
+
             $duration = (int) $this->duration + (int) $this->extend_duration;
             $expire = date('Y-m-d', strtotime($this->created_at . ' +'.$duration.' days'));
             return $expire;
