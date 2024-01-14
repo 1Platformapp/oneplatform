@@ -212,7 +212,7 @@
 
     $('document').ready(function(){
 
-        $('.m_btn_right_icon_each.m_btn_chat').first().trigger('click');
+        $('.m_btn_right_icon_each.m_btn_chat').first().click();
 
         $('.m_btm_filter_dropdown').change(function(){
 
