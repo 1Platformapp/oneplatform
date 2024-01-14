@@ -28,7 +28,7 @@
         <div class="chat_filter_container">
             <div class="chat_filter_tab chat_filter_contacts">
             @if(count($contacts) > 0)
-                @foreach($contacts as $key => $contact)
+                @foreach($contacts as $contact)
                     @if(!$contact->contactUser || !$contact->agentUser)
                         @php continue @endphp
                     @endif
@@ -148,7 +148,7 @@
                                 @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'hasActiveSub' => $hasActiveSub])
                             </div>
                             @endif
-                            <div class="each_dash_section {{$key == 0 ? '' : 'instant_hide'}}" data-id="contact_chat_{{$contact->id}}">
+                            <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
                                 @include('parts.agent-contact-chat')
                             </div>
                         </div>
@@ -211,6 +211,8 @@
 <script>
 
     $('document').ready(function(){
+
+        $('.m_btn_right_icon_each.m_btn_chat').first().trigger('click');
 
         $('.m_btm_filter_dropdown').change(function(){
 
