@@ -338,13 +338,13 @@
                                 <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
                                     <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">1platform.tv/</span>
                                     <input type="email" id="username" name="username" autocomplete="on" class="w-0 h-0">
-                                    @if($user->username == NULL || $user->username == '')
+                                    @if(!isset($user->username) || $user->username == NULL || $user->username == '')
                                     <input type="text" name="fake_username" id="fake_username" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="janesmith">
                                     @else
                                     <span class="py-1.5 pl-1 text-gray-900 sm:text-sm sm:leading-6">{{$user->username}}</span>
                                     @endif
                                 </div>
-                                @if($user->username == NULL || $user->username == '')
+                                @if(!isset($user->username) || $user->username == NULL || $user->username == '')
                                 <p class="mt-3 text-sm leading-6 text-gray-600">The username must be between 8 and 20 characters long and must not contain white spaces</p>
                                 @else
                                 <p class="mt-3 text-sm leading-6 text-gray-600">Your username has already been setup by your agent</p>

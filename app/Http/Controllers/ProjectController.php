@@ -1362,6 +1362,7 @@ class ProjectController extends Controller
                     $agentFee = $appFee['agent']['fee'];
 
                     $existingIntentId = $customerBasket->first()->payment_intent_id;
+
                     if($jsonObj->type == 'crowdfund' && $campaign && $campaign->is_charity != 1 && !isset($jsonObj->failedcheckout)){
                         if($existingIntentId){
                             $url = 'https://api.stripe.com/v1/setup_intents/'.$existingIntentId;

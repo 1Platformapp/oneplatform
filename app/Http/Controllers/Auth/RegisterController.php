@@ -112,7 +112,7 @@ class RegisterController extends Controller
 
         $user = User::where("email", $request->email)->first();
         if($user){
-            Session::flash('error', "Email already exists");
+            Session::flash('error', "Email already exists:".$user->id);
             return redirect()->back();
         }else{
 
@@ -246,6 +246,7 @@ class RegisterController extends Controller
         $commonMethods = new CommonMethods();
         $genres = Genre::all();
         $userData = Session::get('register.data');
+        Session::forget('register.data');
 
         $data = [
             'genres' => $genres,

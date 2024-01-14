@@ -1,31 +1,31 @@
 @extends('templates.advanced-template')
 
 
-@section('pagetitle') 
+@section('pagetitle')
     @if($user->profile->seo_title != '')
-        {{$user->profile->seo_title}} 
-    @else 
-        {{$user->name}} - Crowdfunder 
+        {{$user->profile->seo_title}}
+    @else
+        {{$user->name}} - Crowdfunder
     @endif
 @endsection
 
-@section('pagekeywords') 
+@section('pagekeywords')
     @if($user->profile->seo_keywords != '')
         <meta name="keywords" content="{{$user->profile->seo_keywords}}" />
     @endif
 @endsection
 
-@section('pagedescription') 
+@section('pagedescription')
     @if($user->profile->seo_description != '')
         <meta name="description" content="{{$user->profile->seo_description}}"/>
-    @else 
+    @else
         <meta name="description" content="{{strip_tags(preg_replace('/\s+/', ' ', $userPersonalDetails['storyText']))}}"/>
     @endif
 @endsection
 
 
 @section('page-level-css')
-    
+
     <link rel="stylesheet" href="{{asset('css/project.css?v=2.2')}}"></link>
     <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
 
@@ -87,7 +87,7 @@
 
             var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#fff','lineHeight': '31px'};
             var invalidStyles = {'color': '#fc064c'};
-            
+
             var eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
             var eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
             var eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
@@ -155,7 +155,7 @@
                 var emaill = $('#email').val();
                 $('#email_error').addClass('instant_hide');
                 var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                
+
                 if(email != '' && email == emaill && regex.test(email)){
                     $.ajax({
 
@@ -163,13 +163,13 @@
                         dataType: "json",
                         type: 'post',
                         data: {'find_type': 'email_duplication_truth', 'find': email, 'identity_type': 'guest_register', 'identity': ''},
-                        success: function(response) { 
+                        success: function(response) {
                             if(response.success == 1){
                                 if(response.data.duplicated == 1){
                                     $('#email_error').text('This email is already registered').removeClass('instant_hide');
                                 }
                             }else{
-                                
+
                             }
                         }
                     });
@@ -192,11 +192,11 @@
 
 
             $('.tot_usd_sec').change(function() {
-                
+
                 var from = $('#temp_selected_currency').val();
                 var to = $(this).val();
                 $('#temp_selected_currency').val($(this).val());
-                
+
                 updateCrowdfundBasket('switch', 'currency', to);
             });
 
@@ -289,9 +289,9 @@
             }
 
             $('.mobile-only .project_rit_btm_list').hide().slice(0, mobileBonusPaginate).show();
-            
+
             $('.show_more_bonuses_btn input').on('click', function (e) {
-                
+
                 e.preventDefault();
                 $('.mobile-only .project_rit_btm_list:hidden').slice(0, 1).slideDown( "slow", function() {
 
@@ -437,7 +437,7 @@
                            dataType: "json",
                            type: 'post',
                            data: {'find_type': 'stripe_card_expiration', 'find': token, 'identity_type': 'crowd_funder', 'identity': window.currentUserId},
-                           success: function(response) { 
+                           success: function(response) {
                                if(response.success == 1){
                                     preparePaymentPopup();
                                }else{
@@ -450,7 +450,7 @@
                            }
                        });
                    }
-               }); 
+               });
             }else{
 
                 $('#m_e_error').removeClass('instant_hide').text(' (Card name is required)');
@@ -471,7 +471,7 @@
                     type: 'post',
                     async: false,
                     data: {'type': 'refresh','action': '','value': '','currency': '', 'user': window.currentUserId},
-                    success: function(response) { 
+                    success: function(response) {
                         window.ajaxResponse = response;
                     }
                 });
@@ -483,7 +483,7 @@
             var bonusString = (purchase.data.bonusCount>1) ? 'Bonuses' : 'Bonus';
 
             var currencySymbol = "$";
-            if(selectedCurrency == "GBP"){ currencySymbol = "£"; } 
+            if(selectedCurrency == "GBP"){ currencySymbol = "£"; }
             else if(selectedCurrency == "EUR"){ currencySymbol = "€"; }
 
             $('#project-payment-popup .project_fill_form').addClass('instant_hide');
@@ -501,7 +501,7 @@
                     dataType: "json",
                     type: 'post',
                     data: {'find_type': 'crowdfund_shipping', 'find': 'total', 'identity_type': 'crowd_funder', 'identity': '', 'selected_country': selectedCountry, 'user' : window.currentUserId},
-                    success: function(response) { 
+                    success: function(response) {
                         if(response.success == 1){
                             var shippingCost = parseFloat(response.data.shippingTotal);
                             if(shippingCost > 0){
@@ -513,7 +513,7 @@
                             }else{
                                 $('#project-payment-popup .item_shipping .summary_item_right').text('Free');
                             }
-                        }   
+                        }
                     }
                 });
             }else{
@@ -608,7 +608,7 @@
                 type: 'post',
                 async: false,
                 data: {'action': action, 'type': type, 'value': value, 'currency': selectedCurrency, 'user': window.currentUserId},
-                success: function(response) { 
+                success: function(response) {
                     window.ajaxResponse = response;
                     $('#total_cost').val((parseFloat(response.data.grandTotal)).toFixed(2));
                 }
@@ -637,13 +637,13 @@
                     .then(function(data){
                         var isCharity = window.ajaxResponse.data.isCharity;
                         if(isCharity){
-                            payWithCard(stripe, eCardNumber, data.clientSecret);   
+                            payWithCard(stripe, eCardNumber, data.clientSecret);
                         }else{
                             setupFuturePayment(stripe, eCardNumber, data.clientSecret);
                         }
                     });
                 }
-                
+
                 function setupFuturePayment(stripe, card, clientSecret){
                     stripe.confirmCardSetup(
                         clientSecret,
@@ -720,18 +720,18 @@
 
 
 @section('preheader')
-    
+
     @if($user->home_layout == 'banner' && $user->custom_banner != '')
         <div style="background: none; width: 100%;" class="pre_header_banner">
             <img style="width: 100%;" src="{{asset('user-media/banner/'.$user->custom_banner)}}">
         </div>
     @endif
-    
+
 @stop
 
 
 @section('page-background')
-    
+
     @if($user->home_layout == 'background')
         <div data-url="/user-media/background/{{$user->custom_background}}" class="pg_back back_inactive"></div>
     @endif
@@ -747,7 +747,7 @@
 
 
 @section('flash-message-container')
-    
+
     @if(Session::has('error') || Session::has('success'))
     <div class="p_msg_contain">
 
@@ -804,12 +804,12 @@
 
 
 @section('top-center')
-    
+
     <div class="ch_center_outer user_hm_center">
-        <aside class="top_info_box hide_on_mobile"> 
+        <aside class="top_info_box hide_on_mobile">
             <div class="top_info_right_icon">
                 <i class="fa fa-share"></i>
-            </div> 
+            </div>
         </aside>
         <div class="tp_center_video_outer">
             <div class="jp-gui">
@@ -820,7 +820,7 @@
                 <aside class="tab_btns_outer tab_dsk hide_on_mobile clearfix {{$user->home_layout == 'background' ? 'back_curvs' : ''}}">
                     <div class="each_tab_btn tab_btn_user_bio fly_user_home" data-show="" data-initials="{{$user->username}}">
                         <div class="border"></div>
-                    </div>  
+                    </div>
                     <div class="each_tab_btn tab_btn_music {{count($user->hidden_tabs_home) && in_array('2', $user->hidden_tabs_home) ? 'disabled' : ''}}" data-show="#tabd2">
                         <div class="border"></div>
                     </div>
@@ -832,7 +832,7 @@
                     </div>
                     <div class="each_tab_btn tab_btn_crowd_fund true_active" data-show="#tabd1">
                         <div class="border_alter">
-                            Target<br> 
+                            Target<br>
                             {{$userCampaignDetails['campaignGoal'] }}
                         </div>
                         <div class="border"></div>
@@ -848,7 +848,7 @@
 
                     <div class="each_tab_btn tab_btn_user_bio fly_user_home" data-show="" data-initials="{{$user->username}}">
                         <div class="border"></div>
-                    </div>  
+                    </div>
                     <div class="each_tab_btn tab_btn_music {{count($user->hidden_tabs_home) && in_array('2', $user->hidden_tabs_home) ? 'disabled' : ''}}" data-show="#tabd2">
                         <div class="border"></div>
                     </div>
@@ -860,7 +860,7 @@
                     </div>
                     <div class="each_tab_btn tab_btn_crowd_fund true_active" data-show="#tabd1">
                         <div class="border_alter">
-                            Target<br> 
+                            Target<br>
                             {{$userCampaignDetails['campaignGoal'] }}
                         </div>
                     </div>
@@ -890,7 +890,7 @@
                                     function getDocHeight(doc) {
                                         doc = doc || document;
                                         var body = doc.body, html = doc.documentElement;
-                                        var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                                        var height = Math.max( body.scrollHeight, body.offsetHeight,
                                             html.clientHeight, html.scrollHeight, html.offsetHeight );
                                         return height;
                                     }
@@ -1063,7 +1063,7 @@
                                         <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
                                             <p>
                                                 If you are not paying in your native currency there may be fees for conversion. The actual amount charged by your card issuer may differ from our estimate shown here. This depends on their exchange rate and any applicable fees.
-                                            </p>    
+                                            </p>
                                         </li>
                                         <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
                                             <p>
@@ -1071,7 +1071,7 @@
                                                 <span class="terms_agree_outer">
                                                     <input type="checkbox" class="terms_agree" name="terms_agree" id="checkout_terms_agree">
                                                 </span>
-                                            </p>    
+                                            </p>
                                         </li>
                                         <li class="proj_confirm_payment_btn_outer">
                                             <div class="proj_cont_flt_outer clearfix">
@@ -1091,6 +1091,7 @@
                                 <input type="hidden" name="addedDonation" id="added_donation" value="0">
                                 <input type="hidden" value="{{strtoupper($user->profile->default_currency)}}" id="temp_selected_currency">
                                 <input type="hidden" value="{{strtoupper($user->profile->default_currency)}}" id="original_currency">
+                                <input type="hidden" name="payment_method" id="payment_method" value="stripe">
                             </form>
                             @endif
                         </article>
@@ -1129,7 +1130,7 @@
 
             @if($user->home_layout != 'background')
             <div class="desktop-only panel_head">
-                
+
                 <h2 class="project_name">{{$userCampaignDetails['projectTitle']}}</h2>
 
             </div>
@@ -1223,17 +1224,17 @@
                     <li>
                         <a id="facebook_share_url" onclick="return facebookShare('url')" class="ch_sup_fb" href="javascript:void(0)">
                             <i class="fab fa-facebook-f"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a id="twitter_share_url" onclick="return twitterShare('url')" class="ch_sup_tw" href="javascript:void(0)">
                             <i class="fab fa-twitter"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a class="ch_sup_feature_tab full_support_me" href="{{route('user.home.tab', ['params' => $user->username, 'tab' => '2'])}}">
                             <i class="fas fa-music"></i>
-                        </a> 
+                        </a>
                     </li>
                 </ul>
 
@@ -1389,7 +1390,7 @@
 
 @section('slide')
 
-    
+
 
 @stop
 
