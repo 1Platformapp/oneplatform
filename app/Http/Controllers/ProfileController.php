@@ -5345,14 +5345,14 @@ class ProfileController extends Controller
 
                 $profile->save();
 
-                return redirect(route('profile.with.tab', ['tab' => 'orders']));
+                return redirect(route('agency.dashboard'));
             }else{
 
-                return Redirect::to('profile')->with( 'error', 'Please fill in all the details and authorize access to 1Platform TV');
+                return Redirect::to('dashboard')->with( 'error', 'Please fill in all the details and authorize access to 1Platform TV');
             }
         }else{
 
-            return Redirect::to('profile')->with( 'error', 'Please fill in all the details and authorize access to 1Platform TV');
+            return Redirect::to('dashboard')->with( 'error', 'Please fill in all the details and authorize access to 1Platform TV');
         }
 
     }
