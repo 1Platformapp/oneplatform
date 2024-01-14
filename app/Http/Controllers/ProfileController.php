@@ -323,7 +323,7 @@ class ProfileController extends Controller
             return view( 'pages.admin-chat', $data );
         }else{
 
-            return redirect(route('profile'));
+            return redirect(route('agency.dashboard'));
         }
     }
 
@@ -1099,7 +1099,7 @@ class ProfileController extends Controller
             Session::flash('subTab', $subTab);
         }
 
-        return redirect(route('profile'));
+        return redirect(route('agency.dashboard'));
     }
 
     public function profileWithTabInfo($tab, $info){
@@ -1127,7 +1127,7 @@ class ProfileController extends Controller
             Session::flash('cardsopener', '1');
         }
 
-        return redirect(route('profile'));
+        return redirect(route('agency.dashboard'));
     }
 
     public function changePasswordSecure(Request $request){
@@ -1248,7 +1248,7 @@ class ProfileController extends Controller
 
                 if(Auth::check()){
 
-                    return redirect(route('profile'));
+                    return redirect(route('agency.dashboard'));
                 }
                 return redirect(route('site.home'));
             }
@@ -1262,7 +1262,7 @@ class ProfileController extends Controller
 
             if(Auth::check()){
 
-                return redirect(route('profile'));
+                return redirect(route('agency.dashboard'));
             }
             return redirect(route('site.home'));
         }
@@ -4006,7 +4006,7 @@ class ProfileController extends Controller
 
                     $user->profile->save();
 
-                    return redirect(route('profile'));
+                    return redirect(route('agency.dashboard'));
 
                 }else{
 
@@ -4813,7 +4813,7 @@ class ProfileController extends Controller
 
             $user->save();
 
-            return redirect(route('profile'));
+            return redirect(route('agency.dashboard'));
         }
     }
 
@@ -7255,7 +7255,7 @@ class ProfileController extends Controller
                     $message = 'Successfully sent money to ' . $seller->name;
                     Session::flash('success', $message);
                     Session::flash('page', 'orders');
-                    $redirectUrl = Auth::check() ? route('profile') : route('user.home',['params' => $seller->username]);
+                    $redirectUrl = Auth::check() ? route('agency.dashboard') : route('user.home',['params' => $seller->username]);
 
                     if(count($seller->devices)){
 
