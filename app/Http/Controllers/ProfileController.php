@@ -406,7 +406,7 @@ class ProfileController extends Controller
             $package = explode('_', $user->internalSubscription->subscription_package);
             if($package[0] != 'silver'){
 
-                return redirect(route('agency.dashboard'));
+                //return redirect(route('agency.dashboard'));
             }
 
             $data = [

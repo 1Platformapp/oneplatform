@@ -29,14 +29,14 @@
                             	    @php $package = explode('_', $user->internalSubscription->subscription_package) @endphp
                             		@php $status = $user->internalSubscription->subscription_status @endphp
                             	@else
-                            		@php $package = null @endphp 
-                            		@php $status = null @endphp 
+                            		@php $package = null @endphp
+                            		@php $status = null @endphp
                             	@endif
-                            	
+
                                 @if($user->is_buyer_only == 1)
                                 <div class="pro_note">
                                     <ul>
-                                        
+
                                         <li>Your account is only allowed to purchase on 1 Platform at the moment</li>
                                         <li>If you wish to start selling or promote your profile, you will need to upgrade your account</li>
                                         <li>Click the subscribe button below and start selling at 1 Platform</li>
@@ -63,22 +63,22 @@
                             						<a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}">Upgrade Plan</a>
                             					</div>
                             					@endif
-                            					
+
                             					@if($package && ($package[0] == 'gold' || $package[0] == 'platinum'))
                             					<div class="int_sub_down">
-	                            					<a href="javascript:void(0)">Change Plan</a>
+	                            					<a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}">Change Plan</a>
 	                            				</div>
                             					@endif
                             				</div>
                             			</div>
                             			<div class="curr_sub_user_lr">
                             				<div class="curr_sub_det_each">
-                            					Plan:<span class="hide_on_desktop"><br></span> 
+                            					Plan:<span class="hide_on_desktop"><br></span>
                             					@if($package)
                                                     @if($user->networkAgent() && $package[0] == 'silver')
                                                         Agency Premium
                                                     @else
-                                						{{ucfirst($package[0])}} - 
+                                						{{ucfirst($package[0])}} -
                                                         @if($package[1] > 0)
                                                         &pound;{{$package[1]}} / {{$package[2]}}
                                                         @else
@@ -104,7 +104,7 @@
                             					@else
                             						N/A
                             					@endif
-                            					
+
                             				</div>
                             			</div>
                             		</div>
@@ -137,7 +137,7 @@
                             			</div>
                             		</div>
                             	</div>
-                            	   
+
                                 @if($package && $package[1] > 0)
                             	<div class="curr_sub_invs">
                             		<div class="curr_sub_inv_head">
@@ -219,7 +219,7 @@
                                     <div class="my_sub_sec_list my_purchase_list clearfix">
                                         <div class="sub_left_img">
                                             <span class="smart_badge {{$class}}">
-                                                <img title="{{'You Purchased '.$checkoutItem->name.' from '.$checkout->user_name}}" src="{{$itemImage}}" alt="" /> 
+                                                <img title="{{'You Purchased '.$checkoutItem->name.' from '.$checkout->user_name}}" src="{{$itemImage}}" alt="" />
                                                 <div class="smart_badge_txt">
                                                     @if($class == 'badge_success')
                                                         <i class="fa fa-check-circle"></i> Paid
@@ -257,23 +257,23 @@
                                         @php $link = 'javascript:void(0)' @endphp
                                         @if($checkoutItem->type == 'product')
                                             @if($checkoutItem->file_name && $checkoutItem->file_name != '')
-                                            @php 
-                                                list($first, $nameOnly) = explode('/', $checkoutItem->file_name); 
-                                                $link = route('download.product.file', ['name' => $nameOnly, 'directory' => 'buyer-ticket-files', 'title' => str_replace('/',' ',$checkoutItem->name)]); 
+                                            @php
+                                                list($first, $nameOnly) = explode('/', $checkoutItem->file_name);
+                                                $link = route('download.product.file', ['name' => $nameOnly, 'directory' => 'buyer-ticket-files', 'title' => str_replace('/',' ',$checkoutItem->name)]);
                                             @endphp
                                             @endif
                                             @php $class = ''; @endphp
                                         @elseif($checkoutItem->type == 'project')
                                             @if($checkoutItem->file_name && $checkoutItem->file_name != '')
-                                            @php 
-                                                $link = route('proffer.project.download.pdf', ['filename' => $checkoutItem->file_name, 'title' => $checkoutItem->name]); 
+                                            @php
+                                                $link = route('proffer.project.download.pdf', ['filename' => $checkoutItem->file_name, 'title' => $checkoutItem->name]);
                                             @endphp
                                             @endif
                                             @php $class = ''; @endphp
                                         @elseif($checkoutItem->type == 'proferred-product')
                                             @if($checkoutItem->file_name && $checkoutItem->file_name != '')
-                                            @php 
-                                                $link = route('proffer.product.download.pdf', ['filename' => $checkoutItem->file_name, 'title' => $checkoutItem->name]); 
+                                            @php
+                                                $link = route('proffer.product.download.pdf', ['filename' => $checkoutItem->file_name, 'title' => $checkoutItem->name]);
                                             @endphp
                                             @endif
                                             @php $class = ''; @endphp
@@ -412,7 +412,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div> 
+                                </div>
                                 @endif
                             @endforeach
                             </div>
@@ -434,7 +434,7 @@
                                     <div class="my_sub_sec_list clearfix">
                                         <div class="sub_left_img">
                                             <span>
-                                                <img src="{{$userImage}}" alt="{{'Subscribed to '.$stripeSubscription->user->name}}" />   
+                                                <img src="{{$userImage}}" alt="{{'Subscribed to '.$stripeSubscription->user->name}}" />
                                             </span>
                                         </div>
                                         <div class="sub_right_sec my_date_sec">
@@ -442,7 +442,7 @@
                                                 {{$currencySymbol.number_format($stripeSubscription->plan_amount, 2).'/'.$stripeSubscription->plan_interval.' - '.date('d/m/Y', strtotime($stripeSubscription->created_at)) }}
                                             </a>
                                         </div>
-                                        
+
                                         <div class="sub_right_sec my_sub_right_sec">
                                             <a href="{{$stripeSubscription->user && $stripeSubscription->user->username ? route('user.home', ['params' => $stripeSubscription->user->username]) : 'javascript:void(0)'}}">{{$stripeSubscription->user->name}}</a>
                                         </div>
@@ -465,7 +465,7 @@
                 <div class="pro_tray_title">Manage Your Sales</div>
             </div>
             <div class="each_tab_content">
-                
+
                 <div class="my_sub_sec">
                     <div class="my_sub_sec_inner Bonus_Donators">
                         <h3>
@@ -564,7 +564,7 @@
                                     <div class="my_sub_sec_list clearfix">
                                         <div class="sub_left_img">
                                             <span>
-                                                <img src="{{$customerImage}}" alt="{{$stripeSubscription->customer->name.' has subscribed you'}}" />   
+                                                <img src="{{$customerImage}}" alt="{{$stripeSubscription->customer->name.' has subscribed you'}}" />
                                             </span>
                                         </div>
                                         <div class="sub_right_sec my_date_sec">
@@ -572,7 +572,7 @@
                                                 {{$currencySymbol.number_format($stripeSubscription->plan_amount, 2).'/'.$stripeSubscription->plan_interval.' - '.date('d/m/Y', strtotime($stripeSubscription->created_at)) }}
                                             </a>
                                         </div>
-                                        
+
                                         <div class="sub_right_sec my_sub_right_sec">
                                             <a href="{{$stripeSubscription->customer && $stripeSubscription->customer->username ? route('user.home', ['params' => $stripeSubscription->customer->username]) : 'javascript:void(0)'}}">{{$stripeSubscription->customer->name}}</a>
                                         </div>
@@ -631,9 +631,9 @@
                                         <div class="sub_sec_desc">{{$checkout->comment}}</div>
                                         <div class="sub_sec_det">
                                             @foreach($checkout->instantCheckoutItems as $checkoutItem)
-                                                @if($checkoutItem->type == 'music') @php $info = '('.$checkoutItem->license.')' @endphp 
+                                                @if($checkoutItem->type == 'music') @php $info = '('.$checkoutItem->license.')' @endphp
                                                 @elseif($checkoutItem->type == 'donation_goalless') @php $info = 'Donation' @endphp
-                                                @elseif($checkoutItem->type == 'custom-product') @php $info = ' (Your commission)' @endphp 
+                                                @elseif($checkoutItem->type == 'custom-product') @php $info = ' (Your commission)' @endphp
                                                 @else @php  $info = '' @endphp
                                                 @endif
                                                 <a href="javascript:void(0)">
@@ -648,7 +648,7 @@
                                                     @else
                                                     	{{($checkoutItem->price>0)?$currencySymbol.number_format($checkoutItem->price, 2):' - Free'}}
                                                     @endif
-                                                    
+
                                                 </a>
                                             @endforeach
                                         </div>
@@ -714,7 +714,7 @@
                                                     <img class="trans_image" title="{{$details['seller']['name']}}" src="{{$sellerImage}}" />
                                                     <div class="smart_badge_txt">
                                                         @if($class == 'badge_success')
-                                                            <i class="fa fa-check-circle"></i> Paid 
+                                                            <i class="fa fa-check-circle"></i> Paid
                                                         @elseif($class == 'badge_warning')
                                                             <i class="fa fa-clock-o"></i> Queued
                                                         @else
@@ -724,7 +724,7 @@
                                                 </div>
                                                 <div class="sub_sec_name_desc_contain">
                                                     <div class="sub_sec_name">
-                                                        <a class="trans_name" href="javascript:void(0)"> 
+                                                        <a class="trans_name" href="javascript:void(0)">
                                                             {{$details['seller']['name']}}
                                                         </a>
                                                     </div>
@@ -863,7 +863,7 @@
 
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
         @endif
@@ -894,11 +894,11 @@
                     var target = $('.music_zip_download_popup .pro_pop_download_each[data-type="'+downloadDetailArray[1]+'"]');
                     if(target.length){
                         if(downloadDetailArray[3] == 'cloud'){
-                            target.attr('data-path', downloadDetailArray[0]);    
+                            target.attr('data-path', downloadDetailArray[0]);
                         }else{
                             target.attr('data-path', downloadDetailArray[4]);
                         }
-                        
+
                         target.attr('data-source', downloadDetailArray[3]);
                         target.attr('data-source-id', sourceId);
                         target.find('.item_size').text(Math.round(downloadDetailArray[2]/(1024*1024))+' MB');
@@ -978,7 +978,7 @@
                                 alert(response.error);
                             }
                         }
-                   }); 
+                   });
                 }
             }
         });
