@@ -51,7 +51,7 @@
 
                             @if($package && ($package[0] == 'gold' || $package[0] == 'platinum'))
                             <div class="int_sub_down">
-                                <a href="javascript:void(0)">Change Plan</a>
+                                <a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}">Change Plan</a>
                             </div>
                             @endif
                         </div>
