@@ -75,7 +75,7 @@
                                     </li>
                                     @endif
                                     <li>
-                                        <a title="Chat" class="m_btn_right_icon_each m_btn_chat active {{$key == 0 ? 'first_chat_btn' : ''}}" data-id="{{$contact->id}}">
+                                        <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" id="{{$key == 0 ? 'first_chat_btn' : ''}}" data-id="{{$contact->id}}">
                                             <i class="fas fa-comment-dots"></i>
                                         </a>
                                     </li>
@@ -212,7 +212,7 @@
 
     $('document').ready(function(){
 
-        $('.first_chat_btn').trigger('click');
+        $('#first_chat_btn').trigger('click');
 
         $('.m_btm_filter_dropdown').change(function(){
 
