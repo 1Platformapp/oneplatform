@@ -28,7 +28,7 @@
         <div class="chat_filter_container">
             <div class="chat_filter_tab chat_filter_contacts">
             @if(count($contacts) > 0)
-                @foreach($contacts as $contact)
+                @foreach($contacts as $key => $contact)
                     @if(!$contact->contactUser || !$contact->agentUser)
                         @php continue @endphp
                     @endif
@@ -75,7 +75,7 @@
                                     </li>
                                     @endif
                                     <li>
-                                        <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$contact->id}}">
+                                        <a title="Chat" class="m_btn_right_icon_each m_btn_chat active {{$key == 0 ? 'first_chat_btn' : ''}}" data-id="{{$contact->id}}">
                                             <i class="fas fa-comment-dots"></i>
                                         </a>
                                     </li>
@@ -212,7 +212,7 @@
 
     $('document').ready(function(){
 
-        $('.m_btn_right_icon_each.m_btn_chat').first().click();
+        $('.first_chat_btn').trigger('click');
 
         $('.m_btm_filter_dropdown').change(function(){
 
