@@ -9,7 +9,7 @@
 @section('page-level-css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style>
-        
+
         .p_appli { text-decoration: line-through; color: #dc3545 !important; }
         .coupon_row { position: relative; }
         .coupon_btn { position: absolute; top: 20px; right: 0; background: #818181; color: #fff; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0 10px; font-size: 12px; letter-spacing: 1px; }
@@ -45,7 +45,7 @@
 
         	var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#000','lineHeight': '31px'};
         	var invalidStyles = {'color': '#fc064c'};
-        	
+
         	var eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
         	var eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
         	var eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
@@ -69,7 +69,7 @@
 
                     $('.int_sub_pay.active').removeClass('active');
                     $(this).addClass('active');
-            		var term = p.attr('data-term');   
+            		var term = p.attr('data-term');
             		var name = p.attr('data-name');
             		var price = p.attr('data-price');
 
@@ -84,7 +84,7 @@
             		}else{
             			alert('Package invalid');
             		}
-            	}else{	
+            	}else{
 
             		alert('Choose a package');
             	}
@@ -98,7 +98,7 @@
                 $('#p_price').addClass('instant_hide');
 
                 if(discountCode.val() == ''){
-                    
+
                 }else{
                     var originalPrice = $('#pay_int_sub_price').text();
                     var formData = new FormData();
@@ -115,7 +115,7 @@
                         processData: false,
                         dataType: "json",
                         success: function (response) {
-                              
+
                             $('#pay_int_sub_final').removeClass('busy');
                             if(response.success){
 
@@ -150,7 +150,7 @@
 
             //             createSubscription(stripe, null, 'purchase_free');
             //         }else{
-                        
+
             //         }
             //     }
             // });
@@ -301,7 +301,7 @@
 
 @section('flash-message-container')
 
-    
+
 @stop
 
 <!-- facebook/twitter share Login !-->
@@ -310,7 +310,7 @@
 
 
 @section('page-content')
-    
+
     @if(!isset($action))
         @if($user)
             @if($user->internalSubscription && $user->internalSubscription->subscription_status == 1)
@@ -363,7 +363,7 @@
                                 <div class="wizard_head_step_ok"><i class="fa fa-check-circle"></i></div>
                                 @endif
                             </div>
-                        </div> 
+                        </div>
                         @endif
                         @if($backBtnUrl != '')
                         <div class="startup_back">
@@ -379,7 +379,7 @@
                                     <div class="int_sub_main_head_jun">
                                         Browse our subscription and single song pricing plans below
                                     </div>
-                                    
+
                                     <div class="int_sub_outer">
                                         <div class="int_sub_inner">
                                             <div class="int_sub_nav_outer hide_on_desktop">
@@ -394,7 +394,7 @@
                                                 <div class="int_sub_head">
                                                     <div class="int_sub_head_up">Subscriptions</div>
                                                 </div>
-                                                
+
                                                 <div class="int_sub_dhead">Price</div>
                                                 <div class="int_sub_offer_outer">
                                                     <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
@@ -420,7 +420,7 @@
                                                 </div>
                                             </div>
                                             <div class="int_sub_act_outer">
-                                                
+
                                                 <div class="int_sub_each pro_hover">
                                                     <div class="int_sub_head">
                                                         <div class="int_sub_head_up">{{ucfirst($packages[0]['name'])}}</div>
@@ -433,7 +433,7 @@
                                                     <div class="int_sub_offer_outer">
                                                         <div class="int_sub_offer_each">&nbsp;</div>
                                                         <div class="int_sub_offer_each int_sub_free">
-                                                            <div class="int_sub_confirm">Currently active</div>
+                                                            <div class="int_sub_confirm">Default</div>
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             {{$packages[0]['application_fee']}}%
@@ -485,7 +485,7 @@
                                                             <div class="int_sub_confirm int_sub_pay">Buy</div>
                                                         </div>
                                                         <div class="int_sub_offer_each">
-                                                            {{$packages[1]['application_fee']}}% 
+                                                            {{$packages[1]['application_fee']}}%
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             <div class="int_sub_offer_yes">
@@ -534,7 +534,7 @@
                                                             <div class="int_sub_confirm int_sub_pay">Buy</div>
                                                         </div>
                                                         <div class="int_sub_offer_each">
-                                                            {{$packages[2]['application_fee']}}%  
+                                                            {{$packages[2]['application_fee']}}%
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             <div class="int_sub_offer_yes">
@@ -597,7 +597,7 @@
                                     </div>
                                 @endif
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -607,7 +607,7 @@
 
 
 @section('miscellaneous-html')
-    
+
     <div class="pro_page_pop_up clearfix" id="pay_internal_subscription_popup">
 
         <div class="pro_soc_con_face_inner clearfix">
@@ -641,7 +641,7 @@
                         <input placeholder="Discount Voucher Code" type="text" id="int_sub_voucher_code" />
                         <div class="coupon_btn">Apply Voucher</div>
                     </div>
-                    
+
                 </div>
                 <br>
                 <div id="pay_int_sub_final" class="pro_button">SUBMIT</div>
@@ -667,7 +667,7 @@
                 <div class="soc_con_face_username clearfix">
                     <div class="pro_pop_text_light">
                         An agreement has been sent to <span class="pro_text_dark" id="sender_name"></span>. The user will be offered to accept or reject this agreement.
-                    </div>  
+                    </div>
                 </div>
                 <br>
             </div>
