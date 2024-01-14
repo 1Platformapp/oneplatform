@@ -234,6 +234,14 @@
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-shopping-bag"></i>
                                     </div>
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'stripe'])}}" class="usr_men_quick_txt">
+                                        Stripe Dashboard
+                                    </a>
+                                </div>
+                                <div class="usr_men_quick_each">
+                                    <div class="usr_men_quick_ic">
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </div>
                                     <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
                                         Purchases
                                     </a>
