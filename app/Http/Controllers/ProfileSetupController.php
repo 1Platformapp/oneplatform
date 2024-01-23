@@ -240,6 +240,21 @@ class ProfileSetupController extends Controller
                 }
             }
 
+            $vouchers = [];
+            if($user->isCotyso()){
+                $database = Config('constants.clients_portal_database');
+                $clientsPortalCon = $commonMethods->createDBConnection($database['host'], $database['username'], $database['password'], $database['database']);
+                if($clientsPortalCon && $result = mysqli_query($clientsPortalCon, 'SELECT * FROM Voucher ORDER BY id DESC')){
+                    $assocArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                    foreach($assocArray as $key => $value){
+
+                        $vouchers[$value['id']]['id'] = $value['id'];
+                        $vouchers[$value['id']]['name'] = $value['name'];
+                    }
+                    mysqli_free_result($result);
+                }
+            }
+
             $data = [
 
                 'user' => $user,
@@ -254,7 +269,8 @@ class ProfileSetupController extends Controller
                 'domain' => $user->customDomainSubscription,
                 'stripeUrl' => $stripeUrl,
                 'agents' => $agents,
-                'isStandalone' => $isStandalone
+                'isStandalone' => $isStandalone,
+                'vouchers' => $vouchers
             ];
 
             return view('pages.setup.index', $data);
