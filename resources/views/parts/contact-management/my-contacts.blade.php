@@ -80,11 +80,11 @@
                                         </a>
                                     </li>
                                     @if($contact->approved)
-                                    <li>
+                                    <!--<li>
                                         <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$contact->id}}">
                                             <i class="fa fa-calendar"></i>
                                         </a>
-                                    </li>
+                                    </li>!-->
                                     @else
                                     <li>
                                         <a title="Calendar" class="m_btn_right_icon_each">
