@@ -1081,6 +1081,7 @@
                 removeLoading();
                 if(response.success == 1){
                     $('.calendar-well').html(response.data.data);
+                    $('.each_dash_section[data-value="my-calendar"]').removeClass('instant_hide');
                 }else{
                     console.log(data.error);
                     $('.calendar-well').html(data.error);
