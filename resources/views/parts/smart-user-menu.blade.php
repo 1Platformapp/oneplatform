@@ -308,7 +308,13 @@
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-donate"></i>
                                     </div>
-                                    View
+                                    Setup Crowdfunder
+                                </a>
+                                <a href="{{route('profile.setup', ['page' => 'setup-patron'])}}" class="usr_men_quick_each">
+                                    <div class="usr_men_quick_ic">
+                                        <i class="fas fa-donate"></i>
+                                    </div>
+                                    Patron Hub
                                 </a>
                             </div>
                         </div>
