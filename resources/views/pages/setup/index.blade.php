@@ -800,6 +800,23 @@
 
 		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'videos', 'setupWizard' => ''])
 
+    @elseif($page == 'setup-patron')
+
+		<div class="setup_tray_main">
+			<div class="setup_tray_top">
+				<div class="setup_tray_left">
+                    <div class="setup_tray_head">
+                        Patron Hub
+					</div>
+				</div>
+			</div>
+			<div class="setup_tray_foot">
+
+			</div>
+		</div>
+
+		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'subscribers', 'setupWizard' => ''])
+
 	@elseif($page == 'product')
 
 		<div class="setup_tray_main">

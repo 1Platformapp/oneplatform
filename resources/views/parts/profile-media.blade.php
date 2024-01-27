@@ -1376,16 +1376,15 @@
                             <div class="prog_sub_inps_sec cant_edit_fields">
                                 @php $encourageBullets = Auth::user()->encourage_bullets; @endphp
                                 <ul>
-                                    <li><label class="proj_insp_wid"><input value="{{ is_array($encourageBullets) && $encourageBullets[0] != '' ? $encourageBullets[0] : '' }}" name="encourage_bullets[]" type="text" placeholder="" /></label></li>
-                                    <li><label class="proj_insp_wid"><input value="{{ is_array($encourageBullets) && $encourageBullets[1] != '' ? $encourageBullets[1] : '' }}" name="encourage_bullets[]" type="text" placeholder="" /></label></li>
-                                    <li><label class="proj_insp_wid"><input value="{{ is_array($encourageBullets) && $encourageBullets[2] != '' ? $encourageBullets[2] : '' }}" name="encourage_bullets[]" type="text" placeholder="" /></label></li>
+                                    <li><div class="mb-1">Bullet Text One</div><label class="proj_insp_wid"><input value="{{ is_array($encourageBullets) && $encourageBullets[0] != '' ? $encourageBullets[0] : '' }}" name="encourage_bullets[]" type="text" placeholder="" /></label></li>
+                                    <li><div class="mb-1">Bullet Text Two</div><label class="proj_insp_wid"><input value="{{ is_array($encourageBullets) && $encourageBullets[1] != '' ? $encourageBullets[1] : '' }}" name="encourage_bullets[]" type="text" placeholder="" /></label></li>
+                                    <li><div class="mb-1">Bullet Text Three</div><label class="proj_insp_wid"><input value="{{ is_array($encourageBullets) && $encourageBullets[2] != '' ? $encourageBullets[2] : '' }}" name="encourage_bullets[]" type="text" placeholder="" /></label></li>
                                     <li>
                                         <label class="proj_insp_wid input_with_currency_drop">
-                                            <div class="">
-                                                <div class="proj_cont_right_inner drop_substi_subscrip_inner clearfix">
-                                                    <div class="drop_substi_curr">GBP</div>
-                                                    <input value="{{ Auth::user()->subscription_amount }}" class="tot_usd_val drop_substi_val" type="text" placeholder="0.00" name="subscription_amount" />
-                                                </div>
+                                            <div class="mb-1">Subscription Amount</div>
+                                            <div class="flex items-center border border-[#808081] gap-2 pl-2">
+                                                <div class="text-[#666]">&pound;</div>
+                                                <input value="{{ Auth::user()->subscription_amount }}" class="tot_usd_val drop_substi_val !border-0" type="text" placeholder="0.00" name="subscription_amount" />
                                             </div>
                                         </label>
                                     </li>
@@ -1393,20 +1392,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel donator_profile_version donation_goalless colio_outer colio_dark">
-                        <div class="donator_outer">
-                            <div class="donator_box clearfix">
-                                <div class="colio_header">Make A Contribution</div>
-                                <p>Contributions are not associated with perks</p>
-                                <div class="donator_inner">
-                                    <div class="donation_left">
-                                        <span id="donation_currency">
-                                            {{$commonMethods->getCurrencySymbol(strtoupper(Auth::user()->profile->default_currency))}}
-                                        </span>
-                                        <input readonly type="text" id="donation_amount" name="donation_amount" />
-                                    </div>
-                                    <div class="donation_right">
-                                        <div class="donation_right_in">Add To Cart</div>
+                    <div class="mb-2">Contributions Box. This feature appears on your website, ideal for fans who want to contribute towards your career projects</div>
+                    <div class="border border-[#666] p-2 w-fit mb-2">
+                        <div class="panel donator_profile_version donation_goalless colio_outer colio_dark">
+                            <div class="donator_outer">
+                                <div class="donator_box clearfix">
+                                    <div class="colio_header">Make A Contribution</div>
+                                    <p>Contributions are not associated with perks</p>
+                                    <div class="donator_inner">
+                                        <div class="donation_left">
+                                            <span id="donation_currency">
+                                                {{$commonMethods->getCurrencySymbol(strtoupper(Auth::user()->profile->default_currency))}}
+                                            </span>
+                                            <input readonly type="text" id="donation_amount" name="donation_amount" />
+                                        </div>
+                                        <div class="donation_right">
+                                            <div class="donation_right_in">Add To Cart</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1414,7 +1416,7 @@
                     </div>
                     <label class="add_donator_notice">
                         <input {{ (Auth::user()->accept_donations == 1) ? 'checked' : '' }} type="checkbox" name="accept_donations" value="1" id="accept_donations">
-                        I want to add the above contribution box to my home page<p>(This will not appear or add to any crowdfunder)</p>
+                        I want to add the above contribution box to my home page<p>(Patron Hub is not associated with a crowdfund project.)</p>
                     </label>
                     <br><br>
                     <div class="pay_btm_btn_outer clearfix">

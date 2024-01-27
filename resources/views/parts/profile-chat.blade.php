@@ -487,6 +487,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div data-id="my-patron-hub" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="flex-shrink-0 text-lg">
+                                            <i class="fas fa-hand-holding-heart"></i>
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="focus:outline-none cursor-pointer">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">My Patron Hub</p>
+                                                <p class="truncate text-sm text-gray-500">Setup a patron option that anyone can use to support you</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="order-stages stage-two instant_hide">
@@ -986,26 +998,31 @@
     $('.order-stage-head').click(function(){
 
         var id = $(this).attr('data-id');
-        var formData = new FormData();
-        formData.append('id', id);
-        $.ajax({
 
-            url: '/agent/monies',
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            dataType: 'json',
-            success: function (response) {
-                if(response.success){
-                    $('.order-stages.stage-one').addClass('instant_hide');
-                    $('.order-stages.stage-two').removeClass('instant_hide').find('.content').html(response.data);
-                }else{
-                    console.log(response.error);
+        if (id == 'my-patron-hub') {
+            window.location.href = '/profile-setup/standalone/setup-patron'
+        } else {
+            var formData = new FormData();
+            formData.append('id', id);
+            $.ajax({
+
+                url: '/agent/monies',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: 'json',
+                success: function (response) {
+                    if(response.success){
+                        $('.order-stages.stage-one').addClass('instant_hide');
+                        $('.order-stages.stage-two').removeClass('instant_hide').find('.content').html(response.data);
+                    }else{
+                        console.log(response.error);
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     async function setSession(tab){

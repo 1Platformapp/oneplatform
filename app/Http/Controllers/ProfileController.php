@@ -4815,7 +4815,7 @@ class ProfileController extends Controller
 
             $user->save();
 
-            return redirect(route('agency.dashboard'));
+            return redirect()->back();
         }
     }
 
