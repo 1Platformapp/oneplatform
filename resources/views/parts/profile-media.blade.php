@@ -1397,7 +1397,6 @@
                         <div class="panel donator_profile_version donation_goalless colio_outer colio_dark">
                             <div class="donator_outer">
                                 <div class="donator_box clearfix">
-                                    <div class="colio_header">Make A Contribution</div>
                                     <p>Contributions are not associated with perks</p>
                                     <div class="donator_inner">
                                         <div class="donation_left">
