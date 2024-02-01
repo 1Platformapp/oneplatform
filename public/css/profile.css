@@ -309,7 +309,7 @@
 .edit_elem_sort_up.disabled,.edit_elem_sort_down.disabled { opacity: 0.65; cursor: initial; }
 
 .pro_news_textarea { color: #818181; height: 100px; width: 100%; padding: 5px; font-size: 15px; font-family: Open sans, sans-serif; }
-.pro_contact_textarea { color: #818181; height: 300px; width: 100%; padding: 5px; font-size: 15px; font-family: Open sans, sans-serif; }
+.pro_contact_textarea { color: #818181; height: 400px; width: 100%; padding: 5px; font-size: 15px; font-family: Open sans, sans-serif; }
 
 .pro_price_timer { display: flex; flex-direction: column; margin-bottom: 15px; border: 1px solid #ccc; padding: 10px; }
 .pro_action_btn { padding: 5px 10px; background: #818181; margin-left: auto; color: #fff; cursor: pointer; }

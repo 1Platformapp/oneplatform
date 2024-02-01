@@ -16,7 +16,7 @@
 
 <!-- Page Level Javascript !-->
 @section('page-level-js')
-    
+
     <script src="{{asset('croppie/croppie.min.js')}}"></script>
 
     <script type="text/javascript">
@@ -24,7 +24,7 @@
         var $uploadCrop = new Array();
 
         $('document').ready(function(){
-            
+
             $('.port_wid_head').click(function(){
 
                 $(this).closest('.add_port_wid_outer').find('.port_wid_drop_outer').toggle();
@@ -71,7 +71,7 @@
                 }
 
                 if(form.find('input[value="youtube"]').length){
-                    
+
                     form.find('input[value="youtube"]').each(function(){
                         var youtubeField = $(this).closest('.port_field_body').find('.port_field_text');
                         if(youtubeField.length && !matchYoutubeUrl(youtubeField.val())){
@@ -80,7 +80,7 @@
                         }
                     });
                 }
-                
+
                 if(!error){
 
                     $('#body-overlay,#pro_uploading_in_progress_real').show();
@@ -92,7 +92,7 @@
                                 type: 'canvas',
                                 size: 'viewport'
                             }).then(function (resp) {
-                                
+
                                 $(form).find('.port_thumb_data').val(resp);
                                 form.submit();
                             });
@@ -274,7 +274,7 @@
             }
 
         }
-        
+
     </script>
 @stop
 
@@ -285,7 +285,7 @@
 
 
 @section('flash-message-container')
-    
+
 @stop
 
 <!-- facebook/twitter share Login !-->
@@ -323,15 +323,15 @@
             @if($isAllowed)
             <div class="contact_details_section">
                 <div class="contact_section_head">
-                    {{$contact->contactUser->name}} - Information Form
+                    <span class="font-bold">{{$contact->contactUser->name}} - Creative Brief</span>
                     <br>
-                    <span class="contact_section_sub_head">
-                        The information below will only be visible to the user and the associated agency<br>
+                    <div class="contact_section_sub_head !text-white mt-4 !text-[15px]">
+                        The brief is private and is only visible to you and your contact<br>
                         Press the <i class="fa fa-pencil"></i> to add your answers, then click SAVE button to save each answer<br>
-                        After making changes to this form press 
-                        <span class="notify_now"><i class="fa fa-bell"></i> Notify Now</span> 
-                        to send notification to {{$isAllowed == 'agent' ? $contact->contactUser->name : $agent->name}} 
-                    </span>
+                        After making changes to this form press
+                        <span class="notify_now"><i class="fa fa-bell"></i> Notify Now</span>
+                        to send notification to {{$isAllowed == 'agent' ? $contact->contactUser->name : $agent->name}}
+                    </div>
                 </div>
                 <div class="contact_section_body">
                 	<form action="{{route('agent.contact.details.save', ['code' => $contact->code, 'action' => 'add-question'])}}" method="POST">
@@ -442,7 +442,7 @@
 @stop
 
 @section('miscellaneous-html')
-    
+
     @include('parts.add-form-elements')
     <div id="body-overlay"></div>
     <div class="pro_uploading_in_progress in_progress pro_page_pop_up clearfix" style="z-index: 10;" id="pro_uploading_in_progress_real">

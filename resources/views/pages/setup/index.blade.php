@@ -17,7 +17,7 @@
 
 @section('page-level-css')
 
-	<link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.21')}}" />
+	<link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.24')}}" />
 	<link rel="stylesheet" href="{{asset('simplepicker/simplepicker.css')}}" />
 	<link rel="stylesheet" href="{{asset('css/profile.orders.css')}}">
 	@if($page == 'news' || $page == 'social' || $page == 'videos' || $page == 'product')

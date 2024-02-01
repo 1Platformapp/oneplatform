@@ -51,13 +51,17 @@
 
     <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 contact-edit-section">
         <div class="px-4 sm:px-0 relative">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Join my network</h2>
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Join me on 1Platform App!</h2>
             <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
                     <ul>
-                        <li>This area will send the user a link to join 1Platform and become your network contact</li>
-                        <li>You can send agreements, discussions along</li>
-                        <li>Agree on a commission percentage or any work coming through this contact</li>
+                        <li>Here you can send your contact an approval to be one of the your contacts in your network</li>
+                        <li>
+                            If you want to recieve commission from work connected with your contact then add the perdentage here.
+                            This commission is paid to you from any sales you create in a network chat only not from the user's own account.
+                            Refer to <span class="join_me_video_btn cursor-pointer hover:underline text-blue-500">this video</span> for further details
+                        </li>
+                        <li class="join_me_video_holder"></li>
                     </ul>
                 </div>
             </div>
@@ -76,7 +80,17 @@
                         <input value="{{$contact->commission}}" placeholder="Your Commission (in %age)" type="number" class="pro_stream_input" name="pro_contact_commission" />
                     </div>
                     <div class="pro_stream_input_each">
-                    <textarea placeholder="Write your terms (if any)" type="text" class="pro_contact_textarea" name="pro_contact_terms">{{$contact->terms}}</textarea>
+                    <textarea placeholder="Hey [Recipient's Name],
+
+I hope this message finds you well! I'm excited to invite you to connect with me on the 1Platform App, a fantastic tool that makes networking a breeze.
+
+If there's ever a project or collaboration opportunity where I think we could team up, you'll receive notifications. I'll receive the agreed commission for any work created through our network chat. Don't worry; using the platform directly for your personal needs won't be affected—this commission is specific to collaborations in our chat area. To learn more about the commission feature, check out this explanatory video: [Insert URL].
+
+We can also chat conveniently right there in the app.
+
+Once you're on board, feel free to set up your account and explore all the features tailored for your career.
+
+Looking forward to connecting!" type="text" class="pro_contact_textarea" name="pro_contact_terms">{{$contact->terms}}</textarea>
                     </div>
                 </div>
             </div>
@@ -90,13 +104,13 @@
 
     <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 contact-edit-section">
         <div class="px-4 sm:px-0 relative">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Questionnaire</h2>
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Creative Briefs</h2>
             <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
                     <ul>
-                        <li>Dispatch a pertinent question form to your contact</li>
-                        <li>Your contact will receive it via email and in the app</li>
-                        <li>Check your dashboard for default question forms</li>
+                        <li>Share ideas, ask questions and collaborate seamlessly with your contacts.</li>
+                        <li>We've included ready-made professional briefs to make your creative journey smoother. Join us for a simple and effective collaboration experience</li>
+                        <li>Check your dashboard for a list of all our creative briefs</li>
                     </ul>
                 </div>
             </div>
@@ -124,20 +138,20 @@
                 </div>
             </div>
             <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-                <button type="button" class="edit_with_action edit_and_send_question rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                <button type="button" class="edit_with_action edit_and_send_question rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Send brief to contact</button>
             </div>
         </form>
     </div>
 
     <div class="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 contact-edit-section">
         <div class="px-4 sm:px-0 relative">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Manage contact account</h2>
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Manage your contact's account</h2>
             <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
                     <ul>
-                        <li>If you are a manager and want to manage the account of your contact</li>
-                        <li>Complete control over your contact's account</li>
-                        <li>Granting your contact account control</li>
+                        <li>If you are a manager and want to manage your contact's account</li>
+                        <li>Jointly oversee your shared contact's account</li>
+                        <li>Give full control to your contact</li>
                     </ul>
                 </div>
             </div>
@@ -191,3 +205,10 @@
 </div>
 
 
+<script>
+
+    $('.join_me_video_btn').click(function(){
+        $(this).closest('ul').find('.join_me_video_holder').html('<iframe width="420" height="315" src="https://www.youtube.com/embed/P8BcCrT6sxI"></iframe>');
+    });
+
+</script>

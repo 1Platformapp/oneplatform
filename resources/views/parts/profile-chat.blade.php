@@ -238,59 +238,18 @@
                         <div class="each_dash_section instant_hide" data-value="industry-contacts">
                             <div class="mt-10">
                                 <div class="px-2 py-4">
-                                    <div class="flex items-center mb-3">
-                                        <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
+                                    <div class="flex items-start mb-3">
+                                        <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex mt-1">
                                             <i class="fa fa-info-circle"></i>
                                         </div>
                                         <div class="lg:ml-3 flex-1 md:flex md:justify-between">
                                             <p class="text-sm text-[#333] font-bold">
-                                            1Platform has a network of over <span class="text-[#fc064c]">{{count(\App\Models\IndustryContact::all())}}</span> industry contacts, encompassing labels, publishers, pluggers, producers, skilled songwriters, and many more valuable contacts
+                                            Discover over <span class="text-[#fc064c]">{{count(\App\Models\IndustryContact::all())}}</span> industry contacts on 1Platform
+                                            including labels, publishers, pluggers, producers and skilled song writers. <br>Each contact is complete with phone numbers, websites
+                                            and emails for seamless access and networking
                                             </p>
                                         </div>
                                     </div>
-
-                                    <ul role="list" class="mt-3 grid grid-cols-1 gap-5 md:grid-cols-3 sm:grid-cols-1 sm:gap-6 lg:grid-cols-4">
-                                        <li class="col-span-1 flex rounded-md shadow-sm">
-                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
-                                                <i class="text-white text-lg fa fa-phone"></i>
-                                            </div>
-                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
-                                                <div class="flex-1 truncate px-4 py-2 text-sm">
-                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Phone numbers</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="col-span-1 flex rounded-md shadow-sm">
-                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
-                                                <i class="text-white text-lg fa fa-envelope"></i>
-                                            </div>
-                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
-                                                <div class="flex-1 truncate px-4 py-2 text-sm">
-                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Emails</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="col-span-1 flex rounded-md shadow-sm">
-                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
-                                                <i class="text-white text-lg fas fa-globe"></i>
-                                            </div>
-                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
-                                                <div class="flex-1 truncate px-4 py-2 text-sm">
-                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Websites</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="col-span-1 flex rounded-md shadow-sm">
-                                            <div class="flex w-12 flex-shrink-0 items-center justify-center bg-[#666] rounded-l-md text-sm font-medium text-white">
-                                                <i class="text-white text-lg fas fa-id-badge"></i>
-                                            </div>
-                                            <div class="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
-                                                <div class="flex-1 truncate px-4 py-2 text-sm">
-                                                    <a href="#" class="font-medium text-gray-900 hover:text-gray-600">Social media profiles</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                                 @if($user->hasActivePaidSubscription())
 

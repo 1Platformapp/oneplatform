@@ -20,6 +20,14 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
+                                <a href="{{route('agency.dashboard')}}" class="usr_men_quick_each usr_men_setup_wizard">
+                                    <img src="{{asset('images/hire_recommend.gif')}}">
+                                    <div class="usr_men_quick_txt">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-cog"></i>
+                                        </div>My Dashboard
+                                    </div>
+                                </a>
                                 <a href="{{route('profile.setup', ['page' => 'welcome'])}}" class="usr_men_quick_each usr_men_setup_wizard">
                                     <img src="{{asset('images/setup_recommend.gif')}}">
                                     <div class="usr_men_quick_txt">
@@ -28,23 +36,13 @@
                                         </div>Profile Setup Wizard
                                     </div>
                                 </a>
-                                @if(!Auth::user()->expert && Auth::user()->apply_expert != 2 && !Auth::user()->agent)
-                                <div class="usr_men_quick_each usr_men_setup_wizard">
-                                    <img src="{{asset('images/hire_recommend.gif')}}">
-                                    <div class="usr_men_quick_txt">
-                                        <div class="usr_men_quick_ic">
-                                            <i class="fas fa-handshake"></i>
-                                        </div>Hire Professional Agent
-                                    </div>
-                                </div>
-                                @endif
                             </div>
                         </div>
                     </div>
                     @endif
                     <div class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
-                            My Website
+                            Personal
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
@@ -64,6 +62,15 @@
                                         Add Media Info
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
+                        <div class="usr_men_cat_head">
+                            My Website
+                        </div>
+                        <div class="usr_men_cat_body">
+                            <div class="usr_men_quicks">
                                 <div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fa fa-paint-brush"></i>
@@ -120,14 +127,14 @@
                                         Social Media
                                     </a>
                                 </div>
-                                <div class="usr_men_quick_each">
+                                <!--<div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-donate"></i>
                                     </div>
                                     <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
                                         My Subscribers
                                     </a>
-                                </div>
+                                </div>!-->
                             </div>
                         </div>
                     </div>
