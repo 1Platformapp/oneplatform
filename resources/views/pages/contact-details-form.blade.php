@@ -329,7 +329,7 @@
                         The brief is private and is only visible to you and your contact<br>
                         Press the <i class="fa fa-pencil"></i> to add your answers, then click SAVE button to save each answer<br>
                         After making changes to this form press
-                        <span class="notify_now"><i class="fa fa-bell"></i> Notify Now</span>
+                        <button class="notify_now bg-indigo-600 p-2 rounded-md mx-1 !text-white">Notify my contact</button>
                         to send notification to {{$isAllowed == 'agent' ? $contact->contactUser->name : $agent->name}}
                     </div>
                 </div>
