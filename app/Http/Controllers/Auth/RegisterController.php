@@ -218,7 +218,7 @@ class RegisterController extends Controller
                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         $fcm = new PushNotificationController();
-                        $return = $fcm->send($device->device_id, 'New user registration', 'Email: '.$user->email, $device->platform);
+                        $return = $fcm->send($device->device_id, 'New user registration', 'Email: '.$user->email, $device->platform, null, null);
                     }
                 }
             }

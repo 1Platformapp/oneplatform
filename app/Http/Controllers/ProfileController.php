@@ -7134,7 +7134,7 @@ class ProfileController extends Controller
                         Session::flash('success', $message);
                         Session::flash('page', 'orders');
                         $redirectUrl = route('agency.dashboard');
-
+                        $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
                         if(count($seller->devices)){
 
                             foreach ($seller->devices as $device) {
@@ -7142,7 +7142,7 @@ class ProfileController extends Controller
                                 if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                     $fcm = new PushNotificationController();
-                                    $return = $fcm->send($device->device_id, 'New sale from '.$buyer->firstName(), str_limit('Item purchased from your chat store', 24), $device->platform);
+                                    $return = $fcm->send($device->device_id, 'New sale from '.$buyer->firstName(), str_limit('Item purchased from your chat store', 24), $device->platform, 'sale', $redUrl);
                                 }
                             }
                         }
@@ -7258,7 +7258,7 @@ class ProfileController extends Controller
                     Session::flash('success', $message);
                     Session::flash('page', 'orders');
                     $redirectUrl = Auth::check() ? route('agency.dashboard') : route('user.home',['params' => $seller->username]);
-
+                    $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
                     if(count($seller->devices)){
 
                         foreach ($seller->devices as $device) {
@@ -7266,7 +7266,7 @@ class ProfileController extends Controller
                             if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                 $fcm = new PushNotificationController();
-                                $return = $fcm->send($device->device_id, 'New sale from '.$buyer->firstName(), str_limit('Item purchased from your online store', 24), $device->platform);
+                                $return = $fcm->send($device->device_id, 'New sale from '.$buyer->firstName(), str_limit('Item purchased from your online store', 24), $device->platform, 'sale', $redUrl);
                             }
                         }
                     }

@@ -213,12 +213,13 @@ class UserChat extends Authenticatable
 
         if(count($recipients)){
 
+            $redirectUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'contact-management']));
             foreach ($recipients as $recip) {
 
                 $diffMins = isset($currentChat) && $currentChat->first() ? $currentChat->first()->created_at->diffInMinutes() : 0;
                 if($diffMins >= 15){
                     $result = Mail::to($recip->email)->bcc(Config('constants.bcc_email'))->send(new Agent($this));
-                    $recip->sendAppNotifications('Message from '.$sender->firstName(), str_limit($this->message, 24));
+                    $recip->sendAppNotifications('Message from '.$sender->firstName(), str_limit($this->message, 24), 'chat', $redirectUrl);
                 }
 
                 $recip->sendWebNotification($sender->id, $this->id);

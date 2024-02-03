@@ -175,16 +175,18 @@ class BispokeLicenseController extends Controller
 
                         $chat->save();
 
+                        $redirectUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'contact-management']));
+
                         if($recipient && $type == 'first'){
                             $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new License('bespokeOffer', $recipient, $user, $chat));
                             if(count($recipient->devices)){
 
-                            	foreach ($recipient->devices as $device) {
+                                foreach ($recipient->devices as $device) {
 
                             		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                             			$fcm = new PushNotificationController();
-                            			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform);
+                            			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
                             		}
                             	}
                             }
@@ -200,7 +202,7 @@ class BispokeLicenseController extends Controller
                                 		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                 			$fcm = new PushNotificationController();
-                                			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform);
+                                			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
                                 		}
                                 	}
                                 }
@@ -225,7 +227,7 @@ class BispokeLicenseController extends Controller
                                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                                         $fcm = new PushNotificationController();
-                                        $return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform);
+                                        $return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
                                     }
                                 }
                             }
@@ -241,7 +243,7 @@ class BispokeLicenseController extends Controller
                             		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                             			$fcm = new PushNotificationController();
-                            			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform);
+                            			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
                             		}
                             	}
                             }
@@ -268,7 +270,7 @@ class BispokeLicenseController extends Controller
                         	        		if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         	        			$fcm = new PushNotificationController();
-                        	        			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform);
+                        	        			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
                         	        		}
                         	        	}
                         	        }

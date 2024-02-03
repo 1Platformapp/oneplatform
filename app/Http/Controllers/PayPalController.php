@@ -60,7 +60,7 @@ use Response;
 
 class PayPalController extends Controller
 {
-    
+
     public static function client()
     {
         return new PayPalHttpClient(self::environment());
@@ -99,7 +99,7 @@ class PayPalController extends Controller
 
         $client = self::client();
         $response = $client->execute($request);
-        
+
         return json_decode(json_encode($response->result, JSON_PRETTY_PRINT), TRUE);
     }
 
@@ -164,7 +164,7 @@ class PayPalController extends Controller
 
         $response = self::paypalCall($url, $headers, $fields);
         $array = json_decode(json_encode($response, JSON_PRETTY_PRINT), TRUE);
-        
+
         return $array;
     }
 
@@ -199,7 +199,7 @@ class PayPalController extends Controller
 
         $response = self::paypalCall($url, $headers, $fields);
         $array = json_decode(json_encode($response, JSON_PRETTY_PRINT), TRUE);
-        
+
         return $array;
     }
 
@@ -234,7 +234,7 @@ class PayPalController extends Controller
 
             $error = 'No user is logged in';
         }
-        
+
         return ['error' => $error, 'success' => $success];
     }
 
@@ -249,7 +249,7 @@ class PayPalController extends Controller
         $fields = '';
 
         $response = self::paypalCall($url, $headers, $fields, 'GET');
-        
+
         return json_decode(json_encode($response, JSON_PRETTY_PRINT), TRUE);
     }
 
@@ -264,7 +264,7 @@ class PayPalController extends Controller
         $fields = '';
 
         $response = self::paypalCall($url, $headers, $fields, 'GET');
-        
+
         return json_decode(json_encode($response, JSON_PRETTY_PRINT), TRUE);
     }
 
@@ -279,7 +279,7 @@ class PayPalController extends Controller
         $fields = '';
 
         $response = self::paypalCall($url, $headers, $fields, 'GET');
-        
+
         return json_decode(json_encode($response, JSON_PRETTY_PRINT), TRUE);
     }
 
@@ -327,7 +327,7 @@ class PayPalController extends Controller
             $success = '1';
 
             foreach($array['links'] as $link) {
-                
+
                 if($link['rel'] == 'approve'){
 
                     $redirectUrl = $link['href'];
@@ -358,7 +358,7 @@ class PayPalController extends Controller
                 if($order['status'] == 'CREATED'){
 
                     foreach($order['links'] as $link) {
-                    
+
                         if($link['rel'] == 'approve'){
 
                             return redirect($link['href']);
@@ -373,7 +373,7 @@ class PayPalController extends Controller
                 }else if($order['status'] == 'PAYER_ACTION_REQUIRED'){
 
                     foreach($order['links'] as $link) {
-                        
+
                         if($link['rel'] == 'payer-action'){
 
                             return redirect($link['href']);
@@ -394,7 +394,7 @@ class PayPalController extends Controller
                     if($response['status'] == 'COMPLETED'){
 
                         foreach ($response['purchase_units'] as $unit) {
-                                
+
                             $email = $phoneNumber = $password = '';
                             if($unit['reference_id'] == 'seller'){
 
@@ -444,7 +444,7 @@ class PayPalController extends Controller
                             'applicationfeeid' => null,
                             'failedcheckout' => 0,
                             'free' => '0',
-                        ]; 
+                        ];
 
                         $buyerUserResponse = $projectController->createBuyerUser($sellerUser, $paymentData);
 
@@ -500,8 +500,8 @@ class PayPalController extends Controller
             $email = $request->email;
 
             $paymentData = [
-                'firstname' => $firstName, 
-                'surname' => $lastName, 
+                'firstname' => $firstName,
+                'surname' => $lastName,
                 'email' => $email,
                 'country' => 0,
                 'city' => 0,
@@ -564,7 +564,7 @@ class PayPalController extends Controller
                         if(isset($subscription['id'])){
 
                             foreach($subscription['links'] as $link) {
-                                
+
                                 if($link['rel'] == 'approve'){
 
                                     $redirectUrl = $link['href'];
@@ -604,7 +604,7 @@ class PayPalController extends Controller
 
                     $planId = $paypalSubscription['plan_id'];
                     $paypalPlan = self::readplan($planId);
-                    
+
                     $buyerUser = Auth::user();
                     $sellerUser = User::find($paypalSubscription['custom_id']);
 
@@ -672,11 +672,12 @@ class PayPalController extends Controller
                     $userNotification = new UserNotificationController();
                     $request->request->add(['user' => $sellerUser->id, 'customer' => $buyerUser->id, 'type' => 'sale', 'source_id' => $stripeCheckOut->id]);
                     $response = json_decode($userNotification->create($request), true);
+                    $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
                     if(count($sellerUser->devices)){
                         foreach ($sellerUser->devices as $device) {
                             if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
                                 $fcm = new PushNotificationController();
-                                $return = $fcm->send($device->device_id, 'New sale from '.$buyerUser->firstName(), str_limit('Items purchased from your 1platform store', 24), $device->platform);
+                                $return = $fcm->send($device->device_id, 'New sale from '.$buyerUser->firstName(), str_limit('Items purchased from your 1platform store', 24), $device->platform, 'sale', $redUrl);
                             }
                         }
                     }
@@ -706,7 +707,7 @@ class PayPalController extends Controller
                         }
                     }else{
                         Session::flash('page', 'orders');
-                        $redirectUrl = route('profile'); 
+                        $redirectUrl = route('profile');
                     }
 
                     return redirect($redirectUrl);
@@ -792,7 +793,7 @@ class PayPalController extends Controller
         }else{
         	$email = [];
         }
-        
+
         $description = 'com#'.str_limit($userData['comment'], 70).'_name#'.$userData['name'].'_sur#'.$userData['surname'];
         if(isset($userData['email'])){
             $description .= '_em#'.$userData['email'];
@@ -983,7 +984,7 @@ class PayPalController extends Controller
     }
 
     public static function getAccessToken()
-    {      
+    {
         $userAuthorization = base64_encode(getenv('PAYPAL_CLIENT_ID').':'.getenv('PAYPAL_CLIENT_SECRET'));
         $url = Config('constants.paypal_api_uri').'/v1/oauth2/token';
         $headers = [
@@ -1000,7 +1001,7 @@ class PayPalController extends Controller
     }
 
     public static function getSignupLink(Request $request, $userId)
-    {      
+    {
 
         $user = User::find($userId);
         $emailAddress = $user->email;

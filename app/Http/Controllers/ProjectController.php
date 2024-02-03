@@ -2218,7 +2218,7 @@ class ProjectController extends Controller
             }
 
             $result = Mail::to($sellerUser->email)->bcc(Config('constants.bcc_email'))->send(new InstantCheckout('seller', $stripeCheckOut));
-
+            $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
             CommonMethods::deleteCustomerBasket();
             if($sellerUser->isCotyso() && $buyerUser->password == 'iscotyso'){
                 $buyerUser->email = NULL;
@@ -2235,7 +2235,7 @@ class ProjectController extends Controller
                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         $fcm = new PushNotificationController();
-                        $return = $fcm->send($device->device_id, 'New sale from '.$buyerUser->firstName(), str_limit('Items purchased from your 1platform store', 24), $device->platform);
+                        $return = $fcm->send($device->device_id, 'New sale from '.$buyerUser->firstName(), str_limit('Items purchased from your 1platform store', 24), $device->platform, 'sale', $redUrl);
                     }
                 }
             }
@@ -2273,7 +2273,7 @@ class ProjectController extends Controller
 
             $result = Mail::to($sellerUser->email)->bcc(Config('constants.bcc_email'))->send(new CrowdfundCheckout('seller', $stripeCheckOut));
             $result = Mail::to($buyerUser->email)->bcc(Config('constants.bcc_email'))->send(new CrowdfundCheckout('buyer', $stripeCheckOut));
-
+            $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
             CrowdfundBasket::where(['customer_id' => $buyerUser->id, 'user_id' => $sellerUser->id])->delete();
 
             if(count($sellerUser->devices)){
@@ -2283,7 +2283,7 @@ class ProjectController extends Controller
                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                         $fcm = new PushNotificationController();
-                        $return = $fcm->send($device->device_id, 'New sale from '.$buyerUser->firstName(), str_limit('Corwdfund items purchased from your 1platform store', 24), $device->platform);
+                        $return = $fcm->send($device->device_id, 'New sale from '.$buyerUser->firstName(), str_limit('Corwdfund items purchased from your 1platform store', 24), $device->platform, 'sale', $redUrl);
                     }
                 }
             }

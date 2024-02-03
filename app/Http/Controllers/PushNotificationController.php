@@ -113,7 +113,7 @@ class PushNotificationController extends Controller
 
     public function __construct(){
 
-        
+
     }
 
     public function register(Request $request){
@@ -171,7 +171,7 @@ class PushNotificationController extends Controller
         print($output);exit;*/
     }
 
-    public function send($deviceId, $title, $message, $platform){
+    public function send($deviceId, $title, $message, $platform, $type = null, $redirectUrl = null){
 
         $from = Config('constants.fcmServerKey');
 
@@ -193,12 +193,19 @@ class PushNotificationController extends Controller
             'to' => $deviceId,
             'notification' => $notification
         ];
-        
+
+        if ($type && $redirectUrl) {
+            $fields['data'] = [
+                'type' => $type,
+                'redirect_url' => $redirectUrl
+            ];
+        }
+
         $headers = array(
             'Authorization: key='.$from,
             'Content-Type: application/json'
         );
-        
+
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
         curl_setopt($ch,CURLOPT_POST, true);

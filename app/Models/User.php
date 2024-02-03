@@ -1876,7 +1876,7 @@ class User extends Authenticatable
         return $return;
     }
 
-    public function sendAppNotifications($title, $body){
+    public function sendAppNotifications($title, $body, $type, $redirectUrl){
 
         if(count($this->devices)){
 
@@ -1885,7 +1885,7 @@ class User extends Authenticatable
                 if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
 
                     $fcm = new PushNotificationController();
-                    $return = $fcm->send($device->device_id, $title, $body, $device->platform);
+                    $return = $fcm->send($device->device_id, $title, $body, $device->platform, $type, $redirectUrl);
                 }
             }
         }
