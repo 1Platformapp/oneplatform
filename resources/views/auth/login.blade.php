@@ -265,12 +265,12 @@
                                 <div class="auth_btn_helper">
                                     <a href="{{ route('register') }}">Create an account</a>
                                 </div>
-                                <a href="{{asset('login/google')}}" class="cursor-pointer bg-black h-[28px] mt-4 rounded-lg gap-3 flex flex-row items-center justify-center">
+                                <!--<a href="{{asset('login/google')}}" class="cursor-pointer bg-black h-[28px] mt-4 rounded-lg gap-3 flex flex-row items-center justify-center">
                                     <span class="text-white mt-[1px]">
                                         <i class="fab fa-google"></i>
                                     </span>
                                     <span class="text-white">Continue with google</span>
-                                </a>
+                                </a>!-->
                             </div>
                         </form>
                     </div>

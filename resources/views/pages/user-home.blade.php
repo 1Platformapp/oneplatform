@@ -1,35 +1,35 @@
 @extends('templates.advanced-template')
 
-@section('pagetitle') 
+@section('pagetitle')
     @if($user->profile->seo_title != '')
-        {{$user->profile->seo_title}} 
-    @else 
-        {{$user->name}} - Home 
+        {{$user->profile->seo_title}}
+    @else
+        {{$user->name}} - Home
     @endif
 @endsection
 
-@section('pagekeywords') 
+@section('pagekeywords')
     @if($user->profile->seo_keywords != '')
         <meta name="keywords" content="{{$user->profile->seo_keywords}}" />
     @endif
 @endsection
 
-@section('pagedescription') 
+@section('pagedescription')
     @if($user->profile->seo_description != '')
         <meta name="description" content="{{$user->profile->seo_description}}"/>
-    @else 
+    @else
         <meta name="description" content="{{strip_tags(preg_replace('/\s+/', ' ', $userPersonalDetails['storyText']))}}"/>
     @endif
 @endsection
 
-@section('seocontent') 
+@section('seocontent')
 @endsection
 
 @section('page-level-css')
 
     <link rel="stylesheet" href="{{asset('css/user-home.min.css?v=3.7')}}"></link>
     <link rel="stylesheet" href="{{asset('css/portfolio.min.css')}}"></link>
-    
+
     @if($user->home_layout == 'background')
         <link rel="stylesheet" href="{{asset('css/user_home_background.min.css')}}"></link>
     @endif
@@ -41,7 +41,7 @@
 @stop
 
 @section('page-level-js')
-    
+
     <script defer src="/js/video-player.js"></script>
     <script defer src="/js/feat_items_scroller.js"></script>
 
@@ -138,7 +138,7 @@
 
 @section('imp-notice')
     @if(!$user->hasActivePaidSubscription() && !$user->networkAgent())
-    
+
     @endif
 @stop
 
@@ -192,10 +192,10 @@
                             <a href="{{route('item.share.track', ['itemSlug' => str_slug($item->song_name)])}}">Listen</a>
                         @else
                             <a href="{{route('item.share.product', ['itemSlug' => str_slug($item->title)])}}">View</a>
-                        @endif 
+                        @endif
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     @endif
 
@@ -234,14 +234,14 @@
 
     @if (Session::has('error'))
         <div class="error_span">
-            <i class="fa fa-times-circle"></i> 
+            <i class="fa fa-times-circle"></i>
             {{ (is_array(Session::get('error'))) ? Session::get('error')[0] : Session::get('error') }}
         </div>
     @endif
 
     @if (Session::has('success'))
         <div class="success_span">
-            <i class="fa fa-check-circle"></i> 
+            <i class="fa fa-check-circle"></i>
             @if(is_array(Session::get('success')))
                 {!! Session::get('success')[0] !!}
             @else
@@ -265,14 +265,14 @@
 @section('top-center')
 
     <div class="ch_center_outer user_hm_center">
-        <aside class="top_info_box hide_on_mobile"> 
+        <aside class="top_info_box hide_on_mobile">
             <div class="top_info_right_icon">
                 <i class="fa fa-share"></i>
-            </div> 
+            </div>
         </aside>
         <div class="tp_center_video_outer">
             <div class="jp-gui">
-                
+
                 <video width="578" height="325" style="width: 100%; height: 100%;" class="vid_preloader {{$user->home_layout == 'background' ? 'instant_hide' : ''}}" preload="none">
                     <source type="video/youtube" src="https://www.youtube.com/watch?v={{ $defaultVideoId }}" />
                 </video>
@@ -289,7 +289,7 @@
                     <div class="each_tab_btn tab_btn_social {{count($user->hidden_tabs_home) && in_array('4', $user->hidden_tabs_home) ? 'disabled' : ''}} {{$user->default_tab_home == 4 ? 'true_active' : ''}}" data-show="#tabd4">
                         <div class="border"></div>
                     </div>
-                    @if($userCampaignDetails['campaignIsLive'] == '1' && $userCampaignDetails['campaignStatus'] == 'active') 
+                    @if($userCampaignDetails['campaignIsLive'] == '1' && $userCampaignDetails['campaignStatus'] == 'active')
                     @php $hasCrowdfunder = 1 @endphp
                     @else
                     @php $hasCrowdfunder = 0 @endphp
@@ -489,12 +489,12 @@
                     <li>
                         <a onclick="return facebookShare('url')" class="ch_sup_fb" href="javascript:void(0)">
                             <i class="fab fa-facebook-f"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a onclick="return twitterShare('url')" class="ch_sup_tw" href="javascript:void(0)">
                             <i class="fab fa-twitter"></i>
-                        </a> 
+                        </a>
                     </li>
                     @if($user->feature_tab_home)
                     <li>
@@ -510,20 +510,20 @@
                             @elseif($user->feature_tab_home == 6)
                             <i class="fa fa-ticket-alt"></i>
                             @endif
-                        </a> 
+                        </a>
                     </li>
                     @endif
                     @if(!$user->isCotyso())
                     <li>
                         <a class="ch_sup_chat {{$user->chat_switch == 1 ? '' : 'chart_disabled'}}" href="javascript:void(0)">
                             <i class="fa fa-comments"></i>
-                        </a> 
+                        </a>
                     </li>
                     @endif
                     <li>
                         <a class="ch_sup_fb full_support_me {{$hasCrowdfunder?'':'chart_disabled'}}" href="{{$hasCrowdfunder ? route('user.project', ['username' => $user->username]) : 'javascript:void(0)'}}">
                             <img alt="Support {{$user->name}}" src="{{asset('images/fa-users.png')}}">
-                        </a> 
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -536,7 +536,7 @@
         <div class="panel user_follow_outer {{!Auth::check() ? 'unauth' : ''}}">
             <div class="user_follow_btn">
                 <div class="user_follow_inner">
-                    <i class="fa fa-rss"></i> 
+                    <i class="fa fa-rss"></i>
                     {{Auth::check() && $user && Auth::user()->isFollowerOf($user) ? 'Following' : 'Follow' }}
                 </div>
             </div>
@@ -544,8 +544,8 @@
         @if(count($user->services))
             @include('parts.user-services-panel', ['user' => $user])
         @endif
-        @php 
-            $userNews = \App\Models\UserNews::where(['user_id' => $user->id])->orderBy('featured' , 'desc')->get() 
+        @php
+            $userNews = \App\Models\UserNews::where(['user_id' => $user->id])->orderBy('featured' , 'desc')->get()
         @endphp
         @if(count($userNews))
         <div class="panel news_updates_outer colio_outer colio_dark">
@@ -654,7 +654,7 @@
         @if($basket && $basket->contains('purchase_type', 'subscription') && $basket->contains('user_id', $user->id))
             @php $isSubscribed = 1 @endphp
         @endif
-        <div class="panel user_subscribe_outer colio_outer colio_dark">
+        <!--<div class="panel user_subscribe_outer colio_outer colio_dark">
             @php $encourageBullets = $user->encourage_bullets; @endphp
             <div class="project_rit_btm_bns_otr">
                 <div class="{{ isset($isSubscribed) && $isSubscribed == 1 ? 'proj_rit_btm_list_gray' : 'project_rit_btm_list' }}" id="subscribe_box">
@@ -680,7 +680,7 @@
                     </label>
                 </div>
             </div>
-        </div>
+        </div>!-->
         @endif
         <div class="panel user_short_hand_tab_outer colio_outer colio_dark">
             <div class="colio_header">Quick Links</div>
@@ -789,7 +789,7 @@
         <div class="each_tab_alt_btn tab_alt_btn_social {{count($user->hidden_tabs_home) && in_array('4', $user->hidden_tabs_home) ? 'disabled' : ''}} {{$user->default_tab_home == 4 ? 'true_active' : ''}}" data-target-id="4">
             <div class="border"></div>
         </div>
-        @if($userCampaignDetails['campaignIsLive'] == '1' && $userCampaignDetails['campaignStatus'] == 'active') 
+        @if($userCampaignDetails['campaignIsLive'] == '1' && $userCampaignDetails['campaignStatus'] == 'active')
         @php $hasCrowdfunder = 1 @endphp
         @else
         @php $hasCrowdfunder = 0 @endphp
@@ -812,7 +812,7 @@
 @stop
 
 @section('footer')
-    
+
     @if($user->isCotyso())
         @include('parts.singing-footer')
     @endif

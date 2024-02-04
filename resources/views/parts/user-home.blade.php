@@ -204,12 +204,12 @@
                     }else{
 
                         $('a[href="#tabd2"]').trigger('click');
-                    }                
+                    }
                 }
             }
         });
 
-        
+
     </script>
 
 
@@ -341,7 +341,7 @@
                                             </a>
 
                                         </div>
-                                        
+
                                     </div>
 
                                 </div>
@@ -353,11 +353,11 @@
                                 <div class="player_btm_sec clearfix">
 
                                     <div class="player_bot_user_info">
-                                        @if($userCampaignDetails['campaignAmount'] == 0) 
-                                            Store<br> 
+                                        @if($userCampaignDetails['campaignAmount'] == 0)
+                                            Store<br>
                                             {{$userCampaignDetails['campaignProducts']}}
-                                        @else 
-                                            Target<br> 
+                                        @else
+                                            Target<br>
                                             {{$userCampaignDetails['campaignGoal'] }}
                                          @endif
                                     </div>
@@ -400,16 +400,16 @@
 
                                 <div class="each_tab_btn tab_btn_user_name">
                                     {!! $userPersonalDetails['splitName'] !!}
-                                </div>  
+                                </div>
                                 <div class="each_tab_btn tab_btn_music"></div>
                                 <div class="each_tab_btn tab_btn_fans"></div>
                                 <div class="each_tab_btn tab_btn_social"></div>
                                 <div class="each_tab_btn tab_btn_crowd_fund">
-                                    @if($userCampaignDetails['campaignAmount'] == 0) 
-                                        Store<br> 
+                                    @if($userCampaignDetails['campaignAmount'] == 0)
+                                        Store<br>
                                         {{$userCampaignDetails['campaignProducts']}}
-                                    @else 
-                                        Target<br> 
+                                    @else
+                                        Target<br>
                                         {{$userCampaignDetails['campaignGoal'] }}
                                     @endif
                                 </div>
@@ -450,7 +450,7 @@
 
                                 </div>
 
-                                
+
 
                                 <div id="tabd2" class="ch_tab_det_sec music_sec ">
 
@@ -459,7 +459,7 @@
                                 </div>
 
                                 <div id="tabd3" class="ch_tab_det_sec fans_sec ">
- 
+
                                     <br><br>
                                     <div class="lazy_tab_content"></div>
                                 </div>
@@ -532,7 +532,7 @@
         <div class="panel">
 
             <div class="desktop-only">
-                
+
                 <h2 class="project_name">{{$userPersonalDetails['name']}}'s Store</h2>
 
             </div>
@@ -542,7 +542,7 @@
                 <div class="fund_raise_left">
 
                     <img class="bio_sec_percent_image" src="{{$userPersonalDetails['profileImageCard']}}" alt="#" />
-                    
+
                     <h3 class="project_line">My Music, Products & Licensing</h3>
                     <div class="fund_raise_status"></div>
 
@@ -609,17 +609,17 @@
                     <li>
                         <a onclick="return facebookShare('url')" class="ch_sup_fb" href="javascript:void(0)">
                             <i class="fab fa-facebook-f vertical_center"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a onclick="return twitterShare('url')" class="ch_sup_fb" href="javascript:void(0)">
                             <i class="fab fa-twitter vertical_center"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a class="ch_sup_fb full_support_me" href="{{$userCampaignDetails['campaignAmount'] > 0 ? route('user.project', ['userId' => $user->id]) : 'javascript:void(0)'}}">
                             <i class="fas fa-dollar-sign vertical_center"></i>
-                        </a> 
+                        </a>
                     </li>
                 </ul>
 
@@ -720,9 +720,9 @@
 
         </div>
         @endif
-        
+
         @if($user->subscription_amount != null && $user->subscription_amount > 0)
-        <div class="panel ">
+        <!--<div class="panel ">
             @php $encourageBullets = $user->encourage_bullets; @endphp
             <div class="project_rit_btm_bns_otr">
                 <div class="{{ (!$basket->contains('purchase_type', 'subscription')) ? 'project_rit_btm_list' : 'proj_rit_btm_list_gray' }}" id="subscribe_box">
@@ -743,7 +743,7 @@
                     </label>
                 </div>
             </div>
-        </div>
+        </div>!-->
         @endif
         <div class="panel">
 
@@ -769,7 +769,7 @@
         <div id="user_project_outer" data-link="{{route('user.project', ['id' => $user->id])}}" class="panel card_pro_hover card_pro_click user_hm_rt_btm_otr">
 
             <div class="desktop-only">
-                
+
                 <h2 class="project_name">{{$userCampaignDetails['projectTitle']}}</h2>
 
             </div>
@@ -779,7 +779,7 @@
                 <div class="fund_raise_left">
 
                     <img class="bio_sec_percent_image a_percent" src="{{$userCampaignDetails['mainHeaderImage']}}" alt="#" />
-                    
+
                     <h3 class="project_line">{{$userCampaignDetails['mainHeaderTextOne']}}</h3>
                     <div class="fund_raise_status">{{$userCampaignDetails['mainHeaderTextTwo']}}</div>
 
@@ -856,7 +856,7 @@
                 <a href="javascript:void(0)" data-target-id="tabd4" class="desktop-only trig_click">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{ asset('/images/social_block2.jpg') }}">
                 </a>
-                
+
                 <a href="javascript:void(0)" data-target-id="tab4" class="mobile-only trig_click trig_mobile">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{ asset('/images/social_block2.jpg') }}">
                 </a>
@@ -874,7 +874,7 @@
                 <a href="javascript:void(0)" data-target-id="tabd3" class="desktop-only trig_click">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{ asset('/images/fans_block2.png') }}">
                 </a>
-                
+
                 <a href="javascript:void(0)" data-target-id="tab3" class="mobile-only trig_click trig_mobile">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{ asset('/images/fans_block2.png') }}">
                 </a>
@@ -908,7 +908,7 @@
                 <a href="{{ route('tv') }}" class="desktop-only">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{ asset('/images/audition_tv_block.png') }}">
                 </a>
-                
+
                 <a href="{{ route('tv') }}" class="mobile-only mobile-panel">
                     <p>
                         <img class="defer_loading" src="" data-src="{{ asset('/images/audition_tv_block.png') }}">
@@ -928,7 +928,7 @@
                 <a href="{{ route('live') }}" class="desktop-only">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{ asset('/images/studios_producers_block.png') }}">
                 </a>
-                
+
                 <a href="{{ route('live') }}" class="mobile-only mobile-panel">
                     <p>
                         <img class="defer_loading" style="margin: 0 auto" src="" data-src="{{ asset('/images/studios_producers_block.png') }}">
@@ -948,7 +948,7 @@
                 <a href="{{ route('chart') }}" class="desktop-only">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{ asset('/images/audition_chart_block.png') }}">
                 </a>
-                
+
                 <a href="{{ route('chart') }}" class="mobile-only mobile-panel">
                     <p>
                         <img class="defer_loading" src="" data-src="{{ asset('/images/audition_chart_block.png') }}">
@@ -982,12 +982,12 @@
         <div class="ch_tab_det_outer">
 
             <div class="tab_det_inner tab_det_left_sec right_height_res user_home_left_bar">
-                
+
                 <div style="display: none;" class="lazy_tab_img">
                     <img class="defer_loading" style="margin: 0 auto;" src="" data-src="{{asset('img/lazy_loading.gif')}}">
                 </div>
                 <div id="tab1" class="ch_tab_det_sec bio_sec " style="display: block;">
-            
+
                     <div class="btm_text_stor_outer">
                         <label class="bio_sec_story_title user_campaign_title" style="display: none;">
                             {{$userCampaignDetails['campaignTitle']}}
@@ -1011,16 +1011,16 @@
                     @endif
                 </div>
                 <div id="tab2" class="ch_tab_det_sec desktop-only">
-                    
+
                     <div class="lazy_tab_content"></div>
                 </div>
 
                 <div id="tab3" class="ch_tab_det_sec">
-                    
+
                     <div class="lazy_tab_content"></div>
                 </div>
                 <div id="tab4" class="ch_tab_det_sec">
-                    
+
                     <div class="lazy_tab_content"></div>
                 </div>
                 <a href="#" class="read-more mobile-only">Read more</a>
@@ -1038,7 +1038,7 @@
 
 
 @section('slide')
-    
+
 @stop
 
 
