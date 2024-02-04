@@ -23,7 +23,7 @@
         @endforeach
     </div>
     <div class="my_sub_sec_inner">
-        <h3><span class="head_text text-lg">Questionnaire: {{$skill}}</span></h3>
+        <h3><span class="head_text text-lg">Creative Brief: {{$skill}}</span></h3>
         <form action="{{route('agent.manage.questionnaire')}}" method="POST">
             {{csrf_field()}}
             <input type="hidden" name="skill" value="{{$skill}}">
