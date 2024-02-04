@@ -80,7 +80,7 @@ return [
     'admins' => [
         'developer' => ['name' => 'Ahsan Hanif', 'user_id' => 627],
         'masteradmin' => ['name' => 'Master Admin', 'user_id' => 1],
-        '1platformagent' => ['name' => 'Stuart Leadbetter', 'user_id' => 717],
+        '1platformagent' => ['name' => 'Stuart Leadbetter', 'user_id' => 727],
     ],
 
     'cotysoAccounts' => [ 1 ],

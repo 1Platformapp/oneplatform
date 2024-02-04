@@ -1898,5 +1898,30 @@ class User extends Authenticatable
         $request->request->add(['user' => $this->id,'customer' => $senderId, 'type' => 'chat','source_id' => $chatId]);
         $response = json_decode($userNotification->create($request), true);
     }
+
+    public function createDefaultQuestions(){
+
+        $platformManager = User::find(config('constants.admins')['1platformagent']['user_id']);
+        $skills = Skill::all();
+        foreach($skills as $skill){
+            $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill->value, 'agent_id' => $platformManager->id])->first();
+
+            if ($agentQuestionnaire) {
+                $newQuestionnaire = new AgentQuestionnaire();
+                $newQuestionnaire->agent_id = $this->id;
+                $newQuestionnaire->skill = $skill->value;
+                $newQuestionnaire->save();
+
+                foreach ($agentQuestionnaire->questions as $question) {
+
+                    $newQuestion = new AgentQuestionnaireElement();
+                    $newQuestion->agent_questionnaire_id = $newQuestionnaire->id;
+                    $newQuestion->type = 'text';
+                    $newQuestion->value = $question->value;
+                    $newQuestion->save();
+                }
+            }
+        }
+    }
 }
 

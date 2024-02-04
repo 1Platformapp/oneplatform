@@ -202,6 +202,7 @@ class RegisterController extends Controller
                 $response = json_decode($userNotification->create($request), true);
 
                 Auth::login($user);
+                $user->createDefaultQuestions();
                 return redirect(route('agency.dashboard'));
             }
 
@@ -234,6 +235,8 @@ class RegisterController extends Controller
             $userInternalSubscription->subscription_package = 'silver_0_0';
             $userInternalSubscription->subscription_status = 1;
             $userInternalSubscription->save();
+
+            $user->createDefaultQuestions();
 
             return redirect($url);
         }
