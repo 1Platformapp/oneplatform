@@ -326,7 +326,7 @@
     @endif
 
     @php $packages = config('constants.user_internal_packages') @endphp
-    <div class="hm_video_sec_outer">
+    <!--<div class="hm_video_sec_outer">
 
         <div class="video_upper_sec">
             <div class="auto_content">
@@ -602,7 +602,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>!-->
 @stop
 
 

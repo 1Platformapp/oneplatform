@@ -194,7 +194,7 @@
                                 @if($user->hasActivePaidSubscription())
 
                                 @else
-                                <div class="flex flex-col gap-4 mt-4 mx-2">
+                                <div class="flex flex-col gap-4 mt-4 mx-2 hide_on_mobile">
                                     <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
@@ -254,7 +254,7 @@
                                 @if($user->hasActivePaidSubscription())
 
                                 @else
-                                <div class="flex flex-col gap-4 my-4 mx-2">
+                                <div class="flex flex-col gap-4 my-4 mx-2 hide_on_mobile">
                                     <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
