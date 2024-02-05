@@ -57,11 +57,16 @@
                     <ul>
                         <li>Here you can send your contact an approval to be one of the your contacts in your network</li>
                         <li>
-                            If you want to recieve commission from work connected with your contact then add the perdentage here.
+                            If you want to recieve commission from work connected with your contact then add the percentage here.
                             This commission is paid to you from any sales you create in a network chat only not from the user's own account.
                             Refer to <span class="join_me_video_btn cursor-pointer hover:underline text-blue-500">this video</span> for further details
                         </li>
-                        <li class="join_me_video_holder"></li>
+                        <li class="join_me_video_holder instant_hide flex flex-col gap-2 border p-2">
+                            <div class="ml-auto text-lg join_me_close_btn cursor-pointer">
+                                <i class="fa fa-times"></i>
+                            </div>
+                            <div class="inner"></div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -76,27 +81,27 @@
             <input type="hidden" name="send_email" value="0">
             <div class="px-4 py-6 sm:p-8">
                 <div class="pro_stream_input_outer">
+                    <div class="text-gray-500 font-medium mb-1 text-md">Add commision percentage (optional, leave blank if does not apply)</div>
                     <div class="pro_stream_input_each">
-                        <input value="{{$contact->commission}}" placeholder="Your Commission (in %age)" type="number" class="pro_stream_input" name="pro_contact_commission" />
+                        <input data-has-terms="{{ $contact->terms && $contact->terms != '' ? '1' : '0' }}" {{ $contact->approved ? 'disabled' : ''}} value="{{$contact->commission}}" placeholder="Your Commission (in %age)" type="number" class="pro_stream_input pro_contact_commission" name="pro_contact_commission" />
                     </div>
+                    <div class="text-gray-500 font-medium mt-2 mb-1 text-md">Add your terms and conditions</div>
                     <div class="pro_stream_input_each">
-                    <textarea placeholder="Hey [Recipient's Name],
+                    <textarea type="text" class="pro_contact_textarea" name="pro_contact_terms">@if($contact->terms && $contact->terms != ''){{ $contact->terms }}@elseif(!$contact->approved) Hi
 
-I hope this message finds you well! I'm excited to invite you to connect with me on the 1Platform App, a fantastic tool that makes networking a breeze.
+Hope you are doing well! I wanted to invite you to connect with me on the 1Platform App. It is a cool tool that makes networking easy.
 
-If there's ever a project or collaboration opportunity where I think we could team up, you'll receive notifications. I'll receive the agreed commission for any work created through our network chat. Don't worry; using the platform directly for your personal needs won't be affected—this commission is specific to collaborations in our chat area. To learn more about the commission feature, check out this explanatory video: [Insert URL].
+If there is ever a project or anything where I think we could team up, you will get a heads-up through notifications. We can also chat right there in the app.
 
-We can also chat conveniently right there in the app.
+Once you are in, you can set up your account and use all the features for your career stuff.
 
-Once you're on board, feel free to set up your account and explore all the features tailored for your career.
-
-Looking forward to connecting!" type="text" class="pro_contact_textarea" name="pro_contact_terms">{{$contact->terms}}</textarea>
+Excited to have you on board!  @endif</textarea>
                     </div>
                 </div>
             </div>
             <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
                 @if(!$contact->approved)
-                <button type="button" class="edit_with_action edit_and_send_agree rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                <button type="button" class="edit_with_action edit_and_send_agree rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Send to contact</button>
                 @endif
             </div>
         </form>
@@ -204,11 +209,15 @@ Looking forward to connecting!" type="text" class="pro_contact_textarea" name="p
     </div>
 </div>
 
-
+<input type="text" id="myInput" onchange="handleInputChange()">
 <script>
 
     $('.join_me_video_btn').click(function(){
-        $(this).closest('ul').find('.join_me_video_holder').html('<iframe width="420" height="315" src="https://www.youtube.com/embed/P8BcCrT6sxI"></iframe>');
+        $(this).closest('ul').find('.join_me_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/P8BcCrT6sxI"></iframe>');
+    });
+
+    $('.join_me_close_btn').click(function(){
+        $(this).closest('.join_me_video_holder').addClass('instant_hide');
     });
 
 </script>

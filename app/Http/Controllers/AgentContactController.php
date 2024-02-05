@@ -287,6 +287,8 @@ class AgentContactController extends Controller
                 $result = Mail::to($contact->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($contact->agentUser, $contact, [], 'create'));
                 $contact->agreement_sign = 'sent';
                 $contact->save();
+
+                $successMessage = 'Your contact has been sent an email with approval';
             }else if($sendEmail == '2'){
 
                 $result = Mail::to($contact->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($contact->agentUser, $contact, [], 'questionnaire'));
@@ -316,13 +318,20 @@ class AgentContactController extends Controller
                 $userNotification = new UserNotificationController();
                 $request->request->add(['user' => $contact->contactUser->id, 'customer' => $contact->agentUser->id, 'type' => 'contact_questionnaire', 'source_id' => $contact->id]);
                 $response = json_decode($userNotification->create($request), true);
+
+                $successMessage = 'Your contact has been sent an email';
             }
         }else{
 
             return redirect()->back()->with('error', 'no contact found');
         }
 
-        return Redirect::back();
+        if (isset($successMessage)) {
+
+            return redirect()->back()->with('success', $successMessage);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function approveAgreement(Request $request, $id, $agentId){

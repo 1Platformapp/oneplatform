@@ -212,6 +212,20 @@
 
     $('document').ready(function(){
 
+        $('body').delegate( "input.pro_contact_commission", "keyup", function(e){
+
+            let data = '';
+
+            var value = $(this).val();
+            if (value != '' && value != 0 && $(this).attr('data-has-terms') == '0') {
+                data = 'Hi\n\nI hope this message finds you well! I am excited to invite you to connect with me on the 1Platform App, a fantastic tool that makes networking a breeze.\n\nIf there is ever a project or collaboration opportunity where I think we could team up, you will receive notifications. I will receive the agreed commission for any work created through our network chat. Do not worry; using the platform directly for your personal needs will not be affected—this commission is specific to collaborations in our chat area. To learn more about the commission feature, check out this explanatory video: [Insert URL].\n\nWe can also chat conveniently right there in the app.\n\nOnce you are on board, feel free to set up your account and explore all the features tailored for your career.\n\nLooking forward to connecting!';
+            } else if ((value == '' || value != 0) && $(this).attr('data-has-terms') == '0') {
+                data = 'Hi\n\nHope you are doing well! I wanted to invite you to connect with me on the 1Platform App. It is a cool tool that makes networking easy.\n\nIf there is ever a project or anything where I think we could team up, you will get a heads-up through notifications. We can also chat right there in the app.\n\nOnce you are in, you can set up your account and use all the features for your career stuff.\n\nExcited to have you on board!';
+            }
+
+            $(this).closest('.pro_stream_input_outer').find('textarea').html(data);
+        });
+
         setTimeout(function(){
             $('.m_btn_chat:first').trigger('click');
         }, 100);
