@@ -217,7 +217,7 @@ Excited to have you on board!  @endif</textarea>
     });
 
     $('.join_me_close_btn').click(function(){
-        $(this).closest('.join_me_video_holder').addClass('instant_hide');
+        $(this).closest('.join_me_video_holder').addClass('instant_hide').find('.inner').html('');
     });
 
 </script>
