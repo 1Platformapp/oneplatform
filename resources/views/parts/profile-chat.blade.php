@@ -114,7 +114,7 @@
                                 <div class="que-stages stage-one">
                                     <ul role="list" class="grid xs2:grid-cols-2 sm:grid-cols-4 gap-x-4">
                                         @foreach($skills as $skill)
-                                        <li data-title="{{$skill->brief_title}}" data-skill="{{$skill->id}}" class="relative questionnaire-skill flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200 cursor-pointer">
+                                        <li data-title="{{$skill->brief_title}}" data-skill="{{$skill->value}}" class="relative questionnaire-skill flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200 cursor-pointer">
                                             <div class="flex w-full items-center text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900">
                                                 {{$skill->value}}
                                             </div>
