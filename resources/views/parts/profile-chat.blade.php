@@ -102,12 +102,8 @@
                                 <div class="pro_music_search pro_music_info no_border">
                                     <div class="pro_note">
                                         <ul>
-                                            <li>Easy Collaboration: Users ask customized questions for better teamwork.</li>
-                                            <li>Success Foundation: Asking the right questions lays the groundwork for successful collaborations.</li>
-                                            <li>Quick Attachment: Link the Creative Brief to a contact easily in the "Edit Contact" section.</li>
-                                            <li>Email Alerts: Contacts receive a personalized link to the Creative Brief via email.</li>
-                                            <li>Simple Submission: Easily fill out the Creative Brief through the provided link.</li>
-                                            <li>Instant Updates: Get timely alerts when the contact submits the completed Creative Brief.</li>
+                                            <li>Enable seamless collaboration by attaching Creative Briefs easily for your Contacts.</li>
+                                            <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion. Add video url using here same setup as the (add perecntage video on edit contact)</li>
                                         </ul>
                                     </div>
                                 </div>
