@@ -678,10 +678,11 @@ class AgentContactController extends Controller
         if($request->has('skill')){
 
             $skill = $request->get('skill');
+            $title = $request->get('title');
 
-            $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill, 'agent_id' => $agent->id])->first();
+            $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill, 'title' => $title, 'agent_id' => $agent->id])->first();
 
-            $html = \View::make('parts.agent-questionnaire', ['skill' => $skill, 'questionnaire' => $agentQuestionnaire])->render();
+            $html = \View::make('parts.agent-questionnaire', ['skill' => $skill, 'title' => $title, 'questionnaire' => $agentQuestionnaire])->render();
 
             return json_encode(['data' => $html, 'success' => 1]);
         }else{
