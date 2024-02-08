@@ -717,6 +717,7 @@ class AgentContactController extends Controller
         if($request->has('skill')){
 
             $skill = $request->get('skill');
+            $title = $request->get('title');
             $questions = $request->get('question');
 
             $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill, 'agent_id' => $agent->id])->first();
@@ -725,6 +726,7 @@ class AgentContactController extends Controller
                 $agentQuestionnaire = new AgentQuestionnaire();
                 $agentQuestionnaire->agent_id = $agent->id;
                 $agentQuestionnaire->skill = $skill;
+                $agentQuestionnaire->brief_title = $title;
                 $agentQuestionnaire->save();
             }
 

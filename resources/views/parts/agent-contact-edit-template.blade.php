@@ -135,7 +135,7 @@ Excited to have you on board!  @endif</textarea>
                             <option value="">Choose questionnaire</option>
                             @if(count($user->questionnaires))
                                 @foreach($user->questionnaires as $questionnaire)
-                                <option {{$questionnaire->id == $contact->questionnaire_id ? 'selected' : ''}} value="{{$questionnaire->id}}">{{$questionnaire->skill}}</option>
+                                <option {{$questionnaire->id == $contact->questionnaire_id ? 'selected' : ''}} value="{{$questionnaire->id}}">{{$questionnaire->brief_title}}</option>
                                 @endforeach
                             @endif
                         </select>

@@ -27,6 +27,7 @@
         <form action="{{route('agent.manage.questionnaire')}}" method="POST">
             {{csrf_field()}}
             <input type="hidden" name="skill" value="{{$skill}}">
+            <input type="hidden" name="title" value="{{$title}}">
             <div class="agent_que_actions">
                 <div data-id="add_question_btn" class="agent_que_action_btn">
                     <i class="fa fa-plus"></i> Add question
