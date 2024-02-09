@@ -103,7 +103,17 @@
                                     <div class="pro_note">
                                         <ul>
                                             <li>Enable seamless collaboration by attaching Creative Briefs easily for your Contacts.</li>
-                                            <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion. Add video url using here same setup as the (add perecntage video on edit contact)</li>
+                                            <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion.</li>
+                                            <li class="flex items-center gap-3">
+                                                <div class="open_contact_tab bg-gray-600 text-white px-2 rounded hover:underline cursor-pointer">Go to my network</div>
+                                                <div class="brief_video_btn bg-gray-600 text-white px-2 rounded hover:underline cursor-pointer">Watch video</div>
+                                            </li>
+                                            <li class="brief_video_holder instant_hide flex flex-col gap-2 border p-2 mt-2">
+                                                <div class="ml-auto text-lg brief_close_btn cursor-pointer">
+                                                    <i class="fa fa-times"></i>
+                                                </div>
+                                                <div class="inner"></div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -555,6 +565,18 @@
 
         $('.each-stage-det').not(target).addClass('instant_hide');
         target.removeClass('instant_hide');
+    });
+
+    $('.brief_video_btn').click(function(){
+        $(this).closest('ul').find('.brief_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/P8BcCrT6sxI"></iframe>');
+    });
+
+    $('.open_contact_tab').click(function(){
+        $('.m_btn_right_icon_each.m_btn_contact_management').click();
+    });
+
+    $('.brief_close_btn').click(function(){
+        $(this).closest('.brief_video_holder').addClass('instant_hide').find('.inner').html('');
     });
 
     $('body').delegate('.each-stage-det .notes-submit', 'click', function(e){
