@@ -202,7 +202,7 @@
                                 @if($user->hasActivePaidSubscription())
 
                                 @else
-                                <div class="flex flex-col gap-4 mt-4 mx-2 hide_on_mobile">
+                                <!--<div class="flex flex-col gap-4 mt-4 mx-2 hide_on_mobile">
                                     <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
@@ -216,7 +216,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>!-->
                                 <form>
                                     <div class="px-2 py-4">
                                         <div class="flex items-center mb-3">
@@ -262,7 +262,7 @@
                                 @if($user->hasActivePaidSubscription())
 
                                 @else
-                                <div class="flex flex-col gap-4 my-4 mx-2 hide_on_mobile">
+                                <!--<div class="flex flex-col gap-4 my-4 mx-2 hide_on_mobile">
                                     <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
@@ -276,7 +276,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>!-->
                                 @endif
                                 <div class="pro_form_title flex flex-col border border-[#ccc] mx-2 rounded-lg px-3 py-2 lg:px-6 lg:py-3">
                                     <div>
