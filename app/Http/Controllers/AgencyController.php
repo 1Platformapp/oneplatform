@@ -158,7 +158,7 @@ class AgencyController extends Controller
     public function deleteAccount(Request $request)
     {
         $user = Auth::user();
-        $user->active = 0;
+        $user->hide_account = 1;
 
         $user->save();
         Auth::logout();

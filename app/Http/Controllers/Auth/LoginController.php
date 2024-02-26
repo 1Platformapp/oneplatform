@@ -112,7 +112,7 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1])) {
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1, 'hide_account' => null])) {
             return $this->sendLoginResponse($request);
         }else{
             $this->incrementLoginAttempts($request);
