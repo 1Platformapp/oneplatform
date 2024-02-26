@@ -74,7 +74,7 @@
 
     <div class="pg_back active"></div>
     <h2 class="heading">
-        <a class="main_tab" href="{{Auth::check()?route('user.home', ['params' => Auth::user()->username]):route('login')}}">
+        <a class="main_tab" href="#">
             <span>
                 <i class="fa fa-home"></i>&nbsp;&nbsp;Home
             </span>
@@ -90,7 +90,7 @@
         <a href="{{route('tc')}}" class="each_tab">General</a>
     </h2>
     <div class="terms_outer">
-        <p class="normal">Date of Last Revision: (10/09/2020)</p>
+        <p class="normal">Date of Last Revision: ({{date('d/m/Y')}})</p>
         @if($type == 'general')
         <div class="each_head">1- General</div>
         <div class="each_sub_head">1.1 AGREEMENT TO TERMS</div>

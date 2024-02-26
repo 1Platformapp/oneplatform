@@ -519,12 +519,19 @@
     $('document').ready(function (){
 
         const defaultTab = $('#default-dash-tab').val();
+        const dashboardInfo = $('#dash-info').val();
         const activeTab = defaultTab != '' ? defaultTab : localStorage.getItem('dash-tab-active');
 
         if (activeTab !== null && activeTab != '') {
             $('.m_btn_right_icon_each[data-id="'+activeTab+'"]').trigger('click');
         } else {
             $('.m_btn_management_plan').trigger('click');
+        }
+
+        if (dashboardInfo !== null && dashboardInfo !== '' ) {
+            $('.hrd_usr_men_outer').toggleClass('active');
+            $('body').toggleClass('lock_page');
+            $('#body-overlay').toggle();
         }
 
         // render me page content

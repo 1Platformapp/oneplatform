@@ -125,6 +125,10 @@ class AgencyController extends Controller
             $tab = Session::get('dash-tab');
         }
 
+        if (Session::has('dash-info')) {
+            $info = Session::get('dash-info');
+        }
+
         if (Session::has('me-page')) {
             $mePage = Session::get('me-page');
         }
@@ -144,15 +148,33 @@ class AgencyController extends Controller
             'agentContact' => $agentContact,
             'contacts' => $contacts,
             'tab' => isset($tab) ? $tab : '',
+            'info' => isset($info) ? $info : '',
             'mePage' => isset($mePage) ? $mePage : '',
         ];
 
         return view('pages.admin-home', $data);
     }
 
+    public function deleteAccount(Request $request)
+    {
+        $user = Auth::user();
+        $user->active = 0;
+
+        $user->save();
+        Auth::logout();
+
+        return redirect(route('login'));
+    }
+
     public function dashboardWithTab(Request $request, $tab)
     {
         Session::flash('dash-tab', $tab);
+        return redirect(route('agency.dashboard'));
+    }
+
+    public function dashboardWithInfo(Request $request, $info)
+    {
+        Session::flash('dash-info', $info);
         return redirect(route('agency.dashboard'));
     }
 

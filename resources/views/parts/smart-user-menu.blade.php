@@ -355,6 +355,9 @@
                     	Get help to build your profile
                     </div>
                     <div class="usr_men_cat_each usr_men_logout">
+                        <a href="{{route('agency.delete.account')}}" class="usr_men_cat_head">
+                            <i class="fa fa-trash"></i>&nbsp;Delete my account
+                        </a>
                         <a href="{{route('logout')}}" class="usr_men_cat_head">
                             <i class="fa fa-sign-out"></i>&nbsp;Logout
                         </a>

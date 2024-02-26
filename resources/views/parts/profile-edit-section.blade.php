@@ -485,7 +485,7 @@
                             </div>
                             <div data-order="2" class="port_each_field port_field_checked">
                                 <div class="port_field_label">
-                                    <div class="port_field_label_text">YouTube Video</div>
+                                    <div class="port_field_label_text">YouTube Video (optional)</div>
                                     <div class="port_field_remove"><i class="fa fa-trash"></i></div>
                                 </div>
                                 <div class="port_field_body">
