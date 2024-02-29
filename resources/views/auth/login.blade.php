@@ -241,7 +241,7 @@
             <div class="auto_content">
                 <div class="video_in">
                     <div class="login_resp hide_on_desktop">
-                        <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('login') }}" style="width: 75%; margin: 0 auto;">
                             {{ csrf_field() }}
                             <div class="logo_container">
                                 <a class="logo8" href="javascript:void(0)">
@@ -264,6 +264,11 @@
                                 </div>
                                 <div class="auth_btn_helper">
                                     <a href="{{ route('register') }}">Create an account</a>
+                                </div>
+                                <div width="400" class="login_register_text_02">
+                                    <span>Creating an account with 1Platform<br> means you agree to our</span>
+                                    <a href="{{route('tc')}}">terms and conditions, </a>
+                                    <a href="{{route('privacy.policy')}}">privacy policy</a>
                                 </div>
                                 <!--<a href="{{asset('login/google')}}" class="cursor-pointer bg-black h-[28px] mt-4 rounded-lg gap-3 flex flex-row items-center justify-center">
                                     <span class="text-white mt-[1px]">
