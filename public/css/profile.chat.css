@@ -185,6 +185,12 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
 .chat_get_help i { margin-right: 7px; }
 .m_btn_right_icon_each { font-size: 20px; }
 .pro_form_title { color: #818181; font-size: 18px; margin-bottom: 40px; }
+.genHeight { overflow-y: auto; overflow-x: hidden; }
+.genHeight::-webkit-scrollbar { width: 4px; }
+.genHeight::-webkit-scrollbar-track { box-shadow: inset 0 0 3px grey; border-radius: 10px; }/* Track */
+.genHeight::-webkit-scrollbar-thumb { background: red; border-radius: 10px; } /* Handle */
+.h-65 { height: 65px; overflow: auto; }
+.h-90 { height: 90px; overflow: auto; }
 
 @media (max-width: 1200px) {
     .m_btn_right_icon_each { font-size: 17px; }

@@ -14,7 +14,7 @@
                             <div class="port_field_remove"><i class="fa fa-trash"></i></div>
                         </div>
                         <div class="port_field_body">
-                            <textarea class="ques_field_textarea main_info" placeholder="Type your question" name="question[]">{{$eachQues->value}}</textarea>
+                            <textarea class="ques_field_textarea main_info genHeight h-90" placeholder="Type your question" name="question[]">{{$eachQues->value}}</textarea>
                         </div>
                     </div>
                 @endforeach
@@ -23,7 +23,7 @@
         @endforeach
     </div>
     <div class="my_sub_sec_inner">
-        <h3><span class="head_text text-lg">Creative Brief: {{$title}}</span></h3>
+        <h3><span class="text-lg head_text">Creative Brief: {{$title}}</span></h3>
         <form action="{{route('agent.manage.questionnaire')}}" method="POST">
             {{csrf_field()}}
             <input type="hidden" name="skill" value="{{$skill}}">
@@ -70,7 +70,7 @@
                 @endif
             </div>
 
-            <div class="save_questionnaire_outer edit_profile_btn_1 clearfix">
+            <div class="clearfix save_questionnaire_outer edit_profile_btn_1">
                 <a href="javascript:void(0)">Save </a>
             </div>
         </form>
