@@ -369,7 +369,12 @@
                                     <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
                                     <div class="int_sub_offer_each">&nbsp;</div>
                                     <div class="int_sub_offer_each">
-                                        Fee Per Sale
+                                        <span> Fee Per Sale </span> 
+                                        <a href="https://stripe.com/gb/pricing" target="_blank">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
+                                                <path fill="currentColor" fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0a8 8 0 0 1 16 0m-7 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-1-9a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1" clip-rule="evenodd"/>
+                                            </svg>
+                                        </a>
                                     </div>
                                     <div class="int_sub_offer_each">
                                         <span class="hide_on_mobile">Connect a&nbsp;</span>Custom Domain
