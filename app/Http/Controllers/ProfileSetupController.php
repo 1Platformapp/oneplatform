@@ -225,11 +225,10 @@ class ProfileSetupController extends Controller
                     $nextPage = $page;
                 }else{
 
-                    if($page == 'portfolio' || $page == 'service' || $page == 'news'){
+                    if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product'){
 
                         $nextPage = $page;
                     }else{
-
                         $nextPage = $user->setupWizardnNext($page);
                     }
                 }
