@@ -55,7 +55,7 @@
             <div class="port_field_remove"><i class="fa fa-trash"></i></div>
         </div>
         <div class="port_field_body">
-            <textarea class="ques_field_textarea main_info" placeholder="Type your question" name="question[]"></textarea>
+            <textarea class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]"></textarea>
         </div>
     </div>
 </div>

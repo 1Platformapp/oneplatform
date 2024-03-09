@@ -14,7 +14,7 @@
                             <div class="port_field_remove"><i class="fa fa-trash"></i></div>
                         </div>
                         <div class="port_field_body">
-                            <textarea class="ques_field_textarea main_info genHeight h-90" placeholder="Type your question" name="question[]">{{$eachQues->value}}</textarea>
+                            <textarea class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]">{{$eachQues->value}}</textarea>
                         </div>
                     </div>
                 @endforeach
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="element_container">
-                @if($questionnaire && count($questionnaire->questions))
+            @if($questionnaire && count($questionnaire->questions))
                     @foreach($questionnaire->questions as $question)
                         @if($question->type == 'text')
                         <div class="port_each_field port_field_checked">
@@ -53,7 +53,7 @@
                                 <div class="port_field_remove"><i class="fa fa-trash"></i></div>
                             </div>
                             <div class="port_field_body">
-                                <textarea class="ques_field_textarea main_info" placeholder="Type your question" name="question[]">{{$question->value}}</textarea>
+                                <textarea class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]">{{$question->value}}</textarea>
                             </div>
                         </div>
                         @endif
@@ -64,7 +64,7 @@
                             <div class="port_field_label_text">Question</div>
                         </div>
                         <div class="port_field_body">
-                            <textarea class="ques_field_textarea main_info" placeholder="Type your question" name="question[]"></textarea>
+                            <textarea class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]"></textarea>
                         </div>
                     </div>
                 @endif

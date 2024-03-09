@@ -188,9 +188,11 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
 .genHeight { overflow-y: auto; overflow-x: hidden; }
 .genHeight::-webkit-scrollbar { width: 4px; }
 .genHeight::-webkit-scrollbar-track { box-shadow: inset 0 0 3px grey; border-radius: 10px; }/* Track */
-.genHeight::-webkit-scrollbar-thumb { background: red; border-radius: 10px; } /* Handle */
+.genHeight::-webkit-scrollbar-thumb { background: black; border-radius: 10px; } /* Handle */
 .h-65 { height: 65px; overflow: auto; }
 .h-90 { height: 90px; overflow: auto; }
+.h-120 { height: 120px; overflow: auto; }
+.h-150 { height: 150px; overflow: auto; }
 
 @media (max-width: 1200px) {
     .m_btn_right_icon_each { font-size: 17px; }
