@@ -2,12 +2,12 @@
 @php $hasActiveSub = $user->hasActivePaidSubscription() @endphp
 
 <div class="mt-12 each-stage-det" data-stage-ref="my-contacts">
-    <div class="m_btm_filters_outer items-end md:items-center">
-        <div class="m_btm_filter_search flex-1 flex items-center m_btm_filter_search_field">
+    <div class="items-end m_btm_filters_outer md:items-center">
+        <div class="flex items-center flex-1 m_btm_filter_search m_btm_filter_search_field">
             <i class="ml-2 text-gray-500 fa fa-search"></i>
             <div data-target="agent_contact_listing" class="flex-1 ml-2" contenteditable="true" placeholder="Search your contacts by name"></div>
         </div>
-        <div class="m_btm_filter_drop flex-1">
+        <div class="flex-1 m_btm_filter_drop">
             <select data-target="agent_contact_listing" class="m_btm_filter_dropdown">
                 <option value="">Filter contacts</option>
                 <option value="all">All</option>
@@ -16,7 +16,7 @@
                 <option value="Main Network">My Main Network</option>
             </select>
         </div>
-        <div class="smart_switch_outer switch_personal_chat flex-1 mt-10 md:mt-0 md:ml-auto">
+        <div class="flex-1 mt-10 smart_switch_outer switch_personal_chat md:mt-0 md:ml-auto">
             <div class="smart_switch_txt">Show Personal Chat</div>
             <label class="smart_switch">
                 <input type="checkbox" />
@@ -39,7 +39,7 @@
                         $partnerUser = $isAgentUser ? $contactUser : $agentUser;
                         $contactPDetails = $commonMethods->getUserRealDetails($partnerUser->id)
                     @endphp
-                    <div data-partner="{{$partnerUser->id}}" data-approved="{{$contact->approved ? '1' : ''}}" data-form="my-contact-form_{{ $contact->id }}" class="agent_contact_listing music_btm_list no_sorting clearfix">
+                    <div data-partner="{{$partnerUser->id}}" data-approved="{{$contact->approved ? '1' : ''}}" data-form="my-contact-form_{{ $contact->id }}" class="clearfix agent_contact_listing music_btm_list no_sorting">
                         <div class="edit_elem_top">
                             <div class="m_btm_list_left">
                                 <div data-image="{{$contactPDetails['image']}}" class="music_btm_thumb">
@@ -105,7 +105,7 @@
                                     </li>
                                     @else
                                     <li>
-                                        <a title="Agreements" class="m_btn_right_icon_each">
+                                        <a title="Agreements" class="m_btn_right_icon_each" onclick="openModal()">
                                             <i class="fas fa-file-pdf"></i>
                                         </a>
                                     </li>
@@ -166,7 +166,7 @@
                         @php continue @endphp
                     @endif
                     @php $partnerPDetails = $commonMethods->getUserRealDetails($partnerId) @endphp
-                    <div data-form="my-contact-form_{{ $partner->id }}" class="agent_partner_listing music_btm_list no_sorting clearfix">
+                    <div data-form="my-contact-form_{{ $partner->id }}" class="clearfix agent_partner_listing music_btm_list no_sorting">
                         <div class="edit_elem_top">
                             <div class="m_btm_list_left">
                                 <div data-image="{{$partnerPDetails['image']}}" class="music_btm_thumb">
@@ -202,6 +202,22 @@
             @else
                 <div class="no_results">No records yet</div>
             @endif
+            </div>
+        </div>
+    </div>
+    <!-- Modals -->
+    <div id="myModal">
+        <div class="modal-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-4 text-lg font-semibold">To use contracts, your contact need to approve you first.</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="closeModal()">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -882,7 +898,7 @@
                     } else {
 
                         if (!formData.get('cursor')) {
-                            element.find('.chat_main_body_messages').html('<div class="text-sm text-center font-semibold text-gray-500 m-auto">No messages found</div>');
+                            element.find('.chat_main_body_messages').html('<div class="m-auto text-sm font-semibold text-center text-gray-500">No messages found</div>');
                         }
                     }
                 } else {
@@ -1200,4 +1216,78 @@
         return '';
     }
 
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    function showAlert(type) {
+        if(type == 'agreements') {
+            alert("To use contracts, your contact need to approve you first!");
+        }
+    }
+
 </script>
+<style>
+    #myModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 50;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .modal-content {
+        max-width: 400px; /* Adjust the max-width as needed */
+        width: 100%;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 1rem;
+    }
+
+    .modal-header button {
+        color: #666;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .modal-body {
+        padding-right: 2rem;
+        padding-left: 2rem;
+        text-align: center;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0rem 1rem 1rem 0rem;
+    }
+
+    .modal-footer button {
+        background-color: #3490dc;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
