@@ -78,7 +78,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="pro_upload_video music_thum_sec clearfix">
+                <div class="clearfix pro_upload_video music_thum_sec">
                     <div class="pro_left_video_img">
                         <span class="upload_vieo_img" onclick="$('#music_thumb').trigger('click'); return false;">
                         	<img style="cursor: pointer;" src="{{asset('images/p_music_thum_img.png?v=1.2')}}" id="display-music-thumb" />
@@ -113,12 +113,12 @@
                                 <input autocomplete="off" type="text" placeholder="Search here to add instruments" name="instruments" />
                                 <i class="fa fa-search"></i>
                             </label>
-                            <div class="music_instruments_results pro_custom_drop_res instant_hide clearfix">
+                            <div class="clearfix music_instruments_results pro_custom_drop_res instant_hide">
                                 <div class="pro_instruments_list_drop">
                                     <ul></ul>
                                 </div>
                             </div>
-                            <div class="music_instruments_saved clearfix"></div>
+                            <div class="clearfix music_instruments_saved"></div>
                         </li>
 
                         <li>
@@ -149,12 +149,12 @@
                                 <input autocomplete="off" type="text" placeholder="Search here to add more moods" name="more_moods" />
                                 <i class="fa fa-search"></i>
                             </label>
-                            <div class="music_moods_results pro_custom_drop_res instant_hide clearfix">
+                            <div class="clearfix music_moods_results pro_custom_drop_res instant_hide">
                                 <div class="pro_moods_list_drop">
                                     <ul></ul>
                                 </div>
                             </div>
-                            <div class="music_moods_saved clearfix"></div>
+                            <div class="clearfix music_moods_saved"></div>
                         </li>
                     </ul>
 
@@ -175,7 +175,7 @@
                 <b>This option is for a user to buy a personal use only. If you enter 0 it will be free if u leave it empty the personal option will not show</b>
                 <div class="music_ice_listing">
                     <ul>
-                        <li class="each_license optional clearfix">
+                        <li class="clearfix each_license optional">
                         	<div class="each_license_body">
                         		<p class="p_lic_left">Personal use only</p>
                         		<input type="number" class="p_lic_right" placeholder="(0.99)" name="personal_use_only" min="0" />
@@ -420,7 +420,7 @@
                 </ul>
             </div>
 
-            <div class="save_music_outer edit_profile_btn_1 clearfix">
+            <div class="clearfix save_music_outer edit_profile_btn_1">
                 <a href="javascript:void(0)">Upload</a>
             </div>
 
@@ -511,7 +511,7 @@
                                             </div>
                                             @endforeach
                                         </div>
-                                        <div class="save_design_step_one edit_profile_btn_1 clearfix">
+                                        <div class="clearfix save_design_step_one edit_profile_btn_1">
                                             <a href="javascript:void(0)">Continue</a>
                                         </div>
                                     </div>
@@ -533,7 +533,7 @@
                                         <div class="pro_design_new">
                                             <input accept="image/jpeg,image/gif,image/png" type="file" id="pro_design_file" name="pro_design_file" />
                                         </div>
-                                        <div class="save_design_step_one edit_profile_btn_1 clearfix">
+                                        <div class="clearfix save_design_step_one edit_profile_btn_1">
                                             <a href="javascript:void(0)">Continue</a>
                                         </div>
                                     </div>
@@ -591,7 +591,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="save_design_step_two edit_profile_btn_1 clearfix">
+                                        <div class="clearfix save_design_step_two edit_profile_btn_1">
                                             <a href="javascript:void(0)">Continue</a>
                                         </div>
                                     </div>
@@ -738,7 +738,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="save_design_step_three edit_profile_btn_1 clearfix">
+                                        <div class="clearfix save_design_step_three edit_profile_btn_1">
                                             <a href="javascript:void(0)">Continue</a>
                                         </div>
                                     </div>
@@ -887,7 +887,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="save_design_step_four edit_profile_btn_1 clearfix">
+                                        <div class="clearfix save_design_step_four edit_profile_btn_1">
                                             <a href="javascript:void(0)">Continue</a>
                                         </div>
                                     </div>
@@ -927,7 +927,7 @@
                                                 <div class="pro_design_st_5_comm_calc">Recalculate</div>
                                             </div>
                                         </div>
-                                        <div class="save_design_step_five edit_profile_btn_1 clearfix">
+                                        <div class="clearfix save_design_step_five edit_profile_btn_1">
                                             <a href="javascript:void(0)">Submit</a>
                                         </div>
                                     </div>
@@ -937,7 +937,7 @@
                                 @endif
                             </div>
                             <div data-id="pro_option_one" class="pro_option_body_each {{$content == null || $content == 'product' ? '' : 'instant_hide'}}">
-                                <div class="pro_upload_video music_thum_sec clearfix">
+                                <div class="clearfix pro_upload_video music_thum_sec">
                                     <div class="pro_left_video_img">
                                         <span class="upload_vieo_img" onclick="$('#product_thumb').trigger('click'); return false;"> <img src="{{asset('images/p_music_thum_img.png?v=1.2')}}" alt="#" id="display-product-thumb" /></span>
                                         <a style="color:#ec2450; cursor: pointer;" onclick="$('#product_thumb').trigger('click'); return false;">Add Thumbnail</a>
@@ -1018,7 +1018,7 @@
                                         By clicking Save, you agree to our <a target="_blank" href="{{route('tc')}}">terms and conditions</a>
                                     </p>
                                 </div>
-                                <div class="save_product_outer edit_profile_btn_1 clearfix">
+                                <div class="clearfix save_product_outer edit_profile_btn_1">
                                     <a href="javascript:void(0)">Submit</a>
                                 </div>
                             </div>
@@ -1149,7 +1149,7 @@
                                         <a target="_blank" href="{{route('tc')}}">terms and conditions</a>
                                     </p>
                                 </div>
-                                <div class="save_video_outer edit_profile_btn_1 clearfix">
+                                <div class="clearfix save_video_outer edit_profile_btn_1">
                                     <a href="javascript:void(0)">Submit</a>
                                 </div>
                             </div>
@@ -1189,7 +1189,7 @@
             <div class="pro_main_tray">
                 <div class="pro_tray_title">Add Your Social Media Accounts (Appears On Your Social Tab)</div>
             </div>
-            <div class="pro_social_btn_outer clearfix">
+            <div class="clearfix pro_social_btn_outer">
                 <ul>
                     <li><a class="pro_soc_icon_fb {{ ( $userSocialAccountDetails['facebook_account'] != '' ) ? 'connected' : 'not-connected' }}" href="#"></a></li>
                     <li><a class="pro_soc_icon_youtube {{ ( $userSocialAccountDetails['youtube_account'] != '' ) ? 'connected' : 'not-connected' }}" href="#"></a></li>
@@ -1250,7 +1250,7 @@
                     <form id="add_live_streams_form" action="{{route('user.live.stream.create')}}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="pro_music_info">
-                            <div class="pro_upload_video music_thum_sec clearfix">
+                            <div class="clearfix pro_upload_video music_thum_sec">
                                 <div class="pro_left_video_img">
                                     <span class="upload_vieo_img">
                                         <img src="/images/p_music_thum_img.png?v=1.2" alt="#" id="display-stream-thumb" class="display-stream-thumb" />
@@ -1300,7 +1300,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="save_live_stream_outer edit_profile_btn_1 clearfix">
+                            <div class="clearfix save_live_stream_outer edit_profile_btn_1">
                                 <a href="javascript:void(0)">Submit</a>
                             </div>
                         </div>
@@ -1314,7 +1314,7 @@
                     @else
                         @php $editProdThumb = asset('img/url-thumb-profile.jpg') @endphp
                     @endif
-                    <div data-form="my-stream-form_{{ $stream->id }}" class="music_btm_list no_sorting clearfix">
+                    <div data-form="my-stream-form_{{ $stream->id }}" class="clearfix music_btm_list no_sorting">
 
                         <div class="edit_elem_top">
                             <div class="m_btm_list_left">
@@ -1366,7 +1366,7 @@
                 {{ csrf_field() }}
                 <div class="">
                     <div class="proj_acco_sub subscribers_accodion">
-                        <div class="proj_subscriber_sec clearfix">
+                        <div class="clearfix proj_subscriber_sec">
                             <div class="pro_note">
                                 <ul>
                                     <li>Encourage fans to subscribe a monthly contribution towards your projects</li>
@@ -1396,7 +1396,7 @@
                     <div class="border border-[#666] p-2 w-fit mb-2">
                         <div class="panel donator_profile_version donation_goalless colio_outer colio_dark">
                             <div class="donator_outer">
-                                <div class="donator_box clearfix">
+                                <div class="clearfix donator_box">
                                     <p>Contributions are not associated with perks</p>
                                     <div class="donator_inner">
                                         <div class="donation_left">
@@ -1418,7 +1418,7 @@
                         I want to add the above contribution box to my home page<p>(Patron Hub is not associated with a crowdfund project.)</p>
                     </label>
                     <br><br>
-                    <div class="pay_btm_btn_outer clearfix">
+                    <div class="clearfix pay_btm_btn_outer">
                         <ul>
                             <li><a id="save_subscribers" href="javascript:void(0)">Save</a></li>
                             <li></li>
@@ -1573,7 +1573,7 @@
            		<form id="add_album_form" action="{{route('user.album.save')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="pro_music_info">
-                        <div class="pro_upload_video music_thum_sec clearfix">
+                        <div class="clearfix pro_upload_video music_thum_sec">
                             <div class="pro_left_video_img">
                                 <span class="upload_vieo_img">
                                     <img src="/images/p_music_thum_img.png?v=1.2" alt="#" id="display-album-thumb" class="display-album-thumb" />
@@ -1602,27 +1602,32 @@
                                 </select>
                             </div>
                         </div>
-                        @if(count($user->musics))
                         <div class="pro_stream_input_each">
                             <div class="stream_sec_opt_outer">
                                 <div class="stream_sec_opt_checks">
                                     <div class="stream_sec_opt_label">
                                         Select multiple songs to add to this album
                                     </div>
-                                    @foreach($user->musics as $music)
-                                    <div class="stream_sec_opt_check_each">
-                                        <input id="album_m_{{$music->id}}" class="pro_check_multiple" value="{{$music->id}}" type="checkbox" name="pro_album_musics[]" />
-                                        <label for="album_m_{{$music->id}}"> {{$music->song_name}}</label>
-                                    </div>
-                                    @endforeach
+                                    @if(count($user->musics))
+                                        @foreach($user->musics as $music)
+                                        <div class="stream_sec_opt_check_each">
+                                            <input id="album_m_{{$music->id}}" class="pro_check_multiple" value="{{$music->id}}" type="checkbox" name="pro_album_musics[]" />
+                                            <label for="album_m_{{$music->id}}"> {{$music->song_name}}</label>
+                                        </div>
+                                        @endforeach
+                                    @else
+                                        <span class="message-title">No Songs Found!</span>
+                                        <span class="message-text">(Please add songs so you can add songs into the album.)</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                        @endif
+                        <div>
+                        </div>
                         <div class="pro_stream_input_each">
                             <textarea placeholder="Description" type="text" class="pro_news_textarea" name="pro_album_description"></textarea>
                         </div>
-                        <div class="save_album_outer edit_profile_btn_1 clearfix">
+                        <div class="clearfix save_album_outer edit_profile_btn_1">
                             <a href="javascript:void(0)">Submit</a>
                         </div>
                     </div>
@@ -1631,7 +1636,7 @@
             <div data-value="album_list" class="music_btm_listing_outer_edit pro_tray_tab_content instant_hide">
                 @if(count($user->albums) > 0)
                     @foreach($user->albums as $album)
-                        <div data-form="my-album-form_{{ $album->id }}" class="music_btm_list no_sorting clearfix">
+                        <div data-form="my-album-form_{{ $album->id }}" class="clearfix music_btm_list no_sorting">
                             <div class="edit_elem_top">
                                 <div class="m_btm_list_left">
                                     @php
@@ -1731,7 +1736,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="save_news_outer edit_profile_btn_1 clearfix">
+                            <div class="clearfix save_news_outer edit_profile_btn_1">
                                 <a href="javascript:void(0)">Submit</a>
                             </div>
                         </div>

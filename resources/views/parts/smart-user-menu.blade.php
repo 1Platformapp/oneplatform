@@ -1,5 +1,5 @@
 
-    <div class="hrd_usr_men_outer clearfix">
+    <div class="clearfix hrd_usr_men_outer">
         <div class="usr_men_main_btn_outer">
             <div class="us_men_close">
                 <svg data-bbox="25.9 25.9 148.2 148.2" xmlns="http://www.w3.org/2000/svg" viewBox="25.9 25.9 148.2 148.2" role="img">
@@ -165,7 +165,9 @@
                                         <i class="fas fa-compact-disc"></i>
                                     </div>
                                     <div class="usr_men_quick_txt">
+                                    <a href="{{route('profile.setup.standalone', ['page' => 'album'])}}" class="usr_men_quick_txt">
                                         My Albums
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="usr_men_quick_each">

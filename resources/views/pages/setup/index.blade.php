@@ -337,7 +337,7 @@
 			<div class="setup_welcome_sub_head">
 				Let's setup your profile on 1Platform
 			</div>
-			<div class="edit_profile_btn_1 clearfix">
+			<div class="clearfix edit_profile_btn_1">
 			    <a href="{{route('profile.setup', ['page' => 'username'])}}">Okay</a>
 			</div>
 		</div>
@@ -350,7 +350,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 2 of 19
+						Step 2 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -386,7 +386,7 @@
                 </div>
             </div>
             @if(!$user->profile->basic_setup)
-	            <div class="save_username_outer edit_profile_btn_1 clearfix">
+	            <div class="clearfix save_username_outer edit_profile_btn_1">
 	                <a href="javascript:void(0)">Submit</a>
 	            </div>
             @endif
@@ -400,7 +400,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 3 of 19
+						Step 3 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -442,7 +442,7 @@
             </div>
 
             @if(!$user->profile->basic_setup)
-	            <div class="save_currency_outer edit_profile_btn_1 clearfix">
+	            <div class="clearfix save_currency_outer edit_profile_btn_1">
 	                <a href="javascript:void(0)">Submit</a>
 	            </div>
             @endif
@@ -456,7 +456,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 4 of 19
+						Step 4 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -490,7 +490,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 5 of 19
+						Step 5 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -522,7 +522,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 6 of 19
+						Step 6 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -556,7 +556,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 7 of 19
+						Step 7 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -590,7 +590,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 8 of 19
+						Step 8 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -622,7 +622,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 9 of 19
+						Step 9 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -654,7 +654,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 10 of 19
+						Step 10 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -688,7 +688,7 @@
 				</ul>
 			</div>
 
-			<div class="edit_profile_btn_1 clearfix">
+			<div class="clearfix edit_profile_btn_1">
 				@if(!$user->internalSubscription)
 					<a class="connect_domain" href="{{route('user.startup.wizard')}}">Subscribe</a>
 				@else
@@ -705,7 +705,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 11 of 19
+						Step 11 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -737,7 +737,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 12 of 19
+						Step 12 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -764,7 +764,7 @@
 
 		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'social-media', 'setupWizard' => ''])
 
-		<div class="edit_profile_btn_1 clearfix">
+		<div class="clearfix edit_profile_btn_1">
             <a href="{{route('profile.setup', ['page' => 'video'])}}">Next</a>
         </div>
 
@@ -775,7 +775,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 13 of 19
+						Step 13 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -824,7 +824,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 14 of 19
+						Step 14 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -860,7 +860,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 15 of 19
+						Step 15 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -873,7 +873,7 @@
                         <a href="{{route('profile.setup', ['page' => 'product'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                     </div>
                     <div class="setup_tray_btn setup_next_btn">
-                        <a href="{{route('profile.setup', ['page' => 'agent'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="{{route('profile.setup', ['page' => 'album'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 @endif
@@ -884,6 +884,37 @@
 		</div>
 
 		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'add-music', 'setupWizard' => ''])
+	@elseif($page == 'album')
+
+		<div class="setup_tray_main">
+			<div class="setup_tray_top">
+				<div class="setup_tray_left">
+                    @if(!$isStandalone)
+					<div class="setup_tray_step">
+						Step 16 of 20
+					</div>
+                    @endif
+					<div class="setup_tray_head">
+						Add album
+					</div>
+				</div>
+                @if(!$isStandalone)
+				<div class="setup_tray_right">
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'music'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'agent'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                @endif
+			</div>
+			<div class="setup_tray_foot">
+
+			</div>
+		</div>
+
+		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'albums', 'setupWizard' => ''])
 	@elseif($page == 'crowdfunding')
 
 		<div class="setup_tray_main">
@@ -908,7 +939,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 			        <div class="setup_tray_step">
-			            Step 16 of 19
+			            Step 17 of 20
 			        </div>
                     @endif
 			        <div class="setup_tray_head">
@@ -918,7 +949,7 @@
                 @if(!$isStandalone)
 			    <div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
-                        <a href="{{route('profile.setup', ['page' => 'music'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                        <a href="{{route('profile.setup', ['page' => 'album'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                     </div>
                     <div class="setup_tray_btn setup_next_btn">
                         <a href="{{route('profile.setup', ['page' => 'subscription'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
@@ -941,7 +972,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 			        <div class="setup_tray_step">
-			            Step 17 of 19
+			            Step 18 of 20
 			        </div>
                     @endif
 			        <div class="setup_tray_head">
@@ -970,7 +1001,7 @@
 		        <li>However 1Platform has tons of exciting features for artists and store owners that can be unlocked after you upgrade to one of our paid plans</li>
 		    </ul>
 		</div>
-		<div class="edit_profile_btn_1 clearfix">
+		<div class="clearfix edit_profile_btn_1">
 		    <a class="upgrade_subscription" href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}">Upgrade Now</a>
 		</div>
 
@@ -981,7 +1012,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 18 of 19
+						Step 19 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -1014,11 +1045,11 @@
 		</div>
 
 		@if($user->profile->stripe_secret_key == '' || $user->profile->stripe_secret_key == NULL)
-		<div class="edit_profile_btn_1 clearfix">
+		<div class="clearfix edit_profile_btn_1">
             <a href="{{$stripeUrl}}">Connect Now</a>
         </div>
         @else
-        <div class="edit_profile_btn_1 clearfix">
+        <div class="clearfix edit_profile_btn_1">
             <a target="_blank" href="https://dashboard.stripe.com/">Your Stripe Dashboard</a>
         </div>
         @endif
@@ -1030,7 +1061,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 19 of 19
+						Step 20 of 20
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -1052,7 +1083,7 @@
 			</div>
 		</div>
 
-		<div class="edit_profile_btn_1 clearfix">
+		<div class="clearfix edit_profile_btn_1">
             <a id="setup_finish" href="javascript:void(0)">My Profile</a>
         </div>
 
@@ -1080,30 +1111,30 @@
 
 
 
-	<div class="pro_uploading_in_progress in_progress pro_page_pop_up clearfix" style="z-index: 10;" id="pro_uploading_in_progress_real">
+	<div class="clearfix pro_uploading_in_progress in_progress pro_page_pop_up" style="z-index: 10;" id="pro_uploading_in_progress_real">
 
-	    <div class="pro_soc_con_face_inner clearfix">
+	    <div class="clearfix pro_soc_con_face_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	        </div>
-	        <div class="soc_con_face_username clearfix">
+	        <div class="clearfix soc_con_face_username">
 
 	            <h3>Please wait. Uploading is in progress...</h3><br><br><br>
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_project_pitch_uploaded pro_page_pop_up clearfix" id="pitch_uploaded_popup" style="z-index: 10;">
+	<div class="clearfix pro_project_pitch_uploaded pro_page_pop_up" id="pitch_uploaded_popup" style="z-index: 10;">
 
-	    <div class="pro_soc_discon_inner clearfix">
+	    <div class="clearfix pro_soc_discon_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="fa fa-times pro_soc_top_close"></i>
 	        </div>
-	        <div class="pro_project_pitch_uploaded_inner clearfix">
+	        <div class="clearfix pro_project_pitch_uploaded_inner">
 
 	            <h3>Your Project pitch
 	                has been uploaded</h3><br />
@@ -1113,33 +1144,33 @@
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_project_pitch_uploaded pro_page_pop_up clearfix" id="bio_video_popup" style="z-index: 10;">
+	<div class="clearfix pro_project_pitch_uploaded pro_page_pop_up" id="bio_video_popup" style="z-index: 10;">
 
-	    <div class="pro_soc_discon_inner clearfix">
+	    <div class="clearfix pro_soc_discon_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="fa fa-times pro_soc_top_close"></i>
 	        </div>
-	        <div class="pro_project_pitch_uploaded_inner clearfix">
+	        <div class="clearfix pro_project_pitch_uploaded_inner">
 
 	            <h3>Your bio video has been updated</h3><br />
 	            <center>
 	                <img class="show_icon defer_loading" src="" data-src="{{ asset('images/project_pitch_uploaded.png') }}">
 	            </center>
-	            <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+	            <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
 	                <a href="{{route('profile.setup', ['page' => 'design'])}}" id="submit_button">Okay</a>
 	            </div>
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_confirm_delete_outer pro_page_pop_up clearfix" >
+	<div class="clearfix pro_confirm_delete_outer pro_page_pop_up" >
 
-	    <div class="pro_confirm_delete_inner clearfix">
+	    <div class="clearfix pro_confirm_delete_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a style="opacity: 0;" class="logo8">
 	                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}">
@@ -1147,58 +1178,58 @@
 	            </a>
 	            <i class="fa fa-times pro_soc_top_close"></i>
 	        </div>
-	        <div class="pro_confirm_delete_text clearfix">
+	        <div class="clearfix pro_confirm_delete_text">
 
 	            <div class="main_headline">Are You Sure You Want To Delete This Item?</div><br>
 	            <span class="error"></span>
 	        </div>
-	        <div class="pro_confirm_box_outer pro_submit_button_outer soc_submit_success clearfix">
+	        <div class="clearfix pro_confirm_box_outer pro_submit_button_outer soc_submit_success">
 
 	            <div class="delete_yes pro_confirm_box_each" data-delete-id="" data-delete-item-type="" data-album-status="" data-album-music-id="" id="pro_delete_submit_yes">YES</div>
 	            <div class="delete_no pro_confirm_box_each" id="pro_confirm_delete_submit_no">NO</div>
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_soc_con_face_outer pro_page_pop_up clearfix">
+	<div class="clearfix pro_soc_con_face_outer pro_page_pop_up">
 
-	    <div class="pro_soc_con_face_inner clearfix">
+	    <div class="clearfix pro_soc_con_face_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="pro_soc_top_close fa fa-close"></i>
 	        </div>
 	        <br>
-	        <div class="soc_con_face_username clearfix">
+	        <div class="clearfix soc_con_face_username">
 
 	            <h3>Facebook Page ID</h3><br>
 	            <p>Looking for your page ID? Go to the Facebook page that you want to add to the site&gt;click About&gt;Scroll down to the bottom of the page and copy your Facebook page ID</p><br>
 	            <input placeholder="Example: TaylorSwift" type="text" id="soc_con_face_username_val" value="" />
 	            <span class="error"></span>
 	        </div>
-	        <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+	        <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
 	            <a href="#" id="pro_soc_con_facebook_submit">Connect</a>
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_soc_con_youtube_outer pro_page_pop_up clearfix" >
+	<div class="clearfix pro_soc_con_youtube_outer pro_page_pop_up" >
 
-	    <div class="pro_soc_con_youtube_inner clearfix">
+	    <div class="clearfix pro_soc_con_youtube_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="pro_soc_top_close fa fa-close"></i>
 	        </div>
 	        <br>
-	        <div class="soc_con_youtube_username clearfix">
+	        <div class="clearfix soc_con_youtube_username">
 
 	            <h3>YouTube Channel ID</h3><br>
 	            <input placeholder="Example: UCJ4XbT8rbwUQGB0y0dl4n_w" type="text" id="soc_con_youtube_username_val" value="" />
 	            <span class="error"></span>
 	        </div>
-	        <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+	        <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
 	            <a href="#" id="pro_soc_con_youtube_submit">Connect</a>
 	        </div><br>
@@ -1207,76 +1238,76 @@
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_soc_con_twit_outer pro_page_pop_up clearfix" >
+	<div class="clearfix pro_soc_con_twit_outer pro_page_pop_up" >
 
-	    <div class="pro_soc_con_twit_inner clearfix">
+	    <div class="clearfix pro_soc_con_twit_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="pro_soc_top_close fa fa-close"></i>
 	        </div>
-	        <div class="soc_con_twit_username clearfix">
+	        <div class="clearfix soc_con_twit_username">
 
 	            <h3>Twitter Account Username</h3><br>
 	            <input placeholder="Example: taylorswift13" type="text" id="soc_con_twit_username_val" value="" />
 	            <span class="error"></span>
 	        </div>
-	        <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+	        <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
 	            <a href="#" id="pro_soc_con_twit_submit">Connect</a>
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_soc_con_spot_outer pro_page_pop_up clearfix">
+	<div class="clearfix pro_soc_con_spot_outer pro_page_pop_up">
 
-	    <div class="pro_soc_con_twit_inner clearfix">
+	    <div class="clearfix pro_soc_con_twit_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="pro_soc_top_close fa fa-close"></i>
 	        </div>
-	        <div class="soc_con_twit_username clearfix">
+	        <div class="clearfix soc_con_twit_username">
 
 	            <h3>Paste Your Spotify Artist URL</h3><br>
 	            <input autocomplete="off" placeholder="Example: https://open.spotify.com/artist/123456789" type="text" id="soc_con_spotify_url_val" value="" />
 	            <span class="error"></span>
 	        </div>
-	        <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+	        <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
 	            <a href="javascript:void(0)" id="pro_soc_con_spot_submit">Connect</a>
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_soc_discon_outer pro_page_pop_up clearfix" >
+	<div class="clearfix pro_soc_discon_outer pro_page_pop_up" >
 
-	    <div class="pro_soc_discon_inner clearfix">
+	    <div class="clearfix pro_soc_discon_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="pro_soc_top_close fa fa-close"></i>
 	        </div>
 	        <br>
-	        <div class="soc_discon_text clearfix">
+	        <div class="clearfix soc_discon_text">
 
 	            <h3>Do You Want To Disconnect Your <span>YouTube</span> Account?</h3><br>
 	            <span class="error"></span>
 	        </div>
-	        <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+	        <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
 	            <a data-disconnect-account="" href="#" id="pro_soc_discon_submit_yes">Yes</a>
 	        </div>
-	        <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+	        <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
 	            <a href="#" id="pro_soc_discon_submit_no">No</a>
 	        </div>
 	    </div>
 	</div>
-	<div data-music="" class="music_zip_upload_popup in_progress pro_page_pop_up new_popup clearfix" style="z-index: 10;">
+	<div data-music="" class="clearfix music_zip_upload_popup in_progress pro_page_pop_up new_popup" style="z-index: 10;">
 
-	    <div class="pro_soc_con_face_inner clearfix">
+	    <div class="clearfix pro_soc_con_face_inner">
 
 	        <div class="pro_pop_head">Upload details</div>
 	        <div class="pro_pop_body">
@@ -1381,18 +1412,18 @@
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_page_pop_up clearfix" id="music_private_popup" data-music-id="">
+	<div class="clearfix pro_page_pop_up" id="music_private_popup" data-music-id="">
 
-	    <div class="pro_soc_con_face_inner clearfix">
+	    <div class="clearfix pro_soc_con_face_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 	            <a style="opacity:0;" class="logo8">
 	                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
 	            </a>
 	            <i class="fa fa-times pro_soc_top_close"></i>
 	        </div>
 	        <div class="stage_one">
-	            <div class="soc_con_face_username clearfix">
+	            <div class="clearfix soc_con_face_username">
 	                <div class="main_headline">Manage music privacy</div><br>
 	                <div class="new_popup_check_out">
 	                    <input type="hidden" class="new_popup_check" />
@@ -1410,18 +1441,18 @@
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_page_pop_up clearfix" id="get_agent_popup">
+	<div class="clearfix pro_page_pop_up" id="get_agent_popup">
 
-	    <div class="pro_soc_con_face_inner clearfix">
+	    <div class="clearfix pro_soc_con_face_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 	            <a style="opacity:0;" class="logo8">
 	                <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
 	            </a>
 	            <i class="fa fa-times pro_soc_top_close"></i>
 	        </div>
 	        <div class="stage_one">
-	            <div class="soc_con_face_username clearfix">
+	            <div class="clearfix soc_con_face_username">
 	                <div class="primary_headline">Request to have an artist manager</div>
 	                <div class="pro_pop_text_light text_normal">
 	                    Your request will be sent to <span class="pro_text_dark new_agent_name"></span>
@@ -1439,7 +1470,7 @@
 	            <div id="proceed_get_agent" class="pro_button">Send Request</div>
 	        </div>
 	        <div class="stage_two instant_hide">
-	            <div class="soc_con_face_username clearfix">
+	            <div class="clearfix soc_con_face_username">
 	                <div class="pro_pop_text_light text_center">
 	                    Your request has been sent to <span class="pro_text_dark new_agent_name"></span>. The manager will be resposible to process and reply to this request. Keep checking your email and 1Platform account for any updates regarding this request.
 	                </div>
@@ -1448,36 +1479,36 @@
 	        </div>
 	    </div>
 	</div>
-	<div class="pro_fill_outer pro_page_pop_up clearfix">
+	<div class="clearfix pro_fill_outer pro_page_pop_up">
 
-	    <div class="pro_fill_inner clearfix">
+	    <div class="clearfix pro_fill_inner">
 
-	        <div class="soc_con_top_logo clearfix">
+	        <div class="clearfix soc_con_top_logo">
 
 	            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
 	            <i class="fa fa-times pro_soc_top_close"></i>
 	        </div>
-	        <div class="soc_discon_text clearfix">
+	        <div class="clearfix soc_discon_text">
 
 	            <h3>Wait!! You haven't completed all of your profile information</h3><br />
 	            <span class="error"></span>
 	        </div>
-	        <div class="pro_fill_img clearfix">
+	        <div class="clearfix pro_fill_img">
 	            <img class="defer_loading" src="" data-src="{{ asset('images/pupfillprofile.png') }}">
 	        </div>
 	    </div>
 	</div>
 
-    <div class="pro_add_edit_bonus_outer pro_page_pop_up clearfix" >
-        <div class="pro_confirm_delete_inner clearfix">
-            <div class="soc_con_top_logo clearfix">
+    <div class="clearfix pro_add_edit_bonus_outer pro_page_pop_up" >
+        <div class="clearfix pro_confirm_delete_inner">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity: 0;" class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="main_headline"><span class="add_edit_text">Add</span> Bonus</div><br>
             <form id="add_edit_bonus_form" action="{{ route('add.edit.bonus') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <div class="pro_add_bonus_row_outer clearfix cant_edit_fields">
+                <div class="clearfix pro_add_bonus_row_outer cant_edit_fields">
 
                     <label>Bonus Thumbnail (Optional)</label><br>
                     <img class="pop_up_bonus_thumb defer_loading" src="" data-src="{{ asset('images/p_music_thum_img.png') }}"><br>
@@ -1505,7 +1536,7 @@
                         <label>Bonus Price *</label><br>
                         <div class="proj_bonus_curr_crop_outer">
                             <div class="">
-                                <div class="proj_cont_right_inner drop_substi_bon_inner clearfix">
+                                <div class="clearfix proj_cont_right_inner drop_substi_bon_inner">
                                     <div class="drop_substi_curr">{{$user->profile->default_currency}}</div>
                                     <input value="" class="pop_up_bonus_field drop_substi_val groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_price" name="bonus_price" value="" />
                                 </div>
@@ -1517,7 +1548,7 @@
                         <label>Worldwide Shipping</label><br>
                         <div class="proj_bonus_curr_crop_outer">
                             <div class="">
-                                <div class="proj_cont_right_inner drop_substi_bon_inner clearfix">
+                                <div class="clearfix proj_cont_right_inner drop_substi_bon_inner">
                                     <div class="drop_substi_curr">{{$user->profile->default_currency}}</div>
                                     <input value="" class="pop_up_bonus_field drop_substi_val groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_shipping_worldwide" name="bonus_shipping_worldwide" value="" />
                                 </div>
@@ -1529,7 +1560,7 @@
                         <label>My Country Shipping</label><br>
                         <div class="proj_bonus_curr_crop_outer">
                             <div class="">
-                                <div class="proj_cont_right_inner drop_substi_bon_inner clearfix">
+                                <div class="clearfix proj_cont_right_inner drop_substi_bon_inner">
                                     <div class="drop_substi_curr">{{$user->profile->default_currency}}</div>
                                     <input value="" class="pop_up_bonus_field drop_substi_val groupon ring-1 ring-gray-300" type="text" id="pop_up_bonus_shipping_my_country" name="bonus_shipping_my_country" value="" />
                                 </div>
@@ -1538,7 +1569,7 @@
                         <div class="error instant_hide" id="pop_up_bonus_shipping_my_country_error">Required</div>
                     </div>
                 </div>
-                <div class="pro_submit_button_outer soc_submit_success clearfix">
+                <div class="clearfix pro_submit_button_outer soc_submit_success">
 
                     <input type="hidden" id="pop_up_bonus_id" name="bonus_id" value="0" />
                     <input type="hidden" id="pop_up_campaign_id" name="bonus_campaign_id" value="0" />
@@ -1549,21 +1580,21 @@
         </div>
     </div>
 
-    <div class="pro_confirm_go_live pro_page_pop_up clearfix" style="z-index: 10;" id="pro_confirm_go_live">
+    <div class="clearfix pro_confirm_go_live pro_page_pop_up" style="z-index: 10;" id="pro_confirm_go_live">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
 
                 <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
                 <i class="pro_soc_top_close fa fa-close"></i>
                 <br>
             </div>
-            <div class="soc_con_face_username clearfix">
+            <div class="clearfix soc_con_face_username">
 
                 <h3>You are about to go live on 1Platform TV. Once you are live you cannot undo this action</h3><br>
             </div>
-            <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+            <div class="clearfix pro_submit_button_outer soc_con_submit_success">
                 <a href="javascript:void(0)" id="pro_go_live_confirm">Proceed</a>
             </div>
         </div>
