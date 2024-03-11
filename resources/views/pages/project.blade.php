@@ -494,7 +494,7 @@
             $('#project-payment-popup .item_donation .summary_item_right').text(currencySymbol+purchase.data.donationTotal);
 
             if(parseFloat(purchase.data.bonusTotal) > 0){
-
+                document.getElementById('spinner').classList.remove('hidden');
                 $.ajax({
 
                     url: "/informationFinder",
@@ -514,6 +514,7 @@
                                 $('#project-payment-popup .item_shipping .summary_item_right').text('Free');
                             }
                         }
+                        document.getElementById('spinner').classList.add('hidden');
                     }
                 });
             }else{
@@ -844,7 +845,7 @@
                         <div class="border"></div>
                     </div>
                 </aside>
-                <aside class="tab_btns_outer tab_shared mobile-only ch_tab_sec_outer project_tabs_mobile clearfix">
+                <aside class="clearfix tab_btns_outer tab_shared mobile-only ch_tab_sec_outer project_tabs_mobile">
 
                     <div class="each_tab_btn tab_btn_user_bio fly_user_home" data-show="" data-initials="{{$user->username}}">
                         <div class="border"></div>
@@ -905,10 +906,10 @@
                                     }
                                 </script>
                                 <div id="read_more_less_btns" style="display: none;">
-                                    <div class="story_read_more_btn read_more_actual clearfix">
+                                    <div class="clearfix story_read_more_btn read_more_actual">
                                         <input type="button" value="Read More" />
                                     </div>
-                                    <div class="story_read_more_btn read_less_actual clearfix">
+                                    <div class="clearfix story_read_more_btn read_less_actual">
                                         <input type="button" value="Read Less" />
                                     </div>
                                 </div>
@@ -933,7 +934,7 @@
                                         @if(!Auth::user())
                                             <input type="hidden" name="is_create_new_user" id="is_create_new_user" value="1">
                                             <li class="proj_create_new_account_outer">
-                                                <div class="proj_create_new_account_inner clearfix">
+                                                <div class="clearfix proj_create_new_account_inner">
                                                     <div class="proj_cont_left_inp_outer">
                                                         <b>To purchase create an account</b>
                                                     </div>
@@ -948,8 +949,8 @@
                                                 </div>
                                                 <input class="dummy_field" type="text" name="email_9">
                                                 <input class="dummy_field" type="password" name="password_0">
-                                                <div class="proj_cont_flt_outer clearfix">
-                                                    <div class="proj_email_outer clearfix" id="email_password_section">
+                                                <div class="clearfix proj_cont_flt_outer">
+                                                    <div class="clearfix proj_email_outer" id="email_password_section">
                                                         <div class="proj_cont_left_inp_outer">
                                                             <b>Your Email *</b>
                                                             <input type="text" placeholder="Your Email" name="email" id="email" class="evade_auto_fill" />
@@ -963,7 +964,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="proj_cont_flt_outer proj_email_outer clearfix">
+                                                <div class="clearfix proj_cont_flt_outer proj_email_outer">
                                                     <div class="proj_cont_left_inp_outer">
                                                         <b>Password *</b>
                                                         <input type="Password" placeholder="Password" name="password" id="password" class="evade_auto_fill" />
@@ -975,7 +976,7 @@
                                             <input type="hidden" name="is_create_new_user" id="is_create_new_user" value="0">
                                         @endif
                                         <li class="proj_first_surname_outer add_margin">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <div class="proj_cont_left_inp_outer">
                                                     <b>First Name *</b>
                                                     <input type="text" placeholder="First Name" name="name" id="name" value="{{$loggedUserDet?$loggedUserDet['first_name']:''}}" />
@@ -988,7 +989,7 @@
                                             <label id="hide_show_details_check" class="proj_checkbox proj_checkbox_unchecked"> <input value="1" type="checkbox" name="make_me_private" id="make_me_private" /> Hide name/comment from everyone except organiser</label>
                                         </li>
                                         <li class="proj_address_outer add_margin">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <div class="proj_cont_left_inp_outer">
                                                     <b>Please Enter Your Shipping Address *</b>
                                                     <input type="text" placeholder="Street Address" name="street" id="address" value="{{$loggedUserDet?$loggedUserDet['address']:''}}" />
@@ -1006,7 +1007,7 @@
                                             </div>
                                         </li>
                                         <li class="proj_address_two_outer add_margin">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <div class="proj_cont_left_inp_outer">
                                                     <input value="{{$loggedUserDet?$loggedUserDet['city']:''}}" type="text" placeholder="City *" name="city" id="city" />
                                                     <p id="city_error" class="instant_hide"></p>
@@ -1018,7 +1019,7 @@
                                         </li>
                                         <li>
                                             <b>Credit Card Details * <span id="m_e_error" class="instant_hide"></span></b>
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <div class="proj_cont_left_inp_outer">
                                                     <input type="text" placeholder="Name On Card" name="card_holder_name" id="card_holder_name"  />
                                                 </div>
@@ -1026,13 +1027,13 @@
                                             </div>
                                         </li>
                                         <li class="proj_credit_card_outer">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <div id="m_e_card_cvc" class="proj_cont_left_inp_outer m_e_card_elem"></div>
                                                 <div id="m_e_card_expiry" class="proj_cont_right_inp_outer m_e_card_elem"></div>
                                             </div>
                                         </li>
                                         <li class="proj_photo_textarea_outer">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <div class="proj_cont_left_img_textarea">
                                                     <textarea placeholder="Leave A Comment" id="comment" name="comment"></textarea>
                                                 </div>
@@ -1040,12 +1041,12 @@
                                             <b class="faq_check_stat">If you have any questions about the projects you can check out our <a href="{{ asset("faq") }}">FAQ</a>.</b>
                                         </li>
                                         <li class="proj_total_amount_outer">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <div class="proj_cont_left_inp_outer tot_ship_left ">
                                                     <h4>TOTAL</h4>
                                                 </div>
                                                 <div class="proj_cont_right_inp_outer tot_usd_shiping">
-                                                    <div class="proj_cont_right_inner clearfix">
+                                                    <div class="clearfix proj_cont_right_inner">
                                                         <select class="tot_usd_sec" id="selectedCurrency" name="selectedCurrency">
                                                             @if($crowdfundCart['currency'] == 'USD')
                                                             <option value="USD">USD</option>
@@ -1060,12 +1061,12 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
+                                        <li class="clearfix proj_cont_flt_outer proj_bottom_description">
                                             <p>
                                                 If you are not paying in your native currency there may be fees for conversion. The actual amount charged by your card issuer may differ from our estimate shown here. This depends on their exchange rate and any applicable fees.
                                             </p>
                                         </li>
-                                        <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
+                                        <li class="clearfix proj_cont_flt_outer proj_bottom_description">
                                             <p>
                                                 I agree to 1Platform's <a target="_blank" href="{{route('tc')}}">terms and conditions</a>
                                                 <span class="terms_agree_outer">
@@ -1074,12 +1075,13 @@
                                             </p>
                                         </li>
                                         <li class="proj_confirm_payment_btn_outer">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <input id="monies_submit" type="button" value="Confirm Payment">
+                                                <i id="spinner" class="hidden fa fa-spinner fa-spin"></i>
                                             </div>
                                         </li>
                                         <li class="proj_bottom_description">
-                                            <div class="proj_cont_flt_outer clearfix">
+                                            <div class="clearfix proj_cont_flt_outer">
                                                 <p>
                                                     1Platform does not investigate projects. Project owners are responsible for their projects and ensuring that the project is complete and that all promises are kept. Please contact project owners if you have an issue. Your name, email will be visible to the seller. Shipping address will also be visible where applicable
                                                 </p>
@@ -1217,7 +1219,7 @@
 
             </div>
 
-            <div class="social_btns desktop-only clearfix">
+            <div class="clearfix social_btns desktop-only">
 
                 <ul class="clearfix">
 
@@ -1251,7 +1253,7 @@
         @endif
         <div class="panel colio_outer colio_dark">
             <div class="donator_outer donation_goal {{$donationAdded?'donation_agree':''}}">
-                <div class="donator_box clearfix">
+                <div class="clearfix donator_box">
                     <div class="colio_header">Donate to support {{$user->firstName()}}</div>
                     <p>Your donations help to meet my target goal</p>
                     <div class="donator_inner">

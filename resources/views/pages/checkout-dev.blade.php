@@ -396,6 +396,7 @@
 
         function initiatePayment(stripe, eCardNumber){
 
+            document.getElementById('spinner').classList.remove('hidden');
             document.getElementById('monies_submit').disabled = true;
 
             if($('#sub_n_free').length && $('#sub_n_free').val() == '1'){
@@ -406,6 +407,7 @@
                 })
                 .then(function(result3) {
                     if(result3.error){
+                        document.getElementById('spinner').classList.add('hidden');
                         document.getElementById('monies_submit').disabled = false;
                         $('#m_e_error').text(result3.error.message).removeClass('instant_hide');
                         $('#fill_form_popup,#body-overlay').show();
@@ -436,6 +438,7 @@
             })
             .then(function(result){
                 if(result.error){
+                    document.getElementById('spinner').classList.add('hidden');
                     document.getElementById('monies_submit').disabled = false;
                     $('#m_e_error').text(result.error.message).removeClass('instant_hide');
                     $('#fill_form_popup,#body-overlay').show();
@@ -468,6 +471,7 @@
                         window.location = url;
                     }else{
                         alert(response.error);
+                        document.getElementById('spinner').classList.add('hidden');
                         document.getElementById('monies_submit').disabled = false;
                     }
                 }
@@ -717,7 +721,7 @@
                                 @if($isCotyso)
                                 <li class="proj_photo_textarea_outer proj_tect_area_cotyso">
 
-                                    <div class="proj_cont_flt_outer clearfix">
+                                    <div class="clearfix proj_cont_flt_outer">
 
                                         <div class="proj_cont_left_img_textarea">
 
@@ -731,12 +735,12 @@
                                     </b>
                                 </li>
                                 <li class="proj_create_new_account_outer">
-                                    <div class="proj_create_new_account_inner clearfix">
+                                    <div class="clearfix proj_create_new_account_inner">
                                         <b>To purchase enter your email and phone number where you can be contacted at</b>
                                     </div>
                                     <input class="dummy_field" type="text" name="email_9">
-                                    <div class="proj_cont_flt_outer clearfix">
-                                        <div class="proj_email_outer clearfix" id="email_password_section">
+                                    <div class="clearfix proj_cont_flt_outer">
+                                        <div class="clearfix proj_email_outer" id="email_password_section">
                                             <div class="proj_cont_left_inp_outer">
                                                 <b>Email *</b>
                                                 <input type="text" placeholder="Your Email" name="email" id="cotyso_email" class="evade_auto_fill" />
@@ -754,14 +758,14 @@
 
                                 <li class="proj_create_new_account_outer">
 
-                                    <div class="proj_create_new_account_inner clearfix">
+                                    <div class="clearfix proj_create_new_account_inner">
                                         <b>To purchase you will need to create an account so you can download your files</b>
                                     </div>
                                     <input class="dummy_field" type="text" name="email_9">
                                     <input class="dummy_field" type="password" name="password_0">
-                                    <div class="proj_cont_flt_outer clearfix">
+                                    <div class="clearfix proj_cont_flt_outer">
 
-                                        <div class="proj_email_outer clearfix" id="email_password_section">
+                                        <div class="clearfix proj_email_outer" id="email_password_section">
 
                                             <div class="proj_cont_left_inp_outer">
 
@@ -788,7 +792,7 @@
 
                                     </div>
 
-                                    <div class="proj_cont_flt_outer proj_email_outer clearfix">
+                                    <div class="clearfix proj_cont_flt_outer proj_email_outer">
                                         <div class="proj_cont_left_inp_outer">
 
                                             <b>Password *</b>
@@ -811,7 +815,7 @@
 
                             <li class="proj_first_surname_outer add_margin">
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div class="proj_cont_left_inp_outer">
 
@@ -839,7 +843,7 @@
 
                                 
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div class="proj_cont_left_inp_outer">
 
@@ -904,7 +908,7 @@
 
                             <li class="proj_address_two_outer add_margin">
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div class="proj_cont_left_inp_outer">
 
@@ -929,7 +933,7 @@
 
                                 <b>Choose your payment method * <span id="p_e_error" class="instant_hide"></span></b>
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div class="proj_cont_left_inp_outer">
                                         <div data-payment-mode="stripe" class="proj_cont_each_det active">
@@ -983,7 +987,7 @@
 
                                 <b>Credit / Debit Card Details * <span id="m_e_error" class="instant_hide"></span></b>
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div class="proj_cont_left_inp_outer">
 
@@ -999,7 +1003,7 @@
 
                             <li class="proj_credit_card_outer">
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div id="m_e_card_cvc" class="proj_cont_left_inp_outer m_e_card_elem"></div>
 
@@ -1017,7 +1021,7 @@
                             @if(!$user->isCotyso())
                             <li class="proj_photo_textarea_outer">
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div class="proj_cont_left_img_textarea">
 
@@ -1050,7 +1054,7 @@
                             
                             <li class="proj_total_amount_outer">
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <div class="proj_cont_left_inp_outer tot_ship_left ">
 
@@ -1060,7 +1064,7 @@
 
                                     <div class="proj_cont_right_inp_outer tot_usd_shiping">
 
-                                        <div class="proj_cont_right_inner clearfix">
+                                        <div class="clearfix proj_cont_right_inner">
 
                                             <select class="tot_usd_sec" name="selectedCurrency" id="selectedCurrency">
                                                 @if($sellerDefaultCurrency == 'USD')
@@ -1097,13 +1101,13 @@
                             </li>
 
                             @if(!$isCotyso)
-                            <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
+                            <li class="clearfix proj_cont_flt_outer proj_bottom_description">
                                 <p>
                                     If you are not paying in your native currency there may be fees for conversion. The actual amount charged by your card issuer may differ from our estimate shown here. This depends on their exchange rate and any applicable fees.
                                 </p>    
                             </li>
 
-                            <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
+                            <li class="clearfix proj_cont_flt_outer proj_bottom_description">
                                 <p>
                                     I agree to 1Platform's <a target="_blank" href="{{route('tc')}}">terms and conditions</a>
                                     <span class="terms_agree_outer">
@@ -1116,7 +1120,7 @@
 
                             <li class="proj_confirm_payment_btn_outer">
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <input type="hidden" name="stripe_key" id="stripe_key" value="{{ $user->profile->stripe_secret_key == '' ? '0' : '1' }}">
 
@@ -1124,13 +1128,15 @@
 
                                     <input id="monies_submit" type="button" value="Confirm Payment" />
 
+                                    <i id="spinner" class="hidden fa fa-spinner fa-spin"></i>
+
                                 </div>
 
                             </li>
                             @if(!$isCotyso)
                             <li class="proj_bottom_description">
 
-                                <div class="proj_cont_flt_outer clearfix">
+                                <div class="clearfix proj_cont_flt_outer">
 
                                     <p>
 
@@ -1355,18 +1361,18 @@
 @stop
 
 @section('miscellaneous-html')
-    <div class="pro_page_pop_up clearfix" id="bespoke_license_popup" data-music-id="">
+    <div class="clearfix pro_page_pop_up" id="bespoke_license_popup" data-music-id="">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img alt="image popup" class="pro_soc_top_logo defer_loading" src="#" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="stage_one">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     @guest
                     <div style="text-align: center;" class="main_headline">This feature requires user to login</div>
                     @endguest 
@@ -1387,7 +1393,7 @@
             </div>
             @auth
             <div class="stage_two instant_hide">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="pro_pop_text_light">
                         Your proposal has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('profile.with.tab', ['tab' => 'chat'])}}" class="pro_text_dark">chat</a> to read replies or send more messages/details about your proposal.
                     </div>  
@@ -1397,10 +1403,10 @@
             @endauth
         </div>
     </div>
-    <div data-currency="£" class="pro_page_pop_up clearfix" id="pay_quick_popup">
+    <div data-currency="£" class="clearfix pro_page_pop_up" id="pay_quick_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
-            <div class="soc_con_top_logo clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
@@ -1413,7 +1419,7 @@
                 <div class="login_separator_center">Your Product</div>
                 <div class="login_separator_right"></div>
             </div>
-            <div class="soc_con_face_username clearfix">
+            <div class="clearfix soc_con_face_username">
                 <div class="main_headline"></div>
                 <div class="second_headline"></div>
                 <div class="row pay_quick_item_each">
@@ -1437,7 +1443,7 @@
                 </div>
             </div>
             <div class="stage_one">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="login_separator slim">
                         <div class="login_separator_left"></div>
                         <div class="login_separator_center">Shipping Address</div>
@@ -1501,30 +1507,30 @@
         </div>
     </div>
 
-    <div class="pro_fill_outer pro_page_pop_up clearfix" id="fill_form_popup">
+    <div class="clearfix pro_fill_outer pro_page_pop_up" id="fill_form_popup">
 
-        <div class="pro_fill_inner clearfix">
+        <div class="clearfix pro_fill_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
 
                 <img class="logo8 pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/logo_black.png') }}">
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
-            <div class="soc_discon_text clearfix">
+            <div class="clearfix soc_discon_text">
 
                 <h3>Wait!! You haven't filled all of the mandatory information</h3><br />
                 <span class="error"></span>
             </div>
-            <div class="pro_fill_img clearfix">
+            <div class="clearfix pro_fill_img">
                 <img class="defer_loading" src="" data-src="{{ asset('images/pupfillprofile.png') }}">
             </div>
         </div>
     </div>
-    <div class="pro_soc_con_face_outer pro_page_pop_up clearfix" id="choose-music-license">
+    <div class="clearfix pro_soc_con_face_outer pro_page_pop_up" id="choose-music-license">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
 
                 <a class="logo8"><img alt="image popup" class="pro_soc_top_logo defer_loading" src="#" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
                 <i class="fa fa-times pro_soc_top_close"></i>
