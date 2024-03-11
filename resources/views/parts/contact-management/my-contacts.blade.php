@@ -213,7 +213,7 @@
                     <button onclick="closeModal()">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p class="mb-4 text-lg font-semibold">To use contracts, your contact need to approve you first.</p>
+                    <p class="mb-4 text-lg">To use contracts, your contact need to approve you first.</p>
                 </div>
                 <div class="modal-footer">
                     <button onclick="closeModal()">Close</button>
