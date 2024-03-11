@@ -265,7 +265,7 @@
                     </div>
                     @endif
                 </aside>
-                <aside class="tab_btns_outer tab_shared mobile-only ch_tab_sec_outer clearfix">
+                <aside class="clearfix tab_btns_outer tab_shared mobile-only ch_tab_sec_outer">
                     <div class="each_tab_btn tab_btn_user_bio true_active" data-show="#tabd1">
                         <div class="border"></div>
                     </div>  
@@ -416,7 +416,7 @@
                     </div>
                 </div>
             </div>
-            <div class="social_btns desktop-only clearfix">
+            <div class="clearfix social_btns desktop-only">
                 <ul class="clearfix">
                     <li>
                         <a onclick="return false;" class="ch_sup_fb chart_disabled" href="javascript:void(0)">
@@ -485,6 +485,7 @@
                 <div class="news_update_val">{{$news->value}}</div>
                 @if($news->tab)
                 <div data-id="{{$news->tab}}" class="news_update_link {{$news->tab == '6' || $news->tab == '7' ? 'tilted' : ''}}">
+                    <span class="p-2 text-black bg-white rounded-lg cursor-pointer hover:bg-gray-200">
                     @if($news->tab == '6' || $news->tab == '7')
                     <i class="fa fa-ticket-alt"></i>
                     @php $tname = $news->tab == '6' ? 'My store' : 'My gigs and tickets' @endphp
@@ -504,7 +505,7 @@
                     <i class="fa fa-play"></i>
                     @php $tname = 'My videos' @endphp
                     @endif
-                    <span>{{$tname}}</span>
+                    {{$tname}}</span>
                 </div>
                 @endif
             </div>
@@ -567,7 +568,7 @@
                 }
             @endphp
             <div class="donator_outer donation_goalless {{ (!$donation) ? '' : 'donation_agree' }}">
-                <div class="donator_box clearfix">
+                <div class="clearfix donator_box">
                     <div class="colio_header">Make A Contribution</div>
                     <p>Contributions are not associated with perks</p>
                     <div class="donator_inner">

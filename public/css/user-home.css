@@ -80,7 +80,7 @@
 #news_nav_next { border-radius: 36px 0 0 36px;  }
 #news_nav_next i { margin-left: 4px; }
 #news_nav_back i { margin-right: 4px; }
-.news_update_link { font-size: 15px; cursor: pointer; letter-spacing: 0.6px; margin-top: 20px; border-top: 1px solid #fff; padding-top: 15px; display: flex; align-items: center; justify-content: center; }
+.news_update_link { font-size: 15px; letter-spacing: 0.6px; margin-top: 20px; border-top: 1px solid #fff; padding-top: 15px; display: flex; align-items: center; justify-content: center; }
 .news_update_link i { font-size: 18px; margin-right: 10px; }
 .news_update_link.tilted i { transform: rotate(-30deg); }
 .news_updates_outer .news_update_each + .news_update_each { display: none; }
@@ -147,6 +147,9 @@
 .user_bio_link { font-size: 14px; color: #13a89e !important; text-decoration: none; font-weight: bold; }
 
 .user_sub_paypal { color: #000; background: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; font-weight: bold; font-size: 13px; border-radius: 3px; margin-top: 25px; margin-bottom: 20px; }
+
+.bg-white {background-color: white;}
+
 
 @media (min-width:320px) and (max-width: 767px) {
     
