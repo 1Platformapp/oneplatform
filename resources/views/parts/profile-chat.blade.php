@@ -2,45 +2,45 @@
     <div class="pro_pg_tb_det_inner">
         <div id="contacts_section" class="sub_cat_data">
             <div class="flex flex-row bg-[#333] text-white px-2">
-                <div class="pro_tray_title hidden lg:flex main-tab-head">Management Plan</div>
+                <div class="hidden pro_tray_title lg:flex main-tab-head">Management Plan</div>
 				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
-                <div class="m_btn_right_icons flex flex-row items-center justify-between lg:ml-auto lg:mr-4 text-main-icons gap-2 lg:gap-8 w-full lg:w-fit">
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8 py-2">
+                <div class="flex flex-row items-center justify-between w-full gap-2 m_btn_right_icons lg:ml-auto lg:mr-4 text-main-icons lg:gap-8 lg:w-fit">
+                    <div class="flex items-center justify-center flex-grow h-full py-2 pr-2 border-r border-gray-main-icons lg:pr-8">
                         <div title="Management Plan" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan" data-head="Management Plan">
                             <i class="fas fa-list-ul"></i>
                         </div>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
+                    <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Contact Management" class="m_btn_right_icon_each m_btn_contact_management active" data-id="contact-management" data-head="Contact Management">
                             <i class="fas fa-users"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
+                    <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Calendar" class="m_btn_right_icon_each m_btn_calendarr active" data-id="my-calendar" data-head="My Calendar">
                             <i class="fa fa-calendar"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
+                    <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires" data-head="Creative Briefs">
                             <i class="far fa-question-circle"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
+                    <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Contracts" class="m_btn_right_icon_each m_btn_contracts active" data-id="my-contracts" data-head="My Contracts">
                             <i class="far fa-file-pdf"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
+                    <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="industry-contacts" data-head="Industry Contacts">
                             <i class="fas fa-handshake"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center border-r border-gray-main-icons pr-2 lg:pr-8">
+                    <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions" data-head="My Transactions">
                             <i class="fas fa-dollar-sign"></i>
                         </a>
                     </div>
-                    <div class="h-full flex-grow flex items-center justify-center">
+                    <div class="flex items-center justify-center flex-grow h-full">
                         <a title="Edit profile" title="Edit Profile" class="m_btn_right_icon_each m_btm_profile active" data-id="my-profile" data-head="My Profile">
                             <i class="fa fa-edit"></i>
                         </a>
@@ -49,28 +49,31 @@
             </div>
             @php $userPDetails = $commonMethods->getUserRealDetails($user->id) @endphp
             @php $skills = \App\Models\Skill::all() @endphp
+            @php $skill = $skills->first(function ($skill) use ($user) {
+                return $skill->value == $user->skills;
+            });@endphp
             <div class="">
-                <div class="music_btm_list no_sorting p-0 clearfix">
+                <div class="clearfix p-0 music_btm_list no_sorting">
                     <div class="md:hidden border-b border-[#ccc] pt-4 pb-2 font-bold main-tab-head">Management Plan</div>
                     <div class="edit_elem_bottom">
-                        <div class="loading text-center py-12 font-bold instant_hide">...Loading please wait</div>
+                        <div class="py-12 font-bold text-center loading instant_hide">...Loading please wait</div>
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
-                                <div class="mt-10 flex flex-col">
-                                    <div class="flex flex-col lg:flex-row items-start lg:items-end gap-3 mb-4 lg:mb-12">
+                                <div class="flex flex-col mt-10">
+                                    <div class="flex flex-col items-start gap-3 mb-4 lg:flex-row lg:items-end lg:mb-12">
                                         <div class="text-black">Listing tasks for : </div>
-                                        <select class="todo-select w-[16rem]">
+                                        <select class="todo-select w-[16rem]" data-skill-name="{{$skill->value}}" data-skill-id="{{$skill->id}}">
                                             @foreach($skills as $skill)
                                                 <option value="{{$skill->id}}">{{$skill->value}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="border-b border-gray-200">
-                                        <nav class="-mb-px flex " aria-label="Tabs">
-                                            <div data-stage="one" class="border-indigo-500 text-indigo-600 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 1</div>
-                                            <div data-stage="two" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 2</div>
-                                            <div data-stage="three" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 3</div>
-                                            <div data-stage="four" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage">Stage 4</div>
+                                        <nav class="flex -mb-px " aria-label="Tabs">
+                                            <div data-stage="one" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-indigo-600 border-b-2 border-indigo-500 cursor-pointer each-stage">Stage 1</div>
+                                            <div data-stage="two" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage">Stage 2</div>
+                                            <div data-stage="three" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage">Stage 3</div>
+                                            <div data-stage="four" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage">Stage 4</div>
                                         </nav>
                                     </div>
                                 </div>
@@ -82,11 +85,11 @@
                             <div>
                                 <div class="mt-10">
                                     <div class="border-b border-gray-200">
-                                        <nav class="-mb-px flex " aria-label="Tabs">
-                                            <div data-stage="my-contacts" class="border-indigo-500 text-indigo-600 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Contacts</div>
-                                            <div data-stage="add-contact" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Add contact</div>
-                                            <div data-stage="contact-requests" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Requests</div>
-                                            <div data-stage="my-groups" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 w-1/3 border-b-2 py-4 px-1 text-center text-sm font-medium cursor-pointer each-stage disabled">Groups</div>
+                                        <nav class="flex -mb-px " aria-label="Tabs">
+                                            <div data-stage="my-contacts" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-indigo-600 border-b-2 border-indigo-500 cursor-pointer each-stage disabled">Contacts</div>
+                                            <div data-stage="add-contact" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage disabled">Add contact</div>
+                                            <div data-stage="contact-requests" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage disabled">Requests</div>
+                                            <div data-stage="my-groups" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage disabled">Groups</div>
                                         </nav>
                                     </div>
                                 </div>
@@ -105,11 +108,11 @@
                                             <li>Enable seamless collaboration by attaching Creative Briefs easily for your Contacts.</li>
                                             <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion.</li>
                                             <li class="flex items-center gap-3">
-                                                <div class="open_contact_tab bg-gray-600 text-white px-2 rounded hover:underline cursor-pointer">Go to my network</div>
-                                                <div class="brief_video_btn bg-gray-600 text-white px-2 rounded hover:underline cursor-pointer">Watch video</div>
+                                                <div class="px-2 text-white bg-gray-600 rounded cursor-pointer open_contact_tab hover:underline">Go to my network</div>
+                                                <div class="px-2 text-white bg-gray-600 rounded cursor-pointer brief_video_btn hover:underline">Watch video</div>
                                             </li>
-                                            <li class="brief_video_holder instant_hide flex flex-col gap-2 border p-2 mt-2">
-                                                <div class="ml-auto text-lg brief_close_btn cursor-pointer">
+                                            <li class="flex flex-col gap-2 p-2 mt-2 border brief_video_holder instant_hide">
+                                                <div class="ml-auto text-lg cursor-pointer brief_close_btn">
                                                     <i class="fa fa-times"></i>
                                                 </div>
                                                 <div class="inner"></div>
@@ -121,8 +124,8 @@
                                     <ul role="list" class="grid xs2:grid-cols-2 sm:grid-cols-4 gap-x-4">
                                         @foreach($skills as $skill)
                                         @if($skill->brief_title == null) @php continue; @endphp @endif
-                                        <li data-title="{{$skill->brief_title}}" data-skill="{{$skill->value}}" class="relative questionnaire-skill flex justify-between gap-x-6 hover:bg-gray-200 border-b border-gray-200 cursor-pointer">
-                                            <div class="flex w-full items-center text-sm leading-6 px-4 py-4 text-gray-900 gap-x-4 text-sm leading-6 text-gray-900">
+                                        <li data-title="{{$skill->brief_title}}" data-skill="{{$skill->value}}" class="relative flex justify-between border-b border-gray-200 cursor-pointer questionnaire-skill gap-x-6 hover:bg-gray-200">
+                                            <div class="flex items-center w-full px-4 py-4 text-sm leading-6 text-gray-900 gap-x-4">
                                                 {{$skill->brief_title}}
                                             </div>
                                         </li>
@@ -144,13 +147,13 @@
                                         <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
                                             <i class="fa fa-info-circle"></i>
                                         </div>
-                                        <div class="lg:ml-3 flex-1 md:flex md:justify-between">
+                                        <div class="flex-1 lg:ml-3 md:flex md:justify-between">
                                             <p class="text-sm text-[#333] font-bold">Our groundbreaking digital platform is the world's first to facilitate person-to-person contracts</p>
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
                                         <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
-                                            <div class="min-w-0 flex-1">
+                                            <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">1.</div>
                                                     <div>Subscribe For legal Industry Contracts</div>
@@ -158,7 +161,7 @@
                                             </div>
                                         </div>
                                         <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
-                                            <div class="min-w-0 flex-1">
+                                            <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">2.</div>
                                                     <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer text-[#fc064c]">here</span>, attach contract</div>
@@ -166,7 +169,7 @@
                                             </div>
                                         </div>
                                         <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
-                                            <div class="min-w-0 flex-1">
+                                            <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">3.</div>
                                                     <div>Add details and requirements and submit</div>
@@ -174,7 +177,7 @@
                                             </div>
                                         </div>
                                         <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
-                                            <div class="min-w-0 flex-1">
+                                            <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">4.</div>
                                                     <div>Contact will receive an email/app notification</div>
@@ -182,7 +185,7 @@
                                             </div>
                                         </div>
                                         <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
-                                            <div class="min-w-0 flex-1">
+                                            <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">5.</div>
                                                     <div>They review and sign</div>
@@ -190,7 +193,7 @@
                                             </div>
                                         </div>
                                         <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
-                                            <div class="min-w-0 flex-1">
+                                            <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">6.</div>
                                                     <div>Both parties receive legally binding digital copy</div>
@@ -202,7 +205,7 @@
                                 @if($user->hasActivePaidSubscription())
 
                                 @else
-                                <!--<div class="flex flex-col gap-4 mt-4 mx-2 hide_on_mobile">
+                                <!--<div class="flex flex-col gap-4 mx-2 mt-4 hide_on_mobile">
                                     <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
@@ -223,14 +226,14 @@
                                             <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
                                                 <i class="fa fa-info-circle"></i>
                                             </div>
-                                            <div class="lg:ml-3 flex-1 md:flex md:justify-between">
+                                            <div class="flex-1 lg:ml-3 md:flex md:justify-between">
                                                 <p class="text-sm text-[#333] font-bold">Previews for the contracts are available</p>
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
                                             @foreach(\App\Models\Contract::all() as $contract)
                                             <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
-                                                <div class="min-w-0 flex-1">
+                                                <div class="flex-1 min-w-0">
                                                     <a target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}" class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                         <div>{{$contract->title}}</div>
                                                     </a>
@@ -250,7 +253,7 @@
                                         <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex mt-1">
                                             <i class="fa fa-info-circle"></i>
                                         </div>
-                                        <div class="lg:ml-3 flex-1 md:flex md:justify-between">
+                                        <div class="flex-1 lg:ml-3 md:flex md:justify-between">
                                             <p class="text-sm text-[#333] font-bold">
                                             Discover over <span class="text-[#fc064c]">{{count(\App\Models\IndustryContact::all())}}</span> industry contacts on 1Platform
                                             including labels, publishers, pluggers, producers and skilled song writers. <br>Each contact is complete with phone numbers, websites
@@ -262,7 +265,7 @@
                                 @if($user->hasActivePaidSubscription())
 
                                 @else
-                                <!--<div class="flex flex-col gap-4 my-4 mx-2 hide_on_mobile">
+                                <!--<div class="flex flex-col gap-4 mx-2 my-4 hide_on_mobile">
                                     <div class="border border-[#ccc] sm:rounded-lg">
                                         <div class="px-4 py-5 sm:p-6">
                                             <h3 class="text-base font-semibold leading-6 text-[#333]">Upgrade subscription</h3>
@@ -284,9 +287,9 @@
                                             $industryContactRegions = \App\Models\IndustryContactRegion::orderBy('id', 'asc')->get();
                                             $industryContactCategoryGroups = \App\Models\IndustryContactCategoryGroup::orderBy('id', 'asc')->get();
                                         @endphp
-                                        <div class="ind_con_search_outer flex flex-col space-y-2 md:space-y-0 md:flex-row md:items-center mb-5 border-b border-gray-200 py-8">
+                                        <div class="flex flex-col py-8 mb-5 space-y-2 border-b border-gray-200 ind_con_search_outer md:space-y-0 md:flex-row md:items-center">
                                             <div class="flex flex-row items-center">
-                                                <div class="ind_con_search_by overflow-hidden w-1/2 inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0">
+                                                <div class="inline-flex items-center w-1/2 overflow-hidden text-sm text-gray-900 rounded-md ind_con_search_by hover:bg-gray-50 focus-visible:outline-offset-0">
                                                     <select data-type="ind_cont_drop" id="ind_con_search_by_category">
                                                         <option value="">I'm Looking For:</option>
                                                         @foreach($industryContactCategoryGroups as $icCategoryGroup)
@@ -300,7 +303,7 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="ind_con_search_by overflow-hidden w-1/2 inline-flex items-center rounded-md text-sm text-gray-900 hover:bg-gray-50 focus-visible:outline-offset-0 md:ml-5">
+                                                <div class="inline-flex items-center w-1/2 overflow-hidden text-sm text-gray-900 rounded-md ind_con_search_by hover:bg-gray-50 focus-visible:outline-offset-0 md:ml-5">
                                                     <select data-type="ind_cont_drop" id="ind_con_search_by_city">
                                                         <option value="">City/Region/Country</option>
                                                         <optgroup label="ANYWHERE FROM">
@@ -320,7 +323,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="ind_con_search_submit ml-auto inline-flex items-center justify-center rounded-md px-3 py-1 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0 cursor-pointer">Search</div>
+                                            <div class="inline-flex items-center justify-center px-3 py-1 ml-auto text-sm text-gray-900 rounded-md cursor-pointer ind_con_search_submit ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0">Search</div>
                                             <div class="!mt-12 md:!mt-0 smart_switch_outer flex-1 switch_industry_contacts md:ml-auto">
                                                 <div class="smart_switch_txt">Show Favourite Only</div>
                                                 <label class="smart_switch">
@@ -330,139 +333,139 @@
                                             </div>
                                         </div>
                                         <div class="mt-5 industry-contacts-well">
-                                            <div class="text-center text-md mt-10">...Loading</div>
+                                            <div class="mt-10 text-center text-md">...Loading</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="each_dash_section mt-10 instant_hide" data-value="my-transactions">
+                        <div class="mt-10 each_dash_section instant_hide" data-value="my-transactions">
                             <div class="order-stages stage-one">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    <div data-id="financial-summary" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="financial-summary" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-chart-bar"></i>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">Financial Summary</p>
-                                                <p class="truncate text-sm text-gray-500">Summary of all of your sales, purchases, subscriptions and crowdfunding</p>
+                                                <p class="text-sm text-gray-500 truncate">Summary of all of your sales, purchases, subscriptions and crowdfunding</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-subscription-plan" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-subscription-plan" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0">
-                                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                                             </svg>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">Subscription Plan</p>
-                                                <p class="truncate text-sm text-gray-500">Your active subscription and payments made towards it</p>
+                                                <p class="text-sm text-gray-500 truncate">Your active subscription and payments made towards it</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-purchases" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-purchases" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fa fa-dollar-sign"></i>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">My Purchases</p>
-                                                <p class="truncate text-sm text-gray-500">All your purchases made from 1Platform</p>
+                                                <p class="text-sm text-gray-500 truncate">All your purchases made from 1Platform</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-sales" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-sales" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-hand-holding-usd"></i>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">My Sales</p>
-                                                <p class="truncate text-sm text-gray-500">All your sales made through 1Platform</p>
+                                                <p class="text-sm text-gray-500 truncate">All your sales made through 1Platform</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-premium-videos" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-premium-videos" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0">
-                                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">Premium Videos</p>
-                                                <p class="truncate text-sm text-gray-500">Watch premium videos unlocked through your purchases</p>
+                                                <p class="text-sm text-gray-500 truncate">Watch premium videos unlocked through your purchases</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-subscriptions" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-subscriptions" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0">
-                                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                             </svg>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">Subscriptions</p>
-                                                <p class="truncate text-sm text-gray-500">View who you are currently subscribed to at 1Platform</p>
+                                                <p class="text-sm text-gray-500 truncate">View who you are currently subscribed to at 1Platform</p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div data-id="my-crowdfund-purchases" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-crowdfund-purchases" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-dollar-sign"></i>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">My Crowdfund Purchases</p>
-                                                <p class="truncate text-sm text-gray-500">All your crowdfunding project purchases made from 1Platform</p>
+                                                <p class="text-sm text-gray-500 truncate">All your crowdfunding project purchases made from 1Platform</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-crowdfund-sales" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-crowdfund-sales" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-hand-holding-usd"></i>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">My Crowdfund Sales</p>
-                                                <p class="truncate text-sm text-gray-500">All your crowdfunding project sales made through 1Platform</p>
+                                                <p class="text-sm text-gray-500 truncate">All your crowdfunding project sales made through 1Platform</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-subscribers-donators" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-subscribers-donators" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-hand-holding-heart"></i>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">My Subscribers and Donators</p>
-                                                <p class="truncate text-sm text-gray-500">All your subscribers and donators at 1Platform</p>
+                                                <p class="text-sm text-gray-500 truncate">All your subscribers and donators at 1Platform</p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div data-id="my-patron-hub" class="relative order-stage-head flex items-center space-x-3 rounded-lg border border-gray-300 bg-transparent px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-patron-hub" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-hand-holding-heart"></i>
                                         </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="focus:outline-none cursor-pointer">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="cursor-pointer focus:outline-none">
                                                 <span class="absolute inset-0" aria-hidden="true"></span>
                                                 <p class="text-sm font-medium text-gray-900">My Patron Hub</p>
-                                                <p class="truncate text-sm text-gray-500">Setup a patron option that anyone can use to support you</p>
+                                                <p class="text-sm text-gray-500 truncate">Setup a patron option that anyone can use to support you</p>
                                             </div>
                                         </div>
                                     </div>
@@ -480,7 +483,7 @@
                                 <div class="mt-5">
                                     <div class="">
                                         <div class="py-5">
-                                            <div class="mt-2 max-w-full text-md text-gray-500">
+                                            <div class="max-w-full mt-2 text-gray-500 text-md">
                                                 <p class="font-bold">Access the 1Platform Wizard to simplify your tasks effortlessly</p>
                                                 <p>Accomplish various goals: website creation, portfolio development, product listings, music projects, crowdfunding, setup Stripe, domain connection, music licensing and so much more</p>
                                             </div>
@@ -549,7 +552,9 @@
     });
 
     const select2Todo = $('select.todo-select').select2();
-
+    let user_skill_id = $('select.todo-select').attr('data-skill-id');
+    let user_skill_name = $('select.todo-select').attr('data-skill-name');
+    
     $('body').delegate('.each-task .each-task-det-nav .nav', "click", function(e){
         e.stopPropagation();
     });
@@ -782,12 +787,8 @@
 
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
                 $('.loading').removeClass('instant_hide');
-                const activeSkill = localStorage.getItem('todo-skill-text') != '' ? localStorage.getItem('todo-skill-text') : '';
-                getManagementPlan(activeSkill);
-
-                if (activeSkill != '') {
-                    select2Todo.val(localStorage.getItem('todo-skill-value')).trigger('change');
-                }
+                getManagementPlan(user_skill_name);
+                select2Todo.val(user_skill_id).trigger('change');
             } else {
                 $('.management-plan-well').html('');
             }
@@ -1110,7 +1111,7 @@
                     $('.industry-contacts-well').html(response.data.data);
                     $('select[data-type="ind_cont_drop"]').select2();
                     if(response.data.total_records == 0){
-                        $('.industry-contacts-well').html('<div class="text-center mt-10">No records found</div>');
+                        $('.industry-contacts-well').html('<div class="mt-10 text-center">No records found</div>');
                     }
                     $('.ind_con_count').text(response.data.total_records);
                 }else{
