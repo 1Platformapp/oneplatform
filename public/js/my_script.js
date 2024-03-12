@@ -532,9 +532,8 @@ $(document).ready(function() {
     $("html, body").animate({scrollTop: scrollTo}, "slow");
     });
 
-    $('.tab_btns_outer,.tv_tab_btns_outer, #redirect-to-store').delegate( ".each_tab_btn:not(.true_active):not(.disabled)", "click", function(e){
-alert('asdasd');
-$().trigger('click')
+    $('.tab_btns_outer,.tv_tab_btns_outer').delegate( ".each_tab_btn:not(.true_active):not(.disabled)", "click", function(e){
+
         var thiss = $(this);
         var browserWidth = $( window ).width();
         var mainTabUserId = window.currentUserId;

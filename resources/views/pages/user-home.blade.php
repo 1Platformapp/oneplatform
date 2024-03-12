@@ -63,6 +63,10 @@
                 $('.pg_fore_out').removeClass('fore_active');
             });
 
+            $('#redirect-to-store').click(function(){
+                $('.each_tab_btn[data-show="#tabd6"]').trigger('click');
+            });
+
             var browserWidth = $( window ).width();
             if( browserWidth <= 767 ){
                 $('.ch_left_sec_outer').replaceWith('<section class="ch_left_sec_outer">' + $('.ch_left_sec_outer').html() +'</section>');
@@ -556,7 +560,7 @@
                 <div class="news_update_val">{{$news->value}}</div>
                 @if($news->tab)
                 <div data-id="{{$news->tab}}" class="news_update_link {{$news->tab == '6' || $news->tab == '7' ? 'tilted' : ''}}">
-                    <span class="p-2 text-black bg-white rounded-lg cursor-pointer hover:bg-gray-200">
+                    <span id="{{$news->tab == '6' || $news->tab == '7' ? 'redirect-to-store' : ''}}" class="p-2 text-black bg-white rounded-lg cursor-pointer hover:bg-gray-200">
                     @if($news->tab == '6' || $news->tab == '7')
                     <i class="fa fa-ticket-alt"></i>
                     @php $tname = $news->tab == '6' ? 'My store' : 'My gigs and tickets' @endphp
