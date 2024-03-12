@@ -326,7 +326,7 @@
     @endif
 
     @php $packages = config('constants.user_internal_packages') @endphp
-    <!--<div class="hm_video_sec_outer">
+    <div class="hm_video_sec_outer">
 
         <div class="video_upper_sec">
             <div class="auto_content">
@@ -397,10 +397,15 @@
 
                                                 <div class="int_sub_dhead">Price</div>
                                                 <div class="int_sub_offer_outer">
-                                                    <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
+                                                    <div class="int_sub_offer_each"><span><span class="hide_on_mobile">Choose </span>Payment Plan</span></div>
                                                     <div class="int_sub_offer_each">&nbsp;</div>
                                                     <div class="int_sub_offer_each">
-                                                        Fee Per Sale
+                                                        <span>Fee Per Sale </span>
+                                                        <a href="https://stripe.com/gb/pricing" target="_blank">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
+                                                                <path fill="currentColor" fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0a8 8 0 0 1 16 0m-7 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-1-9a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1" clip-rule="evenodd"/>
+                                                            </svg>
+                                                        </a>
                                                     </div>
                                                     <div class="int_sub_offer_each">
                                                         <span class="hide_on_mobile">Connect a&nbsp;</span>Custom Domain
@@ -602,24 +607,24 @@
                 </div>
             </div>
         </div>
-    </div>!-->
+    </div>!
 @stop
 
 
 @section('miscellaneous-html')
 
-    <div class="pro_page_pop_up clearfix" id="pay_internal_subscription_popup">
+    <div class="clearfix pro_page_pop_up" id="pay_internal_subscription_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="stage_one">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="main_headline">Subscription Plan Payment</div>
                     <div class="second_headline">
 	                    Package: <span id="pay_int_sub_plan"></span> - <span class="pro_text_dark" id="pay_int_sub_price"></span> <span id="p_price"></span>
@@ -650,7 +655,7 @@
                         <i class="fa fa-cc-mastercard"></i>
                     </div>
                     <div id="cc_amex" class="support_each_brand">
-                        <i class="fa fa fa-cc-amex"></i>
+                        <i class="fa fa-cc-amex"></i>
                     </div>
                     <div id="cc_visa" class="support_each_brand">
                         <i class="fa fa-cc-visa"></i>
@@ -664,7 +669,7 @@
                 </div>
             </div>
             <div class="stage_two instant_hide">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="pro_pop_text_light">
                         An agreement has been sent to <span class="pro_text_dark" id="sender_name"></span>. The user will be offered to accept or reject this agreement.
                     </div>
@@ -682,15 +687,15 @@
         @php $showSellerCurrency = ''; @endphp
         @php $suggestedUsername = '' @endphp
     @endif
-    <div class="pro_default_currency in_progress pro_page_pop_up clearfix" style="z-index: 10;{{$showSellerCurrency}}" id="pro_default_currency">
+    <div class="clearfix pro_default_currency in_progress pro_page_pop_up" style="z-index: 10;{{$showSellerCurrency}}" id="pro_default_currency">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
 
                 <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
             </div><br>
-            <div class="soc_con_twit_username clearfix">
+            <div class="clearfix soc_con_twit_username">
                 @php $ccounter = 0 @endphp
                 <div class="main_headline">Start Your Exciting Selling Experience - But First Things First</div><br>
                 @if($user->profile->default_currency == null)
@@ -719,7 +724,7 @@
                 <div class="error instant_hide" id="web_username_error"></div><br>
                 @endif
             </div>
-            <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+            <div class="clearfix pro_submit_button_outer soc_con_submit_success">
                 <a href="javascript:void(0)" id="pro_default_currency_submit">Submit</a>
             </div>
         </div>

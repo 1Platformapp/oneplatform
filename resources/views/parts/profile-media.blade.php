@@ -1046,7 +1046,7 @@
                                     </div>
                                     <div class="edit_elem_top">
                                         <div class="m_btm_list_left">
-                                            <img src="{{ $commonMethods::getUserProductLeftThumbnail($userProduct->id) }}" alt="#" />
+                                            <img class="object-cover w-full h-full" src="{{ $commonMethods::getUserProductLeftThumbnail($userProduct->id) }}" alt="#" />
                                             <ul class="music_btm_img_det">
                                                 <li>
                                                     <label>{{ $userProduct->title }}</label>

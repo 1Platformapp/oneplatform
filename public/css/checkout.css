@@ -60,6 +60,9 @@
 .proj_cont_each_det.active { border-color: #13a89e; } 
 .proj_cont_each_det.active .selected { display: block; }
 .proj_cont_each_det.disabled { opacity: 0.3; cursor: not-allowed; }
+.h-25 { height: 25px;}
+
+.hidden { display:  none !important;}
 
 @media (min-width: 768px){
 
