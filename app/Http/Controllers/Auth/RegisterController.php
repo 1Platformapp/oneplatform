@@ -243,7 +243,7 @@ class RegisterController extends Controller
     }
 
     public function showRegistrationForm(Request $request)
-    {
+    {exit;
         $user = Auth::user();
 
         $commonMethods = new CommonMethods();
