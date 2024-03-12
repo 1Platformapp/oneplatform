@@ -520,20 +520,21 @@ $(document).ready(function() {
 
     $('.news_update_link i,.news_update_link span').click(function(){
 
-        var id = $(this).closest('.news_update_link').attr('data-id');
-        if(browserWidth <= 767){
-            var tab = '#tab';
-            var scrollTo = $(".ch_tab_sec_outer.mobile-only").offset().top - 60;
-        }else{
-            var tab = '#tabd';
-            var scrollTo = $(".top_info_box").offset().top - 60;
-        }
+    var id = $(this).closest('.news_update_link').attr('data-id');
+    if(browserWidth <= 767){
+    var tab = '#tab';
+    var scrollTo = $(".ch_tab_sec_outer.mobile-only").offset().top - 60;
+    }else{
+    var tab = '#tabd';
+    var scrollTo = $(".top_info_box").offset().top - 60;
+    }
         $('.each_tab_btn[data-show="'+tab+id+'"]').trigger('click');
-        $("html, body").animate({scrollTop: scrollTo}, "slow");
+    $("html, body").animate({scrollTop: scrollTo}, "slow");
     });
 
-    $('.tab_btns_outer,.tv_tab_btns_outer').delegate( ".each_tab_btn:not(.true_active):not(.disabled)", "click", function(e){
-
+    $('.tab_btns_outer,.tv_tab_btns_outer, #redirect-to-store').delegate( ".each_tab_btn:not(.true_active):not(.disabled)", "click", function(e){
+alert('asdasd');
+$().trigger('click')
         var thiss = $(this);
         var browserWidth = $( window ).width();
         var mainTabUserId = window.currentUserId;
@@ -1544,7 +1545,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-
+        
         var musicId = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', musicId);
@@ -1568,7 +1569,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-
+        
         var serviceId = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', serviceId);
@@ -1592,7 +1593,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-
+        
         var id = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', id);
@@ -1616,7 +1617,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-
+        
         var id = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', id);
@@ -1853,8 +1854,6 @@ $(document).ready(function() {
 
     $('body').delegate( ".pro_confirm_delete_outer #pro_delete_submit_yes", "click", function(e){
 
-
-
         e.preventDefault();
 
 
@@ -1932,8 +1931,7 @@ $(document).ready(function() {
             $.post( "/deleteUserNews" , { id: deleteId }, function(data) {
 
 
-
-                location.reload();
+                window.location.href = "/profile-setup/standalone/news";
 
             });
 
@@ -2134,8 +2132,8 @@ $(document).ready(function() {
         }
 
         if(!error){
-
             thiss.closest('form').submit();
+            thiss.closest('form').reset();
         }
 
     });
