@@ -64,7 +64,20 @@
             });
 
             $('#redirect-to-store').click(function(){
-                $('.each_tab_btn[data-show="#tabd6"]').trigger('click');
+                var id = $(this).attr('data-id');
+                if(id == 1) {
+                    $('.each_tab_btn[data-show="#tabd1"]').trigger('click');
+                } else if(id == 2) {
+                    $('.each_tab_btn[data-show="#tabd2"]').trigger('click');
+                } else if(id == 3) {
+                    $('.each_tab_btn[data-show="#tabd3"]').trigger('click');
+                } else if(id == 4) {
+                    $('.each_tab_btn[data-show="#tabd4"]').trigger('click');
+                } else if(id == 5) {
+                    $('.each_tab_btn[data-show="#tabd5"]').trigger('click');
+                } else if(id == 6 || id == 7) {
+                    $('.each_tab_btn[data-show="#tabd6"]').trigger('click');
+                }
             });
 
             var browserWidth = $( window ).width();
@@ -560,7 +573,7 @@
                 <div class="news_update_val">{{$news->value}}</div>
                 @if($news->tab)
                 <div data-id="{{$news->tab}}" class="news_update_link {{$news->tab == '6' || $news->tab == '7' ? 'tilted' : ''}}">
-                    <span id="{{$news->tab == '6' || $news->tab == '7' ? 'redirect-to-store' : ''}}" class="p-2 text-black bg-white rounded-lg cursor-pointer hover:bg-gray-200">
+                    <span id="redirect-to-store" data-id="{{$news->tab}}" class="p-2 text-black bg-white rounded-lg cursor-pointer hover:bg-gray-200">
                     @if($news->tab == '6' || $news->tab == '7')
                     <i class="fa fa-ticket-alt"></i>
                     @php $tname = $news->tab == '6' ? 'My store' : 'My gigs and tickets' @endphp
