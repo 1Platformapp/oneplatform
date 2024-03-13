@@ -101,7 +101,17 @@
 
                                             <tr>
                                                 <td style="color: #fc064c;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px;" align="left">
-                                                    Well done! <span style="font-weight: 600;">{{$campaign->title}}</span> is now live
+                                                    Well done! Your project <span style="font-weight: 600;">{{$campaign->title}}</span> is now live.
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td height="12">&nbsp;</td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px" align="left">
+                                                    You can view it on here: <a href="{{'https://www.1platform.tv/project/'.$user->username}}">https://www.1platform.tv/project/{{ $user->username }}</a>
                                                 </td>
                                             </tr>
 
