@@ -774,14 +774,16 @@
 
     <input type="hidden" id="share_current_page" value="project">
 
+    
     @php
         $shareVideoTitle = preg_replace('/[^\w]/', ' ', $defaultVideoTitle);
         $url = 'project_'.$user->id;
         $userImageName = $user->profile->profile_display_image_original == '' ? 'user-general-display-image.png' : $user->profile->profile_display_image_original;
-        $shareVideoURL = route('vid.share', ['videoId' => $defaultVideoId, 'userName' => $user->name, 'url' => $url]);
+        //commented $shareVideoURL = route('vid.share', ['videoId' => $defaultVideoId, 'userName' => $user->name, 'url' => $url]);
+        $shareVideoURL = route('vid.share', ['videoId' => '0cSXq4TYIIk', 'userName' => $user->name, 'url' => $url]);
         $shareURL = route('url.share', ['userName' => $user->name, 'imageName' => base64_encode($userImageName), 'url' => $url]);
     @endphp
-
+    
     <input type="hidden" id="video_share_id" value="{{$defaultVideoId}}">
 
     <input type="hidden" id="video_share_link" value="{{$shareVideoURL}}">
