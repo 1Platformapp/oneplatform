@@ -243,13 +243,13 @@ class RegisterController extends Controller
     }
 
     public function showRegistrationForm(Request $request)
-    {exit;
+    {
         $user = Auth::user();
-
         $commonMethods = new CommonMethods();
         $genres = Genre::all();
         $userData = Session::get('register.data');
         Session::forget('register.data');
+
 
         $data = [
             'genres' => $genres,
@@ -273,5 +273,14 @@ class RegisterController extends Controller
             Session::flash("error", "Invalid activation token");
             return redirect("login");
         }
+    }
+    
+    public function verifyToken(Request $request) {
+        $isTokenVerified = false;
+
+        if($request->token == '1platform24') {
+            $isTokenVerified = true;
+        } 
+        return response()->json(['isTokenVerified' => $isTokenVerified]);
     }
 }

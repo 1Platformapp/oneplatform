@@ -506,6 +506,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::get('reset/{token}', [ForgotPasswordController::class, 'getReset'])->name('reset.password.email');
         Route::get('reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('reset.password');
         Route::post('register-user', [RegisterController::class, 'registerUser'])->name('register.user');
+        Route::post('verify-token', [RegisterController::class, 'verifyToken'])->name('verify.token');
         Route::get('activate-user/{token}', [RegisterController::class, 'getActivate'])->name('activate.user');
         Route::get('user-search', [CommonMethods::class, 'postUserSearchResults'])->name('user.search.results');
         Route::get('profile/{userId}/{videoId?}', [ChartController::class, 'getProfile'])->name('get.profile');

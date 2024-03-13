@@ -211,6 +211,23 @@
                 activateStep($(this).attr('data-step'));
             });
 
+            $('#token-verify').click(function () {
+                var token = $('#verification-token').val();
+
+                $.ajax({
+                        url: '/verify-token',
+                        dataType: 'json',
+                        type: 'POST',
+                        data: {'token' : token},
+                        success: function (data){
+                            if(data.isTokenVerified) {
+                                $('#token-content').addClass('hidden');
+                                $('#register-content').removeClass('hidden');
+                            }
+                        }
+                    });
+            });
+
             $(".platform-searchable").bind('keyup', function(event){
                 var thiss = $(this);
                 var well = thiss.closest('.my-dropdown-container').find('.'+thiss.attr('data-well'));
@@ -277,7 +294,35 @@
 @endsection
 
 @section('page-content')
+<div id="token-content" class="flex items-center justify-center h-screen">
+    <div class="w-full max-w-md pt-6 pb-6">
+        <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
+        <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
+        <div class="mt-6">
+            <div class="mb-4">
+                <label for="token" class="block text-sm font-medium text-gray-600">Token</label>
+                <input
+                    type="text"
+                    id="verification-token"
+                    placeholder="Enter Token"
+                    class="w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200"
+                >
+            </div>
 
+            <div class="flex items-center justify-center">
+                <button
+                    id="token-verify"
+                    type="submit"
+                    class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
+                >
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="register-content" class="hidden">
     <div class="w-full pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
         <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
@@ -502,5 +547,5 @@
             </div>
         </form>
     </div>
-
+</div>
 @endsection
