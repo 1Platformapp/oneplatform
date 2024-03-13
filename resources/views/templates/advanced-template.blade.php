@@ -41,7 +41,7 @@
         <link href="/css/app.css?v=3.64" rel="stylesheet" type="text/css" />
 
 	    <script src="{{asset('js/jquery.min.js')}}"></script>
-	    <script defer src="{{asset('js/my_script.min.js?v=6.76')}}"></script>
+	    <script defer src="{{asset('js/my_script.min.js?v=6.77')}}"></script>
 	    <script src="{{asset('js/load_defer.min.js?v=1.11')}}"></script>
 
 	    @yield('page-level-css','')

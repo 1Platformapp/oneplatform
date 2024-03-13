@@ -32,7 +32,7 @@
 
     <script type="application/javascript" src="/js/jquery.bxslider.min.js"></script>
 
-    <script defer type="application/javascript" src="/js/my_script.min.js?v=6.76"></script>
+    <script defer type="application/javascript" src="/js/my_script.min.js?v=6.77"></script>
 
     @yield('page-level-css','')
 
