@@ -344,11 +344,7 @@
                     </div>
                 </div>
                 @php $packages = config('constants.user_internal_packages') @endphp
-                <div class="home_each_section home_section_packages hide_on_mobile">
-                    <!--<div class="header">
-                        <h2>FIND THE PERFECT PLAN FOR YOUR TEAM</h2>
-                        <h4 class="hide_on_mobile">BROWSE OUR SUBSCRIPTION AND SINGLE SONG PRICING PLANS BELOW</h4>
-                    </div>!-->
+                <!-- <div class="home_each_section home_section_packages hide_on_mobile">
                     <div class="int_sub_outer">
                         <div class="int_sub_inner">
                             <div class="int_sub_nav_outer hide_on_desktop">
@@ -538,7 +534,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 @stop
 

@@ -375,12 +375,12 @@
                         <div class="startup_wizard_body">
                             <div class="startup_wizard_each_content">
                                 @if($step == '2')
-                                    <div class="int_sub_main_head">Find the Perfect Plan for Your Team</div>
+                                    <!-- <div class="int_sub_main_head">Find the Perfect Plan for Your Team</div>
                                     <div class="int_sub_main_head_jun">
                                         Browse our subscription and single song pricing plans below
-                                    </div>
+                                    </div> -->
 
-                                    <div class="int_sub_outer">
+                                    <!-- <div class="int_sub_outer">
                                         <div class="int_sub_inner">
                                             <div class="int_sub_nav_outer hide_on_desktop">
                                                 <div class="int_sub_nav_btn int_nav_btn_prev">
@@ -568,7 +568,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 @elseif($step == '3')
                                     <br><br>
                                     <div class="pro_note_2">
