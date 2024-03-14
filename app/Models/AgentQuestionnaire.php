@@ -10,7 +10,10 @@ use Illuminate\Notifications\Notifiable;
 class AgentQuestionnaire extends Authenticatable
 
 {
-    
+    protected $fillable = [
+        'brief_id'
+    ];
+
     protected $table = 'agent_questionnaires';
     
     public function agent(){

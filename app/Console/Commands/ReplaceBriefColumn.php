@@ -41,7 +41,7 @@ class ReplaceBriefColumn extends Command
     {
         $creatives = CreativeBrief::all();
         foreach($creatives as $creative) {
-            $this->line('Replacing '. $creative->title);
+            $this->line('Updating brief ids for the'. $creative->title);
             $questionaires = AgentQuestionnaire::where('brief_title', $creative->title)->get();
             foreach($questionaires as $questionaire) {
                 $questionaire->fill(['brief_id' => $creative->id]);
