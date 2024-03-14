@@ -1,4 +1,4 @@
-<div id="calendar-container">
+<div class="calendar-container">
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <div class="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
             <div class="flex items-center text-gray-900">
@@ -94,6 +94,7 @@
                                     <input type="text" id="location" placeholder="e.g Cotyso studios, manchester" class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm border border-solid border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
+                            @if(!isset($partner))
                             <div class="w-full mt-2">
                                 <label for="search-participants" class="block text-sm font-medium leading-6 text-gray-900">Participants</label>
                                 <div class="relative participants-search-outer mt-2">
@@ -110,6 +111,7 @@
                                             $contactUser = $contact->contactUser;
                                             $contactPDetails = $commonMethods->getUserRealDetails($contactUser->id)
                                         @endphp
+
                                         <li base-id="{{$contactUser->id}}" class="each-participant hidden flex items-center justify-between space-x-3 py-4">
                                             <div class="flex min-w-0 flex-1 items-center space-x-3">
                                                 <div class="flex-shrink-0">
@@ -133,6 +135,7 @@
                                     </ul>
                                 </div>
                             </div>
+                            @endif
                             <button type="button" class="add-participant-submit w-24 ml-auto mt-4 rounded bg-indigo-600 px-2 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 outline-none">Save</button>
                         </div>
                     </div>
@@ -193,6 +196,7 @@
         </li>
     </div>
     <input id="current-user" type="hidden" value="{{$user->id}}" />
+    <input id="current-partner" type="hidden" value="{{isset($partner) ? $partner->id : ''}}" />
 </div>
 
 <script>
@@ -358,12 +362,14 @@
         });
 
         $('#search-participants').off('input').on('input', function () {
+            var thiss = $(this)
             var searchTerm = $(this).val();
             $('.participants-search-result-outer').html('').addClass('hidden');
 
             if (searchTerm.length > 0) {
-                $('.all-participants .participant-name').each(function () {
+                thiss.closest('.calendar-container').find('.all-participants .participant-name').each(function () {
                     var participantText = $(this).text().toLowerCase();
+                    console.log(participantText);
                     if (participantText.includes(searchTerm)) {
                         var id = $(this).closest('.each-participant').attr('base-id');
                         var count = $('.participants-search-result[data-id="'+id+'"]');
@@ -489,6 +495,7 @@
 
         function fetchCalendarEvents(date){
             var currentUser = $('#current-user');
+            var currentPartner = $('#current-user').val();
             var formData = new FormData();
             formData.append('date', date);
 
@@ -506,6 +513,7 @@
 
                         $('#selected-date-events').html('');
                         response.data.forEach(function(ev) {
+                            console.log(ev);
                             var event = $('.element_sample#event-summary').clone();
                             event.find('.event-title').attr('data-id', ev.id);
                             event.find('.event-title').text(ev.title);
@@ -523,7 +531,10 @@
                             var participants = '';
                             if (ev.participant_users.length) {
                                 ev.participant_users.forEach(function(part) {
-                                    participants += '<dd data-id="'+part.id+'" data-user-id="'+part.user_id+'" data-username="'+part.username+'" data-name="'+part.name+'"><img class="h-6 w-6 rounded-full bg-gray-50 ring-2 ring-white" src="'+part.image+'" alt=""></dd>';
+                                    console.log(part);
+                                    if (currentPartner == '' || currentPartner == part.id) {
+                                        participants += '<dd data-id="'+part.id+'" data-user-id="'+part.user_id+'" data-username="'+part.username+'" data-name="'+part.name+'"><img class="h-6 w-6 rounded-full bg-gray-50 ring-2 ring-white" src="'+part.image+'" alt=""></dd>';
+                                    }
                                 });
                                 event.find('.participants-small').html(participants);
                             }
@@ -535,3 +546,9 @@
         }
     });
 </script>
+
+<style>
+    .add-participant-submit.busy {
+        cursor: not-allowed;
+    }
+</style>

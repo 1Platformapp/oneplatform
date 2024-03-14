@@ -80,11 +80,11 @@
                                         </a>
                                     </li>
                                     @if($contact->approved)
-                                    <!--<li>
+                                    <li>
                                         <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$contact->id}}">
                                             <i class="fa fa-calendar"></i>
                                         </a>
-                                    </li>!-->
+                                    </li>
                                     @else
                                     <li>
                                         <a title="Calendar" class="m_btn_right_icon_each">
@@ -142,7 +142,7 @@
                             @endif
                             @if($contact->approved)
                             <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$contact->id}}">
-                                @include('parts.agent-contact-calendar', ['contact' => $contact])
+                                @include('parts.agent-contact-calendar', ['contact' => $contact, 'commonMethods' => $commonMethods])
                             </div>
                             <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
                                 @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'hasActiveSub' => $hasActiveSub])
