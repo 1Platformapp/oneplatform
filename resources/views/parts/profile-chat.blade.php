@@ -47,7 +47,6 @@
                     </div>
                 </div>
             </div>
-            @php $userPDetails = $commonMethods->getUserRealDetails($user->id) @endphp
             @php $skills = \App\Models\Skill::all() @endphp
             @php $skill = $skills->first(function ($skill) use ($user) {
                 return $skill->value == $user->skills;
