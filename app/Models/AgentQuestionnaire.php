@@ -31,4 +31,9 @@ class AgentQuestionnaire extends Authenticatable
         return $this->hasMany( AgentQuestionnaireAnswer::class, 'agent_questionnaire_id' )->orderBy('id', 'asc');
     }
 
+    public function brief()
+    {
+        return $this->belongsTo(CreativeBrief::class);
+    }
+
 }
