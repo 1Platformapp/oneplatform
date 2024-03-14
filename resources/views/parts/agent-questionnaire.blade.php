@@ -1,11 +1,10 @@
 
-@php $agentQuestionnaires = \App\Models\AgentQuestionnaire::where(['agent_id' => Auth::user()->id])->where('skill', '<>', $skill)->get(); @endphp
-@php $skills = \App\Models\Skill::all() @endphp
-
-<div data-skill="{{$skill}}" class="my_sub_sec">
+@php $agentQuestionnaires = \App\Models\AgentQuestionnaire::where(['agent_id' => Auth::user()->id])->get(); @endphp
+@php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
+<div data-skill="{{$creativeBrief->title}}" class="my_sub_sec">
     <div class="instant_hide other-questionnaires">
         @foreach($agentQuestionnaires as $agentQuestionnaire)
-        <div class="each-other-questionnaire" data-skill="{{$agentQuestionnaire->skill}}">
+        <div class="each-other-questionnaire" data-brief-id="{{$agentQuestionnaire->brief_id}}">
             @if($agentQuestionnaire && count($agentQuestionnaire->questions))
                 @foreach($agentQuestionnaire->questions as $eachQues)
                     <div class="port_each_field port_field_checked">
@@ -23,21 +22,20 @@
         @endforeach
     </div>
     <div class="my_sub_sec_inner">
-        <h3><span class="text-lg head_text">Creative Brief: {{$title}}</span></h3>
+        <h3><span class="text-lg head_text">Creative Brief: {{$creativeBrief->title}}</span></h3>
         <form action="{{route('agent.manage.questionnaire')}}" method="POST">
             {{csrf_field()}}
-            <input type="hidden" name="skill" value="{{$skill}}">
-            <input type="hidden" name="title" value="{{$title}}">
+            <input type="hidden" name="brief_id" value="{{$creativeBrief->id}}">
             <div class="agent_que_actions">
                 <div data-id="add_question_btn" class="agent_que_action_btn">
                     <i class="fa fa-plus"></i> Add question
                 </div>
                 <div data-id="import_questions" class="agent_que_action_btn">
                     <select class="agent_que_import">
-                        <option value="">Import Questions From</option>
-                        @foreach($skills as $skilll)
-                            @if($skilll->value != $skill)
-                                <option value="{{$skilll->value}}">{{$skilll->value}}</option>
+                        <option value="" selected disabled>Import Questions From</option>
+                        @foreach($creativeBriefs as $brief)
+                            @if($brief->title != $creativeBrief->title)
+                                <option value="{{$brief->id}}" data-brief-title="{{$brief->title}}">{{$brief->title}}</option>
                             @endif
                         @endforeach
                     </select>
@@ -99,16 +97,18 @@
         $('.agent_que_import').change(function(){
 
             var from = $(this).val();
+            const selectedOption = this.options[this.selectedIndex];
+            const briefTitle = selectedOption.dataset.briefTitle;
+
             var toElem = $(this).closest('form').find('.element_container');
-            if(confirm('This action will import questions from ' + from)){
-
-                var fromElem = $('.other-questionnaires .each-other-questionnaire[data-skill="'+from+'"]');
+            if(confirm('This action will import questions from ' + briefTitle)){
+                var fromElem = $('.other-questionnaires .each-other-questionnaire[data-brief-id="'+from+'"]');
                 if(fromElem.length && toElem.length){
-
                     var clone = fromElem[0].innerHTML;
-console.log(clone)
                     toElem.append(clone);
                 }
+            } else {
+                this.value = '';
             }
         });
 

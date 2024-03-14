@@ -105,7 +105,7 @@ use App\Models\AgentContact;
 use App\Models\UserChatGroup;
 
 use App\Mail\AgentContact as AgentContactMailer;
-
+use App\Models\CreativeBrief;
 
 class AgentContactController extends Controller
 
@@ -675,14 +675,13 @@ class AgentContactController extends Controller
 
         $agent = Auth::user();
 
-        if($request->has('skill')){
+        if($request->has('brief_id')){
 
-            $skill = $request->get('skill');
-            $title = $request->get('title');
 
-            $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill, 'agent_id' => $agent->id])->first();
+            $agentQuestionnaire = AgentQuestionnaire::where(['brief_id' => $request->brief_id, 'agent_id' => $agent->id])->first();
+            $creativeBrief = CreativeBrief::where('id', $request->brief_id)->first();
 
-            $html = \View::make('parts.agent-questionnaire', ['skill' => $skill, 'title' => $title, 'questionnaire' => $agentQuestionnaire])->render();
+            $html = \View::make('parts.agent-questionnaire', ['creativeBrief' => $creativeBrief, 'questionnaire' => $agentQuestionnaire])->render();
 
             return json_encode(['data' => $html, 'success' => 1]);
         }else{
@@ -714,19 +713,16 @@ class AgentContactController extends Controller
 
         $agent = Auth::user();
 
-        if($request->has('skill')){
-
-            $skill = $request->get('skill');
-            $title = $request->get('title');
+        if($request->has('brief_id')){
+            
             $questions = $request->get('question');
 
-            $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill, 'agent_id' => $agent->id])->first();
+            $agentQuestionnaire = AgentQuestionnaire::where(['brief_id' => $request->brief_id, 'agent_id' => $agent->id])->first();
             if(!$agentQuestionnaire){
 
                 $agentQuestionnaire = new AgentQuestionnaire();
                 $agentQuestionnaire->agent_id = $agent->id;
-                $agentQuestionnaire->skill = $skill;
-                $agentQuestionnaire->brief_title = $title;
+                $agentQuestionnaire->brief_id = $request->brief_id;
                 $agentQuestionnaire->save();
             }
 

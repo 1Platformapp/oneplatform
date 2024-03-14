@@ -47,6 +47,7 @@
                     </div>
                 </div>
             </div>
+            @php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
             @php $skills = \App\Models\Skill::all() @endphp
             @php $skill = $skills->first(function ($skill) use ($user) {
                 return $skill->value == $user->skills;
@@ -121,11 +122,10 @@
                                 </div>
                                 <div class="que-stages stage-one">
                                     <ul role="list" class="grid xs2:grid-cols-2 sm:grid-cols-4 gap-x-4">
-                                        @foreach($skills as $skill)
-                                        @if($skill->brief_title == null) @php continue; @endphp @endif
-                                        <li data-title="{{$skill->brief_title}}" data-skill="{{$skill->value}}" class="relative flex justify-between border-b border-gray-200 cursor-pointer questionnaire-skill gap-x-6 hover:bg-gray-200">
+                                        @foreach($creativeBriefs as $creativeBrief)
+                                        <li data-brief-id="{{$creativeBrief->id}}" class="relative flex justify-between border-b border-gray-200 cursor-pointer questionnaire-skill gap-x-6 hover:bg-gray-200">
                                             <div class="flex items-center w-full px-4 py-4 text-sm leading-6 text-gray-900 gap-x-4">
-                                                {{$skill->brief_title}}
+                                                {{$creativeBrief->title}}
                                             </div>
                                         </li>
                                         @endforeach
@@ -957,14 +957,11 @@
     });
 
     $('.questionnaire-skill').click(function(){
-
-        var skill = $(this).attr('data-skill');
-        var title = $(this).attr('data-title');
+//comehere
+        var brief_id = $(this).attr('data-brief-id');
         var formData = new FormData();
-        formData.append('skill', skill);
-        formData.append('title', title);
+        formData.append('brief_id', brief_id);
         $.ajax({
-
             url: '/agent/get-questionnaire',
             type: 'POST',
             data: formData,
