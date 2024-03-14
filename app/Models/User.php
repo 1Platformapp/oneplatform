@@ -1903,14 +1903,14 @@ class User extends Authenticatable
     public function createDefaultQuestions(){
 
         $platformManager = User::find(config('constants.admins')['1platformagent']['user_id']);
-        $skills = Skill::all();
-        foreach($skills as $skill){
-            $agentQuestionnaire = AgentQuestionnaire::where(['skill' => $skill->value, 'agent_id' => $platformManager->id])->first();
+        $creativeBriefs = CreativeBrief::all();
+        foreach($creativeBriefs as $creativeBrief){
+            $agentQuestionnaire = AgentQuestionnaire::where(['brief_id' => $creativeBrief->id, 'agent_id' => $platformManager->id])->first();
 
             if ($agentQuestionnaire) {
                 $newQuestionnaire = new AgentQuestionnaire();
                 $newQuestionnaire->agent_id = $this->id;
-                $newQuestionnaire->skill = $skill->value;
+                $newQuestionnaire->brief_id = $creativeBrief->id;
                 $newQuestionnaire->save();
 
                 foreach ($agentQuestionnaire->questions as $question) {
