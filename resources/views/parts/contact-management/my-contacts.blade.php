@@ -213,7 +213,7 @@
                     <button onclick="closeModal()">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p class="mb-4 text-lg">To use contracts, your contact need to approve you first.</p>
+                    <p class="mb-4 text-lg">To use this feature, your contact must be approved.</p>
                 </div>
                 <div class="modal-footer">
                     <button onclick="closeModal()">Close</button>
@@ -1222,12 +1222,6 @@
 
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
-    }
-
-    function showAlert(type) {
-        if(type == 'agreements') {
-            alert("To use contracts, your contact need to approve you first!");
-        }
     }
 
 </script>
