@@ -62,7 +62,7 @@
                                 <div class="flex flex-col mt-10">
                                     <div class="flex flex-col items-start gap-3 mb-4 lg:flex-row lg:items-end lg:mb-12">
                                         <div class="text-black">Listing tasks for : </div>
-                                        <select class="todo-select w-[16rem]" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? skill->id : ''}}">
+                                        <select class="todo-select w-[16rem]" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? $skill->id : ''}}">
                                             @foreach($skills as $skill)
                                                 <option value="{{$skill->id}}">{{$skill->value}}</option>
                                             @endforeach
