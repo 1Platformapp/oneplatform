@@ -1,11 +1,6 @@
 @php
     $total = 0;
-    $basket = (isset($basket)) ? $basket : \App\Http\Controllers\CommonMethods::getCustomerBasket();
     foreach($basket as $b){ $total += $b->price;}
-    if($basket->first() && $basket->first()->user){
-        $basketUser = $basket->first()->user;
-        $basketCurrency = \App\Http\Controllers\CommonMethods::getCurrencySymbol(strtoupper($basketUser->profile->default_currency));
-    }
 @endphp
         @if(strpos(url()->current(), '/project/') !== false)
             <div class="crowdfund_cart_outer">
@@ -34,9 +29,9 @@
             		        $class = 'merge_checkout';
             		    @endphp 
             		@else
-            		    @if(isset($basketUser))
+            		    @if($basket->first()->user)
             		        @php
-            		            $link = route('user.checkout', ['userId' => $basketUser->id]);
+            		            $link = route('user.checkout', ['userId' => $basket->first()->user->id]);
             		            $class = 'normal_checkout';
             		        @endphp 
             		    @else

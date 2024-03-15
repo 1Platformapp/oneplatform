@@ -1,4 +1,5 @@
 @php $commonMethods = new \App\Http\Controllers\CommonMethods() @endphp
+
 @if($b->purchase_type == 'music')
     <?php
     $thumb = $b->music->thumbnail_left == "" ? asset("img/url-thumb-profile.jpg") : asset("user-music-thumbnails/" . $b->music->thumbnail_left);
@@ -75,7 +76,6 @@
     $price = $b->price;
     ?>
 @endif
-
 <div class="each_cart_item" data-purchasetype="{{ $b->purchase_type }}" data-basket="{{ $b->id }}">
     <div class="cart_item_left">
         <a href="">
@@ -87,7 +87,7 @@
             {{ str_limit($title, 29) }}
         </div>
         <div class="cart_item_description">
-            {{ str_limit($description, 65) }}
+            {{ substr($description, 0, 100) }}
         </div>
     </div>
     <div class="cart_item_tool">

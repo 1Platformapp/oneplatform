@@ -872,6 +872,8 @@ class ChartController extends Controller
 
 
     public function postCustomerBasket(Request $request){
+        try {
+            DB::beginTransaction();
 
         session_start();
 
@@ -887,13 +889,12 @@ class ChartController extends Controller
             $_SESSION['basket_customer_id'] = time();
 
         }
-
         if($request->purchase_type == 'music'){
-
+            
             $findItem = UserMusic::find($request->music_id);
-
+            
             if(!$findItem){
-
+                
                 $return["error"] = 'Music does not exist';
                 return $return;
             }
@@ -934,7 +935,7 @@ class ChartController extends Controller
                 $return["error"] = 'Product does not exist';
                 return $return;
             }
-
+            
             $basketPrice = $findItem->price;
         }
         if($request->purchase_type == 'custom_product'){
@@ -992,9 +993,8 @@ class ChartController extends Controller
         $sameUserFlag = true;
 
         $basketUser = '';
-
         $currentUser = User::find($request->basket_user_id);
-
+        
         $buyerUser = User::find($_SESSION['basket_customer_id']);
 
         $basket = CommonMethods::getCustomerBasket();
@@ -1089,9 +1089,11 @@ class ChartController extends Controller
 
         $basket = CommonMethods::getCustomerBasket();
 
+        $basketCurrency = \App\Http\Controllers\CommonMethods::getCurrencySymbol(strtoupper($basket->first()->user->profile->default_currency)) ?? 'usd'; 
+
         $view = '';
 
-        $view = \View::make('parts.smart-cart', ['basket' => $basket])->render();
+        $view = \View::make('parts.smart-cart', ['basket' => $basket, 'basketCurrency' => $basketCurrency])->render();
 
         $return['basketHTML'] = $view;
 
@@ -1113,6 +1115,13 @@ class ChartController extends Controller
         }
 
         return $return;
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            $return['error'] = $e;
+            
+            return $return;
+        }
     }
 
     public function undoCustomerBasket(Request $request){
