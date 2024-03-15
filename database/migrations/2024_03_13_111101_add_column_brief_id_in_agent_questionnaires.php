@@ -26,7 +26,7 @@ class AddColumnBriefIdInAgentQuestionnaires extends Migration
     public function down()
     {
         Schema::table('aud_agent_questionnaires', function (Blueprint $table) {
-            $table->dropColumn('uuid');
+            $table->dropColumn('brief_id');
         });
     }
 }
