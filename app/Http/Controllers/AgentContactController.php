@@ -125,12 +125,19 @@ class AgentContactController extends Controller
     public function create(Request $request){
 
         $commonMethods = new CommonMethods();
-        $user = Auth::User();
         $error = '';
         $success = '';
-
+        
         $name = $request->get('pro_contact_name');
         $lastName = $request->get('pro_contact_last_name');
+        
+        $user = User::where('first_name', $name)->where('surname', $lastName)->first();
+        
+        if($user) {
+            return redirect()->back()->with(['error' => 'This person already has an account']);            
+        } 
+
+        $user = Auth::User();
         $skill = $request->get('pro_contact_skill');
         $phone = $request->get('pro_contact_phone');
         $commission = $request->get('pro_contact_commission');
