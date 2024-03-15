@@ -1577,7 +1577,19 @@ class ChartController extends Controller
                 }
                 if($findType == 'my-calendar'){
 
-                    $data['data'] = \View::make('parts.calendar', ['commonMethods' => $commonMethods, 'user' => $user])->render();
+                    $partnerId = '';
+                    if (isset($identity) && $identity != '') {
+                        $contact = AgentContact::find($identity);
+                        if ($contact && Auth::user()->id == $contact->contactUser->id) {
+                            $partnerId = $contact->agentUser->id;
+                        } else if ($contact && Auth::user()->id == $contact->agentUser->id) {
+                            $partnerId = $contact->contactUser->id;
+                        }
+                    }
+
+                    $rand = rand(10000, 99999);
+
+                    $data['data'] = \View::make('parts.calendar', ['commonMethods' => $commonMethods, 'user' => $user, 'partner' => $partnerId, 'uuid' => $rand])->render();
                     $success = 1;
                 }
                 if($findType == 'industry_contact_details'){
