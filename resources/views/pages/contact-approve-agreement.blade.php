@@ -187,11 +187,16 @@
             </div>
         </div>
         <div class="esign_submit">
-            <p style="font-size: 16px;color: #818181;margin: 50px 0;">
-                If you approve the agreement and have added your valid signature you can click submit
+            <p style="font-size: 16px;color: #818181;margin: 10px 0;">
+                <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform. 
+                Our website serves as a platform for users to buy, sell, and collaborate. 
+                We do not take responsibility for any disputes or legal issues arising from these interactions. 
+                Users are advised to exercise caution and diligence when engaging with others on the platform. 
+                By using our services, you agree that 1Platform cannot be held liable for any such disputes, 
+                and you waive any right to take legal action against the platform.
             </p>
 
-            <div class="esign_submit_button btn_01">Submit</div>
+            <div class="esign_submit_button btn_01">Approve Agreement</div>
             <form id="esign_form" class="instant_hide" action="{{route('agent.contact.verify.response')}}" method="POST">
                 {{csrf_field()}}
                 <input type="hidden" value="" id="esign_data" name="data">
@@ -204,11 +209,11 @@
 
 @section('miscellaneous-html')
 
-    <div class="pro_page_pop_up clearfix" id="esign_popup">
+    <div class="clearfix pro_page_pop_up" id="esign_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
 
                 <a style="opacity: 0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="{{asset('images/1logo8.png')}}">

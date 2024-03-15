@@ -16,21 +16,21 @@
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td class="hide_on_mobile" style="color:#000;font-size: 24px; width:100%;vertical-align:bottom;text-align:center;">
                                 1Platform Network Agency
                             </td>
                             <td class="hide_on_desktop" style="color:#000;font-size: 24px; width:100%;vertical-align:bottom;">
                                 1Platform Network Agency
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td style="height: 30px;width:55%;vertical-align:top;"></td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
                         <tr>
-                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">AGENT DETAILS</td>
+                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">Your Network Contact</td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
@@ -56,7 +56,7 @@
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
                         <tr>
-                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">YOUR DETAILS</td>
+                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">Your Details</td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
@@ -80,7 +80,7 @@
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
                         <tr>
-                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">PROPOSED AGENT'S COMMISSION</td>
+                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">Your Network Contact Commision</td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
@@ -102,7 +102,7 @@
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
                         <tr>
-                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">1PLATFORM FEE</td>
+                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">1Platform Fee</td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
@@ -124,7 +124,7 @@
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
                         <tr>
-                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">PROPOSED TERMS & CONDITIONS</td>
+                            <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">Join my Network (Terms & Conditions)</td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
