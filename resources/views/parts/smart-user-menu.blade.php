@@ -46,22 +46,22 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'personal'])}}" class="text-black usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'personal'])}}" class="text-black usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-user"></i>
+                                        </div>
                                         Add Personal Info
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-user-cog"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'media'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'media'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-user-cog"></i>
+                                        </div>
                                         Add Media Info
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -71,62 +71,62 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-paint-brush"></i>
-                                    </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'design'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'design'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-paint-brush"></i>
+                                        </div>
                                         Design & Layout
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-user-edit"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'bio'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'bio'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-user-edit"></i>
+                                        </div>
                                         Add Bio
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-briefcase"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'portfolio'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'portfolio'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
                                         My Portfolio
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-user-tie"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'service'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'service'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-user-tie"></i>
+                                        </div>
                                         My Services
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-globe"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'domain'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'domain'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-globe"></i>
+                                        </div>
                                         Connect Domain
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-bullhorn"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'news'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'news'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-bullhorn"></i>
+                                        </div>
                                         News
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-connectdevelop"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'social'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'social'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-connectdevelop"></i>
+                                        </div>
                                         Social Media
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                                 <!--<div class="usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-donate"></i>
@@ -144,40 +144,38 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-headphones"></i>
-                                    </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'music'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'music'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-headphones"></i>
+                                        </div>
                                         Upload Music
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-edit"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'music'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'music'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-edit"></i>
+                                        </div>
                                         Edit Music
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-compact-disc"></i>
                                     </div>
-                                    <div class="usr_men_quick_txt">
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'album'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'album'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-compact-disc"></i>
+                                        </div>
                                         My Albums
-                                    </a>
                                     </div>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fab fa-staylinked"></i>
-                                    </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'song-links'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'song-links'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fab fa-staylinked"></i>
+                                        </div>
                                         Song Links
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -187,23 +185,23 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-youtube"></i>
-                                    </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-youtube"></i>
+                                        </div>
                                         YouTube Videos
-                                    </a>
-                                </div>
-
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-video"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
+                                </a>
+
+                                <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-video"></i>
+                                        </div>
                                         Premium Videos
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
 
                             </div>
                         </div>
@@ -214,22 +212,22 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-store-alt"></i>
-                                    </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'product'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'product'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-store-alt"></i>
+                                        </div>
                                         Standard Products
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-paint-roller"></i>
                                     </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'product', 'content' => 'pod'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'product', 'content' => 'pod'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-paint-roller"></i>
+                                        </div>
                                         Print on Demand
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -239,38 +237,38 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-shopping-bag"></i>
-                                    </div>
-                                    <a href="{{route('profile.setup.standalone', ['page' => 'stripe'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'stripe'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-shopping-bag"></i>
+                                        </div>
                                         Stripe Dashboard
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-shopping-bag"></i>
                                     </div>
-                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-shopping-bag"></i>
+                                        </div>
                                         Purchases
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-pound-sign"></i>
                                     </div>
-                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-pound-sign"></i>
+                                        </div>
                                         Sales
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-clipboard-list"></i>
                                     </div>
-                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-clipboard-list"></i>
+                                        </div>
                                         Summary
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -280,15 +278,15 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fa fa-users"></i>
-                                    </div>
-                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'industry-contacts'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('agency.dashboard.tab', ['tab' => 'industry-contacts'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-users"></i>
+                                        </div>
                                         Industry Contacts
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
+                                    </div>
+                                </a>
+                                <div class="px-5 usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-outdent"></i>
                                     </div>
@@ -296,7 +294,7 @@
                                         Distribution
                                     </div>
                                 </div>
-                                <div class="usr_men_quick_each">
+                                <div class="px-5 usr_men_quick_each">
                                     <div class="usr_men_quick_ic">
                                         <i class="fas fa-search-location"></i>
                                     </div>
@@ -313,17 +311,21 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <a href="{{route('profile.setup', ['page' => 'crowdfunding'])}}" class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-donate"></i>
+                                <a href="{{route('profile.setup', ['page' => 'crowdfunding'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-donate"></i>
+                                        </div>
+                                        Setup Crowdfunder
                                     </div>
-                                    Setup Crowdfunder
                                 </a>
-                                <a href="{{route('profile.setup', ['page' => 'setup-patron'])}}" class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-donate"></i>
+                                <a href="{{route('profile.setup', ['page' => 'setup-patron'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-donate"></i>
+                                        </div>
+                                        Patron Hub
                                     </div>
-                                    Patron Hub
                                 </a>
                             </div>
                         </div>
@@ -334,22 +336,22 @@
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="usr_men_quicks">
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-comment-dots"></i>
-                                    </div>
-                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'contact-management'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('agency.dashboard.tab', ['tab' => 'contact-management'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-comment-dots"></i>
+                                        </div>
                                         Chat
-                                    </a>
-                                </div>
-                                <div class="usr_men_quick_each">
-                                    <div class="usr_men_quick_ic">
-                                        <i class="fas fa-question-circle"></i>
                                     </div>
-                                    <a href="{{route('agency.dashboard.tab', ['tab' => 'my-questionnaires'])}}" class="usr_men_quick_txt">
+                                </a>
+                                <a href="{{route('agency.dashboard.tab', ['tab' => 'my-questionnaires'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-question-circle"></i>
+                                        </div>
                                         Agent Questionnaires
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
