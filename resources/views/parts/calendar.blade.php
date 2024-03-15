@@ -1,4 +1,4 @@
-<div class="calendar-container">
+<div id="calendar_{{$uuid}}" class="calendar-container">
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <div class="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
             <div class="flex items-center text-gray-900">
@@ -27,11 +27,13 @@
             </div>
             <div class="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200 calendar-dates"></div>
             <div class="flex md:flex-row gap-x-2 gap-y-4 flex-col mt-8">
+                @if($partner == '')
                 <button type="button" class="add-event w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 outline-none">Add event</button>
+                @endif
                 <button type="button" class="show-all-events w-full rounded-md bg-white px-3 py-2 text-sm font-semibold border text-indigo-600 shadow outline-none">Show all events</button>
             </div>
         </div>
-        <ol id="selected-date-events" class="mt-4 divide-y divide-gray-200 text-sm leading-6 lg:col-span-7 xl:col-span-8"></ol>
+        <ul class="selected-date-events mt-4 divide-y divide-gray-200 text-sm leading-6 lg:col-span-7 xl:col-span-8"></ul>
     </div>
 
     <div class="participants_popup pro_page_pop_up new_popup clearfix" style="z-index: 10; max-height:600px; overflow:auto">
@@ -94,7 +96,7 @@
                                     <input type="text" id="location" placeholder="e.g Cotyso studios, manchester" class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm border border-solid border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
-                            @if(!isset($partner))
+                            @if($partner == '')
                             <div class="w-full mt-2">
                                 <label for="search-participants" class="block text-sm font-medium leading-6 text-gray-900">Participants</label>
                                 <div class="relative participants-search-outer mt-2">
@@ -132,6 +134,30 @@
                                             </div>
                                         </li>
                                         @endforeach
+
+                                        @if($user->networkAgent())
+                                        @php $agentUser = $user->networkAgent() @endphp
+                                        @php $agentPDetails = $commonMethods->getUserRealDetails($agentUser->id) @endphp
+                                        <li base-id="{{$agentUser->id}}" class="each-participant hidden flex items-center justify-between space-x-3 py-4">
+                                            <div class="flex min-w-0 flex-1 items-center space-x-3">
+                                                <div class="flex-shrink-0">
+                                                    <img class="h-10 w-10 rounded-full" src="{{$agentPDetails['image']}}" alt="{{$agentPDetails['name']}}">
+                                                </div>
+                                                <div class="min-w-0 flex-1">
+                                                    <p class="participant-name truncate text-sm font-medium text-gray-900">{{$agentPDetails['name']}}</p>
+                                                    <p class="truncate text-sm font-medium text-gray-500">@ {{$agentUser->username}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <button type="button" class="participant-remove relative cursor-pointer rounded-md hover:text-gray-500 outline-none">
+                                                    <span class="absolute -inset-2.5"></span>
+                                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -196,12 +222,13 @@
         </li>
     </div>
     <input id="current-user" type="hidden" value="{{$user->id}}" />
-    <input id="current-partner" type="hidden" value="{{isset($partner) ? $partner->id : ''}}" />
+    <input class="current-partner" type="hidden" value="{{isset($partner) ? $partner : ''}}" />
 </div>
 
 <script>
 
    $(document).ready(function () {
+
         $(document).click(function (event) {
             if (!$(event.target).closest('.dropdown-menu').length) {
                 $('.dropdown-menu').addClass('hidden');
@@ -257,13 +284,13 @@
 
             // Create date elements for each day in the current month
             for (let day = 1; day <= daysInMonth; day++) {
-                const dateElement = $('<button>')
+                const dateElement = $('<button type="button">')
                 .addClass('bg-white py-1.5 text-gray-900 hover:bg-gray-100 focus:z-10 current-month')
                 .append($('<time>')
                     .attr('datetime', `${day}-${month + 1}-${year}`)
                     .addClass('mx-auto flex h-7 w-7 items-center justify-center rounded-full' +
-                        (day === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear() ? ' font-semibold text-indigo-600 today' : '') +
-                        (day === currentDate.getDate() + 1 && month === currentDate.getMonth() && year === currentDate.getFullYear() ? ' font-semibold text-white bg-gray-900 selected-date ' : '')
+                        (day === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear() ? ' font-semibold text-indigo-600 today' : '')
+                        //(day === currentDate.getDate() + 1 && month === currentDate.getMonth() && year === currentDate.getFullYear() ? ' font-semibold text-white bg-gray-900 selected-date ' : '')
                     )
                     .text(day)
                 );
@@ -303,7 +330,7 @@
         });
 
         renderCalendar(currentMonth, currentYear);
-        fetchCalendarEvents($('time.selected-date').attr('datetime'));
+        //fetchCalendarEvents($('time.selected-date').attr('datetime'), null);
 
         $('body').undelegate('.participants-small', 'click').delegate('.participants-small', 'click', function(e){
 
@@ -339,7 +366,8 @@
 
         $('.show-all-events').off('click').on('click', function() {
 
-            fetchCalendarEvents('*');
+            var thiss = $(this);
+            fetchCalendarEvents('*', thiss.closest('.calendar-container'));
             $('.isolate button.current-month time.selected-date').removeClass('text-white bg-gray-900 selected-date font-semibold');
         });
 
@@ -387,7 +415,7 @@
             $('.isolate button.current-month time.today').addClass('font-semibold');
             thiss.find('time').addClass('selected-date font-semibold bg-gray-900 text-white').removeClass('text-gray-900 bg-white');
 
-            fetchCalendarEvents(thiss.find('time').attr('datetime'));
+            fetchCalendarEvents(thiss.find('time').attr('datetime'), thiss.closest('.calendar-container'));
         });
 
         $('body').undelegate('.participant-form .add-participant-submit:not(.busy)', 'click').delegate('.participant-form .add-participant-submit:not(.busy)', 'click', function(e){
@@ -442,7 +470,7 @@
                     success: function (response) {
                         if (response.success) {
                             $('.pro_page_pop_up,#body-overlay').hide();
-                            fetchCalendarEvents(dateTime.attr('datetime'));
+                            fetchCalendarEvents(dateTime.attr('datetime'), thiss.closest('.calendar-container'));
                         }
                     },
                     complete: function () {
@@ -493,9 +521,9 @@
             }
         });
 
-        function fetchCalendarEvents(date){
+        function fetchCalendarEvents(date, parent){
             var currentUser = $('#current-user');
-            var currentPartner = $('#current-user').val();
+            var currentPartner = parent != null ? parent.find('.current-partner').val() : '';
             var formData = new FormData();
             formData.append('date', date);
 
@@ -511,34 +539,51 @@
 
                     if (response.success && response.data) {
 
-                        $('#selected-date-events').html('');
+                        $('.selected-date-events').html('');
                         response.data.forEach(function(ev) {
-                            console.log(ev);
-                            var event = $('.element_sample#event-summary').clone();
-                            event.find('.event-title').attr('data-id', ev.id);
-                            event.find('.event-title').text(ev.title);
 
-                            if(ev.user_id != currentUser.val()) {
-                                event.find('.dropdown-icon').parent().addClass('hidden');
-                            }
-
-                            if (ev.date_time_input) {
-                                event.find('.event-date-time').text(ev.date_time_input);
-                            } else {
-                                event.find('.event-date-time').text(date);
-                            }
-                            event.find('.event-location').text(ev.location);
-                            var participants = '';
+                            let show = false
                             if (ev.participant_users.length) {
                                 ev.participant_users.forEach(function(part) {
-                                    console.log(part);
-                                    if (currentPartner == '' || currentPartner == part.id) {
-                                        participants += '<dd data-id="'+part.id+'" data-user-id="'+part.user_id+'" data-username="'+part.username+'" data-name="'+part.name+'"><img class="h-6 w-6 rounded-full bg-gray-50 ring-2 ring-white" src="'+part.image+'" alt=""></dd>';
+                                    if (currentPartner == '' || currentPartner == part.user_id) {
+                                        show = true
                                     }
-                                });
-                                event.find('.participants-small').html(participants);
+                                })
                             }
-                            $('#selected-date-events').append(event.find('li').prop('outerHTML'));
+
+                            console.log(ev.participant_users);
+                            console.log(show);
+                            console.log(currentPartner);
+
+                            if (show) {
+                                var event = $('.element_sample#event-summary').clone();
+                                event.find('.event-title').attr('data-id', ev.id);
+                                event.find('.event-title').text(ev.title);
+
+                                if(ev.user_id != currentUser.val()) {
+                                    event.find('.dropdown-icon').parent().addClass('hidden');
+                                }
+
+                                if (ev.date_time_input) {
+                                    event.find('.event-date-time').text(ev.date_time_input);
+                                } else {
+                                    event.find('.event-date-time').text(date);
+                                }
+                                event.find('.event-location').text(ev.location);
+                                var participants = '';
+                                if (ev.participant_users.length) {
+                                    ev.participant_users.forEach(function(part) {
+                                        participants += '<dd data-id="'+part.id+'" data-user-id="'+part.user_id+'" data-username="'+part.username+'" data-name="'+part.name+'"><img class="h-6 w-6 rounded-full bg-gray-50 ring-2 ring-white" src="'+part.image+'" alt=""></dd>';
+                                    });
+                                    event.find('.participants-small').html(participants);
+                                }
+
+                                if (parent) {
+                                    parent.find('.selected-date-events').append(event.find('li').prop('outerHTML'));
+                                } else {
+                                    console.log('not in');
+                                }
+                            }
                         });
                     }
                 }

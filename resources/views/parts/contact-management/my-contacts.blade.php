@@ -142,7 +142,7 @@
                             @endif
                             @if($contact->approved)
                             <div class="each_dash_section instant_hide" data-id="contact_calendar_{{$contact->id}}">
-                                @include('parts.agent-contact-calendar', ['contact' => $contact, 'commonMethods' => $commonMethods])
+
                             </div>
                             <div class="each_dash_section instant_hide" data-id="contact_agreement_{{$contact->id}}">
                                 @include('parts.agent-contact-agreement', ['contact' => $contact, 'contracts' => $contracts, 'hasActiveSub' => $hasActiveSub])
@@ -226,6 +226,26 @@
 
 <script>
 
+    function getContactCalendar(well, contact){
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': 'my-calendar', 'find': '', 'identity_type': 'subscriber', 'identity': contact},
+            success: function(response) {
+
+                if(response.success == 1){
+                    well.html(response.data.data);
+                    well.removeClass('instant_hide');
+                }else{
+
+                }
+            }
+        });
+    }
+
     $('document').ready(function(){
 
         $('body').delegate( "input.pro_contact_commission", "keyup", function(e){
@@ -304,7 +324,12 @@
                 mainP.find('.each_dash_section[data-id="contact_agreement_' + id + '"]').toggleClass('instant_hide');
             } else if ($(this).hasClass('m_btn_calendar')) {
                 mainP.find('.each_dash_section:not(.each_dash_section[data-id="contact_calendar_' + id + '"])').addClass('instant_hide');
-                mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]').toggleClass('instant_hide');
+                // mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]').toggleClass('instant_hide');
+                if (mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]').hasClass('instant_hide')) {
+                    getContactCalendar(mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]'), id);
+                } else {
+                    mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]').addClass('instant_hide');
+                }
             } else if ($(this).hasClass('m_btn_chat')) {
                 if (mainP.hasClass('agent_contact_listing')) {
 

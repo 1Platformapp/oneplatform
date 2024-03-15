@@ -554,7 +554,7 @@
     const select2Todo = $('select.todo-select').select2();
     let user_skill_id = $('select.todo-select').attr('data-skill-id');
     let user_skill_name = $('select.todo-select').attr('data-skill-name');
-    
+
     $('body').delegate('.each-task .each-task-det-nav .nav', "click", function(e){
         e.stopPropagation();
     });
