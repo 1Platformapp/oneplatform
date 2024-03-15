@@ -151,7 +151,6 @@ class ProfileSetupController extends Controller
     }
 
     public function fullWizard(Request $request, $page, $content = null){
-
         $currentUrl = $request->url();
         $isStandalone = (strpos($currentUrl, 'standalone') !== false) ? true : false;
 
@@ -225,7 +224,7 @@ class ProfileSetupController extends Controller
                     $nextPage = $page;
                 }else{
 
-                    if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product'){
+                    if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product' || $page == 'music' || $page == 'album'){
 
                         $nextPage = $page;
                     }else{
