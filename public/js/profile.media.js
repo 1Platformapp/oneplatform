@@ -156,11 +156,12 @@ $('#search_social_music_directory input').keyup(function(){
             sessionStorage.setItem('preload_cat', 'media');
             sessionStorage.setItem('preload_subcat', 'edit_musics');
             
-            if(window.location.href.indexOf('/quick-setup/') !== -1){
-                window.location.href = '/quick-setup/add-products';
-            }else{
-                window.location.href = '/profile';
-            }
+            location.reload();
+            // if(window.location.href.indexOf('/quick-setup/') !== -1){
+            //     window.location.href = '/quick-setup/add-products';
+            // }else{
+            //     window.location.href = '/profile';
+            // }
         });
         $('.m_btm_private').click(function(){
 

@@ -1113,7 +1113,7 @@ class ChartController extends Controller
                 $return['checkoutType'] = 'merge_checkout';
             }
         }
-
+        DB::commit();
         return $return;
 
         } catch (\Exception $e) {
@@ -1125,7 +1125,6 @@ class ChartController extends Controller
     }
 
     public function undoCustomerBasket(Request $request){
-
         session_start();
         $view = "";
 
@@ -1139,8 +1138,9 @@ class ChartController extends Controller
                     $message = 'Deleted';
 
                     $basket = CommonMethods::getCustomerBasket();
+                    $basketCurrency = \App\Http\Controllers\CommonMethods::getCurrencySymbol(strtoupper($basket->first()->user->profile->default_currency)) ?? 'usd';
 
-                    $view = \View::make('parts.smart-cart', ['basket' => $basket])->render();
+                    $view = \View::make('parts.smart-cart', ['basket' => $basket, 'basketCurrency' => $basketCurrency])->render();
                 }else{
                     $message = 'You are not the owner';
                 }

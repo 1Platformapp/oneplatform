@@ -1,6 +1,8 @@
 @php
-    $total = 0;
     $basket = [];
+    $basket = $basket ?? \App\Http\Controllers\CommonMethods::getCustomerBasket();
+    $basketCurrency = $basketCurrency ?? (count($basket) ?? \App\Http\Controllers\CommonMethods::getCurrencySymbol(strtoupper($basket->first()->user->profile->default_currency)));
+    $total = 0;
     foreach($basket as $b){ $total += $b->price;}
 @endphp
         @if(strpos(url()->current(), '/project/') !== false)

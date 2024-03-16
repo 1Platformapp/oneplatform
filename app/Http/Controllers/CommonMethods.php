@@ -726,18 +726,13 @@ class CommonMethods extends Controller
 
 
     public static function getCurrencySymbol($currency){
-
         if( $currency == '' ){
-
             return '';
-        }else if( $currency == 'USD' ){
-
+        }else if( $currency == 'USD' || $currency == 'usd' ){
             return '$';
-        }else if( $currency == 'GBP' ){
-
+        }else if( $currency == 'GBP' || $currency == 'gpp' ){
             return '£';
-        }else if( $currency == 'EUR' ){
-
+        }else if( $currency == 'EUR' || $currency == 'eur' ){
             return '€';
         }
     }
@@ -3269,37 +3264,34 @@ class CommonMethods extends Controller
             $_SESSION['basket_customer_id'] = time()+rand(10000, 99999);
             $basket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('sold_out', 0)->get();
         }
-
-        foreach ($basket as $key => $b) {
-
-            if($b->purchase_type == 'music' && !$b->music){
-
-                $b->delete();
-            }elseif($b->purchase_type == 'album' && !$b->album){
-
-                $b->delete();
-            }elseif($b->purchase_type == 'product' && !$b->product){
-
-                $b->delete();
-            }elseif($b->purchase_type == 'custom_product' && !$b->product){
-
-                $b->delete();
-            }elseif($b->purchase_type == 'instant-project' || $b->purchase_type == 'project' || $b->purchase_type == 'instant-product' || $b->purchase_type == 'instant-license'){
-                $explode = explode('_', $b->extra_info);
-                $chat = UserChat::find(isset($explode[1]) ? $explode[1] : 0);
-                if(!$chat){
+        
+        if(count($basket) > 0) {
+            foreach ($basket as $b) {
+                if($b->purchase_type == 'music' && !$b->music){
                     $b->delete();
+                }elseif($b->purchase_type == 'album' && !$b->album){
+                    $b->delete();
+                }elseif($b->purchase_type == 'product' && !$b->product){
+                    $b->delete();
+                }elseif($b->purchase_type == 'custom_product' && !$b->product){
+                    $b->delete();
+                }elseif($b->purchase_type == 'instant-project' || $b->purchase_type == 'project' || $b->purchase_type == 'instant-product' || $b->purchase_type == 'instant-license'){
+                    $explode = explode('_', $b->extra_info);
+                    $chat = UserChat::find(isset($explode[1]) ? $explode[1] : 0);
+                    if(!$chat){
+                        $b->delete();
+                    }
                 }
             }
         }
 
         $basket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('sold_out', 0)->get();
-
+        
         return $basket;
     }
 
-
-
+    
+    
 
 
 
@@ -4033,10 +4025,10 @@ class CommonMethods extends Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_URL, $url);
         if($method == 'POST'){
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
         }else if($method == 'DELETE'){
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
