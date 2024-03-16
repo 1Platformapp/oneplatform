@@ -1,5 +1,6 @@
 @php
     $total = 0;
+    $basket = [];
     foreach($basket as $b){ $total += $b->price;}
 @endphp
         @if(strpos(url()->current(), '/project/') !== false)
@@ -18,22 +19,22 @@
         <div class="cart_main_btn_outer">
             @if(count($basket))
             	@if($basket->first()->user->isCotyso() && request()->getHttpHost() != Config('constants.primaryDomain'))
-            		@php 
+            		@php
 	            		$link = 'https://'.request()->getHttpHost().'/personalized-checkout';
 	            		$class = 'normal_checkout';
-            		@endphp 
+            		@endphp
             	@else
             		@if(isset($userParams) && ($userParams == 'customDomain' || $userParams == 'personalDomain') && Session::has('mergeCart'))
-            		    @php 
+            		    @php
             		        $link = route('user.checkout.merge', ['customerId' => Session::get('mergeCart')]);
             		        $class = 'merge_checkout';
-            		    @endphp 
+            		    @endphp
             		@else
             		    @if($basket->first()->user)
             		        @php
             		            $link = route('user.checkout', ['userId' => $basket->first()->user->id]);
             		            $class = 'normal_checkout';
-            		        @endphp 
+            		        @endphp
             		    @else
             		        $link = '';
             		        $class = '';
@@ -104,4 +105,3 @@
             </div>
         </div>
 
-        

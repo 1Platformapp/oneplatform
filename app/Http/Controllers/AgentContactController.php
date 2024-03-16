@@ -127,15 +127,15 @@ class AgentContactController extends Controller
         $commonMethods = new CommonMethods();
         $error = '';
         $success = '';
-        
+
         $name = $request->get('pro_contact_name');
         $lastName = $request->get('pro_contact_last_name');
-        
+
         $user = User::where('first_name', $name)->where('surname', $lastName)->first();
-        
+
         if($user) {
-            return redirect()->back()->with(['error' => 'This person already has an account']);            
-        } 
+            return redirect()->back()->with(['error' => 'The name of the contact already exist in our database']);
+        }
 
         $user = Auth::User();
         $skill = $request->get('pro_contact_skill');
@@ -721,7 +721,7 @@ class AgentContactController extends Controller
         $agent = Auth::user();
 
         if($request->has('brief_id')){
-            
+
             $questions = $request->get('question');
 
             $agentQuestionnaire = AgentQuestionnaire::where(['brief_id' => $request->brief_id, 'agent_id' => $agent->id])->first();
