@@ -1,5 +1,4 @@
 @php
-    $basket = [];
     $basket = $basket ?? \App\Http\Controllers\CommonMethods::getCustomerBasket();
     $basketCurrency = $basketCurrency ?? (count($basket) ?? \App\Http\Controllers\CommonMethods::getCurrencySymbol(strtoupper($basket->first()->user->profile->default_currency)));
     $total = 0;
@@ -74,7 +73,7 @@
                     </div>
                     <div class="cart_item_right">
                         <div class="cart_subtotal_val">
-                            {{$basketCurrency.number_format($total, 2)}}
+                            {{$basketCurrency}} {{$total}}
                         </div>
                     </div>
                 </div>
@@ -85,8 +84,8 @@
                     </div>
                     <div class="cart_item_right">
                         <div class="cart_total_val">
-                            {{$basketCurrency}}<size>{{(int)$total}}</size>
-                            {{substr(number_format($total, 2), -2)}}
+                            {{$basketCurrency}}<size>{{$total}}</size>
+                            {{$total}}
                         </div>
                     </div>
                 </div>

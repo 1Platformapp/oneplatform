@@ -575,6 +575,7 @@ class ProfileController extends Controller
         $success = 0;
         $error = '';
         $data = ['subscription_id' => 0, 'subscription_status' => '', 'subscription_payment_intent_status' => '', 'subscription_payment_intent_client_secret' => '', 'internal_subscription_id' => 0];
+        
         if($user && isset($jsonObj->package)){
 
             $paymentMethodId = $jsonObj->paymentMethodId;
@@ -583,12 +584,11 @@ class ProfileController extends Controller
             $cardName = $jsonObj->cardName;
 
             if($paymentMethodId !== null){
-
                 $response = $this->createInternalSubscription($user, $package, $paymentMethodId, $cardName, $discountCode);
                 if($response && is_array($response) && isset($response['subscription']) && isset($response['subscription']['error'])){
                     $error = $response['subscription']['error']['message'];
                 }else if($response && is_array($response) && isset($response['customer']) && isset($response['subscription']) && $response['subscription']['status'] == 'active'){
-
+                    
                     if($user->internalSubscription){
 
                         $user->internalSubscription->delete();
@@ -613,7 +613,6 @@ class ProfileController extends Controller
                     $user->save();
                     $success = 1;
                 }else if($response && is_array($response) && isset($response['error'])){
-
                     $error = $response['error'];
                 }else if($response && isset($response['subscription']) && $response['subscription']['status'] == 'incomplete'){
 
@@ -643,7 +642,6 @@ class ProfileController extends Controller
                     $success = 1;
                 }
             }else if($jsonObj->action == 'update_internal'){
-
                 $userInternalSubscription = InternalSubscription::find($jsonObj->internalId);
                 if($userInternalSubscription && $userInternalSubscription->user_id == $user->id && $userInternalSubscription->status == 0){
                 	$userInternalSubscription->subscription_status = 1;
@@ -689,7 +687,11 @@ class ProfileController extends Controller
             $error = 'no/protected data';
         }
 
-        return json_encode(array('success' => $success, 'error' => $error, 'data' => $data));
+        $success = $success ?? false;
+        $error = $error ?? '';
+        $data = $data ?? [];
+        
+        return json_encode(['success' => $success, 'error' => $error, 'data' => $data]);
     }
 
     public function updateUserChatSwitch(Request $request){
@@ -832,7 +834,7 @@ class ProfileController extends Controller
     public function createInternalSubscription($user, $package, $paymentMethodId, $cardName, $discountCode){
 
     	$commonMethods = new CommonMethods();
-
+        
         $package = explode('_', $package);
         $packagess = Config('constants.user_internal_packages');
         if($package[0] == 'gold' && $package[2] == 'month'){
@@ -851,16 +853,21 @@ class ProfileController extends Controller
             $planId = '';
         }
 
+        
         if($planId != ''){
-
+            
             $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
             try {
-
+                
                 $url = 'https://api.stripe.com/v1/customers';
                 $fields = [
                     'name' => $cardName
                 ];
                 $stripeCustomer = $commonMethods->stripeCall($url, $headers, $fields);
+                
+                if(!$stripeCustomer) {
+                    return array('error' => 'Stripe Customer not found');
+                }
 
                 $url = 'https://api.stripe.com/v1/payment_methods/'.$paymentMethodId.'/attach';
                 $fields = [
@@ -6191,7 +6198,7 @@ class ProfileController extends Controller
     public function updateSellerSettings(Request $request){
 
         if ($request->isMethod('post')) {
-
+            
             $user = Auth::user();
             $success = 0;
             $error = '';

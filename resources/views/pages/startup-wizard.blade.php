@@ -163,7 +163,7 @@
 
             		return false;
             	}
-
+                
             	var error = 0;
             	var cardName = $('#int_sub_card_name');
                 var discountCode = $('#int_sub_voucher_code');
@@ -181,11 +181,11 @@
                             },
                         })
                         .then((result) => {
-                            if(result.error){
-                                alert(result.error.message);
-                                $('#pay_int_sub_final').removeClass('disabled');
-                            }else{
+                            if(result.paymentMethod.id){
                                 createSubscription(stripe, result.paymentMethod.id);
+                            }else{
+                                alert(result?.error?.message);
+                                $('#pay_int_sub_final').removeClass('disabled');
                             }
                         })
             	}
@@ -225,7 +225,7 @@
             var price = p.attr('data-price');
             var discountCode = $('#int_sub_voucher_code');
             var cardName = $('#int_sub_card_name');
-
+            
             fetch('/processInternalSubscription', {
                 method: 'post',
                 headers: {
@@ -247,7 +247,7 @@
             .then(function(result){
                 if(result.error != ''){
                     alert(result.error);
-                    $('#pay_int_sub_final').removeClass('disabled');
+$('#pay_int_sub_final').removeClass('disabled');
                 }else{
                 	if(paymentMethodId){
                 		if(result.data.subscription_status == 'active'){
