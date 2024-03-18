@@ -32,7 +32,7 @@
 
     <script type="application/javascript" src="/js/jquery.bxslider.min.js"></script>
 
-    <script defer type="application/javascript" src="/js/my_script.min.js?v=6.77"></script>
+    <script defer type="application/javascript" src="/js/my_script.min.js?v=6.78"></script>
 
     @yield('page-level-css','')
 
@@ -81,7 +81,7 @@
 
 <div class="wrapper_outer">
 
-    <div class="hrd_cart_outer clearfix">
+    <div class="clearfix hrd_cart_outer">
         @include('parts.smart-cart')
     </div>
 
@@ -126,7 +126,7 @@
 
             @yield('flash-message-container','')
 
-            <div class="profile_inner clearfix">
+            <div class="clearfix profile_inner">
 
 
 

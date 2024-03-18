@@ -41,7 +41,7 @@
         <link href="/css/app.css?v=3.65" rel="stylesheet" type="text/css" />
 
 	    <script src="{{asset('js/jquery.min.js')}}"></script>
-	    <script defer src="{{asset('js/my_script.min.js?v=6.77')}}"></script>
+	    <script defer src="{{asset('js/my_script.min.js?v=6.78')}}"></script>
 	    <script src="{{asset('js/load_defer.min.js?v=1.11')}}"></script>
 
 	    @yield('page-level-css','')
@@ -73,14 +73,14 @@
 	    	</header>
 
 	        <aside>
-		        <div class="hrd_cart_outer clearfix">
+		        <div class="clearfix hrd_cart_outer">
 		            @include('parts.smart-cart')
 		        </div>
 
 		        @include('parts.smart-notifications')
 
 		        @if(!isset($user) || !$user->isCotyso() || Auth::check())
-		        <div class="tv_slide_out_outer clearfix">
+		        <div class="clearfix tv_slide_out_outer">
 		            @include('parts.smart-tv-slide-out')
 		        </div>
 
@@ -111,7 +111,7 @@
 
 		                @yield('flash-message-container','')
 
-		                <section class="content_inner clearfix">
+		                <section class="clearfix content_inner">
 
 		                	<section class="ch_cent_right_outer">
 
