@@ -3,16 +3,16 @@
     <div class="music_head_img">How to make proposals</div>
 </div>
 
-<div class="tab_chan_tp_btns clearfix">
+<div class="clearfix tab_chan_tp_btns">
 
     <div data-id="singles" class="each_music_head">
-        <div class="music_head_img">
-            <img src="{{asset('images/music_tab_01_active.png?v=1.1')}}">
+        <div class="">
+            <img src="{{asset('images/music-logo.png')}}" width="40" height="40">
         </div>
     </div>
     <div data-id="albums" class="each_music_head">
-        <div class="music_head_img">
-            <img src="{{asset('images/music_tab_02.png?v=1.1')}}">
+        <div class="">
+            <img src="{{asset('images/music-folder-logo.png')}}" width="40" height="40">
         </div>
     </div>
     <div class="hide_on_mobile" data-video-id="R4GUz1XsDqA" id="offer_guide">
