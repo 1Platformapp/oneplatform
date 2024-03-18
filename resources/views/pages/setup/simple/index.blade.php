@@ -298,7 +298,7 @@
     <div class="w-full max-w-md pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
         <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
-        <div class="mt-6 flex flex-col">
+        <div class="flex flex-col mt-6">
             <div class="mb-4">
                 <label for="token" class="block text-sm font-medium text-gray-600">Token</label>
                 <input type="text" id="verification-token" placeholder="Enter Token" class="w-full p-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200">
@@ -478,27 +478,36 @@
                 </div>
 
                 <div data-step="three" class="hidden space-y-12 each-step-body sm:space-y-16">
+                    @php $skills = \App\Models\Skill::all() @endphp
                     <div class="pb-12 space-y-8 border-b border-gray-900/10 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="skillname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Main skill</label>
                             <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
-                                    <input data-uri="/searchSkills" data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                                    <select data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        @foreach($skills as $skill)
+                                            <option value="{{$skill->value}}">{{$skill->value}}</option>
+                                        @endforeach
+                                    </select>        
                                 </div>
-                                <div class="hidden my-dropdown main-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
+                                <!-- <div class="hidden my-dropdown main-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="otherskillname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Other skill</label>
                             <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
-                                    <input data-uri="/searchSkills" data-well="other-skill-dropdown" id="other_skill_name" name="sec_skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                                    <select data-well="other-skill-dropdown" id="other_skill_name" name="sec_skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        @foreach($skills as $skill)
+                                            <option value="{{$skill->value}}">{{$skill->value}}</option>
+                                        @endforeach
+                                    </select>    
                                 </div>
-                                <div class="hidden my-dropdown other-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
+                                <!-- <div class="hidden my-dropdown other-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
