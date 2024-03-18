@@ -944,10 +944,10 @@ class User extends Authenticatable
             ['step' => 14, 'name' => 'product', 'skip' => 1],
             ['step' => 15, 'name' => 'music', 'skip' => 1],
             ['step' => 16, 'name' => 'album', 'skip' => 1],
-            ['step' => 17, 'name' => 'agent', 'skip' => 1],
-            ['step' => 18, 'name' => 'subscription', 'skip' => 1],
-            ['step' => 19, 'name' => 'stripe', 'skip' => 1],
-            ['step' => 20, 'name' => 'finish', 'skip' => 0],
+            // ['step' => 17, 'name' => 'agent', 'skip' => 1],
+            ['step' => 17, 'name' => 'subscription', 'skip' => 1],
+            ['step' => 18, 'name' => 'stripe', 'skip' => 1],
+            ['step' => 19, 'name' => 'finish', 'skip' => 0],
 
         ];
 

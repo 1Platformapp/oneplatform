@@ -413,6 +413,7 @@
                             <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <select data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        <option value='' selected disabled>Select a Skill</option>
                                         @foreach($skills as $skill)
                                             <option value="{{$skill->value}}">{{$skill->value}}</option>
                                         @endforeach
@@ -428,6 +429,7 @@
                             <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <select data-well="other-skill-dropdown" id="other_skill_name" name="sec_skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        <option value='' selected disabled>Select a Skill</option>
                                         @foreach($skills as $skill)
                                             <option value="{{$skill->value}}">{{$skill->value}}</option>
                                         @endforeach

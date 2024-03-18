@@ -1334,8 +1334,6 @@ $(document).ready(function() {
                 if( name.length && name.val() == '' ){ error = 1; name.parent().parent().addClass('error_field'); }
                 if( firstName.val() == '' ){ error = 1; firstName.parent().parent().addClass('error_field'); }
                 if( surname.val() == '' ){ error = 1; surname.parent().parent().addClass('error_field'); }
-                if( address.val() == '' ){ error = 1; address.parent().parent().addClass('error_field'); }
-                if( postcode.val() == '' ){ error = 1; postcode.parent().parent().addClass('error_field'); }
 
                 if(countryName.val() == ''){
 

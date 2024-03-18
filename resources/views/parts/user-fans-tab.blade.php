@@ -1,14 +1,14 @@
 @php $userCampaignDetails = $commonMethods->getUserRealCampaignDetails($user->id) @endphp
-<div class="social_supp_btns clearfix">
+<div class="clearfix social_supp_btns">
 
     @if($userCampaignDetails['campaignAmount'] > 0)
     <div class="fan_support_btn">
-        <div class="fan_support_ic"><img src="{{asset('images/fan_support_ic.png?v=1.1')}}"></div>
+        <div class="fan_support_ic"><img src="{{ asset('images/donate-sign.png') }}" width="40" class="filter brightness-0 invert"></div>
         <div class="fan_support_text"><a href="{{route('user.project', ['username' => $user->username])}}">Support Me</a></div>
     </div>
     @else
     <div class="fan_support_btn support_instant">
-        <div class="fan_support_ic"><img src="{{asset('images/fan_support_ic.png?v=1.1')}}"></div>
+        <div class="fan_support_ic"><img src="{{ asset('images/donate-sign.png') }}" width="40" class="filter brightness-0 invert"></div>
         <div class="fan_support_text"><a href="javascript:void(0)">Support Me</a></div>
     </div>
     @endif
@@ -25,8 +25,8 @@
    
     @foreach($user->followers as $follower)
         @if($follower->followerUser)
-        <div class="tab_fan_list clearfix">
-            <div class="tab_fan_list_top clearfix">
+        <div class="clearfix tab_fan_list">
+            <div class="clearfix tab_fan_list_top">
                 <a href="{{route('user.home',['params'=>$follower->followerUser->username])}}">
                     <img src="{{ $commonMethods->getUserDisplayImage($follower->followerUser->id) }}" alt="#" />
                 </a>

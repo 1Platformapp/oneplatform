@@ -350,7 +350,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 2 of 20
+						Step 2 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -400,7 +400,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 3 of 20
+						Step 3 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -456,7 +456,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 4 of 20
+						Step 4 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -490,7 +490,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 5 of 20
+						Step 5 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -522,7 +522,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 6 of 20
+						Step 6 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -556,7 +556,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 7 of 20
+						Step 7 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -590,7 +590,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 8 of 20
+						Step 8 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -622,7 +622,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 9 of 20
+						Step 9 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -654,7 +654,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 10 of 20
+						Step 10 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -705,7 +705,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 11 of 20
+						Step 11 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -737,7 +737,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 12 of 20
+						Step 12 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -775,7 +775,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 13 of 20
+						Step 13 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -824,7 +824,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 14 of 20
+						Step 14 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -860,7 +860,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 15 of 20
+						Step 15 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -891,7 +891,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 16 of 20
+						Step 16 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -904,7 +904,7 @@
                         <a href="{{route('profile.setup', ['page' => 'music'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                     </div>
                     <div class="setup_tray_btn setup_next_btn">
-                        <a href="{{route('profile.setup', ['page' => 'agent'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="{{route('profile.setup', ['page' => 'subscription'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 @endif
@@ -972,7 +972,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 			        <div class="setup_tray_step">
-			            Step 18 of 20
+			            Step 18 of 19
 			        </div>
                     @endif
 			        <div class="setup_tray_head">
@@ -982,7 +982,7 @@
                 @if(!$isStandalone)
 			    <div class="setup_tray_right">
                     <div class="setup_tray_btn setup_back_btn">
-                        <a href="{{route('profile.setup', ['page' => 'agent'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                        <a href="{{route('profile.setup', ['page' => 'album'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                     </div>
                     <div class="setup_tray_btn setup_next_btn">
                         <a href="{{route('profile.setup', ['page' => 'stripe'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
@@ -1012,7 +1012,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 19 of 20
+						Step 19 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
@@ -1061,7 +1061,7 @@
 				<div class="setup_tray_left">
                     @if(!$isStandalone)
 					<div class="setup_tray_step">
-						Step 20 of 20
+						Step 19 of 19
 					</div>
                     @endif
 					<div class="setup_tray_head">
