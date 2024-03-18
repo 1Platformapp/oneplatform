@@ -142,7 +142,7 @@ class RegisterController extends Controller
             $user->manager_chat = isset($request->managerChat) && $request->managerChat == 1 ? 1 : NULL;
             $user->skills = $request->has('skill') ? $request->skill : '';
             $user->sec_skill = $request->has('sec_skill') ? $request->sec_skill : '';
-            $user->sec_skill = $request->has('level') ? $request->level : '';
+            $user->level = $request->has('level') ? $request->level : '';
             $user->username = $request->has('fake_username') ? $request->fake_username : NULL;
             $user->save();
 
