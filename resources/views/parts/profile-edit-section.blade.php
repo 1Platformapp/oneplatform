@@ -25,62 +25,62 @@
                     <input name="profile_image" accept="image/*" type="file" id="profile_image" style="display: none;">
                     {{ csrf_field() }}
                     <div class="pro_inp_list_outer">
-                        <div class="pro_inp_outer clearfix">
+                        <div class="clearfix pro_inp_outer">
                             <label>First Name *</label>
                             <div class="pro_inp_right"><input autocomplete="new-password" name="first_name" type="text" placeholder="First Name" value="{{ $userPersonalDetails['first_name'] }}" />  </div>
                         </div>
-                        <div class="pro_inp_outer clearfix">
+                        <div class="clearfix pro_inp_outer">
                             <label>Surname *</label>
                             <div class="pro_inp_right"><input autocomplete="new-password" name="surname" type="text" placeholder="Surname" value="{{ $userPersonalDetails['surname'] }}" />  </div>
                         </div>
                         @if(!$user->is_buyer_only)
-                        <div class="pro_inp_outer clearfix">
+                        <div class="clearfix pro_inp_outer">
                             <label>Artist Name *</label>
                             <div class="pro_inp_right"><input autocomplete="new-password" name="name" type="text" placeholder="Appears on your website page i.e bio, musics etc" value="{{ $userPersonalDetails['name'] }}" />  </div>
                         </div>
                         @endif
-                        <div class="pro_inp_outer clearfix">
-                            <label>Address *</label>
+                        <div class="clearfix pro_inp_outer">
+                            <label>Address</label>
                             <div class="pro_inp_right">
                                 <input autocomplete="new-address"  name="address" type="text" placeholder="Address" value="{{ $userPersonalDetails['address'] }}" autocomplete="off" />
                             </div>
                         </div>
-                        <div class="pro_inp_outer clearfix">
-                            <label>Postcode *</label>
+                        <div class="clearfix pro_inp_outer">
+                            <label>Postcode</label>
                             <div class="pro_inp_right"><input autocomplete="new-postcode" name="postcode" type="text" placeholder="Add Postcode" value="{{ $userPersonalDetails['postcode'] }}" />  </div>
                         </div>
-                        <div class="pro_inp_outer clearfix">
+                        <div class="clearfix pro_inp_outer">
                             <label>Country *</label>
                             <div class="pro_inp_right simple_custom_dropdown simple_searchable">
                                 <input autocomplete="off" type="text" placeholder="Enter here" name="cou_id" value="{{$userPersonalDetails['country'] == '' ? '' : $userPersonalDetails['country']}}">
                                 <input type="hidden" name="country_id" value="{{$userPersonalDetails['country'] == '' ? '' : $userPersonalDetails['countryId']}}">
                                 <i class="fa fa-search"></i>
-                                <div class="country_results pro_custom_drop_res instant_hide clearfix">
+                                <div class="clearfix country_results pro_custom_drop_res instant_hide">
                                     <div class="pro_country_list_drop">
                                         <ul></ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="pro_inp_outer clearfix">
+                        <div class="clearfix pro_inp_outer">
                             <label>City *</label>
                             <div class="pro_inp_right simple_custom_dropdown simple_searchable">
                                 <input autocomplete="off" type="text" placeholder="Enter here" name="cit_id" value="{{$userPersonalDetails['city'] == '' ? '' : $userPersonalDetails['city']}}">
                                 <input type="hidden" name="city_id" value="{{$userPersonalDetails['city'] == '' ? '' : $userPersonalDetails['cityId']}}">
                                 <i class="fa fa-search"></i>
-                                <div class="city_results pro_custom_drop_res instant_hide clearfix">
+                                <div class="clearfix city_results pro_custom_drop_res instant_hide">
                                     <div class="pro_city_list_drop">
                                         <ul></ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="pro_inp_outer clearfix">
+                        <div class="clearfix pro_inp_outer">
                             <label>Website</label>
                             <div class="pro_inp_right">
                                 <input name="website" type="text" placeholder="Website" value="{{$userPersonalDetails['website']}}"  />
                             </div>
-                        </div><div class="pro_inp_outer clearfix">
+                        </div><div class="clearfix pro_inp_outer">
                             <label>Phone</label>
                             <div class="pro_inp_right">
                                 <div class="pro_inp_right">
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pro_inp_outer clearfix">
+                        <div class="clearfix pro_inp_outer">
                             <label>Hear About</label>
                             <div class="pro_inp_right music_sec_opt_outer simple_custom_dropdown">
                                 <span>{{ ($userPersonalDetails['hearAbout'] != '') ? $userPersonalDetails['hearAbout'] : 'Where did you hear about us?' }}</span>
@@ -102,18 +102,18 @@
                         </div>
                     </div>
                 </form>
-                <div class="save_profile_outer edit_profile_btn_1 clearfix"><a href="javascript:void(0)">Save</a></div>
+                <div class="clearfix save_profile_outer edit_profile_btn_1"><a href="javascript:void(0)">Save</a></div>
             </div>
             <div id="email_section" class="each_pro_edit_section sub_cat_data {{$subTab == 'info' ? '' : 'instant_hide'}}">
                 <div class="pro_main_tray">
                     <div class="pro_tray_title">Account Settings</div>
                 </div>
                 <div class="pro_inp_list_outer">
-                    <div class="pro_inp_outer clearfix">
+                    <div class="clearfix pro_inp_outer">
                         <label>Email *</label>
                         <div class="pro_inp_right"><input readonly name="email_address" class="place_red" type="email" placeholder="change Email" value="{{ $userPersonalDetails['email'] }}" />  </div>
                     </div>
-                    <div class="pro_inp_outer clearfix">
+                    <div class="clearfix pro_inp_outer">
                         <label>Password</label>
                         <div class="pro_inp_right"><input autocomplete="off" readonly name="password" class="place_red" type="password" placeholder="change password"  />  </div>
                     </div>
@@ -127,7 +127,7 @@
                     <p class="section_note">
                         Here you add your skill for example, Singer, Musician, Photographer, Singer, Videographer, Producer, Agent etc
                     </p>
-                    <div id="musical_intro_btn" class="edit_profile_btn_1 clearfix">
+                    <div id="musical_intro_btn" class="clearfix edit_profile_btn_1">
                         <a href="javascript:void(0)">Add</a>
                     </div>
                     <hr>
@@ -143,41 +143,41 @@
                                     <li>If you want to be an agent tick the option below. <a target="_blank" href="{{route('faq')}}">Click here</a> to learn more about 1platform agents</li>
                                 </ul>
                             </div>
-                            <div class="pro_inp_outer clearfix">
+                            <div class="clearfix pro_inp_outer">
                                 <label>Main Skill *</label>
                                 <div class="pro_inp_right">
                                     <input autocomplete="off" name="skill" type="text" placeholder="Your main skill e.g: musician, photographer, singer etc..." value="{{$userPersonalDetails['skills']}}">
-                                    <div class="pro_main_skill_results pro_custom_drop_res left_adjusted instant_hide clearfix">
+                                    <div class="clearfix pro_main_skill_results pro_custom_drop_res left_adjusted instant_hide">
                                         <div class="pro_main_skill_list_drop">
                                             <ul></ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pro_inp_outer clearfix">
+                            <div class="clearfix pro_inp_outer">
                                 <label>Other Skill</label>
                                 <div class="pro_inp_right">
                                     <input autocomplete="off" name="sec_skill" type="text" placeholder="Add any additional skills you do or offer" value="{{$userPersonalDetails['sec_skill']}}">
-                                    <div class="pro_sec_skill_results pro_custom_drop_res left_adjusted instant_hide clearfix">
+                                    <div class="clearfix pro_sec_skill_results pro_custom_drop_res left_adjusted instant_hide">
                                         <div class="pro_sec_skill_list_drop">
                                             <ul></ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="pro_inp_outer further_skill_outer profile_custom_dropdown_outer clearfix">
+                            <div class="clearfix pro_inp_outer further_skill_outer profile_custom_dropdown_outer">
                                 <label>Instruments</label>
                                 <div class="pro_inp_right pro_plus_icon">
                                     <input autocomplete="off" name="further_skills" type="text" placeholder="Type to search instruments" />
                                     <i class="fa fa-search"></i>
-                                    <div class="pro_inp_outer pro_custom_drop_res left_adjusted pro_further_skill_list_drop_outer instant_hide clearfix">
+                                    <div class="clearfix pro_inp_outer pro_custom_drop_res left_adjusted pro_further_skill_list_drop_outer instant_hide">
                                         <div class="pro_further_skill_list_drop profile_custom_dropdown_inner">
                                             <ul></ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div id="further_skills_results" class="profile_custom_dropdown_results_outer clearfix">
+                            <div id="further_skills_results" class="clearfix profile_custom_dropdown_results_outer">
                                 @if(count($userPersonalDetails['furtherSkillsArray']))
                                     @foreach($userPersonalDetails['furtherSkillsArray'] as $item)
                                     <div class="profile_custom_drop_each">
@@ -190,7 +190,7 @@
                                 @endif
                             </div>
 
-                            <div class="pro_inp_outer clearfix">
+                            <div class="clearfix pro_inp_outer">
                                 <label>Genre</label>
                                 <div class="pro_inp_right music_sec_opt_outer simple_custom_dropdown">
                                     <span>{{ ($userPersonalDetails['genreId'] != '') ? $userPersonalDetails['genre'] : 'Add Genre' }}</span>
@@ -204,7 +204,7 @@
                                 </div>
                             </div>
 
-                            <div class="pro_inp_outer clearfix">
+                            <div class="clearfix pro_inp_outer">
                                 <label>Level *</label>
                                 <div class="pro_inp_right music_sec_opt_outer simple_custom_dropdown">
                                     <span>{{ ($userPersonalDetails['level'] != '') ? $userPersonalDetails['level'] : 'Choose the level of your main skill' }}</span>
@@ -217,7 +217,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="pro_inp_outer clearfix">
+                            <div class="clearfix pro_inp_outer">
                                 <label>Agent</label>
                                 <div style="display: flex; flex-direction: row;" class="pro_inp_right">
                                     @if($user->apply_expert==2)
@@ -228,7 +228,7 @@
                                     @elseif($user->apply_expert==1)
                                     <input name="exp" readonly type="text" value="Your request to be an agent is pending"  />
                                     @else
-                                    <div class="pro_select_outer clearfix">
+                                    <div class="clearfix pro_select_outer">
                                         <ul class="clearfix">
                                             <li>
                                                 <text class="{{$user->apply_expert==1?'pro_gander_active':''}}">Apply to be a 1Platform agent
@@ -248,7 +248,7 @@
                             </div>
                         </div>
                     </form>
-                    <div class="save_profile_outer edit_profile_btn_1 clearfix"><a href="javascript:void(0)">Save</a></div>
+                    <div class="clearfix save_profile_outer edit_profile_btn_1"><a href="javascript:void(0)">Save</a></div>
                 </div>
             </div>
             @php $serviceCategories = \App\Models\ServiceCategory::all() @endphp
@@ -287,7 +287,7 @@
                             <div class="pro_input_icon">
                                 <input autocomplete="off" placeholder="Enter a service name (e.g Photoshoot)" type="text" class="pro_stream_input pro_service_search" name="pro_service">
                             </div>
-                            <div class="pro_services_results pro_custom_drop_res left_adjusted instant_hide clearfix">
+                            <div class="clearfix pro_services_results pro_custom_drop_res left_adjusted instant_hide">
                                 <div class="pro_services_list_drop">
                                     <ul></ul>
                                 </div>
@@ -322,7 +322,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="save_service_outer edit_profile_btn_1 clearfix">
+                        <div class="clearfix save_service_outer edit_profile_btn_1">
                             <a href="javascript:void(0)">Submit </a>
                         </div>
                     </form>
@@ -509,7 +509,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="save_portfolio_outer edit_profile_btn_1 clearfix">
+                        <div class="clearfix save_portfolio_outer edit_profile_btn_1">
                             <a href="javascript:void(0)">Save </a>
                         </div>
                         <input type="hidden" value="" class="port_thumb_data" name="port_thumb_data" />
@@ -656,7 +656,7 @@
                         </div>!-->
                     </div>
                 </form>
-                <div class="save_profile_outer edit_profile_btn_1 clearfix">
+                <div class="clearfix save_profile_outer edit_profile_btn_1">
                     <a href="javascript:void(0)">Save </a>
                 </div>
             </div>
@@ -687,7 +687,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="pro_h_l_outer clearfix">
+                <div class="clearfix pro_h_l_outer">
                     <div class="pro_h_l_head">
 
                         <div class="pro_h_l_btn_each_outer">
@@ -709,7 +709,7 @@
                                 <div class="pro_content_closer">
                                     <i class="fa fa-times"></i>
                                 </div>
-                                <div class="banner_editor_outer clearfix">
+                                <div class="clearfix banner_editor_outer">
                                     <div class="banner_left">
                                         <div class="banner_sub_head">Upload new background</div>
                                         <div class="upload_new_banner">
@@ -751,7 +751,7 @@
                                 <div class="pro_content_closer">
                                     <i class="fa fa-times"></i>
                                 </div>
-                                <div class="banner_editor_outer clearfix">
+                                <div class="clearfix banner_editor_outer">
                                     <div class="banner_left">
                                         <div class="banner_sub_head">Upload new banner</div>
                                         <div class="upload_new_banner">
@@ -826,7 +826,7 @@
                 <div class="pro_edit_text">
                     If you have a small logo place it here. Max width: 500px and Max height: 125px
                 </div>
-                <div class="pro_h_logo_outer clearfix">
+                <div class="clearfix pro_h_logo_outer">
                     <div class="pro_h_logo_head">
                         <div data-id="h_logo_standard_content" class="pro_h_logo_btn_each {{$user->home_logo == 'standard' ? 'active' : ''}}">
                             <div class="pro_h_logo_btn_top">
@@ -863,7 +863,7 @@
                         </div>
                         <div class="pro_hl_content_inner">
                             <div id="h_logo_custom_content" class="each_h_logo_content instant_hide">
-                                <div class="banner_editor_outer clearfix">
+                                <div class="clearfix banner_editor_outer">
                                     <div class="banner_left">
                                         <div class="banner_sub_head">Upload new logo</div>
                                         <div class="upload_new_banner">
@@ -899,7 +899,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="pro_def_h_t_btn_outer clearfix">
+                <div class="clearfix pro_def_h_t_btn_outer">
                     <div class="pro_h_dt_head">
                         <div data-id="1" class="pro_h_dt_btn_each {{$user->default_tab_home == 1 ? 'active' : ''}}">
                             <div class="pro_h_dt_btn_top">
@@ -982,7 +982,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="pro_def_seo_btn_outer clearfix">
+                <div class="clearfix pro_def_seo_btn_outer">
                     <div class="pro_seo_head">
                         <form id="pro_favicon_form" action="{{route('save.user.profile')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
@@ -1044,7 +1044,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="pro_def_seo_btn_outer clearfix">
+                <div class="clearfix pro_def_seo_btn_outer">
                     <div class="pro_seo_head">
                         <form action="{{isset($setupWizard) ? '' : route('save.user.profile.seo')}}" method="post">
                             {{csrf_field()}}
@@ -1084,7 +1084,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="save_profile_outer edit_profile_btn_1 clearfix"><a href="javascript:void(0)">Save</a></div>
+                    <div class="clearfix save_profile_outer edit_profile_btn_1"><a href="javascript:void(0)">Save</a></div>
                 </div>
             </div>
             @if(!isset($isQuickSetup))
@@ -1108,7 +1108,7 @@
                 <div class="pro_main_tray">
                     <div class="pro_tray_title">Connect Your Domain</div>
                 </div>
-                <div class="curr_stat_outer clearfix">
+                <div class="clearfix curr_stat_outer">
                     <div class="each_curr_stat">
                         <div class="stat_head">Domain Status:</div>
                         <div class="stat_content">{{$domainStatus}}</div>
@@ -1325,7 +1325,7 @@
                     @if(count($user->followings))
                         @foreach($user->followings as $key => $followingUser)
                             @if($followingUser->followeeUser)
-                                <div data-href="{{route('user.home', ['params' => $followingUser->followeeUser->username])}}" class="tab_chanel_list each_user_following clearfix">
+                                <div data-href="{{route('user.home', ['params' => $followingUser->followeeUser->username])}}" class="clearfix tab_chanel_list each_user_following">
                                     <div class="summary">
                                         <a href="javascript:void(0)">
                                             <img class="" src="{{$commonMethods->getUserDisplayImage($followingUser->followeeUser->id)}}" alt="#">
@@ -1353,7 +1353,7 @@
                     @if(count($user->followers))
                         @foreach($user->followers as $key => $follower)
                             @if($follower->followerUser)
-                                <div data-href="{{$follower->followerUser->username ? route('user.home', ['params' => $follower->followerUser->username]) : ''}}" class="tab_chanel_list each_user_following clearfix">
+                                <div data-href="{{$follower->followerUser->username ? route('user.home', ['params' => $follower->followerUser->username]) : ''}}" class="clearfix tab_chanel_list each_user_following">
                                     <div class="summary">
                                         <a href="javascript:void(0)">
                                             <img class="" src="{{$commonMethods->getUserDisplayImage($follower->followerUser->id)}}" alt="#">
