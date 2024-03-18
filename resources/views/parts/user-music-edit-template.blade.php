@@ -37,7 +37,7 @@
             @php $edit_music_thumb = asset('user-music-thumbnails/'.$userMusic->thumbnail_left) @endphp
         @endif
 
-        <div class="pro_upload_video music_thum_sec clearfix">
+        <div class="clearfix pro_upload_video music_thum_sec">
             <div class="pro_left_video_img">
                 <span class="upload_vieo_img" onclick="$('#music_thumb_{{ $userMusic->id }}').trigger('click'); return false;">
                     <img src="{{$edit_music_thumb}}" style="cursor: pointer;" alt="#" id="display-music-thumb_{{ $userMusic->id }}" />
@@ -81,12 +81,12 @@
                         <input autocomplete="off" type="text" placeholder="Search here to add instruments" name="instruments" />
                         <i class="fa fa-search"></i>
                     </label>
-                    <div class="music_instruments_results pro_custom_drop_res instant_hide clearfix">
+                    <div class="clearfix music_instruments_results pro_custom_drop_res instant_hide">
                         <div class="pro_instruments_list_drop">
                             <ul></ul>
                         </div>
                     </div>
-                    <div class="music_instruments_saved clearfix">
+                    <div class="clearfix music_instruments_saved">
                         @if(is_array($userMusic->instruments) && count(array_filter($userMusic->instruments)))
                             @foreach($userMusic->instruments as $musicInstrument)
                                 <div class="profile_custom_drop_each">
@@ -143,12 +143,12 @@
                         <input autocomplete="off" type="text" placeholder="Search here to add more moods" name="more_moods" />
                         <i class="fa fa-search"></i>
                     </label>
-                    <div class="music_moods_results pro_custom_drop_res instant_hide clearfix">
+                    <div class="clearfix music_moods_results pro_custom_drop_res instant_hide">
                         <div class="pro_moods_list_drop">
                             <ul></ul>
                         </div>
                     </div>
-                    <div class="music_moods_saved clearfix">
+                    <div class="clearfix music_moods_saved">
                         @php $userMusicMoods = explode(',', $userMusic->more_moods) @endphp
                         @if(is_array($userMusicMoods) && count(array_filter($userMusicMoods)))
                             @foreach(array_filter($userMusicMoods) as $musicMood)
@@ -180,10 +180,22 @@
         <div class="music_license_button">
             <div class="music_license_head">Non License Fee</div>
         </div>
-        <b>This option is for a user to buy a personal use only. If you enter 0 it will be free if u leave it empty the personal option will not show</b>
+        <span class="pb-0">This feature allows users to purchase for personal use only.</span>
+        <div class="pro_note">
+            <ul>
+                <li>
+                    If you enter 0, the item will be available for free.
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    If you leave the field empty, personal use option will not be displayed.
+                </li>
+            </ul>
+        </div>
         <div class="music_ice_listing">
             <ul>
-                <li class="each_license optional clearfix">
+                <li class="clearfix each_license optional">
                     <div class="each_license_body">
                         <p class="p_lic_left">Personal use only</p>
                         <input type="number" class="p_lic_right" placeholder="(0.99)" name="personal_use_only" value="{{ $userMusic->personal_use_only }}" min="0" />
@@ -436,7 +448,7 @@
         </ul>
     </div>
 
-    <div class="save_music_outer edit_profile_btn_1 clearfix">
+    <div class="clearfix save_music_outer edit_profile_btn_1">
         <a href="javascript:void(0)">Upload</a>
     </div>
 </form>

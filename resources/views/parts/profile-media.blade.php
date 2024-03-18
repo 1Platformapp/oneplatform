@@ -172,7 +172,19 @@
                 <div class="music_license_button">
                 	<div class="music_license_head">Non License Fee</div>
                 </div>
-                <b>This option is for a user to buy a personal use only. If you enter 0 it will be free if u leave it empty the personal option will not show</b>
+                <span class="pb-0">This feature allows users to purchase for personal use only.</span>
+                <div class="pro_note">
+                    <ul>
+                        <li>
+                            If you enter 0, the item will be available for free.
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            If you leave the field empty, personal use option will not be displayed.
+                        </li>
+                    </ul>
+                </div>
                 <div class="music_ice_listing">
                     <ul>
                         <li class="clearfix each_license optional">
