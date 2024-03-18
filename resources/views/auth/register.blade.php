@@ -201,7 +201,7 @@
                             if(data.success){
                                 var resultsRows = JSON.parse( JSON.stringify( data.result ) );
                                 if(data.totalRecords == 0){
-                                    var response = '<div class="my-dropdown-item no_results p-3 text-center">No results</div>';
+                                    var response = '<div class="p-3 text-center my-dropdown-item no_results">No results</div>';
                                 }else{
                                     var response = '';
                                 }
@@ -212,12 +212,12 @@
                                         var eachResultRow = JSON.parse(JSON.stringify(resultsRows[id]));
                                         var name = eachResultRow['name'] ? eachResultRow['name'] : (eachResultRow['value'] ? eachResultRow['value'] : eachResultRow[1]);
                                         var id = eachResultRow['id'];
-                                        response += '<div data-id="'+id+'" class="my-dropdown-item p-3 cursor-pointer hover:bg-gray-50">'+name+'</div>';
+                                        response += '<div data-id="'+id+'" class="p-3 cursor-pointer my-dropdown-item hover:bg-gray-50">'+name+'</div>';
                                     }
                                 }
                                 var totalMatchingRecords = data.totalRecords;
                                 if( totalMatchingRecords ) { response = response; }
-                                else { response = '<div class="my-dropdown-item no_results p-3 text-center">No results</div>'; }
+                                else { response = '<div class="p-3 text-center my-dropdown-item no_results">No results</div>'; }
 
                                 well.html(response).removeClass('hidden');
                             }else{
@@ -255,48 +255,48 @@
 @section('page-content')
 
     <div class="w-full pt-6 pb-6">
-        <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Welcome to 1Platform</h2>
-        <p class="mt-1 text-sm text-gray-500 text-center">1Platform: Your essential tool for music career success</p>
+        <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
+        <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
         <nav aria-label="Progress" class="pt-16 pb-12">
             <ol role="list" class="space-y-4 md:flex md:space-x-8 md:space-y-0">
                 <li data-step="one" class="each-step md:flex-1">
-                    <div class="each-step-in flex flex-col border-l-4 cursor-pointer border-gray-200 hover:border-gray-300 py-2 pl-4 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
-                        <span class="each-step-title text-sm font-medium text-gray-500 group-hover:text-gray-700">Step 1</span>
-                        <span class="each-step-name text-sm font-medium">Username and currency</span>
+                    <div class="flex flex-col py-2 pl-4 border-l-4 border-gray-200 cursor-pointer each-step-in hover:border-gray-300 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
+                        <span class="text-sm font-medium text-gray-500 each-step-title group-hover:text-gray-700">Step 1</span>
+                        <span class="text-sm font-medium each-step-name">Username and currency</span>
                     </div>
                 </li>
                 <li data-step="two" class="each-step md:flex-1">
-                    <div class="each-step-in flex flex-col border-l-4 py-2 pl-4 cursor-pointer border-gray-200 hover:border-gray-300 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
-                        <span class="each-step-title text-sm font-medium text-gray-500 group-hover:text-gray-700">Step 2</span>
-                        <span class="each-step-name text-sm font-medium">Add personal information</span>
+                    <div class="flex flex-col py-2 pl-4 border-l-4 border-gray-200 cursor-pointer each-step-in hover:border-gray-300 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
+                        <span class="text-sm font-medium text-gray-500 each-step-title group-hover:text-gray-700">Step 2</span>
+                        <span class="text-sm font-medium each-step-name">Add personal information</span>
                     </div>
                 </li>
                 <li data-step="three" class="each-step md:flex-1">
-                    <div class="each-step-in flex flex-col border-l-4 py-2 pl-4 group cursor-pointer border-gray-200 hover:border-gray-300 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
-                        <span class="each-step-title text-sm font-medium text-gray-500 group-hover:text-gray-700">Step 3</span>
-                        <span class="each-step-name text-sm font-medium">Add media information</span>
+                    <div class="flex flex-col py-2 pl-4 border-l-4 border-gray-200 cursor-pointer each-step-in group hover:border-gray-300 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
+                        <span class="text-sm font-medium text-gray-500 each-step-title group-hover:text-gray-700">Step 3</span>
+                        <span class="text-sm font-medium each-step-name">Add media information</span>
                     </div>
                 </li>
             </ol>
         </nav>
     </div>
     @if (Session::has('error'))
-        <div class="flash-container rounded-md p-4 bg-red-50 text-red-800 mb-4 flex flex-row items-center">
+        <div class="flex flex-row items-center p-4 mb-4 text-red-800 rounded-md flash-container bg-red-50">
             <div>
                 <i class="fa fa-times-circle"></i>
                 {{ (is_array(Session::get('error'))) ? Session::get('error')[0] : Session::get('error') }}
             </div>
-            <div class="close-btn cursor-pointer ml-auto text-red-800">
+            <div class="ml-auto text-red-800 cursor-pointer close-btn">
                 <i class="fa fa-times"></i>
             </div>
         </div>
     @elseif(Session::has('profile_saved'))
-        <div class="flash-container rounded-md p-4 bg-green-50 text-green-800 mb-4 flex flex-row items-center">
+        <div class="flex flex-row items-center p-4 mb-4 text-green-800 rounded-md flash-container bg-green-50">
             <div>
                 <i class="fa fa-check-circle"></i>
                 Saved successfully
             </div>
-            <div class="close-btn cursor-pointer ml-auto text-green-800">
+            <div class="ml-auto text-green-800 cursor-pointer close-btn">
                 <i class="fa fa-times"></i>
             </div>
         </div>
@@ -304,15 +304,15 @@
     <div class="bg-white rounded-lg">
         <form id="register-form" action="{{route('register.user')}}" method="POST">
             {{csrf_field()}}
-            <div class="mx-6 py-12">
-                <h2 class="text-base font-semibold leading-7 text-gray-900 mb-2"><span id="step-name"></span></h2>
-                <div data-step="one" class="each-step-body space-y-12 sm:space-y-16 hidden">
-                    <div class="space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+            <div class="py-12 mx-6">
+                <h2 class="mb-2 text-base font-semibold leading-7 text-gray-900"><span id="step-name"></span></h2>
+                <div data-step="one" class="hidden space-y-12 each-step-body sm:space-y-16">
+                    <div class="pb-12 space-y-8 border-b border-gray-900/10 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="fake_username" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Username</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">1platform.tv/</span>
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
+                                    <span class="flex items-center pl-3 text-gray-500 select-none sm:text-sm">1platform.tv/</span>
                                     <input type="email" id="username" name="username" autocomplete="on" class="w-0 h-0">
                                     <input type="text" name="fake_username" id="fake_username" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="janesmith">
                                 </div>
@@ -321,7 +321,7 @@
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="currency" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Currency</label>
-                            <div class="mt-2 sm:col-span-2 ring-1 ring-inset rounded-md ring-gray-300 sm:mt-0">
+                            <div class="mt-2 rounded-md sm:col-span-2 ring-1 ring-inset ring-gray-300 sm:mt-0">
                                 <select id="currency" name="currency" autocomplete="off" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
                                     <option value="gbp">GBP</option>
                                     <option value="eur">EUR</option>
@@ -332,12 +332,12 @@
                     </div>
                 </div>
 
-                <div data-step="two" class="each-step-body space-y-12 sm:space-y-16 hidden">
-                    <div class="space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+                <div data-step="two" class="hidden space-y-12 each-step-body sm:space-y-16">
+                    <div class="pb-12 space-y-8 border-b border-gray-900/10 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">First name</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="text" id="firstname" name="firstName" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -345,7 +345,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="surname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Surname</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="text" id="surname" name="lastName" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -353,7 +353,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="artistname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Artist name</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="text" id="artistname" name="name" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                                 <p class="mt-3 text-sm leading-6 text-gray-600">This will be your public name</p>
@@ -362,7 +362,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="emailaddress" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Email</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="text" id="emailaddress" name="email" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -370,7 +370,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="fake_password" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Password</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="password" id="password" name="password" autocomplete="off" class="hidden">
                                     <input type="password" id="fake_password" name="password" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                                 </div>
@@ -379,8 +379,8 @@
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="countryname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Country</label>
-                            <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                            <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="hidden" id="country_id" name="country_id" value="">
                                     <input data-uri="/searchCountries" data-well="country-dropdown" id="country_name" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
                                 </div>
@@ -391,8 +391,8 @@
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="cityname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">City</label>
-                            <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
+                            <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="hidden" id="city_id" name="city_id" value="">
                                     <input data-uri="/searchCities" data-well="city-dropdown" id="city_name" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
                                 </div>
@@ -404,33 +404,43 @@
                     </div>
                 </div>
 
-                <div data-step="three" class="each-step-body space-y-12 sm:space-y-16 hidden">
-                    <div class="space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+                <div data-step="three" class="hidden space-y-12 each-step-body sm:space-y-16">
+                @php $skills = \App\Models\Skill::all() @endphp
+                    <div class="pb-12 space-y-8 border-b border-gray-900/10 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="skillname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Main skill</label>
-                            <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input data-uri="/searchSkills" data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                            <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
+                                    <select data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        @foreach($skills as $skill)
+                                            <option value="{{$skill->value}}">{{$skill->value}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="hidden my-dropdown main-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
+                                <!-- <div class="hidden my-dropdown main-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="otherskillname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Other skill</label>
-                            <div class="my-dropdown-container relative mt-2 sm:col-span-2 sm:mt-0">
-                                <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 outline-none">
-                                    <input data-uri="/searchSkills" data-well="other-skill-dropdown" id="other_skill_name" name="sec_skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Search here">
+                            <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
+                                    <select data-well="other-skill-dropdown" id="other_skill_name" name="sec_skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        @foreach($skills as $skill)
+                                            <option value="{{$skill->value}}">{{$skill->value}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="hidden my-dropdown other-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
+                                <!-- <div class="hidden my-dropdown other-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="genre" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Genre</label>
-                            <div class="mt-2 sm:col-span-2 ring-1 ring-inset rounded-md ring-gray-300 sm:mt-0">
+                            <div class="mt-2 rounded-md sm:col-span-2 ring-1 ring-inset ring-gray-300 sm:mt-0">
                                 <select id="genre" name="genre_id" autocomplete="off" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
                                     <option value="">Choose an option</option>
                                     @foreach($genres as $key => $genre)
@@ -441,7 +451,7 @@
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="level" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Level</label>
-                            <div class="mt-2 sm:col-span-2 ring-1 ring-inset rounded-md ring-gray-300 sm:mt-0">
+                            <div class="mt-2 rounded-md sm:col-span-2 ring-1 ring-inset ring-gray-300 sm:mt-0">
                                 <select id="level" name="level" autocomplete="off" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
                                     <option value="">Choose an option</option>
                                     <option value="Beginner">Beginner</option>
@@ -454,15 +464,15 @@
                 </div>
 
                 <div class="flex items-end justify-between">
-                    <div class="mt-6 google-recaptcha hidden">
+                    <div class="hidden mt-6 google-recaptcha">
                         <div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div>
                     </div>
-                    <div class="mt-6 flex flex-col justify-end gap-x-6 ml-auto">
-                        <button type="button" class="next-btn inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 outline-none">Next</button>
+                    <div class="flex flex-col justify-end mt-6 ml-auto gap-x-6">
+                        <button type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500">Next</button>
                     </div>
                 </div>
                 <div class="flex">
-                    <p id="error-span" class="mt-3 text-sm leading-6 text-red-600 hidden ml-auto">There is some validation error</p>
+                    <p id="error-span" class="hidden mt-3 ml-auto text-sm leading-6 text-red-600">There is some validation error</p>
                 </div>
             </div>
         </form>
