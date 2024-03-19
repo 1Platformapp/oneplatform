@@ -12,7 +12,7 @@
         <title>@yield('pagetitle')</title>
         <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}" class="switchmediaall">
         <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
-        <link href="/css/style.min.css?v=3.18" rel="stylesheet" type="text/css" />
+        <link href="/css/style.min.css?v=3.2" rel="stylesheet" type="text/css" />
         <link href="/css/app.css?v=3.65" rel="stylesheet" type="text/css" />
         <link href="/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
