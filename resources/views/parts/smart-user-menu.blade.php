@@ -366,6 +366,14 @@
                             <i class="fa fa-sign-out"></i>&nbsp;Logout
                         </a>
                     </div>
+                    @else
+                    <div>
+                        <a href="{{route('register')}}" id="signup_btn">
+                            <i class="fa fa-comment-dots"></i>
+                            Create an account
+                        </a>
+                        <a href="{{route('login')}}" id="signin_btn">Sign in</a>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -380,3 +388,9 @@
             $('#body-overlay').hide();
         });
     </script>
+<style scoped>
+#signup_btn { font-size: 13px; margin-left: 23px; padding: 8px; width: 150px; text-align: center; }
+#signin_btn { margin-left: 23px; width: 150px; text-align: center; font-size: 13px; padding: 8px; }
+#signup_btn { display: inline-block; background: rgb(19, 168, 158); color: #fff; border-radius: 2px; margin-left: 50px; padding: 8px; cursor: pointer; text-decoration: none; border: 1px solid rgb(19, 168, 158);  }
+#signin_btn { display: inline-block; border: 1px solid #000; color: #000; border-radius: 2px; margin-left: 20px; padding: 8px; }
+</style>
