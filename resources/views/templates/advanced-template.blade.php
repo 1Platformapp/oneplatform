@@ -36,7 +36,7 @@
 	    <link rel="stylesheet" href="{{asset('player-element/dist/speed/speed.min.css')}}">
 	    <link rel="stylesheet" href="{{asset('player-element/dist/chromecast/chromecast.min.css')}}">
 	    <link rel="stylesheet" href="{{asset('player-element/dist/context-menu/context-menu.min.css')}}">
-	    <link href="{{asset('css/style.min.css?v=3.18')}}" rel="stylesheet" type="text/css">
+	    <link href="{{asset('css/style.min.css?v=3.3')}}" rel="stylesheet" type="text/css">
 	    <link href="{{asset('css/frontend.min.css?v=3.17')}}" rel="stylesheet" type="text/css">
         <link href="/css/app.css?v=3.65" rel="stylesheet" type="text/css" />
 

@@ -171,11 +171,11 @@
 
                                             <tr>
                                                 <td align="center">
-                                                    <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->username, 'type' => 'facebook_url'])}}">
-                                                        <img src="{{asset('email-template-images/new/Asset_4.png')}}">
+                                                    <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->id, 'type' => 'facebook_url'])}}">
+                                                        <img src="https://www.1platform.tv/email-template-images/new/Asset_4.png">
                                                     </a>
-                                                    <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->username, 'type' => 'twitter_url'])}}">
-                                                        <img src="{{asset('email-template-images/new/Asset_5.png')}}">
+                                                    <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->id, 'type' => 'twitter_url'])}}">
+                                                        <img src="https://www.1platform.tv/email-template-images/new/Asset_5.png">
                                                     </a>
                                                 </td>
                                             </tr>

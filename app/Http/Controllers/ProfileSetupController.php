@@ -224,7 +224,7 @@ class ProfileSetupController extends Controller
                     $nextPage = $page;
                 }else{
 
-                    if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product' || $page == 'music' || $page == 'album'){
+                    if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product' || $page == 'music' || $page == 'album' || $page == 'video'){
 
                         $nextPage = $page;
                     }else{

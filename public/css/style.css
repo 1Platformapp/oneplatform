@@ -50,7 +50,7 @@ body { width: 100%; font-size: 14px; font-family: Open sans, sans-serif; -webkit
 .ch_left_sec_outer { width:24.45%; float:left; }
 .ch_cent_right_outer { width:73.83%; float:right; }
 
-.edit_profile_btn_1 { margin: 60px 0 100px 0; box-shadow: 0 0 13px #818181; }
+.edit_profile_btn_1 { margin: 60px 0 100px 0; box-shadow: 0 0 5px #818181; }
 .edit_profile_btn_1 a { width: 100%; background: #fff; display: block; text-align: center; color:#000; font-size:16px; text-transform: uppercase; font-family: Open sans, sans-serif; line-height: 32px; -webkit-transition:0.7s all ease-in-out; -moz-transition:0.7s all ease-in-out; -o-transition:0.7s all ease-in-out; transition:0.7s all ease-in-out; }
 
 .active_video_list { width:100% !important; transition:1s all ease-in-out; -webkit-transition:1s all ease-in-out; -moz-transition:1s all ease-in-out; -o-transition:1s all ease-in-out; }
@@ -123,7 +123,7 @@ body { width: 100%; font-size: 14px; font-family: Open sans, sans-serif; -webkit
 .pro_page_pop_up .pro_text_dark { color: rgb(39, 40, 42); }
 .pro_page_pop_up.extend .soc_con_top_logo { position: absolute; right: 20px; }
 
-.error_span { color: #991B1B; background-color: #FEF2F2; border-radius: 3px; display: table; font-family: Open sans, sans-serif; font-size: 15px; line-height: 30px; margin: 12px 0; padding: 10px; width: 100%; }
+.error_span { color: #ffffff; background-color: #ff4f4f; border-radius: 3px; display: table; font-family: Open sans, sans-serif; font-size: 15px; line-height: 30px; margin: 12px 0; padding: 10px; width: 100%; }
 .error_span span{ display: block; }
 .success_span { color: #fff; background-color: #28a745; display: table; font-family: Open sans, sans-serif; font-size: 15px; line-height: 30px; margin: 12px 0; padding: 10px; width: 100%; }
 .success_span i { font-size: 19px; }

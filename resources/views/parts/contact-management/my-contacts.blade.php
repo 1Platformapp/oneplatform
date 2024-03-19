@@ -87,7 +87,7 @@
                                     </li>
                                     @else
                                     <li>
-                                        <a title="Calendar" class="m_btn_right_icon_each">
+                                        <a title="Calendar" class="m_btn_right_icon_each" onclick="openModal()">
                                             <i class="fa fa-calendar"></i>
                                         </a>
                                     </li>
@@ -117,7 +117,7 @@
                                             <i class="fa fa-home"></i>
                                         </a>
                                         @else
-                                        <a title="Website" href="javascript:void(0)" class="m_btn_right_icon_each m_btm_website">
+                                        <a title="Website" href="javascript:void(0)" onclick="openModal()" class="m_btn_right_icon_each m_btm_website">
                                             <i class="fa fa-home"></i>
                                         </a>
                                         @endif

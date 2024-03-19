@@ -13,7 +13,7 @@
                             <div class="port_field_remove"><i class="fa fa-trash"></i></div>
                         </div>
                         <div class="port_field_body">
-                            <textarea class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]">{{$eachQues->value}}</textarea>
+                            <textarea onclick="expandQuestion(this)" class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]">{{$eachQues->value}}</textarea>
                         </div>
                     </div>
                 @endforeach
@@ -51,7 +51,7 @@
                                 <div class="port_field_remove"><i class="fa fa-trash"></i></div>
                             </div>
                             <div class="port_field_body">
-                                <textarea class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]">{{$question->value}}</textarea>
+                                <textarea onclick="expandQuestion(this)" class="ques_field_textarea genHeight h-90" placeholder="Type your question" name="question[]">{{$question->value}}</textarea>
                             </div>
                         </div>
                         @endif
@@ -76,6 +76,10 @@
 </div>
 <script>
 
+    function expandQuestion(element) {
+        element.classList.toggle('h-150');
+    }
+    
     $('document').ready(function(){
 
         $('.agent_que_action_btn').click(function(){

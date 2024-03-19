@@ -127,7 +127,7 @@
         }else{
             $shareVideoTitle = preg_replace('/[^\w]/', ' ', $defaultVideoTitle);
             $url = 'live_0';
-            $shareVideoURL = route('vid.share', ['videoId' => $defaultVideoId, 'userName' => $shareVideoTitle, 'url' => $url]);
+            $shareVideoURL = route('vid.share', ['videoId' => '0cSXq4TYIIk', 'userName' => $shareVideoTitle, 'url' => $url]);
             $shareURL = route('url.share', ['userName' => '1Platform Hosts', 'userImage' => base64_encode('1a_right_expert.png'), 'url' => $url]);
         }
     @endphp
@@ -187,7 +187,7 @@
                                 <source type="video/youtube" src="https://www.youtube.com/watch?v={{ $defaultVideoId }}" />
 
                             </video>
-                            <div class="experts_tab_btns tab_btns_outer tab_dsk hide_on_mobile clearfix">
+                            <div class="clearfix experts_tab_btns tab_btns_outer tab_dsk hide_on_mobile">
 
                                 <div class="each_tab_btn tab_btn_expert_logo" data-show="#tabd1">
                                     <!--<a href="javascript:void(0)">
@@ -236,7 +236,7 @@
                                                     @if(!$expert->user || !$expert->user->profile) @php continue @endphp @endif
 
                                                     @php $profile = $expert->user->profile @endphp
-                                                    <div data-skill="{{$expert->user->skills}}" class="tab_chanel_list each_user_video each_chart_video studio_page_video clearfix">
+                                                    <div data-skill="{{$expert->user->skills}}" class="clearfix tab_chanel_list each_user_video each_chart_video studio_page_video">
 
                                                         <a href="#">
                                                             <img class="" src="https://i.ytimg.com/vi/{{$profile->user_bio_video_id }}/mqdefault.jpg" alt="#" />
@@ -258,7 +258,7 @@
                                             <div class="scroller_head">1Platform Latest</div>
                                             <div class="hm_lst_slid_outer">
 
-                                                <div class="hm_lst_slid_inner clearfix">
+                                                <div class="clearfix hm_lst_slid_inner">
 
                                                     <div data-max-slides="3" id="owl_content"></div>
 
@@ -322,7 +322,7 @@
 @section('top-left')
     
     <div class="ch_tab_sec_outer mobile-only">
-        <div class="experts_tab_btns tab_btns_outer clearfix">
+        <div class="clearfix experts_tab_btns tab_btns_outer">
             <div class="each_tab_btn tab_btn_expert_logo" data-show="#tab1">
                 <!--<a href="javascript:void(0)">
                     <img src="{{asset('images/tab_experts_logo.png')}}">
@@ -371,7 +371,7 @@
                             @if(!$expert->user || !$expert->user->profile) @php continue @endphp @endif
 
                             @php $profile = $expert->user->profile @endphp
-                            <div data-skill="{{$expert->user->skills}}" class="tab_chanel_list each_user_video each_chart_video studio_page_video clearfix">
+                            <div data-skill="{{$expert->user->skills}}" class="clearfix tab_chanel_list each_user_video each_chart_video studio_page_video">
 
                                 <a href="#">
                                     <img class="" src="https://i.ytimg.com/vi/{{$profile->user_bio_video_id }}/mqdefault.jpg" alt="#" />
@@ -505,7 +505,7 @@
 
             </div>
 
-            <div class="social_btns desktop-only clearfix">
+            <div class="clearfix social_btns desktop-only">
 
                 <ul class="clearfix">
 

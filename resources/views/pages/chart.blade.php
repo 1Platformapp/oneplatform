@@ -137,7 +137,7 @@
         }else{
             $shareVideoTitle = preg_replace('/[^\w]/', ' ', $defaultVideoTitle);
             $url = 'chart_0';
-            $shareVideoURL = route('vid.share', ['videoId' => $defaultVideoId, 'userName' => $shareVideoTitle, 'url' => $url]);
+            $shareVideoURL = route('vid.share', ['videoId' => '0cSXq4TYIIk', 'userName' => $shareVideoTitle, 'url' => $url]);
             $shareURL = route('url.share', ['userName' => '1Platform Chart', 'imageName' => base64_encode('1a_right_chart.png'), 'url' => $url]);
         }
     @endphp
@@ -163,7 +163,7 @@
                 <video poster="{{asset('images/test/coming soon trials-01.jpg')}}" width="578" height="325" style="width: 100%; height: 100%;" class="vid_preloader" preload="none">
                     <source type="video/youtube" src="https://www.youtube.com/watch?v={{ $defaultVideoId }}" />
                 </video>
-                <aside class="chart_tab_btns tab_btns_outer tab_dsk hide_on_mobile clearfix">
+                <aside class="clearfix chart_tab_btns tab_btns_outer tab_dsk hide_on_mobile">
                     <div class="each_tab_btn tab_btn_chart_logo" data-show="#tabd1">
                         <!--<a href="javascript:void(0)">
                             <img src="{{asset('images/1a_bottom_chart.png')}}">
@@ -192,7 +192,7 @@
                     </div>
                     <div class="each_tab_btn tab_btn_tv" data-show=""></div> 
                 </aside>
-                <aside class="tab_btns_outer tab_shared mobile-only ch_tab_sec_outer clearfix">
+                <aside class="clearfix tab_btns_outer tab_shared mobile-only ch_tab_sec_outer">
                     <div class="each_tab_btn tab_btn_user_name fly_user_home" data-initials="" data-show="">
                         <div class="border"></div>
                     </div>
@@ -227,7 +227,7 @@
                                 <div id="r_tab1" class="r_tab_det" style="display:block ">
                                     @foreach($videos as $key=> $video)
                                         @if (!$video->profile || !$video->profile->user) @php continue @endphp @endif
-                                        <div class="tab_chanel_list each_user_video each_chart_video chart_page_video clearfix">
+                                        <div class="clearfix tab_chanel_list each_user_video each_chart_video chart_page_video">
                                             @php
                                                 $imgSrc = 'https://i.ytimg.com/vi/'.$video->video_id.'/mqdefault.jpg';
                                             @endphp
@@ -236,12 +236,12 @@
                                                 <a data-stream-type="{{ $video->type }}" data-orig-image="{{$video->profile->profile_display_image_original == '' ? 'user-general-display-image.png' : $video->profile->profile_display_image_original}}" data-stream-id="{{ ( $video->type == 'youtube' ) ? $video->video_id : $video->link }}" href="#" class="each_user_video_artist">{{ $video->profile->user->name }}</a>
                                                 <p>{{ substr($video->title, 0, 60) }}</p>
                                             </div>
-                                            <div class="r_left_sec_outer clearfix">
-                                                <ul class="chart_rank clearfix">
+                                            <div class="clearfix r_left_sec_outer">
+                                                <ul class="clearfix chart_rank">
 
                                                     <li><mark>{{$video->rank}}</mark></li>
                                                 </ul>
-                                                <ul class="chart_likes clearfix">
+                                                <ul class="clearfix chart_likes">
                                                     <li>
                                                         @if($video->direction == 1)
                                                             <img src="{{asset('images/chart_rank_up.png')}}">
@@ -262,14 +262,14 @@
                                         </div>
                                     @endforeach
                                     @if(count($videos) > 11)
-                                        <div class="load_more_streams clearfix">Load More Videos</div>
+                                        <div class="clearfix load_more_streams">Load More Videos</div>
                                     @endif
                                 </div>
                                 <br><div class="spacer"></div>
                                 <div class="scroller_outer">
                                     <div class="scroller_head">1Platform Latest</div>
                                     <div class="hm_lst_slid_outer">
-                                        <div class="hm_lst_slid_inner clearfix">
+                                        <div class="clearfix hm_lst_slid_inner">
                                             <div data-max-slides="3" id="owl_content"></div>
                                         </div>
                                     </div>
@@ -361,7 +361,7 @@
                     </div>
                 </div>
             </div>
-            <div class="social_btns desktop-only clearfix">
+            <div class="clearfix social_btns desktop-only">
                 <ul class="clearfix">
                     <li>
                         <a id="facebook_share_url" onclick="return facebookShare('url')" class="ch_sup_fb" href="javascript:void(0)">

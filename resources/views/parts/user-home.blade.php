@@ -249,7 +249,7 @@
         $shareVideoTitle = preg_replace('/[^\w]/', ' ', $defaultVideoTitle);
         $url = 'userhome_'.$user->id;
         $userImageName = $user->profile->profile_display_image_original == '' ? 'user-general-display-image.png' : $user->profile->profile_display_image_original;
-        $shareVideoURL = route('vid.share', ['videoId' => $defaultVideoId, 'userName' => $user->name, 'url' => $url]);
+        $shareVideoURL = route('vid.share', ['videoId' => '0cSXq4TYIIk', 'userName' => $user->name, 'url' => $url]);
         $shareURL = route('url.share', ['userName' => $user->name, 'userImage' => $userImageName, 'url' => $url]);
     @endphp
 
@@ -316,11 +316,11 @@
 
                             </video>
 
-                            <div class="ch_tp_sec user_left_bar_top_info mobile-only clearfix">
+                            <div class="clearfix ch_tp_sec user_left_bar_top_info mobile-only">
 
-                                <div class="ch_tp_sec_inner clearfix">
+                                <div class="clearfix ch_tp_sec_inner">
 
-                                    <div class="ch_tp_sec_left clearfix">
+                                    <div class="clearfix ch_tp_sec_left">
 
                                         <a href="javascript:void(0)">
                                             <img class="top_left_user_display_image" src="{{$userPersonalDetails['profileImage']}}" alt="#" />
@@ -350,7 +350,7 @@
 
                             <div class="jp-interface">
 
-                                <div class="player_btm_sec clearfix">
+                                <div class="clearfix player_btm_sec">
 
                                     <div class="player_bot_user_info">
                                         @if($userCampaignDetails['campaignAmount'] == 0)
@@ -396,7 +396,7 @@
 
                             </div>
 
-                            <div class="tab_btns_outer tab_dsk clearfix">
+                            <div class="clearfix tab_btns_outer tab_dsk">
 
                                 <div class="each_tab_btn tab_btn_user_name">
                                     {!! $userPersonalDetails['splitName'] !!}
@@ -602,7 +602,7 @@
 
             </div>
 
-            <div class="social_btns desktop-only clearfix">
+            <div class="clearfix social_btns desktop-only">
 
                 <ul class="clearfix">
 
@@ -703,7 +703,7 @@
                 }
             @endphp
             <div class="donator_outer donation_goalless {{ (!$donation) ? '' : 'donation_agree' }}">
-                <div class="donator_box clearfix">
+                <div class="clearfix donator_box">
                     <h3>Make A Contribution</h3>
                     <p>Contributions are not associated with perks</p>
                     <div class="donation_left">
@@ -963,7 +963,7 @@
 
     <div class="ch_tab_sec_outer mobile-only">
 
-        <div class="tab_btns_outer clearfix">
+        <div class="clearfix tab_btns_outer">
 
             <ul>
 
