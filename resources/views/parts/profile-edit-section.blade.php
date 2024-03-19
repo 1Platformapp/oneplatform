@@ -143,26 +143,39 @@
                                     <li>If you want to be an agent tick the option below. <a target="_blank" href="{{route('faq')}}">Click here</a> to learn more about 1platform agents</li>
                                 </ul>
                             </div>
+                            @php $skills = \App\Models\Skill::all() @endphp
                             <div class="clearfix pro_inp_outer">
                                 <label>Main Skill *</label>
                                 <div class="pro_inp_right">
-                                    <input autocomplete="off" name="skill" type="text" placeholder="Your main skill e.g: musician, photographer, singer etc..." value="{{$userPersonalDetails['skills']}}">
+                                    <select id="main_skill_select" data-skill="{{$userPersonalDetails['skills']}}"  name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        <option value='' disabled>Select a Skill</option>
+                                        @foreach($skills as $skill)
+                                            <option value="{{$skill->value}}">{{$skill->value}}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- <input autocomplete="off" name="skill" type="text" placeholder="Your main skill e.g: musician, photographer, singer etc..." value="{{$userPersonalDetails['skills']}}">
                                     <div class="clearfix pro_main_skill_results pro_custom_drop_res left_adjusted instant_hide">
                                         <div class="pro_main_skill_list_drop">
                                             <ul></ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="clearfix pro_inp_outer">
                                 <label>Other Skill</label>
                                 <div class="pro_inp_right">
-                                    <input autocomplete="off" name="sec_skill" type="text" placeholder="Add any additional skills you do or offer" value="{{$userPersonalDetails['sec_skill']}}">
+                                    <select id="sec_skill_select" data-skill="{{$userPersonalDetails['sec_skill']}}" name="sec_skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
+                                        <option value='' selected disabled>Select a Skill</option>
+                                        @foreach($skills as $skill)
+                                            <option value="{{$skill->value}}">{{$skill->value}}</option>
+                                        @endforeach
+                                    </select>
+                                    <!-- <input autocomplete="off" name="sec_skill" type="text" placeholder="Add any additional skills you do or offer" value="{{$userPersonalDetails['sec_skill']}}">
                                     <div class="clearfix pro_sec_skill_results pro_custom_drop_res left_adjusted instant_hide">
                                         <div class="pro_sec_skill_list_drop">
                                             <ul></ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="clearfix pro_inp_outer further_skill_outer profile_custom_dropdown_outer">
@@ -1379,6 +1392,19 @@
     </div>
 
     <script>
+
+        var mainSkill = $('#main_skill_select');
+        var secSkill = $('#sec_skill_select');
+
+        let mainSkillName = $('#main_skill_select').attr('data-skill');
+        let secSkillName = $('#sec_skill_select').attr('data-skill');
+
+        if(mainSkillName) {
+            mainSkill.val(mainSkillName);
+        }
+        if(secSkillName) {
+            secSkill.val(secSkillName);
+        }
 
         $('.proceed_submit').click(function(){
             var thiss = $(this);
