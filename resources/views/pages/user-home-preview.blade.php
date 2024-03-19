@@ -25,7 +25,7 @@
 @endsection
 
 @section('page-level-css')
-    <link rel="stylesheet" href="{{asset('css/user-home.min.css?v=3.6')}}"></link>
+    <link rel="stylesheet" href="{{asset('css/user-home.min.css?v=3.8')}}"></link>
     <link rel="stylesheet" href="{{asset('css/portfolio.min.css')}}"></link>
     
     @if($user->home_layout == 'background')
