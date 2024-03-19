@@ -45,7 +45,7 @@
                             Personal
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('profile.setup.standalone', ['page' => 'personal'])}}" class="text-black usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -54,7 +54,7 @@
                                         Add Personal Info
                                     </div>
                                 </a>
-                                <a href="{{route('profile.setup.standalone', ['page' => 'media'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'media'])}}" class=" usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
                                             <i class="fas fa-user-cog"></i>
@@ -70,7 +70,7 @@
                             My Website
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('profile.setup.standalone', ['page' => 'design'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -143,7 +143,7 @@
                             My Music
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('profile.setup.standalone', ['page' => 'music'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -184,7 +184,7 @@
                             My Videos
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -211,7 +211,7 @@
                             My Products
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('profile.setup.standalone', ['page' => 'product'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -236,7 +236,7 @@
                             My Finances
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('profile.setup.standalone', ['page' => 'stripe'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -277,7 +277,7 @@
                             Artist Tools
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('agency.dashboard.tab', ['tab' => 'industry-contacts'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -310,7 +310,7 @@
                             Crowdfunding
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('profile.setup', ['page' => 'crowdfunding'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -335,7 +335,7 @@
                             Networking
                         </div>
                         <div class="usr_men_cat_body">
-                            <div class="usr_men_quicks">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                                 <a href="{{route('agency.dashboard.tab', ['tab' => 'contact-management'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
