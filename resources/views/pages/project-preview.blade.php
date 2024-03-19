@@ -168,7 +168,7 @@
         $shareVideoTitle = preg_replace('/[^\w]/', ' ', $defaultVideoTitle);
         $url = 'project_'.$user->id;
         $userImageName = $user->profile->profile_display_image_original == '' ? 'user-general-display-image.png' : $user->profile->profile_display_image_original;
-        $shareVideoURL = route('vid.share', ['videoId' => $defaultVideoId, 'userName' => $user->name, 'url' => $url]);
+        $shareVideoURL = route('vid.share', ['videoId' => '0cSXq4TYIIk', 'userName' => $user->name, 'url' => $url]);
         $shareURL = route('url.share', ['userName' => $user->name, 'imageName' => base64_encode($userImageName), 'url' => $url]);
     @endphp
 
@@ -227,7 +227,7 @@
                             @php $projectVideoId = ($videoUrl != '') ? $commonMethods->getYoutubeIdFromUrl($videoUrl) : '' @endphp
 
 
-                            <div class="tab_btns_outer tab_dsk hide_on_mobile clearfix">
+                            <div class="clearfix tab_btns_outer tab_dsk hide_on_mobile">
 
                                 <div class="each_tab_btn tab_btn_user_bio fly_user_home disabled" data-show="" data-initials="">
                                     <div class="border"></div>
@@ -257,7 +257,7 @@
 
                             </div>
 
-                            <div class="tab_btns_outer mobile-only ch_tab_sec_outer project_tabs_mobile clearfix">
+                            <div class="clearfix tab_btns_outer mobile-only ch_tab_sec_outer project_tabs_mobile">
 
                                 <div class="each_tab_btn tab_btn_user_bio fly_user_home disabled" data-show="" data-initials="{{$user->username}}">
                                     <div class="border"></div>
@@ -322,13 +322,13 @@
 
                                         <div id="read_more_less_btns" style="display: none;">
 
-                                            <div class="story_read_more_btn read_more_actual clearfix">
+                                            <div class="clearfix story_read_more_btn read_more_actual">
 
                                                 <input type="button" value="Read More" />
 
                                             </div>
 
-                                            <div class="story_read_more_btn read_less_actual clearfix">
+                                            <div class="clearfix story_read_more_btn read_less_actual">
 
                                                 <input type="button" value="Read Less" />
 
@@ -365,7 +365,7 @@
 
                                                     <li class="proj_create_new_account_outer">
 
-                                                        <div class="proj_create_new_account_inner clearfix">
+                                                        <div class="clearfix proj_create_new_account_inner">
                                                             <div class="proj_cont_left_inp_outer">
 
                                                                 <b>To purchase create an account</b>
@@ -383,9 +383,9 @@
                                                         </div>
                                                         <input class="dummy_field" type="text" name="email_9">
                                                         <input class="dummy_field" type="password" name="password_0">
-                                                        <div class="proj_cont_flt_outer clearfix">
+                                                        <div class="clearfix proj_cont_flt_outer">
 
-                                                            <div class="proj_email_outer clearfix" id="email_password_section">
+                                                            <div class="clearfix proj_email_outer" id="email_password_section">
 
                                                                 <div class="proj_cont_left_inp_outer">
 
@@ -412,7 +412,7 @@
 
                                                         </div>
 
-                                                        <div class="proj_cont_flt_outer proj_email_outer clearfix">
+                                                        <div class="clearfix proj_cont_flt_outer proj_email_outer">
                                                             <div class="proj_cont_left_inp_outer">
 
                                                                 <b>Password *</b>
@@ -436,7 +436,7 @@
 
 
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <div class="proj_cont_left_inp_outer">
 
@@ -461,7 +461,7 @@
 
                                                 <li class="proj_address_outer add_margin">
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <div class="proj_cont_left_inp_outer">
 
@@ -496,7 +496,7 @@
 
                                                 <li class="proj_address_two_outer add_margin">
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <div class="proj_cont_left_inp_outer">
 
@@ -518,7 +518,7 @@
 
                                                     <b>Credit Card Details *</b>
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <div class="proj_cont_left_inp_outer">
 
@@ -538,7 +538,7 @@
 
                                                 <li class="proj_credit_card_outer">
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <div class="proj_cont_left_inp_outer">
 
@@ -614,7 +614,7 @@
 
                                                 <li class="proj_photo_textarea_outer">
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <div class="proj_cont_left_img_textarea">
 
@@ -630,7 +630,7 @@
 
                                                 <li class="proj_total_amount_outer">
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <div class="proj_cont_left_inp_outer tot_ship_left ">
 
@@ -640,7 +640,7 @@
 
                                                         <div class="proj_cont_right_inp_outer tot_usd_shiping">
 
-                                                            <div class="proj_cont_right_inner clearfix">
+                                                            <div class="clearfix proj_cont_right_inner">
 
                                                                 <select class="tot_usd_sec" id="selectedCurrency" name="selectedCurrency">
 
@@ -664,13 +664,13 @@
 
                                                 </li>
 
-                                                <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
+                                                <li class="clearfix proj_cont_flt_outer proj_bottom_description">
                                                     <p>
                                                         If you are not paying in your native currency there may be fees for conversion. The actual amount charged by your card issuer may differ from our estimate shown here. This depends on their exchange rate and any applicable fees.
                                                     </p>
                                                 </li>
 
-                                                <li class="proj_cont_flt_outer proj_bottom_description  clearfix">
+                                                <li class="clearfix proj_cont_flt_outer proj_bottom_description">
                                                     <p>
                                                         I agree to 1Platform's <a target="_blank" href="{{route('tc')}}">terms and conditions</a>
                                                         <span class="terms_agree_outer">
@@ -681,7 +681,7 @@
 
                                                 <li class="proj_confirm_payment_btn_outer">
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <input onclick="return false;" type="button" value="Confirm Payment">
                                                     </div>
@@ -690,7 +690,7 @@
 
                                                 <li class="proj_bottom_description">
 
-                                                    <div class="proj_cont_flt_outer clearfix">
+                                                    <div class="clearfix proj_cont_flt_outer">
 
                                                         <p>
 
@@ -862,7 +862,7 @@
 
             </div>
 
-            <div class="social_btns desktop-only clearfix">
+            <div class="clearfix social_btns desktop-only">
 
                 <ul class="clearfix">
 
@@ -896,7 +896,7 @@
         @endif
         <div class="panel colio_outer colio_dark">
             <div class="donator_outer donation_goal {{$donationAdded?'donation_agree':''}}">
-                <div class="donator_box clearfix">
+                <div class="clearfix donator_box">
                     <div class="colio_header">Donate to support {{$user->firstName()}}</div>
                     <p>Your donations help to meet my target goal</p>
                     <div class="donator_inner">
@@ -1025,7 +1025,7 @@
 
         @endforeach
 
-        <!--<div class="story_read_more_btn return_to_top clearfix"><br>
+        <!--<div class="clearfix story_read_more_btn return_to_top"><br>
 
             <input type="button" value="Return to top of the page">
 
