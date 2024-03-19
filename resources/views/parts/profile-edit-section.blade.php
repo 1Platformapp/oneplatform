@@ -35,8 +35,8 @@
                         </div>
                         @if(!$user->is_buyer_only)
                         <div class="clearfix pro_inp_outer">
-                            <label>Artist Name *</label>
-                            <div class="pro_inp_right"><input autocomplete="new-password" name="name" type="text" placeholder="Appears on your website page i.e bio, musics etc" value="{{ $userPersonalDetails['name'] }}" />  </div>
+                            <label>Visible Name *</label>
+                            <div class="pro_inp_right"><input autocomplete="new-password" name="name" type="text" placeholder="Other users will see this name" value="{{ $userPersonalDetails['name'] }}" />  </div>
                         </div>
                         @endif
                         <div class="clearfix pro_inp_outer">
