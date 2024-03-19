@@ -131,11 +131,11 @@ class AgentContactController extends Controller
         $name = $request->get('pro_contact_name');
         $lastName = $request->get('pro_contact_last_name');
 
-        $user = User::where('first_name', $name)->where('surname', $lastName)->first();
+        // $user = User::where('first_name', $name)->where('surname', $lastName)->first();
 
-        if($user) {
-            return redirect()->back()->with(['error' => 'The name of the contact already exist in our database']);
-        }
+        // if($user) {
+        //     return redirect()->back()->with(['error' => 'The name of the contact already exist in our database']);
+        // }
 
         $user = Auth::User();
         $skill = $request->get('pro_contact_skill');
