@@ -114,7 +114,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2013.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('tv')}}">
-                                                                        Watch Great Content
+                                                                        Start Your Project List
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -122,7 +122,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2014.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('chart')}}">
-                                                                        Enter 1Platform Chart
+                                                                        Create Your Network
                                                                     </a>
                                                                 </div>
                                                             </td>
