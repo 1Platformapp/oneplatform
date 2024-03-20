@@ -148,6 +148,43 @@
             });
         }
 
+        async function registerUser() {
+            const formData = new FormData();
+                
+            formData.append('fake_username', $('#fake_username').val());
+            formData.append('currency', $('#currency').val());
+            formData.append('firstName', $('#firstname').val());
+            formData.append('lastName', $('#surname').val());
+            formData.append('name', $('#artistname').val());
+            formData.append('email', $('#emailaddress').val());
+            formData.append('password', $('#fake_password').val());
+            formData.append('country_id', $('#country_id').val());
+            formData.append('city_id', $('#city_id').val());
+            formData.append('skill', $('#main_skill_name').val());
+            formData.append('sec_skill', $('#other_skill_name').val());
+            formData.append('genre_id', $('#genre').val());
+            formData.append('level', $('#level').val());
+            formData.append('user_id', $('#user_id').val());
+            formData.append('g-recaptcha-response', grecaptcha.getResponse());
+               
+            fetch('api/register/user', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                document.getElementById('spinner').removeClass('fa fa-spinner fa-spin');
+                document.getElementById('submit_btn').disabled = false;
+                if(data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
         $('document').ready(function(){
 
             $.ajaxSetup({
@@ -201,8 +238,17 @@
                             $('#error-span').removeClass('hidden');
                             return;
                         }
+                            
+                        let hitApi = $('#register-form').attr('data-api-hit');
 
-                        $('#register-form').submit();
+                        if(hitApi) {
+                            document.getElementById('spinner').addClass('fa fa-spinner fa-spin');
+                            document.getElementById('submit_btn').disabled = true;
+
+                            await registerUser();
+                        } else {
+                            $('#register-form').submit();
+                        }
                     }
                 }
             });
@@ -362,7 +408,7 @@
         </div>
     @endif
     <div class="bg-white rounded-lg">
-        <form id="register-form" action="{{auth::user() ? route('profile.simple.setup') : route('register.user')}}" method="POST">
+        <form id="register-form" data-api-hit="{{auth::user() ? false : true}}" action="{{auth::user() ? route('profile.simple.setup') : route('register.user')}}" method="POST">
             {{csrf_field()}}
             <div class="py-12 mx-6">
                 <h2 class="mb-2 text-base font-semibold leading-7 text-gray-900"><span id="step-name"></span></h2>
@@ -439,7 +485,7 @@
                         @elseif(isset($prefill['email']))
                         <input type="hidden" id="emailaddress" name="email" autocomplete="off" value="{{$prefill['email']}}">
                         @endif
-                        <input type="hidden" name="user_id" autocomplete="off" value="{{$prefill['id'] ?? null}}">
+                        <input type="hidden" id="user_id" name="user_id" autocomplete="off" value="{{$prefill['id'] ?? null}}">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="fake_password" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Password</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
@@ -540,7 +586,9 @@
                 <div class="flex flex-col items-end justify-between lg:flex-row">
                     <div class="mt-6 google-recaptcha"></div>
                     <div class="flex flex-col justify-end mt-6 ml-auto gap-x-6">
-                        <button type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500">Next</button>
+                        <button id="submit_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500">
+                            <i id="spinner" class=""></i>Next
+                        </button>
                     </div>
                 </div>
                 <div class="flex">

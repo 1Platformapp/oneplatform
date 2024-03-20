@@ -5,16 +5,15 @@
 
 <div class="clearfix tab_chan_tp_btns">
 
-    <div data-id="singles" class="each_music_head">
-        <div class="">
-            <img src="{{asset('images/music-logo.png')}}" width="40" height="40">
-        </div>
+    <div class="cursor-pointer me-6" onclick="toggleAlbums()">
+        <img src="{{asset('images/music-logo.png')}}" width="40" height="40">
     </div>
-    <div data-id="albums" class="each_music_head">
-        <div class="">
-            <img src="{{asset('images/music-folder-logo.png')}}" width="40" height="40">
-        </div>
+    
+    <div class="cursor-pointer me-6" onclick="toggleSingles()">
+        <img src="{{asset('images/music-folder-logo.png')}}" width="40" height="40">
     </div>
+    
+    
     <div class="hide_on_mobile" data-video-id="R4GUz1XsDqA" id="offer_guide">
         <div class="music_head_img">How to make proposals</div>
     </div>
@@ -48,7 +47,7 @@
 
 
 
-<div class="user_album_outer" id="albums_div2" style="display: none;">
+<div class="hidden user_album_outer" id="albums_div2">
     <h3 class="tabd2_head">Albums</h3>
     @foreach($user->albums as $album)
 
@@ -57,3 +56,17 @@
     @endforeach
 
 </div>
+
+<script>
+
+    function toggleSingles() {
+        $('#music_and_vidoes2').addClass('hidden');
+        $('#albums_div2').removeClass('hidden');
+    }
+
+    function toggleAlbums() {
+        $('#albums_div2').addClass('hidden');
+        $('#music_and_vidoes2').removeClass('hidden');
+    }
+
+</script>

@@ -171,11 +171,15 @@
 
                                             <tr>
                                                 <td align="center">
-                                                    <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->id, 'type' => 'facebook_url'])}}">
-                                                        <img src="https://www.1platform.tv/email-template-images/new/Asset_4.png">
+                                                    <a style="text-align: center; font-size: 13px; display: inline-block; background: rgb(52, 32, 133); color: #fff; border-radius: 2px; padding: 8px; cursor: pointer; text-decoration: none; border: 1px solid rgb(52, 32, 133);" href="{{route('user.project.auto.share', ['username' => $user->id, 'type' => 'facebook_url'])}}">
+                                                        <i class="fa-brands fa-facebook-f"></i>
+                                                        Facebook
+                                                        <!-- <img src="https://www.1platform.tv/email-template-images/new/Asset_4.png"> -->
                                                     </a>
-                                                    <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->id, 'type' => 'twitter_url'])}}">
-                                                        <img src="https://www.1platform.tv/email-template-images/new/Asset_5.png">
+                                                    <a style="text-align: center; font-size: 13px; display: inline-block; background: rgb(12, 156, 240); color: #fff; border-radius: 2px; padding: 8px; cursor: pointer; text-decoration: none; border: 1px solid rgb(12, 156, 240);" href="{{route('user.project.auto.share', ['username' => $user->id, 'type' => 'twitter_url'])}}">
+                                                        <i class="fab fa-twitter"></i>
+                                                        Twitter
+                                                        <!-- <img src="https://www.1platform.tv/email-template-images/new/Asset_5.png"> -->
                                                     </a>
                                                 </td>
                                             </tr>
