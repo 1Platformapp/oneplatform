@@ -129,7 +129,7 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2015.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile')}}">
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup', ['page' => 'crowdfunding'])}}">
                                                                         Start A Crowdfunding Project
                                                                     </a>
                                                                 </div>
@@ -151,7 +151,7 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2016.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile')}}">
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup.standalone', ['page' => 'music'])}}">
                                                                         Sell music & licences
                                                                     </a>
                                                                 </div>
@@ -159,7 +159,7 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2017.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile')}}">
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup.standalone', ['page' => 'product'])}}">
                                                                         Sell tickets for your gigs
                                                                     </a>
                                                                 </div>
@@ -167,7 +167,9 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2018.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    And much more exciting stuff
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile')}}">
+                                                                        And much more exciting stuff
+                                                                    </a>
                                                                 </div>
                                                             </td>
                                                         </tr>
