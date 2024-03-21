@@ -269,6 +269,10 @@
                                     <span>Creating an account with 1Platform<br> means you agree to our</span>
                                     <a href="{{route('tc')}}">terms and conditions, </a>
                                     <a href="{{route('privacy.policy')}}">privacy policy</a>
+                                    <div>
+                                        <span>Checkout our FAQs</span><br class="hide_on_mobile">
+                                        <a href="{{route('faq')}}">here </a>
+                                    </div>
                                 </div>
                                 <!--<a href="{{asset('login/google')}}" class="cursor-pointer bg-black h-[28px] mt-4 rounded-lg gap-3 flex flex-row items-center justify-center">
                                     <span class="text-white mt-[1px]">
@@ -338,7 +342,7 @@
                             <div class="login_register_text_02">
                                 <span>Creating an account with 1Platform means you agree to our</span><br class="hide_on_mobile">
                                 <a href="{{route('tc')}}">terms and conditions, </a>
-                                <a href="{{route('privacy.policy')}}">privacy policy</a>
+                                <a href="{{route('privacy.policy')}}">privacy policy</a> <span>,and</span> <a href="{{route('faq')}}">FAQ </a>
                             </div>
                         </div>
                     </div>
@@ -365,7 +369,7 @@
                                     <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
                                     <div class="int_sub_offer_each">&nbsp;</div>
                                     <div class="int_sub_offer_each">
-                                        <span> Fee Per Sale </span> 
+                                        <span> Fee Per Sale </span>
                                         <a href="https://stripe.com/gb/pricing" target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
                                                 <path fill="currentColor" fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0a8 8 0 0 1 16 0m-7 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-1-9a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1" clip-rule="evenodd"/>

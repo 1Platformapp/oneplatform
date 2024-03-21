@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <style>
-        
+
         .faq_main_outer h3 { font-size: 14px; color: #fff; }
         .faq_main_outer p { font-size: 13px; line-height: 20px; color: #fff; }
         .faq_main_outer { position: relative; width: 100%; padding: 40px 85px; font-family: 'Montserrat', sans-serif; }
 
         .faq_main_outer ul.normal { color: #fff; font-size: 12px; margin: 10px 40px 0 40px; }
         .faq_main_outer ul.normal li { list-style: disc; }
-        .pg_back { 
+        .pg_back {
             background-image: url(https://www.1 Platformtvdev.singingexperience.co.uk/images/expert_back_03.jpg);
             content: "";
             position: fixed;
@@ -76,7 +76,7 @@
     <script>
         $('document').ready(function(){
 
-            $('.que_top').click(function(){
+            $('.que_top:not(.disabled)').click(function(){
                 $(this).closest('.each_que_outer').find('.que_bottom').slideToggle('slow');
             });
 
@@ -111,7 +111,7 @@
                 <i class="fa fa-home"></i>&nbsp;&nbsp;Home
             </span>
         </a>
-        Frequently Asked Questions   
+        Frequently Asked Questions
     </h2>
 
     <div class="que_top_head hide_on_desktop">
@@ -126,6 +126,19 @@
     </div>
 
     <div class="que_outer">
+
+        <div class="each_que_outer back_one">
+            <div class="que_top disabled">
+                <h3 style="color: #ffc107;">Tell us, how we can help?</h3>
+            </div>
+            <div style="display: block;" class="que_bottom">
+                <p style="font-weight: bold;">Contact us by phone or email</p>
+                <span style="color: white; font-size: 13px"> If you have questions about your account, or app management, we can help. </span>
+                <div style="color: white;">
+                    <i class="fa fa-envelope"></i> oneplatformtv@gmail.com
+                </div>
+            </div>
+        </div>
 
         <div class="each_que_outer back_one">
             <div class="que_top">
@@ -183,17 +196,17 @@
                 </p>
                 <p>
                     However, It is recommended that when making a purchase you should either, log in if you have an account or create one. That way you can see your purchases in your profile.
-                </p> 
+                </p>
             </div>
         </div>
 
         <div class="each_que_outer back_six">
             <div class="que_top">
                 <h3>What Sort Of Products Can I Sell On 1 Platform?</h3>
-            </div>  
+            </div>
             <div class="que_bottom">
                 <p>
-                    1 Platform is fantastic for setting up your own store, whether you are new to it or have been selling for years. 
+                    1 Platform is fantastic for setting up your own store, whether you are new to it or have been selling for years.
                 </p>
                     <p>
                         Physical and digital products can be sold. We also have some unique options such as the ability to sell licences for your music to be used in radio, TV, film and more. You can even include the option for customers to buy stems for your track.
@@ -357,7 +370,7 @@
             </div>
             <div class="que_bottom">
                     <p>
-                        When you upload a song or product then you can add a thumbnail. This might be a picture of your product or cover art for your song/album. 
+                        When you upload a song or product then you can add a thumbnail. This might be a picture of your product or cover art for your song/album.
                         <br>
                         We recommend 500x280.
                     </p>
@@ -843,7 +856,7 @@
             </div>
             <div class="que_bottom">
                     <p>
-                        If you are running a charity or flexible project then you will receive your money regardless of whether or not you reach your campaign goal. 
+                        If you are running a charity or flexible project then you will receive your money regardless of whether or not you reach your campaign goal.
                     </p>
                     <p>
                         If you are running a personal project then you will only receive funds if you reach your project goal.
@@ -1015,7 +1028,7 @@
         </div>
 
     </div>
-    
+
 </div>
 @stop
 
