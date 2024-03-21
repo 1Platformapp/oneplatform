@@ -91,141 +91,145 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->input('g-recaptcha-response'),
-        ]);
-
-        $verification = $response->json();
-
-        if (!$verification['success']) {
-            Session::flash('error', "The google verification is required");
-            return Response(['message' => 'The google verification is required'], 401);
-        }
-        $user = User::where("email", $request->email)->first();
-        
-        if($user){
-            Session::flash('error', "Email already exists");
-            return Response(['message' => 'Email already exists'], 401);
-        }
-
-        if($request->has('user_id') && $request->user_id > 0){
-            $user = User::find($request->user_id);
-            $address = $user->address;
-            $profile = $user->profile;
-        }else{
-            $user = new User();
-            $address = new Address();
-            $profile = new Profile;
-        }
-
-        $user->name = isset($request->name) ? $request->name : trim($request->firstName.' '.$request->lastName);
-        $user->first_name = $request->firstName;
-        $user->surname = $request->lastName;
-        $user->email = $request->email;
-        $user->contact_number = isset($request->contact_number) ? $request->contact_number : NULL;
-        $user->music_url = isset($request->music_url) ? $request->music_url : NULL;
-        $user->password = bcrypt($request->password);
-        $user->subscription_id = 0;
-        $user->active = 1;
-        $user->api_token = str_random(60);
-        $user->manager_chat = isset($request->managerChat) && $request->managerChat == 1 ? 1 : NULL;
-        $user->skills = $request->has('skill') ? $request->skill : '';
-        $user->sec_skill = $request->has('sec_skill') ? $request->sec_skill : '';
-        $user->level = $request->has('level') ? $request->level : '';
-        $user->username = $request->has('fake_username') ? $request->fake_username : NULL;
-        $user->save();
-
-        $address->alias = 'main address';
-        $address->user_id = $user->id;
-        if ($request->has('city_id')) {
-            $address->city_id = $request->city_id;
-        }
-        if ($request->has('country_id')) {
-            $address->country_id = $request->country_id;
-        }
-        $address->save();
-
-        $profile->birth_date = Carbon::now();
-        $profile->user_id = $user->id;
-        if ($request->has('currency')) {
-            $profile->default_currency = $request->currency;
-        }
-        $profile->basic_setup = 1;
-        $profile->save();
-
-        $agentContact = AgentContact::where(['contact_id' => $user->id])->first();
-        if($agentContact){
-
-            $agentContact->approved = 1;
-            $agentContact->save();
-
-            $user->active = 1;
-            $user->save();
-
-            if($agentContact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$agentContact->agreement_pdf)){
-                unlink(public_path('agent-agreements/').$agentContact->agreement_pdf);
+        try {
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET_KEY'),
+                'response' => $request->input('g-recaptcha-response'),
+            ]);
+    
+            $verification = $response->json();
+    
+            if (!$verification['success']) {
+                Session::flash('error', "The google verification is required");
+                return Response(['message' => 'The google verification is required'], 401);
             }
-            $pdfName = strtoupper('aca_'.uniqid()).'.pdf';
-            $fileName = 'agent-agreements/'.$pdfName;
-            $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $agentContact->terms);
-            $data = ['name' => $agentContact->name, 'email' => $agentContact->email, 'commission' => $agentContact->commission, 'terms' => $terms, 'agent' => $agentContact->agentUser, 'agreementSign' => $agentContact->agreement_sign];
-            PDF::loadView('pdf.agent-contact-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
-            $agentContact->agreement_pdf = $pdfName;
-            $agentContact->save();
-
-            $userChatGroup = new UserChatGroup();
-            $userChatGroup->agent_id = $agentContact->agent_id;
-            $userChatGroup->contact_id = $agentContact->contact_id;
-            $userChatGroup->save();
-
-            $userChatGroup->mergePersonalChat();
-
-            $result = Mail::to($agentContact->agentUser->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($agentContact->agentUser, $agentContact, [''], 'approved-for-agent'));
-            $userNotification = new UserNotificationController();
-            $request->request->add(['user' => $agentContact->agentUser->id, 'customer' => $agentContact->contactUser->id, 'type' => 'contact_approved_for_agent', 'source_id' => $agentContact->id]);
-            $response = json_decode($userNotification->create($request), true);
-
-            $result = Mail::to($agentContact->contactUser->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($agentContact->agentUser, $agentContact, [''], 'approved-for-contact'));
-            $userNotification = new UserNotificationController();
-            $request->request->add(['customer' => $agentContact->agentUser->id, 'user' => $agentContact->contactUser->id, 'type' => 'contact_approved_for_contact', 'source_id' => $agentContact->id]);
-            $response = json_decode($userNotification->create($request), true);
-
-            Auth::login($user);
-            $user->createDefaultQuestions();
-            return Response(['message' => 'Account Created', 'redirect' => 'agency.dashboard'], 200);
-        }
-        Mail::to($user->email)->bcc('cotysostudios@gmail.com')->send(new MailUser('emailVerified', $user));
-        
-        $platformManager = User::find(config('constants.admins')['1platformagent']['user_id']);
-        if ($platformManager !== null && count($platformManager->devices)) {
-
-            foreach ($platformManager->devices as $device) {
-
-                if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
-
-                    $fcm = new PushNotificationController();
-                    $return = $fcm->send($device->device_id, 'New user registration', 'Email: '.$user->email, $device->platform, null, null);
+            $user = User::where("email", $request->email)->first();
+            
+            if($user){
+                Session::flash('error', "Email already exists");
+                return Response(['message' => 'Email already exists'], 401);
+            }
+    
+            if($request->has('user_id') && $request->user_id > 0){
+                $user = User::find($request->user_id);
+                $address = $user->address;
+                $profile = $user->profile;
+            }else{
+                $user = new User();
+                $address = new Address();
+                $profile = new Profile;
+            }
+    
+            $user->name = isset($request->name) ? $request->name : trim($request->firstName.' '.$request->lastName);
+            $user->first_name = $request->firstName;
+            $user->surname = $request->lastName;
+            $user->email = $request->email;
+            $user->contact_number = isset($request->contact_number) ? $request->contact_number : NULL;
+            $user->music_url = isset($request->music_url) ? $request->music_url : NULL;
+            $user->password = bcrypt($request->password);
+            $user->subscription_id = 0;
+            $user->active = 1;
+            $user->api_token = str_random(60);
+            $user->manager_chat = isset($request->managerChat) && $request->managerChat == 1 ? 1 : NULL;
+            $user->skills = $request->has('skill') ? $request->skill : '';
+            $user->sec_skill = $request->has('sec_skill') ? $request->sec_skill : '';
+            $user->level = $request->has('level') ? $request->level : '';
+            $user->username = $request->has('fake_username') ? $request->fake_username : NULL;
+            $user->save();
+    
+            $address->alias = 'main address';
+            $address->user_id = $user->id;
+            if ($request->has('city_id')) {
+                $address->city_id = $request->city_id;
+            }
+            if ($request->has('country_id')) {
+                $address->country_id = $request->country_id;
+            }
+            $address->save();
+    
+            $profile->birth_date = Carbon::now();
+            $profile->user_id = $user->id;
+            if ($request->has('currency')) {
+                $profile->default_currency = $request->currency;
+            }
+            $profile->basic_setup = 1;
+            $profile->save();
+    
+            $agentContact = AgentContact::where(['contact_id' => $user->id])->first();
+            if($agentContact){
+    
+                $agentContact->approved = 1;
+                $agentContact->save();
+    
+                $user->active = 1;
+                $user->save();
+    
+                if($agentContact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$agentContact->agreement_pdf)){
+                    unlink(public_path('agent-agreements/').$agentContact->agreement_pdf);
+                }
+                $pdfName = strtoupper('aca_'.uniqid()).'.pdf';
+                $fileName = 'agent-agreements/'.$pdfName;
+                $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $agentContact->terms);
+                $data = ['name' => $agentContact->name, 'email' => $agentContact->email, 'commission' => $agentContact->commission, 'terms' => $terms, 'agent' => $agentContact->agentUser, 'agreementSign' => $agentContact->agreement_sign];
+                PDF::loadView('pdf.agent-contact-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
+                $agentContact->agreement_pdf = $pdfName;
+                $agentContact->save();
+    
+                $userChatGroup = new UserChatGroup();
+                $userChatGroup->agent_id = $agentContact->agent_id;
+                $userChatGroup->contact_id = $agentContact->contact_id;
+                $userChatGroup->save();
+    
+                $userChatGroup->mergePersonalChat();
+    
+                $result = Mail::to($agentContact->agentUser->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($agentContact->agentUser, $agentContact, [''], 'approved-for-agent'));
+                $userNotification = new UserNotificationController();
+                $request->request->add(['user' => $agentContact->agentUser->id, 'customer' => $agentContact->contactUser->id, 'type' => 'contact_approved_for_agent', 'source_id' => $agentContact->id]);
+                $response = json_decode($userNotification->create($request), true);
+    
+                $result = Mail::to($agentContact->contactUser->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($agentContact->agentUser, $agentContact, [''], 'approved-for-contact'));
+                $userNotification = new UserNotificationController();
+                $request->request->add(['customer' => $agentContact->agentUser->id, 'user' => $agentContact->contactUser->id, 'type' => 'contact_approved_for_contact', 'source_id' => $agentContact->id]);
+                $response = json_decode($userNotification->create($request), true);
+    
+                Auth::login($user);
+                $user->createDefaultQuestions();
+                return Response(['message' => 'Account Created', 'redirect' => 'agency.dashboard'], 200);
+            }
+            Mail::to($user->email)->bcc('cotysostudios@gmail.com')->send(new MailUser('emailVerified', $user));
+            
+            $platformManager = User::find(config('constants.admins')['1platformagent']['user_id']);
+            if ($platformManager !== null && count($platformManager->devices)) {
+    
+                foreach ($platformManager->devices as $device) {
+    
+                    if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
+    
+                        $fcm = new PushNotificationController();
+                        $return = $fcm->send($device->device_id, 'New user registration', 'Email: '.$user->email, $device->platform, null, null);
+                    }
                 }
             }
+            
+            $userNotification = new UserNotificationController();
+            $request->request->add(['user' => config('constants.admins')['1platformagent']['user_id'], 'customer' => $user->id, 'type' => 'new_user_to_platform_manager', 'source_id' => $user->id]);
+            $response = json_decode($userNotification->create($request), true);
+            Auth::login($user);
+            $loginController = new LoginController();
+            $url = $loginController->handleUserProAppRedirect($user, route('agency.dashboard'));
+    
+            $userInternalSubscription = new InternalSubscription();
+            $userInternalSubscription->user_id = $user->id;
+            $userInternalSubscription->subscription_package = 'silver_0_0';
+            $userInternalSubscription->subscription_status = 1;
+            $userInternalSubscription->save();
+    
+            $user->createDefaultQuestions();
+    
+            return Response(['message' => 'Account Created', 'redirect' => $url], 200);
+        } catch (\Exception $e) {
+            return Response(['message' => $e->getMessage()], 500);
         }
-        
-        $userNotification = new UserNotificationController();
-        $request->request->add(['user' => config('constants.admins')['1platformagent']['user_id'], 'customer' => $user->id, 'type' => 'new_user_to_platform_manager', 'source_id' => $user->id]);
-        $response = json_decode($userNotification->create($request), true);
-        Auth::login($user);
-        $loginController = new LoginController();
-        $url = $loginController->handleUserProAppRedirect($user, route('agency.dashboard'));
-
-        $userInternalSubscription = new InternalSubscription();
-        $userInternalSubscription->user_id = $user->id;
-        $userInternalSubscription->subscription_package = 'silver_0_0';
-        $userInternalSubscription->subscription_status = 1;
-        $userInternalSubscription->save();
-
-        $user->createDefaultQuestions();
-
-        return Response(['message' => 'Account Created', 'redirect' => $url], 200);
     }
 
 

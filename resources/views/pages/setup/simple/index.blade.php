@@ -176,6 +176,7 @@
                 alert(data.message);
                 $('#spinner').removeClass('fa fa-spinner fa-spin');
                 document.getElementById('submit_btn').disabled = false;
+                $('#submit_btn').removeClass('is-busy');
                 if(data.redirect) {
                     window.location.href = data.redirect;
                 }
