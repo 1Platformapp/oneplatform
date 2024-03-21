@@ -132,8 +132,12 @@
                 <h3 style="color: #ffc107;">Tell us, how we can help?</h3>
             </div>
             <div style="display: block;" class="que_bottom">
+                <span style="color: white; font-size: 13px">1Platform
+                    The world's unique platform that empowers artists with promotion tools, sales capabilities, and industry guidance for a successful career launch
+                    <br> <br>
+                    Account deletion can be initiated from a button provided in the side menu of mobile app. This deletes the user record and any data associated with the user from our database that is not linked to purchases made by other users of platform. It includes but not limited to user record, user personal data, user products, music, albums, sales, purchases and social media information saved in our database.</span>
+                <br><br>
                 <p style="font-weight: bold;">Contact us by phone or email</p>
-                <span style="color: white; font-size: 13px"> If you have questions about your account, or app management, we can help. </span>
                 <div style="color: white;">
                     <i class="fa fa-envelope"></i> oneplatformtv@gmail.com
                 </div>
