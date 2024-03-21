@@ -120,7 +120,7 @@ class LoginController extends Controller
         if (!$user) {
             $errors->push('Invalid Email or Password');
             return redirect()->back()->withErrors($errors);
-        } else if (!$user->hide_account) {
+        } else if ($user->hide_account != null) {
             $errors->push('Account is deleted');
             return redirect()->back()->withErrors($errors);
         }
