@@ -755,6 +755,12 @@ video {
 .mt-\[1px\] {
   margin-top: 1px;
 }
+.me-2 {
+  margin-inline-end: 0.5rem;
+}
+.me-6 {
+  margin-inline-end: 1.5rem;
+}
 .block {
   display: block;
 }

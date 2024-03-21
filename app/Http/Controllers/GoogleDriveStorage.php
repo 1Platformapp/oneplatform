@@ -38,6 +38,12 @@ use Storage;
 class GoogleDriveStorage extends Controller
 
 {
+    protected $firebase;
+
+    public function __construct(FirebaseController $firebase)
+    {
+        $this->firebase = $firebase;    
+    }
 
     public function listFiles(Request $request)
     {
@@ -86,17 +92,21 @@ class GoogleDriveStorage extends Controller
         		    $file = $request->file('mu_down_file');
         		    $filePath = $file;
 
-        		    Storage::cloud()->put($filename, fopen($filePath, 'r+'));
+
+                    $contents = $this->firebase->uploadFile($file);
+
+        		    // Storage::cloud()->put($filename, fopen($filePath, 'r+'));
 
         		    
-        		    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+        		    // $contents = collect(Storage::cloud()->listContents($dir, $recursive));
 
-        		    $file = $contents
-        		        ->where('type', '=', 'file')
-        		        ->where('filename', '=', $filename)
-        		        ->first();
+        		    $fileData['size'] = $contents['size'];
+                    $fileData['filename'] = $decFName;
+                    $fileData['mimetype'] = $contents['contentType'];
+                    $fileData['type'] = 'file';
+                    $fileData['path'] = $contents['mediaLink'];
         		  
-                    $music->addDownloadItem($file, $itemType, 'cloud', $decFName);
+                    $music->addDownloadItem($fileData, $itemType, 'firebase', $decFName);
         		    
         		    $success = 1;
         		}else{

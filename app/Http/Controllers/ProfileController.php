@@ -2797,12 +2797,10 @@ class ProfileController extends Controller
         $data = [];
         $error = '';
         $commonMethods = new CommonMethods();
-        $cloudStorage = new GoogleDriveStorage();
+        $cloudStorage = new GoogleDriveStorage(new FirebaseController);
 
         $user = Auth::user();
-
         if($user && $request->has('type')){
-
             $type = $request->get('type');
             if($type == 'music_info'){
 
@@ -2903,8 +2901,7 @@ class ProfileController extends Controller
                 }
 
                 $success = 1;
-            }else if($request->hasFile('mu_down_file') && $request->has('mu_down_id')){
-
+            }else if($type == 'main'){
                 $extension = $this->getFileExtension($_FILES["mu_down_file"]['name']);
                 $size = $request->file('mu_down_file')->getSize();
                 $musicId = $request->get('mu_down_id');
@@ -2912,6 +2909,7 @@ class ProfileController extends Controller
                 $itemType = $request->get('type');
 
                 $musicArray = $music->downloads;
+
                 if(count($musicArray)){
 
                     $contents = collect(Storage::cloud()->listContents('/', false));
@@ -2949,7 +2947,6 @@ class ProfileController extends Controller
                 }
                 if($music && $music->user->id == $user->id){
                     if($extension == 'wav'){
-
                         //$userFolder = $user->googleDriveFolder($cloudStorage);
                         //$request->request->add(['dir', $userFolder]);
                         $response = $cloudStorage->uploadFileAsStream($request);
@@ -3052,7 +3049,6 @@ class ProfileController extends Controller
                     $error = 'music not found';
                 }
             }else{
-
                 $error = 'No known action';
             }
         }else{
