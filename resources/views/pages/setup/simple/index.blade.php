@@ -174,7 +174,7 @@
             .then(response => response.json())
             .then(data => {
                 alert(data.message);
-                document.getElementById('spinner').removeClass('fa fa-spinner fa-spin');
+                $('#spinner').removeClass('fa fa-spinner fa-spin');
                 document.getElementById('submit_btn').disabled = false;
                 if(data.redirect) {
                     window.location.href = data.redirect;
@@ -242,7 +242,7 @@
                         let hitApi = $('#register-form').attr('data-api-hit');
 
                         if(hitApi) {
-                            document.getElementById('spinner').addClass('fa fa-spinner fa-spin');
+                            $('#spinner').addClass('fa fa-spinner fa-spin');
                             document.getElementById('submit_btn').disabled = true;
 
                             await registerUser();
