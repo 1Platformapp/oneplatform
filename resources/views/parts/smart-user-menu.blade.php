@@ -359,9 +359,9 @@
                     	Get help to build your profile
                     </div>
                     <div class="usr_men_cat_each usr_men_logout">
-                        <a href="{{route('agency.delete.account')}}" class="usr_men_cat_head">
+                        <button type="button" class="usr_men_cat_head" onclick="confirmPopUp()">
                             <i class="fa fa-trash"></i>&nbsp;Delete my account
-                        </a>
+                        </button>
                         <a href="{{route('logout')}}" class="usr_men_cat_head">
                             <i class="fa fa-sign-out"></i>&nbsp;Logout
                         </a>
@@ -381,6 +381,12 @@
     </div>
 
     <script>
+        function confirmPopUp() {
+            if(confirm('Are you sure you want to delete your account?')) {
+                window.location.href = "{{ route('agency.delete.account') }}";
+            }
+        }
+
         $('.us_men_close svg').click(function(){
 
             $('body').removeClass('lock_page');
