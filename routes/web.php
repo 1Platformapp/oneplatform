@@ -420,6 +420,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('dashboard', [AgencyController::class, 'index'])->name('agency.dashboard');
         Route::get('delete-account', [AgencyController::class, 'deleteAccount'])->name('agency.delete.account');
+        Route::get('restore-account/{id}', [AgencyController::class, 'restoreAccount'])->name('agency.restore.account');
         Route::get('dashboard/info/{info}', [AgencyController::class, 'dashboardWithInfo'])->name('agency.dashboard.info');
         Route::get('dashboard/{tab}', [AgencyController::class, 'dashboardWithTab'])->name('agency.dashboard.tab');
         Route::post('dashboard/set-session/{tab}', [AgencyController::class, 'setSession'])->name('agency.dashboard.set.session');

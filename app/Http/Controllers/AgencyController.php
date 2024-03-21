@@ -166,6 +166,19 @@ class AgencyController extends Controller
         return redirect(route('login'));
     }
 
+    public function restoreAccount($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $user->hide_account = null;
+            $user->save();
+    
+            return response(['message' => 'Account restored successfully'], 200);
+        } catch (\Exception $e) {
+            return response(['message' => $e->getMessage()], 504);
+        }
+    }
+
     public function dashboardWithTab(Request $request, $tab)
     {
         Session::flash('dash-tab', $tab);
