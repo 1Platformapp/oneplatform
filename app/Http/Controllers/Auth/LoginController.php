@@ -112,6 +112,19 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
+        $user = User::where('email', $request->email)->first();
+
+        
+        $errors = collect();
+
+        if (!$user) {
+            $errors->push('Invalid Email or Password');
+            return redirect()->back()->withErrors($errors);
+        } else if (!$user->hide_account) {
+            $errors->push('Account is deleted');
+            return redirect()->back()->withErrors($errors);
+        }
+
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1, 'hide_account' => null])) {
             return $this->sendLoginResponse($request);
         }else{

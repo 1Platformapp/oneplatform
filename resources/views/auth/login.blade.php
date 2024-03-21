@@ -302,8 +302,16 @@
                                     <div class="form_group">
                                         <input placeholder="Enter your password" required type="password" class="form_input {{ ($errors->has('email')) ? 'auth_error' : '' }}" name="password" id="password" />
                                     </div>
+                                    @if ($errors->any())
+                                        <div class="relative px-4 py-3 mb-2 text-red-700 bg-red-100 border border-red-400 rounded" role="alert">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                     <div class="forgot_password_outer">
-
                                         <a class="forgot_password" href="">Forgot Your Password?</a>
                                     </div>
                                     <div class="login_button_outer">
