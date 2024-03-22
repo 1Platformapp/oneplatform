@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Kreait\Firebase\Storage\Bucket;
+use Kreait\Firebase\Factory;
 use Illuminate\Http\UploadedFile;
 
 class FirebaseController extends Controller
@@ -12,7 +12,7 @@ class FirebaseController extends Controller
 
     public function __construct()
     {
-        $this->database = app('firebase.database');
+        //$this->database = app('firebase.database');
     }
 
     public function test()
@@ -23,23 +23,29 @@ class FirebaseController extends Controller
     public function uploadFile(UploadedFile $uploadedFile)
     {
         try {
-            $firebase = app('firebase.storage');
-            $storage = $firebase->getBucket();
+            // $firebase = app('firebase.storage');
+            // $storage = $firebase->getBucket();
 
-            $storagePath = 'audios/';
-            $filename = $uploadedFile->getClientOriginalName();
+            // $storagePath = 'audios/';
+            // $filename = $uploadedFile->getClientOriginalName();
 
-            $upload = $storage->upload(
-                fopen($uploadedFile->getRealPath(), 'r'),
-                [
-                    'predefinedAcl' => 'publicRead',
-                    'name' => $storagePath . $filename,
-                ]
-            );
+            // $upload = $storage->upload(
+            //     fopen($uploadedFile->getRealPath(), 'r'),
+            //     [
+            //         'predefinedAcl' => 'publicRead',
+            //         'name' => $storagePath . $filename,
+            //     ]
+            // );
 
-            // $publicUrl = $upload->info()['mediaLink'];
+            // // $publicUrl = $upload->info()['mediaLink'];
 
-            return $upload->info();
+            // return $upload->info();
+
+            $factory = (new Factory)->withServiceAccount(public_path('firebase.json'))->withDatabaseUri('https://platformrepo-3683c.firebaseio.com');
+            $cloudStorage = $factory->createStorage();
+
+            return '';
+
         } catch (\Exception $e) {
             dd($e->getMessage());
             // return redirect()->back()->with('error', 'error uploading. ' . $e->getMessage());

@@ -95,10 +95,10 @@
             @if($b->purchase_type == "subscription")
                 {{$price}}
             @else
-            @if($price>0) 
-                {{$commonMethods->getCurrencySymbol(strtoupper($b->user->profile->default_currency))}}{{number_format($price, 2)}}
-            @else 
-                Free 
+            @if($price>0)
+                {{$b->user ? $commonMethods->getCurrencySymbol(strtoupper($b->user->profile->default_currency)) : ''}}{{number_format($price, 2)}}
+            @else
+                Free
             @endif
             @endif
         </div>
