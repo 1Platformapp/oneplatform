@@ -107,10 +107,11 @@
 
                 return false;
             }else if (step == 'three') {
-
-                if (mainSkill == '') {
+                if (mainSkill == 'null' || mainSkill == null) {
                     return true;
                 }
+
+                return false;
             }
         }
 
@@ -176,8 +177,8 @@
                 alert(data.message);
                 $('#spinner').removeClass('fa fa-spinner fa-spin');
                 document.getElementById('submit_btn').disabled = false;
-                $('#submit_btn').removeClass('is-busy');  
-                if(data.redirect) {
+                $('#submit_btn').removeClass('is-busy');
+                                if(data.redirect) {
                     window.location.href = data.redirect;
                 }
             })
@@ -237,6 +238,7 @@
                         if (await validateStep('three')) {
                             console.log('Validation failed');
                             $('#error-span').removeClass('hidden');
+                            $(this).removeClass('is-busy');
                             return;
                         }
                             
@@ -532,7 +534,7 @@
                             <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <select data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
-                                        <option value='' selected disabled>Select a Skill</option>
+                                        <option value="null" selected disabled>Select a Skill</option>
                                         @foreach($skills as $skill)
                                             <option value="{{$skill->value}}">{{$skill->value}}</option>
                                         @endforeach
