@@ -114,7 +114,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2013.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('tv')}}">
-                                                                        Start Your Project List
+                                                                        Project List
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -122,7 +122,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2014.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('chart')}}">
-                                                                        Create Your Network
+                                                                        Network
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -130,7 +130,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2015.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup', ['page' => 'crowdfunding'])}}">
-                                                                        Start A Crowdfunding Project
+                                                                        Create Crowdfund
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -152,7 +152,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2016.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup.standalone', ['page' => 'music'])}}">
-                                                                        Sell music & licences
+                                                                        Music & Licences
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -160,7 +160,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2017.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup.standalone', ['page' => 'product'])}}">
-                                                                        Sell tickets for your gigs
+                                                                        Add Music
                                                                     </a>
                                                                 </div>
                                                             </td>
