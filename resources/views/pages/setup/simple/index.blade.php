@@ -204,6 +204,20 @@
                 filledStep($(this).attr('data-step'));
             });
 
+            $('body').delegate('.back-btn', 'click', function(){
+                var currentStep = $('.each-step.current-step');
+
+                if (currentStep.length) {
+                    if (currentStep.attr('data-step') == 'three') {
+                        $('.google-recaptcha').html('');
+                        activateStep('two');
+                    } else if (currentStep.attr('data-step') == 'two') {
+                        $(this).addClass('hidden');
+                        activateStep('one');
+                    }
+                }
+            });
+
             $('body').delegate('.next-btn:not(.is-busy)', 'click', async function(e){
                 $(this).addClass('is-busy');
                 const username = $('#username');
@@ -223,6 +237,7 @@
                         }
 
                         activateStep('two');
+                        $('.back-btn').removeClass('hidden');
                         $(this).removeClass('is-busy');
                     } else if (currentStep.attr('data-step') == 'two') {
                         if (await validateStep('two')) {
@@ -589,14 +604,20 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col items-end justify-between lg:flex-row">
+                <div class="flex flex-col items-start justify-between lg:flex-row">
+                    <div class="flex flex-row mt-6">
+                        <button id="back_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none back-btn hover:bg-indigo-500">
+                            Back
+                        </button>
+                    </div>
                     <div class="mt-6 google-recaptcha"></div>
-                    <div class="flex flex-col justify-end mt-6 ml-auto gap-x-6">
+                    <div class="flex flex-row mt-6 lg:justify-end gap-x-6">
                         <button id="submit_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500">
                             <i id="spinner" class=""></i>Next
                         </button>
                     </div>
                 </div>
+
                 <div class="flex">
                     <p id="error-span" class="hidden mt-3 ml-auto text-sm leading-6 text-red-600">There is some validation error</p>
                 </div>
