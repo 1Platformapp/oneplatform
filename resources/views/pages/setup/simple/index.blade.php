@@ -178,8 +178,11 @@
                 $('#spinner').removeClass('fa fa-spinner fa-spin');
                 document.getElementById('submit_btn').disabled = false;
                 $('#submit_btn').removeClass('is-busy');
-                                if(data.redirect) {
-                    window.location.href = data.redirect;
+                if(data.redirect) {
+                    $('#login_email_address').val($('#emailaddress').val());
+                    $('#login_password').val($('#fake_password').val());
+                    $('#login-form').submit();
+                    // window.location.href = data.redirect;
                 }
             })
             .catch(error => {
@@ -597,6 +600,16 @@
                 <div class="flex">
                     <p id="error-span" class="hidden mt-3 ml-auto text-sm leading-6 text-red-600">There is some validation error</p>
                 </div>
+            </div>
+        </form>
+
+        <form id="login-form" class="hidden form-horizontal" method="POST" action="{{ route('login') }}">
+            {{ csrf_field() }}
+            <div class="form_group">
+                <input type="email" class="hidden" hidden name="email" id="login_email_address" />
+            </div>
+            <div class="form_group">
+                <input type="password" class="hidden" hidden name="password" id="login_password" />
             </div>
         </form>
     </div>
