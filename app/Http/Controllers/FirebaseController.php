@@ -8,11 +8,9 @@ use Illuminate\Http\UploadedFile;
 
 class FirebaseController extends Controller
 {
-    protected $database;
-
     public function __construct()
     {
-        $this->database = app('firebase.database');
+        //
     }
 
     public function test()
