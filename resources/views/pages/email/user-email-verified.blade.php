@@ -113,16 +113,16 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2013.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('tv')}}">
-                                                                        Project List
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('agency.dashboard.tab', ['tab' => 'management-plan'])}}">
+                                                                        Start Your Project List
                                                                     </a>
                                                                 </div>
                                                             </td>
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2014.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('chart')}}">
-                                                                        Network
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('agency.dashboard.tab', ['tab' => 'contact-management'])}}">
+                                                                        Create Your Network
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -130,7 +130,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2015.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup', ['page' => 'crowdfunding'])}}">
-                                                                        Create Crowdfund
+                                                                        Start A Crowdfunding Project
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -152,7 +152,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2016.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup.standalone', ['page' => 'music'])}}">
-                                                                        Music & Licences
+                                                                        Sell music & licences
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -160,7 +160,7 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%2017.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
                                                                     <a style="text-decoration: none; color: #818181;" href="{{route('profile.setup.standalone', ['page' => 'product'])}}">
-                                                                        Add Music
+                                                                        Sell tickets for your gigs
                                                                     </a>
                                                                 </div>
                                                             </td>

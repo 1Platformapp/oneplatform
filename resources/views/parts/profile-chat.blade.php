@@ -2,11 +2,11 @@
     <div class="pro_pg_tb_det_inner">
         <div id="contacts_section" class="sub_cat_data">
             <div class="flex flex-row bg-[#333] text-white px-2">
-                <div class="hidden pro_tray_title lg:flex main-tab-head">Management Plan</div>
+                <div class="hidden pro_tray_title lg:flex main-tab-head">Project List</div>
 				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
                 <div class="flex flex-row items-center justify-between w-full gap-2 m_btn_right_icons lg:ml-auto lg:mr-4 text-main-icons lg:gap-8 lg:w-fit">
                     <div class="flex items-center justify-center flex-grow h-full py-2 pr-2 border-r border-gray-main-icons lg:pr-8">
-                        <div title="Management Plan" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan" data-head="Management Plan">
+                        <div title="Project List" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan" data-head="Project List">
                             <i class="fas fa-list-ul"></i>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
             });@endphp
             <div class="">
                 <div class="clearfix p-0 music_btm_list no_sorting">
-                    <div class="md:hidden border-b border-[#ccc] pt-4 pb-2 font-bold main-tab-head">Management Plan</div>
+                    <div class="md:hidden border-b border-[#ccc] pt-4 pb-2 font-bold main-tab-head">Project List</div>
                     <div class="edit_elem_bottom">
                         <div class="py-12 font-bold text-center loading instant_hide">...Loading please wait</div>
                         <div class="each_dash_section instant_hide" data-value="management-plan">
