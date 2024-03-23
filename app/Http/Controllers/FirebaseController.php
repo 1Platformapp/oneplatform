@@ -25,21 +25,6 @@ class FirebaseController extends Controller
             // $firebase = app('firebase.storage');
             // $storage = $firebase->getBucket();
 
-            // $storagePath = 'audios/';
-            // $filename = $uploadedFile->getClientOriginalName();
-
-            // $upload = $storage->upload(
-            //     fopen($uploadedFile->getRealPath(), 'r'),
-            //     [
-            //         'predefinedAcl' => 'publicRead',
-            //         'name' => $storagePath . $filename,
-            //     ]
-            // );
-
-            // // $publicUrl = $upload->info()['mediaLink'];
-
-            // return $upload->info();
-
             $factory = (new Factory)->withServiceAccount(public_path(env('FIREBASE_CREDENTIALS')))->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
             $storage = $factory->createStorage();
             $defaultBucket = $storage->getBucket();
