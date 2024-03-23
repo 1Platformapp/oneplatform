@@ -11,6 +11,11 @@ class InstantCheckoutItem extends Authenticatable
 
 {
 	protected $table = 'instant_checkout_items';
+    
+    protected $appends = [
+        "download_url",
+    ];
+
 	
     public function stripeCheckout()
     {
@@ -19,11 +24,30 @@ class InstantCheckoutItem extends Authenticatable
 
     }
 
+    public function music()
+    {
+        return $this->belongsTo(UserMusic::class, 'source_table_id');
+    }
 
     public function checkoutDetails()
     {
 
         return $this->hasMany(InstantCheckoutItemDetail::class);
 
+    }
+
+    public function getDownloadUrlAttribute()
+    {
+        $download_url = null;
+        
+        if($this->type == 'music' && $this->music != null) {
+            foreach($this->music->downloads as $download) {
+                if($download['source'] == 'firebase') {
+                    $download_url = $download['path'];
+                }
+            }
+        }
+        
+        return $download_url;
     }
 }

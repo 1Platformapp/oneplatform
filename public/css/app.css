@@ -2260,10 +2260,6 @@ video {
     flex-direction: row;
   }
 
-  .lg\:flex-col {
-    flex-direction: column;
-  }
-
   .lg\:items-end {
     align-items: flex-end;
   }

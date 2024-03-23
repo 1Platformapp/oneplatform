@@ -6,7 +6,7 @@
 
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My subscription plan</span></h3>
+            <h3><span class="text-lg head_text">My subscription plan</span></h3>
         </div>
         <div class="current_sub_outer">
 
@@ -180,7 +180,7 @@
     @endphp
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My purchases</span></h3>
+            <h3><span class="text-lg head_text">My purchases</span></h3>
         </div>
         @foreach($instantPurchases as $checkout)
             @if($checkout->user)
@@ -199,7 +199,7 @@
                     @php $class = 'badge_warning' @endphp
                 @endif
                 @if($checkoutItem->type == 'music' || $checkoutItem->type == 'album' || $checkoutItem->type == 'product' || $checkoutItem->type == 'project' || $checkoutItem->type == 'proferred-product' || $checkoutItem->type == 'custom-product')
-                <div class="my_sub_sec_list my_purchase_list clearfix">
+                <div class="clearfix my_sub_sec_list my_purchase_list">
                     <div class="sub_left_img">
                         <span class="smart_badge {{$class}}">
                             <img title="{{'You Purchased '.$checkoutItem->name.' from '.$checkout->user_name}}" src="{{$itemImage}}" alt="" />
@@ -264,11 +264,13 @@
                         @php $link = 'javascript:void(0)'; @endphp
                         @php $class = 'disabled'; @endphp
                     @else
-                        @php $class = 'purchase_download'; @endphp
+                        @php 
+                            $class = 'purchase_download';
+                        @endphp
                     @endif
-                    <div class="sub_button_sec my_purchases_dwnload clearfix">
+                    <div class="clearfix sub_button_sec my_purchases_dwnload">
                         <label>
-                            <a class="{{$class}}" data-download="{{$checkoutItem->type}}" data-checkout-item="{{$checkoutItem->id}}" data-sourcet="{{$checkoutItem->source_table_id}}" href="{{$link}}"> Download <i class="fa fa-download"></i></a>
+                            <a class="{{$class}}" data-download-url="{{$checkoutItem->download_url}}" data-download="{{$checkoutItem->type}}" data-checkout-item="{{$checkoutItem->id}}" data-sourcet="{{$checkoutItem->source_table_id}}" href="{{$link}}"> Download <i class="fa fa-download"></i></a>
                         </label>
                     </div>
                     <div class="sub_left_img">
@@ -348,40 +350,45 @@
             if(href == '' || href == 'javascript:void(0)'){
                 var checkoutItem = thiss.attr('data-checkout-item');
                 var download = thiss.attr('data-download');
+                var downloadUrl = thiss.attr('data-download-url');
                 var downloadAs = thiss.parent().parent().parent().find('.my_purchase_sec a').first().text();
-                $('#body-overlay,.pro_initiating_download').show();
-
-                $.ajax({
-
-                    url: '/prepare-zip',
-                    type: 'POST',
-                    data: {'type': download, 'user': '{{Auth::user()->id}}', 'checkout_item': checkoutItem, 'download_as': downloadAs},
-                    cache: false,
-                    dataType: 'json',
-                    success: function (response) {
-
-                        $('#body-overlay,.pro_initiating_download').hide();
-                        if(response.success == 1 && response.download_link != ''){
-                            window.location.href = response.download_link;
-                        }else if(response.success == 1 && response.cloud_download != ''){
-                            prepareDownloadPopup(response.cloud_download, thiss.attr('data-sourcet'));
+                
+                if(downloadUrl != null) {
+                    window.open(downloadUrl, '_blank');
+                } else {
+                    $('#body-overlay,.pro_initiating_download').show();
+                    $.ajax({
+    
+                        url: '/prepare-zip',
+                        type: 'POST',
+                        data: {'type': download, 'user': '{{Auth::user()->id}}', 'checkout_item': checkoutItem, 'download_as': downloadAs},
+                        cache: false,
+                        dataType: 'json',
+                        success: function (response) {
+    
+                            $('#body-overlay,.pro_initiating_download').hide();
+                            if(response.success == 1 && response.download_link != ''){
+                                window.location.href = response.download_link;
+                            }else if(response.success == 1 && response.cloud_download != ''){
+                                prepareDownloadPopup(response.cloud_download, thiss.attr('data-sourcet'));
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     </script>
 @elseif($id == 'my-premium-videos')
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My premium videos</span></h3>
+            <h3><span class="text-lg head_text">My premium videos</span></h3>
         </div>
         @foreach(\App\Models\UserLiveStream::all() as $key => $liveStream)
             @if(Auth::user()->canWatchLiveStream($liveStream->id))
             @php $streamYoutubeId = $commonMethods->getYoutubeIdFromUrl($liveStream->url) @endphp
             @php $streamYoutubeTitle = $commonMethods->getVideoTitle($streamYoutubeId); @endphp
             @php $imgSrc = $liveStream->thumbnail && $liveStream->thumbnail != '' ? asset('user-stream-thumbnails/'.$liveStream->thumbnail) : 'https://i.ytimg.com/vi/'.$streamYoutubeId.'/mqdefault.jpg' @endphp
-            <div class="music_btm_list clearfix">
+            <div class="clearfix music_btm_list">
                 <div class="m_btm_list_left">
                     <img src="{{$imgSrc}}" alt="#">
                     <ul class="music_btm_img_det">
@@ -408,13 +415,13 @@
 @elseif($id == 'my-subscriptions')
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My subscriptions</span></h3>
+            <h3><span class="text-lg head_text">My subscriptions</span></h3>
         </div>
         @foreach($user->artistSubscriptions as $stripeSubscription)
             @php $currencySymbol = $commonMethods->getCurrencySymbol($stripeSubscription->plan_currency) @endphp
             @php $userImage = $commonMethods->getUserDisplayImage($stripeSubscription->user->id) @endphp
             @if($stripeSubscription->user)
-                <div class="my_sub_sec_list clearfix">
+                <div class="clearfix my_sub_sec_list">
                     <div class="sub_left_img">
                         <span>
                             <img src="{{$userImage}}" alt="{{'Subscribed to '.$stripeSubscription->user->name}}" />
@@ -429,7 +436,7 @@
                     <div class="sub_right_sec my_sub_right_sec">
                         <a href="{{$stripeSubscription->user && $stripeSubscription->user->username ? route('user.home', ['params' => $stripeSubscription->user->username]) : 'javascript:void(0)'}}">{{$stripeSubscription->user->name}}</a>
                     </div>
-                    <div class="sub_button_sec clearfix">
+                    <div class="clearfix sub_button_sec">
                         <label class="no_back"><input data-find="{{$stripeSubscription->id}}" data-find-type="subscription_offers" data-identity="{{$user->id}}" data-identity-type="subscription_customer" type="button" value="Details" class="details_subscription" /></label>
                         <label class="cancel_subscription no_back" data-identity="{{$stripeSubscription->id}}"><input type="button" value="Cancel Subscription" /></label>
                     </div>
@@ -443,7 +450,7 @@
     @endphp
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My sales</span></h3>
+            <h3><span class="text-lg head_text">My sales</span></h3>
         </div>
         @foreach($instantSales as $checkout)
             @if(!($checkout->stripe_subscription_id && !$checkout->amount))
@@ -460,7 +467,7 @@
             @else
                 @php $class = 'badge_warning' @endphp
             @endif
-            <div class="my_sub_sec_list clearfix">
+            <div class="clearfix my_sub_sec_list">
                 <div class="upper_sec">
                     <div class="sub_sec_img_contain smart_badge {{$class}}">
                         <img class="trans_image" title="{{$checkout->customer_name}}" src="{{$customerImage}}" alt="#" />
@@ -544,7 +551,7 @@
     @endphp
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My crowdfund purchases</span></h3>
+            <h3><span class="text-lg head_text">My crowdfund purchases</span></h3>
         </div>
         @foreach($crowdfundPurchases as $checkout)
             @if($checkout->user)
@@ -561,7 +568,7 @@
             @else
                 @php $class = 'badge_warning' @endphp
             @endif
-                <div class="my_sub_sec_list clearfix">
+                <div class="clearfix my_sub_sec_list">
                     <div class="upper_sec">
                         <div class="sub_sec_img_contain smart_badge {{$class}}">
                             <img title="{{'You purchased from '.$checkout->user_name}}" src="{{$userImage}}" alt="" />
@@ -619,7 +626,7 @@
     @endphp
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My crowdfund sales</span></h3>
+            <h3><span class="text-lg head_text">My crowdfund sales</span></h3>
         </div>
         @foreach($crowdfundSales as $checkout)
             @if($checkout->customer)
@@ -636,7 +643,7 @@
             @else
                 @php $class = 'badge_warning' @endphp
             @endif
-                <div class="my_sub_sec_list clearfix">
+                <div class="clearfix my_sub_sec_list">
                     <div class="upper_sec">
                         <div class="sub_sec_img_contain smart_badge {{$class}}">
                             <img title="{{$checkout->customer_name.' purchased from you'}}" src="{{$customerImage}}" alt="" />
@@ -698,13 +705,13 @@
 @elseif($id == 'my-subscribers-donators')
     <div class="mt-5">
         <div class="my_sub_sec_inner">
-            <h3><span class="head_text text-lg">My subscribers and donators</span></h3>
+            <h3><span class="text-lg head_text">My subscribers and donators</span></h3>
         </div>
         @foreach($user->stripe_subscriptions as $stripeSubscription)
             @php $currencySymbol = $commonMethods->getCurrencySymbol($stripeSubscription->plan_currency) @endphp
             @php $customerImage = $commonMethods->getUserDisplayImage($stripeSubscription->customer->id) @endphp
             @if($stripeSubscription->customer)
-                <div class="my_sub_sec_list clearfix">
+                <div class="clearfix my_sub_sec_list">
                     <div class="sub_left_img">
                         <span>
                             <img src="{{$customerImage}}" alt="{{$stripeSubscription->customer->name.' has subscribed you'}}" />
@@ -719,7 +726,7 @@
                     <div class="sub_right_sec my_sub_right_sec">
                         <a href="{{$stripeSubscription->customer && $stripeSubscription->customer->username ? route('user.home', ['params' => $stripeSubscription->customer->username]) : 'javascript:void(0)'}}">{{$stripeSubscription->customer->name}}</a>
                     </div>
-                    <div class="sub_button_sec clearfix">
+                    <div class="clearfix sub_button_sec">
                         <label><input data-identity="{{$stripeSubscription->id}}" data-identity-type="subscription_user" type="submit" value="Send Thank You" class="send_thankyou" /></label>
                         <label class="cancel_subscription no_back" data-identity="{{$stripeSubscription->id}}"><input type="button" value="Cancel Subscription" /></label>
                     </div>
@@ -781,7 +788,7 @@
     @endphp
     <div class="mt-5">
         <div class="inside_notic_sec">
-            <div class="inside_notic_left clearfix">
+            <div class="clearfix inside_notic_left">
 
                 <div class="inside_notic_head">
                     <label>My Insights</label>
@@ -801,7 +808,7 @@
                     </div>
                 </div>
             </div>
-            <div class="inside_notic_right clearfix">
+            <div class="clearfix inside_notic_right">
                 <div class="inside_notic_head">
                     <label>&nbsp;</label>
                 </div>
@@ -823,7 +830,7 @@
         </div>
         <div class="inside_notic_sec inside_notic_sec2 mCustomScrollbar">
 
-            <div class="inside_notic_left clearfix">
+            <div class="clearfix inside_notic_left">
 
                 <div class="inside_notic_head">
                     <label>My Crowdfunder Updates</label>
@@ -849,7 +856,7 @@
                     </div>
                 </div>
             </div>
-            <div class="inside_notic_right clearfix">
+            <div class="clearfix inside_notic_right">
 
                 <div class="inside_notic_head">
                     <label>My Bonuses</label>
