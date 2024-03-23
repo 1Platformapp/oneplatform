@@ -30,7 +30,9 @@ class FirebaseController extends Controller
             $defaultBucket = $storage->getBucket();
 
             $storagePath = 'audios/';
-            $filename = $uploadedFile->getClientOriginalName();
+            
+            $filename = time() . rand(1000, 9999). '.' . $uploadedFile->getClientOriginalExtension();
+
             $upload = $defaultBucket->upload(
                 fopen($uploadedFile->getRealPath(), 'r'),
                 [
