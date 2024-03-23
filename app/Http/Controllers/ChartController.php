@@ -1065,7 +1065,15 @@ class ChartController extends Controller
             $basketPrice = $request->basket_price;
         }
 
-        $existingBasket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('product_id', $request->product_id)->first();
+        $existingBasket = null;
+
+        if($request->purchase_type == 'product') {
+            $existingBasket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('product_id', $request->product_id)->first();
+        }
+
+        if($request->purchase_type == 'music') {
+            $existingBasket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('music_id', $request->music_id)->first();
+        }
 
         if($existingBasket) {
             $return['error'] = 'Item is already in cart';
