@@ -113,7 +113,7 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2013.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('tv')}}">
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('agency.dashboard.tab', ['tab' => 'management-plan'])}}">
                                                                         Start Your Project List
                                                                     </a>
                                                                 </div>
@@ -121,7 +121,7 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2014.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('chart')}}">
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('agency.dashboard.tab', ['tab' => 'contact-management'])}}">
                                                                         Create Your Network
                                                                     </a>
                                                                 </div>

@@ -107,10 +107,11 @@
 
                 return false;
             }else if (step == 'three') {
-
-                if (mainSkill == '') {
+                if (mainSkill == 'null' || mainSkill == null) {
                     return true;
                 }
+
+                return false;
             }
         }
 
@@ -176,9 +177,12 @@
                 alert(data.message);
                 $('#spinner').removeClass('fa fa-spinner fa-spin');
                 document.getElementById('submit_btn').disabled = false;
-                $('#submit_btn').removeClass('is-busy');  
+                $('#submit_btn').removeClass('is-busy');
                 if(data.redirect) {
-                    window.location.href = data.redirect;
+                    $('#login_email_address').val($('#emailaddress').val());
+                    $('#login_password').val($('#fake_password').val());
+                    $('#login-form').submit();
+                    // window.location.href = data.redirect;
                 }
             })
             .catch(error => {
@@ -200,6 +204,20 @@
                 filledStep($(this).attr('data-step'));
             });
 
+            $('body').delegate('.back-btn', 'click', function(){
+                var currentStep = $('.each-step.current-step');
+
+                if (currentStep.length) {
+                    if (currentStep.attr('data-step') == 'three') {
+                        $('.google-recaptcha').html('');
+                        activateStep('two');
+                    } else if (currentStep.attr('data-step') == 'two') {
+                        $(this).addClass('hidden');
+                        activateStep('one');
+                    }
+                }
+            });
+
             $('body').delegate('.next-btn:not(.is-busy)', 'click', async function(e){
                 $(this).addClass('is-busy');
                 const username = $('#username');
@@ -219,6 +237,7 @@
                         }
 
                         activateStep('two');
+                        $('.back-btn').removeClass('hidden');
                         $(this).removeClass('is-busy');
                     } else if (currentStep.attr('data-step') == 'two') {
                         if (await validateStep('two')) {
@@ -237,6 +256,7 @@
                         if (await validateStep('three')) {
                             console.log('Validation failed');
                             $('#error-span').removeClass('hidden');
+                            $(this).removeClass('is-busy');
                             return;
                         }
                             
@@ -532,7 +552,7 @@
                             <div class="relative mt-2 my-dropdown-container sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <select data-well="main-skill-dropdown" id="main_skill_name" name="skill" type="text" autocomplete="off" class="platform-searchable block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
-                                        <option value='' selected disabled>Select a Skill</option>
+                                        <option value="null" selected disabled>Select a Skill</option>
                                         @foreach($skills as $skill)
                                             <option value="{{$skill->value}}">{{$skill->value}}</option>
                                         @endforeach
@@ -584,17 +604,33 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col items-end justify-between lg:flex-row">
+                <div class="flex flex-col items-start justify-between lg:flex-row">
+                    <div class="flex flex-row mt-6">
+                        <button id="back_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none back-btn hover:bg-indigo-500">
+                            Back
+                        </button>
+                    </div>
                     <div class="mt-6 google-recaptcha"></div>
-                    <div class="flex flex-col justify-end mt-6 ml-auto gap-x-6">
+                    <div class="flex flex-row mt-6 lg:justify-end gap-x-6">
                         <button id="submit_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500">
                             <i id="spinner" class=""></i>Next
                         </button>
                     </div>
                 </div>
+
                 <div class="flex">
                     <p id="error-span" class="hidden mt-3 ml-auto text-sm leading-6 text-red-600">There is some validation error</p>
                 </div>
+            </div>
+        </form>
+
+        <form id="login-form" class="hidden form-horizontal" method="POST" action="{{ route('login') }}">
+            {{ csrf_field() }}
+            <div class="form_group">
+                <input type="email" class="hidden" hidden name="email" id="login_email_address" />
+            </div>
+            <div class="form_group">
+                <input type="password" class="hidden" hidden name="password" id="login_password" />
             </div>
         </form>
     </div>
