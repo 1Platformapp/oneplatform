@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 
 class FirebaseController extends Controller
@@ -41,10 +42,21 @@ class FirebaseController extends Controller
 
             // return $upload->info();
 
-            $factory = (new Factory)->withServiceAccount(public_path('firebase.json'))->withDatabaseUri('https://platformrepo-3683c.firebaseio.com');
-            $cloudStorage = $factory->createStorage();
+            $factory = (new Factory)->withServiceAccount(public_path(env('FIREBASE_CREDENTIALS')))->withDatabaseUri(env('FIREBASE_DATABASE_URL'));
+            $storage = $factory->createStorage();
+            $defaultBucket = $storage->getBucket();
 
-            return '';
+            $storagePath = 'audios/';
+            $filename = $uploadedFile->getClientOriginalName();
+            $upload = $defaultBucket->upload(
+                fopen($uploadedFile->getRealPath(), 'r'),
+                [
+                    'predefinedAcl' => 'publicRead',
+                    'name' => $storagePath . $filename,
+                ]
+            );
+
+            return $upload->info();
 
         } catch (\Exception $e) {
             dd($e->getMessage());
