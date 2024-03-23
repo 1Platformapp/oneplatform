@@ -404,12 +404,12 @@
                             </div>
                             <div class="each_col">
                                 <input class="dummy_field" type="text" name="fakeusernameremembered">
-                                <input class="border-2 border-solid border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
+                                <input id="project-date" class="border-2 border-solid border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
                                 <div class="instant_hide error end_term_error">Required</div>
                             </div>
                         </div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input class="border-2 border-solid border-input-b" placeholder="Price" type="number" class="price" />
+                        <input id="project-price" class="border-2 border-solid border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                         <textarea class="description" placeholder="Project description (i.e details/milestones/terms etc)"></textarea>
                         <div class="instant_hide error description_error">Required</div>
@@ -478,7 +478,7 @@
                         </select>
                         <div class="instant_hide error choose_product_error">Required</div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input class="border-2 border-solid border-input-b" placeholder="Price" type="number" class="price" />
+                        <input id="product-price" class="border-2 border-solid border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                     </div>
                 </div>
