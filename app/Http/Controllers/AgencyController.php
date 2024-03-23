@@ -3,29 +3,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\IndustryContactController;
-use App\Http\Controllers\CommonMethods;
+use PDF;
+use Auth;
+use Mail;
 
+use Image;
+use Session;
 use App\Models\User;
+use App\Models\Skill;
+use App\Models\Contract;
 use App\Models\UserChat;
 use App\Models\AgentContact;
+use Illuminate\Http\Request;
 use App\Models\UserChatGroup;
-use App\Models\StripeCheckout;
-use App\Models\Contract;
 use App\Models\AgencyContract;
+use App\Models\StripeCheckout;
+
+use Illuminate\Support\Facades\DB;
+
 use App\Models\IndustryContactRegion;
-use App\Models\IndustryContactCategoryGroup;
+use App\Http\Controllers\CommonMethods;
 use App\Models\SkillManagementPlanTask;
-use App\Models\Skill;
-
+use App\Models\IndustryContactCategoryGroup;
+use App\Http\Controllers\IndustryContactController;
 use App\Mail\AgencyContract as AgencyContractMailer;
-
-use Auth;
-use Image;
-use Mail;
-use PDF;
-use Session;
 
 class AgencyController extends Controller
 {
@@ -479,7 +480,6 @@ class AgencyController extends Controller
             'private' => ['messages' => []],
             'group' => ['messages' => [], 'members' => []]
         ];
-        $commonMethods = new CommonMethods();
 
         if(!$request->has('type') || !$request->has('data')){
 
@@ -596,112 +596,163 @@ class AgencyController extends Controller
         return json_encode(['success' => $success, 'data' => $data]);
     }
 
-    public function createMessage(Request $request){
+    public function createMessage(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = Auth::user();
+            $contactId = $request->get('contact');
+            $partnerId = $request->get('partner');
+            $message = $request->get('message');
+            $action = $request->get('action');
 
-        $user = Auth::user();
-        $success = false;
-        $commonMethods = new CommonMethods();
-        $error = '';
-
-        if(!$request->has('action')){
-
-            $error = 'some required data does not exist (ref: chat_action)';
-        }else if($request->get('action') == 'attachment-finalize' && (!$request->has('chat') || !$request->has('contact') || !$request->has('message'))){
-
-            $error = 'some required data does not exist (ref: chat_finalize)';
-        }else if($request->get('action') == 'send-message' && ((!$request->has('contact') && (!$request->has('partner'))) || !$request->has('message'))){
-
-            $error = 'some required data does not exist (ref: send_message)';
-        }else if($request->get('action') == 'attachment-upload' && (!$request->has('chat') || !$request->file('attachment'))){
-
-            $error = 'some required data does not exist (ref: attachment)';
-        }
-
-        if($error != ''){
-
-            return json_encode(['success' => false, 'error' => $error]);
-        }
-
-        $contactId = $request->get('contact');
-        $partnerId = $request->get('partner');
-        $message = $request->get('message');
-        $action = $request->get('action');
-        if($action == 'attachment-initialize'){
-
-            $chat = new UserChat();
-            $chat->sender_id = NULL;
-            $chat->group_id = NULL;
-            $chat->recipient_id = NULL;
-            $chat->message = NULL;
-            $chat->music_id = NULL;
-
-            $chat->save();
-            $id = $chat->id;
-        }else if($action == 'send-message' || $action == 'attachment-finalize'){
-
-            if($action == 'attachment-finalize'){
-                $chat = UserChat::find($request->get('chat'));
-            }else{
+            if($action == 'attachment-initialize'){
                 $chat = new UserChat();
-            }
-
-            if($request->has('contact')){
-
-                $agentContact = AgentContact::find($contactId);
-                if(!$agentContact || !$agentContact->agentUser || !$agentContact->contactUser){
-                    return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: agent_contact)'));
+                $id = $chat->id;
+            } else if($action == 'send-message' || $action == 'attachment-finalize') {
+                if($action == 'attachment-finalize'){
+                    $chat = UserChat::findOrFail($request->get('chat'));
+                }else{
+                    $chat = new UserChat();
                 }
 
-                $agent = $agentContact->agentUser;
-                $artist = $agentContact->contactUser;
-
-                if($agentContact->approved == 1){
-
-                    $chatGroup = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
-                    if(!$chatGroup){
-                        return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: chat_group)'));
+                if($request->has('contact')){
+                    $agentContact = AgentContact::findOrFail($contactId);
+                    $agent = $agentContact->agentUser;
+                    $artist = $agentContact->contactUser;
+    
+                    if($agentContact->approved == 1){
+                        $chatGroup = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->firstOrFail();
+                        $chat->group_id = $chatGroup->id;
+                    }else{
+                        $partner = $user->isAgentOfContact($agentContact) ? $artist : $agent;
+                        $chat->recipient_id = $partner->id;
                     }
-
-                    $chat->group_id = $chatGroup->id;
-                }else{
-
-                    $partner = $user->isAgentOfContact($agentContact) ? $artist : $agent;
+    
+                    $agentContact->latest_message_at = date('Y-m-d H:i:s');
+                    $agentContact->save();
+                }else if($request->has('partner')){
+                    $partner = User::findOrFail($partnerId);
                     $chat->recipient_id = $partner->id;
                 }
 
-                $agentContact->latest_message_at = date('Y-m-d H:i:s');
-                $agentContact->save();
-            }else if($request->has('partner')){
+                $chat->sender_id = $user->id;
+                $chat->message = $message;
+                $chat->music_id = NULL;
+                $chat->save();
+                $id = $chat->id;
 
-                $partner = User::find($partnerId);
-                if(!$partner){
-                    return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: agent_partner)'));
-                }
-                $chat->recipient_id = $partner->id;
+                $response = $chat->sendNotifications();
+            } else if($action == 'attachment-upload'){
+
+                $chat = UserChat::findOrFail($request->get('chat'));
+    
+                $id = $chat->id;
+                $response = $chat->attachFile($request->file('attachment'));
+                throw_if(!$response, 'ref: attachment_finish_error');
             }
 
-            $chat->sender_id = $user->id;
-            $chat->message = $message;
-            $chat->music_id = NULL;
-            $chat->save();
-            $id = $chat->id;
-
-            $response = $chat->sendNotifications();
-        }else if($action == 'attachment-upload'){
-
-            $chat = UserChat::find($request->get('chat'));
-            if(!$chat){
-                return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: attachment_chat_missing)'));
-            }
-
-            $id = $chat->id;
-            $response = $chat->attachFile($request->file('attachment'));
-            if(!$response){
-                return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: attachment_finish_error)'));
-            }
+            DB::commit();
+            return json_encode(['success' => true, 'id' => $id]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return json_encode(['success' => false, 'error' => $e->getMessage()]);
         }
+        
+        // $error = '';
 
-        return json_encode(['success' => true, 'id' => $id]);
+        // if(!$request->has('action')){
+        //     $error = 'some required data does not exist (ref: chat_action)';
+        // }else if($request->get('action') == 'attachment-finalize' && (!$request->has('chat') || !$request->has('contact') || !$request->has('message'))){
+        //     $error = 'some required data does not exist (ref: chat_finalize)';
+        // }else if($request->get('action') == 'send-message' && ((!$request->has('contact') && (!$request->has('partner'))) || !$request->has('message'))){
+        //     $error = 'some required data does not exist (ref: send_message)';
+        // }else if($request->get('action') == 'attachment-upload' && (!$request->has('chat') || !$request->file('attachment'))){
+        //     $error = 'some required data does not exist (ref: attachment)';
+        // }
+
+        // if($error != ''){
+
+        //     return json_encode(['success' => false, 'error' => $error]);
+        // }
+
+        
+        // if($action == 'attachment-initialize'){
+
+        //     $chat = new UserChat();
+        //     $chat->sender_id = NULL;
+        //     $chat->group_id = NULL;
+        //     $chat->recipient_id = NULL;
+        //     $chat->message = NULL;
+        //     $chat->music_id = NULL;
+
+        //     $chat->save();
+        //     $id = $chat->id;
+        // }else if($action == 'send-message' || $action == 'attachment-finalize'){
+
+        //     if($action == 'attachment-finalize'){
+        //         $chat = UserChat::find($request->get('chat'));
+        //     }else{
+        //         $chat = new UserChat();
+        //     }
+
+        //     if($request->has('contact')){
+
+        //         $agentContact = AgentContact::find($contactId);
+        //         if(!$agentContact || !$agentContact->agentUser || !$agentContact->contactUser){
+        //             return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: agent_contact)'));
+        //         }
+
+        //         $agent = $agentContact->agentUser;
+        //         $artist = $agentContact->contactUser;
+
+        //         if($agentContact->approved == 1){
+
+        //             $chatGroup = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->get()->first();
+        //             if(!$chatGroup){
+        //                 return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: chat_group)'));
+        //             }
+
+        //             $chat->group_id = $chatGroup->id;
+        //         }else{
+
+        //             $partner = $user->isAgentOfContact($agentContact) ? $artist : $agent;
+        //             $chat->recipient_id = $partner->id;
+        //         }
+
+        //         $agentContact->latest_message_at = date('Y-m-d H:i:s');
+        //         $agentContact->save();
+        //     }else if($request->has('partner')){
+
+        //         $partner = User::find($partnerId);
+        //         if(!$partner){
+        //             return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: agent_partner)'));
+        //         }
+        //         $chat->recipient_id = $partner->id;
+        //     }
+
+        //     $chat->sender_id = $user->id;
+        //     $chat->message = $message;
+        //     $chat->music_id = NULL;
+        //     $chat->save();
+        //     $id = $chat->id;
+
+        //     $response = $chat->sendNotifications();
+        // }else if($action == 'attachment-upload'){
+
+        //     $chat = UserChat::find($request->get('chat'));
+        //     if(!$chat){
+        //         return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: attachment_chat_missing)'));
+        //     }
+
+        //     $id = $chat->id;
+        //     $response = $chat->attachFile($request->file('attachment'));
+        //     if(!$response){
+        //         return json_encode(array('success' => false, 'error' => 'some required data does not exist (ref: attachment_finish_error)'));
+        //     }
+        // }
+
+        // return json_encode(['success' => true, 'id' => $id]);
     }
 
     public function getMoniesData (Request $request){
