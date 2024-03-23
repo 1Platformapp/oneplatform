@@ -42,7 +42,7 @@ class GoogleDriveStorage extends Controller
 
     public function __construct(FirebaseController $firebase)
     {
-        $this->firebase = $firebase;    
+        $this->firebase = $firebase;
     }
 
     public function listFiles(Request $request)
@@ -51,7 +51,7 @@ class GoogleDriveStorage extends Controller
         $dir = '/';
         $recursive = false; // Get subdirectories also?
         $contents = collect(Storage::cloud()->listContents($dir, $recursive));
-                
+
         return $contents->where('type', '=', 'file'); // files
     }
 
@@ -82,7 +82,7 @@ class GoogleDriveStorage extends Controller
                     }else{
                         $decFDir = '';
                     }
-                    
+
                     $mp3 = shell_exec(Config('constants.ffmpeg_path').' -i '.$_FILES['mu_down_file']['tmp_name'].' '.Config('constants.ffmpeg_decoded_path').$decFDir.$decFName.' 2>&1');
 
         		    $dir = $request->has('dir') ? $request->get('dir') : '/';
@@ -97,7 +97,7 @@ class GoogleDriveStorage extends Controller
 
         		    // Storage::cloud()->put($filename, fopen($filePath, 'r+'));
 
-        		    
+
         		    // $contents = collect(Storage::cloud()->listContents($dir, $recursive));
 
         		    $fileData['size'] = $contents['size'];
@@ -105,9 +105,9 @@ class GoogleDriveStorage extends Controller
                     $fileData['mimetype'] = $contents['contentType'];
                     $fileData['type'] = 'file';
                     $fileData['path'] = $contents['mediaLink'];
-        		  
+
                     $music->addDownloadItem($fileData, $itemType, 'firebase', $decFName);
-        		    
+
         		    $success = 1;
         		}else{
         		    $error = 'No music found';
@@ -118,7 +118,7 @@ class GoogleDriveStorage extends Controller
         }else{
             $error = 'Request missing required data or authentication';
         }
-    
+
         return json_encode(['success' => $success, 'error' => $error, 'music_mp3' => $decFName]);
     }
 
@@ -244,7 +244,7 @@ class GoogleDriveStorage extends Controller
         $dir = '/';
         $recursive = false; // Get subdirectories also?
         $contents = collect(Storage::cloud()->listContents($dir, $recursive));
-        
+
         //return $contents->where('type', '=', 'dir'); // directories
         return $contents->where('type', '=', 'dir'); // files
     }
@@ -262,7 +262,7 @@ class GoogleDriveStorage extends Controller
     public function deleteFolder(Request $request)
     {
         $directoryName = 'Test';
-        
+
         // Now find that directory and use its ID (path) to delete it
         $dir = '/';
         $recursive = false; // Get subdirectories also?
