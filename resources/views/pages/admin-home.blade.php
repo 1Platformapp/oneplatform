@@ -187,23 +187,23 @@
 
     <div id="body-overlay"></div>
 
-    <div class="pro_send_email_outer pro_page_pop_up clearfix" >
+    <div class="clearfix pro_send_email_outer pro_page_pop_up" >
 
-        <div class="pro_soc_discon_inner clearfix">
+        <div class="clearfix pro_soc_discon_inner">
 
-            <div class="soc_discon_text clearfix">
+            <div class="clearfix soc_discon_text">
 
                 <h3>Post a Thank You Note</h3>
                 <span class="error"></span>
             </div>
-            <div class="soc_share_images clearfix">
+            <div class="clearfix soc_share_images">
                 <img id="thank_you_image" class="defer_loading" src="" data-src="{{ asset('images/video_img.png') }}">
                 <img class="dance_icon_right defer_loading" src="" data-src="{{ asset('images/dancing-icon-2.png') }}">
             </div>
-            <div class="soc_share_buttons clearfix">
+            <div class="clearfix soc_share_buttons">
 
                 <span>
-                    <div class="social_supp_btns clearfix">
+                    <div class="clearfix social_supp_btns">
                             <ul class="clearfix">
                                 <li><a id="facebook_share" class="popup_share_icon ch_sup_fb" href="javascript:void(0)"> Share</a> </li>
                                 <li><a id="twitter_share" class="popup_share_icon ch_sup_tw" href="javascript:void(0)"> Tweet</a></li>
@@ -213,30 +213,30 @@
                 <a id="thank_via_email_btn">Or send an Email</a>
             </div>
 
-            <div class="email_box clearfix">
+            <div class="clearfix email_box">
                 <textarea id="thankyou_email_text"></textarea>
             </div>
-            <div class="pro_submit_button_outer email_button clearfix">
+            <div class="clearfix pro_submit_button_outer email_button">
                 <a id="send_thankyou_email">Send</a>
             </div>
         </div>
     </div>
 
-    <div class="pro_orders_tab_contact_details pro_page_pop_up clearfix" style="" id="contact_popup">
+    <div class="clearfix pro_orders_tab_contact_details pro_page_pop_up" style="" id="contact_popup">
 
-        <div class="pro_soc_discon_inner clearfix">
+        <div class="clearfix pro_soc_discon_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
 
                 <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
-            <div class="pro_orders_tab_contact_details_inner clearfix">
+            <div class="clearfix pro_orders_tab_contact_details_inner">
 
                 <h4 id="cont_popup_name"></h4>
                 <h4 id="cont_popup_email"></h4><br />
                 <h4 id="cont_popup_address"></h4>
-                <div class="pro_submit_button_outer soc_con_submit_success clearfix">
+                <div class="clearfix pro_submit_button_outer soc_con_submit_success">
 
                     <a style="cursor: pointer;" id="submit_button" onclick="$('.pro_soc_top_close').click()">Okay</a>
                 </div>
@@ -244,16 +244,16 @@
         </div>
     </div>
 
-    <div class="pro_page_pop_up clearfix" id="subscription_offers_popup">
+    <div class="clearfix pro_page_pop_up" id="subscription_offers_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
-            <div class="soc_con_top_logo clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
-            <div class="soc_con_face_username clearfix">
+            <div class="clearfix soc_con_face_username">
                 <div class="subscription_offers_in">
                     <img src="" class="profile_img" />
                     <div class="profile_heading"></div>
@@ -266,9 +266,9 @@
         </div>
     </div>
 
-    <div class="music_zip_download_popup pro_page_pop_up new_popup clearfix" style="z-index: 10;">
+    <div class="clearfix music_zip_download_popup pro_page_pop_up new_popup" style="z-index: 10;">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
         <div class="pro_pop_head">Download details</div>
             <div class="pro_pop_body">
@@ -364,19 +364,19 @@
         </div>
     </div>
 
-    <div class="pro_initiating_download in_progress pro_page_pop_up clearfix" style="z-index: 10;" id="pro_initiating_download">
+    <div class="clearfix pro_initiating_download in_progress pro_page_pop_up" style="z-index: 10;" id="pro_initiating_download">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
             <h3>We are preparing your download. Do not refresh or navigate away.</h3><br><br><br>
         </div>
     </div>
 
-    <div class="pro_page_pop_up clearfix" id="chat_purchase_popup">
+    <div class="clearfix pro_page_pop_up" id="chat_purchase_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
@@ -384,18 +384,18 @@
             </div>
             <div class="stage_one">
                 <div class="project stage">
-                    <div class="soc_con_face_username clearfix">
+                    <div class="clearfix soc_con_face_username">
                         <div class="main_headline">Set up a new Project Agreement</div><br>
-                        <select class="choose_customer_dropdown border-2 border-input-b">
+                        <select class="border-2 choose_customer_dropdown border-input-b">
                             <option value="">Choose recipient</option>
                         </select>
                         <div class="instant_hide error choose_customer_error">Required</div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input class="border-solid border-2 border-input-b" placeholder="Title" type="text" class="title" />
+                        <input class="border-2 border-solid border-input-b" placeholder="Title" type="text" class="title" />
                         <div class="instant_hide error title_error">Required</div>
                         <div class="pro_pop_multi_row">
                             <div class="each_col">
-                                <select class="choose_end_term_dropdown border-solid border-2 border-input-b">
+                                <select class="border-2 border-solid choose_end_term_dropdown border-input-b">
                                     <option value="">Term Date</option>
                                     <option value="perpetual">Perpetual</option>
                                     <option value="custom">Let me write end term</option>
@@ -404,26 +404,26 @@
                             </div>
                             <div class="each_col">
                                 <input class="dummy_field" type="text" name="fakeusernameremembered">
-                                <input class="border-solid border-2 border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
+                                <input class="border-2 border-solid border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
                                 <div class="instant_hide error end_term_error">Required</div>
                             </div>
                         </div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input class="border-solid border-2 border-input-b" placeholder="Price" type="number" class="price" />
+                        <input class="border-2 border-solid border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                         <textarea class="description" placeholder="Project description (i.e details/milestones/terms etc)"></textarea>
                         <div class="instant_hide error description_error">Required</div>
                     </div>
                 </div>
                 <div class="license stage">
-                    <div class="soc_con_face_username clearfix">
+                    <div class="clearfix soc_con_face_username">
                         <div class="main_headline">You are adding a bespoke license agreement</div><br>
-                        <select class="choose_customer_dropdown border-solid border-2 border-input-b">
+                        <select class="border-2 border-solid choose_customer_dropdown border-input-b">
                             <option value="">Choose recipient</option>
                         </select>
                         <div class="instant_hide error choose_customer_error">Required</div>
                         @if(Auth::check())
-                        <select class="choose_agreement_music border-solid border-2 border-input-b" >
+                        <select class="border-2 border-solid choose_agreement_music border-input-b" >
                             <option value="">Choose music</option>
                             @if(count(Auth::user()->musics))
                                 @foreach(Auth::user()->musics as $music)
@@ -435,7 +435,7 @@
                         @endif
                         <div class="pro_pop_multi_row">
                             <div class="each_col">
-                                <select class="choose_end_term_dropdown border-solid border-2 border-input-b">
+                                <select class="border-2 border-solid choose_end_term_dropdown border-input-b">
                                     <option value="">Term Date</option>
                                     <option value="perpetual">Perpetual</option>
                                     <option value="custom">Let me write end term</option>
@@ -444,31 +444,31 @@
                             </div>
                             <div class="each_col">
                                 <input class="dummy_field" type="text" name="fakeusernameremembered">
-                                <input class="border-solid border-2 border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
+                                <input id="term-date" class="border-2 border-solid border-input-b" disabled="disabled" placeholder="Eg. valid upto 01/01/2022" type="text" class="end_term" />
                                 <div class="instant_hide error end_term_error">Required</div>
                             </div>
                         </div>
-                        <select class="choose_agreement_license border-solid border-2 border-input-b">
+                        <select class="border-2 border-solid choose_agreement_license border-input-b">
                             <option selected value="bespoke">Bespoke Agreement</option>
                             @foreach(config('constants.licenses') as $key => $license)
                             <option value="{{$key}}">{{$license['name']}}</option>
                             @endforeach
                         </select>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input class="border-solid border-2 border-input-b" placeholder="Price" type="number" class="price" />
+                        <input id="term-price" class="border-2 border-solid border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                         <textarea class="license_terms" placeholder="Write all terms of use here"></textarea>
                         <div class="license_terms_error instant_hide error">Required</div>
                     </div>
                 </div>
                 <div class="product stage">
-                    <div class="soc_con_face_username clearfix">
+                    <div class="clearfix soc_con_face_username">
                         <div class="main_headline">You are adding a product</div><br>
-                        <select class="choose_customer_dropdown border-solid border-2 border-input-b">
+                        <select class="border-2 border-solid choose_customer_dropdown border-input-b">
                             <option value="">Choose recipient</option>
                         </select>
                         <div class="instant_hide error choose_customer_error">Required</div>
-                        <select class="choose_product border-solid border-2 border-input-b">
+                        <select class="border-2 border-solid choose_product border-input-b">
                             @if(Auth::user())
                             <option value="">Choose product</option>
                             @foreach(Auth::user()->products as $product)
@@ -478,7 +478,7 @@
                         </select>
                         <div class="instant_hide error choose_product_error">Required</div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input class="border-solid border-2 border-input-b" placeholder="Price" type="number" class="price" />
+                        <input class="border-2 border-solid border-input-b" placeholder="Price" type="number" class="price" />
                         <div class="instant_hide error price_error">Required</div>
                     </div>
                 </div>
@@ -486,7 +486,7 @@
                 <div class="pro_button chat_purchase_send_btn">SUBMIT</div>
             </div>
             <div class="stage_two instant_hide">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="pro_pop_text_light text_center">
                         Successfully sent to <span class="pro_text_dark" id="sender_name"></span>. The user will be offered to accept
                     </div>
@@ -496,8 +496,8 @@
         </div>
     </div>
 
-    <div class="pro_pop_chat_upload in_progress new_popup pro_page_pop_up clearfix" style="z-index: 10;">
-        <div class="pro_soc_con_face_inner clearfix">
+    <div class="clearfix pro_pop_chat_upload in_progress new_popup pro_page_pop_up" style="z-index: 10;">
+        <div class="clearfix pro_soc_con_face_inner">
             <div class="pro_pop_head">Upload details</div>
             <div class="pro_pop_body">
                 <div class="pro_body_in"></div>
@@ -516,11 +516,11 @@
         </div>
     </div>
 
-    <div class="pro_confirm_delete_outer pro_page_pop_up clearfix" >
+    <div class="clearfix pro_confirm_delete_outer pro_page_pop_up" >
 
-        <div class="pro_confirm_delete_inner clearfix">
+        <div class="clearfix pro_confirm_delete_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
 
                 <a style="opacity: 0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}">
@@ -528,12 +528,12 @@
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
-            <div class="pro_confirm_delete_text clearfix">
+            <div class="clearfix pro_confirm_delete_text">
 
                 <div class="main_headline">Are You Sure You Want To Delete This Item?</div><br>
                 <span class="error"></span>
             </div>
-            <div class="pro_confirm_box_outer pro_submit_button_outer soc_submit_success clearfix">
+            <div class="clearfix pro_confirm_box_outer pro_submit_button_outer soc_submit_success">
 
                 <div class="delete_yes pro_confirm_box_each" data-delete-id="" data-delete-item-type="" data-album-status="" data-album-music-id="" id="pro_delete_submit_yes">YES</div>
                 <div class="delete_no pro_confirm_box_each" id="pro_confirm_delete_submit_no">NO</div>
@@ -541,18 +541,18 @@
         </div>
     </div>
 
-    <div class="pro_page_pop_up clearfix" id="switch_account_popup">
+    <div class="clearfix pro_page_pop_up" id="switch_account_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="stage_one">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="main_headline">Switch to your contact account?</div><br>
                     <div class="pro_pop_text_light">
                         If you proceed, the system will log you out from your current account and will log into your contact's account
@@ -564,18 +564,18 @@
         </div>
     </div>
 
-    <div class="pro_page_pop_up clearfix" id="get_agent_popup">
+    <div class="clearfix pro_page_pop_up" id="get_agent_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
 
-            <div class="soc_con_top_logo clearfix">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="stage_one">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="primary_headline">Request to have an artist manager</div>
                     <div class="pro_pop_text_light text_normal">
                         Your request will be sent to <span class="pro_text_dark new_agent_name"></span>
@@ -593,7 +593,7 @@
                 <div id="proceed_get_agent" class="pro_button">Send Request</div>
             </div>
             <div class="stage_two instant_hide">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="pro_pop_text_light text_center">
                         Your request has been sent to <span class="pro_text_dark new_agent_name"></span>. The manager will be resposible to process and reply to this request. Keep checking your email and 1Platform account for any updates regarding this request.
                     </div>
@@ -603,16 +603,16 @@
         </div>
     </div>
 
-    <div class="pro_page_pop_up clearfix" id="add_chat_group_member_popup">
-        <div class="pro_soc_con_face_inner clearfix">
-            <div class="soc_con_top_logo clearfix">
+    <div class="clearfix pro_page_pop_up" id="add_chat_group_member_popup">
+        <div class="clearfix pro_soc_con_face_inner">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="stage_one">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="main_headline">Introduce a contact in this chat</div><br>
                     <div class="hide_on_mobile"><br></div>
                     <div class="pro_pop_multi_row">
@@ -650,17 +650,17 @@
         </div>
     </div>
 
-    <div data-currency="{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}" class="pro_page_pop_up clearfix" id="pay_quick_popup">
+    <div data-currency="{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}" class="clearfix pro_page_pop_up" id="pay_quick_popup">
 
-        <div class="pro_soc_con_face_inner clearfix">
-            <div class="soc_con_top_logo clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
+            <div class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>
                 <i class="fa fa-times pro_soc_top_close"></i>
             </div>
             <div class="stage_one">
-                <div class="soc_con_face_username clearfix">
+                <div class="clearfix soc_con_face_username">
                     <div class="main_headline"></div>
                     <div class="second_headline"></div>
                     <div id="pay_quick_error" class="instant_hide m_e_card_pop_error"></div>
@@ -683,10 +683,10 @@
             </div>
         </div>
     </div>
-    <div class="ind_con_details_popup pro_page_pop_up new_popup clearfix" style="z-index: 10; max-height:600px; overflow:auto">
+    <div class="clearfix ind_con_details_popup pro_page_pop_up new_popup" style="z-index: 10; max-height:600px; overflow:auto">
 
-        <div class="pro_soc_con_face_inner clearfix">
-            <div style="padding: 10px 20px;" class="soc_con_top_logo clearfix">
+        <div class="clearfix pro_soc_con_face_inner">
+            <div style="padding: 10px 20px;" class="clearfix soc_con_top_logo">
                 <a style="opacity:0;" class="logo8">
                     <img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
                 </a>

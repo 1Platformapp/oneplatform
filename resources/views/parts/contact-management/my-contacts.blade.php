@@ -689,11 +689,12 @@
         });
 
         $('body').delegate('.choose_end_term_dropdown', 'change', function(e){
-
             if($(this).val() == 'custom'){
-                $(this).closest('.pro_pop_multi_row').find('.end_term').attr('disabled', false).focus();
+                $(this).closest('.pro_pop_multi_row').find('.end_term').prop('disabled', false).focus();
+                $('#term-date').prop('disabled', false).focus();
             }else{
-                $(this).closest('.pro_pop_multi_row').find('.end_term').val('').attr('disabled', true);
+                $(this).closest('.pro_pop_multi_row').find('.end_term').val('').prop('disabled', true);
+                $('#term-date').prop('disabled', true);
             }
         });
 
@@ -724,7 +725,6 @@
                 error = 1;
                 alert('Incorrect purchase');
             }
-
             if(error == 0){
 
                 var customer = stage.find('.choose_customer_dropdown');
@@ -737,7 +737,6 @@
                 var music = stage.find('.choose_agreement_music');
                 var license = stage.find('.choose_agreement_license');
                 var licenseTerms = stage.find('.license_terms');
-
                 if(stage.find('.choose_customer_dropdown').length > 0){
                     if(customer.val() == ''){
                         stage.find('.choose_customer_error').removeClass('instant_hide');
@@ -755,8 +754,10 @@
                         formData.append('title', title.val());
                     }
                 }
-                if(stage.find('.price').length > 0){
-
+                
+                if($('#term-price').val()) {
+                    formData.append('price', $('#term-price').val());
+                }else if(stage.find('.price').length > 0){
                     if(price.val() == ''){
                         stage.find('.price_error').removeClass('instant_hide');
                         error = 1;
@@ -778,12 +779,12 @@
                     if(endTermSelect.val() == ''){
                         stage.find('.choose_end_term_error').removeClass('instant_hide');
                         error = 1;
-                    }else if(endTermSelect.val() == 'custom' && endTerm.val() == ''){
+                    }else if(endTermSelect.val() == 'custom' && (endTerm.val() == '' || $('#term-date').val() == '')){
                         stage.find('.end_term_error').removeClass('instant_hide');
                         error = 1;
                     }else{
                         formData.append('endTermSelect', endTermSelect.val());
-                        formData.append('endTerm', endTerm.val());
+                        formData.append('endTerm', ($('#term-date').length ? $('#term-date').val() : endTerm.val()));
                     }
                 }
                 if(stage.find('.choose_product').length > 0){
