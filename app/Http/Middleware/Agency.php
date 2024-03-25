@@ -29,8 +29,10 @@ class Agency
 
             if ($routeName = $request->route()->getName() == 'agency.dashboard') {
                 return $next($request);
-            } else {
+            } else if ($request->isMethod('GET')){
                 return redirect(route('agency.dashboard'));
+            } else {
+                return $next($request);
             }
         }
 
