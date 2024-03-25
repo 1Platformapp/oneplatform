@@ -17,7 +17,7 @@
 
         $('document').ready(function(){
 
-        	
+
         });
 
     </script>
@@ -30,7 +30,7 @@
 
 @section('flash-message-container')
 
-    
+
 @stop
 
 <!-- facebook/twitter share Login !-->
@@ -39,7 +39,7 @@
 
 
 @section('page-content')
-    
+
     <div class="hm_video_sec_outer">
 
         <div class="video_upper_sec">
@@ -52,7 +52,7 @@
                                 <br><br>
                                 @if($type == 'subscription.for.home')
                                 <div class="pro_note_2">
-                                    
+
                                     <h2 class="note_head">
                                         Your home page has not been created yet
                                     </h2>
@@ -63,11 +63,11 @@
                                 </div>
                                 <div class="connect_stripe_actions">
                                     <a class="connect_stripe_now" href="{{route('user.startup.wizard')}}">Choose a plan now</a>
-                                    <a class="connect_stripe_skip" href="{{route('profile')}}">Continue to browse the site without a plan</a>
+                                    <a class="connect_stripe_skip" href="{{route('agency.dashboard')}}">Continue to browse the site without a plan</a>
                                 </div>
                                 @endif
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,5 +77,5 @@
 
 
 @section('miscellaneous-html')
-    
+
 @stop

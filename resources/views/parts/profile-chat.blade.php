@@ -2,9 +2,10 @@
     <div class="pro_pg_tb_det_inner">
         <div id="contacts_section" class="sub_cat_data">
             <div class="flex flex-row bg-[#333] text-white px-2">
-                <div class="hidden pro_tray_title lg:flex main-tab-head">Project List</div>
+                <div class="hidden pro_tray_title lg:flex main-tab-head">My Transactions</div>
 				   <!-- <a href="https://wa.me/923356947187?text=I'm%20interested%20in%20your%20car%20for%20sale">Send</a> !-->
                 <div class="flex flex-row items-center justify-between w-full gap-2 m_btn_right_icons lg:ml-auto lg:mr-4 text-main-icons lg:gap-8 lg:w-fit">
+                    @if(!$user->is_buyer_only)
                     <div class="flex items-center justify-center flex-grow h-full py-2 pr-2 border-r border-gray-main-icons lg:pr-8">
                         <div title="Project List" class="m_btn_right_icon_each m_btn_management_plan active" data-id="management-plan" data-head="Project List">
                             <i class="fas fa-list-ul"></i>
@@ -35,16 +36,19 @@
                             <i class="fas fa-handshake"></i>
                         </a>
                     </div>
+                    @endif
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions" data-head="My Transactions">
                             <i class="fas fa-dollar-sign"></i>
                         </a>
                     </div>
+                    @if(!$user->is_buyer_only)
                     <div class="flex items-center justify-center flex-grow h-full">
                         <a title="Edit profile" title="Edit Profile" class="m_btn_right_icon_each m_btm_profile active" data-id="my-profile" data-head="My Profile">
                             <i class="fa fa-edit"></i>
                         </a>
                     </div>
+                    @endif
                 </div>
             </div>
             @php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
@@ -379,6 +383,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if(!$user->is_buyer_only)
                                     <div data-id="my-sales" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-hand-holding-usd"></i>
@@ -391,6 +396,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                     <div data-id="my-premium-videos" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0">
                                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -432,6 +438,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @if(!$user->is_buyer_only)
                                     <div data-id="my-crowdfund-sales" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-hand-holding-usd"></i>
@@ -468,6 +475,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="order-stages stage-two instant_hide">

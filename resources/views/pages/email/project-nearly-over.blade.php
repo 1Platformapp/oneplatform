@@ -103,7 +103,7 @@
                                             <tr>
                                                 <td style="color:#999999;font-family:Open Sans,sans-serif;font-weight: 500;font-size:13px">
                                                     Your project is nearly over<br><br>
-                                                    If you haven't extended your project duration already <a href="{{route('profile')}}" style="color: #fc064c; font-weight: 600;">visit your project page to extend it</a> 
+                                                    If you haven't extended your project duration already <a href="{{route('agency.dashboard')}}" style="color: #fc064c; font-weight: 600;">visit your project page to extend it</a>
                                                 </td>
                                             </tr>
 
@@ -140,8 +140,8 @@
                                             <tr>
                                                 <td align="center" style="cursor: pointer; padding: 3px;background: #737373;color: #fff;font-family: Open Sans,sans-serif;border-radius: 5px;font-size: 15px;">
                                                     <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->username, 'type' => 'facebook_url'])}}">
-                                                    <img style="height: 12px;" src="{{asset('images/face_spec_icon.png')}}"> Share  
-                                                    </a>                     
+                                                    <img style="height: 12px;" src="{{asset('images/face_spec_icon.png')}}"> Share
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -151,8 +151,8 @@
                                             <tr>
                                                 <td align="center" style="cursor: pointer; padding: 3px;background: #737373;color: #fff;font-family: Open Sans,sans-serif;border-radius: 5px;font-size: 14px;">
                                                     <a style="color: #fff;text-decoration: none;" href="{{route('user.project.auto.share', ['username' => $user->username, 'type' => 'twitter_url'])}}">
-                                                    <img style="width: 14px;" src="{{asset('images/tw_icon.png')}}"> Tweet          
-                                                    </a>                
+                                                    <img style="width: 14px;" src="{{asset('images/tw_icon.png')}}"> Tweet
+                                                    </a>
                                                 </td>
                                             </tr>
 

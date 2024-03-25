@@ -163,7 +163,7 @@
 
             		return false;
             	}
-                
+
             	var error = 0;
             	var cardName = $('#int_sub_card_name');
                 var discountCode = $('#int_sub_voucher_code');
@@ -225,7 +225,7 @@
             var price = p.attr('data-price');
             var discountCode = $('#int_sub_voucher_code');
             var cardName = $('#int_sub_card_name');
-            
+
             fetch('/processInternalSubscription', {
                 method: 'post',
                 headers: {
@@ -598,7 +598,7 @@ $('#pay_int_sub_final').removeClass('disabled');
                                     	@else
                                     	<a class="connect_stripe_now" href="https://paypal.com">Your PayPal Dashboard</a>
                                     	@endif
-                                        <a class="connect_stripe_skip" href="{{route('profile')}}">Skip this step for now</a>
+                                        <a class="connect_stripe_skip" href="{{route('agency.dashboard')}}">Skip this step for now</a>
                                     </div>
                                 @endif
                             </div>

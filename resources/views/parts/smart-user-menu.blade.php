@@ -39,7 +39,6 @@
                             </div>
                         </div>
                     </div>
-                    @endif
                     <div class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             Personal
@@ -231,12 +230,14 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="usr_men_cat_each {{isset($page)&&$page=='orders'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Finances
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                @if(!Auth::user()->is_buyer_only)
                                 <a href="{{route('profile.setup.standalone', ['page' => 'stripe'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -245,6 +246,7 @@
                                         Stripe Dashboard
                                     </div>
                                 </a>
+                                @endif
                                 <a href="{{route('agency.dashboard.tab', ['tab' => 'my-transactions'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -272,6 +274,7 @@
                             </div>
                         </div>
                     </div>
+                    @if(!Auth::user()->is_buyer_only)
                     <div class="usr_men_cat_each {{isset($page)&&$page=='tools'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             Artist Tools
@@ -358,6 +361,7 @@
                     <div class="usr_men_cat_each usr_men_seller_help mobile-only">
                     	Get help to build your profile
                     </div>
+                    @endif
                     <div class="usr_men_cat_each usr_men_logout">
                         <button type="button" class="usr_men_cat_head" onclick="confirmPopUp()">
                             <i class="fa fa-trash"></i>&nbsp;Delete my account

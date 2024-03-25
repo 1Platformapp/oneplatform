@@ -78,7 +78,7 @@ class HomeController extends Controller
         if(Auth::check()){
             $user = Auth::user();
             if($user->is_buyer_only || !$user->internalSubscription || $user->profile->stripe_secret_key == '' || $user->username == null){
-                return redirect(route('profile'));
+                return redirect(route('agency.dashboard'));
             }else{
                 return redirect(route('user.home', ['params' => $user->username]));
             }
@@ -128,7 +128,7 @@ class HomeController extends Controller
             if(!$user->is_buyer_only && !$user->internalSubscription){
                 return redirect(route('user.action.required', ['type' => 'subscription.for.home']));
             }else if($user->is_buyer_only || !$user->internalSubscription || $user->username == null){
-                return redirect(route('profile'));
+                return redirect(route('agency.dashboard'));
             }else{
                 return redirect(route('user.home', ['params' => $user->username]));
             }

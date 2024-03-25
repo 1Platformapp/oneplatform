@@ -170,7 +170,7 @@ $videoUploadedDisplay = '';
         <div class="stage_two instant_hide">
             <div class="soc_con_face_username clearfix">
                 <div class="pro_pop_text_light">
-                    Your proposal has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('profile.with.tab', ['tab' => 'chat'])}}" class="pro_text_dark">chat</a> to read replies or send more messages/details about your proposal.
+                    Your proposal has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('agency.dashboard')}}" class="pro_text_dark">chat</a> to read replies or send more messages/details about your proposal.
                 </div>
             </div>
             <br>

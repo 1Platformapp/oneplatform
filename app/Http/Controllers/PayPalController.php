@@ -707,7 +707,7 @@ class PayPalController extends Controller
                         }
                     }else{
                         Session::flash('page', 'orders');
-                        $redirectUrl = route('profile');
+                        $redirectUrl = route('agency.dashboard');
                     }
 
                     return redirect($redirectUrl);
@@ -736,7 +736,7 @@ class PayPalController extends Controller
     	if($basketUser){
     		return redirect(route('user.home', ['params' => $basketUser->username]))->with('success', 'Your order has been cancelled');
     	}else{
-    		return redirect(route('profile'))->with('success', 'Your order has been cancelled');
+    		return redirect(route('agency.dashboard'))->with('success', 'Your order has been cancelled');
     	}
     }
 
@@ -972,13 +972,13 @@ class PayPalController extends Controller
 
             if(!$user || !$user->profile || !($user->profile->paypal_merchant_id == NULL || $user->profile->paypal_merchant_id == '')){
 
-                return redirect(route('profile'))->with('error', 'There is some problem while trying to connect PayPal account');
+                return redirect(route('agency.dashboard'))->with('error', 'There is some problem while trying to connect PayPal account');
             }else{
 
                 $user->profile->paypal_merchant_id = $merchantId;
                 $user->profile->save();
 
-                return redirect(route('profile'))->with('success', 'You have successfully connected PayPal account');
+                return redirect(route('agency.dashboard'))->with('success', 'You have successfully connected PayPal account');
             }
         }
     }

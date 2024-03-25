@@ -99,7 +99,7 @@
 
                                             <tr>
                                                 <td style="color:#335f84;font-family:Helvetica,Arial,sans-serif;font-size:16px;text-align: center;">
-                                                    Your project is nearly over.If you haven't extended your project duration already <span><a style="color:#f95753;" href="{{ $asset . "/profile/" . $receiver->id }}">visit your peoject page</a></span> to extend it.
+                                                    Your project is nearly over.If you haven't extended your project duration already <span><a style="color:#f95753;" href="{{ route('agency.dashboard') }}">visit your project page</a></span> to extend it.
                                                 </td>
                                             </tr>
 
@@ -117,7 +117,7 @@
 
                                             <tr>
                                                 <td style="font-size: 28px;text-align: center;font-family: Helvetica,Arial,sans-serif;color: #4d4d4d;">10 days left</td>
-                                            </tr> 
+                                            </tr>
 
                                             <tr>
                                                 <td height="25">&nbsp;</td>

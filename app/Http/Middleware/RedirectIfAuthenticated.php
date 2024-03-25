@@ -32,7 +32,7 @@ class RedirectIfAuthenticated
                             return redirect(route('user.startup.wizard'));
                         }
                     }else{
-                        return redirect(route('profile'));
+                        return redirect(route('agency.dashboard'));
                     }
                 }
                 return redirect(route('site.home'));

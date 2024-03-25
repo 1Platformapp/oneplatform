@@ -140,7 +140,7 @@
 
                                                                         <td style="width:100%" valign="middle" height="52" align="center">
 
-                                                                            <a href="{{ $asset . '/profile?page=orders&email_user=' . $receiver->id }}" style="text-decoration:none" target="_blank" data-saferedirecturl=""><img src="{{ asset('email-template-images/thanks-button-with-alfie.png') }}" style="width: 300px;"></a>
+                                                                            <a href="{{ route('agency.dashboard') }}" style="text-decoration:none" target="_blank" data-saferedirecturl=""><img src="{{ asset('email-template-images/thanks-button-with-alfie.png') }}" style="width: 300px;"></a>
 
                                                                         </td>
                                                                     </tr>

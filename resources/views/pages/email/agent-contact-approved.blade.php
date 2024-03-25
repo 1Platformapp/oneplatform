@@ -110,7 +110,7 @@
                                                     has approved the agreement, you created at 1Platform.
                                                     @else
                                                     <span style="color:#fc064c;">{{$agent->name}}</span>
-                                                    will be your agent at 1Platform. Reach out to your agent using 1Platform's built-in <a style="color:#000;" href="{{route('profile.with.tab',['tab' => 'chat'])}}">chat</a>
+                                                    will be your agent at 1Platform. Reach out to your agent using 1Platform's built-in <a style="color:#000;" href="{{route('agency.dashboard')}}">chat</a>
                                                     @endif
                                                 </td>
                                             </tr>

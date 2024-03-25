@@ -111,12 +111,12 @@
                                                     @if($chat->recipient)
                                                         <span style="color:#fc064c;">
                                                             {{$chat->sender->name}}
-                                                        </span> 
+                                                        </span>
                                                         has sent you a message
                                                     @elseif($chat->group)
                                                         <span style="color:#fc064c;">
                                                             {{$chat->sender->name}}
-                                                        </span> 
+                                                        </span>
                                                         has left a message in a group conversation
                                                     @endif
                                                 </td>
@@ -144,7 +144,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td style="font-family:Open Sans,sans-serif;font-weight: 500;font-size:16px;" align="left">
-                                                                    <a href="{{route('profile.with.tab.info', ['tab' => 'chat', 'info' => 'conv_'.$chat->id])}}"><button style="box-shadow: 3px 3px 5px #404040; border: 0; width: 100%; height: 25px; color: #fff; background-color: #999999; font-size: 14px; cursor: pointer;">View / Reply</button></a>
+                                                                    <a href="{{route('agency.dashboard')}}"><button style="box-shadow: 3px 3px 5px #404040; border: 0; width: 100%; height: 25px; color: #fff; background-color: #999999; font-size: 14px; cursor: pointer;">View / Reply</button></a>
                                                                 </td>
                                                             </tr>
                                                         </tbody>

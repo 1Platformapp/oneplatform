@@ -138,7 +138,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            
+
 
                                             <tr>
                                                 <td height="22">&nbsp;</td>
@@ -167,7 +167,7 @@
                                                             <td style="color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: center;" align="left">
                                                                 <img src="{{asset('email-template-images/new/Asset%2018.png')}}"><br><br>
                                                                 <div style="padding: 5px; border: 1px solid #818181; border-radius: 5px;">
-                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('profile')}}">
+                                                                    <a style="text-decoration: none; color: #818181;" href="{{route('agency.dashboard')}}">
                                                                         And much more exciting stuff
                                                                     </a>
                                                                 </div>
@@ -176,7 +176,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            
+
 
                                             </tbody>
                                         </table>

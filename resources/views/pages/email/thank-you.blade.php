@@ -127,7 +127,7 @@
                                                         {{$sender->name}} says
                                                     </span>
                                                     <span style="font-family:Open Sans,sans-serif;font-size: 14px; color: #fc064c; float: right; font-weight:bold;">
-                                                        <a style="color: #fc064c; text-decoration: none;" href="{{route('profile')}}?page=crowdfunds">
+                                                        <a style="color: #fc064c; text-decoration: none;" href="{{route('agency.dashboard')}}?page=crowdfunds">
                                                             Create a Campaign
                                                         </a>
                                                     </span>
@@ -158,9 +158,9 @@
 
                                             <tr>
                                                 <td align="center" style="cursor: pointer; padding: 3px;background: #737373;color: #fff;font-family: Open Sans,sans-serif;font-size: 15px;">
-                                                    <a style="color: #fff;text-decoration: none;" href="{{route('profile')}}?page=orders">
-                                                    View Donators  
-                                                    </a>                     
+                                                    <a style="color: #fff;text-decoration: none;" href="{{route('agency.dashboard')}}?page=orders">
+                                                    View Donators
+                                                    </a>
                                                 </td>
                                             </tr>
 

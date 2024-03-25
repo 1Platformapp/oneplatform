@@ -119,7 +119,7 @@
 
                                             <?php foreach($customerBasket as $b){
                                                 $convertedAmount = $commonMethods->convert(strtoupper($user->profile->default_currency), $currency, $b->price);
-                                            if($b->purchase_type == 'music' || $b->purchase_type == 'instant-license'){ 
+                                            if($b->purchase_type == 'music' || $b->purchase_type == 'instant-license'){
                                                 if($b->music){
                                                     $music = $b->music;
                                                 }else{
@@ -141,7 +141,7 @@
                                                             </span>
                                                         </span>
                                                     <span style="color:#8c8c8c; float: right;">
-                                                        {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}} 
+                                                        {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}}
                                                     </span>
                                                 </td>
                                             </tr>
@@ -160,7 +160,7 @@
                                                         <span style="color:#8c8c8c; float: right;">{{ $currencySymbol.number_format($convertedAmount, 2) }} </span>
                                                     </td>
                                                 </tr>
-                                            <?php } else if($b->purchase_type == 'product' || $b->purchase_type == 'proferred-product'){ 
+                                            <?php } else if($b->purchase_type == 'product' || $b->purchase_type == 'proferred-product'){
                                                 if($b->product){
                                                     $product = $b->product;
                                                 }else{
@@ -185,7 +185,7 @@
                                                             <span style="font-size: 11px; color: #000;">{{ $b->instantItemTitle() }}</span>
                                                         </span>
                                                         <span style="color:#8c8c8c; float: right;">
-                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}} 
+                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}}
                                                         </span>
                                                 </td>
                                             </tr>
@@ -198,7 +198,7 @@
                                                                 <span style="font-size: 11px; color: #000;">{{ $b->price }}/month</span>
                                                             </span>
                                                             <span style="color:#8c8c8c; float: right;">
-                                                                {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}} 
+                                                                {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}}
                                                             </span>
                                                     </td>
                                                 </tr>
@@ -211,7 +211,7 @@
                                                     <span style="color:#8c8c8c; float: right;">{{ $currencySymbol.number_format($convertedAmount, 2) }} </span>
                                                 </td>
                                             </tr>
-                                            <?php }  
+                                            <?php }
                                             }?>
 
                                             <tr>
@@ -224,7 +224,7 @@
                                                             <td style="color:#8c8c8c;font-family:Open Sans,sans-serif;font-weight: 500; font-size: 11px;width:100%; line-height: 24px;">
                                                                 Customers will receive all digital products and licences.<br>
                                                                 It is your responsibility to deliver any physical good.<br>
-                                                                You can find customers details on the <a style="text-decoration: none;" href="{{ asset("/profile") }}?page=orders"><span style="color:#fc064c;">My Monies</span></a> page.
+                                                                You can find customers details on the <a style="text-decoration: none;" href="{{ route('agency.dashboard') }}?page=orders"><span style="color:#fc064c;">My Monies</span></a> page.
                                                             </td>
                                                         </tr>
                                                         </tbody>

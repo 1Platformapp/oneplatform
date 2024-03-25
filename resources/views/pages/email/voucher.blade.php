@@ -103,7 +103,7 @@
                                             <tr>
                                                 <td style="color:#8c8c8c;font-family:Open Sans,sans-serif;font-weight: 500;font-size:11px">
                                                     1Platform has granted you a discount voucher. To redeem this voucher
-                                                    <br>1- Click Redeem now button below. 
+                                                    <br>1- Click Redeem now button below.
                                                     <br>2- Go to My Sales & Purchases -> My purchases -> My Subscription Plan
                                                     <br>3- Find and click the button that says Subscribe or Change Plan
                                                     <br>4- Choose your plan and use the discount code given in this email
@@ -137,7 +137,7 @@
                                                         <tbody>
                                                         <tr>
                                                             <td style="font-family:Open Sans,sans-serif;font-weight: 500;font-size:16px;" align="left">
-                                                                <a href="{{route('profile')}}"><button style="box-shadow: 3px 3px 5px #404040; border: 0; width: 100%; height: 25px; color: #fff; background-color: #999999; font-size: 14px; cursor: pointer;">Redeem now</button></a>
+                                                                <a href="{{route('agency.dashboard')}}"><button style="box-shadow: 3px 3px 5px #404040; border: 0; width: 100%; height: 25px; color: #fff; background-color: #999999; font-size: 14px; cursor: pointer;">Redeem now</button></a>
                                                             </td>
                                                         </tr>
                                                         </tbody>

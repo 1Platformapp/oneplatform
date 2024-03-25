@@ -8,7 +8,7 @@
 <!-- Page Level CSS !-->
 
 @section('page-level-css')
-    
+
     <style>
         .chat_each_user { justify-content: space-between; }
         .chat_each_sender_sec,.chat_each_recipient_sec { flex: 0 1 50%; position: relative; display: flex; flex-direction: row; }
@@ -21,7 +21,7 @@
 <!-- Page Level Javascript !-->
 
 @section('page-level-js')
-    
+
     <script>
 
         window.currentUserId = {{Auth::user()->id}};
@@ -87,14 +87,14 @@
 
     <div class="pro_left_sec_outer">
 
-        
+
 
         <div class="pro_left_btns_outer">
 
             <ul>
 
                 <li data-cat="profile" class="pro_tb_each">
-                    <a href="{{route('profile')}}">My Profile</a>
+                    <a href="{{route('agency.dashboard')}}">My Profile</a>
                 </li>
                 <li data-cat="media" class="pro_tb_each">
                     <a href="{{route('profile.with.tab',['tab' => 'media'])}}">My Media</a>
@@ -139,7 +139,7 @@
                             <input class="dummy_field" />
                             <i class="fa fa-search"></i>
                         </div>
-                    </div>  
+                    </div>
                     <div class="chat_users_outer"></div>
                 </div>
                 <div class="chat_right">
@@ -173,7 +173,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
 
@@ -184,7 +184,7 @@
 
 
 @section('miscellaneous-html')
-    
+
 @stop
 
 
