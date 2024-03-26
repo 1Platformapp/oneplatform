@@ -392,7 +392,7 @@ class BispokeLicenseController extends Controller
                 $data = ['sellerDetails' => $sellerDetails, 'buyerDetails' => $buyerDetails, 'terms' => $message, 'endTermSelect' => $endTermSelect, 'endTerm' => $endTerm, 'license' => $license, 'music' => $music, 'price' => $price, 'commonMethods' => $commonMethods];
                 $ticketNumber = strtoupper('lic_'.uniqid()).'.pdf';
                 $fileName = "bespoke-licenses/".$ticketNumber;
-                PDF::loadView('pdf.bespoke-license', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
+                PDF::loadView('pdf.bespoke-license', $data)->setPaper([0, 0, 700, 1000], 'portrait')->setWarnings(false)->save($fileName);
 
                 $chat = new UserChat();
                 $chat->sender_id = $user->id;
