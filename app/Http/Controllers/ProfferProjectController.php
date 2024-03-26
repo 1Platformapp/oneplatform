@@ -110,8 +110,21 @@ class ProfferProjectController extends Controller
             $user = Auth::user();
         }
 
-        if($user && $request->has('description') && $request->has('title') && $request->has('price')){
+        if(!$user) {
+            return json_encode(['success' => $success, 'error' => 'User not found']);
+        }
 
+        if(!$request->has('description')) {
+            return json_encode(['success' => $success, 'error' => 'Description is required']);
+        }
+
+        if(!$request->has('title')) {
+            return json_encode(['success' => $success, 'error' => 'Title is required']);
+        }
+
+        if(!$request->has('price')) {
+            return json_encode(['success' => $success, 'error' => 'Price is required']);
+        }
 
             $message = $request->get('description');
             $endTermSelect = $request->get('endTermSelect');
@@ -188,10 +201,6 @@ class ProfferProjectController extends Controller
 
                 $error = 'No recipient';
             }
-        }else{
-
-            $error = 'No/insufficient request data';
-        }
 
         return json_encode(['success' => $success, 'error' => $error]);
     }

@@ -747,7 +747,9 @@
                         formData.append('customer', customer.val());
                     }
                 }
-                if(stage.find('.title').length > 0){
+                if(purchaseItem == 'project' && $('#project-title').length > 0) {
+                    formData.append('title', $('#project-title').val());
+                } else if(stage.find('.title').length > 0){
 
                     if(title.val() == ''){
                         stage.find('.title_error').removeClass('instant_hide');
@@ -827,7 +829,6 @@
                 if(stage.find('.license_terms').length > 0){
                     formData.append('terms', licenseTerms.val());
                 }
-
                 if(error){
                     console.log('error');
                 }else{

@@ -386,12 +386,12 @@
                 <div class="project stage">
                     <div class="clearfix soc_con_face_username">
                         <div class="main_headline">Set up a new Project Agreement</div><br>
-                        <select class="border-2 choose_customer_dropdown border-input-b">
+                        <select class="border-2 border-solid choose_customer_dropdown border-input-b">
                             <option value="">Choose recipient</option>
                         </select>
                         <div class="instant_hide error choose_customer_error">Required</div>
                         <input class="dummy_field" type="text" name="fakeusernameremembered">
-                        <input class="border-2 border-solid border-input-b" placeholder="Title" type="text" class="title" />
+                        <input id="project-title" class="border-2 border-solid border-input-b" placeholder="Title" type="text" class="title" />
                         <div class="instant_hide error title_error">Required</div>
                         <div class="pro_pop_multi_row">
                             <div class="each_col">
