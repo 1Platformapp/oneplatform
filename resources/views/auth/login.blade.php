@@ -286,10 +286,10 @@
                     <div class="video_upper_inner hide_on_mobile">
                         <div class="auth_head_section">
                             <h1 class="auth_head_main">
-                                Get Your Website & Agent Now
+                                1Platform
                             </h1>
                             <h3 class="auth_head_secon">
-                                1 Platform is the best way to get artists to connect<br>everything creative & business in one place
+                                Your complete suite of music<br>management tools, all in one place.
                             </h3>
                         </div>
                         <div class="auth_box_outer">
