@@ -5,7 +5,6 @@
         <style>
             table { width: 100% !important; }
         </style>
-    </head>e>
     </head>
     <body style="width:1000px;" >
         <table align="center" style="width:100%;" cellpadding="0" cellspacing="0" >
@@ -125,6 +124,22 @@
                             </td>   
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
+                        </tr>
+                        <tr>
+                            <td style="height:50px; width:100%; vertical-align:top;"></td>
+                        </tr>
+                        <tr><hr></tr>
+                        <tr>
+                            <td style="border-top:1px solid;">
+                                <p style="font-size: 16px;color: #818181;margin: 10px 0;">
+                                    <span style="color: red;">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform. 
+                                    Our website serves as a platform for users to buy, sell, and collaborate. 
+                                    We do not take responsibility for any disputes or legal issues arising from these interactions. 
+                                    Users are advised to exercise caution and diligence when engaging with others on the platform. 
+                                    By using our services, you agree that 1Platform cannot be held liable for any such disputes, 
+                                    and you waive any right to take legal action against the platform.
+                                </p>
+                            </td>
                         </tr>
                     </table>
                 </td>
