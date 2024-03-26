@@ -317,7 +317,7 @@
             @if(Auth::check())
             <div class="back_to_profile">
                 <i class="fa fa-arrow-left"></i>
-                <a href="{{route('profile')}}">Back to profile</a>
+                <a href="{{route('agency.dashboard')}}">Back to profile</a>
             </div>
             @endif
             @if($isAllowed)

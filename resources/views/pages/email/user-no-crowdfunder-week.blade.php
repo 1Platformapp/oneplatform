@@ -179,7 +179,7 @@
 
                                             <tr>
                                             <td style="font-family:Open Sans,sans-serif;font-weight: 500;font-size:16px;" align="left">
-                                                    <a href="{{route('profile')}}">
+                                                    <a href="{{route('agency.dashboard')}}">
                                                         <button style="box-shadow: 3px 3px 5px #404040; border: 0; width: 100%; height: 25px; color: #fff; background-color: #999999; font-size: 14px; cursor: pointer;">
                                                             Start My Project
                                                         </button>

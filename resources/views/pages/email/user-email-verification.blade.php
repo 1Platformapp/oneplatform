@@ -109,7 +109,7 @@
                                             <tr>
                                                 <td height="22">&nbsp;</td>
                                             </tr>
-                                            
+
                                             <tr>
                                                 <td align="left">
                                                     <table style="width: 100%;">
@@ -118,9 +118,9 @@
                                                                 <img src="{{asset('email-template-images/new/Asset%209.png')}}">
                                                             </td>
                                                             <td style="padding-left: 20px; color: #818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px; text-align: left;" align="right">
-                                                                <a href="{{route('profile')}}">
+                                                                <a href="{{route('agency.dashboard')}}">
                                                                     <button style="box-shadow: 3px 3px 5px #404040; border: 0; width: 100%; height: 25px; color: #fff; background-color: #999999; font-size: 14px; cursor: pointer;">
-                                                                        <a style="text-decoration: none; color: #fff;" href="{{ route("activate.user", ["token" => $user->api_token]) }}">
+                                                                        <a style="text-decoration: none; color: #fff;" href="{{ route('activate.user', ['token' => $user->api_token]) }}">
                                                                             Verify My Email
                                                                         </a>
                                                                     </button>

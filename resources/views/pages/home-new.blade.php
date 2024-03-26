@@ -76,7 +76,7 @@
 	                            </a>
 	                            <a href="{{route('login')}}" id="dsk_signin">Sign in</a>
 	                            @else
-	                            <a href="{{route('profile.with.tab.info', ['tab' => 'edit', 'info' => 'cards'])}}" id="dsk_dashboard">
+	                            <a href="{{route('agency.dashboard')}}" id="dsk_dashboard">
 	                                <span id="dsk_dash_left">
 	                                    <img src="{{asset('images/user-default-thumb.jpg')}}" />
 	                                </span>

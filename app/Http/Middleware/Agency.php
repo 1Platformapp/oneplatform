@@ -27,7 +27,13 @@ class Agency
 
         if($user->is_buyer_only){
 
-            return redirect(route('profile'));
+            if ($routeName = $request->route()->getName() == 'agency.dashboard') {
+                return $next($request);
+            } else if ($request->isMethod('GET')){
+                return redirect(route('agency.dashboard'));
+            } else {
+                return $next($request);
+            }
         }
 
         if($user->profile->basic_setup != 1){

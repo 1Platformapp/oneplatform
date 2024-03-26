@@ -2327,11 +2327,11 @@ class ProjectController extends Controller
             if($paymentData['free'] == '1'){
                 $message = 'Successfully finished';
                 Session::flash('page', 'orders');
-                $redirectUrl = route('profile');
+                $redirectUrl = route('agency.dashboard');
             }else{
                 $message = $checkoutMessage;
                 Session::flash('page', 'orders');
-                $redirectUrl = route('profile');
+                $redirectUrl = route('agency.dashboard');
             }
         }
 
@@ -2481,7 +2481,7 @@ class ProjectController extends Controller
     						$checkout->error_date_time = NULL;
     						$checkout->stripe_charge_id = $charge['id'];
     						Session::flash('success', 'Your payment has been sent to '.$checkout->user->name);
-    						$url = route('profile.with.tab', ['tab' => 'orders']);
+    						$url = route('agency.dashboard');
     					}else if($paymentIntent['last_payment_error'] && isset($paymentIntent['last_payment_error']['decline_code']) && $paymentIntent['last_payment_error']['decline_code'] != ''){
 
     						$checkout->error = $paymentIntent['last_payment_error']['decline_code'];

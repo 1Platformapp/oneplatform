@@ -58,7 +58,7 @@
                                     <td width="14">&nbsp;</td>
                                     <td height="31">&nbsp;</td>
                                     <td width="14">&nbsp;</td>
-                                </tr> 
+                                </tr>
 
                                 <tr>
                                     <td width="14">&nbsp;</td>
@@ -68,7 +68,7 @@
                                         @endif
                                     </td>
                                     <td align="right" style="text-align:right;font-family:Open Sans,sans-serif;font-weight: 600;font-size:13px;" width="14">TSN_{{$checkout->id}}</td>
-                                </tr> 
+                                </tr>
 
                                 <tr>
                                     <td width="14">&nbsp;</td>
@@ -148,7 +148,7 @@
                                             @if(isset($customerBasket))
                                             <?php foreach($customerBasket as $b){
                                                 $convertedAmount = $commonMethods->convert(strtoupper($user->profile->default_currency), $currency, $b->price);
-                                                if($b->purchase_type == 'music' || $b->purchase_type == 'instant-license'){ 
+                                                if($b->purchase_type == 'music' || $b->purchase_type == 'instant-license'){
                                                     if($b->music){
                                                         $music = $b->music;
                                                     }else{
@@ -170,7 +170,7 @@
                                                             </span>
                                                         </span>
                                                         <span style="color:#8c8c8c; float: right;">
-                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}} 
+                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}}
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -209,11 +209,11 @@
                                                             </span>
                                                         </span>
                                                         <span style="color:#8c8c8c; float: right;">
-                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}} 
+                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}}
                                                         </span>
                                                     </td>
                                                 </tr>
-                                                
+
                                             <?php } else if($b->purchase_type == 'subscription'){ ?>
 
                                                 <tr>
@@ -224,7 +224,7 @@
                                                             </span>
                                                         </span>
                                                         <span style="color:#8c8c8c; float: right;">
-                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}} 
+                                                            {{$convertedAmount>0?$currencySymbol.number_format($convertedAmount, 2):'Free'}}
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -237,7 +237,7 @@
                                                     $chat = \App\Models\UserChat::find($explode[1]);
                                                     $product = \App\Models\UserProduct::find($chat->product['id']);
                                                 }
-                                                
+
                                              ?>
 
                                                 <tr>
@@ -309,7 +309,7 @@
                                                                 @else
                                                                     {{$item['title']}}
                                                                 @endif
-                                                                
+
                                                                 @if($item['type'] == 'custom-product')
                                                                 <br>
                                                                 <span style="font-size: 10px; color: #000;">
@@ -318,7 +318,7 @@
                                                                     @if($item['size'] != 'None')
                                                                      x {{$item['size']}}
                                                                     @else
-                                                                     x 
+                                                                     x
                                                                     @endif
                                                                     @if($item['color'] != 'None')
                                                                      {{$item['color']}}
@@ -329,7 +329,7 @@
                                                             </span>
                                                         </span>
                                                         <span style="color:#8c8c8c; float: right;">
-                                                            {{$item['currSym'].$item['price']}} 
+                                                            {{$item['currSym'].$item['price']}}
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -355,7 +355,7 @@
                                                         <tbody>
                                                         <tr>
                                                             <td style="color:#8c8c8c;font-family:Open Sans,sans-serif;font-weight: 500;font-size:10px;width:100%;" align="center">
-                                                                To download your products go to <a style="text-decoration: none;" href="{{ asset("/profile") }}?page=orders"><span style="color:#fc064c;">My Purchases</span></a> in your profile.
+                                                                To download your products go to <a style="text-decoration: none;" href="{{ route('agency.dashboard') }}?page=orders"><span style="color:#fc064c;">My Purchases</span></a> in your profile.
                                                             </td>
                                                         </tr>
                                                         </tbody>

@@ -109,16 +109,16 @@
                                                         </tr>
                                                         <tr>
                                                        <td align="center" style="cursor: pointer; padding: 3px;background: #737373;color: #fff;font-family: Open Sans,sans-serif;border-radius: 5px;font-size: 14px;">
-                                                           <a style="color: #fff;text-decoration: none;" href="{{route('profile')}}">
+                                                           <a style="color: #fff;text-decoration: none;" href="{{route('agency.dashboard')}}">
                                                                My Profile
-                                                           </a>                       
+                                                           </a>
                                                        </td>
                                                        </tr>
                                                        <tr>
                                                             <td height="22">&nbsp;</td>
                                                        </tr>
                                                     @else
-                                                       This message is a notification to let you know that the subscription by 
+                                                       This message is a notification to let you know that the subscription by
                                                        <span style="color:#fc064c;">{{$subscription->customer->name}}</span>
                                                        to your website has ended
                                                        <tr>
@@ -126,16 +126,16 @@
                                                        </tr>
                                                        <tr>
                                                        <td align="center" style="cursor: pointer; padding: 3px;background: #737373;color: #fff;font-family: Open Sans,sans-serif;border-radius: 5px;font-size: 14px;">
-                                                           <a style="color: #fff;text-decoration: none;" href="{{route('profile.with.tab', ['tab' => 'orders'])}}">
+                                                           <a style="color: #fff;text-decoration: none;" href="{{route('agency.dashboard')}}">
                                                                View Sales
-                                                           </a>                       
+                                                           </a>
                                                        </td>
                                                        </tr>
                                                        <tr>
                                                             <td height="22">&nbsp;</td>
                                                        </tr>
                                                     @endif
-                                                     
+
                                                      <br><br>
                                                 </td>
                                             </tr>

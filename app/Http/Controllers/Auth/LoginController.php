@@ -114,7 +114,7 @@ class LoginController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        
+
         $errors = collect();
 
         if (!$user) {
@@ -392,7 +392,7 @@ class LoginController extends Controller
 
     public function handleFacebookJSLoginCallback(Request $request){
 
-        $redirectUrl = route('profile');
+        $redirectUrl = route('agency.dashboard');
         $isBuyerOnly = NULL;
         if(Session::has('contributeUserId')){
             $redirectUrl = route('user.project', ['username' => Session::get('contributeUserId')]);

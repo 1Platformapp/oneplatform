@@ -3,11 +3,11 @@
 @section('pagetitle') {{$user->name}} - Checkout @endsection
 
 @section('page-level-css')
-    
+
     <link rel="stylesheet" href="{{asset('css/project.css?v=2.2')}}"></link>
     <link rel="stylesheet" href="{{asset('css/checkout.css?v=1.7')}}"></link>
     <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
-    
+
     @if($user->isCotyso() && $user->home_layout == 'background')
         <link rel="stylesheet" href="{{asset('css/user_home_background.min.css')}}"></link>
     @endif
@@ -16,7 +16,7 @@
         .stripe_power { display: flex; align-items: center; justify-content: flex-end; }
         .stripe_power a { display: block; width: 275px; margin-top: 25px; margin-bottom: 60px; }
         .proj_tect_area_cotyso { border-bottom: 1px dashed #fff; margin-bottom: 50px; }
-        
+
         @media(min-width:320px) and (max-width:767px){
             .stripe_power { justify-content: center; }
             .stripe_power a { margin-bottom: 30px; }
@@ -30,7 +30,7 @@
 <!-- Page Level Javascript !-->
 
 @section('page-level-js')
-    
+
     @if($user->isCotyso() && $user->home_layout == 'background')
         <script src="{{ asset('js/user_home_background.min.js') }}"></script>
     @endif
@@ -49,7 +49,7 @@
 
             var baseStyles = {'fontFamily': 'Open sans, sans-serif','fontSize': '14px','color': '#fff','lineHeight': '31px'};
             var invalidStyles = {'color': '#fc064c'};
-            
+
             var eCardNumber = elements.create('cardNumber', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
             var eCardCvc = elements.create('cardCvc', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
             var eCardExpiry = elements.create('cardExpiry', {'style': {'base': baseStyles, 'invalid': invalidStyles}});
@@ -139,7 +139,7 @@
             }
 
             $('#not_logged_in').remove();
-            
+
             musicHoverSupport();
 
             var browserWidth = $( window ).width();
@@ -227,7 +227,7 @@
                 var emaill = $('#email').val();
                 $('#email_error').addClass('instant_hide');
                 var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                
+
                 if(email != '' && email == emaill && regex.test(email)){
                     $.ajax({
 
@@ -235,13 +235,13 @@
                         dataType: "json",
                         type: 'post',
                         data: {'find_type': 'email_duplication_truth', 'find': email, 'identity_type': 'guest_register', 'identity': ''},
-                        success: function(response) { 
+                        success: function(response) {
                             if(response.success == 1){
                                 if(response.data.duplicated == 1){
                                     $('#email_error').text('This email is already registered. You must login with this email to purchase').removeClass('instant_hide');
                                 }
                             }else{
-                                
+
                             }
                         }
                     });
@@ -267,7 +267,7 @@
                 var city = $(this).val();
                 $('#city_error').addClass('instant_hide');
                 $("#city").css("border", "1px solid #9daec3");
-                
+
                 if(city != ''){
                     $.ajax({
 
@@ -275,9 +275,9 @@
                         dataType: "json",
                         type: 'post',
                         data: {'find_type': 'city_validation', 'find': city, 'identity_type': 'guest', 'identity': ''},
-                        success: function(response) { 
+                        success: function(response) {
                             if(response.success == 1){
-                                
+
                             }else{
                                 $("#city").css("border", "1px solid red");
                                 $('#city_error').text(response.error).removeClass('instant_hide');
@@ -307,7 +307,7 @@
             		    contentType:false,
             		    cache: false,
             		    processData: false,
-            		    success: function(response) { 
+            		    success: function(response) {
             		        if(response.success == 1){
             		            location.reload();
             		        }else{
@@ -335,14 +335,14 @@
             		    contentType:false,
             		    cache: false,
             		    processData: false,
-            		    success: function(response) { 
+            		    success: function(response) {
             		        if(response.success == 1){
             		            location.reload();
             		        }else{
             		            alert(response.error);
             		        }
             		    }
-            		});	
+            		});
             	}
             });
 
@@ -441,7 +441,7 @@
                 proceedPreparePayment(paymentData,stripe, eCardNumber);
             }
         }
-        
+
         function payWithCard(stripe, card, clientSecret){
             stripe
             .confirmCardPayment(clientSecret, {
@@ -481,7 +481,7 @@
                         if(!/^(?:f|ht)tps?\:\/\//.test(url)){
                             url = 'https://' + url;
                         }
-                        window.location = url;
+                        window.location = url + '/my-transactions';
                     }else{
                         alert(response.error);
                         document.getElementById('spinner').classList.add('hidden');
@@ -703,7 +703,7 @@
 
 
 @section('top-center')
-    	
+
     @php $sellerDefaultCurrency = strtoupper($user->profile->default_currency); @endphp
     @if($user->isCotyso())
         @php $isCotyso = 1 @endphp
@@ -785,7 +785,7 @@
                                                 <b>Your Email *</b>
 
                                                 <input type="text" placeholder="Your Email" name="email" id="email" class="evade_auto_fill" />
-                                             
+
 
                                                 <span id="email_error" class="instant_hide"></span>
 
@@ -854,7 +854,7 @@
 
                             <li class="proj_address_outer add_margin">
 
-                                
+
 
                                 <div class="clearfix proj_cont_flt_outer">
 
@@ -1067,7 +1067,7 @@
                                     </div>
 
                                 </div>
-                                <b class="faq_check_stat">If you have any questions you can check out our 
+                                <b class="faq_check_stat">If you have any questions you can check out our
                                 	<a href="{{route('faq')}}">FAQ</a>
                                 </b>
                             </li>
@@ -1085,9 +1085,9 @@
                                     @endif
 
                                 @endif
-                                
+
                             @endforeach
-                            
+
                             <li class="proj_total_amount_outer">
 
                                 <div class="clearfix proj_cont_flt_outer">
@@ -1140,7 +1140,7 @@
                             <li class="clearfix proj_cont_flt_outer proj_bottom_description">
                                 <p>
                                     If you are not paying in your native currency there may be fees for conversion. The actual amount charged by your card issuer may differ from our estimate shown here. This depends on their exchange rate and any applicable fees.
-                                </p>    
+                                </p>
                             </li>
 
                             <li class="clearfix proj_cont_flt_outer proj_bottom_description">
@@ -1149,8 +1149,8 @@
                                     <span class="terms_agree_outer">
                                         <input type="checkbox" class="terms_agree" name="terms_agree" id="checkout_terms_agree">
                                     </span>
-                                    
-                                </p>    
+
+                                </p>
                             </li>
                             @endif
 
@@ -1163,7 +1163,7 @@
                                     <input type="hidden" name="userEmails" id="userEmails" value="">
 
                                     <input id="monies_submit" type="button" value="Confirm Payment" />
- 
+
                                     <i id="spinner" class="hidden fa fa-spinner fa-spin"></i>
                                 </div>
 
@@ -1253,7 +1253,7 @@
 
 @section('top-right')
 
-    
+
 
 @stop
 
@@ -1410,12 +1410,12 @@
                 <div class="clearfix soc_con_face_username">
                     @guest
                     <div style="text-align: center;" class="main_headline">This feature requires user to login</div>
-                    @endguest 
+                    @endguest
                     @auth
                     <div class="main_headline">Negotiate with the owner</div><br>
                     <textarea id="bispoke_offer" placeholder="Write your proposal here (i.e music name, terms of use, price etc)"></textarea>
                     <div class="instant_hide error" id="bispoke_offer_error">Required</div>
-                    @endauth 
+                    @endauth
                 </div>
                 <br>
                 @auth
@@ -1430,8 +1430,8 @@
             <div class="stage_two instant_hide">
                 <div class="clearfix soc_con_face_username">
                     <div class="pro_pop_text_light">
-                        Your proposal has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('profile.with.tab', ['tab' => 'chat'])}}" class="pro_text_dark">chat</a> to read replies or send more messages/details about your proposal.
-                    </div>  
+                        Your proposal has been sent to <span class="pro_text_dark" id="sender_name"></span>. Go to <a href="{{route('agency.dashboard')}}" class="pro_text_dark">chat</a> to read replies or send more messages/details about your proposal.
+                    </div>
                 </div>
                 <br>
             </div>

@@ -169,7 +169,7 @@ class ChartController extends Controller
 
                             Auth::login($loginUser);
 
-                            return redirect(route('profile'));
+                            return redirect(route('agency.dashboard'));
                         }
                     }else{
 
@@ -890,11 +890,11 @@ class ChartController extends Controller
 
         }
         if($request->purchase_type == 'music'){
-            
+
             $findItem = UserMusic::find($request->music_id);
-            
+
             if(!$findItem){
-                
+
                 $return["error"] = 'Music does not exist';
                 return $return;
             }
@@ -935,7 +935,7 @@ class ChartController extends Controller
                 $return["error"] = 'Product does not exist';
                 return $return;
             }
-            
+
             $basketPrice = $findItem->price;
         }
         if($request->purchase_type == 'custom_product'){
@@ -994,7 +994,7 @@ class ChartController extends Controller
 
         $basketUser = '';
         $currentUser = User::find($request->basket_user_id);
-        
+
         $buyerUser = User::find($_SESSION['basket_customer_id']);
 
         $basket = CommonMethods::getCustomerBasket();
@@ -1104,7 +1104,7 @@ class ChartController extends Controller
 
         $basket = CommonMethods::getCustomerBasket();
 
-        $basketCurrency = \App\Http\Controllers\CommonMethods::getCurrencySymbol(strtoupper($basket->first()->user->profile->default_currency)) ?? 'usd'; 
+        $basketCurrency = \App\Http\Controllers\CommonMethods::getCurrencySymbol(strtoupper($basket->first()->user->profile->default_currency)) ?? 'usd';
 
         $view = '';
 
@@ -1134,7 +1134,7 @@ class ChartController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             $return['error'] = $e;
-            
+
             return $return;
         }
     }

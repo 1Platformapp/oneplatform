@@ -68,7 +68,7 @@
                                         @endif
                                     </td>
                                     <td align="right" style="text-align:right;font-family:Open Sans,sans-serif;font-weight: 600;font-size:13px;" width="14">TSN_{{$checkout->id}}</td>
-                                </tr> 
+                                </tr>
 
                                 <tr>
                                     <td width="14">&nbsp;</td>
@@ -147,7 +147,7 @@
                                                             @if($checkoutItem->size != 'None')
                                                              x {{$checkoutItem->size}}
                                                             @else
-                                                             x 
+                                                             x
                                                             @endif
                                                             @if($checkoutItem->color != 'None')
                                                              {{$checkoutItem->color}}
@@ -162,14 +162,14 @@
                                                 </td>
                                             </tr>
                                             @endforeach
-                                            
+
                                             <tr>
                                                 <td height="22">&nbsp;</td>
                                             </tr>
 
                                             <tr>
                                             <td style="font-family:Open Sans,sans-serif;font-weight: 500;font-size:16px;" align="left">
-                                                    <a href="{{route('profile')}}">
+                                                    <a href="{{route('agency.dashboard')}}">
                                                         <button style="box-shadow: 3px 3px 5px #404040; border: 0; width: 100%; height: 25px; color: #fff; background-color: #999999; font-size: 14px; cursor: pointer;">
                                                             <a style="color: #fff;text-decoration: none;" href="https://www.duong.1platform.tv/admin/purchase/{{$checkout->id}}">
                                                                 View details

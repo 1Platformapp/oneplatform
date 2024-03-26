@@ -159,7 +159,7 @@
 
                                             <tr>
                                                 <td style="font-family:Helvetica,Arial,sans-serif;font-size:16px;" align="left">
-                                                    <a href="{{ $asset . '/profile?email_user=' . $receiver->id }}"><img style="width: 100%;" src="{{$asset.'/email-template-images/image_start_new_project_button.png'}}"></a>
+                                                    <a href="{{ route('agency.dashboard') }}"><img style="width: 100%;" src="{{$asset.'/email-template-images/image_start_new_project_button.png'}}"></a>
                                                 </td>
                                             </tr>
                                             </tbody>

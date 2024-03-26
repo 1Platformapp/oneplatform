@@ -1433,7 +1433,7 @@
                     thiss.removeClass('busy');
                     if(response.success == 1){
                         if(thiss.attr('id') == 'unsub_dom' || thiss.attr('id') == 'payment_details'){
-                            window.location.href = '/profile?page=domain';
+                            window.location.href = '/dashboard';
                         }else{
                             thiss.find('i').removeClass('fa-spinner').removeClass('fa-spin').addClass('fa-check');
                         }

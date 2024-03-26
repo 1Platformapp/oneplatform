@@ -35,7 +35,7 @@
             @php $contract = \App\Models\AgencyContract::find($notification->source_table_id) @endphp
 		@endif
 
-		<div data-id="{{$notification->id}}" data-type="{{$notification->type}}" data-link="{{isset($customLink) && $customLink != '' ? $customLink : ($tab != '' ? route('profile.with.tab',['tab' => $tab]) : route('agency.dashboard')) }}" class="each_usr_notif_item">
+		<div data-id="{{$notification->id}}" data-type="{{$notification->type}}" data-link="{{isset($customLink) && $customLink != '' ? $customLink : ($tab != '' ? route('agency.dashboard') : route('agency.dashboard')) }}" class="each_usr_notif_item">
 		    <div class="usr_notif_item_avatar">
 		        <img alt="user notification" src="{{$commonMethods->getUserDisplayImage($notification->customer->id)}}" />
 		    </div>

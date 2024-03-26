@@ -284,7 +284,7 @@
     					</a>
     					@else
     					@php $explode = explode(':',$quickSetup['error']) @endphp
-    					<a href="{{route('profile.with.tab', ['tab' => $explode[0], 'subtab' => $explode[1]])}}">
+    					<a href="{{route('agency.dashboard')}}">
     						<i class="fa fa-external-link"></i>
     					</a>
     					@endif
@@ -375,7 +375,7 @@
     					Connect Social Media Accounts
     				</div>
     				<div class="pro_build_acc_link">
-	    				<a href="{{route('profile.with.tab', ['tab' => 'media', 'subtab' => 'social-media'])}}">
+	    				<a href="{{route('agency.dashboard')}}">
 	    					@if(!$user->hasSocialEmpty())
 	    						<i class="fa fa-eye"></i>
 	    					@else

@@ -135,7 +135,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="color:#818181;font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px;">
-                                                    You will be unable to edit your current project, however you can start a new project on your 1Platform profile page. 
+                                                    You will be unable to edit your current project, however you can start a new project on your 1Platform profile page.
                                                 </td>
                                             </tr>
                                             <tr>
@@ -152,9 +152,9 @@
 
                                             <tr>
                                                 <td align="center" style="cursor: pointer; padding: 3px;background: #737373;color: #fff;font-family: Open Sans,sans-serif;border-radius: 5px;font-size: 15px;">
-                                                    <a style="color: #fff;text-decoration: none;" href="{{route('profile')}}?page=crowdfunds">
-                                                    Start My Brand New Project  
-                                                    </a>                     
+                                                    <a style="color: #fff;text-decoration: none;" href="{{route('agency.dashboard')}}?page=crowdfunds">
+                                                    Start My Brand New Project
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <tr>
