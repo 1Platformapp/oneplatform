@@ -223,7 +223,7 @@
     </div>
 </div>
 
-
+<script src="https://js.stripe.com/v3/"></script>
 <script>
 
     function getContactCalendar(well, contact){
@@ -1130,7 +1130,6 @@
                 var formData = new FormData();
                 formData.append('response', value);
                 formData.append(customType, id);
-
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -1155,6 +1154,8 @@
                             } else {
                                 refreshChat(parent);
                             }
+                        } else {
+                            console.log(response);
                         }
                     }
                 });

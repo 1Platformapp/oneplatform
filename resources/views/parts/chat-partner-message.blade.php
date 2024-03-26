@@ -34,12 +34,13 @@
         </div>
         <div class="chat_message_det_bottom">
             @if(is_array($chat->agreement) && count($chat->agreement))
-            <a download href="{{asset('bespoke-licenses/'.$chat->agreement['filename'])}}">
-                <i class="fa fa-file-pdf-o"></i>
-                <div class="msg_agreement_det">
-                    <div class="msg_agree_status {{strtolower($chat->agreement['status'])}}">{{$chat->agreement['status']}}</div>
-                    <div class="msg_agree_name">LICENSE</div>
-                </div>
+                <a download href="{{asset('bespoke-licenses/'.$chat->agreement['filename'])}}">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <div class="msg_agreement_det">
+                        <div class="msg_agree_status {{strtolower($chat->agreement['status'])}}">{{$chat->agreement['status']}}</div>
+                        <div class="msg_agree_name">LICENSE</div>
+                    </div>
+                </a>
                 @php $price = isset($chat->agreement['price']) ? $chat->agreement['price'] : 0 @endphp
                 @php $music = isset($chat->agreement['music']) ? $chat->agreement['music'] : 0 @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->agreement['status'] == 'Pending')
@@ -54,14 +55,14 @@
                     </div>
                 </div>
                 @endif
-            </a>
             @elseif(is_array($chat->project) && count($chat->project))
-            <a download href="{{asset('proffered-project/'.$chat->project['filename'])}}">
-                <i class="fa fa-file-pdf-o"></i>
-                <div class="msg_agreement_det">
-                    <div class="msg_agree_status {{strtolower($chat->project['status'])}}">{{$chat->project['status']}}</div>
-                    <div class="msg_agree_name">PROJECT</div>
-                </div>
+                <a download href="{{asset('proffered-project/'.$chat->project['filename'])}}">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <div class="msg_agreement_det">
+                        <div class="msg_agree_status {{strtolower($chat->project['status'])}}">{{$chat->project['status']}}</div>
+                        <div class="msg_agree_name">PROJECT</div>
+                    </div>
+                </a>
                 @php $price = isset($chat->project['price']) ? $chat->project['price'] : 0 @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->project['status'] == 'Pending')
                 <div class="msg_agreement_actions">
@@ -75,14 +76,14 @@
                     </div>
                 </div>
                 @endif
-            </a>
             @elseif(is_array($chat->product) && count($chat->product))
-            <a download href="{{asset('proffered-product/'.$chat->product['filename'])}}">
-                <i class="fa fa-file-pdf-o"></i>
-                <div class="msg_agreement_det">
-                    <div class="msg_agree_status {{strtolower($chat->product['status'])}}">{{$chat->product['status']}}</div>
-                    <div class="msg_agree_name">PRODUCT</div>
-                </div>
+                <a download href="{{asset('proffered-product/'.$chat->product['filename'])}}">
+                    <i class="fa fa-file-pdf-o"></i>
+                    <div class="msg_agreement_det">
+                        <div class="msg_agree_status {{strtolower($chat->product['status'])}}">{{$chat->product['status']}}</div>
+                        <div class="msg_agree_name">PRODUCT</div>
+                    </div>
+                </a>
                 @php $price = isset($chat->product['price']) ? $chat->product['price'] : 0 @endphp
                 @php $productId = $chat->product['id'] @endphp
                 @if(Auth::user()->id == $chat->recipient->id && $chat->product['status'] == 'Pending')
@@ -97,7 +98,6 @@
                     </div>
                 </div>
                 @endif
-            </a>
             @else
                 @php $url = '@(http)?(s)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@' @endphp
                 @php $message = preg_replace($url, '<a class="user_message_hyp" href="$0" target="_blank" title="Click here">$0</a>', $chat->message); @endphp
