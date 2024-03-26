@@ -50,7 +50,7 @@
                         <h2 class="text-base leading-7 text-gray-900">Video</h2>
                     </div>
                     <div class="p-6 bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                        <iframe width="100%" height="100%" src="{{$task->video_url}}"></iframe>
+                        <iframe class="w-full h-200 md:h-400" src="{{$task->video_url}}"></iframe>
                     </div>
                 </div>
                 @endif
