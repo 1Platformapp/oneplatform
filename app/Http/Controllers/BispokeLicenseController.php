@@ -376,13 +376,19 @@ class BispokeLicenseController extends Controller
                     return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
                 }
 
-                if($customer == 'partner' && $user->isAgent() && $group->contact){
-                    $recipient = $group->contact;
-                }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
-                    $recipient = $group->agent;
-                }else{
-                    $recipient = User::find($customer);
+                if($user->id == $group->agent_id) {
+                    $recipient = User::find($group->contact_id);
+                } else {
+                    $recipient = User::find($group->agent_id);
                 }
+
+                // if($customer == 'partner' && $user->isAgent() && $group->contact){
+                //     $recipient = $group->contact;
+                // }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
+                //     $recipient = $group->agent;
+                // }else{
+                //     $recipient = User::find($customer);
+                // }
             }
 
             if($music && $music->user->id == $user->id && $recipient){
