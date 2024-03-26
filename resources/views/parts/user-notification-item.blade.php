@@ -24,7 +24,7 @@
 			@php $user = \App\Models\User::find($notification->source_table_id) @endphp
 			@php $customLink = 'https://www.duong.1platform.tv/admin/users/music-license-approval' @endphp
 		@elseif($notification->type == 'chat')
-			@php $customLink = route('agency.dashboard') @endphp
+			@php $customLink = route('agency.dashboard.tab', ['tab' => 'contact-management']) @endphp
 		@elseif($notification->type == 'new_user_to_platform_manager')
 			@php $user = \App\Models\User::find($notification->source_table_id) @endphp
 			@php $customLink = 'https://www.duong.1platform.tv/admin/users' @endphp
