@@ -214,7 +214,7 @@ class ProfileSetupController extends Controller
                         Session::put('error', $designError);
                         $page = 'media';
                     }else{
-                        $page == 'design';
+                        $page = 'design';
                     }
                 }
 
