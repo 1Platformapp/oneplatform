@@ -586,11 +586,7 @@ $(document).ready(function() {
                             $(showTabContent+' .lazy_tab_content').html(response);
                             if($('#twitter-feed1').length){
                                 $.getScript('https://platform.twitter.com/widgets.js', function() {
-                                    $.getScript('/js/twitter-feed.js', function() {
-                                        $("head").append($("<link rel='stylesheet' href='/twitter-custom-embedded-feed/twitter-styles.css' type='text/css' media='screen' />"));
-                                        $("head").append($("<link rel='stylesheet' href='/css/twitter-feed.css?v=1.1' type='text/css' media='screen' />"));
-                                        fillSocialTabWithTwitterFeed();
-                                    });
+                                    $('#twitter-feed1').html('<a class="twitter-timeline" href="https://twitter.com/cotyso?ref_src=twsrc%5Etfw">Tweets by Cotyso</a>');
                                 });
                             }
                             $.getScript('/js/instagram-feed.js?v=1.1', function() {
@@ -1542,7 +1538,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-        
+
         var musicId = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', musicId);
@@ -1566,7 +1562,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-        
+
         var serviceId = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', serviceId);
@@ -1590,7 +1586,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-        
+
         var id = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', id);
@@ -1614,7 +1610,7 @@ $(document).ready(function() {
 
 
         e.preventDefault();
-        
+
         var id = $(this).attr('data-del-id');
 
         $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-id', id);

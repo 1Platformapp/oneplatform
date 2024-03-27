@@ -23,7 +23,7 @@
 		@endif
 	</div>
 	@endif
-	
+
 	@if($user->profile->social_spotify_artist_id != '' || $user->profile->social_youtube != '')
 	<div class="clearfix social_ma_row">
 		@if($user->profile->social_spotify_artist_id != '')
@@ -71,7 +71,7 @@
 			headerHTML += '<div class="twitter_feed_head"><i class="fab fa-twitter"></i>';
 			headerHTML += '<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>';
 			loadingHTML += '<div id="loading-container"><img src="/img/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
-			$('#twitter-feed1').html(headerHTML);
+			$('#twitter-feed1').html('ahsan');
 		}
 	}
 
