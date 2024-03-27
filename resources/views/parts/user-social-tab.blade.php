@@ -17,7 +17,7 @@
 		<div class="twitter_feed_outer each_social_item">
 			<div class="social_ma_head">Twitter</div>
 		    <div id="twitter-feed1"></div>
-		    <input type="hidden" id="social_twitter_username" value="{{$user->profile->social_twitter}}">
+		    <input type="hidden" id="social_twitter_username" value="cotyso">
 		    <input type="hidden" id="social_twitter_display_limit" value="{{$commonMethods->getSocialTabTweetsDisplayLimit()}}">
 		</div>
 		@endif
@@ -59,8 +59,20 @@
 
 
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <script>
+
+	var twitterprofile = $('#social_twitter_username').val();
+	var headerHTML = '';
+	var loadingHTML = '';
+		if( twitterprofile.length ){
+			headerHTML += '<div class="twitter_feed_head"><i class="fab fa-twitter"></i>';
+			headerHTML += '<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>';
+			loadingHTML += '<div id="loading-container"><img src="/img/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
+			$('#twitter-feed1').html(headerHTML);
+		}
+
 	window.onSpotifyIframeApiReady = (IFrameAPI) => {
 		const element = document.getElementById('embed-iframe');
 		const artistID = $('#embed-iframe').attr('data-artist-id');
