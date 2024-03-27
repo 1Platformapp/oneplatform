@@ -20,7 +20,7 @@ module.exports = {
                 'main-icons': '#989898'
             },
             height: {
-                '200': '12.5rem',
+                '280': '17.5rem',
                 '400': '25rem',
               },
         }
