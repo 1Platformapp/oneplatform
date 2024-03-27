@@ -162,7 +162,11 @@
 @section('page-background')
 
     @if($user->home_layout == 'background')
-        <div data-url="/user-media/background/{{$user->custom_background}}" class="pg_back back_inactive"></div>
+        <div data-url="/user-media/background/{{$user->custom_background}}" class="pg_back back_inactive">
+            <div class="flex justify-center w-full mt-4">
+                <span class="text-xl font-semibold text-white">Goto "<a class="cursor-pointer hover:text-red-500" href="{{route('profile.setup.with.next', ['page' => 'design'])}}">Design My Website</a>" and Update Your Background Image</span>
+            </div>
+        </div>
     @endif
 
     @if(!Session::has('exempt_splash') && $user->profile->splash && isset($user->profile->splash['id']))
