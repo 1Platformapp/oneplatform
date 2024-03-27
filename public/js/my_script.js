@@ -586,7 +586,7 @@ $(document).ready(function() {
                             $(showTabContent+' .lazy_tab_content').html(response);
                             if($('#twitter-feed1').length){
                                 $.getScript('https://platform.twitter.com/widgets.js', function() {
-                                    $('#twitter-feed1').html('<a class="twitter-timeline" href="https://twitter.com/cotyso?ref_src=twsrc%5Etfw">Tweets by Cotyso</a>');
+                                    $('#twitter-feed1').html('<a class="twitter-timeline" href="https://twitter.com/Cotyso?ref_src=twsrc%5Etfw">Tweets by Cotyso</a>');
                                 });
                             }
                             $.getScript('/js/instagram-feed.js?v=1.1', function() {
