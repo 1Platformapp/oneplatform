@@ -59,19 +59,21 @@
 
 
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="https://platform.twitter.com/widgets.js" onload="twitterScriptLoaded()" charset="utf-8"></script>
 
 <script>
 
-	var twitterprofile = $('#social_twitter_username').val();
-	var headerHTML = '';
-	var loadingHTML = '';
+	function twitterScriptLoaded() {
+		var twitterprofile = $('#social_twitter_username').val();
+		var headerHTML = '';
+		var loadingHTML = '';
 		if( twitterprofile.length ){
 			headerHTML += '<div class="twitter_feed_head"><i class="fab fa-twitter"></i>';
 			headerHTML += '<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>';
 			loadingHTML += '<div id="loading-container"><img src="/img/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
 			$('#twitter-feed1').html(headerHTML);
 		}
+	}
 
 	window.onSpotifyIframeApiReady = (IFrameAPI) => {
 		const element = document.getElementById('embed-iframe');
