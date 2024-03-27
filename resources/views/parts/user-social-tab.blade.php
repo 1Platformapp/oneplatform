@@ -3,7 +3,7 @@
 <div class="social_ma_outer">
 
 	@if($user->profile->social_facebook != '' || $user->profile->social_twitter != '')
-	<div class="social_ma_row clearfix">
+	<div class="clearfix social_ma_row">
 		@if($user->profile->social_facebook != '')
 		<div class="fb-page each_social_item">
 			<div class="social_ma_head">Facebook</div>
@@ -25,11 +25,12 @@
 	@endif
 	
 	@if($user->profile->social_spotify_artist_id != '' || $user->profile->social_youtube != '')
-	<div class="social_ma_row clearfix">
+	<div class="clearfix social_ma_row">
 		@if($user->profile->social_spotify_artist_id != '')
 		<div class="spotify_follow_button_outer each_social_item">
 			<div class="social_ma_head">Spotify</div>
-			<div id="spotify-follow-button-contain"></div>
+			<div id="embed-iframe" data-artist-id="{{$user->profile->social_spotify_artist_id}}"></div>
+			<!-- <div id="spotify-follow-button-contain"></div> -->
 		</div>
 		@endif
 		@if($user->profile->social_spotify_artist_id != '' && $user->profile->social_youtube != '')
@@ -46,7 +47,7 @@
 	@endif
 
 	@if($user->profile->social_instagram_user_id != NULL && $user->profile->social_instagram_user_access_token_ll != NULL)
-	<div class="social_ma_row clearfix">
+	<div class="clearfix social_ma_row">
 		<div class="instagram_feed_outer each_social_item">
 			<div class="social_ma_head">Instagram</div>
 			<div id="instagram_id"></div><br />
@@ -55,3 +56,19 @@
 	</div>
 	@endif
 </div>
+
+
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
+<script>
+	window.onSpotifyIframeApiReady = (IFrameAPI) => {
+		const element = document.getElementById('embed-iframe');
+		const artistID = $('#embed-iframe').attr('data-artist-id');
+		const options = {
+			uri: 'spotify:artist:'+artistID,
+		};
+		const callback = (EmbedController) => {};
+		IFrameAPI.createController(element, options, callback);
+	};
+
+</script>

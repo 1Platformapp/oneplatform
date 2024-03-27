@@ -4224,23 +4224,23 @@ class ProfileController extends Controller
     public static function getUserSpotifyIframe(Request $request){
 
         $iFrame = '';
-        $commonMethods = new commonMethods;
-        if($request->userId){
+        // $commonMethods = new commonMethods;
+        // if($request->userId){
 
-            $user = User::find($request->userId);
-        }else{
+        //     $user = User::find($request->userId);
+        // }else{
 
-            return '';
-        }
+        //     return '';
+        // }
 
-        if($user && $user->profile && $user->profile->social_spotify_artist_id != ''){
+        // if($user && $user->profile && $user->profile->social_spotify_artist_id != ''){
 
-            $iFrame = '<iframe src="https://open.spotify.com/follow/1?uri=spotify:artist:'.$user->profile->social_spotify_artist_id.'&size=detail&theme=dark" scrolling="no" style="border:none; overflow:hidden; width: 100%;" allowtransparency="true" height="56" frameborder="0"></iframe>';
-            return $iFrame;
-        }else{
+        //     $iFrame = '<iframe src="https://open.spotify.com/follow/1?uri=spotify:artist:'.$user->profile->social_spotify_artist_id.'&size=detail&theme=dark" scrolling="no" style="border:none; overflow:hidden; width: 100%;" allowtransparency="true" height="56" frameborder="0"></iframe>';
+        //     return $iFrame;
+        // }else{
 
-            return '';
-        }
+        //     return '';
+        // }
 
         return $iFrame;
     }
