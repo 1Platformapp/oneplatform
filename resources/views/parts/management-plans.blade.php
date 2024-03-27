@@ -49,8 +49,8 @@
                     <div class="md:px-4">
                         <h2 class="text-base leading-7 text-gray-900">Video</h2>
                     </div>
-                    <div class="p-6 bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                        <iframe class="w-full h-200 md:h-400" src="{{$task->video_url}}"></iframe>
+                    <div class="p-6 bg-white shadow-sm ring-1 h-200 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                        <iframe class="w-full h-full" src="{{$task->video_url}}"></iframe>
                     </div>
                 </div>
                 @endif
