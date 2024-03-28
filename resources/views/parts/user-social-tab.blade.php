@@ -17,7 +17,7 @@
 		<div class="twitter_feed_outer each_social_item">
 			<div class="social_ma_head">Twitter</div>
 		    <div id="twitter-feed1"></div>
-		    <input type="hidden" id="social_twitter_username" value="cotyso">
+		    <input type="hidden" id="social_twitter_username" value="{{$user->profile->social_twitter}}">
 		    <input type="hidden" id="social_twitter_display_limit" value="{{$commonMethods->getSocialTabTweetsDisplayLimit()}}">
 		</div>
 		@endif
