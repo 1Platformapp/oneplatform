@@ -210,8 +210,8 @@ class ProfileSetupController extends Controller
                 if($page == 'design'){
 
                     $designError = $user->designStepError();
-                    if($designError != null){
-                        Session::put('error', $designError);
+                    Session::put('error', $designError);
+                    if($designError != null && !$isStandalone){
                         $page = 'media';
                     }else{
                         $page = 'design';
@@ -234,7 +234,7 @@ class ProfileSetupController extends Controller
                 if (!$isStandalone) {
                     
                     return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
-                } else if($page == 'design' && $nextPage == 'bio') {
+                } else if($page == 'design' && $nextPage == 'bio' && $designError == null) {
                     $page = $nextPage;
                 }
             }
