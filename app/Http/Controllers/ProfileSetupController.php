@@ -210,7 +210,7 @@ class ProfileSetupController extends Controller
                 if($page == 'design'){
 
                     $designError = $user->designStepError();
-                    if($designError != ''){
+                    if($designError != null){
                         Session::put('error', $designError);
                         $page = 'media';
                     }else{
@@ -231,13 +231,13 @@ class ProfileSetupController extends Controller
                         $nextPage = $user->setupWizardnNext($page);
                     }
                 }
-
                 if (!$isStandalone) {
-
+                    
                     return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
+                } else if($page == 'design' && $nextPage == 'bio') {
+                    $page = $nextPage;
                 }
             }
-
             $vouchers = [];
             if($user->isCotyso()){
                 $database = Config('constants.clients_portal_database');

@@ -1180,7 +1180,7 @@ class User extends Authenticatable
             $error = 'Please upload a logo image by clicking the +image button next to custom logo';
         }else{
 
-            $error = '';
+            $error = null;
         }
 
 
