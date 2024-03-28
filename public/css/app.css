@@ -812,6 +812,18 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-28 {
+  height: 7rem;
+}
+.h-44 {
+  height: 11rem;
+}
+.h-400 {
+  height: 25rem;
+}
+.h-auto {
+  height: auto;
+}
 .max-h-60 {
   max-height: 15rem;
 }
@@ -927,10 +939,16 @@ video {
 .cursor-pointer {
   cursor: pointer;
 }
+.cursor-default {
+  cursor: default;
+}
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+.resize-none {
+  resize: none;
 }
 .resize {
   resize: both;

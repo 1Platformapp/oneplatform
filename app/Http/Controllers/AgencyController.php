@@ -312,7 +312,6 @@ class AgencyController extends Controller
             return 'Unauthorized access';
         }
 
-        $commonMethods = new CommonMethods();
         $contract = Contract::find($id);
         $agentContact = AgentContact::where(['id' => $contactId, 'approved' => 1])->get()->first();
 
@@ -349,8 +348,8 @@ class AgencyController extends Controller
             $creator = '';
         }
 
-        $contractDetails = '';
-        $contractDetails = ['body' => str_replace(array("'", "\""), " ", $contract->body), 'data' => $request->get('inputData')];
+        $contractDetails = $request->contractBody ?? '';
+        // $contractDetails = ['body' => str_replace(array("'", "\""), " ", $contract->body), 'data' => $request->get('inputData')];
 
         $agencyContract = new AgencyContract();
         $agencyContract->contact_id = $contactId;
@@ -392,7 +391,7 @@ class AgencyController extends Controller
             // owner of the contract can update
             $terms = $request->get('terms') == '' ? NULL : $request->get('terms');
             $name = $request->get('name') == '' ? $contract->title : $request->get('name');
-            $contractDetails = ['body' => $agencyContract->contract_details['body'], 'data' => $request->get('inputData')];
+            $contractDetails = $request->contractBody ?? '';
 
             $agencyContract->contract_name = $name;
             $agencyContract->custom_terms = $terms;
@@ -426,15 +425,15 @@ class AgencyController extends Controller
             $fileName = rand(100000, 999999).'.'.$extension;
             file_put_contents(public_path('signatures/').$fileName, $imageData);
 
-            $contractDetails = '';
-            $contractPieces = explode('<<var>>', $agencyContract->contract_details['body']);
-            foreach ($contractPieces as $key => $piece) {
+            $contractDetails = $agencyContract->contract_details ?? '';
+            // $contractPieces = explode('<<var>>', $agencyContract->contract_details['body']);
+            // foreach ($contractPieces as $key => $piece) {
 
-                $contractDetails .= $piece;
-                if(isset($agencyContract->contract_details['data'][$key])){
-                    $contractDetails .= ' ' . $agencyContract->contract_details['data'][$key] . ' ';
-                }
-            }
+            //     $contractDetails .= $piece;
+            //     if(isset($agencyContract->contract_details['data'][$key])){
+            //         $contractDetails .= ' ' . $agencyContract->contract_details['data'][$key] . ' ';
+            //     }
+            // }
 
             if($agencyContract->contact->agentUser->id == $user->id){
 
@@ -463,7 +462,7 @@ class AgencyController extends Controller
 
             $agencyContract->pdf = $pdfName;
             $agencyContract->signatures = $signatures;
-            $agencyContract->contract_details = [$contractDetails];
+            $agencyContract->contract_details = $contractDetails;
             $agencyContract->approved_at = date('Y-m-d H:i:s');
             $agencyContract->legal_names = $legalNames;
             $agencyContract->save();
