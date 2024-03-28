@@ -59,20 +59,21 @@
 
 
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-<script src="https://platform.twitter.com/widgets.js" onload="twitterScriptLoaded()" charset="utf-8"></script>
 
 <script>
 
-	function twitterScriptLoaded() {
-		var twitterprofile = $('#social_twitter_username').val();
-		var headerHTML = '';
-		var loadingHTML = '';
-		if( twitterprofile.length ){
-			headerHTML += '<div class="twitter_feed_head"><i class="fab fa-twitter"></i>';
-			headerHTML += '<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>';
-			loadingHTML += '<div id="loading-container"><img src="/img/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
-			$('#twitter-feed1').html('ahsan');
-		}
+
+	var twitterprofile = $('#social_twitter_username').val();
+	var headerHTML = '';
+	var loadingHTML = '';
+	if( twitterprofile.length ){
+		$.getScript('https://platform.twitter.com/widgets.js', function() {
+			$('#twitter-feed1').html('<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>');
+		});
+		// headerHTML += '<div class="twitter_feed_head"><i class="fab fa-twitter"></i>';
+		// headerHTML += '<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>';
+		// loadingHTML += '<div id="loading-container"><img src="/img/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
+		// $('#twitter-feed1').html('ahsan');
 	}
 
 	window.onSpotifyIframeApiReady = (IFrameAPI) => {
