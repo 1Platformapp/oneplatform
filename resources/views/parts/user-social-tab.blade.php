@@ -3,9 +3,9 @@
 <div class="social_ma_outer">
 
 	@if($user->profile->social_facebook != '' || $user->profile->social_twitter != '')
-	<div class="flex flex-row clearfix gap-1 border-black border-y-2">
+	<div class="flex flex-col clearfix gap-1 border-black md:flex-row border-y-2">
 		@if($user->profile->social_facebook != '')
-		<div class="w-1/2 fb-page">
+		<div class="w-full md:w-1/2">
 			<div class="social_ma_head">Facebook</div>
 			<iframe src="https://www.facebook.com/plugins/page.php?href={{urlencode($user->profile->social_facebook)}}&tabs=timeline&width=400&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=2036609159758654" width="100%" height="500" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 		</div>
@@ -14,7 +14,7 @@
 		<!-- <div class="each_social_separator"></div> -->
 		@endif
 		@if($user->profile->social_twitter != '')
-		<div class="w-1/2 twitter_feed_outer">
+		<div class="w-full md:w-1/2">
 			<div class="social_ma_head">Twitter</div>
 		    <div id="twitter-feed1" width="100%" height="500"></div>
 		    <input type="hidden" id="social_twitter_username" value="{{$user->profile->social_twitter}}">
@@ -25,9 +25,9 @@
 	@endif
 
 	@if($user->profile->social_spotify_artist_id != '' || $user->profile->social_youtube != '')
-	<div class="flex flex-row clearfix gap-1 border-black border-y-2">
+	<div class="flex flex-col clearfix gap-1 border-black md:flex-row border-y-2">
 		@if($user->profile->social_spotify_artist_id != '')
-		<div class="w-1/2 spotify_follow_button_outer">
+		<div class="w-full md:w-1/2">
 			<div class="social_ma_head">Spotify</div>
 			<div id="embed-iframe" data-artist-id="{{$user->profile->social_spotify_artist_id}}"></div>
 			<!-- <div id="spotify-follow-button-contain"></div> -->
@@ -37,7 +37,7 @@
 		<!-- <div class="each_social_separator"></div> -->
 		@endif
 		@if($user->profile->social_youtube != '')
-		<div class="w-1/2 social_youtube_outer">
+		<div class="w-full md:w-1/2">
 			<div class="social_ma_head">YouTube</div>
 			<br>&nbsp;
 		    <div id="yt-button-container-render" data-channelid="{{$user->profile->social_youtube}}"></div>
