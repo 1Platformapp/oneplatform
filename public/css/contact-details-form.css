@@ -30,6 +30,12 @@ body,.content_outer { font-family: Montserrat; }
 .port_wid_drop_each:hover { color: #000; }
 .port_wid_drop_each i { margin-right: 10px; color: #818181; }
 
+
+.genHeight { overflow-y: auto; overflow-x: hidden; }
+.genHeight::-webkit-scrollbar { width: 4px; }
+.genHeight::-webkit-scrollbar-track { box-shadow: inset 0 0 3px grey; border-radius: 10px; }
+.genHeight::-webkit-scrollbar-thumb { background: black; border-radius: 10px; }
+
 .port_each_field { font-family: Montserrat; margin-top: 20px; }
 .port_each_field .port_field_label { display: flex; flex-direction: row; margin-bottom: 10px; color: #444; justify-content: space-between; align-items: center; }
 .port_each_field .port_field_label_text { margin-right: 10px; font-size: 14px; }

@@ -12,6 +12,64 @@
     <link href="{{asset('css/contact-details-form.css')}}" type="text/css" rel="stylesheet">
     <style>
         .jSignature { max-width: 100% !important; }
+        #myModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 50;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .modal-content {
+            max-width: 400px; /* Adjust the max-width as needed */
+            width: 100%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem;
+        }
+
+        .modal-header button {
+            color: #666;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding-right: 2rem;
+            padding-left: 2rem;
+            text-align: center;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0rem 1rem 1rem 0rem;
+        }
+
+        .modal-footer button {
+            background-color: #3490dc;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 @stop
 
@@ -21,6 +79,17 @@
 <script src="{{asset('esign/libs/modernizr.js')}}"></script>
 <script src="{{asset('esign/src/jSignature.js')}}"></script>
 <script src="{{asset('esign/src/main.js')}}"></script>
+<script>
+    
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+</script>
 
 @stop
 
@@ -64,10 +133,12 @@
             <div class="contact_section_body">
                 <form class="flex flex-col" id="signature-form" action="{{$action == 'edit' ? route('agency.contract.update', ['id' => $agencyContract->id]) : route('agency.contract.create', ['id' => $contract->id, 'contact' => $agentContact->id])}}" method="POST">
                     {{csrf_field()}}
-
-
                     
-                    <div class="mt-8">
+                    <div class="flex items-center justify-center my-4">
+                        <label class="block text-xl font-medium leading-6 text-gray-900 cursor-pointer" onclick="openModal()">Click to see Advisory Notes</label>
+                    </div>
+                    <div>
+                        <label for="contractBody" class="block mb-4 text-lg font-medium leading-6 text-gray-900">Contract Detail</label>
                         <textarea name="contractBody" class="w-full px-4 py-2 border rounded-md resize-none h-400 genHeight focus:outline-none focus:ring focus:border-blue-500" placeholder="Start writing...">{{$details}}</textarea>
                     <!-- @foreach ($variables as $index => $variable)
                         <span class="text-sm font-normal">{!!$variable!!}</span>
@@ -76,7 +147,7 @@
                         @endif
                     @endforeach -->
                     </div>
-                    <div class="my-12">
+                    <div class="mb-12">
                         <label for="comment" class="block text-sm font-medium leading-6 text-gray-900">Name your contract (optional)</label>
                         <div class="mt-2">
                             <input type="text" value="{{$action == 'edit' ? $agencyContract->contract_name : ''}}" name="name" class="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" placeholder="(e.g song writing contract)">
@@ -150,6 +221,16 @@
                             @endif
                         </div>
                     </div>
+                    <div>
+                        <p style="font-size: 16px;color: #818181;margin: 10px 0;">
+                            <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform. 
+                            Our website serves as a platform for users to buy, sell, and collaborate. 
+                            We do not take responsibility for any disputes or legal issues arising from these interactions. 
+                            Users are advised to exercise caution and diligence when engaging with others on the platform. 
+                            By using our services, you agree that 1Platform cannot be held liable for any such disputes, 
+                            and you waive any right to take legal action against the platform.
+                        </p>
+                    </div>
 
                     @if($action == 'edit')
                         <button type="submit" class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
@@ -158,6 +239,21 @@
                         <input type="hidden" value="" id="signature-data" name="data">
                     @endif
                 </form>
+            </div>
+        </div>
+    </div>
+    <div id="myModal">
+        <div class="modal-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-4 text-md">{!! nl2br($contract->advisory_notes ?? 'N/A') !!}</p>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="closeModal()">Close</button>
+                </div>
             </div>
         </div>
     </div>
