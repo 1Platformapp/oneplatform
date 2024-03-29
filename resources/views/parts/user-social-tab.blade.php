@@ -16,7 +16,7 @@
 		@if($user->profile->social_twitter != '')
 		<div class="w-full md:w-1/2">
 			<div class="social_ma_head">Twitter</div>
-		    <div id="twitter-feed1" class="w-full genHeight h-400"></div>
+		    <div id="twitter-feed1" class="w-full genHeight h-280"></div>
 		    <input type="hidden" id="social_twitter_username" value="{{$user->profile->social_twitter}}">
 		    <input type="hidden" id="social_twitter_display_limit" value="{{$commonMethods->getSocialTabTweetsDisplayLimit()}}">
 		</div>
