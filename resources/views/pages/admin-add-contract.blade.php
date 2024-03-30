@@ -9,7 +9,7 @@
 @section('page-level-css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link href="{{asset('css/contact-details-form.css')}}" type="text/css" rel="stylesheet">
+    <link href="{{asset('css/contact-details-form.css?v=1.2')}}" type="text/css" rel="stylesheet">
     <style>
         .jSignature { max-width: 100% !important; }
         #myModal {
