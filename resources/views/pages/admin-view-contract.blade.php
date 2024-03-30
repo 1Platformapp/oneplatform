@@ -31,17 +31,18 @@
         }
 
         .modal-content {
-            max-width: 400px; /* Adjust the max-width as needed */
+            max-width: 700px;
             width: 100%;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             overflow: hidden;
+            height: 500px;
         }
 
         .modal-header {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             padding: 1rem;
         }
 
@@ -54,7 +55,6 @@
         .modal-body {
             padding-right: 2rem;
             padding-left: 2rem;
-            text-align: center;
         }
 
         .modal-footer {
@@ -222,10 +222,11 @@
     <div id="myModal">
         <div class="modal-container">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="items-center modal-header">
+                    <p class="text-lg font-bold">Advisory Notes</p>
                     <button onclick="closeModal()">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body h-400 genHeight">
                     <p class="mb-4 text-md">{!! nl2br($contract->contract->advisory_notes ?? 'N/A') !!}</p>
                 </div>
                 <div class="modal-footer">
