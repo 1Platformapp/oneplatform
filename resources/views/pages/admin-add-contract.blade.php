@@ -135,7 +135,7 @@
                     {{csrf_field()}}
                     
                     <div class="flex items-center justify-center my-4">
-                        <label class="block text-xl font-medium leading-6 text-gray-900 cursor-pointer" onclick="openModal()">Click to see Advisory Notes</label>
+                        <button type="button" class="block px-4 py-1 text-sm font-medium leading-6 text-white bg-gray-900 rounded-full cursor-pointer" onclick="openModal()">Click to see Advisory Notes</label>
                     </div>
                     <div>
                         <label for="contractBody" class="block mb-4 text-lg font-medium leading-6 text-gray-900">Contract Detail</label>
