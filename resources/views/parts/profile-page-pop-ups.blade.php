@@ -273,7 +273,7 @@ $videoUploadedDisplay = '';
                 <div class="py-2 ps-3">
                     https://open.spotify.com/artist/
                 </div>
-                <input autocomplete="off" type="text" id="soc_con_spotify_id" class="flex-1 py-2 pe-3" placeholder="2dGJo7pcD1V6oG8kP0tJRR" />
+                <input autocomplete="off" type="text" id="soc_con_spotify_url_val" class="flex-1 py-2 pe-3" placeholder="2dGJo7pcD1V6oG8kP0tJRR" />
             </div>
             <span class="error"></span>
         </div>
