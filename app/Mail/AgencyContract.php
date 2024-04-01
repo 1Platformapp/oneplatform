@@ -20,13 +20,17 @@ class AgencyContract extends Mailable
      * @return void
      */
 
-    public $contract;
+    protected $contract;
+    protected $recipient;
+    protected $action;
+    protected $pdfPath;
 
-    public function __construct(AgencyContractModel $contract, User $recipient, $action)
+    public function __construct(AgencyContractModel $contract, User $recipient, $action, $pdfPath = null)
     {
         $this->contract = $contract;
         $this->recipient = $recipient;
         $this->action = $action;
+        $this->pdfPath = $pdfPath;
     }
 
     /**
@@ -49,6 +53,10 @@ class AgencyContract extends Mailable
 
             return $this->view('pages.email.contract-approved')
             ->subject($this->contract->contract_name." has been approved")
+            ->attach($this->pdfPath, [
+                'as' => basename($this->pdfPath),
+                'mime' => 'application/pdf'
+            ])
             ->with([
                 'contract' => $this->contract,
                 'recipient' => $this->recipient,

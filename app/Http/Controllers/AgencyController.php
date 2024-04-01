@@ -448,14 +448,15 @@ class AgencyController extends Controller
             $pdfName = strtoupper('acnt_'.uniqid()).'.pdf';
             $fileName = 'agent-agreements/'.$pdfName;
             $data = ['contact' => $agencyContract->contact->contactUser, 'legalNames' => $legalNames, 'contractDetails' => $contractDetails, 'agent' => $agencyContract->contact->agentUser, 'contract' => $agencyContract, 'signatures' => $signatures];
+            $pdfPath = public_path('agent-agreements').'/'.$pdfName;
             PDF::loadView('pdf.agent-contract-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
 
-            $result = Mail::to($agencyContract->contact->agentUser->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $agencyContract->contact->agentUser, 'contract-approved-for-agent'));
+            Mail::to($agencyContract->contact->agentUser->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $agencyContract->contact->agentUser, 'contract-approved-for-agent', $pdfPath));
             $userNotification = new UserNotificationController();
             $request->request->add(['user' => $agencyContract->contact->agentUser->id, 'customer' => $agencyContract->contact->contactUser->id, 'type' => 'contract_approved_for_agent', 'source_id' => $agencyContract->id]);
             $response = json_decode($userNotification->create($request), true);
 
-            $result = Mail::to($agencyContract->contact->contactUser->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $agencyContract->contact->contactUser, 'contract-approved-for-contact'));
+            Mail::to($agencyContract->contact->contactUser->email)->bcc(Config('constants.bcc_email'))->send(new AgencyContractMailer($agencyContract, $agencyContract->contact->contactUser, 'contract-approved-for-contact', $pdfPath));
             $userNotification = new UserNotificationController();
             $request->request->add(['customer' => $agencyContract->contact->agentUser->id, 'user' => $agencyContract->contact->contactUser->id, 'type' => 'contract_approved_for_contact', 'source_id' => $agencyContract->id]);
             $response = json_decode($userNotification->create($request), true);
