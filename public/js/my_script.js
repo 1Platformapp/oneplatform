@@ -584,6 +584,7 @@ $(document).ready(function() {
                         success: function (response) {
 
                             $(showTabContent+' .lazy_tab_content').html(response);
+
                             $.getScript('/js/instagram-feed.js?v=1.1', function() {
                                 fillSocialTabWithInstagramFeed(mainTabUserId);
                             });
