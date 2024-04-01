@@ -1270,7 +1270,7 @@
 	        </div>
 	        <div class="clearfix soc_con_twit_username">
 
-	            <h3>Paste Your Spotify Artist URL</h3><br>
+	            <h3>Paste Your Spotify Artist ID</h3><br>
 	            <input autocomplete="off" placeholder="Example: https://open.spotify.com/artist/123456789" type="text" id="soc_con_spotify_url_val" value="" />
 	            <span class="error"></span>
 	        </div>
