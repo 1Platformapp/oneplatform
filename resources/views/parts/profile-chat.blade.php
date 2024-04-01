@@ -155,7 +155,7 @@
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
                                             <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">1.</div>
@@ -163,7 +163,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
                                             <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">2.</div>
@@ -171,7 +171,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
                                             <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">3.</div>
@@ -179,7 +179,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
                                             <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">4.</div>
@@ -187,7 +187,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
                                             <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">5.</div>
@@ -195,7 +195,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
                                             <div class="flex-1 min-w-0">
                                                 <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
                                                     <div class="hidden lg:flex">6.</div>
