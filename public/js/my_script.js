@@ -584,17 +584,12 @@ $(document).ready(function() {
                         success: function (response) {
 
                             $(showTabContent+' .lazy_tab_content').html(response);
-                            if($('#twitter-feed1').length){
-                                // $.getScript('https://platform.twitter.com/widgets.js', function() {
-                                //     $('#twitter-feed1').html('<a class="twitter-timeline" href="https://twitter.com/Cotyso?ref_src=twsrc%5Etfw">Tweets by Cotyso</a>');
-                                // });
-                            }
                             $.getScript('/js/instagram-feed.js?v=1.1', function() {
                                 fillSocialTabWithInstagramFeed(mainTabUserId);
                             });
-                            $.getScript('/js/spotify-follow-button.js', function() {
-                                fillSocialTabWithSpotifyFeed(mainTabUserId);
-                            });
+                            // $.getScript('/js/spotify-follow-button.js', function() {
+                            //     fillSocialTabWithSpotifyFeed(mainTabUserId);
+                            // });
                             $.getScript('https://apis.google.com/js/platform.js', function() {
                                 $.getScript('/js/youtube-subscribe-button.js?v=1.2', function() {
                                     fillSocialTabWithYoutubeSubscribeButton();
