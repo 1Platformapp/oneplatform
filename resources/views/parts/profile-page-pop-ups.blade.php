@@ -269,7 +269,12 @@ $videoUploadedDisplay = '';
         <div class="clearfix soc_con_twit_username">
 
             <h3>Paste Your Spotify Artist ID</h3><br>
-            <input autocomplete="off" placeholder="Example: https://open.spotify.com/artist/123456789" type="text" id="soc_con_spotify_url_val" value="" />
+            <div class="flex border border-gray-300 rounded">
+                <div class="py-2 ps-3">
+                    https://open.spotify.com/artist/
+                </div>
+                <input autocomplete="off" type="text" id="soc_con_spotify_id" class="flex-1 py-2 pe-3" placeholder="2dGJo7pcD1V6oG8kP0tJRR" />
+            </div>
             <span class="error"></span>
         </div>
         <div class="clearfix pro_submit_button_outer soc_con_submit_success">
