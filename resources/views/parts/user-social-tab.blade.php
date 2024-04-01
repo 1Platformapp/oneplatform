@@ -7,7 +7,7 @@
 		@if($user->profile->social_facebook != '')
 		<div class="w-full md:w-1/2 genHeight h-550">
 			<div class="social_ma_head">Facebook</div>
-			<iframe class="w-full h-550" src="https://www.facebook.com/plugins/page.php?href={{urlencode($user->profile->social_facebook)}}&tabs=timeline&width=400&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=2036609159758654" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+			<iframe class="w-full h-550" src="https://www.facebook.com/plugins/page.php?href={{urlencode($user->profile->social_facebook)}}&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=2036609159758654" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 		</div>
 		@endif
 		@if($user->profile->social_facebook != '' && $user->profile->social_twitter != '')
