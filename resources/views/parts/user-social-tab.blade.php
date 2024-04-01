@@ -5,9 +5,9 @@
 	@if($user->profile->social_facebook != '' || $user->profile->social_twitter != '')
 	<div class="flex flex-col clearfix gap-1 border-black md:flex-row border-y-2">
 		@if($user->profile->social_facebook != '')
-		<div class="w-full md:w-1/2">
+		<div class="w-full md:w-1/2 genHeight h-550">
 			<div class="social_ma_head">Facebook</div>
-			<iframe src="https://www.facebook.com/plugins/page.php?href={{urlencode($user->profile->social_facebook)}}&tabs=timeline&width=400&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=2036609159758654" width="100%" height="500" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+			<iframe src="https://www.facebook.com/plugins/page.php?href={{urlencode($user->profile->social_facebook)}}&tabs=timeline&width=400&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=2036609159758654" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 		</div>
 		@endif
 		@if($user->profile->social_facebook != '' && $user->profile->social_twitter != '')
@@ -61,33 +61,42 @@
 <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 
 <script>
+function loadTwitterFeed() {
+    var twitterprofile = $('#social_twitter_username').val();
+    if (twitterprofile.length) {
+        $.getScript('https://platform.twitter.com/widgets.js', function() {
+            $('#twitter-feed1').html('<a class="twitter-timeline" href="https://twitter.com/' + twitterprofile + '?ref_src=twsrc%5Etfw">Tweets by ' + twitterprofile + '</a>');
+        });
+    }
+}
 
+function loadSpotifyIframe() {
+    const artistID = $('#embed-iframe').attr('data-artist-id');
+    if (artistID) {
+        window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            const element = document.getElementById('embed-iframe');
+            const options = {
+                uri: 'spotify:artist:' + artistID,
+            };
+            const callback = (EmbedController) => {};
+            IFrameAPI.createController(element, options, callback);
+        };
+    }
+}
 
-	var twitterprofile = $('#social_twitter_username').val();
-	var headerHTML = '';
-	var loadingHTML = '';
-	if( twitterprofile.length ){
-		$.getScript('https://platform.twitter.com/widgets.js', function() {
-			$('#twitter-feed1').html('<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>');
-		});
-		// headerHTML += '<div class="twitter_feed_head"><i class="fab fa-twitter"></i>';
-		// headerHTML += '<a class="twitter-timeline" href="https://twitter.com/'+twitterprofile+'?ref_src=twsrc%5Etfw">Tweets by '+twitterprofile+'</a>';
-		// loadingHTML += '<div id="loading-container"><img src="/img/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
-		// $('#twitter-feed1').html('ahsan');
-	}
+try {
+    loadTwitterFeed();
+} catch (error) {
+    console.error('Error loading Twitter feed:', error);
+}
 
-	window.onSpotifyIframeApiReady = (IFrameAPI) => {
-		const element = document.getElementById('embed-iframe');
-		const artistID = $('#embed-iframe').attr('data-artist-id');
-		const options = {
-			uri: 'spotify:artist:'+artistID,
-		};
-		const callback = (EmbedController) => {};
-		IFrameAPI.createController(element, options, callback);
-	};
+try {
+    loadSpotifyIframe();
+} catch (error) {
+    console.error('Error loading Spotify iframe:', error);
+}
 
 </script>
-
 
 <style scoped>
 .h-550 { max-height: 550px;}
