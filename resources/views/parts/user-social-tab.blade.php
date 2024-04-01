@@ -14,9 +14,9 @@
 		<!-- <div class="each_social_separator"></div> -->
 		@endif
 		@if($user->profile->social_twitter != '')
-		<div class="w-full md:w-1/2">
+		<div class="w-full md:w-1/2 genHeight h-550">
 			<div class="social_ma_head">Twitter</div>
-		    <div id="twitter-feed1" class="w-full genHeight h-280"></div>
+		    <div id="twitter-feed1" class="w-full"></div>
 		    <input type="hidden" id="social_twitter_username" value="{{$user->profile->social_twitter}}">
 		    <input type="hidden" id="social_twitter_display_limit" value="{{$commonMethods->getSocialTabTweetsDisplayLimit()}}">
 		</div>
@@ -87,3 +87,12 @@
 	};
 
 </script>
+
+
+<style scoped>
+.h-550 { max-height: 550px;}
+.genHeight { overflow-y: auto; overflow-x: hidden; }
+.genHeight::-webkit-scrollbar { width: 4px; }
+.genHeight::-webkit-scrollbar-track { box-shadow: inset 0 0 3px grey; border-radius: 10px; }
+.genHeight::-webkit-scrollbar-thumb { background: black; border-radius: 10px; }
+</style>
