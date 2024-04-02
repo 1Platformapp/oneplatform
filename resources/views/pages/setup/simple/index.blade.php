@@ -151,7 +151,7 @@
 
         async function registerUser() {
             const formData = new FormData();
-                
+
             formData.append('fake_username', $('#fake_username').val());
             formData.append('currency', $('#currency').val());
             formData.append('firstName', $('#firstname').val());
@@ -167,7 +167,7 @@
             formData.append('level', $('#level').val());
             formData.append('user_id', $('#user_id').val());
             formData.append('g-recaptcha-response', grecaptcha.getResponse());
-               
+
             fetch('api/register/user', {
                 method: 'POST',
                 body: formData,
@@ -259,7 +259,7 @@
                             $(this).removeClass('is-busy');
                             return;
                         }
-                            
+
                         let hitApi = $('#register-form').attr('data-api-hit');
 
                         if(hitApi) {
@@ -361,7 +361,7 @@
 @endsection
 
 @section('page-content')
-<div id="token-content" class="flex items-center justify-center h-screen">
+<div id="token-content" class="flex items-center justify-center h-screen hidden">
     <div class="w-full max-w-md pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
         <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
@@ -380,7 +380,7 @@
     </div>
 </div>
 
-<div id="register-content" class="hidden">
+<div id="register-content" class="">
     <div class="w-full pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
         <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
@@ -556,7 +556,7 @@
                                         @foreach($skills as $skill)
                                             <option value="{{$skill->value}}">{{$skill->value}}</option>
                                         @endforeach
-                                    </select>        
+                                    </select>
                                 </div>
                                 <!-- <div class="hidden my-dropdown main-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
@@ -572,7 +572,7 @@
                                         @foreach($skills as $skill)
                                             <option value="{{$skill->value}}">{{$skill->value}}</option>
                                         @endforeach
-                                    </select>    
+                                    </select>
                                 </div>
                                 <!-- <div class="hidden my-dropdown other-skill-dropdown absolute top-full border pt-2 text-sm divide-y border-t-0 left-0 w-full max-h-[300px] z-50 bg-white flex flex-col">
 
