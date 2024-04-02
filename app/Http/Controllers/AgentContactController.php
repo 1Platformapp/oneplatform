@@ -83,10 +83,9 @@ use App\Mail\Agent;
 
 use App\Models\Address;
 
+use Illuminate\Support\Facades\DB;
 
 use Image;
-
-use DB;
 
 use PDF;
 
@@ -562,50 +561,54 @@ class AgentContactController extends Controller
         return json_encode(['success' => $success, 'error' => $error, 'html' => $html]);
     }
 
-    public function delete(Request $request){
-
-        $return['error'] = '';
-        $return['success'] = 0;
-        if( Auth::check() && $request->has('id') ){
-
+    public function delete(Request $request)
+    {
+        $success = 0;
+        
+        try {
+            DB::beginTransaction();
+            if(!(Auth::check() && $request->has('id'))){
+                return json_encode(['success' => $success, 'error' => 'No user is logged in']);
+            }
+    
             $user = Auth::user();
             $contact = AgentContact::find($request->id);
-
-            if( $contact && $contact->agent_id == $user->id ){
-
-                if($contact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$contact->agreement_pdf)){
-
-                    unlink(public_path('agent-agreements/').$contact->agreement_pdf);
-                }
-
-                $userChatGroup = UserChatGroup::where(['contact_id' => $contact->contact_id, 'agent_id' => $user->id])->first();
-                if($userChatGroup){
-                    $userChatGroup->delete();
-                }
-
-                if(!$contact->approved && !$contact->is_already_user){
-
-                    $contact->contactUser->profile->delete();
-                    $contact->contactUser->address->delete();
-                    $contact->contactUser->delete();
-                }
-
-                $return['success'] = $contact->delete();
-            }else{
-
-                $return['error'] = 'Delete item and logged in user are mismatched';
+    
+            if( !$contact || $contact->agent_id != $user->id ){
+                return json_encode(['success' => $success, 'error' => 'Delete item and logged in user are mismatched']);
             }
-        }else{
 
-            $return['error'] = 'No user is logged in';
+            if(AgentContact::where('id', $request->id)->whereHas('contracts')->exists()) {
+                return json_encode(['success' => $success, 'error' => 'You have contracts with this user, cannot delete!']);
+            }
+    
+            if($contact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$contact->agreement_pdf)){
+    
+                unlink(public_path('agent-agreements/').$contact->agreement_pdf);
+            }
+    
+            $userChatGroup = UserChatGroup::where(['contact_id' => $contact->contact_id, 'agent_id' => $user->id])->first();
+            if($userChatGroup){
+                $userChatGroup->delete();
+            }
+    
+            if(!$contact->approved && !$contact->is_already_user){
+    
+                $contact->contactUser->profile->delete();
+                $contact->contactUser->address->delete();
+                $contact->contactUser->delete();
+            }
+    
+            $success = $contact->delete();
+            DB::rollBack();
+    
+            return json_encode(['success' => $success, 'error' => '']);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Session::flash('error', 'Error: '.$e->getMessage());
+            return json_encode(['success' => $success, 'error' => $e->getMessage()]);
         }
-
-        if( $return['error'] != '' ){
-
-            Session::flash('error', 'Error: '.$return['error']);
-        }
-
-        return json_encode(['success' => $return['success'], 'error' => $return['error']]);
     }
 
     public function deleteQuestion (Request $request){
