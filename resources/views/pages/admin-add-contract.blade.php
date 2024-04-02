@@ -79,6 +79,7 @@
 <script src="{{asset('esign/libs/modernizr.js')}}"></script>
 <script src="{{asset('esign/src/jSignature.js')}}"></script>
 <script src="{{asset('esign/src/main.js')}}"></script>
+<script src="https://cdn.tiny.cloud/1/y6tokqg00tkidjbat439k9tylc7vh873k66cyauf7vjgojoc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     
     function openModal() {
@@ -88,6 +89,17 @@
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
     }
+
+    tinymce.init({
+        selector: '#mytextarea',
+        menubar: false,
+        statusbar: false,
+        plugins: 'anchor autolink codesample  link lists media searchreplace visualblocks wordcount checklist mediaembed casechange export pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advcode advtemplate autocorrect typography inlinecss markdown',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | checklist numlist bullist indent outdent | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
 
 </script>
 
@@ -139,7 +151,7 @@
                     </div>
                     <div>
                         <label for="contractBody" class="block mb-4 text-lg font-medium leading-6 text-gray-900">Contract Detail</label>
-                        <textarea name="contractBody" class="w-full px-4 py-2 border rounded-md resize-none h-400 genHeight focus:outline-none focus:ring focus:border-blue-500" placeholder="Start writing...">{{$details}}</textarea>
+                        <textarea id="mytextarea" name="contractBody" class="w-full px-4 py-2 border rounded-md resize-none h-400 genHeight focus:outline-none focus:ring focus:border-blue-500" placeholder="Start writing...">{{$details}}</textarea>
                     <!-- @foreach ($variables as $index => $variable)
                         <span class="text-sm font-normal">{!!$variable!!}</span>
                         @if($index + 1 < count($variables))
@@ -147,7 +159,7 @@
                         @endif
                     @endforeach -->
                     </div>
-                    <div class="mb-12">
+                    <div class="mt-4 mb-12">
                         <label for="comment" class="block text-sm font-medium leading-6 text-gray-900">Name your contract (optional)</label>
                         <div class="mt-2">
                             <input type="text" value="{{$action == 'edit' ? $agencyContract->contract_name : ''}}" name="name" class="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" placeholder="(e.g song writing contract)">
