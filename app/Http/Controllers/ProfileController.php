@@ -2915,7 +2915,7 @@ class ProfileController extends Controller
 
                 if(count($musicArray)){
 
-                    $contents = collect(Storage::cloud()->listContents('/', false));
+                    // $contents = collect(Storage::cloud()->listContents('/', false));
                     foreach ($musicArray as $key => $download) {
 
                         if($download['itemtype'] == $itemType){
@@ -2933,13 +2933,13 @@ class ProfileController extends Controller
                                 unlink($UnFileName);
                             }
 
-                            $file = $contents
-                                ->where('type', '=', 'file')
-                                ->where('filename', '=', $download['filename'])
-                                ->first();
-                            if($file && is_array($file) && count($file)){
-                                Storage::cloud()->delete($file['path']);
-                            }
+                            // $file = $contents
+                            //     ->where('type', '=', 'file')
+                            //     ->where('filename', '=', $download['filename'])
+                            //     ->first();
+                            // if($file && is_array($file) && count($file)){
+                            //     Storage::cloud()->delete($file['path']);
+                            // }
 
                             unset($musicArray[$key]);
 
