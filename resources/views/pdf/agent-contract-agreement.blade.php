@@ -38,14 +38,16 @@
                 @endif
             </div>
 
-            @if($contract->contract->advisory_notes)
+            <!-- @if($contract->contract->advisory_notes)
                 <div style="height: 30px;"></div>
                 <div style="color:#000; font-size: 17px; margin-top: 15px;">ADVISORY NOTES</div>
                 <div style="height: 15px;"></div>
                 <div style="font-size: 16px;color: #818181;margin: 10px 0;">
                     {!! nl2br($contract->contract->advisory_notes) !!}
                 </div>
-            @endif
+            @endif -->
+
+            <div style="height: 45px;"></div>
 
             @if(count($signatures))
                 <div style="height: 15px;"></div>
