@@ -202,7 +202,7 @@
         function myFunction() {
             captchaNumber = Math.floor(Math.random() * 6);
             const imgCaptcha = document.getElementById('imgCaptchaPlace');
-            imgCaptcha.src = 'captcha_images/'+captchaNumber+'_cpt';   
+            imgCaptcha.src = "{{ asset('captcha_images') }}/" + captchaNumber + "_cpt";   
         }
 
         $('document').ready(function(){
