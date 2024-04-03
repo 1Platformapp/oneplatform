@@ -592,7 +592,7 @@
     });
 
     $('.brief_video_btn').click(function(){
-        $(this).closest('ul').find('.brief_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/P8BcCrT6sxI"></iframe>');
+        $(this).closest('ul').find('.brief_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>');
     });
 
     $('.open_contact_tab').click(function(){

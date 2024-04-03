@@ -216,7 +216,7 @@ Excited to have you on board!  @endif</textarea>
 <script>
 
     $('.join_me_video_btn').click(function(){
-        $(this).closest('ul').find('.join_me_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/P8BcCrT6sxI"></iframe>');
+        $(this).closest('ul').find('.join_me_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>');
     });
 
     $('.join_me_close_btn').click(function(){
