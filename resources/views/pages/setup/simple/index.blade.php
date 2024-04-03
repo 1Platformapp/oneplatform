@@ -190,6 +190,21 @@
             });
         }
 
+        var captchaArray=[];        
+        captchaArray.push("VQ7W3");
+        captchaArray.push("A1234");
+        captchaArray.push("A32BD");
+        captchaArray.push("LD673");
+        captchaArray.push("PQ78V");
+        captchaArray.push("MX81W");
+        var captchaNumber;
+
+        function myFunction() {
+            captchaNumber = Math.floor(Math.random() * 6);
+            const imgCaptcha = document.getElementById('imgCaptchaPlace');
+            imgCaptcha.src = 'captcha_images/'+captchaNumber+'_cpt';   
+        }
+
         $('document').ready(function(){
 
             $.ajaxSetup({
@@ -246,7 +261,7 @@
                             $(this).removeClass('is-busy');
                             return;
                         }
-
+                        myFunction();
                         activateStep('three');
                         var recaptchaScriptUrl = 'https://www.google.com/recaptcha/api.js';
                         $('.google-recaptcha').html('<div class="g-recaptcha" data-sitekey="6Lf2wLgnAAAAAAyelpUjpxzAHH9y8ea1k8FrtvCV"></div>');
@@ -258,6 +273,13 @@
                             $('#error-span').removeClass('hidden');
                             $(this).removeClass('is-busy');
                             return;
+                        }
+                        if($("#captcha").val() == captchaArray[captchaNumber]) {
+                            // Continue
+                        } else {
+                            alert('Captcha Failed');
+                            $(this).removeClass('is-busy');
+                            return
                         }
 
                         let hitApi = $('#register-form').attr('data-api-hit');
@@ -361,7 +383,7 @@
 @endsection
 
 @section('page-content')
-<div id="token-content" class="flex items-center justify-center h-screen hidden">
+<div id="token-content" class="flex items-center justify-center hidden h-screen">
     <div class="w-full max-w-md pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
         <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
@@ -599,6 +621,15 @@
                                     <option value="Intermediate">Intermediate</option>
                                     <option value="Professional">Professional</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <div>
+                                <label for="level" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Captcha</label>
+                                <img id='imgCaptchaPlace' src=''/>
+                            </div>
+                            <div class="mt-2 rounded-md sm:col-span-2 ring-1 ring-inset ring-gray-300 sm:mt-0">
+                                <input id="captcha" type="text" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
                             </div>
                         </div>
                     </div>
