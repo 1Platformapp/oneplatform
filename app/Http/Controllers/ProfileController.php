@@ -2901,7 +2901,10 @@ class ProfileController extends Controller
                 }
 
                 $success = 1;
-            }else if($type == 'main'){
+            }else if(in_array($type, ["main", "loop_one", "loop_two", "loop_three", 
+                "stem_one", "stem_two", "stem_three", "stem_four", "stem_five", 
+                "stem_six", "stem_seven", "stem_eight"]))
+            {
                 $extension = $this->getFileExtension($_FILES["mu_down_file"]['name']);
                 $size = $request->file('mu_down_file')->getSize();
                 $musicId = $request->get('mu_down_id');
