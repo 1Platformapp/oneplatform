@@ -64,13 +64,18 @@
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
                                 <div class="flex flex-col mt-10">
-                                    <div class="flex flex-col items-start gap-3 mb-4 lg:flex-row lg:items-end lg:mb-12">
-                                        <div class="text-black">Listing tasks for : </div>
-                                        <select class="todo-select w-[16rem]" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? $skill->id : ''}}">
-                                            @foreach($skills as $skill)
-                                                <option value="{{$skill->id}}">{{$skill->value}}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="flex flex-col justify-between gap-3 mx-4 mb-4 lg:flex-row lg:items-end lg:mb-12">
+                                        <div>
+                                            <div class="text-black">Listing tasks for : </div>
+                                            <select class="todo-select w-[16rem]" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? $skill->id : ''}}">
+                                                @foreach($skills as $skill)
+                                                    <option value="{{$skill->id}}">{{$skill->value}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>    
+                                        <div>
+                                            <h2 class="text-base leading-7 text-gray-900">Click to learn about <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/shorts/2kPicLgUoNw">Project Map Master</a></h2>
+                                        </div>
                                     </div>
                                     <div class="border-b border-gray-200">
                                         <nav class="flex -mb-px " aria-label="Tabs">

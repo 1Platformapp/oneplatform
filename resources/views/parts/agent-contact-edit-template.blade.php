@@ -59,7 +59,7 @@
                         <li>
                             If you want to recieve commission from work connected with your contact then add the percentage here.
                             This commission is paid to you from any sales you create in a network chat only not from the user's own account.
-                            Refer to <span class="text-blue-500 cursor-pointer join_me_video_btn hover:underline">this video</span> for further details
+                            Refer to <a href="https://www.youtube.com/watch?v=KnUY6j2cysE" target="_blank" class="text-blue-500 cursor-pointer join_me_video_btn hover:underline">this video</a> for further details
                         </li>
                         <li class="flex flex-col gap-2 p-2 border join_me_video_holder instant_hide">
                             <div class="ml-auto text-lg cursor-pointer join_me_close_btn">
@@ -117,6 +117,9 @@ Excited to have you on board!  @endif</textarea>
                         <li>We've included ready-made professional briefs to make your creative journey smoother. Join us for a simple and effective collaboration experience</li>
                         <li>Check your dashboard for a list of all our creative briefs</li>
                     </ul>
+                </div>
+                <div>
+                    <h2 class="text-base leading-7 text-gray-900">Click to learn about <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/watch?v=wnxlgkWyVn0">Creative Briefs</a></h2>
                 </div>
             </div>
             <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
