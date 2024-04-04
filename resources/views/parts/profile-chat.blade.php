@@ -63,7 +63,11 @@
                         <div class="py-12 font-bold text-center loading instant_hide">...Loading please wait</div>
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
-                                <div class="flex flex-col mt-10">
+                                <div class="flex flex-col gap-4 mt-10">
+                                    <button onclick="toggleProjectListVideo()" class="w-1/6 px-4 py-2 text-white bg-gray-600 rounded cursor-pointer project_list_video_btn hover:underline">Watch Explainer Video</button>
+                                    <div id="projectListVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
+                                    </div>
                                     <div class="flex flex-col items-center justify-between gap-3 mx-4 mb-4 lg:flex-row lg:mb-12">
                                         <div class="flex items-center">
                                             <div class="text-black">Listing tasks for : </div>
@@ -73,9 +77,6 @@
                                                 @endforeach
                                             </select>
                                         </div>    
-                                        <div class="w-2/3 p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
-                                        </div>
                                         <!-- <div>
                                             <h2 class="text-base leading-7 text-gray-900">Click to learn about <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/shorts/">Project Map Master</a></h2>
                                         </div> -->
@@ -533,6 +534,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    function toggleProjectListVideo() {
+        var videoDiv = document.getElementById('projectListVideo');
+        videoDiv.classList.toggle('hidden');
+    }
 
     $('document').ready(function (){
 
