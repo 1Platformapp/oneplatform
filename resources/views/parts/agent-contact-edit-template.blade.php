@@ -50,7 +50,7 @@
     </div>
 
     <div class="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
-        <div class="relative px-4 sm:px-0">
+        <div class="relative px-0">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Join me on 1Platform App!</h2>
             <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
@@ -111,7 +111,7 @@ Excited to have you on board!  @endif</textarea>
     </div>
 
     <div class="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
-        <div class="relative px-4 sm:px-0">
+        <div class="relative px-0">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Creative Briefs</h2>
             <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
