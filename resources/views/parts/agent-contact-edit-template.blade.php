@@ -69,7 +69,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/KnUY6j2cysE"></iframe>
                 </div>
             </div>
@@ -121,7 +121,7 @@ Excited to have you on board!  @endif</textarea>
                         <li>Check your dashboard for a list of all our creative briefs</li>
                     </ul>
                 </div>
-                <div class="p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                <div class="p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
                 </div>
             </div>
