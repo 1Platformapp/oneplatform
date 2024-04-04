@@ -1,10 +1,13 @@
 <div id="calendar_{{$uuid}}" class="calendar-container">
-    @if($partner == '')    
-    <div class="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-3">
-        <div class="md:px-4">
-            <h2 class="text-base leading-7 text-gray-900">Click to see <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/watch?v=gKKe8crFi6s">How to use Calendar</a></h2>
-        </div>
+    @if($partner == '')
+    <div class="w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+        <iframe class="w-full h-full" src="https://www.youtube.com/embed/gKKe8crFi6s"></iframe>
     </div>
+    <!-- <div class="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-3">
+        <div class="md:px-4">
+            <h2 class="text-base leading-7 text-gray-900">Click to see <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/watch?v=">How to use Calendar</a></h2>
+        </div>
+    </div> -->
     @endif
     <div class="lg:grid lg:grid-cols-12 lg:gap-x-16">
         <div class="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
