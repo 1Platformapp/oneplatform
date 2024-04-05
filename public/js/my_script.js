@@ -4903,7 +4903,7 @@ $(document).ready(function() {
 
         var extension = e.originalEvent.target.files[0].type;
 
-        if(data.size > 60*1024*1024) {
+        if(data.size > 80*1024*1024) {
             elem.val('');
             alert('The file cannot be more than 60MB');
             return false;
