@@ -2349,6 +2349,10 @@ video {
     width: 16.666667%;
   }
 
+  .lg\:w-1\/5 {
+    width: 20%;
+  }
+
   .lg\:grid-cols-12 {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }

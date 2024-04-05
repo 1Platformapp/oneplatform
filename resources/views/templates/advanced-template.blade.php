@@ -38,7 +38,7 @@
 	    <link rel="stylesheet" href="{{asset('player-element/dist/context-menu/context-menu.min.css')}}">
 	    <link href="{{asset('css/style.min.css?v=3.3')}}" rel="stylesheet" type="text/css">
 	    <link href="{{asset('css/frontend.min.css?v=3.17')}}" rel="stylesheet" type="text/css">
-        <link href="/css/app.css?v=3.74" rel="stylesheet" type="text/css" />
+        <link href="/css/app.css?v=3.75" rel="stylesheet" type="text/css" />
 
 	    <script src="{{asset('js/jquery.min.js')}}"></script>
 	    <script defer src="{{asset('js/my_script.min.js?v=9.9')}}"></script>
