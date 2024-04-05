@@ -262,6 +262,13 @@
             }
         });
 
+        $('.music_bottom_load_thumb').click(function(){
+            $(this).addClass('instant_hide');
+            var src = $(this).closest('.music_btm_thumb').attr('data-image');
+            var img = '<img src="'+src+'">';
+            $(this).closest('.music_btm_thumb').append(img);
+        });
+
         setTimeout(function(){
             $('.m_btn_chat:first').trigger('click');
         }, 100);

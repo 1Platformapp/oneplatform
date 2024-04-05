@@ -6837,7 +6837,6 @@ $(document).ready(function() {
     });
 
     $('.music_bottom_load_thumb').click(function(){
-
         $(this).addClass('instant_hide');
         var src = $(this).closest('.music_btm_thumb').attr('data-image');
         var img = '<img src="'+src+'">';
