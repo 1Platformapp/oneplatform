@@ -64,23 +64,34 @@
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
                                 <div class="flex flex-col gap-4 mt-10">
-                                    <button onclick="toggleProjectListVideo()" class="w-full px-4 py-2 font-semibold text-white bg-green-500 rounded cursor-pointer hover:bg-green-600 hover:font-bold md:w-1/3 lg:w-1/5 project_list_video_btn">Watch Explainer Video</button>
-                                    <div id="projectListVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                                        <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
-                                    </div>
-                                    <div class="flex flex-col items-center justify-between gap-3 mx-4 mb-4 lg:flex-row lg:mb-12">
-                                        <div class="flex items-center">
-                                            <div class="text-black">Listing tasks for : </div>
-                                            <select class="todo-select w-[16rem]" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? $skill->id : ''}}">
-                                                @foreach($skills as $skill)
-                                                    <option value="{{$skill->id}}">{{$skill->value}}</option>
-                                                @endforeach
-                                            </select>
+                                    <div class="flex flex-col w-full">
+                                        <div class="flex flex-row items-center justify-between mb-4 w-full lg:mb-12">
+                                            <div id="management-plan-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
+
+                                                <div class="flex items-center bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400">
+                                                    <!--<div class="text-black">Listing tasks for &nbsp;</div>!-->
+                                                    <select class="todo-select" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? $skill->id : ''}}">
+                                                        @foreach($skills as $skill)
+                                                            <option value="{{$skill->id}}">{{$skill->value}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div onclick="toggleProjectListVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                    <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- <div>
+                                                <h2 class="text-base leading-7 text-gray-900">Click to learn about <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/shorts/">Project Map Master</a></h2>
+                                            </div> -->
                                         </div>
-                                        <!-- <div>
-                                            <h2 class="text-base leading-7 text-gray-900">Click to learn about <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/shorts/">Project Map Master</a></h2>
-                                        </div> -->
+                                        <div id="projectListVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                                            <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
+                                        </div>
                                     </div>
+
                                     <div class="border-b border-gray-200">
                                         <nav class="flex -mb-px " aria-label="Tabs">
                                             <div data-stage="one" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-indigo-600 border-b-2 border-indigo-500 cursor-pointer each-stage">Stage 1</div>
@@ -1051,6 +1062,7 @@
 
     function getManagementPlan(skill = ''){
 
+        $('#management-plan-head').addClass('instant_hide');
         $.ajax({
 
             url: "/informationFinder",
@@ -1060,6 +1072,7 @@
             success: function(response) {
 
                 removeLoading();
+                $('#management-plan-head').removeClass('instant_hide');
                 if(response.success == 1){
                     $('.management-plan-well').html(response.data.data);
                 }else{
@@ -1147,3 +1160,7 @@
         $('.loading').addClass('instant_hide');
     }
 </script>
+
+<style>
+    .select2.select2-container.select2-container--default { width: 100% !important; }
+</style>
