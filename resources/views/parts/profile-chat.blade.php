@@ -64,7 +64,7 @@
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
                                 <div class="flex flex-col gap-4 mt-8">
-                                    <div class="flex flex-col w-full">
+                                    <div class="flex flex-col gap-4 w-full">
                                         <div class="flex flex-row items-center justify-between w-full">
                                             <div id="management-plan-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
                                                 <div class="flex items-center bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400">
