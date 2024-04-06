@@ -122,7 +122,14 @@ Excited to have you on board!  @endif</textarea>
                     </ul>
                 </div>
                 <div class="p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
+                    <!-- Quwat -> Youtube Video here -->
+                    <div class="tp_center_video_outer">
+                        <div class="jp-gui">
+                            <video id="player1" width="578" height="325" style="width: 100%; height: 100%;" class="vid_preloader" preload="none">
+                                <source type="video/youtube" src="https://www.youtube.com/watch?v=wnxlgkWyVn0" />
+                            </video>
+                        </div>
+                    </div>
                 </div>
             </div>
             <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
@@ -216,14 +223,109 @@ Excited to have you on board!  @endif</textarea>
 </div>
 
 <input type="text" id="myInput" onchange="handleInputChange()">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.5/mediaelement-and-player.min.js"></script>
 <script>
 
-    $('.join_me_video_btn').click(function(){
-        $(this).closest('ul').find('.join_me_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>');
-    });
+    $(document).ready(function() {
+// Quwat -> this to load video
+        $.getScript('https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.5/mediaelement-and-player.js', function() {
+            $.getScript('/player-element/dist/jump-forward/jump-forward.min.js', function() {
+                $.getScript('/player-element/dist/skip-back/skip-back.min.js', function() {
+                    $.getScript('/player-element/dist/speed/speed.min.js', function() {
+                        $.getScript('/player-element/dist/chromecast/chromecast.min.js', function() {
+                            $.getScript('/player-element/dist/context-menu/context-menu.min.js', function() {
+                                mediaInstance = loadDeferredVideo();
+                            });
+                        });
+                    });
+                });
+            });
+        });
 
-    $('.join_me_close_btn').click(function(){
-        $(this).closest('.join_me_video_holder').addClass('instant_hide').find('.inner').html('');
-    });
+        function loadDeferredVideo(){
+            if($('.vid_preloader').length){
+                $('.vid_preloader').attr('id', 'player1').removeClass('vid_preloader');
+                var mediaInstancee = playMediaElementVideo(0, 0, 0, 0, 0);
+                return mediaInstancee;
+            }
+            return 0;
+        }
 
+        function playMediaElementVideo(videoType, videoSrc, mediaElementInstance, autoPlay, poster = null) {
+            var browserWidth = $( window ).width();
+
+            if($('#soundcloudPlayer').length){
+                $('#soundcloudPlayer').removeAttr('src').hide();
+            }
+            if($('#vimeo_player').length){
+                $('#vimeo_player').removeClass('active').html('');
+            }
+            if($('#jw_player').hasClass('jwplayer')){
+
+                window.jwplayer('jw_player').remove();
+            }
+
+            $('.mejs__container.mejs__video').css('display', 'block');
+
+            if(mediaElementInstance){
+                if(window.location.href.indexOf('/tv') > -1){
+                }else{
+                    mediaElementInstance.remove();
+                }
+            }
+            if(browserWidth > 767){
+
+                if(typeof spectrum !== 'undefined'){
+                    spectrum.pause();
+                    $('#play').addClass('fa-play').removeClass('fa-pause');
+                    $('.ap_outer').hide();
+                }
+            }else{
+                if(typeof spectrum !== 'undefined' && spectrum.duration > 0){
+                    spectrum.pause();
+                    $('#play').addClass('fa-play').removeClass('fa-pause');
+                    $('.ap_outer').hide();
+                }
+            }
+            if( videoSrc ){
+                $('#player1').css('width','100%').css('height', '100%').attr('src', videoSrc);
+            }
+
+            var mediaElements = document.getElementById('player1');
+
+            var features = ['playpause', 'current', 'progress', 'duration', 'markers', 'volume', 'playlist', 'fullscreen'];
+
+            var media = new MediaElementPlayer(mediaElements, {
+                pluginPath: 'https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.5/',
+                shimScriptAccess: 'always',
+                autoRewind: false,
+                features: features,
+                currentMessage: 'Now playing:',
+                success: function(mediaElement, domObject) {
+                    if( autoPlay ){ mediaElement.play(); }
+                }
+            });
+
+            $(".mejs__controls").css({ "height":"23px" });
+            
+            $(".mejs__button > button").css("margin", "5px 6px");
+            
+            $(".mejs__time-total").css("margin", "0px");
+            
+            $(".mejs__time").css("padding", "10px 6px 0");
+            
+            $("#player1_youtube_iframe").css({ "height":"100%" });
+        
+            return media;
+        }
+
+        $('.join_me_video_btn').click(function() {
+            $(this).closest('ul').find('.join_me_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>');
+        });
+
+        $('.join_me_close_btn').click(function() {
+            $(this).closest('.join_me_video_holder').addClass('instant_hide').find('.inner').html('');
+        });
+    });
+    
 </script>
