@@ -63,11 +63,10 @@
                         <div class="py-12 font-bold text-center loading instant_hide">...Loading please wait</div>
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
-                                <div class="flex flex-col gap-4 mt-10">
+                                <div class="flex flex-col gap-4 mt-8">
                                     <div class="flex flex-col w-full">
-                                        <div class="flex flex-row items-center justify-between mb-4 w-full lg:mb-12">
+                                        <div class="flex flex-row items-center justify-between w-full">
                                             <div id="management-plan-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
-
                                                 <div class="flex items-center bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400">
                                                     <!--<div class="text-black">Listing tasks for &nbsp;</div>!-->
                                                     <select class="todo-select" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? $skill->id : ''}}">
@@ -79,20 +78,14 @@
                                                 <div onclick="toggleProjectListVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
                                                     <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                                 </div>
-
                                             </div>
-
-
-                                            <!-- <div>
-                                                <h2 class="text-base leading-7 text-gray-900">Click to learn about <a class="text-red-500 hover:text-red-700" target="_blank" href="https://www.youtube.com/shorts/">Project Map Master</a></h2>
-                                            </div> -->
                                         </div>
-                                        <div id="projectListVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                                        <div id="projectListVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
                                             <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
                                         </div>
                                     </div>
 
-                                    <div class="border-b border-gray-200">
+                                    <div class="border-b border-t border-gray-200">
                                         <nav class="flex -mb-px " aria-label="Tabs">
                                             <div data-stage="one" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-indigo-600 border-b-2 border-indigo-500 cursor-pointer each-stage">Stage 1</div>
                                             <div data-stage="two" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage">Stage 2</div>
@@ -107,8 +100,18 @@
                         </div>
                         <div class="each_dash_section instant_hide" data-value="contact-management">
                             <div>
-                                <div class="mt-10">
-                                    <div class="border-b border-gray-200">
+                                <div class="flex flex-col gap-4 mt-8">
+                                    <div class="flex flex-col">
+                                        <div id="contact-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
+                                            <div onclick="toggleContactVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
+                                            </div>
+                                            <div id="contactVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
+                                                <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border-b border-t border-gray-200">
                                         <nav class="flex -mb-px " aria-label="Tabs">
                                             <div data-stage="my-contacts" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-indigo-600 border-b-2 border-indigo-500 cursor-pointer each-stage disabled">Contacts</div>
                                             <div data-stage="add-contact" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage disabled">Add contact</div>
@@ -122,26 +125,43 @@
                             <div class="contact-management-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-calendar">
+                            <div>
+                                <div id="calendar-head" class="flex flex-col gap-4 mt-8">
+                                    <div class="flex flex-col">
+                                        <div id="contact-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
+                                            <div onclick="toggleCalendarVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
+                                            </div>
+                                            <div id="calendarVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
+                                                <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/gKKe8crFi6s"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="calendar-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-questionnaires">
-                            <div class="mt-10">
-                                <div class="pro_music_search pro_music_info no_border">
-                                    <div class="pro_note">
-                                        <ul>
-                                            <li>Enable seamless collaboration by attaching Creative Briefs easily for your Contacts.</li>
-                                            <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion.</li>
-                                            <li class="flex items-center gap-3">
-                                                <div class="px-2 text-white bg-gray-600 rounded cursor-pointer open_contact_tab hover:underline">Go to my network</div>
-                                                <div class="px-2 text-white bg-gray-600 rounded cursor-pointer brief_video_btn hover:underline">Watch video</div>
-                                            </li>
-                                            <li class="flex flex-col gap-2 p-2 mt-2 border brief_video_holder instant_hide">
-                                                <div class="ml-auto text-lg cursor-pointer brief_close_btn">
-                                                    <i class="fa fa-times"></i>
-                                                </div>
-                                                <div class="inner"></div>
-                                            </li>
-                                        </ul>
+                            <div>
+                                <div id="briefs-head" class="flex flex-col gap-4 mt-8">
+                                    <div class="flex flex-col gap-4">
+                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
+                                            <div class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <button class="open_contact_tab w-full px-4 py-2 font-normal text-black project_list_video_btn">Go to my network</button>
+                                            </div>
+                                            <div onclick="toggleBriefsVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
+                                            </div>
+                                        </div>
+                                        <div class="pro_note">
+                                            <ul>
+                                                <li>Enable seamless collaboration by attaching Creative Briefs easily for your Contacts.</li>
+                                                <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div id="briefsVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
+                                        <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
                                     </div>
                                 </div>
                                 <div class="que-stages stage-one">
@@ -164,63 +184,65 @@
                             </div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-contracts">
-                            <div class="mt-10">
-                                <div class="px-2 py-4">
-                                    <div class="flex items-center mb-3">
-                                        <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex">
-                                            <i class="fa fa-info-circle"></i>
-                                        </div>
-                                        <div class="flex-1 lg:ml-3 md:flex md:justify-between">
-                                            <p class="text-sm text-[#333] font-bold">Our groundbreaking digital platform is the world's first to facilitate person-to-person contracts</p>
+                            <div>
+                                <div id="contracts-head" class="flex flex-col gap-4 mt-8 mb-4">
+                                    <div class="flex flex-col gap-4">
+                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
+                                            <div onclick="toggleContractsVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                            <div class="flex-1 min-w-0">
-                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                    <div class="hidden lg:flex">1.</div>
-                                                    <div>Subscribe For legal Industry Contracts</div>
-                                                </div>
+                                    <div id="contractsVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
+                                        <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                <div class="hidden lg:flex">1.</div>
+                                                <div>Subscribe For legal Industry Contracts</div>
                                             </div>
                                         </div>
-                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                            <div class="flex-1 min-w-0">
-                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                    <div class="hidden lg:flex">2.</div>
-                                                    <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer text-[#fc064c]">here</span>, attach contract</div>
-                                                </div>
+                                    </div>
+                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                <div class="hidden lg:flex">2.</div>
+                                                <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer text-[#fc064c]">here</span>, attach contract</div>
                                             </div>
                                         </div>
-                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                            <div class="flex-1 min-w-0">
-                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                    <div class="hidden lg:flex">3.</div>
-                                                    <div>Add details and requirements and submit</div>
-                                                </div>
+                                    </div>
+                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                <div class="hidden lg:flex">3.</div>
+                                                <div>Add details and requirements and submit</div>
                                             </div>
                                         </div>
-                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                            <div class="flex-1 min-w-0">
-                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                    <div class="hidden lg:flex">4.</div>
-                                                    <div>Contact will receive an email/app notification</div>
-                                                </div>
+                                    </div>
+                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                <div class="hidden lg:flex">4.</div>
+                                                <div>Contact will receive an email/app notification</div>
                                             </div>
                                         </div>
-                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                            <div class="flex-1 min-w-0">
-                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                    <div class="hidden lg:flex">5.</div>
-                                                    <div>They review and sign</div>
-                                                </div>
+                                    </div>
+                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                <div class="hidden lg:flex">5.</div>
+                                                <div>They review and sign</div>
                                             </div>
                                         </div>
-                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                            <div class="flex-1 min-w-0">
-                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                    <div class="hidden lg:flex">6.</div>
-                                                    <div>Both parties receive legally binding digital copy</div>
-                                                </div>
+                                    </div>
+                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                <div class="hidden lg:flex">6.</div>
+                                                <div>Both parties receive legally binding digital copy</div>
                                             </div>
                                         </div>
                                     </div>
@@ -270,19 +292,17 @@
                             </div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="industry-contacts">
-                            <div class="mt-10">
-                                <div class="px-2 py-4">
-                                    <div class="flex items-start mb-3">
-                                        <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex mt-1">
-                                            <i class="fa fa-info-circle"></i>
+                            <div>
+                                <div id="ind-contacts-head" class="flex flex-col gap-4 mt-8 mb-4">
+                                    <div class="flex flex-col gap-4">
+                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
+                                            <div onclick="toggleIndContactsVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
+                                            </div>
                                         </div>
-                                        <div class="flex-1 lg:ml-3 md:flex md:justify-between">
-                                            <p class="text-sm text-[#333] font-bold">
-                                            Discover over <span class="text-[#fc064c]">{{count(\App\Models\IndustryContact::all())}}</span> industry contacts on 1Platform
-                                            including labels, publishers, pluggers, producers and skilled song writers. <br>Each contact is complete with phone numbers, websites
-                                            and emails for seamless access and networking
-                                            </p>
-                                        </div>
+                                    </div>
+                                    <div id="indContactsVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
+                                        <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
                                     </div>
                                 </div>
                                 @if($user->hasActivePaidSubscription())
@@ -304,7 +324,19 @@
                                     </div>
                                 </div>!-->
                                 @endif
-                                <div class="pro_form_title flex flex-col border border-[#ccc] mx-2 rounded-lg px-3 py-2 lg:px-6 lg:py-3">
+                                <div class="pro_form_title flex flex-col border border-[#ccc] rounded-lg px-3 py-2 lg:px-6 lg:py-3">
+                                    <div class="flex items-start mb-3">
+                                        <div class="flex-shrink-0 text-[#666] text-lg hidden lg:flex mt-1">
+                                            <i class="fa fa-info-circle"></i>
+                                        </div>
+                                        <div class="flex-1 lg:ml-3 md:flex md:justify-between">
+                                            <p class="text-sm text-[#333] font-bold">
+                                            Discover over <span class="text-[#fc064c]">{{count(\App\Models\IndustryContact::all())}}</span> industry contacts on 1Platform
+                                            including labels, publishers, pluggers, producers and skilled song writers. <br>Each contact is complete with phone numbers, websites
+                                            and emails for seamless access and networking
+                                            </p>
+                                        </div>
+                                    </div>
                                     <div>
                                         @php
                                             $industryContactRegions = \App\Models\IndustryContactRegion::orderBy('id', 'asc')->get();
@@ -363,8 +395,17 @@
                             </div>
                         </div>
                         <div class="mt-10 each_dash_section instant_hide" data-value="my-transactions">
+                            <div id="transactionsVideo" class="hidden w-full p-6 bg-white shadow-sm mb-4 ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
+                                <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
+                            </div>
                             <div class="order-stages stage-one">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                    <div onclick="toggleTransactionsVideo()" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border cursor-pointer border-gray-300 rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                        <div class="flex-shrink-0 text-lg">
+                                            <i class="fas fa-video"></i>
+                                        </div>
+                                        <p class="text-sm font-medium text-gray-900">Watch Explainer Video</p>
+                                    </div>
                                     <div data-id="financial-summary" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-chart-bar"></i>
@@ -551,6 +592,36 @@
         videoDiv.classList.toggle('hidden');
     }
 
+    function toggleContactVideo() {
+        var videoDiv = document.getElementById('contactVideo');
+        videoDiv.classList.toggle('hidden');
+    }
+
+    function toggleCalendarVideo() {
+        var videoDiv = document.getElementById('calendarVideo');
+        videoDiv.classList.toggle('hidden');
+    }
+
+    function toggleBriefsVideo() {
+        var videoDiv = document.getElementById('briefsVideo');
+        videoDiv.classList.toggle('hidden');
+    }
+
+    function toggleContractsVideo() {
+        var videoDiv = document.getElementById('contractsVideo');
+        videoDiv.classList.toggle('hidden');
+    }
+
+    function toggleIndContactsVideo() {
+        var videoDiv = document.getElementById('indContactsVideo');
+        videoDiv.classList.toggle('hidden');
+    }
+
+    function toggleTransactionsVideo() {
+        var videoDiv = document.getElementById('transactionsVideo');
+        videoDiv.classList.toggle('hidden');
+    }
+
     $('document').ready(function (){
 
         const defaultTab = $('#default-dash-tab').val();
@@ -609,10 +680,6 @@
 
         $('.each-stage-det').not(target).addClass('instant_hide');
         target.removeClass('instant_hide');
-    });
-
-    $('.brief_video_btn').click(function(){
-        $(this).closest('ul').find('.brief_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>');
     });
 
     $('.open_contact_tab').click(function(){
@@ -1085,6 +1152,7 @@
 
     function getContactManagement(){
 
+        $('#contact-head').addClass('instant_hide');
         $.ajax({
 
             url: "/informationFinder",
@@ -1094,6 +1162,7 @@
             success: function(response) {
 
                 removeLoading();
+                $('#contact-head').removeClass('instant_hide');
                 if(response.success == 1){
                     $('.contact-management-well').html(response.data.data);
                     $('.each_dash_section[data-value="contact-management"] .each-stage').removeClass('disabled');
@@ -1107,6 +1176,7 @@
 
     function getCalendar(){
 
+        $('#calendar-head').addClass('instant_hide');
         $.ajax({
 
             url: "/informationFinder",
@@ -1116,6 +1186,7 @@
             success: function(response) {
 
                 removeLoading();
+                $('#calendar-head').removeClass('instant_hide');
                 if(response.success == 1){
                     $('.calendar-well').html(response.data.data);
                     $('.each_dash_section[data-value="my-calendar"]').removeClass('instant_hide');
@@ -1129,6 +1200,7 @@
 
     function getIndustryContacts(find){
 
+        $('#ind-contacts-head').addClass('instant_hide');
         $.ajax({
 
             url: "/informationFinder",
@@ -1138,6 +1210,7 @@
             success: function(response) {
 
                 removeLoading();
+                $('#ind-contacts-head').removeClass('instant_hide');
                 if(response.success == 1){
                     $('.industry-contacts-well').html(response.data.data);
                     $('select[data-type="ind_cont_drop"]').select2();
