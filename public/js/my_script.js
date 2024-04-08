@@ -4374,15 +4374,8 @@ $(document).ready(function() {
 
     $("#profile_tab_01 input[name=password]").click(function() {
 
-        if(window.currentUserId == 1){
-
-            $('#change_pwd_secure_popup,#body-overlay').show();
-        }else{
-
-            $('.pro_page_pop_up .error').html('');
-            $('#body-overlay').css('display', 'block');
+        $('#body-overlay').css('display', 'block');
             $('.pro_change_pass_outer').css('display', 'block');
-        }
 
         return false;
     });

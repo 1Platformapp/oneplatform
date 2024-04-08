@@ -104,7 +104,7 @@
                 </form>
                 <div class="clearfix save_profile_outer edit_profile_btn_1"><a href="javascript:void(0)">Save</a></div>
             </div>
-            <div id="email_section" class="each_pro_edit_section sub_cat_data {{$subTab == 'info' ? '' : 'instant_hide'}}">
+            <div id="email_section" class="each_pro_edit_section sub_cat_data {{$subTab == 'email_section' ? '' : 'instant_hide'}}">
                 <div class="pro_main_tray">
                     <div class="pro_tray_title">Account Settings</div>
                 </div>

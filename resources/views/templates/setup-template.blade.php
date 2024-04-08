@@ -18,7 +18,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <script src="/js/jquery.min.js" type="text/javascript"></script>
         <script type="application/javascript" src="/js/jquery.bxslider.min.js"></script>
-        <script defer type="application/javascript" src="/js/my_script.min.js?v=9.91"></script>
+        <script defer type="application/javascript" src="/js/my_script.js?v=9.91"></script>
         @yield('page-level-css','')
         @yield('page-level-js','')
     </head>

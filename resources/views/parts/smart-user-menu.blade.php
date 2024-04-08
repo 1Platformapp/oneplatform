@@ -61,6 +61,14 @@
                                         Add Media Info
                                     </div>
                                 </a>
+                                <a href="{{route('profile.setup.standalone', ['page' => 'change-password'])}}" class="text-black usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fa fa-key"></i>
+                                        </div>
+                                        Update Password
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>

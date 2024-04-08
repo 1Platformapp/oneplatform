@@ -31,7 +31,7 @@
 		.wrapper { width: 100%; position: relative; }
 		.setup_inner { max-width: 55%; margin: 40px auto; padding: 15px; border: 1px solid #ccc; border-radius: 5px; background: #fff; }
 		.setup_tray_main { margin-bottom: 20px; }
-		.pro_main_tray,#email_section, #bio_section form h2, .no_results, .pro_stripeless_outer { display: none; }
+		.pro_main_tray, #bio_section form h2, .no_results, .pro_stripeless_outer { display: none; }
 		.setup_tray_main { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; padding-bottom: 19px; border-bottom: 1px solid #ccc; }
 		.setup_tray_top { display: flex; flex-direction: row; align-items: inherit; width: 100%; }
 		.setup_tray_step { font-size: 12px; margin-bottom: 10px; }
@@ -482,6 +482,10 @@
 		</div>
 
 		@include('parts.profile-edit-section', ['page' => 'edit', 'subTab' => 'info', 'setupWizard' => ''])
+
+    @elseif($page == 'change-password')
+
+        @include('parts.profile-edit-section', ['page' => 'edit', 'subTab' => 'email_section', 'setupWizard' => ''])
 
 	@elseif($page == 'media')
 
@@ -1109,7 +1113,38 @@
 	    </div>
 	</div>
 
+    <div class="clearfix pro_change_pass_outer pro_page_pop_up" >
 
+    <div class="clearfix pro_soc_con_twit_inner">
+
+        <div class="clearfix soc_con_top_logo">
+
+            <a class="logo8"><img class="pro_soc_top_logo defer_loading" src="" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div></a>
+            <i class="fa fa-times pro_soc_top_close"></i>
+        </div>
+        <div class="clearfix soc_con_twit_username">
+
+            <h3>Change Password</h3><br>
+            <div class="success"></div>
+            <div class="">
+                <input placeholder="Current Password" type="password" id="pro_change_pass_current" autocomplete="off" />
+                <span class="error"></span>
+            </div><br />
+            <div class="">
+                <input placeholder="New Password" type="password" id="pro_change_pass_new" autocomplete="off" />
+                <span class="error"></span>
+            </div><br />
+            <div class="">
+                <input placeholder="Confirm Password" type="password" id="pro_change_pass_confirm" autocomplete="off" />
+                <span class="error"></span>
+            </div>
+        </div>
+        <div class="clearfix pro_submit_button_outer soc_con_submit_success">
+
+            <a href="#" id="pro_change_pass_submit">Submit</a>
+        </div>
+    </div>
+</div>
 
 	<div class="clearfix pro_uploading_in_progress in_progress pro_page_pop_up" style="z-index: 10;" id="pro_uploading_in_progress_real">
 
