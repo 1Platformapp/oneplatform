@@ -190,7 +190,7 @@
             });
         }
 
-        var captchaArray=[];        
+        var captchaArray=[];
         captchaArray.push("VQ7W3");
         captchaArray.push("A1234");
         captchaArray.push("A32BD");
@@ -202,7 +202,7 @@
         function myFunction() {
             captchaNumber = Math.floor(Math.random() * 6);
             const imgCaptcha = document.getElementById('imgCaptchaPlace');
-            imgCaptcha.src = "{{ asset('captcha_images') }}/" + captchaNumber + "_cpt";   
+            imgCaptcha.src = "{{ public_path('captcha_images') }}/" + captchaNumber + "_cpt";
         }
 
         $('document').ready(function(){
@@ -626,7 +626,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <div>
                                 <label for="level" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Captcha</label>
-                                <img id='imgCaptchaPlace' src='captcha_images/no_captcha_found_cpt'/>
+                                <img id='imgCaptchaPlace' src="{{public_path('captcha_images/no_captcha_found_cpt')}}"/>
                             </div>
                             <div class="mt-2 rounded-md sm:col-span-2 ring-1 ring-inset ring-gray-300 sm:mt-0">
                                 <input id="captcha" type="text" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6">
