@@ -51,6 +51,8 @@
 		            	{{$notification->customer->name}} has approved agreement with your agency
 		            @elseif($notification->type == 'contact_approved_for_contact')
 		            	{{$notification->customer->name}} is now your 1Platform agent
+                    @elseif($notification->type == 'contact_agency_request')
+		            	{{$notification->customer->name}} has invited you to signup at 1platform
 		            @elseif($notification->type == 'agent_form_filled')
 		            	{{$notification->customer->name}} has made changes to the information form
 		            @elseif($notification->type == 'agent_contact_request')

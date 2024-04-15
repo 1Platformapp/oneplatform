@@ -43,7 +43,6 @@
 @php
     $body = $contract->body;
     $details = $body;
-    $variables = explode("<<var>>", $details);
 @endphp
 
 <div class="contact_details_outer relative">
@@ -62,15 +61,7 @@
             <div class="contact_section_body">
                 <form class="flex flex-col" id="signature-form" action="#" method="POST">
                     <div class="element_container mt-8">
-                    @php $totalLength = 0 @endphp
-                    @foreach ($variables as $index => $variable)
-                        @php $totalLength = $totalLength + strlen($variable) @endphp
-                        @php if($totalLength > 500) continue @endphp
-                        <span class="text-sm font-normal">{!!$variable!!}</span>
-                        @if($index + 1 < count($variables))
-                        <input disabled class="border-b border-solid border-black text-theme-red mb-2" type="text" />
-                        @endif
-                    @endforeach
+                    {!! nl2br($details) !!}
 
                     </div>
                     <div class="my-12">
@@ -85,7 +76,7 @@
                     </div>
                     <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mt-24 mb-12 gap-20">
                         <div class="flex flex-col w-full lg:w-1/2">
-                            <button id="signature-prompt" type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 px-12 py-4 mb-2 text-center hover:border-gray-400">
+                            <button type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 px-12 py-4 mb-2 text-center hover:border-gray-400">
                                 <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6" />
                                 </svg>
@@ -93,7 +84,7 @@
                                 <label for="signature-file" class="inline-flex items-center rounded-md bg-gray-400 px-2 cursor-pointer mt-2 py-1 text-sm text-white shadow-sm hover:bg-gray-500">
                                     Upload signature file
                                 </label>
-                                <input id="signature-file" type="file" accept="image/*" class="absolute top-[-100px] left-[-100px] w-0 h-0 inset-0 opacity-0 -z-50 pointer-events-none" />
+                                <input type="file" accept="image/*" class="absolute top-[-100px] left-[-100px] w-0 h-0 inset-0 opacity-0 -z-50 pointer-events-none" />
                             </button>
                             <div id="signature-result" class="instant_hide flex justify-center">
                                 <img id="signature-image" class="mb-2" src="">
@@ -106,6 +97,16 @@
                         <div class="flex flex-col w-full lg:w-1/2">
                             <div class="border-t border-solid pt-1 border-black text-center font-medium">Artist</div>
                         </div>
+                    </div>
+                    <div>
+                        <p style="font-size: 16px;color: #818181;margin: 10px 0;">
+                            <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform.
+                            Our website serves as a platform for users to buy, sell, and collaborate.
+                            We do not take responsibility for any disputes or legal issues arising from these interactions.
+                            Users are advised to exercise caution and diligence when engaging with others on the platform.
+                            By using our services, you agree that 1Platform cannot be held liable for any such disputes,
+                            and you waive any right to take legal action against the platform.
+                        </p>
                     </div>
                 </form>
             </div>

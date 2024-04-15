@@ -295,6 +295,10 @@ class AgentContactController extends Controller
                 $contact->save();
 
                 $successMessage = 'Your contact has been sent an email with approval';
+
+                $userNotification = new UserNotificationController();
+                $request->request->add(['user' => $contact->contactUser->id, 'customer' => $contact->agentUser->id, 'type' => 'contact_agency_request', 'source_id' => $contact->id]);
+                $response = json_decode($userNotification->create($request), true);
             }else if($sendEmail == '2'){
 
                 $result = Mail::to($contact->email)->bcc(Config('constants.bcc_email'))->send(new AgentContactMailer($contact->agentUser, $contact, [], 'questionnaire'));
@@ -564,16 +568,16 @@ class AgentContactController extends Controller
     public function delete(Request $request)
     {
         $success = 0;
-        
+
         try {
             DB::beginTransaction();
             if(!(Auth::check() && $request->has('id'))){
                 return json_encode(['success' => $success, 'error' => 'No user is logged in']);
             }
-    
+
             $user = Auth::user();
             $contact = AgentContact::find($request->id);
-    
+
             if( !$contact || $contact->agent_id != $user->id ){
                 return json_encode(['success' => $success, 'error' => 'Delete item and logged in user are mismatched']);
             }
@@ -581,27 +585,27 @@ class AgentContactController extends Controller
             if(AgentContact::where('id', $request->id)->whereHas('contracts')->exists()) {
                 return json_encode(['success' => $success, 'error' => 'You have contracts with this user, cannot delete!']);
             }
-    
+
             if($contact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$contact->agreement_pdf)){
-    
+
                 unlink(public_path('agent-agreements/').$contact->agreement_pdf);
             }
-    
+
             $userChatGroup = UserChatGroup::where(['contact_id' => $contact->contact_id, 'agent_id' => $user->id])->first();
             if($userChatGroup){
                 $userChatGroup->delete();
             }
-    
+
             if(!$contact->approved && !$contact->is_already_user){
-    
+
                 $contact->contactUser->profile->delete();
                 $contact->contactUser->address->delete();
                 $contact->contactUser->delete();
             }
-    
+
             $success = $contact->delete();
             DB::rollBack();
-    
+
             return json_encode(['success' => $success, 'error' => '']);
 
         } catch (\Exception $e) {
