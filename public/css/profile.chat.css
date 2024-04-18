@@ -36,7 +36,7 @@
 .chat_each_message.msg_in .chat_message_pic { margin-right: 10px; }
 .chat_each_message.msg_out .chat_message_pic { margin-left: 10px; }
 .chat_each_message .chat_message_name { font-size: 12px; }
-.chat_each_message .chat_message_det_bottom { display: flex; flex-direction: column; color: #777; font-size: 12px; line-height: 17px; }
+.chat_each_message .chat_message_det_bottom { display: flex; flex-direction: column; font-size: 12px; line-height: 17px; }
 .chat_each_message.msg_out .chat_message_det_bottom { text-align: right; }
 .chat_each_message.msg_in .chat_message_det_bottom { text-align: left; }
 .attachment_visi { display: flex; margin-top: 5px; flex-wrap: wrap; }
@@ -92,7 +92,7 @@
 .chat_main_header .header_each_action.active { color: #922c88; }
 .chat_main_header .header_each_action:hover { color: #922c88; }
 .chat_each_message.msg_agreement .msg_agreement_det { margin-left: 15px; font-size: 18px; }
-.chat_each_message.msg_agreement .chat_message_det_bottom a { color: #777; display: flex; width: 100%; }
+.chat_each_message.msg_agreement .chat_message_det_bottom a { display: flex; width: 100%; }
 .chat_each_message.msg_agreement .chat_message_det_bottom i { font-size: 38px; }
 .chat_each_message.msg_agreement .msg_agree_status { font-size: 12px; font-weight: bold; text-align: left; margin-bottom: 6px; }
 .chat_each_message.msg_agreement .msg_agree_name { font-weight: bold; font-size: 16px; }

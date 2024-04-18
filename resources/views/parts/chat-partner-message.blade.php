@@ -27,9 +27,9 @@
     <div class="chat_message_pic">
         {{strtoupper(implode('', array_map(function($v) { return $v[0]; }, explode(' ', $chat->sender->name))))}}
     </div>
-    <div class="chat_message_det">
+    <div class="chat_message_det {{Auth::user()->id == $chat->sender->id ? 'sender' : 'reciever'}}">
         <div class="chat_message_det_top">
-            <div class="chat_message_name">{{$chat->sender->name}}</div>
+            <div class="font-bold chat_message_name">{{$chat->sender->name}}</div>
             <div class="chat_message_date">{{date('d-M-Y h:i A', strtotime($chat->created_at))}}</div>
         </div>
         <div class="chat_message_det_bottom">
@@ -128,3 +128,22 @@
     </div>
 </div>
 @endif
+
+
+<style scoped>
+
+.sender {
+    background-color: #128C7E;
+    border-radius: 10px;
+    padding: 7px;
+    color: white;
+}
+
+.reciever {
+    background-color: #435A64;
+    border-radius: 10px;
+    padding: 7px;
+    color: white;
+}
+
+</style>

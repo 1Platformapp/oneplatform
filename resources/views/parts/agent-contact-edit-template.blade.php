@@ -121,15 +121,9 @@ Excited to have you on board!  @endif</textarea>
                         <li>Check your dashboard for a list of all our creative briefs</li>
                     </ul>
                 </div>
-                <div class="p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                    <!-- Quwat -> Youtube Video here -->
-                    <div class="tp_center_video_outer">
-                        <div class="jp-gui">
-                            <video id="player1" width="578" height="325" style="width: 100%; height: 100%;" class="vid_preloader" preload="none">
-                                <source type="video/youtube" src="https://www.youtube.com/watch?v=wnxlgkWyVn0" />
-                            </video>
-                        </div>
-                    </div>
+                <!-- Quwat -> Youtube Video here -->
+                <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
                 </div>
             </div>
             <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
