@@ -2218,7 +2218,7 @@ class ProjectController extends Controller
             }
 
             $result = Mail::to($sellerUser->email)->bcc(Config('constants.bcc_email'))->send(new InstantCheckout('seller', $stripeCheckOut));
-            $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
+            $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-purchases']));
             CommonMethods::deleteCustomerBasket();
             if($sellerUser->isCotyso() && $buyerUser->password == 'iscotyso'){
                 $buyerUser->email = NULL;
@@ -2273,7 +2273,7 @@ class ProjectController extends Controller
 
             $result = Mail::to($sellerUser->email)->bcc(Config('constants.bcc_email'))->send(new CrowdfundCheckout('seller', $stripeCheckOut));
             $result = Mail::to($buyerUser->email)->bcc(Config('constants.bcc_email'))->send(new CrowdfundCheckout('buyer', $stripeCheckOut));
-            $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
+            $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-purchases']));
             CrowdfundBasket::where(['customer_id' => $buyerUser->id, 'user_id' => $sellerUser->id])->delete();
 
             if(count($sellerUser->devices)){
