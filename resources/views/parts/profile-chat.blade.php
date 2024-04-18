@@ -636,7 +636,6 @@
             $('body').toggleClass('lock_page');
             $('#body-overlay').toggle();
         }
-        alert(defaultSubTab);
         if (activeTab !== null && activeTab != '') {
             $('.m_btn_right_icon_each[data-id="'+activeTab+'"]').trigger('click');
             if(defaultSubTab == 'my-purchases') {
