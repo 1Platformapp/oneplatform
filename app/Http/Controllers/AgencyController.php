@@ -126,6 +126,10 @@ class AgencyController extends Controller
             $tab = Session::get('dash-tab');
         }
 
+        if (Session::has('dash-sub-tab')) {
+            $subTab = Session::get('dash-sub-tab');
+        }
+
         if (Session::has('dash-info')) {
             $info = Session::get('dash-info');
         }
@@ -149,6 +153,7 @@ class AgencyController extends Controller
             'agentContact' => $agentContact,
             'contacts' => $contacts,
             'tab' => isset($tab) ? $tab : '',
+            'subTab' => isset($subTab) ? $subTab : '',
             'info' => isset($info) ? $info : '',
             'mePage' => isset($mePage) ? $mePage : '',
         ];

@@ -2327,10 +2327,12 @@ class ProjectController extends Controller
             if($paymentData['free'] == '1'){
                 $message = 'Successfully finished';
                 Session::flash('page', 'orders');
+                Session::flash('dash-sub-tab', 'my-purchases');
                 $redirectUrl = route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-purchases']);
             }else{
                 $message = $checkoutMessage;
                 Session::flash('page', 'orders');
+                Session::flash('dash-sub-tab', 'my-purchases');
                 $redirectUrl = route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-purchases']);
             }
         }
