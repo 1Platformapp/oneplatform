@@ -64,10 +64,10 @@
                         <div class="each_dash_section instant_hide" data-value="management-plan">
                             <div>
                                 <div class="flex flex-col gap-4 mt-8">
-                                    <div class="flex flex-col gap-4 w-full">
+                                    <div class="flex flex-col w-full gap-4">
                                         <div class="flex flex-row items-center justify-between w-full">
-                                            <div id="management-plan-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
-                                                <div class="flex items-center bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400">
+                                            <div id="management-plan-head" class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                                                <div class="flex items-center px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm hover:border-gray-400">
                                                     <!--<div class="text-black">Listing tasks for &nbsp;</div>!-->
                                                     <select class="todo-select" data-skill-name="{{$skill ? $skill->value : ''}}" data-skill-id="{{$skill ? $skill->id : ''}}">
                                                         @foreach($skills as $skill)
@@ -75,7 +75,7 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div onclick="toggleProjectListVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                                <div onclick="toggleProjectListVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                     <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                                 </div>
                                             </div>
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="border-b border-t border-gray-200">
+                                    <div class="border-t border-b border-gray-200">
                                         <nav class="flex -mb-px " aria-label="Tabs">
                                             <div data-stage="one" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-indigo-600 border-b-2 border-indigo-500 cursor-pointer each-stage">Stage 1</div>
                                             <div data-stage="two" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage">Stage 2</div>
@@ -102,8 +102,8 @@
                             <div>
                                 <div class="flex flex-col gap-4 mt-8">
                                     <div class="flex flex-col">
-                                        <div id="contact-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
-                                            <div onclick="toggleContactVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                        <div id="contact-head" class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                                            <div onclick="toggleContactVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                             <div id="contactVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
@@ -111,7 +111,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="border-b border-t border-gray-200">
+                                    <div class="border-t border-b border-gray-200">
                                         <nav class="flex -mb-px " aria-label="Tabs">
                                             <div data-stage="my-contacts" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-indigo-600 border-b-2 border-indigo-500 cursor-pointer each-stage disabled">Contacts</div>
                                             <div data-stage="add-contact" class="w-1/3 px-1 py-4 text-sm font-medium text-center text-gray-500 border-b-2 border-transparent cursor-pointer hover:border-gray-300 hover:text-gray-700 each-stage disabled">Add contact</div>
@@ -128,8 +128,8 @@
                             <div>
                                 <div id="calendar-head" class="flex flex-col gap-4 mt-8">
                                     <div class="flex flex-col">
-                                        <div id="contact-head" class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
-                                            <div onclick="toggleCalendarVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                        <div id="contact-head" class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                                            <div onclick="toggleCalendarVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                             <div id="calendarVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
@@ -145,11 +145,11 @@
                             <div>
                                 <div id="briefs-head" class="flex flex-col gap-4 mt-8">
                                     <div class="flex flex-col gap-4">
-                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
-                                            <div class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
-                                                <button class="open_contact_tab w-full px-4 py-2 font-normal text-black project_list_video_btn">Go to my network</button>
+                                        <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                                            <div class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
+                                                <button class="w-full px-4 py-2 font-normal text-black open_contact_tab project_list_video_btn">Go to my network</button>
                                             </div>
-                                            <div onclick="toggleBriefsVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                            <div onclick="toggleBriefsVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                         </div>
@@ -187,8 +187,8 @@
                             <div>
                                 <div id="contracts-head" class="flex flex-col gap-4 mt-8 mb-4">
                                     <div class="flex flex-col gap-4">
-                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
-                                            <div onclick="toggleContractsVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                        <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                                            <div onclick="toggleContractsVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                         </div>
@@ -295,8 +295,8 @@
                             <div>
                                 <div id="ind-contacts-head" class="flex flex-col gap-4 mt-8 mb-4">
                                     <div class="flex flex-col gap-4">
-                                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 w-full">
-                                            <div onclick="toggleIndContactsVideo()" class="flex bg-white rounded-lg border border-gray-300 px-6 py-5 shadow-sm hover:border-gray-400 cursor-pointer">
+                                        <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                                            <div onclick="toggleIndContactsVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                         </div>
@@ -395,12 +395,12 @@
                             </div>
                         </div>
                         <div class="mt-10 each_dash_section instant_hide" data-value="my-transactions">
-                            <div id="transactionsVideo" class="hidden w-full p-6 bg-white shadow-sm mb-4 ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
+                            <div id="transactionsVideo" class="hidden w-full p-6 mb-4 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
                                 <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
                             </div>
                             <div class="order-stages stage-one">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    <div onclick="toggleTransactionsVideo()" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border cursor-pointer border-gray-300 rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div onclick="toggleTransactionsVideo()" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-video"></i>
                                         </div>
@@ -622,9 +622,12 @@
         videoDiv.classList.toggle('hidden');
     }
 
+    var defaultSubTab = '';
+    
     $('document').ready(function (){
 
         const defaultTab = $('#default-dash-tab').val();
+        defaultSubTab = $('#default-dash-sub-tab').val();
         const dashboardInfo = $('#dash-info').val();
         const activeTab = defaultTab != '' ? defaultTab : localStorage.getItem('dash-tab-active');
 
@@ -638,6 +641,10 @@
             $('.hrd_usr_men_outer').toggleClass('active');
             $('body').toggleClass('lock_page');
             $('#body-overlay').toggle();
+        }
+        
+        if(defaultSubTab == 'my-purchases') {
+            $('.order-stage-head').trigger('click');
         }
 
         // render me page content
@@ -1083,6 +1090,8 @@
     $('.order-stage-head').click(function(){
 
         var id = $(this).attr('data-id');
+
+        id = defaultSubTab == '' ? id : defaultSubTab;
 
         if (id == 'my-patron-hub') {
             window.location.href = '/profile-setup/standalone/setup-patron'
