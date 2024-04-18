@@ -185,10 +185,12 @@ class AgencyController extends Controller
         }
     }
 
-    public function dashboardWithTab(Request $request, $tab, $subTab = null)
+    public function dashboardWithTab(Request $request, $tab)
     {
         Session::flash('dash-tab', $tab);
-        Session::flash('dash-sub-tab', $subTab);
+        if($tab == 'my-transactions') {
+            Session::flash('dash-sub-tab', 'my-purchases');
+        }
         return redirect(route('agency.dashboard'));
     }
 
