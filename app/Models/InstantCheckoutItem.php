@@ -38,7 +38,7 @@ class InstantCheckoutItem extends Authenticatable
 
     public function getDownloadUrlAttribute()
     {
-        $download_url = null;
+        $downloads = null;
         
         if($this->type == 'music' && $this->music != null) {
             $downloads = $this->music->downloads;

@@ -270,7 +270,7 @@
                     @endif
                     <div class="clearfix sub_button_sec my_purchases_dwnload">
                         <label>
-                            <span>Link:  {{$checkoutItem->download_url}} / {{$checkoutItem->source}} </span>
+                            <span>Link:  {{$checkoutItem->download_url}} </span>
                             <a class="{{$class}}" data-download-url="{{$checkoutItem->download_url}}" data-download="{{$checkoutItem->type}}" data-checkout-item="{{$checkoutItem->id}}" data-sourcet="{{$checkoutItem->source_table_id}}" href="{{$link}}"> Download <i class="fa fa-download"></i></a>
                         </label>
                     </div>
