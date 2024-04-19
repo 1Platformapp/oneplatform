@@ -14,6 +14,7 @@ class InstantCheckoutItem extends Authenticatable
     
     protected $appends = [
         "download_url",
+        "source",
     ];
 
 	
@@ -44,10 +45,26 @@ class InstantCheckoutItem extends Authenticatable
             foreach($this->music->downloads as $download) {
                 if($download['source'] == 'firebase') {
                     $download_url = $download['path'];
+                    $source = $download['source'];
                 }
             }
         }
         
         return $download_url;
+    }
+
+    public function getSourceAttribute()
+    {
+        $source = null;
+        
+        if($this->type == 'music' && $this->music != null) {
+            foreach($this->music->downloads as $download) {
+                if($download['source'] == 'firebase') {
+                    $source = $download['source'];
+                }
+            }
+        }
+        
+        return $source;
     }
 }
