@@ -49,7 +49,7 @@ class InstantCheckoutItem extends Authenticatable
             }
 
             if (is_array($downloads)) {
-                $download_url = 'inside if array';
+                $download_url = $downloads[1]['path'];
                 foreach ($downloads as $download) {
                     $download_url = 'inside foreach';
                     if (isset($download['source']) && $download['source'] == 'firebase') {
