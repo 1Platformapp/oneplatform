@@ -211,11 +211,8 @@ class ProfileSetupController extends Controller
 
                     $designError = $user->designStepError();
                     Session::put('error', $designError);
-                    if($designError != null && !$isStandalone){
-                        $page = 'media';
-                    }else{
-                        $page = 'design';
-                    }
+
+                    $page = 'media';
                 }
 
                 if($page == 'personal' && $user->manager_chat == 1){
