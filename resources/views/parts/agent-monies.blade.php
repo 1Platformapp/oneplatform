@@ -351,6 +351,7 @@
                 var checkoutItem = thiss.attr('data-checkout-item');
                 var download = thiss.attr('data-download');
                 var downloadUrl = thiss.attr('data-download-url');
+                alert(downloadUrl);
                 var downloadAs = thiss.parent().parent().parent().find('.my_purchase_sec a').first().text();
                 
                 if(downloadUrl != null) {
