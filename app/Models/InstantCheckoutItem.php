@@ -41,7 +41,7 @@ class InstantCheckoutItem extends Authenticatable
         $download_url = null;
         
         if($this->type == 'music' && $this->music != null) {
-            $downloads = unserialize($this->music->downloads);
+            $downloads = $this->music->downloads;
 
             foreach($downloads as $download) {
                 if($download['source'] == 'firebase') {
@@ -50,6 +50,6 @@ class InstantCheckoutItem extends Authenticatable
             }
         }
         
-        return $download_url;
+        return $downloads;
     }
 }
