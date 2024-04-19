@@ -38,17 +38,20 @@ class InstantCheckoutItem extends Authenticatable
 
     public function getDownloadUrlAttribute()
     {
-        $download_url = null;
+        $download_url = 'start';
         
         if ($this->type == 'music' && $this->music != null) {
             $downloads = $this->music->downloads;
-
+            $download_url = 'inside if';
             if (is_string($downloads)) {
+                $download_url = 'inside if string';
                 $downloads = unserialize($downloads);
             }
 
             if (is_array($downloads)) {
+                $download_url = 'inside if array';
                 foreach ($downloads as $download) {
+                    $download_url = 'inside foreach';
                     if (isset($download['source']) && $download['source'] == 'firebase') {
                         $download_url = $download['path'];
                         break;
