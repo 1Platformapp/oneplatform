@@ -54,10 +54,10 @@ class UserMusic extends Authenticatable
         $this->attributes['downloads'] = serialize($value);
     }
 
-    public function getDownloadsAttribute($value)
-    {
-        return $value && is_array($value) && count($value) ? array_filter(unserialize($value)) : array();
-    }
+    // public function getDownloadsAttribute($value)
+    // {
+    //     return $value && is_array($value) && count($value) ? array_filter(unserialize($value)) : array();
+    // }
 
     public function setPrivacyAttribute($value)
     {
