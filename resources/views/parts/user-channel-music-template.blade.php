@@ -1,7 +1,7 @@
 @php $playerThumb = $music->thumbnail_player == '' ? 'url-thumb-profile.jpg' : $music->thumbnail_player @endphp
 @php $domain = parse_url(request()->root())['host'] @endphp
 @php $comm = new \App\Http\Controllers\CommonMethods() @endphp
-<div class="tab_chanel_list clearfix each-music" data-thumbnail-player="{{ $playerThumb }}" data-musicid="{{ $music->id }}" data-userid="{{base64_encode($music->user->id)}}" data-musicfile="{{ $music->music_file && $music->music_file != '' && $comm->fileExists(public_path('user-music-files/'.$music->music_file)) && filesize(public_path('user-music-files/'.$music->music_file)) > 0 ? $music->music_file : '' }}">
+<div class="clearfix tab_chanel_list each-music" data-thumbnail-player="{{ $playerThumb }}" data-musicid="{{ $music->id }}" data-userid="{{base64_encode($music->user->id)}}" data-musicfile="{{ $music->music_file && $music->music_file != '' && $comm->fileExists(public_path('user-music-files/'.$music->music_file)) && filesize(public_path('user-music-files/'.$music->music_file)) > 0 ? $music->music_file : '' }}">
     @php $musicThumb = $music->thumbnail_left == '' ? asset('img/url-thumb-profile.jpg') : asset('user-music-thumbnails/'.$music->thumbnail_left) @endphp
     @php $style = $music->genre ? $music->genre->name : 'None' @endphp
     @php $mood = $music->dropdown_two != '' ? $music->dropdown_two : 'None' @endphp
@@ -69,9 +69,9 @@
             </div>
         </div>
 
-        <div class="ch_video_detail_outer add_to_cart_item clearfix" style="display: none;">
+        <div class="clearfix ch_video_detail_outer add_to_cart_item" style="display: none;">
             <div class="clearfix">
-                <div class="music_det clearfix">
+                <div class="clearfix music_det">
                     <div class="headline">Instruments</div>
                     <div class="detail">
                         <div class="instruments_detail">
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 @if($music->lyrics)
-                <div class="music_det clearfix">
+                <div class="clearfix music_det">
                     <div class="headline">Lyrics</div>
                     <div class="detail">
                         <div class="lyrics_detail">
@@ -91,8 +91,16 @@
                 </div>
                 @endif
                 @php $musicStems = $musicLoops = [] @endphp
-                @if(count($music->downloads))
-                    @foreach($music->downloads as $key => $item)
+                @php 
+                    $downloads = [];
+                    if($music->downloads && is_array($music->downloads) && count($music->downloads)) {
+                        $downloads = [array_filter(unserialize($music->downloads))];
+                    } else {
+                        $downloads = [];
+                    }
+                @endphp
+                @if(count($downloads))
+                    @foreach($downloads as $key => $item)
                         @if($item['itemtype'] == 'loop_one') @php $hasloop = 1; $loopOne = $item['dec_fname'] @endphp @endif
                         @if($item['itemtype'] == 'loop_two') @php $hasloop = 1; $loopTwo = $item['dec_fname'] @endphp @endif
                         @if($item['itemtype'] == 'loop_three') @php $hasloop = 1; $loopThree = $item['dec_fname'] @endphp @endif
@@ -106,7 +114,7 @@
                         @if($item['itemtype'] == 'stem_eight') @php $hasstem = 1; $stemEight = $item['dec_fname'] @endphp @endif
                     @endforeach
                 @endif
-                <div class="music_det clearfix">
+                <div class="clearfix music_det">
                     @if(isset($hasloop) && $hasloop == 1)
                     <div class="loop_outer">
                         <div class="loop_inner">
