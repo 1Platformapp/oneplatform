@@ -197,52 +197,57 @@
                                         <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                        <div class="flex-1 min-w-0">
-                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                <div class="hidden lg:flex">1.</div>
-                                                <div>Subscribe For legal Industry Contracts</div>
+                                <p>
+                                    Click <a href="#" id="toggleContracts" class="text-red-600">here</a> to see how contracts works.
+                                </p>
+                                <div id="how-contract-works" class="hidden">
+                                    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">1.</div>
+                                                    <div>Subscribe For legal Industry Contracts</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                        <div class="flex-1 min-w-0">
-                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                <div class="hidden lg:flex">2.</div>
-                                                <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer text-[#fc064c]">here</span>, attach contract</div>
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">2.</div>
+                                                    <div>Choose contact from <span class="open-contacts-section font-bold cursor-pointer text-[#fc064c]">here</span>, attach contract</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                        <div class="flex-1 min-w-0">
-                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                <div class="hidden lg:flex">3.</div>
-                                                <div>Add details and requirements and submit</div>
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">3.</div>
+                                                    <div>Add details and requirements and submit</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                        <div class="flex-1 min-w-0">
-                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                <div class="hidden lg:flex">4.</div>
-                                                <div>Contact will receive an email/app notification</div>
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">4.</div>
+                                                    <div>Contact will receive an email/app notification</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                        <div class="flex-1 min-w-0">
-                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                <div class="hidden lg:flex">5.</div>
-                                                <div>They review and sign</div>
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">5.</div>
+                                                    <div>They review and sign</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
-                                        <div class="flex-1 min-w-0">
-                                            <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
-                                                <div class="hidden lg:flex">6.</div>
-                                                <div>Both parties receive legally binding digital copy</div>
+                                        <div class="relative flex items-center col-span-1 px-3 py-2 space-x-3 outline-none lg:px-6 lg:py-3">
+                                            <div class="flex-1 min-w-0">
+                                                <div class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
+                                                    <div class="hidden lg:flex">6.</div>
+                                                    <div>Both parties receive legally binding digital copy</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -580,6 +585,16 @@
 
 </style>
 <script>
+
+    document.getElementById('toggleContracts').addEventListener('click', function(event) {
+        event.preventDefault();
+        var toggleContent = document.getElementById('how-contract-works');
+        if (toggleContent.classList.contains('hidden')) {
+            toggleContent.classList.remove('hidden');
+        } else {
+            toggleContent.classList.add('hidden');
+        }
+    });
 
     $.ajaxSetup({
         headers: {
