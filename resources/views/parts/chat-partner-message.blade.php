@@ -29,10 +29,10 @@
     </div>
     <div class="chat_message_det {{Auth::user()->id == $chat->sender->id ? 'sender' : 'reciever'}}">
         <div class="chat_message_det_top">
-            <div class="font-bold chat_message_name">{{$chat->sender->name}}</div>
+            <div class="font-bold text-16">{{$chat->sender->name}}</div>
             <div class="chat_message_date">{{date('d-M-Y h:i A', strtotime($chat->created_at))}}</div>
         </div>
-        <div class="text-white chat_message_det_bottom">
+        <div class="text-white chat_message_det_bottom text-14">
             @if(is_array($chat->agreement) && count($chat->agreement))
                 <a download href="{{asset('bespoke-licenses/'.$chat->agreement['filename'])}}">
                     <i class="fa fa-file-pdf-o"></i>

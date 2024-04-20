@@ -35,8 +35,7 @@
 .chat_each_message.msg_out .chat_message_det_top { flex-direction: row-reverse; justify-content: flex-end; }
 .chat_each_message.msg_in .chat_message_pic { margin-right: 10px; }
 .chat_each_message.msg_out .chat_message_pic { margin-left: 10px; }
-.chat_each_message .chat_message_name { font-size: 12px; }
-.chat_each_message .chat_message_det_bottom { display: flex; flex-direction: column; font-size: 12px; line-height: 17px; }
+.chat_each_message .chat_message_det_bottom { display: flex; flex-direction: column; line-height: 17px; }
 .chat_each_message.msg_out .chat_message_det_bottom { text-align: right; }
 .chat_each_message.msg_in .chat_message_det_bottom { text-align: left; }
 .attachment_visi { display: flex; margin-top: 5px; flex-wrap: wrap; }
