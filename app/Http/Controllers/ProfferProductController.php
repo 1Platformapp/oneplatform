@@ -120,6 +120,7 @@ class ProfferProductController extends Controller
             $product = UserProduct::find($productId);
             $type = $request->get('type');
             $customer = $request->get('customer');
+            $agentContact = null;
 
             if($type == 'partner-purchase'){
 
@@ -176,6 +177,11 @@ class ProfferProductController extends Controller
                 ];
 
                 $chat->save();
+
+                if($agentContact){
+                    $agentContact->latest_message_at = date('Y-m-d H:i:s');
+                    $agentContact->save();
+                }
 
                 $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new ProfferedProduct('create', $user, $recipient, $chat));
                 $userNotification = new UserNotificationController();

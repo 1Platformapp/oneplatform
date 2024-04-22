@@ -126,81 +126,87 @@ class ProfferProjectController extends Controller
             return json_encode(['success' => $success, 'error' => 'Price is required']);
         }
 
-            $message = $request->get('description');
-            $endTermSelect = $request->get('endTermSelect');
-            $endTerm = $request->get('endTerm');
-            $title = $request->get('title');
-            $price = $request->get('price');
-            $type = $request->get('type');
-            $customer = $request->get('customer');
+        $message = $request->get('description');
+        $endTermSelect = $request->get('endTermSelect');
+        $endTerm = $request->get('endTerm');
+        $title = $request->get('title');
+        $price = $request->get('price');
+        $type = $request->get('type');
+        $customer = $request->get('customer');
+        $agentContact = null;
 
-            if($type == 'partner-purchase'){
+        if($type == 'partner-purchase'){
 
-                $recipientId = $request->get('id');
-                $recipient = User::find($recipientId);
-            }else if($type == 'group-purchase'){
+            $recipientId = $request->get('id');
+            $recipient = User::find($recipientId);
+        }else if($type == 'group-purchase'){
 
-                $agentContactId = $request->get('id');
-                $agentContact = AgentContact::find($agentContactId);
+            $agentContactId = $request->get('id');
+            $agentContact = AgentContact::find($agentContactId);
 
-                if(!$agentContact){
-                    return json_encode(['success' => 0, 'error' => 'unknown contact']);
-                }
-
-                $group = UserChatGroup::where(['agent_id' => $agentContact->agent_id, 'contact_id' => $agentContact->contact_id])->get()->first();
-
-                if(!$group){
-                    return json_encode(['success' => 0, 'error' => 'unknown group']);
-                }
-
-                if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
-                    return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
-                }
-
-                if($customer == 'partner' && $user->isAgent() && $group->contact){
-                    $recipient = $group->contact;
-                }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
-                    $recipient = $group->agent;
-                }else{
-                    $recipient = User::find($customer);
-                }
+            if(!$agentContact){
+                return json_encode(['success' => 0, 'error' => 'unknown contact']);
             }
 
-            if($recipient){
+            $group = UserChatGroup::where(['agent_id' => $agentContact->agent_id, 'contact_id' => $agentContact->contact_id])->get()->first();
 
-                $sellerDetails = $commonMethods->getUserRealDetails($user->id);
-                $buyerDetails = $commonMethods->getUserRealDetails($recipient->id);
-                $data = ['sellerDetails' => $sellerDetails, 'buyerDetails' => $buyerDetails, 'title' => $title, 'endTermSelect' => $endTermSelect, 'endTerm' => $endTerm, 'description' => $message, 'price' => $price, 'commonMethods' => $commonMethods];
-                $ticketNumber = strtoupper('project_'.uniqid()).'.pdf';
-                $fileName = "proffered-project/".$ticketNumber;
-                PDF::loadView('pdf.proffer-project', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
+            if(!$group){
+                return json_encode(['success' => 0, 'error' => 'unknown group']);
+            }
 
-                $chat = new UserChat();
-                $chat->sender_id = $user->id;
-                $chat->recipient_id = $recipient->id;
-                $chat->group_id = isset($group) ? $group->id : NULL;
-                $chat->message = $message;
-                $chat->project = [
-                    'filename'        => $ticketNumber,
-                    'title'           => $title,
-                    'price'           => $price,
-                    'status'          => 'Pending',
-                    'endTermSelect'   => $endTermSelect,
-                    'endTerm'         => $endTerm,
-                ];
+            if($user->id != $group->contact_id && $user->id != $group->agent_id && !in_array($user->id, $group->other_members)){
+                return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
+            }
 
-                $chat->save();
-
-                $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new ProfferedProject('create', $user, $recipient, $chat));
-                $userNotification = new UserNotificationController();
-                $request->request->add(['user' => $recipient->id,'customer' => $user->id,'type' => 'chat','source_id' => $chat->id]);
-                $response = json_decode($userNotification->create($request), true);
-
-                $success = 1;
+            if($customer == 'partner' && $user->isAgent() && $group->contact){
+                $recipient = $group->contact;
+            }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
+                $recipient = $group->agent;
             }else{
-
-                $error = 'No recipient';
+                $recipient = User::find($customer);
             }
+        }
+
+        if($recipient){
+
+            $sellerDetails = $commonMethods->getUserRealDetails($user->id);
+            $buyerDetails = $commonMethods->getUserRealDetails($recipient->id);
+            $data = ['sellerDetails' => $sellerDetails, 'buyerDetails' => $buyerDetails, 'title' => $title, 'endTermSelect' => $endTermSelect, 'endTerm' => $endTerm, 'description' => $message, 'price' => $price, 'commonMethods' => $commonMethods];
+            $ticketNumber = strtoupper('project_'.uniqid()).'.pdf';
+            $fileName = "proffered-project/".$ticketNumber;
+            PDF::loadView('pdf.proffer-project', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
+
+            $chat = new UserChat();
+            $chat->sender_id = $user->id;
+            $chat->recipient_id = $recipient->id;
+            $chat->group_id = isset($group) ? $group->id : NULL;
+            $chat->message = $message;
+            $chat->project = [
+                'filename'        => $ticketNumber,
+                'title'           => $title,
+                'price'           => $price,
+                'status'          => 'Pending',
+                'endTermSelect'   => $endTermSelect,
+                'endTerm'         => $endTerm,
+            ];
+
+            $chat->save();
+
+            if($agentContact){
+                $agentContact->latest_message_at = date('Y-m-d H:i:s');
+                $agentContact->save();
+            }
+
+            $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new ProfferedProject('create', $user, $recipient, $chat));
+            $userNotification = new UserNotificationController();
+            $request->request->add(['user' => $recipient->id,'customer' => $user->id,'type' => 'chat','source_id' => $chat->id]);
+            $response = json_decode($userNotification->create($request), true);
+
+            $success = 1;
+        }else{
+
+            $error = 'No recipient';
+        }
 
         return json_encode(['success' => $success, 'error' => $error]);
     }

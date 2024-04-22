@@ -352,6 +352,7 @@ class BispokeLicenseController extends Controller
             $music = UserMusic::find($musicId);
             $type = $request->get('type');
             $customer = $request->get('customer');
+            $agentContact = null;
 
             if($type == 'partner-purchase'){
 
@@ -416,6 +417,11 @@ class BispokeLicenseController extends Controller
                 ];
 
                 $chat->save();
+
+                if($agentContact){
+                    $agentContact->latest_message_at = date('Y-m-d H:i:s');
+                    $agentContact->save();
+                }
 
                 $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new License('bespokeAgreement', $user, $recipient, $chat));
                 $userNotification = new UserNotificationController();
