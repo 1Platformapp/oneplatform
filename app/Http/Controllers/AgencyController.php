@@ -616,6 +616,13 @@ class AgencyController extends Controller
 
             if($action == 'attachment-initialize'){
                 $chat = new UserChat();
+                $chat->sender_id = NULL;
+                $chat->group_id = NULL;
+                $chat->recipient_id = NULL;
+                $chat->message = NULL;
+                $chat->music_id = NULL;
+
+                $chat->save();
                 $id = $chat->id;
             } else if($action == 'send-message' || $action == 'attachment-finalize') {
                 if($action == 'attachment-finalize'){
