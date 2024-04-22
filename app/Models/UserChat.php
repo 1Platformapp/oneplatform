@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\FirebaseController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -157,15 +158,13 @@ class UserChat extends Authenticatable
             $this->save();
             $success = true;
         }else{
-            $dir = '/';
-            $recursive = false;
+            $firebase = new FirebaseController();
             $filename = 'chat_attachment_'.$this->id;
-            $filePath = $file;
-            Storage::disk('google')->put($filename.'.'.$extension, fopen($filePath, 'r+'));
-            $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
-            $cloudFile = $contents->where('type', '=', 'file')->where('filename', '=', $filename)->first();
             $attachments = $this->attachments;
-            $attachments[] = ['type' => 'cloud', 'mime' => $cloudFile['mimetype'], 'filename' => $filename, 'download_link' => $cloudFile['path'], 'size' => $cloudFile['size']];
+
+            $contents = $firebase->uploadFile($file);
+            $attachments[] = ['type' => 'file', 'mime' => $contents['contentType'], 'filename' => $filename, 'download_link' => $contents['mediaLink'], 'size' => $contents['size']];
+            
             $this->attachments = $attachments;
             $this->save();
             $success = true;
