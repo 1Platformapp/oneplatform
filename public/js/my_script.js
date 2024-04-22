@@ -6394,7 +6394,7 @@ $(document).ready(function() {
             $('.attach_expand_wrapper').removeClass('instant_hide');
         }else{
             var down = $(this).attr('data-download');
-            $('.attach_expand_wrapper .attach_wrap_in .download').attr('href', 'https://drive.google.com/uc?id='+down+'&export=download')
+            $('.attach_expand_wrapper .attach_wrap_in .download').attr('href', down)
             $('.attach_expand_wrapper .attach_wrap_in .download')[0].click();
         }
     });
