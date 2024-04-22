@@ -87,4 +87,4 @@ if($page != 'chat')
     </div>
 </div>
 
-<link rel="stylesheet" href="{{asset('css/profile.chat-old.css?v=1.5')}}">
+<link rel="stylesheet" href="{{asset('css/profile.chat-old.css?v=1.6')}}">
