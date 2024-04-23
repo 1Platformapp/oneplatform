@@ -146,9 +146,9 @@ class ProfferProductController extends Controller
                 }
 
                 if($customer == 'partner' && $user->isAgent() && $group->contact){
-                    $recipient = $group->contact;
-                }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
                     $recipient = $group->agent;
+                }else if($customer == 'partner' && !$user->isAgent() && $group->agent){
+                    $recipient = $group->contact;
                 }else{
                     $recipient = User::find($customer);
                 }
