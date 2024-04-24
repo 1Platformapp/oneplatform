@@ -1,4 +1,3 @@
-
 @if($chat->admin_join_chat)
 <div class="chat_join">
     <div class="chat_join_in">
@@ -30,7 +29,20 @@
     <div class="chat_message_det {{Auth::user()->id == $chat->sender->id ? 'sender' : 'reciever'}}">
         <div class="chat_message_det_top">
             <div class="font-bold text-16">{{$chat->sender->name}}</div>
-            <div class="chat_message_date">{{date('d-M-Y h:i A', strtotime($chat->created_at))}}</div>
+            <div class="chat_message_date">
+                @php
+                if (auth()) {
+                    $timezone = auth()->user()->timezone; // Get the user's timezone from authentication or any other source
+                }
+                $date = \Carbon\Carbon::parse($chat->created_at);
+                if($timezone) {
+                    $date->timezone = $timezone;
+                }
+                echo $date->format('d-M-Y h:i A');
+                
+                @endphp
+                <!-- {{date('d-M-Y h:i A', strtotime($chat->created_at))}} -->
+            </div>
         </div>
         <div class="text-white chat_message_det_bottom text-14">
             @if(is_array($chat->agreement) && count($chat->agreement))
