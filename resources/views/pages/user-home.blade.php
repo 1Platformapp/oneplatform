@@ -365,13 +365,13 @@
                 </aside>
                 <main>
                     <section class="tab_det_left_sec tab_det_dsk tab_det_inner right_height_res expanded @if($user->isCotyso()) expanded @if($user->default_tab_home != 6) leave @else p10 @endif @endif">
-                        <h1 class="page_title">
+                        <h1 class="page_title2">
                             @if($user->profile->seo_h1)
                                 {{$user->profile->seo_h1}}
                             @else
                             	{{$user->name}}
                             	@if($userPersonalDetails['skills'] != '')
-                            		{{' is a '.$userPersonalDetails['skills']}}
+                            		{{' is a '. $userPersonalDetails['skills'] == 'Bands' ? 'Band' : $userPersonalDetails['skills']}}
                             	@endif
                             	@if($userPersonalDetails['skills'] == '' && $userPersonalDetails['city'] != '')
                             		{{' is'}}
