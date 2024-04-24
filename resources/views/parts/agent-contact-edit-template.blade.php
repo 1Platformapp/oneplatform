@@ -132,6 +132,16 @@ Excited to have you on board!  @endif</textarea>
         </div>
 
         <form action="{{route('agent.contact.update')}}" method="POST" class="bg-white shadow-sm contact-edit-section-right ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+            <div class="p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                <!-- Quwat -> Youtube Video here -->
+                <div class="tp_center_video_outer">
+                    <div class="jp-gui">
+                        <video id="player1" width="578" height="325" style="width: 100%; height: 100%;" class="vid_preloader" preload="none">
+                            <source type="video/youtube" src="https://www.youtube.com/watch?v=wnxlgkWyVn0" />
+                        </video>
+                    </div>
+                </div>
+            </div>
             {{ csrf_field() }}
             <input type="hidden" name="edit" value="{{$contact->id}}">
             <input type="hidden" name="send_email" value="0">
