@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::domain(Config::get('constants.primaryDomain'))->group(function () {
     Route::post('register/user', [RegisterController::class, 'register']);
 });
+
+Route::prefix('user')->group(function(){
+    Route::get('/', [UserController::class, 'index'])->name('user.index');
+});
+
         

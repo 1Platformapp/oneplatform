@@ -2,25 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Auth;
+use App\Models\UserCampaign;
+use App\Models\UserChatGroup;
+use App\Models\UserLiveStream;
 
 use App\Http\Controllers\CommonMethods;
+use App\Models\Traits\Scopes\UserScope;
+use Illuminate\Notifications\Notifiable;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\UserNotificationController;
-
-use App\Models\UserCampaign;
-use App\Models\UserLiveStream;
-use App\Models\UserChatGroup;
-use Auth;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 
 {
 
     use Notifiable;
+    use UserScope;
 
     protected $dates = [ 'last_login' ];
 
