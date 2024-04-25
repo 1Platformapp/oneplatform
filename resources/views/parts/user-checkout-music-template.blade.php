@@ -3,7 +3,7 @@
 @if(isset($disparity) && $disparity == 1)
     
     <div class="tot_awe_pro_outer">
-        <div class="user_product_summary clearfix">
+        <div class="clearfix user_product_summary">
             <div class="user_product_summary_left">
                 <div class="user_product_img_thumb">
                     <img class="" src="{{$musicThumb}}">
@@ -26,7 +26,7 @@
     </div>
 @else
     
-    <div class="tab_chanel_list clearfix each-music" data-thumbnail-player="{{ $basket->music->thumbnail_player }}" data-musicid="{{ $basket->music->id }}" data-musicfile="{{ $basket->music->music_file }}">
+    <div class="clearfix tab_chanel_list each-music" data-thumbnail-player="{{ $basket->music->thumbnail_player }}" data-musicid="{{ $basket->music->id }}" data-musicfile="{{ $basket->music->music_file }}">
 
             <?php
             $style = "None";
@@ -58,9 +58,9 @@
                 </div>
             </div>
 
-            <div class="ch_video_detail_outer add_to_cart_item clearfix" style="display: none;">
+            <div class="clearfix ch_video_detail_outer add_to_cart_item" style="display: none;">
                 <div class="clearfix">
-                    <div class="music_det clearfix">
+                    <div class="clearfix music_det">
                         <div class="headline">Instruments</div>
                         <div class="detail">
                             <div class="instruments_detail">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     @if($basket->music->lyrics)
-                    <div class="music_det clearfix">
+                    <div class="clearfix music_det">
                         <div class="headline">Lyrics</div>
                         <div class="detail">
                             <div class="lyrics_detail">
@@ -80,8 +80,16 @@
                     </div>
                     @endif
                     @php $musicStems = $musicLoops = [] @endphp
-                    @if(count($basket->music->downloads))
-                        @foreach($basket->music->downloads as $key => $item)
+                    @php 
+                        $downloads = [];
+                        if($basket->music->downloads && is_array($basket->music->downloads) && count($basket->music->downloads)) {
+                            $downloads = [array_filter(unserialize($basket->music->downloads))];
+                        } else {
+                            $downloads = [];
+                        }
+                    @endphp
+                    @if(count($downloads))
+                        @foreach($downloads as $key => $item)
                             @if($item['itemtype'] == 'loop_one') @php $hasloop = 1; $loopOne = $item['dec_fname'] @endphp @endif
                             @if($item['itemtype'] == 'loop_two') @php $hasloop = 1; $loopTwo = $item['dec_fname'] @endphp @endif
                             @if($item['itemtype'] == 'loop_three') @php $hasloop = 1; $loopThree = $item['dec_fname'] @endphp @endif
@@ -95,7 +103,7 @@
                             @if($item['itemtype'] == 'stem_eight') @php $hasstem = 1; $stemEight = $item['dec_fname'] @endphp @endif
                         @endforeach
                     @endif
-                    <div class="music_det clearfix">
+                    <div class="clearfix music_det">
                         @if(isset($hasloop) && $hasloop == 1)
                         <div class="loop_outer">
                             <div class="loop_inner">

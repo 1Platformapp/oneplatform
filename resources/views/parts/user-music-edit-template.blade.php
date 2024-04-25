@@ -12,9 +12,18 @@
             Edit Music Information
             <i class="fa fa-times edit_elem_close"></i>
         </label>
+
+        @php 
+            $downloads = [];
+            if($userMusic->downloads && is_array($userMusic->downloads) && count($userMusic->downloads)) {
+                $downloads = [array_filter(unserialize($userMusic->downloads))];
+            } else {
+                $downloads = [];
+            }
+        @endphp
         
-        @if($userMusic->downloads)
-            @foreach($userMusic->downloads as $key => $item)
+        @if($downloads)
+            @foreach($downloads as $key => $item)
                 @if($item['itemtype'] == 'loop_one') @php $loopOne = $userMusic->getDownloadName($item) @endphp @endif
                 @if($item['itemtype'] == 'loop_two') @php $loopTwo = $userMusic->getDownloadName($item) @endphp @endif
                 @if($item['itemtype'] == 'loop_three') @php $loopThree = $userMusic->getDownloadName($item) @endphp @endif

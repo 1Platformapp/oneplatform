@@ -92,8 +92,16 @@
     			<div class="item_desc_read_more instant_hide"></div>
     		</section>
     		@php $musicStems = $musicLoops = [] @endphp
-    		@if(count($item->downloads))
-    		    @foreach($item->downloads as $key => $itemm)
+			@php 
+				$downloads = [];
+				if($item->downloads && is_array($item->downloads) && count($item->downloads)) {
+					$downloads = [array_filter(unserialize($item->downloads))];
+				} else {
+					$downloads = [];
+				}
+			@endphp
+    		@if(count($downloads))
+    		    @foreach($downloads as $key => $itemm)
     		        @if($itemm['itemtype'] == 'loop_one') @php $hasloop = 1; $loopOne = $itemm['dec_fname'] @endphp @endif
     		        @if($itemm['itemtype'] == 'loop_two') @php $hasloop = 1; $loopTwo = $itemm['dec_fname'] @endphp @endif
     		        @if($itemm['itemtype'] == 'loop_three') @php $hasloop = 1; $loopThree = $itemm['dec_fname'] @endphp @endif
