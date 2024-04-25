@@ -100,19 +100,19 @@
                             <div class="w-full mt-2">
                                 <label for="search-participants" class="block text-sm font-medium leading-6 text-gray-900">Participants</label>
                                 <div class="relative mt-2 participants-search-outer">
-                                    <input type="text" id="search-participants" placeholder="search here..." class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                    <input data-agent-id="{{$user->id}}" type="text" id="search-participants" placeholder="search here..." class="block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                     <ul class="absolute z-10 hidden w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg participants-search-result-outer max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm" id="options" role="listbox"></ul>
                                 </div>
                                 <div class="flex mt-2">
                                     <ul role="list" class="w-full mt-4 border-t border-b border-gray-200 divide-y divide-gray-200 all-participants">
                                         @foreach ($user->contacts as $contact)
-                                        @if(!$contact->contactUser || !$contact->agentUser)
-                                            @php continue @endphp
-                                        @endif
-                                        @php
-                                            $contactUser = $contact->contactUser;
-                                            $contactPDetails = $commonMethods->getUserRealDetails($contactUser->id)
-                                        @endphp
+                                            @if(!$contact->contactUser || !$contact->agentUser)
+                                                @php continue @endphp
+                                            @endif
+                                            @php
+                                                $contactUser = $contact->contactUser;
+                                                $contactPDetails = $commonMethods->getUserRealDetails($contactUser->id)
+                                            @endphp
 
                                         <li base-id="{{$contactUser->id}}" class="flex items-center justify-between py-4 space-x-3 each-participant">
                                             <div class="flex items-center flex-1 min-w-0 space-x-3">
@@ -228,6 +228,10 @@
 <script>
 
    $(document).ready(function () {
+
+        var typingTimer;
+        var doneTypingInterval = 500;
+        var userIds = [];
 
         $(document).click(function (event) {
             if (!$(event.target).closest('.dropdown-menu').length) {
@@ -371,8 +375,9 @@
         });
 
         $('body').undelegate('.participants-search-result', 'click').delegate('.participants-search-result', 'click', function(e){
-            var id = $(this).attr('data-id');
-            $('.all-participants .each-participant[base-id="'+id+'"]').removeClass('hidden');
+            var user_id = $(this).attr('data-id');
+            $('.all-participants .each-participant[base-id="'+user_id+'"]').removeClass('hidden');
+            userIds.push(user_id);
             $('.participants-search-result-outer').addClass('hidden');
             $('#search-participants').val('');
         });
@@ -383,6 +388,8 @@
 
         $('body').undelegate('.participant-remove', 'click').delegate('.participant-remove', 'click', function(e){
             var target = $(this).closest('.each-participant');
+            var user_id = target.attr('base-id');
+            userIds = userIds.filter((item) => item != user_id);
             if (target.length > 0) {
                 target.addClass('hidden');
             }
@@ -391,21 +398,48 @@
         $('#search-participants').off('input').on('input', function () {
             var thiss = $(this)
             var searchTerm = $(this).val();
-            $('.participants-search-result-outer').html('').addClass('hidden');
+            var agentId = $(this).data('agent-id');
 
-            if (searchTerm.length > 0) {
-                thiss.closest('.calendar-container').find('.all-participants .participant-name').each(function () {
-                    var participantText = $(this).text().toLowerCase();
-                    console.log(participantText);
-                    if (participantText.includes(searchTerm)) {
-                        var id = $(this).closest('.each-participant').attr('base-id');
-                        var count = $('.participants-search-result[data-id="'+id+'"]');
-                        if (count.length == 0) {
-                            $('.participants-search-result-outer').append('<li data-id="'+id+'" class="relative py-2 pl-3 text-sm text-gray-900 cursor-pointer select-none participants-search-result hover:bg-gray-200 pr-9" role="option" tabindex="-1"><span class="block truncate">'+participantText+'</span></li>').removeClass('hidden');
+            typingTimer = setTimeout(function() {
+                var searchQuery = $('#search-participants').val();
+                $.ajax({
+                    url: '/api/users',
+                    method: 'GET',
+                    data: { search: searchQuery, agent_id: agentId },
+                    success: function(response) {
+                        $('.participants-search-result-outer').html('');
+                        var users = response.users ?? [];
+                        users = users.filter((item) => !userIds.includes(String(item.id)));
+                        
+                        if(users.length > 0) {
+                            users.forEach((item) => {
+                                $('.participants-search-result-outer').append('<li data-id="'+item.id+'" class="relative py-2 pl-3 text-sm text-gray-900 cursor-pointer select-none participants-search-result hover:bg-gray-200 pr-9" role="option" tabindex="-1"><span class="block truncate">'+item.name+'</span></li>').removeClass('hidden');
+                                // userIds.push(item.id);
+                            })
                         }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
                     }
                 });
-            }
+            }, doneTypingInterval);
+
+
+            // $('.participants-search-result-outer').html('').addClass('hidden');
+
+            // // if (searchTerm.length > 0) {
+            // //     thiss.closest('.calendar-container').find('.all-participants .participant-name').each(function () {
+            // //         var participantText = $(this).text().toLowerCase();
+            // //         console.log(participantText);
+            // //         if (participantText.includes(searchTerm)) {
+            // //             var id = $(this).closest('.each-participant').attr('base-id');
+            // //             var count = $('.participants-search-result[data-id="'+id+'"]');
+            // //             if (count.length == 0) {
+            // //                 $('.participants-search-result-outer').append('<li data-id="'+id+'" class="relative py-2 pl-3 text-sm text-gray-900 cursor-pointer select-none participants-search-result hover:bg-gray-200 pr-9" role="option" tabindex="-1"><span class="block truncate">'+participantText+'</span></li>').removeClass('hidden');
+            // //             }
+            // //         }
+            // //     });
+            // // }
         });
 
         $('body').undelegate('.isolate button.current-month', 'click').delegate('.isolate button.current-month', 'click', function(e){
