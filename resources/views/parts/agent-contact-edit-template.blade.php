@@ -69,9 +69,6 @@
                         </li>
                     </ul>
                 </div>
-                <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/KnUY6j2cysE"></iframe>
-                </div>
             </div>
             <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
                 <i class="fa fa-chevron-down"></i>
@@ -108,6 +105,9 @@ Excited to have you on board!  @endif</textarea>
                 @endif
             </div>
         </form>
+        <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-500 ring-gray-900/5 sm:rounded-xl md:col-span-3">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/KnUY6j2cysE"></iframe>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
@@ -122,9 +122,9 @@ Excited to have you on board!  @endif</textarea>
                     </ul>
                 </div>
                 <!-- Quwat -> Youtube Video here -->
-                <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
+                <!-- <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
-                </div>
+                </div> -->
             </div>
             <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
                 <i class="fa fa-chevron-down"></i>
@@ -132,16 +132,6 @@ Excited to have you on board!  @endif</textarea>
         </div>
 
         <form action="{{route('agent.contact.update')}}" method="POST" class="bg-white shadow-sm contact-edit-section-right ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-            <div class="p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                <!-- Quwat -> Youtube Video here -->
-                <div class="tp_center_video_outer">
-                    <div class="jp-gui">
-                        <video id="player1" width="578" height="325" style="width: 100%; height: 100%;" class="vid_preloader" preload="none">
-                            <source type="video/youtube" src="https://www.youtube.com/watch?v=wnxlgkWyVn0" />
-                        </video>
-                    </div>
-                </div>
-            </div>
             {{ csrf_field() }}
             <input type="hidden" name="edit" value="{{$contact->id}}">
             <input type="hidden" name="send_email" value="0">
@@ -163,6 +153,9 @@ Excited to have you on board!  @endif</textarea>
                 <button type="button" class="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm edit_with_action edit_and_send_question hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Send brief to contact</button>
             </div>
         </form>
+        <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-500 ring-gray-900/5 sm:rounded-xl md:col-span-3">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
