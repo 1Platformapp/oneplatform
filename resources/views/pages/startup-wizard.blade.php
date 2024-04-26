@@ -417,6 +417,9 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                         Network Associates
                                                     </div>
                                                     <div class="int_sub_offer_each">
+                                                        Legal Contracts
+                                                    </div>
+                                                    <div class="int_sub_offer_each">
                                                         Free From Adverts
                                                     </div>
                                                     <div class="int_sub_offer_each">
@@ -472,6 +475,11 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                                 <i class="fa fa-times"></i>
                                                             </div>
                                                         </div>
+                                                        <div class="int_sub_offer_each">
+                                                            <div class="int_sub_offer_no">
+                                                                <i class="fa fa-times"></i>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="int_sub_each pro_hover">
@@ -510,8 +518,13 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                             {{$packages[1]['network_limit']}}
                                                         </div>
                                                         <div class="int_sub_offer_each">
-                                                            <div class="int_sub_offer_no">
-                                                                <i class="fa fa-times"></i>
+                                                            <div class="int_sub_offer_yes">
+                                                                <i class="fa fa-check"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="int_sub_offer_each">
+                                                            <div class="int_sub_offer_yes">
+                                                                <i class="fa fa-check"></i>
                                                             </div>
                                                         </div>
                                                         <div class="int_sub_offer_each">
@@ -560,6 +573,11 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             {{$packages[2]['network_limit']}}
+                                                        </div>
+                                                        <div class="int_sub_offer_each">
+                                                            <div class="int_sub_offer_yes">
+                                                                <i class="fa fa-check"></i>
+                                                            </div>
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             <div class="int_sub_offer_yes">
