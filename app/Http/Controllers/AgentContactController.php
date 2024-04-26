@@ -239,7 +239,7 @@ class AgentContactController extends Controller
 
         if($contact){
 
-            if($email != '' && !$contact->is_already_user){
+            if($email != '' && !$contact->is_already_user && !$contact->approved){
 
                 $userExist = User::where(['email' => $email])->get()->first();
                 $agentContact = AgentContact::where(['email' => $email])->get()->first();
