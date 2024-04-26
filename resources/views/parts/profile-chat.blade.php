@@ -423,7 +423,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--<div data-id="my-subscription-plan" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div data-id="my-subscription-plan" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0">
                                             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
@@ -436,7 +436,7 @@
                                                 <p class="text-sm text-gray-500 truncate">Your active subscription and payments made towards it</p>
                                             </div>
                                         </div>
-                                    </div>!-->
+                                    </div>
                                     <div data-id="my-purchases" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fa fa-dollar-sign"></i>
