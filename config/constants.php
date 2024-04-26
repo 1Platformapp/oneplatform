@@ -51,9 +51,9 @@ return [
     'crowdfund_application_fee' => 4.75,
 
     'user_internal_packages' => [
-        0 => ['name' => 'silver', 'volume' => 2, 'application_fee' => 14, 'pricing' => ['month' => 0, 'year' => 0], 'plans' => ['month' => '', 'year' => '']],
-        1 => ['name' => 'gold', 'volume' => 5, 'application_fee' => 7, 'pricing' => ['month' => 15, 'year' => 150], 'plans' => ['month' => 'plan_GvpknURF7L8Ard', 'year' => 'plan_GvpjjnaxsDNNBs']],
-        2 => ['name' => 'platinum', 'volume' => 10, 'application_fee' => 2, 'pricing' => ['month' => 65, 'year' => 650], 'plans' => ['month' => 'plan_GvpiL6uWDjexAC', 'year' => 'plan_GvphF3EFx0lJUD']]
+        0 => ['name' => 'silver', 'volume' => 2, 'network_limit' => 10, 'application_fee' => 14, 'pricing' => ['month' => 0, 'year' => 0], 'plans' => ['month' => '', 'year' => '']],
+        1 => ['name' => 'gold', 'volume' => 5, 'network_limit' => 100, 'application_fee' => 7, 'pricing' => ['month' => 15, 'year' => 150], 'plans' => ['month' => 'plan_GvpknURF7L8Ard', 'year' => 'plan_GvpjjnaxsDNNBs']],
+        2 => ['name' => 'platinum', 'volume' => 10, 'network_limit' => 500, 'application_fee' => 2, 'pricing' => ['month' => 65, 'year' => 650], 'plans' => ['month' => 'plan_GvpiL6uWDjexAC', 'year' => 'plan_GvphF3EFx0lJUD']]
     ],
 
     'ffmpeg_path' => '/var/www/vhosts/recordingexperiences.com/httpdocs/usr/bin/ffmpeg',

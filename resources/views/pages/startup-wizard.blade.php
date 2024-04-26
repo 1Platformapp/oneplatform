@@ -414,6 +414,9 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                         Max Disk Usage
                                                     </div>
                                                     <div class="int_sub_offer_each">
+                                                        Network Associates
+                                                    </div>
+                                                    <div class="int_sub_offer_each">
                                                         Free From Adverts
                                                     </div>
                                                     <div class="int_sub_offer_each">
@@ -450,6 +453,9 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             {{$packages[0]['volume']}}GB
+                                                        </div>
+                                                        <div class="int_sub_offer_each">
+                                                            {{$packages[0]['network_limit']}}
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             <div class="int_sub_offer_no">
@@ -501,6 +507,9 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                             {{$packages[1]['volume']}}GB
                                                         </div>
                                                         <div class="int_sub_offer_each">
+                                                            {{$packages[1]['network_limit']}}
+                                                        </div>
+                                                        <div class="int_sub_offer_each">
                                                             <div class="int_sub_offer_no">
                                                                 <i class="fa fa-times"></i>
                                                             </div>
@@ -548,6 +557,9 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             {{$packages[2]['volume']}}GB
+                                                        </div>
+                                                        <div class="int_sub_offer_each">
+                                                            {{$packages[2]['network_limit']}}
                                                         </div>
                                                         <div class="int_sub_offer_each">
                                                             <div class="int_sub_offer_yes">

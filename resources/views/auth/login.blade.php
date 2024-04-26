@@ -391,6 +391,9 @@
                                         Max Disk Usage
                                     </div>
                                     <div class="int_sub_offer_each">
+                                        Network Associates
+                                    </div>
+                                    <div class="int_sub_offer_each">
                                         Free From Adverts
                                     </div>
                                     <div class="int_sub_offer_each">
@@ -427,6 +430,9 @@
                                         </div>
                                         <div class="int_sub_offer_each">
                                             {{$packages[0]['volume']}}GB
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            {{$packages[0]['network_limit']}}
                                         </div>
                                         <div class="int_sub_offer_each">
                                             <div class="int_sub_offer_no">
@@ -478,6 +484,9 @@
                                             {{$packages[1]['volume']}}GB
                                         </div>
                                         <div class="int_sub_offer_each">
+                                            {{$packages[1]['network_limit']}}
+                                        </div>
+                                        <div class="int_sub_offer_each">
                                             <div class="int_sub_offer_yes">
                                                 <i class="fa fa-check"></i>
                                             </div>
@@ -525,6 +534,9 @@
                                         </div>
                                         <div class="int_sub_offer_each">
                                             {{$packages[2]['volume']}}GB
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            {{$packages[2]['network_limit']}}
                                         </div>
                                         <div class="int_sub_offer_each">
                                             <div class="int_sub_offer_yes">
