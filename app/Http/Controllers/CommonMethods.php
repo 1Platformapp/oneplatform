@@ -608,6 +608,34 @@ class CommonMethods extends Controller
         return true;
     }
 
+    public static function canUserAddNetwork($user)
+    {
+        $userAllowedNetwork = 0;
+        $internalPackages = Config('constants.user_internal_packages');
+        $userPackage = InternalSubscription::where(['user_id' => $user->id, 'subscription_status' => 1])->first();
+        $userNetworks = $user->contacts()->count();
+
+        if($userPackage){
+            $userPackage = explode('_', $userPackage->subscription_package);
+            $userPackage = $userPackage[0];
+        } else{
+            $userPackage = 'silver';
+        }
+
+        foreach ($internalPackages as $internalPackage) {
+            if($internalPackage['name'] == $userPackage){
+                $userAllowedNetwork = $internalPackage['network_limit'];
+                break;
+            }
+        }
+
+        if($userNetworks < $userAllowedNetwork) {
+            return true;
+        }
+        
+        return false;
+    }
+
     public static function userCheckoutApplicationFee($userId){
 
         $user = User::find($userId);

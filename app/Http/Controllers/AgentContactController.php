@@ -127,6 +127,7 @@ class AgentContactController extends Controller
         $error = '';
         $success = '';
 
+        $user = Auth::User();
         $name = $request->get('pro_contact_name');
         $lastName = $request->get('pro_contact_last_name');
 
@@ -136,7 +137,10 @@ class AgentContactController extends Controller
         //     return redirect()->back()->with(['error' => 'The name of the contact already exist in our database']);
         // }
 
-        $user = Auth::User();
+        if($user && !$commonMethods->canUserAddNetwork($user)) {
+            return redirect()->back()->with(['error' => 'Error: Your package network limit has reached']);
+        }
+        
         $skill = $request->get('pro_contact_skill');
         $phone = $request->get('pro_contact_phone');
         $commission = $request->get('pro_contact_commission');
