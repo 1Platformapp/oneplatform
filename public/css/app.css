@@ -794,9 +794,6 @@ video {
 .h-400 {
   height: 25rem;
 }
-.h-500 {
-  height: 31.25rem;
-}
 .h-5 {
   height: 1.25rem;
 }
@@ -2124,10 +2121,6 @@ video {
 
   .md\:top-4 {
     top: 1rem;
-  }
-  
-  .md\:h-500 {
-    height: 31.25rem;
   }
 
   .md\:col-span-2 {
