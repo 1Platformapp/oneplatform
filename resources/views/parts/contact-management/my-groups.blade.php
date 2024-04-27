@@ -11,7 +11,7 @@
             @foreach($chatGroups as $chatGroup)
             @php $groupContact = \App\Models\AgentContact::where(['contact_id' => $chatGroup->contact_id, 'agent_id' => $chatGroup->agent_id])->get()->first() @endphp
             @if($groupContact)
-            <div id="{{$chatGroup->id}}" data-form="my-contact-form_{{ $groupContact->id }}" class="chat_group_listing agent_contact_listing music_btm_list no_sorting clearfix">
+            <div id="{{$chatGroup->id}}" data-form="my-contact-form_{{ $groupContact->id }}" class="clearfix chat_group_listing agent_contact_listing music_btm_list no_sorting">
                 <div class="edit_elem_top">
                     <div class="m_btm_list_left">
                         <div class="music_btm_thumb">

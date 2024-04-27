@@ -190,7 +190,10 @@ class AgencyController extends Controller
         Session::flash('dash-tab', $tab);
         if($tab == 'my-transactions') {
             Session::flash('dash-sub-tab', 'my-purchases');
+        } elseif ($tab == 'contact-management'){
+            Session::flash('dash-sub-tab', $request->subTab ?? '');
         }
+
         return redirect(route('agency.dashboard'));
     }
 

@@ -655,6 +655,11 @@
             $('.m_btn_right_icon_each[data-id="'+activeTab+'"]').trigger('click');
             if(defaultSubTab == 'my-purchases') {
                 $('.order-stage-head').trigger('click');
+            } else if (defaultSubTab == 'groups') {
+                var element = $('body').find('.each-stage[data-stage="my-groups"]');
+                element.removeClass('disabled');
+                
+                element.trigger('click');
             }
         } else {
             $('.m_btn_management_plan').trigger('click');
@@ -691,7 +696,6 @@
     });
 
     $('body').delegate('.each-stage:not(.disabled)', 'click', function(e){
-
         var stage = $(this).attr('data-stage');
         var target = $('.each-stage-det[data-stage-ref="'+stage+'"]');
 

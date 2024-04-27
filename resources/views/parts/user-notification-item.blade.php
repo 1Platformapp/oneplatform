@@ -20,6 +20,7 @@
 			@php $contactUser = \App\Models\User::find($notification->source_table_id) @endphp
 		@elseif($notification->type == 'agent_group_member_add')
 			@php $group = \App\Models\UserChatGroup::find($notification->source_table_id) @endphp
+			@php $customLink = route('agency.dashboard.tab', ['tab' => 'contact-management', 'subTab' => 'groups']) @endphp
 		@elseif($notification->type == 'music_license_verification')
 			@php $user = \App\Models\User::find($notification->source_table_id) @endphp
 			@php $customLink = 'https://www.duong.1platform.tv/admin/users/music-license-approval' @endphp
