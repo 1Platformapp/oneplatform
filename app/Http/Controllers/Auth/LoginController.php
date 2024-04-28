@@ -200,7 +200,7 @@ class LoginController extends Controller
             $loginUser->password = bcrypt($user->getNickname() . "123456");
             $loginUser->subscription_id = 0;
             //$loginUser->active          = 1;
-            $loginUser->active          = 0;
+            $loginUser->active          = 40;
             $loginUser->api_token       = str_random(60);
             $loginUser->is_buyer_only   = $isBuyerOnly;
             $loginUser->save();

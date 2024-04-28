@@ -467,98 +467,98 @@ class ProjectController extends Controller
         try {
             DB::beginTransaction();
             $basketFlag = "0";
-    
+
             if(isset($request->basketFlag)){
-    
+
                 $basketFlag = $request->basketFlag;
-    
+
             }
             $commonMethods = new CommonMethods();
-    
+
             if($userId == null &&  Auth::check()){
-    
+
                 $user = Auth::user();
             }else if($userId){
-    
+
                 $user = User::find($userId);
             }else{
-    
+
                 return redirect(route('login'));
             }
-    
+
             $basket = $commonMethods::getCustomerBasket();
-    
+
             if(!$user){
-    
+
                 return redirect(route('login'));
             }
-    
+
             if(count($basket) <= 0){
-    
+
                 return redirect(route('user.home', ['params' => $user->username]));
             }
-    
+
             $userCampaign = $user->campaigns()->where('status', 'active')->orderBy('id', 'desc')->first();
-    
+
             if (!$userCampaign){
-    
+
                 $userCampaign = new userCampaign;
-    
+
                 $userCampaign->user_id = $user->id;
-    
+
                 $userCampaign->save();
             }
-    
+
             if( $request->load_campaign != null ){
-    
+
                 $userLoadCampaign = UserCampaign::find($request->load_campaign);
-    
+
                 if( $userLoadCampaign && $userLoadCampaign->user_id == $user->id ){
-    
+
                     $userCampaign = $userLoadCampaign;
                 }
             }
-    
+
             $userCampaignDetails = $commonMethods::getUserRealCampaignDetails($userId);
-    
+
             $userPersonalDetails = $commonMethods::getUserRealDetails($userId);
-    
+
             $userVideo = $user->profile->competitionVideos()->orderBy('id', 'desc')->first();
-    
-    
-    
+
+
+
             $userVideoId = "";
-    
+
             if($userVideo){
-    
+
                 $userVideoId = $userVideo->id;
             }
             if(isset($request->videoId)){
-    
+
                 $userVideoId = $request->videoId;
             }
-    
+
             $countries = Country::all();
-    
+
             $videos = [];
-    
+
             $basket = $commonMethods::getCustomerBasket();
-    
+
             $totalProductsLocalDeliveryCost = 0;
-    
+
             $totalProductsInternationalDeliveryCost = 0;
-    
+
             $totalCost = 0;
-    
+
             foreach ($basket as $b){
-    
+
                 if($b->purchase_type == 'product') {
-    
+
                     $totalProductsLocalDeliveryCost = $totalProductsLocalDeliveryCost + $b->product->local_delivery;
-    
+
                     $totalProductsInternationalDeliveryCost = $totalProductsInternationalDeliveryCost + $b->product->international_shipping;
                 }else if($b->purchase_type == 'proferred-product'){
-    
+
                     $explode = explode('_', $b->extra_info);
                     if(isset($explode[1])){
                         $chat = UserChat::find($explode[1]);
@@ -571,54 +571,54 @@ class ProjectController extends Controller
                         }
                     }
                 }
-    
+
                 $totalCost += $b->price;
             }
-    
+
             $allPastProjects = \App\Models\UserCampaign::where('user_id', $user->id)->where('status', 'inactive')->orderBy('id', 'desc')->get();
-    
+
             $reviewItems = $basket->filter(function ($basketItem) {
                 return $basketItem->hasPriceDisparity();
             });
-    
-    
-    
+
+
+
             $data   = [
-    
+
                 'commonMethods' => $commonMethods,
-    
+
                 'user' => $user,
-    
+
                 'basket' => $basket,
-    
+
                 'userCampaignDetails' => $userCampaignDetails,
-    
+
                 'userPersonalDetails' => $userPersonalDetails,
-    
+
                 'userCampaign' => $userCampaign,
-    
+
                 'userVideo' => $userVideo,
-    
+
                 'userVideoId' => $userVideoId,
-    
+
                 'countries' => $countries,
-    
+
                 'basketFlag' => $basketFlag,
-    
+
                 'totalProductsLocalDeliveryCost' => $totalProductsLocalDeliveryCost,
-    
+
                 'totalProductsInternationalDeliveryCost' => $totalProductsInternationalDeliveryCost,
-    
+
                 'totalCost'=>$totalCost,
-    
+
                 'allPastProjects' => $allPastProjects,
-    
+
                 'loggedUserDet' => Auth::check() ? $commonMethods::getUserRealDetails(Auth::user()->id) : null,
-    
+
                 'reviewItems' => $reviewItems,
             ];
             DB::commit();
-    
+
             return view( 'pages.checkout', $data );
         } catch (\Exception $e) {
             DB::rollback();
@@ -632,29 +632,29 @@ class ProjectController extends Controller
     {
         try {
             DB::beginTransaction();
-    
+
             if ($customerId == null || $customerId == ''){
-    
+
                 return redirect('site.home');
             }
-    
+
             $mergeCartItems = CustomerBasket::where('customer_id', $customerId)->get();
             if(count($mergeCartItems) <= 0){
-    
+
                 return redirect('site.home');
             }
-    
+
             if(!isset($_SESSION)) {
                 session_start();
             }
-    
+
             foreach ($mergeCartItems as $key => $mergeCartItem) {
-    
+
                 $_SESSION['basket_customer_id'] = $mergeCartItem->customer_id;
                 $user = User::find($mergeCartItem->user_id);
                 $mergeCartItem->sold_out = 0;
                 $mergeCartItem->save();
-    
+
                 $customer = User::find($_SESSION['basket_customer_id']);
                 if(!Auth::check() && $customer){
                     Auth::login($customer);
@@ -662,7 +662,7 @@ class ProjectController extends Controller
             }
 
             DB::commit();
-    
+
             return redirect(route('user.checkout', ['userId' => $user->id]));
         } catch (\Exception $e) {
             DB::rollback();
@@ -886,7 +886,8 @@ class ProjectController extends Controller
             $user->name            = trim($paymentData['firstname'].' '.$paymentData['surname']);
             $user->password        = bcrypt($paymentData['password']);
             $user->subscription_id = 0;
-            $user->active          = 1;
+            //$user->active          = 1;
+            $user->active          = 20;
             $user->api_token       = str_random(60);
             $user->save();
             $address               = new Address();
@@ -2361,7 +2362,8 @@ class ProjectController extends Controller
                 $user->first_name = trim($paymentData['firstname']);
                 $user->surname = trim($paymentData['surname']);
                 $user->password = 'iscotyso';
-                $user->active = 1;
+                //$user->active = 1;
+                $user->active = 30;
                 $user->api_token = str_random(60);
                 $user->save();
                 $address = new Address();
