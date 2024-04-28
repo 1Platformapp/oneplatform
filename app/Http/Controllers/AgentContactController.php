@@ -140,7 +140,7 @@ class AgentContactController extends Controller
         if($user && !$commonMethods->canUserAddNetwork($user)) {
             return redirect()->back()->with(['error' => 'Error: Your package network limit has reached']);
         }
-        
+
         $skill = $request->get('pro_contact_skill');
         $phone = $request->get('pro_contact_phone');
         $commission = $request->get('pro_contact_commission');
@@ -173,7 +173,8 @@ class AgentContactController extends Controller
             $contactUser->email = NULL;
             $contactUser->password = NULL;
             $contactUser->subscription_id = 0;
-            $contactUser->active          = 1;
+            //$contactUser->active          = 1;
+            $contactUser->active          = 0;
             $contactUser->api_token  = str_random(60);
             $contactUser->save();
 
