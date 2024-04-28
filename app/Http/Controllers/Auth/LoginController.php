@@ -199,7 +199,8 @@ class LoginController extends Controller
             $_SESSION["avatar"] = $user->getAvatar();
             $loginUser->password = bcrypt($user->getNickname() . "123456");
             $loginUser->subscription_id = 0;
-            $loginUser->active          = 1;
+            //$loginUser->active          = 1;
+            $loginUser->active          = 0;
             $loginUser->api_token       = str_random(60);
             $loginUser->is_buyer_only   = $isBuyerOnly;
             $loginUser->save();
@@ -297,7 +298,8 @@ class LoginController extends Controller
             $loginUser->email = $user->nickname.'@social.com';
             $loginUser->password = NULL;
             $loginUser->subscription_id = 0;
-            $loginUser->active          = 1;
+            //$loginUser->active          = 1;
+            $loginUser->active          = 0;
             $loginUser->api_token       = str_random(60);
             $loginUser->is_buyer_only   = $isBuyerOnly;
             $loginUser->save();
@@ -368,7 +370,8 @@ class LoginController extends Controller
             $loginUser->email = $user->email;
             $loginUser->password = bcrypt("123456");
             $loginUser->subscription_id = 0;
-            $loginUser->active          = 1;
+            //$loginUser->active          = 1;
+            $loginUser->active          = 0;
             $loginUser->api_token       = str_random(60);
             $loginUser->is_buyer_only   = $isBuyerOnly;
             $loginUser->save();
@@ -429,7 +432,8 @@ class LoginController extends Controller
             $loginUser->email = $userFbEmail;
             $loginUser->password = bcrypt($userFbEmail);
             $loginUser->subscription_id = 0;
-            $loginUser->active = 1;
+            //$loginUser->active = 1;
+            $loginUser->active = 0;
             $loginUser->api_token = str_random(60);
             $loginUser->is_buyer_only = $isBuyerOnly;
             $loginUser->save();
