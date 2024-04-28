@@ -402,7 +402,7 @@
     </div>
 </div>
 
-<div id="register-content" class="">
+<div id="register-content" class="hidden">
     <div class="w-full pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
         <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
