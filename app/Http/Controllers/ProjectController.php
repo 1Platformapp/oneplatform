@@ -886,8 +886,7 @@ class ProjectController extends Controller
             $user->name            = trim($paymentData['firstname'].' '.$paymentData['surname']);
             $user->password        = bcrypt($paymentData['password']);
             $user->subscription_id = 0;
-            //$user->active          = 1;
-            $user->active          = 20;
+            $user->active          = 1;
             $user->api_token       = str_random(60);
             $user->save();
             $address               = new Address();
@@ -2362,8 +2361,7 @@ class ProjectController extends Controller
                 $user->first_name = trim($paymentData['firstname']);
                 $user->surname = trim($paymentData['surname']);
                 $user->password = 'iscotyso';
-                //$user->active = 1;
-                $user->active = 30;
+                $user->active = 1;
                 $user->api_token = str_random(60);
                 $user->save();
                 $address = new Address();

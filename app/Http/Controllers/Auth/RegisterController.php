@@ -128,7 +128,7 @@ class RegisterController extends Controller
             $user->music_url = isset($request->music_url) ? $request->music_url : NULL;
             $user->password = bcrypt($request->password);
             $user->subscription_id = 0;
-            $user->active = 100;
+            $user->active = 1;
             $user->api_token = str_random(60);
             $user->manager_chat = isset($request->managerChat) && $request->managerChat == 1 ? 1 : NULL;
             $user->skills = $request->has('skill') ? $request->skill : '';
@@ -161,7 +161,7 @@ class RegisterController extends Controller
                 $agentContact->approved = 1;
                 $agentContact->save();
 
-                $user->active = 200;
+                $user->active = 1;
                 $user->save();
 
                 if($agentContact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$agentContact->agreement_pdf)){
@@ -280,7 +280,7 @@ class RegisterController extends Controller
             $user->music_url = isset($request->music_url) ? $request->music_url : NULL;
             $user->password = bcrypt($request->password);
             $user->subscription_id = 0;
-            $user->active = 300;
+            $user->active = 1;
             $user->api_token = str_random(60);
             $user->manager_chat = isset($request->managerChat) && $request->managerChat == 1 ? 1 : NULL;
             $user->skills = $request->has('skill') ? $request->skill : '';
@@ -313,7 +313,7 @@ class RegisterController extends Controller
                 $agentContact->approved = 1;
                 $agentContact->save();
 
-                $user->active = 400;
+                $user->active = 1;
                 $user->save();
 
                 if($agentContact->agreement_pdf && CommonMethods::fileExists(public_path('agent-agreements/').$agentContact->agreement_pdf)){
@@ -406,7 +406,7 @@ class RegisterController extends Controller
     public function getActivate($token){
         $user = User::where("api_token", $token)->first();
         if($user){
-            $user->active = 500;
+            $user->active = 1;
             $user->save();
             Session::flash("success", "Your account is successfully activated");
 

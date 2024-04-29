@@ -206,8 +206,7 @@ class AuthController extends Controller
                 $user->email           = $emailAddress;
                 $user->password        = bcrypt($password);
                 $user->subscription_id = 0;
-                //$user->active          = 1;
-                $user->active          = 2;
+                $user->active          = 1;
 
                 Auth::getDispatcher()->fire( 'auth.register', [ $user, $request ] );
                 $user->save();
@@ -358,8 +357,7 @@ class AuthController extends Controller
                 $user->email           = $email;
                 $user->password        = bcrypt($rand_password);
                 $user->subscription_id = 0;
-                //$user->active          = 1;
-                $user->active          = 3;
+                $user->active          = 1;
 
                 Auth::getDispatcher()->fire( 'auth.register', [ $user, $request ] );
 
@@ -520,8 +518,7 @@ class AuthController extends Controller
                 $user->email           = $email;
                 $user->password        = bcrypt($rand_password);
                 $user->subscription_id = 0;
-                //$user->active          = 1;
-                $user->active          = 4;
+                $user->active          = 1;
 
                 Auth::getDispatcher()->fire( 'auth.register', [ $user, $request ] );
 
@@ -721,7 +718,7 @@ class AuthController extends Controller
         $user                  = new User();
         $user->name            = $data[ 'name' ];
         $user->email           = $data[ 'email' ];
-        $user->active           = 5;
+        $user->active           = 1;
         $user->password        = bcrypt( $data[ 'password' ] );
         $user->firstlogintime        = 0;
         $user->subscription_id = 0;
