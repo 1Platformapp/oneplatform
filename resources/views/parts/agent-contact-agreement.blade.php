@@ -10,6 +10,9 @@
         <div class="pro_stream_input_outer">
             <ul role="list" class="contracts_list grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach($myContracts as $myContract)
+                @if(!$myContract->contact->contactUser || !$myContract->contact->agentUser)
+                    @php continue @endphp
+                @endif
                 @if($myContract->contact->contactUser->id == $contact->contact_id && $myContract->contact->agentUser->id == $contact->agent_id)
                 @php $signatures = count($myContract->signatures) == 2 @endphp
                 @php $counter++ @endphp

@@ -8,6 +8,9 @@
 
     <div class="btn_list_outer">
         @foreach($user->contactRequests as $contactRequest)
+            @if(!$contactRequest->contactUser || !$contactRequest->agentUser)
+                @php continue @endphp
+            @endif
             @php $contactPDetails = $commonMethods->getUserRealDetails($contactRequest->contactUser->id) @endphp
             <div class="agent_contact_request_listing music_btm_list no_sorting clearfix">
                 <div class="edit_elem_top">
