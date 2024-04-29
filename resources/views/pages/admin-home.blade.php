@@ -624,7 +624,7 @@
                                 <option value="add_by_code">Add contact by code</option>
                                 @if(count($contacts))
                                     @foreach($contacts as $contact)
-                                        @if(!$contact->contactUser || $contact->agentUser || $contact->approved == NULL)
+                                        @if(!$contact->contactUser || !$contact->agentUser || $contact->approved == NULL)
                                             @php continue @endphp
                                         @endif
                                         @php
