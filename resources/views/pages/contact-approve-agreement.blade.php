@@ -143,7 +143,8 @@
         <div class="document_in">
 
             @php $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $review ? $contact->c_terms : $contact->terms) @endphp
-            @include('pdf.agent-contact-agreement', ['agent' => $contact->agentUser, 'name' => $contact->name, 'email' => $contact->email, 'commission' => $review ? $contact->c_commission : $contact->commission, 'terms' => $terms, 'view' => ''])
+            @php $commonMethods = new App\Http\Controllers\CommonMethods() @endphp
+            @include('pdf.agent-contact-agreement', ['agent' => $contact->agentUser, 'name' => $contact->name, 'applicationFee' => $commonMethods->userCheckoutApplicationFee($contact->id), 'email' => $contact->email, 'commission' => $review ? $contact->c_commission : $contact->commission, 'terms' => $terms, 'view' => ''])
 
             <div class="sign_outer">
                 <table align="center" style="width:100%; padding-left: 12px; padding-right: 17px;" cellpadding="0" cellspacing="0">
@@ -188,11 +189,11 @@
         </div>
         <div class="esign_submit">
             <p style="font-size: 16px;color: #818181;margin: 10px 0;">
-                <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform. 
-                Our website serves as a platform for users to buy, sell, and collaborate. 
-                We do not take responsibility for any disputes or legal issues arising from these interactions. 
-                Users are advised to exercise caution and diligence when engaging with others on the platform. 
-                By using our services, you agree that 1Platform cannot be held liable for any such disputes, 
+                <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform.
+                Our website serves as a platform for users to buy, sell, and collaborate.
+                We do not take responsibility for any disputes or legal issues arising from these interactions.
+                Users are advised to exercise caution and diligence when engaging with others on the platform.
+                By using our services, you agree that 1Platform cannot be held liable for any such disputes,
                 and you waive any right to take legal action against the platform.
             </p>
 

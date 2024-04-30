@@ -376,6 +376,7 @@ class AgentContactController extends Controller
 
     public function verifyContactResponse(Request $request){
 
+        $commonMethods = new CommonMethods();
         if($request->has('id') && $request->has('data') && $request->get('data') != ''){
 
             $contactId = $request->get('id');
@@ -412,7 +413,8 @@ class AgentContactController extends Controller
                     $pdfName = strtoupper('aca_'.uniqid()).'.pdf';
                     $fileName = 'agent-agreements/'.$pdfName;
                     $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $contact->terms);
-                    $data = ['name' => $contact->name, 'email' => $contact->email, 'commission' => $contact->commission, 'terms' => $terms, 'agent' => $contact->agentUser, 'agreementSign' => $contact->agreement_sign];
+                    $applicationFee = CommonMethods::userCheckoutApplicationFee($contact->id);
+                    $data = ['name' => $contact->name, 'applicationFee' => $applicationFee, 'email' => $contact->email, 'commission' => $contact->commission, 'terms' => $terms, 'agent' => $contact->agentUser, 'agreementSign' => $contact->agreement_sign];
                     PDF::loadView('pdf.agent-contact-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
                     $contact->agreement_pdf = $pdfName;
 
@@ -473,6 +475,7 @@ class AgentContactController extends Controller
                 $pdfName = strtoupper('aca_'.uniqid()).'.pdf';
                 $fileName = 'agent-agreements/'.$pdfName;
                 $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $contact->terms);
+                $applicationFee = CommonMethods::userCheckoutApplicationFee($contact->id);
                 $data = ['name' => $contact->name, 'email' => $contact->email, 'commission' => $contact->commission, 'terms' => $terms, 'agent' => $contact->agentUser, 'agreementSign' => $contact->agreement_sign];
                 PDF::loadView('pdf.agent-contact-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
                 $contact->agreement_pdf = $pdfName;

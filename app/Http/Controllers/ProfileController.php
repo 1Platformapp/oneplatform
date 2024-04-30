@@ -575,7 +575,7 @@ class ProfileController extends Controller
         $success = 0;
         $error = '';
         $data = ['subscription_id' => 0, 'subscription_status' => '', 'subscription_payment_intent_status' => '', 'subscription_payment_intent_client_secret' => '', 'internal_subscription_id' => 0];
-        
+
         if($user && isset($jsonObj->package)){
 
             $paymentMethodId = $jsonObj->paymentMethodId;
@@ -588,7 +588,7 @@ class ProfileController extends Controller
                 if($response && is_array($response) && isset($response['subscription']) && isset($response['subscription']['error'])){
                     $error = $response['subscription']['error']['message'];
                 }else if($response && is_array($response) && isset($response['customer']) && isset($response['subscription']) && $response['subscription']['status'] == 'active'){
-                    
+
                     if($user->internalSubscription){
 
                         $user->internalSubscription->delete();
@@ -690,7 +690,7 @@ class ProfileController extends Controller
         $success = $success ?? false;
         $error = $error ?? '';
         $data = $data ?? [];
-        
+
         return json_encode(['success' => $success, 'error' => $error, 'data' => $data]);
     }
 
@@ -834,7 +834,7 @@ class ProfileController extends Controller
     public function createInternalSubscription($user, $package, $paymentMethodId, $cardName, $discountCode){
 
     	$commonMethods = new CommonMethods();
-        
+
         $package = explode('_', $package);
         $packagess = Config('constants.user_internal_packages');
         if($package[0] == 'gold' && $package[2] == 'month'){
@@ -853,18 +853,18 @@ class ProfileController extends Controller
             $planId = '';
         }
 
-        
+
         if($planId != ''){
-            
+
             $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
             try {
-                
+
                 $url = 'https://api.stripe.com/v1/customers';
                 $fields = [
                     'name' => $cardName
                 ];
                 $stripeCustomer = $commonMethods->stripeCall($url, $headers, $fields);
-                
+
                 if(!$stripeCustomer) {
                     return array('error' => 'Stripe Customer not found');
                 }
@@ -2901,8 +2901,8 @@ class ProfileController extends Controller
                 }
 
                 $success = 1;
-            }else if(in_array($type, ["main", "loop_one", "loop_two", "loop_three", 
-                "stem_one", "stem_two", "stem_three", "stem_four", "stem_five", 
+            }else if(in_array($type, ["main", "loop_one", "loop_two", "loop_three",
+                "stem_one", "stem_two", "stem_three", "stem_four", "stem_five",
                 "stem_six", "stem_seven", "stem_eight"]))
             {
                 $extension = $this->getFileExtension($_FILES["mu_down_file"]['name']);
@@ -6197,7 +6197,7 @@ class ProfileController extends Controller
     public function updateSellerSettings(Request $request){
 
         if ($request->isMethod('post')) {
-            
+
             $user = Auth::user();
             $success = 0;
             $error = '';
@@ -6959,21 +6959,21 @@ class ProfileController extends Controller
             $error = '';
             $redirectUrl = '';
             if($request->has('id') && $request->get('id') != ''){
-    
+
                 $chatId = $request->get('id');
                 $chat = UserChat::find($chatId);
                 if($chat && $chat->sender && $chat->sender->profile->stripe_user_id != ''){
-    
+
                     if($request->has('intent')){
                         $intentId = $request->get('intent');
                         $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
                         array_push($headers, 'Stripe-Account: '.$chat->sender->profile->stripe_user_id);
-    
+
                         $url = 'https://api.stripe.com/v1/payment_intents/'.$intentId;
                         $fields = [];
                         $paymentIntent = $commonMethods->stripeCall($url, $headers, $fields, 'GET');
                         if($paymentIntent && isset($paymentIntent['id']) && isset($paymentIntent['metadata']['ReferenceID']) && $paymentIntent['metadata']['ReferenceID'] == $chatId && $paymentIntent['status'] == 'succeeded'){
-    
+
                             $metaData = $paymentIntent['metadata'];
                             $sellerId = $metaData['Seller'];
                             $buyerId = $metaData['Buyer'];
@@ -6982,14 +6982,14 @@ class ProfileController extends Controller
                             $platformShare = $metaData['1PlatformShare'];
                             $agentShare = $metaData['AgentShare'];
                             $agentTwoShare = $metaData['AgentTwoShare'] != 'None' ? $metaData['AgentTwoShare'] : 0;
-    
+
                             $buyer = User::find($buyerId);
                             $seller = User::find($sellerId);
                             $agent = User::find($agentId);
                             $agentTwo = $agentTwoId ? User::find($agentTwoId) : NULL;
                             $agentContact = AgentContact::where(['contact_id' => $seller->id, 'agent_id' => $agent->id])->first();
                             $buyerContact = $agentTwo ? AgentContact::where(['contact_id' => $buyer->id, 'agent_id' => $agentTwo->id])->first() : NULL;
-    
+
                             if(isset($paymentIntent['charges']) && isset($paymentIntent['charges']['data'][0])){
                                 $charge = $paymentIntent['charges']['data'][0];
                                 $applicationFeeId = $charge['application_fee'];
@@ -6997,7 +6997,7 @@ class ProfileController extends Controller
                                 $applicationFeeId = NULL;
                                 $charge['id'] = NULL;
                             }
-    
+
                             if($chat->agreement != NULL){
                                 $details = $chat->agreement;
                                 $type = 'music';
@@ -7010,11 +7010,11 @@ class ProfileController extends Controller
                                 $type = 'proferred-product';
                             }
                             $itemTitle = $type == 'music' ? 'Bespoke License' : $details['title'];
-    
+
                             $totalPrice = $paymentIntent['amount']/100;
                             $totalApplicationFee = $paymentIntent['application_fee_amount']/100;
                             $currSym = $commonMethods->getCurrencySymbol(strtoupper($seller->profile->default_currency));
-    
+
                             if($agent && $agentShare > 0){
                                 $agentTransferDetails = 'Agent instant checkout fee from seller. Agent: '.$agent->id.' - '.$agent->name.' - '.$currSym.$agentShare.' @'.$agentContact->commission.'%'.'. Buyer: '.$buyer->id.' - '.$buyer->name.'. Seller: '.$seller->id.' - '.$seller->name.'. Charge: '.$charge['id'].'. Application Fee: '.$applicationFeeId;
                                 $agentTransfer = new AgentTransfer();
@@ -7026,7 +7026,7 @@ class ProfileController extends Controller
                                 $agentTransfer->stripe_application_fee_id = $applicationFeeId;
                                 $agentTransfer->save();
                             }
-    
+
                             if($agentTwo && $agentTwoShare > 0){
                                 $agentTransferDetails = 'Agent two instant checkout fee from seller. Agent: '.$agent->id.' - '.$agent->name.' - '.$currSym.$agentShare.'. Agent Two: '.$agentTwo->id.' - '.$agentTwo->name.' - '.$currSym.$agentTwoShare.' @50%'.'. Buyer: '.$buyer->id.' - '.$buyer->name.'. Seller: '.$seller->id.' - '.$seller->name.'. Charge: '.$charge['id'].'. Application Fee: '.$applicationFeeId;
                                 $agentTransfer = new AgentTransfer();
@@ -7038,9 +7038,9 @@ class ProfileController extends Controller
                                 $agentTransfer->stripe_application_fee_id = $applicationFeeId;
                                 $agentTransfer->save();
                             }
-    
+
                             $buyerDetails = $commonMethods->getUserRealDetails($buyer->id);
-    
+
                             $stripeCheckOut = new StripeCheckout();
                             $stripeCheckOut->user_id = $seller->id;
                             $stripeCheckOut->customer_id = $buyer->id;
@@ -7060,11 +7060,11 @@ class ProfileController extends Controller
                             $stripeCheckOut->postcode = $buyerDetails['postcode'];
                             $stripeCheckOut->comment = NULL;
                             $stripeCheckOut->save();
-    
+
                             $userNotification = new UserNotificationController();
                             $request->request->add(['user' => $seller->id, 'customer' => $buyer->id, 'type' => 'sale', 'source_id' => $stripeCheckOut->id]);
                             $response = json_decode($userNotification->create($request), true);
-    
+
                             $instantCheckoutItem = new InstantCheckoutItem();
                             $instantCheckoutItem->stripe_checkout_id = $stripeCheckOut->id;
                             $instantCheckoutItem->type = $type;
@@ -7085,7 +7085,7 @@ class ProfileController extends Controller
                                 $instantCheckoutItem->file_name = $details['filename'];
                             }
                             $instantCheckoutItem->save();
-    
+
                             if($type == 'music' && $music !== null && is_array($music->loops) && count($music->loops)){
                                 foreach ($music->loops as $loop) {
                                     if(trim($loop) != ''){
@@ -7116,13 +7116,13 @@ class ProfileController extends Controller
                                     }
                                 }
                             }
-    
+
                             $result = Mail::to($seller->email)->bcc(Config('constants.bcc_email'))->send(new InstantCheckout('seller', $stripeCheckOut));
                             $buyerArray = ['customer' => $buyer, 'user' => $seller, 'bcc' => Config('constants.bcc_email'), 'type' => $type, 'filename' => $details['filename']];
                             $buyerObj = (object) $buyerArray;
                             $item = ['type' => $type, 'title' => $itemTitle, 'price' => $details['price'], 'currSym' => $currSym];
                             $result =  Mail::send('pages.email.basket-buyer-email', ['customer' => $buyer, 'user' => $seller, 'item' => $item, 'checkout' => $stripeCheckOut], function ($m) use ($buyerObj){
-    
+
                                 $m->from(Config('constants.from_email'), '1PlatformTV');
                                 $m->bcc($buyerObj->bcc);
                                 $m->to($buyerObj->customer->email, $buyerObj->customer->name);
@@ -7137,31 +7137,31 @@ class ProfileController extends Controller
                                 }
                                 $m->subject('Your Order at 1Platform');
                             });
-    
+
                             $message = 'Successfully sent money to ' . $seller->name;
                             Session::flash('success', $message);
                             Session::flash('page', 'orders');
                             $redirectUrl = route('agency.dashboard');
                             $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
                             if(count($seller->devices)){
-    
+
                                 foreach ($seller->devices as $device) {
-    
+
                                     if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
-    
+
                                         $fcm = new PushNotificationController();
                                         $return = $fcm->send($device->device_id, 'New sale from '.$buyer->firstName(), str_limit('Item purchased from your chat store', 24), $device->platform, 'sale', $redUrl);
                                     }
                                 }
                             }
-    
+
                             $success = 1;
                         }else{
                             $error = 'Payment Intent Error';
                         }
                     }else if($request->has('free')){
-    
-    
+
+
                     }else{
                         $error = 'Free Error';
                     }
@@ -7169,18 +7169,18 @@ class ProfileController extends Controller
                     $error = 'Invalid data';
                 }
             }else if($request->has('seller') && $request->has('intent')){
-    
+
                 $seller = User::find($request->get('seller'));
                 if($seller && $seller->profile->stripe_user_id != ''){
                     $intentId = $request->get('intent');
                     $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
                     array_push($headers, 'Stripe-Account: '.$seller->profile->stripe_user_id);
-    
+
                     $url = 'https://api.stripe.com/v1/payment_intents/'.$intentId;
                     $fields = [];
                     $paymentIntent = $commonMethods->stripeCall($url, $headers, $fields, 'GET');
                     if($paymentIntent && isset($paymentIntent['id']) && isset($paymentIntent['metadata']['ReferenceID']) && $paymentIntent['status'] == 'succeeded'){
-    
+
                         $metaData = $paymentIntent['metadata'];
                         $sellerId = $metaData['Seller'];
                         $buyerId = $metaData['Buyer'];
@@ -7195,13 +7195,13 @@ class ProfileController extends Controller
                         $color = $metaData['Color'];
                         $size = $metaData['Size'];
                         $totalPrice = $paymentIntent['amount']/100;
-    
+
                         $buyer = $buyerId ? User::find($buyerId) : NULL;
                         $seller = User::find($sellerId);
                         $product = UserProduct::find($productId);
                         $customProduct = CustomProduct::find($customProductId);
                         $currSym = $commonMethods->getCurrencySymbol(strtoupper($seller->profile->default_currency));
-    
+
                         if(isset($paymentIntent['charges']) && isset($paymentIntent['charges']['data'][0])){
                             $charge = $paymentIntent['charges']['data'][0];
                             $applicationFeeId = $charge['application_fee'];
@@ -7209,7 +7209,7 @@ class ProfileController extends Controller
                             $applicationFeeId = NULL;
                             $charge['id'] = NULL;
                         }
-    
+
                         $stripeCheckOut = new StripeCheckout();
                         $stripeCheckOut->user_id = $seller->id;
                         $stripeCheckOut->customer_id = $buyer ? $buyer->id : 0;
@@ -7232,11 +7232,11 @@ class ProfileController extends Controller
                         $stripeCheckOut->postcode = $metaData['Postcode'];
                         $stripeCheckOut->comment = NULL;
                         $stripeCheckOut->save();
-    
+
                         $userNotification = new UserNotificationController();
                         $request->request->add(['user' => $seller->id, 'customer' => ($buyer ? $buyer->id : 0), 'type' => 'sale', 'source_id' => $stripeCheckOut->id]);
                         $response = json_decode($userNotification->create($request), true);
-    
+
                         $instantCheckoutItem = new InstantCheckoutItem();
                         $instantCheckoutItem->stripe_checkout_id = $stripeCheckOut->id;
                         $instantCheckoutItem->type = 'custom-product';
@@ -7248,49 +7248,49 @@ class ProfileController extends Controller
                         $instantCheckoutItem->source_table_id = $product->id;
                         $instantCheckoutItem->description = $product->description;
                         $instantCheckoutItem->save();
-    
+
                         $result = Mail::to($seller->email)->bcc(Config('constants.bcc_email'))->send(new InstantCheckout('seller', $stripeCheckOut));
                         $buyerArray = ['customer' => $buyer, 'user' => $seller, 'bcc' => Config('constants.bcc_email'), 'type' => 'custom-product', 'filename' => '', 'shippingemail' => $metaData['Email'], 'shippingname' => $metaData['Name']];
                         $buyerObj = (object) $buyerArray;
                         $item = ['type' => 'custom-product', 'title' => $product->title, 'price' => $totalPrice, 'currSym' => $currSym, 'quantity' => $quantity, 'color' => $color, 'size' => $size];
                         $result =  Mail::send('pages.email.basket-buyer-email', ['customer' => $buyer, 'user' => $seller, 'item' => $item, 'checkout' => $stripeCheckOut], function ($m) use ($buyerObj){
-    
+
                             $m->from(Config('constants.from_email'), '1PlatformTV');
                             $m->bcc($buyerObj->bcc);
                             $m->to($buyerObj->customer ? $buyerObj->customer->email: $buyerObj->shippingemail, $buyerObj->customer ? $buyerObj->customer->name : $buyerObj->shippingname);
                             $m->subject('Your Order at 1Platform');
                         });
                         $result = Mail::to(config('constants.admin_email'))->bcc(Config('constants.bcc_email'))->send(new InstantCheckout('admin', $stripeCheckOut));
-    
+
                         $message = 'Successfully sent money to ' . $seller->name;
                         Session::flash('success', $message);
                         Session::flash('page', 'orders');
                         $redirectUrl = Auth::check() ? route('agency.dashboard') : route('user.home',['params' => $seller->username]);
                         $redUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'my-transactions']));
                         if(count($seller->devices)){
-    
+
                             foreach ($seller->devices as $device) {
-    
+
                                 if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
-    
+
                                     $fcm = new PushNotificationController();
                                     $return = $fcm->send($device->device_id, 'New sale from '.$buyer->firstName(), str_limit('Item purchased from your online store', 24), $device->platform, 'sale', $redUrl);
                                 }
                             }
                         }
-    
+
                         $success = 1;
                     }else{
                         $error = 'Payment Intent Error';
                     }
                 }else{
-    
+
                     $error = 'No valid seller found';
                 }
             }else{
                 $error = 'No Data';
             }
-    
+
             DB::commit();
             echo json_encode(['success' => $success, 'error' => $error, 'url' => $redirectUrl]);
         }  catch (\Exception $e) {
@@ -7305,15 +7305,15 @@ class ProfileController extends Controller
         try {
             $totalAmount = 0;
             $commonMethods = new CommonMethods();
-    
+
             if($request->has('id') && $request->get('id') != ''){
-    
+
                 $chatId = $request->get('id');
                 $chat = UserChat::find($chatId);
-    
+
                 $paymentDet = $this->verifyInstantPaymentAndGetData('chat', $chat->id);
                 if($paymentDet && is_array($paymentDet)){
-    
+
                     $paymentData = (object) $paymentDet;
                     $seller = User::find($paymentData->sellerId);
                     $buyer = User::find($paymentData->buyerId);
@@ -7325,7 +7325,7 @@ class ProfileController extends Controller
                     http_response_code(500);
                     return json_encode(['error' => 'verification error']);
                 }
-    
+
                 if($chat->agreement != NULL){
                     $details = $chat->agreement;
                 }else if($chat->project != NULL){
@@ -7333,19 +7333,19 @@ class ProfileController extends Controller
                 }else{
                     $details = $chat->product;
                 }
-    
-    
+
+
                 try{
-    
+
                     $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
                     array_push($headers, 'Stripe-Account: '.$seller->profile->stripe_user_id);
                     $createPaymentIntent = 1;
-    
+
                     $fee = $paymentData->platformShare + $paymentData->agentShare;
                     if($paymentData->agentTwoShare){
                         $fee += $paymentData->agentTwoShare;
                     }
-    
+
                     $metaData = [
                         'Buyer' => $buyer->id,
                         'Seller' => $seller->id,
@@ -7357,7 +7357,7 @@ class ProfileController extends Controller
                         'ReferenceID' => $chatId,
                         'Type' => 'Chat Instant',
                     ];
-    
+
                     $existingIntentId = $chat->payment_intent_id;
                     if($existingIntentId){
                         $url = 'https://api.stripe.com/v1/payment_intents/'.$existingIntentId;
@@ -7372,7 +7372,7 @@ class ProfileController extends Controller
                         }
                     }
                     if(!$createPaymentIntent){
-    
+
                         $url = 'https://api.stripe.com/v1/payment_intents/'.$existingIntentId;
                         $fields = [
                             'amount' => $details['price']*100,
@@ -7386,7 +7386,7 @@ class ProfileController extends Controller
                             return json_encode(['error' => $paymentIntent['error']['message']]);
                         }
                     }else{
-    
+
                         $url = 'https://api.stripe.com/v1/payment_intents';
                         $fields = [
                             'amount' => $details['price']*100,
@@ -7414,16 +7414,16 @@ class ProfileController extends Controller
                     return json_encode(['error' => $e->getMessage()]);
                 }
             }else if($request->has('metaData')){
-    
+
                 $data = $request->get('metaData');
                 if(isset($data['type']) && $data['type'] == 'custom_product'){
-    
+
                     $paymentDet = $this->verifyInstantPaymentAndGetData($data['type'], $data['product'].'_'.$data['quantity'].'_'.$data['countryCode'].'_'.$data['shipping_country']);
-    
+
                     $seller = User::find($paymentDet['sellerId']);
                     $buyer = $paymentDet['buyerId'] ? User::find($paymentDet['buyerId']) : NULL;
                     $product = UserProduct::find($paymentDet['productId']);
-    
+
                     $metaData = [
                         'Buyer' => $buyer ? $buyer->id : 0,
                         'Seller' => $seller->id,
@@ -7446,7 +7446,7 @@ class ProfileController extends Controller
                         'Country' => $data['shipping_country'],
                         'Type' => 'Custom Product',
                     ];
-    
+
                     $url = 'https://api.stripe.com/v1/payment_intents';
                     $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
                     array_push($headers, 'Stripe-Account: '.$seller->profile->stripe_user_id);
@@ -7462,17 +7462,17 @@ class ProfileController extends Controller
                         http_response_code(500);
                         return json_encode(['error' => $paymentIntent['error']['message']]);
                     }
-    
+
                     $output = [
                         'clientSecret' => $paymentIntent['client_secret'],
                         'seller' => $seller->id,
                     ];
 
                     DB::commit();
-    
+
                     return json_encode($output);
                 }else{
-    
+
                     http_response_code(500);
                     return json_encode(['error' => 'no or invalid data']);
                 }
@@ -7548,7 +7548,8 @@ class ProfileController extends Controller
                 }
 
                 $totalPrice = $details['price'];
-                $platformFromSeller = $totalPrice * (3/100);
+                $appliFee = $commonMethods->userCheckoutApplicationFee($chatDetails->seller->id);
+                $platformFromSeller = $totalPrice * ($appliFee/100);
                 $agentFromSeller = $chatDetails->agentContact && $chatDetails->agentContact->commission ? $totalPrice * ($chatDetails->agentContact->commission/100) : 0;
                 $agentFinalShare = $chatDetails->buyer->id == $chatDetails->agent->id ? 0 : $agentFromSeller;
 

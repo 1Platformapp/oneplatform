@@ -113,7 +113,7 @@
                         </tr>
                         <tr>
                             <td style="color:#888;font-size: 14px;width:55%;vertical-align:bottom;">
-                                3%
+                                {{$applicationFee}}%
                             </td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
@@ -136,7 +136,7 @@
                         <tr>
                             <td style="color:#888;font-size: 14px;width:55%;vertical-align:bottom;">
                                 {!! $terms !!}
-                            </td>   
+                            </td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
@@ -149,7 +149,7 @@
                         <tr>
                             <td style="color:#888;font-size: 14px;width:55%;vertical-align:bottom;">
                                 <img style="max-width:350px;" src="{{public_path('signatures/'.$agreementSign)}}">
-                            </td>   
+                            </td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
