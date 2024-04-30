@@ -297,7 +297,7 @@
                 subscribeUser();
             } else {
                 proceedWithUserRegistration().then((response) => {
-                    handlePostRegister(response)
+                    handlePostRegister(response.redirect);
                 });
             }
         }
