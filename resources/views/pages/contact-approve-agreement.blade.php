@@ -144,7 +144,7 @@
 
             @php $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $review ? $contact->c_terms : $contact->terms) @endphp
             @php $commonMethods = new App\Http\Controllers\CommonMethods() @endphp
-            @include('pdf.agent-contact-agreement', ['agent' => $contact->agentUser, 'name' => $contact->name, 'applicationFee' => $commonMethods->userCheckoutApplicationFee($contact->id), 'email' => $contact->email, 'commission' => $review ? $contact->c_commission : $contact->commission, 'terms' => $terms, 'view' => ''])
+            @include('pdf.agent-contact-agreement', ['agent' => $contact->agentUser, 'name' => $contact->name, 'applicationFee' => $commonMethods->userCheckoutApplicationFee($contact->contact_id), 'email' => $contact->email, 'commission' => $review ? $contact->c_commission : $contact->commission, 'terms' => $terms, 'view' => ''])
 
             <div class="sign_outer">
                 <table align="center" style="width:100%; padding-left: 12px; padding-right: 17px;" cellpadding="0" cellspacing="0">

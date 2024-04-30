@@ -195,7 +195,7 @@ class RegisterController extends Controller
 
                 Auth::login($user);
                 $user->createDefaultQuestions();
-                return Response(['message' => 'Account Created', 'redirect' => 'agency.dashboard'], 200);
+                return Response(['message' => 'Account Created', 'redirect' => 'agency.dashboard', 'id' => $user->id], 200);
             }
             Mail::to($user->email)->bcc('cotysostudios@gmail.com')->send(new MailUser('emailVerified', $user));
 
@@ -227,7 +227,7 @@ class RegisterController extends Controller
 
             $user->createDefaultQuestions();
 
-            return Response(['message' => 'Account Created', 'redirect' => $url], 200);
+            return Response(['message' => 'Account Created', 'redirect' => $url, 'id' => $user->id], 200);
         } catch (\Exception $e) {
             return Response(['message' => $e->getMessage()], 500);
         }

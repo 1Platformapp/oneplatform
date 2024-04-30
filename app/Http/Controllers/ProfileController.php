@@ -571,7 +571,7 @@ class ProfileController extends Controller
     	$jsonStr = file_get_contents('php://input');
     	$jsonObj = json_decode($jsonStr);
 
-        $user = Auth::user();
+        $user = Auth::check() ? Auth::user() : User::find($jsonObj->user_id);
         $success = 0;
         $error = '';
         $data = ['subscription_id' => 0, 'subscription_status' => '', 'subscription_payment_intent_status' => '', 'subscription_payment_intent_client_secret' => '', 'internal_subscription_id' => 0];
