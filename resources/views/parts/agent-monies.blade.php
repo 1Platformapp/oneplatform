@@ -264,7 +264,7 @@
                         @php $link = 'javascript:void(0)'; @endphp
                         @php $class = 'disabled'; @endphp
                     @else
-                        @php 
+                        @php
                             $class = 'purchase_download';
                         @endphp
                     @endif
@@ -352,20 +352,20 @@
                 var download = thiss.attr('data-download');
                 var downloadUrl = thiss.attr('data-download-url');
                 var downloadAs = thiss.parent().parent().parent().find('.my_purchase_sec a').first().text();
-                
+
                 if(downloadUrl != null) {
                     window.open(downloadUrl, '_blank');
                 } else {
                     $('#body-overlay,.pro_initiating_download').show();
                     $.ajax({
-    
+
                         url: '/prepare-zip',
                         type: 'POST',
                         data: {'type': download, 'user': '{{Auth::user()->id}}', 'checkout_item': checkoutItem, 'download_as': downloadAs},
                         cache: false,
                         dataType: 'json',
                         success: function (response) {
-    
+
                             $('#body-overlay,.pro_initiating_download').hide();
                             if(response.success == 1 && response.download_link != ''){
                                 window.location.href = response.download_link;
@@ -790,87 +790,104 @@
         <div class="inside_notic_sec">
             <div class="clearfix inside_notic_left">
 
-                <div class="inside_notic_head">
+                <div class="inside_notic_head flex justify-between items-center">
                     <label>My Insights</label>
+                    <a href="https://dashboard.stripe.com/" target="_blank" class="no-underline bg-blue-600 text-white rounded-md text-center py-2 px-6 cursor-pointer">My Stripe Dashboard</a>
                 </div>
-                <div class="inside_notic_body">
-                    <div class="ins_not_left">
-                        <p>Singles Sold (inc free)</p>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">Singles Sold (inc free)</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $purchaseParticulars['singles_sold'] }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ins_not_right">
-                        <p>{{ $purchaseParticulars['singles_sold'] }}</p>
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">Albums Sold</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $purchaseParticulars['albums_sold'] }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ins_not_left">
-                        <p>Albums Sold</p>
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">Products Sold</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $purchaseParticulars['products_sold'] }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ins_not_right">
-                        <p>{{ $purchaseParticulars['albums_sold'] }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix inside_notic_right">
-                <div class="inside_notic_head">
-                    <label>&nbsp;</label>
-                </div>
-                <div class="inside_notic_body">
-                    <div class="ins_not_left">
-                        <p>Products Sold</p>
-                    </div>
-                    <div class="ins_not_right">
-                        <p>{{ $purchaseParticulars['products_sold'] }}</p>
-                    </div>
-                    <div class="ins_not_left">
-                        <p>Total of Revenue</p>
-                    </div>
-                    <div class="ins_not_right">
-                        <p>{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}{{ number_format($purchaseParticulars['total_revenue'], 2) }}</p>
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">Total Revenue</p>
+                                <p class="text-sm text-gray-500 truncate">{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}{{ number_format($purchaseParticulars['total_revenue'], 2) }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="inside_notic_sec inside_notic_sec2 mCustomScrollbar">
-
+        <div class="inside_notic_sec">
             <div class="clearfix inside_notic_left">
-
                 <div class="inside_notic_head">
                     <label>My Crowdfunder Updates</label>
                 </div>
-                <div class="inside_notic_body">
-                    <div class="ins_not_left">
-                        <p>Target Goal</p>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">Target Goal</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $userCampaignDetails['campaignGoal'] }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ins_not_right">
-                        <p>{{ $userCampaignDetails['campaignGoal'] }}</p>
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">Amount Raised</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $userCampaignDetails['campaignCurrencySymbol'].$userCampaignDetails['amountRaised'] }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ins_not_left">
-                        <p>Amount Raised</p>
-                    </div>
-                    <div class="ins_not_right">
-                        <p>{{ $userCampaignDetails['campaignCurrencySymbol'].$userCampaignDetails['amountRaised'] }}</p>
-                    </div>
-                    <div class="ins_not_left">
-                        <p>Fans</p>
-                    </div>
-                    <div class="ins_not_right">
-                        <p>{{ $userCampaignDetails['campaignDonators'] }}</p>
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">Fans</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $userCampaignDetails['campaignDonators'] }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="clearfix inside_notic_right">
+        </div>
+        <div class="inside_notic_sec">
+            <div class="clearfix inside_notic_left">
 
                 <div class="inside_notic_head">
                     <label>My Bonuses</label>
                 </div>
-                <div class="inside_notic_body profile_order_scroll">
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     @foreach($userCampaign->perks as $perk)
-                    <div class="ins_not_left">
-                        <p>{{ $perk->title }}</p>
-                    </div>
-                    <div class="ins_not_right">
-                        <p>{{ $perk->items_claimed }}/{{ $perk->items_available }}</p>
+                    <div class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm order-stage-head focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                        <div class="flex-1 min-w-0">
+                            <div class="cursor-pointer focus:outline-none">
+                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                <p class="text-sm font-medium text-gray-900">{{ $perk->title }}</p>
+                                <p class="text-sm text-gray-500 truncate">{{ $perk->items_claimed }}/{{ $perk->items_available }}</p>
+                            </div>
+                        </div>
                     </div>
                     @endforeach
-
                 </div>
             </div>
         </div>

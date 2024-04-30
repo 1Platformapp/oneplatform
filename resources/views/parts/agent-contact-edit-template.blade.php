@@ -59,13 +59,7 @@
                         <li>
                             If you want to recieve commission from work connected with your contact then add the percentage here.
                             This commission is paid to you from any sales you create in a network chat only not from the user's own account.
-                            Refer to video below for further details
-                        </li>
-                        <li class="flex flex-col gap-2 p-2 border join_me_video_holder instant_hide">
-                            <div class="ml-auto text-lg cursor-pointer join_me_close_btn">
-                                <i class="fa fa-times"></i>
-                            </div>
-                            <div class="inner"></div>
+                            Refer to video in the start of this section for further details
                         </li>
                     </ul>
                 </div>
@@ -105,9 +99,6 @@ Excited to have you on board!  @endif</textarea>
                 @endif
             </div>
         </form>
-        <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-500 ring-gray-900/5 sm:rounded-xl md:col-span-3">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/KnUY6j2cysE"></iframe>
-        </div>
     </div>
 
     <div class="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
@@ -121,10 +112,6 @@ Excited to have you on board!  @endif</textarea>
                         <li>Check your dashboard for a list of all our creative briefs</li>
                     </ul>
                 </div>
-                <!-- Quwat -> Youtube Video here -->
-                <!-- <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-400 ring-gray-900/5 sm:rounded-xl md:col-span-2">
-                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
-                </div> -->
             </div>
             <span class="absolute top-0 right-0 rounded-full p-3 text-center bg-white minw-[25px] h-[25p] flex items-center justify-center cursor-pointer contact-edit-nav">
                 <i class="fa fa-chevron-down"></i>
@@ -153,9 +140,6 @@ Excited to have you on board!  @endif</textarea>
                 <button type="button" class="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm edit_with_action edit_and_send_question hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Send brief to contact</button>
             </div>
         </form>
-        <div class="w-full p-0 bg-white shadow-sm lg:p-6 ring-1 xs2:h-280 md:h-500 ring-gray-900/5 sm:rounded-xl md:col-span-3">
-            <iframe class="w-full h-full" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
-        </div>
     </div>
 
     <div class="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
@@ -220,109 +204,9 @@ Excited to have you on board!  @endif</textarea>
 </div>
 
 <input type="text" id="myInput" onchange="handleInputChange()">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.5/mediaelement-and-player.min.js"></script>
 <script>
 
     $(document).ready(function() {
-// Quwat -> this to load video
-        $.getScript('https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.5/mediaelement-and-player.js', function() {
-            $.getScript('/player-element/dist/jump-forward/jump-forward.min.js', function() {
-                $.getScript('/player-element/dist/skip-back/skip-back.min.js', function() {
-                    $.getScript('/player-element/dist/speed/speed.min.js', function() {
-                        $.getScript('/player-element/dist/chromecast/chromecast.min.js', function() {
-                            $.getScript('/player-element/dist/context-menu/context-menu.min.js', function() {
-                                mediaInstance = loadDeferredVideo();
-                            });
-                        });
-                    });
-                });
-            });
-        });
-
-        function loadDeferredVideo(){
-            if($('.vid_preloader').length){
-                $('.vid_preloader').attr('id', 'player1').removeClass('vid_preloader');
-                var mediaInstancee = playMediaElementVideo(0, 0, 0, 0, 0);
-                return mediaInstancee;
-            }
-            return 0;
-        }
-
-        function playMediaElementVideo(videoType, videoSrc, mediaElementInstance, autoPlay, poster = null) {
-            var browserWidth = $( window ).width();
-
-            if($('#soundcloudPlayer').length){
-                $('#soundcloudPlayer').removeAttr('src').hide();
-            }
-            if($('#vimeo_player').length){
-                $('#vimeo_player').removeClass('active').html('');
-            }
-            if($('#jw_player').hasClass('jwplayer')){
-
-                window.jwplayer('jw_player').remove();
-            }
-
-            $('.mejs__container.mejs__video').css('display', 'block');
-
-            if(mediaElementInstance){
-                if(window.location.href.indexOf('/tv') > -1){
-                }else{
-                    mediaElementInstance.remove();
-                }
-            }
-            if(browserWidth > 767){
-
-                if(typeof spectrum !== 'undefined'){
-                    spectrum.pause();
-                    $('#play').addClass('fa-play').removeClass('fa-pause');
-                    $('.ap_outer').hide();
-                }
-            }else{
-                if(typeof spectrum !== 'undefined' && spectrum.duration > 0){
-                    spectrum.pause();
-                    $('#play').addClass('fa-play').removeClass('fa-pause');
-                    $('.ap_outer').hide();
-                }
-            }
-            if( videoSrc ){
-                $('#player1').css('width','100%').css('height', '100%').attr('src', videoSrc);
-            }
-
-            var mediaElements = document.getElementById('player1');
-
-            var features = ['playpause', 'current', 'progress', 'duration', 'markers', 'volume', 'playlist', 'fullscreen'];
-
-            var media = new MediaElementPlayer(mediaElements, {
-                pluginPath: 'https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.5/',
-                shimScriptAccess: 'always',
-                autoRewind: false,
-                features: features,
-                currentMessage: 'Now playing:',
-                success: function(mediaElement, domObject) {
-                    if( autoPlay ){ mediaElement.play(); }
-                }
-            });
-
-            $(".mejs__controls").css({ "height":"23px" });
-            
-            $(".mejs__button > button").css("margin", "5px 6px");
-            
-            $(".mejs__time-total").css("margin", "0px");
-            
-            $(".mejs__time").css("padding", "10px 6px 0");
-            
-            $("#player1_youtube_iframe").css({ "height":"100%" });
-        
-            return media;
-        }
-
-        $('.join_me_video_btn').click(function() {
-            $(this).closest('ul').find('.join_me_video_holder').removeClass('instant_hide').find('.inner').html('<iframe width="100%" height="315" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>');
-        });
-
-        $('.join_me_close_btn').click(function() {
-            $(this).closest('.join_me_video_holder').addClass('instant_hide').find('.inner').html('');
-        });
     });
-    
+
 </script>

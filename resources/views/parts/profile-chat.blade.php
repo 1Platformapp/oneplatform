@@ -75,14 +75,12 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div onclick="toggleProjectListVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
+                                                <div class="explainer-video-button flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                     <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="projectListVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
-                                            <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
-                                        </div>
+                                        <div data-video-url="https://www.youtube.com/embed/2kPicLgUoNw" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                     </div>
 
                                     <div class="border-t border-b border-gray-200">
@@ -103,12 +101,10 @@
                                 <div class="flex flex-col gap-4 mt-8">
                                     <div class="flex flex-col">
                                         <div id="contact-head" class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-                                            <div onclick="toggleContactVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
+                                            <div class="explainer-video-button flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
-                                            <div id="contactVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
-                                                <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/2kPicLgUoNw"></iframe>
-                                            </div>
+                                            <div data-video-url="https://www.youtube.com/embed/2kPicLgUoNw" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                         </div>
                                     </div>
                                     <div class="border-t border-b border-gray-200">
@@ -129,12 +125,10 @@
                                 <div id="calendar-head" class="flex flex-col gap-4 mt-8">
                                     <div class="flex flex-col">
                                         <div id="contact-head" class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-                                            <div onclick="toggleCalendarVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
+                                            <div class="explainer-video-button flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
-                                            <div id="calendarVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
-                                                <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/gKKe8crFi6s"></iframe>
-                                            </div>
+                                            <div data-video-url="https://www.youtube.com/embed/gKKe8crFi6s" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +143,7 @@
                                             <div class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black open_contact_tab project_list_video_btn">Go to my network</button>
                                             </div>
-                                            <div onclick="toggleBriefsVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
+                                            <div class="explainer-video-button flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                         </div>
@@ -160,9 +154,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div id="briefsVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
-                                        <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
-                                    </div>
+                                    <div data-video-url="https://www.youtube.com/embed/wnxlgkWyVn0" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                 </div>
                                 <div class="que-stages stage-one">
                                     <ul role="list" class="grid xs2:grid-cols-2 sm:grid-cols-4 gap-x-4">
@@ -188,14 +180,12 @@
                                 <div id="contracts-head" class="flex flex-col gap-4 mt-8 mb-4">
                                     <div class="flex flex-col gap-4">
                                         <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-                                            <div onclick="toggleContractsVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
+                                            <div class="explainer-video-button flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="contractsVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
-                                        <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
-                                    </div>
+                                    <div data-video-url="https://www.youtube.com/embed/wnxlgkWyVn0" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                 </div>
                                 <p>
                                     Click <a href="#" id="toggleContracts" class="text-red-600">here</a> to see how contracts works.
@@ -301,14 +291,12 @@
                                 <div id="ind-contacts-head" class="flex flex-col gap-4 mt-8 mb-4">
                                     <div class="flex flex-col gap-4">
                                         <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-                                            <div onclick="toggleIndContactsVideo()" class="flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
+                                            <div class="explainer-video-button flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="indContactsVideo" class="hidden w-full p-6 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
-                                        <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
-                                    </div>
+                                    <div data-video-url="https://www.youtube.com/embed/wnxlgkWyVn0" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                 </div>
                                 @if($user->hasActivePaidSubscription())
 
@@ -400,12 +388,10 @@
                             </div>
                         </div>
                         <div class="mt-10 each_dash_section instant_hide" data-value="my-transactions">
-                            <div id="transactionsVideo" class="hidden w-full p-6 mb-4 bg-white shadow-sm ring-1 xs2:h-280 md:h-400 ring-gray-300 sm:rounded-xl md:col-span-2">
-                                <iframe class="w-full h-full" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen" src="https://www.youtube.com/embed/wnxlgkWyVn0"></iframe>
-                            </div>
+                            <div data-video-url="https://www.youtube.com/embed/wnxlgkWyVn0" class="explainer-video-well w-full bg-white md:col-span-2 mb-4"></div>
                             <div class="order-stages stage-one">
                                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                    <div onclick="toggleTransactionsVideo()" class="relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                    <div class=" explainer-video-button relative flex items-center px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
                                         <div class="flex-shrink-0 text-lg">
                                             <i class="fas fa-video"></i>
                                         </div>
@@ -548,7 +534,7 @@
                                 <div class="text-lg cursor-pointer order-stage-nav back">
                                     <i class="fas fa-arrow-left"></i>
                                 </div>
-                                <div class="content max-h-[600px] overflow-y-auto overflow-x-hidden"></div>
+                                <div class="content max-h-[800px] overflow-y-auto overflow-x-hidden"></div>
                             </div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-profile">
@@ -586,15 +572,18 @@
 </style>
 <script>
 
-    document.getElementById('toggleContracts').addEventListener('click', function(event) {
-        event.preventDefault();
-        var toggleContent = document.getElementById('how-contract-works');
-        if (toggleContent.classList.contains('hidden')) {
-            toggleContent.classList.remove('hidden');
-        } else {
-            toggleContent.classList.add('hidden');
-        }
-    });
+    const element = document.getElementById('toggleContracts')
+    if (element) {
+        document.getElementById('toggleContracts').addEventListener('click', function(event) {
+            event.preventDefault();
+            var toggleContent = document.getElementById('how-contract-works');
+            if (toggleContent.classList.contains('hidden')) {
+                toggleContent.classList.remove('hidden');
+            } else {
+                toggleContent.classList.add('hidden');
+            }
+        });
+    }
 
     $.ajaxSetup({
         headers: {
@@ -602,43 +591,8 @@
         }
     });
 
-    function toggleProjectListVideo() {
-        var videoDiv = document.getElementById('projectListVideo');
-        videoDiv.classList.toggle('hidden');
-    }
-
-    function toggleContactVideo() {
-        var videoDiv = document.getElementById('contactVideo');
-        videoDiv.classList.toggle('hidden');
-    }
-
-    function toggleCalendarVideo() {
-        var videoDiv = document.getElementById('calendarVideo');
-        videoDiv.classList.toggle('hidden');
-    }
-
-    function toggleBriefsVideo() {
-        var videoDiv = document.getElementById('briefsVideo');
-        videoDiv.classList.toggle('hidden');
-    }
-
-    function toggleContractsVideo() {
-        var videoDiv = document.getElementById('contractsVideo');
-        videoDiv.classList.toggle('hidden');
-    }
-
-    function toggleIndContactsVideo() {
-        var videoDiv = document.getElementById('indContactsVideo');
-        videoDiv.classList.toggle('hidden');
-    }
-
-    function toggleTransactionsVideo() {
-        var videoDiv = document.getElementById('transactionsVideo');
-        videoDiv.classList.toggle('hidden');
-    }
-
     var defaultSubTab = '';
-    
+
     $('document').ready(function (){
 
         const defaultTab = $('#default-dash-tab').val();
@@ -658,7 +612,7 @@
             } else if (defaultSubTab == 'groups') {
                 var element = $('body').find('.each-stage[data-stage="my-groups"]');
                 element.removeClass('disabled');
-                
+
                 element.trigger('click');
             }
         } else {
@@ -685,6 +639,27 @@
 
     $('body').delegate('.each-task .each-task-det-nav .nav', "click", function(e){
         e.stopPropagation();
+    });
+
+    $('body').delegate('.explainer-video-button', 'click', function(e){
+
+        const parent = $(this).closest('.each_dash_section');
+        const well = parent.find('.explainer-video-well');
+
+        if (well.html() == '') {
+            const iframe = $('<iframe>', {
+                class: 'w-full h-full',
+                allowfullscreen: 'allowfullscreen',
+                mozallowfullscreen: 'mozallowfullscreen',
+                msallowfullscreen: 'msallowfullscreen',
+                oallowfullscreen: 'oallowfullscreen',
+                webkitallowfullscreen: 'webkitallowfullscreen',
+                src: well.attr('data-video-url')
+            });
+            well.html(iframe);
+        } else {
+            well.html('');
+        }
     });
 
     $('body').delegate('.each-task .each-task-det-nav', 'click', function(e){
@@ -1262,4 +1237,12 @@
 
 <style>
     .select2.select2-container.select2-container--default { width: 100% !important; }
+    .explainer-video-well iframe {
+        height: 400px;
+    }
+    @media (max-width: 767px) {
+        .explainer-video-well iframe {
+            height: 280px;
+        }
+    }
 </style>
