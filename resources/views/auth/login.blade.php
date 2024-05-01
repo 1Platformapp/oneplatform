@@ -411,56 +411,6 @@
 
                                 <div class="int_sub_each pro_hover">
                                     <div class="int_sub_head">
-                                        <div class="int_sub_head_up">{{ucfirst($packages[0]['name'])}}</div>
-                                    </div>
-                                    <div class="int_sub_dhead solo">
-                                        <div class="inner">
-                                            <p>Free</p>
-                                        </div>
-                                    </div>
-                                    <div class="int_sub_offer_outer">
-                                        <div class="int_sub_offer_each">&nbsp;</div>
-                                        <div class="int_sub_offer_each int_sub_free">
-                                            <div class="int_sub_confirm">Sign Up</div>
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            {{$packages[0]['application_fee']}}%
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            <div class="int_sub_offer_no">
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            {{$packages[0]['volume']}}GB
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            {{$packages[0]['network_limit']}}
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            <div class="int_sub_offer_no">
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            <div class="int_sub_offer_no">
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            <div class="int_sub_offer_no">
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </div>
-                                        <div class="int_sub_offer_each">
-                                            <div class="int_sub_offer_no">
-                                                <i class="fa fa-times"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="int_sub_each pro_hover">
-                                    <div class="int_sub_head">
                                         <div class="int_sub_head_up">{{ucfirst($packages[1]['name'])}}</div>
                                     </div>
                                     <div class="int_sub_dhead">
