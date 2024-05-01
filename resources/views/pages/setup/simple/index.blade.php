@@ -348,6 +348,10 @@
                 filledStep($(this).attr('data-step'));
             });
 
+            $('body').delegate('.pro_soc_top_close', 'click', function(){
+                $('#pay_internal_subscription_popup, #body-overlay').hide();
+            });
+
             $('body').delegate('.current-plan', 'click', function(){
 
                 const current = $(this);
