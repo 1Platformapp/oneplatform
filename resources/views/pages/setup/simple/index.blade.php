@@ -873,7 +873,7 @@
                                         </span>
                                     </span>
                                     <span class="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right">
-                                        <span class="font-medium text-gray-900">&pound;15</span>
+                                        <span class="font-medium text-gray-900">&pound;{{config('constants.user_internal_packages')[1]['pricing']['month']}}</span>
                                         <span class="ml-1 text-gray-500 sm:ml-0">/mo</span>
                                     </span>
                                 </label>
@@ -889,7 +889,7 @@
                                         </span>
                                     </span>
                                     <span class="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right">
-                                        <span class="font-medium text-gray-900">$65</span>
+                                        <span class="font-medium text-gray-900">&pound;{{config('constants.user_internal_packages')[2]['pricing']['month']}}</span>
                                         <span class="ml-1 text-gray-500 sm:ml-0">/mo</span>
                                     </span>
                                 </label>
