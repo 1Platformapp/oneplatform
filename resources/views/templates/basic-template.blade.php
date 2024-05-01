@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Cache-control" content="public">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link href="/css/app.css?v=3.78" rel="stylesheet" type="text/css" />
+        <link href="/css/app.css?v=3.79" rel="stylesheet" type="text/css" />
         <title>@yield('pagetitle')</title>
         @yield('pagekeywords', '')
         @yield('pagedescription', '')
