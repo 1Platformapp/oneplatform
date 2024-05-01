@@ -315,6 +315,8 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
 
     Route::post('cancelSubscription', [ProfileController::class, 'cancelSubscription'])->name('cancel.subscription');
 
+    Route::post('cancel-user-plan', [ProfileController::class, 'cancelUserPlan'])->name('cancel.user.plan');
+
     Route::prefix('live-stream')->group(function(){
 
         Route::post('post', [ProfileController::class, 'postLiveStream'])->name('user.live.stream.create');

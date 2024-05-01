@@ -50,10 +50,16 @@
                             @endif
 
                             @if($package && ($package[0] == 'gold' || $package[0] == 'platinum'))
-                            <div class="int_sub_down">
-                                <a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}">Change Plan</a>
+                            <div class="flex flex-col gap-2">
+                                <div class="int_sub_down">
+                                    <a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="text-white bg-[#007bff] p-[0.5rem] text-center rounded mt-1">Change Plan</a>
+                                </div>
+                                <div class="int_sub_down">
+                                    <div data-id="{{$user->internalSubscription->id}}" class="cancel-subscription text-white bg-[#ff5649] px-[0.5rem] py-[0.35rem] text-center rounded mt-1 cursor-pointer">Cancel Plan</div>
+                                </div>
                             </div>
                             @endif
+
                         </div>
                     </div>
                     <div class="curr_sub_user_lr">
@@ -1085,6 +1091,24 @@
             }
         });
     });
+
+    $('body').delegate('.cancel-subscription', 'click', function(e){
+
+        $.ajax({
+            url: '/cancel-user-plan',
+            dataType: "json",
+            type: 'post',
+            data: {},
+            success: function(response) {
+                if(response.success == 1){
+
+                }else{
+                    alert(response.error);
+                }
+            }
+        });
+    });
+
     $('body').delegate( ".contact_btn:not(.downloadable)", "click", function(e){
 
         var thiss = $(this);

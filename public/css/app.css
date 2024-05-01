@@ -565,9 +565,6 @@ video {
 .inset-0 {
   inset: 0px;
 }
-.-inset-px {
-  inset: -1px;
-}
 .left-0 {
   left: 0px;
 }
@@ -653,6 +650,10 @@ video {
   margin-left: auto;
   margin-right: auto;
 }
+.my-1 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
@@ -707,6 +708,9 @@ video {
 .me-6 {
   margin-inline-end: 1.5rem;
 }
+.ml-1 {
+  margin-left: 0.25rem;
+}
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -757,9 +761,6 @@ video {
 }
 .mt-\[1px\] {
   margin-top: 1px;
-}
-.ml-1 {
-  margin-left: 0.25rem;
 }
 .block {
   display: block;
@@ -950,11 +951,11 @@ video {
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
-.grid-cols-7 {
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-}
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-7 {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;
@@ -1254,6 +1255,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(252 6 76 / var(--tw-bg-opacity));
 }
+.bg-\[\#ff5649\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 86 73 / var(--tw-bg-opacity));
+}
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -1325,6 +1330,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(254 252 232 / var(--tw-bg-opacity));
 }
+.bg-\[\#007bff\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 123 255 / var(--tw-bg-opacity));
+}
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -1349,6 +1358,9 @@ video {
 }
 .p-6 {
   padding: 1.5rem;
+}
+.p-\[0\.5rem\] {
+  padding: 0.5rem;
 }
 .px-0 {
   padding-left: 0px;
@@ -1433,6 +1445,18 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.px-\[0\.5rem\] {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.py-\[0\.25rem\] {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-\[0\.35rem\] {
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
 }
 .pb-0 {
   padding-bottom: 0px;
@@ -1983,16 +2007,16 @@ video {
     margin-right: 0.25rem;
   }
 
-  .sm\:mt-0 {
-    margin-top: 0px;
-  }
-
   .sm\:ml-0 {
     margin-left: 0px;
   }
 
   .sm\:ml-4 {
     margin-left: 1rem;
+  }
+
+  .sm\:mt-0 {
+    margin-top: 0px;
   }
 
   .sm\:inline {

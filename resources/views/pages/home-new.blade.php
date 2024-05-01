@@ -185,192 +185,177 @@
                     </div>
                     @endif
                     @php $packages = config('constants.user_internal_packages') @endphp
-                    <!--<div class="home_each_section home_section_packages">
-                    	<div class="int_sub_outer">
-                    	    <div class="int_sub_inner">
-                    	        <div class="int_sub_nav_outer hide_on_desktop">
-                    	            <div class="int_sub_nav_btn int_nav_btn_prev">
-                    	                <i class="fa fa-caret-left"></i>
-                    	            </div>
-                    	            <div class="int_sub_nav_btn int_nav_btn_next">
-                    	                <i class="fa fa-caret-right"></i>
-                    	            </div>
-                    	        </div>
-                    	        <div class="int_sub_liner">
-                    	            <div class="int_sub_head">
-                    	                <div class="int_sub_head_up">Subscriptions</div>
-                    	            </div>
+                    <div class="home_each_section home_section_packages hide_on_mobile">
+                        <div class="int_sub_outer">
+                            <div class="int_sub_inner">
+                                <div class="int_sub_nav_outer hide_on_desktop">
+                                    <div class="int_sub_nav_btn int_nav_btn_prev">
+                                        <i class="fa fa-caret-left"></i>
+                                    </div>
+                                    <div class="int_sub_nav_btn int_nav_btn_next">
+                                        <i class="fa fa-caret-right"></i>
+                                    </div>
+                                </div>
+                                <div class="int_sub_liner">
+                                    <div class="int_sub_head">
+                                        <div class="int_sub_head_up">Subscriptions</div>
+                                    </div>
 
-                    	            <div class="int_sub_dhead">Price</div>
-                    	            <div class="int_sub_offer_outer">
-                    	                <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
-                    	                <div class="int_sub_offer_each">&nbsp;</div>
-                    	                <div class="int_sub_offer_each">
-                    	                    Fee Per Sale
-                    	                </div>
-                    	                <div class="int_sub_offer_each">
-                    	                    <span class="hide_on_mobile">Connect a&nbsp;</span>Custom Domain
-                    	                </div>
-                    	                <div class="int_sub_offer_each">
-                    	                    Max Disk Usage
-                    	                </div>
-                    	                <div class="int_sub_offer_each">
-                    	                    Free From Adverts
-                    	                </div>
-                    	                <div class="int_sub_offer_each">
-                    	                    <span class="hide_on_mobile">Access To&nbsp;</span>Industry Contacts
-                    	                </div>
-                    	                <div class="int_sub_offer_each">
-                    	                    Get Pro Agent
-                    	                </div>
-                    	            </div>
-                    	        </div>
-                    	        <div class="int_sub_act_outer">
+                                    <div class="int_sub_dhead">Price</div>
+                                    <div class="int_sub_offer_outer">
+                                        <div class="int_sub_offer_each"><span class="hide_on_mobile">Choose </span>Payment Plan</div>
+                                        <div class="int_sub_offer_each">&nbsp;</div>
+                                        <div class="int_sub_offer_each">
+                                            <span> Fee Per Sale </span>
+                                            <a href="https://stripe.com/gb/pricing" target="_blank">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
+                                                    <path fill="currentColor" fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0a8 8 0 0 1 16 0m-7 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-1-9a1 1 0 0 0-1 1v4a1 1 0 1 0 2 0V6a1 1 0 0 0-1-1" clip-rule="evenodd"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            <span class="hide_on_mobile">Connect a&nbsp;</span>Custom Domain
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            Max Disk Usage
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            Network Associates
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            Legal Contracts
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            Free From Adverts
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            <span class="hide_on_mobile">Access To&nbsp;</span>Industry Contacts
+                                        </div>
+                                        <div class="int_sub_offer_each">
+                                            Get Pro Agent
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="int_sub_act_outer">
 
-                    	            <div class="int_sub_each pro_hover">
-                    	                <div class="int_sub_head">
-                    	                    <div class="int_sub_head_up">{{ucfirst($packages[0]['name'])}}</div>
-                    	                </div>
-                    	                <div class="int_sub_dhead solo">
-                    	                    <div class="inner">
-                    	                        <p>Free</p>
-                    	                    </div>
-                    	                </div>
-                    	                <div class="int_sub_offer_outer">
-                    	                    <div class="int_sub_offer_each">&nbsp;</div>
-                    	                    <div class="int_sub_offer_each int_sub_free">
-                    	                        <div class="int_sub_confirm">Sign Up</div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[0]['application_fee']}}%
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_no">
-                    	                            <i class="fa fa-times"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[0]['volume']}}GB
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_no">
-                    	                            <i class="fa fa-times"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_no">
-                    	                            <i class="fa fa-times"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                   	<div class="int_sub_offer_each">
-                    	                   	    <div class="int_sub_offer_no">
-                    	                   	        <i class="fa fa-times"></i>
-                    	                   	    </div>
-                    	                   	</div>
-                    	                </div>
-                    	            </div>
-                    	            <div class="int_sub_each pro_hover">
-                    	                <div class="int_sub_head">
-                    	                    <div class="int_sub_head_up">{{ucfirst($packages[1]['name'])}}</div>
-                    	                </div>
-                    	                <div class="int_sub_dhead">
-                    	                    <div class="inner">
-                    	                        <sup>&pound;</sup>
-                    	                        <p>{{$packages[1]['pricing']['month']}}</p>
-                    	                    </div>
-                    	                    <div class="int_sub_dhead_interval">per month</div>
-                    	                </div>
-                    	                <div class="int_sub_offer_outer">
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_term_switch">
-                    	                            <div data-name="{{$packages[1]['name']}}" data-price="{{$packages[1]['pricing']['month']}}" data-term="month" class="int_sub_term_each active">Monthly</div>
-                    	                            <div data-name="{{$packages[1]['name']}}" data-price="{{$packages[1]['pricing']['year']}}" data-term="year" class="int_sub_term_each">Yearly</div>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_confirm int_sub_pay">Sign Up</div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[1]['application_fee']}}%
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_yes">
-                    	                            <i class="fa fa-check"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[1]['volume']}}GB
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_yes">
-                    	                            <i class="fa fa-check"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_yes">
-                    	                            <i class="fa fa-check"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_no">
-                    	                            <i class="fa fa-times"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                </div>
-                    	            </div>
-                    	            <div class="int_sub_each pro_hover">
-                    	                <div class="int_sub_head">
-                    	                    <div class="int_sub_head_up">{{ucfirst($packages[2]['name'])}}</div>
-                    	                </div>
-                    	                <div class="int_sub_dhead">
-                    	                    <div class="inner">
-                    	                        <sup>&pound;</sup>
-                    	                        <p>{{$packages[2]['pricing']['month']}}</p>
-                    	                    </div>
-                    	                    <div class="int_sub_dhead_interval">per month</div>
-                    	                </div>
-                    	                <div class="int_sub_offer_outer">
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_term_switch">
-                    	                            <div data-name="{{$packages[2]['name']}}" data-price="{{$packages[2]['pricing']['month']}}" data-term="month" class="int_sub_term_each active">Monthly</div>
-                    	                            <div data-name="{{$packages[2]['name']}}" data-price="{{$packages[2]['pricing']['year']}}" data-term="year" class="int_sub_term_each">Yearly</div>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_confirm int_sub_pay">Sign Up</div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[2]['application_fee']}}%
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_yes">
-                    	                            <i class="fa fa-check"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        {{$packages[2]['volume']}}GB
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_yes">
-                    	                            <i class="fa fa-check"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_yes">
-                    	                            <i class="fa fa-check"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                    <div class="int_sub_offer_each">
-                    	                        <div class="int_sub_offer_yes">
-                    	                            <i class="fa fa-check"></i>
-                    	                        </div>
-                    	                    </div>
-                    	                </div>
-                    	            </div>
-                    	        </div>
-                    	    </div>
-                    	</div>
-                    </div>!-->
+                                    <div class="int_sub_each pro_hover">
+                                        <div class="int_sub_head">
+                                            <div class="int_sub_head_up">{{ucfirst($packages[1]['name'])}}</div>
+                                        </div>
+                                        <div class="int_sub_dhead">
+                                            <div class="inner">
+                                                <sup>&pound;</sup>
+                                                <p>{{$packages[1]['pricing']['month']}}</p>
+                                            </div>
+                                            <div class="int_sub_dhead_interval">per month</div>
+                                        </div>
+                                        <div class="int_sub_offer_outer">
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_term_switch">
+                                                    <div data-name="{{$packages[1]['name']}}" data-price="{{$packages[1]['pricing']['month']}}" data-term="month" class="int_sub_term_each active">Monthly</div>
+                                                    <div data-name="{{$packages[1]['name']}}" data-price="{{$packages[1]['pricing']['year']}}" data-term="year" class="int_sub_term_each">Yearly</div>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_confirm int_sub_pay">Sign Up</div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                {{$packages[1]['application_fee']}}%
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                {{$packages[1]['volume']}}GB
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                {{$packages[1]['network_limit']}}
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_no">
+                                                    <i class="fa fa-times"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="int_sub_each pro_hover">
+                                        <div class="int_sub_head">
+                                            <div class="int_sub_head_up">{{ucfirst($packages[2]['name'])}}</div>
+                                        </div>
+                                        <div class="int_sub_dhead">
+                                            <div class="inner">
+                                                <sup>&pound;</sup>
+                                                <p>{{$packages[2]['pricing']['month']}}</p>
+                                            </div>
+                                            <div class="int_sub_dhead_interval">per month</div>
+                                        </div>
+                                        <div class="int_sub_offer_outer">
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_term_switch">
+                                                    <div data-name="{{$packages[2]['name']}}" data-price="{{$packages[2]['pricing']['month']}}" data-term="month" class="int_sub_term_each active">Monthly</div>
+                                                    <div data-name="{{$packages[2]['name']}}" data-price="{{$packages[2]['pricing']['year']}}" data-term="year" class="int_sub_term_each">Yearly</div>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_confirm int_sub_pay">Sign Up</div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                {{$packages[2]['application_fee']}}%
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                {{$packages[2]['volume']}}GB
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                {{$packages[2]['network_limit']}}
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                            <div class="int_sub_offer_each">
+                                                <div class="int_sub_offer_yes">
+                                                    <i class="fa fa-check"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 @stop
 
