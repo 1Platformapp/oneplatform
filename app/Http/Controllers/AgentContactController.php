@@ -364,7 +364,7 @@ class AgentContactController extends Controller
         }else{
 
             $approvedContact = AgentContact::where(['id' => $id, 'agent_id' => $agentId, 'approved' => 1])->first();
-            $pendingSignup = User::where(['id' => $approvedContact->contactUser->id])->whereNull('email')->whereNull('password')->first();
+            $pendingSignup = $approvedContact && $approvedContact->contactUser ? User::where(['id' => $approvedContact->contactUser->id])->whereNull('email')->whereNull('password')->first() : false;
             if($approvedContact && $pendingSignup){
 
                 return redirect(route('agent.contact.signup', ['id' => $approvedContact->id, 'agentId' => $approvedContact->agentUser->id]));
@@ -413,7 +413,7 @@ class AgentContactController extends Controller
                     $pdfName = strtoupper('aca_'.uniqid()).'.pdf';
                     $fileName = 'agent-agreements/'.$pdfName;
                     $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $contact->terms);
-                    $applicationFee = CommonMethods::userCheckoutApplicationFee($contact->id);
+                    $applicationFee = CommonMethods::userCheckoutApplicationFee($contact->contactUser->id);
                     $data = ['name' => $contact->name, 'applicationFee' => $applicationFee, 'email' => $contact->email, 'commission' => $contact->commission, 'terms' => $terms, 'agent' => $contact->agentUser, 'agreementSign' => $contact->agreement_sign];
                     PDF::loadView('pdf.agent-contact-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
                     $contact->agreement_pdf = $pdfName;

@@ -17,6 +17,27 @@
 
 @section('page-level-css')
 
+    <style>
+        .p_appli { text-decoration: line-through; color: #dc3545 !important; }
+        .coupon_row { position: relative; }
+        .coupon_btn { position: absolute; top: 20px; right: 0; background: #818181; color: #fff; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0 10px; font-size: 12px; letter-spacing: 1px; }
+        #pay_internal_subscription_popup .second_headline { font-size: 14px !important; }
+        #p_price { color: #28a745; }
+        .support_card_brands { margin-top: 20px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; }
+        .support_card_brands i { font-size: 45px; }
+        .support_each_brand#cc_master { color: #D2691E; }
+        .support_each_brand#cc_amex { color: royalblue; }
+        .support_each_brand#cc_visa { color: #8A2BE2; }
+        .support_each_brand#cc_diners { color: #3333ff; }
+        .support_each_brand#cc_discover  { color: #e67e00; }
+        .startup_back a { color: #000;text-decoration: none; font-size: 15px; }
+        @media (min-width:320px) and (max-width: 767px) {
+
+            .coupon_btn { top: 15px; }
+        }
+        #pay_int_sub_final.disabled { opacity: 0.65; cursor: not-allowed; }
+        #pay_int_sub_plan { text-transform: capitalize; }
+    </style>
 @endsection
 
 
@@ -180,9 +201,7 @@
         function subscribeUser () {
 
             $.getScript('https://js.stripe.com/v3/', function() {
-                window.term = 'month';
-                window.name = 'gold';
-                window.price = 15;
+
                 window.stripe = Stripe($('#stripe_publishable_key').val());
                 var elements = stripe.elements();
 
@@ -200,10 +219,7 @@
                 $('#pay_int_sub_price').removeClass('p_appli');
                 $('#p_price').addClass('instant_hide');
                 $('#int_sub_voucher_code').val('');
-                $('#pay_internal_subscription_popup #pay_int_sub_plan').text(window.name);
-                $('#pay_internal_subscription_popup #pay_int_sub_price').text('£' + window.price + ' / ' + window.term);
                 $('#pay_internal_subscription_popup, #body-overlay').show();
-
             });
         }
 
@@ -330,6 +346,18 @@
             activateStep(step);
             $('.each-step[data-step="'+step+'"]').prevAll().each(function(){
                 filledStep($(this).attr('data-step'));
+            });
+
+            $('body').delegate('.current-plan', 'click', function(){
+
+                const current = $(this);
+
+                $('.current-plan').removeClass('border-indigo-600').addClass('border-gray-300');
+                current.removeClass('border-gray-300').addClass('border-indigo-600');
+
+                window.term = current.attr('data-term');
+                window.name = current.attr('data-name');
+                window.price = current.attr('data-price');
             });
 
             $('body').delegate('.back-btn', 'click', function(){
@@ -831,11 +859,46 @@
                 <div class="clearfix soc_con_face_username">
                     <div class="main_headline">Subscription Plan Payment</div>
                     <div class="second_headline">
-                        Package: <span id="pay_int_sub_plan"></span> - <span class="pro_text_dark" id="pay_int_sub_price"></span> <span id="p_price"></span>
+                        <fieldset>
+                            <div class="space-x-2 grid grid-cols-2">
+                                <label data-term="month" data-name="{{config('constants.user_internal_packages')[1]['name']}}" data-price="{{config('constants.user_internal_packages')[1]['pricing']['month']}}" class="grid-col current-plan border-indigo-600 cursor-pointer rounded-lg border bg-white px-6 py-4 shadow-sm focus:outline-none sm:flex sm:justify-between">
+                                    <span class="flex items-center">
+                                        <span class="flex flex-col text-sm">
+                                            <span class="font-medium text-gray-900 capitalize">{{config('constants.user_internal_packages')[1]['name']}}</span>
+                                            <div class="flex flex-col text-gray-500">
+                                                <span class="block sm:inline">{{config('constants.user_internal_packages')[1]['volume']}}GB Disk</span>
+                                                <span class="hidden sm:mx-1 sm:inline" aria-hidden="true">&middot;</span>
+                                                <span class="block sm:inline">{{config('constants.user_internal_packages')[1]['network_limit']}} Networks</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                    <span class="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right">
+                                        <span class="font-medium text-gray-900">&pound;15</span>
+                                        <span class="ml-1 text-gray-500 sm:ml-0">/mo</span>
+                                    </span>
+                                </label>
+                                <label data-term="month" data-name="{{config('constants.user_internal_packages')[2]['name']}}" data-price="{{config('constants.user_internal_packages')[2]['pricing']['month']}}" class="grid-col current-plan block cursor-pointer rounded-lg border bg-white px-6 py-4 shadow-sm focus:outline-none sm:flex sm:justify-between">
+                                    <span class="flex items-center">
+                                        <span class="flex flex-col text-sm">
+                                            <span class="font-medium text-gray-900 capitalize">{{config('constants.user_internal_packages')[2]['name']}}</span>
+                                            <div class="flex flex-col text-gray-500">
+                                                <span class="block sm:inline">{{config('constants.user_internal_packages')[2]['volume']}}GB Disk</span>
+                                                <span class="hidden sm:mx-1 sm:inline" aria-hidden="true">&middot;</span>
+                                                <span class="block sm:inline">{{config('constants.user_internal_packages')[2]['network_limit']}} Networks</span>
+                                            </div>
+                                        </span>
+                                    </span>
+                                    <span class="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right">
+                                        <span class="font-medium text-gray-900">$65</span>
+                                        <span class="ml-1 text-gray-500 sm:ml-0">/mo</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </fieldset>
                     </div>
                     <div id="m_e_error" class="instant_hide m_e_card_pop_error"></div>
                     <input class="dummy_field" type="text" name="fakeusernameremembered">
-                    <input placeholder="Card Name" type="text" id="int_sub_card_name" />
+                    <input placeholder="Card Name" type="text" class="m_e_card_elem" id="int_sub_card_name" />
                     <div id="m_e_card_number" class="m_e_card_elem m_e_card_pop"></div>
                     <div class="pro_pop_multi_row">
                         <div class="each_col">
@@ -893,6 +956,6 @@
         </div>
     </div>
     <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
-    <input type="hidden" id="prefill" value="{{$prefill}}">
+    <input type="hidden" id="prefill" value="{{$prefill ? '1' : ''}}">
 
 @endsection

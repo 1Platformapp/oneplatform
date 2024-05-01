@@ -661,7 +661,7 @@ $('#pay_int_sub_final').removeClass('disabled');
 	                </div>
 	                <div id="m_e_error" class="instant_hide m_e_card_pop_error"></div>
                     <input class="dummy_field" type="text" name="fakeusernameremembered">
-                    <input placeholder="Card Name" type="text" id="int_sub_card_name" />
+                    <input placeholder="Card Name" type="text" class="m_e_card_elem" id="int_sub_card_name" />
                     <div id="m_e_card_number" class="m_e_card_elem m_e_card_pop"></div>
                     <div class="pro_pop_multi_row">
                         <div class="each_col">

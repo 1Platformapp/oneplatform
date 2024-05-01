@@ -170,7 +170,7 @@ class RegisterController extends Controller
                 $pdfName = strtoupper('aca_'.uniqid()).'.pdf';
                 $fileName = 'agent-agreements/'.$pdfName;
                 $terms = preg_replace('/\r|\n/', '</td></tr><tr><td>', $agentContact->terms);
-                $applicationFee = CommonMethods::userCheckoutApplicationFee($agentContact->id);
+                $applicationFee = CommonMethods::userCheckoutApplicationFee($agentContact->contactUser->id);
                 $data = ['name' => $agentContact->name, 'email' => $agentContact->email, 'applicationFee' => $applicationFee, 'commission' => $agentContact->commission, 'terms' => $terms, 'agent' => $agentContact->agentUser, 'agreementSign' => $agentContact->agreement_sign];
                 PDF::loadView('pdf.agent-contact-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
                 $agentContact->agreement_pdf = $pdfName;

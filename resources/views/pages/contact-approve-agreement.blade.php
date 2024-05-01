@@ -197,7 +197,7 @@
                 and you waive any right to take legal action against the platform.
             </p>
 
-            <div class="esign_submit_button btn_01">Approve Agreement</div>
+            <div class="esign_submit_button btn_01 ml-auto" style="width: 250px;" >Approve Agreement</div>
             <form id="esign_form" class="instant_hide" action="{{route('agent.contact.verify.response')}}" method="POST">
                 {{csrf_field()}}
                 <input type="hidden" value="" id="esign_data" name="data">
