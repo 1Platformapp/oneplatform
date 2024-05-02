@@ -45,18 +45,24 @@
                             </div>
                             @elseif($status && $package && $package[0] == 'silver')
                             <div class="int_sub_up">
-                                <a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}">Upgrade Plan</a>
+                                <a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="text-white bg-[#007bff] p-[0.5rem] text-center rounded mt-1">Upgrade Plan</a>
                             </div>
                             @endif
 
                             @if($package && ($package[0] == 'gold' || $package[0] == 'platinum'))
                             <div class="flex flex-col gap-2">
+                                @if($user->internalSubscription->cancel_at)
+                                <div class="int_sub_down">
+                                    <div class="text-black bg-[#ffc107] p-[0.5rem] text-center rounded mt-1 cursor">Cancellation Scheduled</div>
+                                </div>
+                                @else
                                 <div class="int_sub_down">
                                     <a href="{{route('user.startup.wizard', ['action' => 'upgrade-subscription'])}}" class="text-white bg-[#007bff] p-[0.5rem] text-center rounded mt-1">Change Plan</a>
                                 </div>
                                 <div class="int_sub_down">
                                     <div data-id="{{$user->internalSubscription->id}}" class="cancel-subscription text-white bg-[#ff5649] px-[0.5rem] py-[0.35rem] text-center rounded mt-1 cursor-pointer">Cancel Plan</div>
                                 </div>
+                                @endif
                             </div>
                             @endif
 
@@ -88,6 +94,12 @@
                                 N/A
                             @endif
                         </div>
+                        @if($user->internalSubscription->cancel_at)
+                        <div class="curr_sub_det_each">
+                            Cancel Date: <span class="hide_on_desktop"><br></span>
+                            {{date('d/m/Y', strtotime($user->internalSubscription->cancel_at))}}
+                        </div>
+                        @endif
                         <div class="curr_sub_det_each">
                             Subscription Status: <span class="hide_on_desktop"><br></span>
                             @if($status)
@@ -1094,19 +1106,17 @@
 
     $('body').delegate('.cancel-subscription', 'click', function(e){
 
-        $.ajax({
-            url: '/cancel-user-plan',
-            dataType: "json",
-            type: 'post',
-            data: {},
-            success: function(response) {
-                if(response.success == 1){
-
-                }else{
-                    alert(response.error);
+        if(confirm('Do you want to cancel your subscription?')){
+            $.ajax({
+                url: '/cancel-user-plan',
+                dataType: "json",
+                type: 'post',
+                data: {},
+                success: function(response) {
+                    location.reload();
                 }
-            }
-        });
+            });
+        }
     });
 
     $('body').delegate( ".contact_btn:not(.downloadable)", "click", function(e){

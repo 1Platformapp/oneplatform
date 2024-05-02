@@ -632,7 +632,7 @@ class CommonMethods extends Controller
         if($userNetworks < $userAllowedNetwork) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -3292,7 +3292,7 @@ class CommonMethods extends Controller
             $_SESSION['basket_customer_id'] = time()+rand(10000, 99999);
             $basket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('sold_out', 0)->get();
         }
-        
+
         if(count($basket) > 0) {
             foreach ($basket as $b) {
                 if($b->purchase_type == 'music' && !$b->music){
@@ -3314,12 +3314,12 @@ class CommonMethods extends Controller
         }
 
         $basket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('sold_out', 0)->get();
-        
+
         return $basket;
     }
 
-    
-    
+
+
 
 
 
@@ -3991,6 +3991,17 @@ class CommonMethods extends Controller
 
         $string = array_slice($string, 0, $level);
         return $string ? implode(', ', $string) . ' ago' : 'just now';
+    }
+
+    public function custom_http_build_query($params) {
+        $query_params = array();
+        foreach ($params as $key => $value) {
+            if (is_bool($value)) {
+                $value = $value ? 'true' : 'false';
+            }
+            $query_params[] = urlencode($key) . '=' . urlencode($value);
+        }
+        return implode('&', $query_params);
     }
 
     public function createDatabaseBackup($host,$user,$pass,$name,$tables,$except){

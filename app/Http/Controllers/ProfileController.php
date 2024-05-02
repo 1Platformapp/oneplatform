@@ -7300,6 +7300,55 @@ class ProfileController extends Controller
 
     }
 
+    public function cancelUserPlan(Request $request)
+    {
+        $success = 0;
+        $error = '';
+        $user = Auth::user();
+        $commonMethods = new CommonMethods();
+
+        try {
+
+            $userSubscription = InternalSubscription::where('user_id', $user->id)->first();
+
+            if (!$userSubscription || $userSubscription->subscription_status != 1) {
+                throw ('Subscription does not have a valid state');
+            }
+
+            $url = 'https://api.stripe.com/v1/subscriptions/'.$userSubscription->stripe_subscription_id;
+            $fields = ['cancel_at_period_end' => true];
+            $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret'), 'Content-Type' => 'application/x-www-form-urlencoded'];
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $commonMethods->custom_http_build_query($fields));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $output = curl_exec($ch);
+            curl_close($ch);
+            $subscription = json_decode(trim($output), TRUE);
+
+            if (isset($subscription['id']) && $subscription['id'] == $userSubscription->stripe_subscription_id && $subscription['cancel_at_period_end'] == true) {
+
+                $cancelTime = date('Y-m-d H:i:s', $subscription['cancel_at']);
+                $userSubscription->cancel_at = $cancelTime;
+                $userSubscription->save();
+
+                Session::flash('notice', 'Your subscription will be automatically cancelled at the end of your current billing cycle '. $subscription['cancel_at']);
+                return json_encode([]);
+            }
+
+            Session::flash('notice', implode(',', $subscription));
+            return json_encode([]);
+        } catch (\Exception $ex) {
+
+            Session::flash('notice', $ex->getMessage());
+            return json_encode([]);
+        }
+    }
+
     public function prepareInstantPayment(Request $request)
     {
         try {

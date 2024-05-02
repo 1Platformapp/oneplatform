@@ -27,6 +27,7 @@ use App\Models\CrowdfundBasket;
 use App\Models\Test;
 use App\Models\ArtistJob;
 use App\Models\City;
+use App\Models\InternalSubscription;
 use App\Models\Competition;
 use App\Models\Country;
 use App\Models\CustomerBasket;
@@ -974,6 +975,31 @@ class ProjectController extends Controller
 
                     $user->no_crowdfunder_week_email = 1;
                     $user->save();
+                }
+            }
+        }
+
+        return Response::json([], 200);
+    }
+
+    public function stripeScheduledOperations(Request $request){
+
+        $internalSubscriptions = InternalSubscription::all();
+
+        foreach ($internalSubscriptions as $internalSubscription) {
+
+            if($internalSubscription->cancel_at){
+                $cancelDate = date('Y-m-d', strtotime($internalSubscription->cancel_at));
+                $today = date('Y-m-d');
+
+                if ($cancelDate == $today) {
+                    $internalSubscription->stripe_subscription_id = null;
+                    $internalSubscription->stripe_customer_id = null;
+                    $internalSubscription->subscription_card = null;
+                    $internalSubscription->subscription_package = 'silver_0_0';
+                    $internalSubscription->cancel_at = null;
+
+                    $internalSubscription->save();
                 }
             }
         }

@@ -524,6 +524,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::get('setPwd', [ProfileController::class, 'setPwd'])->name('setPwd');
         Route::get('sendCronjobEmails', [ProjectController::class, 'sendCronjobEmails'])->name('send.cronjob.emails');
         Route::get('runDailyCronjob', [ProjectController::class, 'cronjobDaily'])->name('run.daily.cron');
+        Route::get('cronjob/stripe', [ProjectController::class, 'stripeScheduledOperations'])->name('run.stripe.cron');
         Route::get('inactivateProject', [ProfileController::class, 'inactivateProject'])->name('inactivateProject');
         Route::get('updateFirsttimeLogin', [ProfileController::class, 'updateFirsttimeLogin'])->name('updateFirsttimeLogin');
         Route::get('activateStudioAccount', [ProfileController::class, 'activateStudioAccount'])->name('activate-studio-account');
