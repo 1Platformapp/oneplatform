@@ -19,7 +19,7 @@
 
 	<link rel="stylesheet" href="{{asset('css/profile.min.css?v=5.24')}}" />
 	<link rel="stylesheet" href="{{asset('simplepicker/simplepicker.css')}}" />
-	<link rel="stylesheet" href="{{asset('css/profile.orders.css')}}">
+	<link rel="stylesheet" href="{{asset('css/profile.orders.css?v=1.4')}}">
 	@if($page == 'news' || $page == 'social' || $page == 'videos' || $page == 'product')
 		<link rel="stylesheet" href="{{asset('css/profile.media.css?v=1.7')}}">
 	@endif

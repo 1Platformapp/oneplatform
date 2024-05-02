@@ -1165,4 +1165,4 @@
     });
 </script>
 
-<link rel="stylesheet" href="{{asset('css/profile.orders.css')}}">
+<link rel="stylesheet" href="{{asset('css/profile.orders.css?v=1.4')}}">

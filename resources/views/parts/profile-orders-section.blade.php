@@ -881,7 +881,7 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="{{asset('css/profile.orders.css')}}">
+<link rel="stylesheet" href="{{asset('css/profile.orders.css?v=1.4')}}">
 
 <script type="text/javascript">
     function prepareDownloadPopup(downloads, sourceId){
