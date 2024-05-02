@@ -178,18 +178,18 @@ class AgencyController extends Controller
             $user = User::findOrFail($id);
             $user->hide_account = null;
             $user->save();
-    
+
             return response(['message' => 'Account restored successfully'], 200);
         } catch (\Exception $e) {
             return response(['message' => $e->getMessage()], 504);
         }
     }
 
-    public function dashboardWithTab(Request $request, $tab)
+    public function dashboardWithTab(Request $request, $tab, $subTab = null)
     {
         Session::flash('dash-tab', $tab);
         if($tab == 'my-transactions') {
-            Session::flash('dash-sub-tab', 'my-purchases');
+            Session::flash('dash-sub-tab', $subTab ? $subTab : '');
         } elseif ($tab == 'contact-management'){
             Session::flash('dash-sub-tab', $request->subTab ?? '');
         }
@@ -638,7 +638,7 @@ class AgencyController extends Controller
                     $agentContact = AgentContact::findOrFail($contactId);
                     $agent = $agentContact->agentUser;
                     $artist = $agentContact->contactUser;
-    
+
                     if($agentContact->approved == 1){
                         $chatGroup = UserChatGroup::where(['agent_id' => $agent->id, 'contact_id' => $artist->id])->firstOrFail();
                         $chat->group_id = $chatGroup->id;
@@ -646,7 +646,7 @@ class AgencyController extends Controller
                         $partner = $user->isAgentOfContact($agentContact) ? $artist : $agent;
                         $chat->recipient_id = $partner->id;
                     }
-    
+
                     $agentContact->latest_message_at = date('Y-m-d H:i:s');
                     $agentContact->save();
                 }else if($request->has('partner')){
@@ -664,7 +664,7 @@ class AgencyController extends Controller
             } else if($action == 'attachment-upload'){
 
                 $chat = UserChat::findOrFail($request->get('chat'));
-    
+
                 $id = $chat->id;
                 $response = $chat->attachFile($request->file('attachment'));
                 throw_if(!$response, 'ref: attachment_finish_error');
@@ -676,7 +676,7 @@ class AgencyController extends Controller
             DB::rollBack();
             return json_encode(['success' => false, 'error' => $e->getMessage()]);
         }
-        
+
         // $error = '';
 
         // if(!$request->has('action')){
@@ -694,7 +694,7 @@ class AgencyController extends Controller
         //     return json_encode(['success' => false, 'error' => $error]);
         // }
 
-        
+
         // if($action == 'attachment-initialize'){
 
         //     $chat = new UserChat();

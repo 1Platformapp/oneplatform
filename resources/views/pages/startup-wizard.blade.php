@@ -251,7 +251,8 @@ $('#pay_int_sub_final').removeClass('disabled');
                 }else{
                 	if(paymentMethodId){
                 		if(result.data.subscription_status == 'active'){
-                	        location.reload();
+                            alert('You have successfully purchased the plan');
+                	        window.location.href = '/dashboard/my-transactions/my-subscription-plan'
                 	    }else if(result.data.subscription_status == 'incomplete'){
                 	    	if(result.data.subscription_payment_intent_status == 'requires_action' || result.data.subscription_payment_intent_status == 'requires_source_action'){
                 	    	    window.internal_subscription_id = result.data.internal_subscription_id;
@@ -266,7 +267,8 @@ $('#pay_int_sub_final').removeClass('disabled');
                 	    	            }else{
                 	    	                if(result2.paymentIntent.status == 'succeeded'){
                 	    	                    createSubscription(stripe, null, 'update_internal', window.internal_subscription_id);
-                	    	                    location.reload();
+                                                alert('You have successfully purchased the plan');
+                	    	                    window.location.href = '/dashboard/my-transactions/my-subscription-plan'
                 	    	                }else{
                 	    	                	alert('Error: retried payment with status: '+result2.paymentIntent.status);
                 	    	                	$('#pay_int_sub_final').removeClass('disabled');

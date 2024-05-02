@@ -424,7 +424,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
         Route::get('delete-account', [AgencyController::class, 'deleteAccount'])->name('agency.delete.account');
         Route::get('restore-account/{id}', [AgencyController::class, 'restoreAccount'])->name('agency.restore.account');
         Route::get('dashboard/info/{info}', [AgencyController::class, 'dashboardWithInfo'])->name('agency.dashboard.info');
-        Route::get('dashboard/{tab}', [AgencyController::class, 'dashboardWithTab'])->name('agency.dashboard.tab');
+        Route::get('dashboard/{tab}/{subTab?}', [AgencyController::class, 'dashboardWithTab'])->name('agency.dashboard.tab');
         Route::post('dashboard/set-session/{tab}', [AgencyController::class, 'setSession'])->name('agency.dashboard.set.session');
         Route::get('test/send-whatsapp-message', [TestController::class, 'sendWhatsappMessage'])->name('test.send.whatsapp.message');
         Route::get('dashboard/add-contract/preview/{id}', [AgencyController::class, 'addContractFormPreview'])->name('agency.contract.preview');

@@ -607,13 +607,13 @@
         }
         if (activeTab !== null && activeTab != '') {
             $('.m_btn_right_icon_each[data-id="'+activeTab+'"]').trigger('click');
-            if(defaultSubTab == 'my-purchases') {
-                $('.order-stage-head').trigger('click');
-            } else if (defaultSubTab == 'groups') {
+            if (defaultSubTab == 'groups') {
                 var element = $('body').find('.each-stage[data-stage="my-groups"]');
                 element.removeClass('disabled');
 
                 element.trigger('click');
+            } else {
+                $('.order-stage-head[data-id="'+defaultSubTab+'"]').trigger('click');
             }
         } else {
             $('.m_btn_management_plan').trigger('click');
@@ -1083,7 +1083,7 @@
 
         var id = $(this).attr('data-id');
 
-        id = defaultSubTab == '' ? id : defaultSubTab;
+        //id = defaultSubTab == '' ? id : defaultSubTab;
 
         if (id == 'my-patron-hub') {
             window.location.href = '/profile-setup/standalone/setup-patron'
