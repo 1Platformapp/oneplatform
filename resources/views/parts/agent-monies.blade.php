@@ -73,13 +73,13 @@
                             Plan:<span class="hide_on_desktop"><br></span>
                             @if($package)
                                 @if($user->networkAgent() && $package[0] == 'silver')
-                                    Agency Premium
+                                    Silver
                                 @else
                                     {{ucfirst($package[0])}} -
                                     @if($package[1] > 0)
                                     &pound;{{$package[1]}} / {{$package[2]}}
                                     @else
-                                    Free
+                                    Silver
                                     @endif
                                 @endif
                             @else
