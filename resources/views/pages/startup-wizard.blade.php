@@ -372,6 +372,8 @@ $('#pay_int_sub_final').removeClass('disabled');
                             </a>
                         </div>
                         @endif
+                        @php $currentSub = $user->internalSubscription @endphp
+                        @php $currentPlanExplode = explode('_', $user->internalSubscription->subscription_package) @endphp
                         <div class="startup_wizard_body">
                             <div class="startup_wizard_each_content">
                                 @if($step == '2')
@@ -500,9 +502,15 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                                 <div data-name="{{$packages[1]['name']}}" data-price="{{$packages[1]['pricing']['year']}}" data-term="year" class="int_sub_term_each">Yearly</div>
                                                             </div>
                                                         </div>
+                                                        @if(isset($currentPlanExplode[0]) && strtolower($currentPlanExplode[0]) == 'gold')
+                                                        <div class="int_sub_offer_each">
+                                                            <div class="int_sub_confirm">Your Plan</div>
+                                                        </div>
+                                                        @else
                                                         <div class="int_sub_offer_each">
                                                             <div class="int_sub_confirm int_sub_pay">Buy</div>
                                                         </div>
+                                                        @endif
                                                         <div class="int_sub_offer_each">
                                                             {{$packages[1]['application_fee']}}%
                                                         </div>
@@ -557,9 +565,15 @@ $('#pay_int_sub_final').removeClass('disabled');
                                                                 <div data-name="{{$packages[2]['name']}}" data-price="{{$packages[2]['pricing']['year']}}" data-term="year" class="int_sub_term_each">Yearly</div>
                                                             </div>
                                                         </div>
+                                                        @if(isset($currentPlanExplode[0]) && strtolower($currentPlanExplode[0]) == 'platinum')
+                                                        <div class="int_sub_offer_each">
+                                                            <div class="int_sub_confirm int_sub_pay">Your Plan</div>
+                                                        </div>
+                                                        @else
                                                         <div class="int_sub_offer_each">
                                                             <div class="int_sub_confirm int_sub_pay">Buy</div>
                                                         </div>
+                                                        @endif
                                                         <div class="int_sub_offer_each">
                                                             {{$packages[2]['application_fee']}}%
                                                         </div>
