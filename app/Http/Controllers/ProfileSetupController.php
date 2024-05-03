@@ -207,33 +207,33 @@ class ProfileSetupController extends Controller
                     $response = (new ProfileController)->saveUserProfile($request);
                 }
 
-                if($page == 'design'){
+                // if($page == 'design'){
 
-                    $designError = $user->designStepError();
-                    Session::put('error', $designError);
+                //     $designError = null;
+                //     $page = 'design';
+                // }
 
-                    $page = 'media';
-                }
+                // if($page == 'personal' && $user->manager_chat == 1){
 
-                if($page == 'personal' && $user->manager_chat == 1){
+                //     Session::put('managerChat', 'personal');
+                //     $nextPage = $page;
+                // }else{
 
-                    Session::put('managerChat', 'personal');
-                    $nextPage = $page;
-                }else{
+                //     if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product' || $page == 'music' || $page == 'album' || $page == 'video'){
 
-                    if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product' || $page == 'music' || $page == 'album' || $page == 'video'){
+                //         $nextPage = $page;
+                //     }else{
+                //         $nextPage = $user->setupWizardnNext($page);
+                //     }
+                // }
+                // if (!$isStandalone) {
 
-                        $nextPage = $page;
-                    }else{
-                        $nextPage = $user->setupWizardnNext($page);
-                    }
-                }
-                if (!$isStandalone) {
-                    
-                    return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
-                } else if($page == 'design' && $nextPage == 'bio' && $designError == null) {
-                    $page = $nextPage;
-                }
+                //     return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
+                // } else if($page == 'design' && $nextPage == 'bio' && $designError == null) {
+                //     $page = $nextPage;
+                // }
+
+                // echo $page;exit;
             }
             $vouchers = [];
             if($user->isCotyso()){
