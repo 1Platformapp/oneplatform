@@ -262,9 +262,9 @@
                                 <div class="auth_btn_submit">
                                     <input type="submit" value="Log In">
                                 </div>
-                                <div class="auth_btn_helper">
+                                <!--<div class="auth_btn_helper">
                                     <a href="{{ route('register') }}">Create an account</a>
-                                </div>
+                                </div>!-->
                                 <div width="400" class="login_register_text_02">
                                     <span>Creating an account with 1Platform<br> means you agree to our</span>
                                     <a href="{{route('tc')}}">terms and conditions, </a>
@@ -407,7 +407,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="int_sub_act_outer">
+                            <!--<div class="int_sub_act_outer">
 
                                 <div class="int_sub_each pro_hover">
                                     <div class="int_sub_head">
@@ -523,7 +523,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>!-->
                         </div>
                     </div>
                 </div>

@@ -236,7 +236,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="int_sub_act_outer">
+                                <!--<div class="int_sub_act_outer">
 
                                     <div class="int_sub_each pro_hover">
                                         <div class="int_sub_head">
@@ -352,7 +352,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>!-->
                             </div>
                         </div>
                     </div>
