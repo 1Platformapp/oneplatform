@@ -356,7 +356,7 @@
                     </div>
                 </div>
                 @php $packages = config('constants.user_internal_packages') @endphp
-                <div class="home_each_section home_section_packages hide_on_mobile">
+                <!--<div class="home_each_section home_section_packages hide_on_mobile">
                     <div class="int_sub_outer">
                         <div class="int_sub_inner">
                             <div class="int_sub_nav_outer hide_on_desktop">
@@ -407,7 +407,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="int_sub_act_outer">
+                            <div class="int_sub_act_outer">
 
                                 <div class="int_sub_each pro_hover">
                                     <div class="int_sub_head">
@@ -523,10 +523,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>!-->
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div>!-->
             </div>
 @stop
 
