@@ -31,7 +31,7 @@
         }
 
         .modal-content {
-            max-width: 700px; 
+            max-width: 700px;
             width: 100%;
             background-color: #fff;
             border-radius: 8px;
@@ -79,9 +79,9 @@
 <script src="{{asset('esign/libs/modernizr.js')}}"></script>
 <script src="{{asset('esign/src/jSignature.js')}}"></script>
 <script src="{{asset('esign/src/main.js')}}"></script>
-<script src="https://cdn.tiny.cloud/1/y6tokqg00tkidjbat439k9tylc7vh873k66cyauf7vjgojoc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/{{Config('constants.editor_tinycloud_api_key')}}/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
-    
+
     function openModal() {
         document.getElementById('myModal').style.display = 'block';
     }
@@ -145,7 +145,7 @@
             <div class="contact_section_body">
                 <form class="flex flex-col" id="signature-form" action="{{$action == 'edit' ? route('agency.contract.update', ['id' => $agencyContract->id]) : route('agency.contract.create', ['id' => $contract->id, 'contact' => $agentContact->id])}}" method="POST">
                     {{csrf_field()}}
-                    
+
                     <div class="flex items-center justify-center my-4">
                         <button type="button" class="block px-4 py-1 text-sm font-medium leading-6 text-white bg-green-700 rounded-full cursor-pointer hover:bg-green-500 hover:font-bold" onclick="openModal()">Click here for Guidance</button>
                     </div>
@@ -235,11 +235,11 @@
                     </div>
                     <div>
                         <p style="font-size: 16px;color: #818181;margin: 10px 0;">
-                            <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform. 
-                            Our website serves as a platform for users to buy, sell, and collaborate. 
-                            We do not take responsibility for any disputes or legal issues arising from these interactions. 
-                            Users are advised to exercise caution and diligence when engaging with others on the platform. 
-                            By using our services, you agree that 1Platform cannot be held liable for any such disputes, 
+                            <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform.
+                            Our website serves as a platform for users to buy, sell, and collaborate.
+                            We do not take responsibility for any disputes or legal issues arising from these interactions.
+                            Users are advised to exercise caution and diligence when engaging with others on the platform.
+                            By using our services, you agree that 1Platform cannot be held liable for any such disputes,
                             and you waive any right to take legal action against the platform.
                         </p>
                     </div>

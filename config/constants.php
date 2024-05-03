@@ -42,6 +42,8 @@ return [
 
     'paypal_api_uri' => 'https://api-m.sandbox.paypal.com',
 
+    'editor_tinycloud_api_key' => 'qg6p2tpxnxk2ndkur6146uhi041588nfurd5y6km3fcndzno',
+
     'facebook_profile' => 'https://www.facebook.com/1PlatformTV',
 
     'twitter_profile' => 'https://www.twitter.com/1PlatformTV',
