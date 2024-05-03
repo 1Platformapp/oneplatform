@@ -70,10 +70,10 @@
 	                        </p>
 	                        <div class="dsk_tools">
 	                            @if(!Auth::check())
-	                            <a href="{{route('register')}}" id="dsk_signup">
+	                            <!--<a href="{{route('register')}}" id="dsk_signup">
 	                            	<i class="fa fa-comment-dots"></i>
 	                            	Create an account
-	                            </a>
+	                            </a>!-->
 	                            <a href="{{route('login')}}" id="dsk_signin">Sign in</a>
 	                            @else
 	                            <a href="{{route('agency.dashboard')}}" id="dsk_dashboard">
