@@ -956,7 +956,8 @@
                         <a href="{{route('profile.setup', ['page' => 'album'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
                     </div>
                     <div class="setup_tray_btn setup_next_btn">
-                        <a href="{{route('profile.setup', ['page' => 'subscription'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <!--<a href="{{route('profile.setup', ['page' => 'subscription'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>!-->
+                        <a href="{{route('profile.setup', ['page' => 'stripe'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 @endif
