@@ -317,9 +317,9 @@
                                     <div class="login_button_outer">
                                         <input type="submit" value="LOG IN">
                                     </div><br /><br />
-                                    <div class="register_button_outer">
+                                    <!--<div class="register_button_outer">
                                         <a href="{{ route('register') }}">Create an account</a>
-                                    </div>
+                                    </div>!-->
 
                                 </form>
                             </div>
