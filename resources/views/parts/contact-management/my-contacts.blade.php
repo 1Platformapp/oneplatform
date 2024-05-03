@@ -28,7 +28,7 @@
         <div class="chat_filter_container">
             <div class="chat_filter_tab chat_filter_contacts">
             @if(count($contacts) > 0)
-                @foreach($contacts as $contact)
+                @foreach($contacts as $key => $contact)
                     @if(!$contact->contactUser || !$contact->agentUser)
                         @php continue @endphp
                     @endif
@@ -42,9 +42,15 @@
                     <div data-partner="{{$partnerUser->id}}" data-approved="{{$contact->approved ? '1' : ''}}" data-form="my-contact-form_{{ $contact->id }}" class="clearfix agent_contact_listing music_btm_list no_sorting">
                         <div class="edit_elem_top">
                             <div class="m_btm_list_left">
+                                @if($key < 10)
+                                <div class="music_btm_thumb">
+                                    <img src="{{$contactPDetails['image']}}" alt="">
+                                </div>
+                                @else
                                 <div data-image="{{$contactPDetails['image']}}" class="music_btm_thumb">
                                     <div class="music_bottom_load_thumb">Load Image</div>
                                 </div>
+                                @endif
                                 <ul class="music_btm_img_det">
                                     <li>
                                         <a class="filter_search_target" href="">
