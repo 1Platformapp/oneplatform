@@ -27,7 +27,7 @@ class Agency
 
         if($user->is_buyer_only){
 
-            if ($routeName = $request->route()->getName() == 'agency.dashboard') {
+            if ($routeName = $request->route()->getName() == 'agency.dashboard' || $routeName = $request->route()->getName() == 'agency.dashboard.tab') {
                 return $next($request);
             } else if ($request->isMethod('GET')){
                 return redirect(route('agency.dashboard'));

@@ -467,6 +467,9 @@
 
         function postPayment(formData){
 
+            const email = $('#email').val();
+            const password = $('#password').val();
+
             $.ajax({
                 url: '/post-payment',
                 type: 'POST',
@@ -481,7 +484,12 @@
                         if(!/^(?:f|ht)tps?\:\/\//.test(url)){
                             url = 'https://' + url;
                         }
-                        window.location = url + '/my-transactions';
+
+                        $('#login_email_address').val(email);
+                        $('#login_password').val(password);
+                        $('#login-form').submit();
+
+                        //window.location = url;
                     }else{
                         alert(response.error);
                         document.getElementById('spinner').classList.add('hidden');
@@ -1240,6 +1248,16 @@
                 @endif
             </div>
         </div>
+        <form id="login-form" class="hidden form-horizontal" method="POST" action="{{ route('custom.login') }}">
+            {{ csrf_field() }}
+            <input type="text" name="redirect_url" value="{{route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-purchases'])}}" />
+            <div class="form_group">
+                <input type="email" name="email" id="login_email_address" />
+            </div>
+            <div class="form_group">
+                <input type="password" name="password" id="login_password" />
+            </div>
+        </form>
         <div class="filler" id="shopping_cart_filler"></div>
         <div class="filler" id="shopping_suggest_filler"></div>
         <div class="filler" id="checkout_filler"></div>

@@ -1096,6 +1096,17 @@ class ProfileController extends Controller
         return redirect(route('user.home', ['params' => $params]));
     }
 
+    public function customLogin(Request $request){
+
+        $user = User::where('email', $request->email)->first();
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1, 'hide_account' => null])) {
+
+            return redirect($request->redirect_url);
+        } else {
+            return redirect()->back();
+        }
+    }
+
     public function profileWithTab($tab, $subTab = null){
 
         if($tab == 'chat' || $tab == 'orders' || $tab == 'tools'){

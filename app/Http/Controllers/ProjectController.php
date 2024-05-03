@@ -2386,7 +2386,7 @@ class ProjectController extends Controller
                 $user->name = trim($paymentData['firstname'].' '.$paymentData['surname']);
                 $user->first_name = trim($paymentData['firstname']);
                 $user->surname = trim($paymentData['surname']);
-                $user->password = 'iscotyso';
+                $user->password = 'isCotyso';
                 $user->active = 1;
                 $user->api_token = str_random(60);
                 $user->save();
