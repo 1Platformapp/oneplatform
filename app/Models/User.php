@@ -17,6 +17,8 @@ use App\Http\Controllers\UserNotificationController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use PDF;
+
 class User extends Authenticatable
 
 {
