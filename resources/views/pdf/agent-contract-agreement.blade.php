@@ -75,12 +75,7 @@
                 <div style="height: 45px;"></div>
                 <div>
                     <p style="font-size: 16px;color: #818181;margin: 10px 0;">
-                        <span style="color: red;">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform. 
-                        Our website serves as a platform for users to buy, sell, and collaborate. 
-                        We do not take responsibility for any disputes or legal issues arising from these interactions. 
-                        Users are advised to exercise caution and diligence when engaging with others on the platform. 
-                        By using our services, you agree that 1Platform cannot be held liable for any such disputes, 
-                        and you waive any right to take legal action against the platform.
+                        <span class="text-red-600 text-sm">Disclaimer:</span> {{Config('constants.disclaimer')}}
                     </p>
                 </div>
             @endif

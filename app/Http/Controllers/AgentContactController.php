@@ -138,7 +138,7 @@ class AgentContactController extends Controller
         // }
 
         if($user && !$commonMethods->canUserAddNetwork($user)) {
-            return redirect()->back()->with(['error' => 'Error: Your package network limit has reached']);
+            return redirect()->back()->with(['error' => 'Sorry, but you have reached the cap on the number of networks you can add. To include more please upgrade your package', 'action' => ['text' => 'Upgrade' , 'url' => route('user.startup.wizard', ['action' => 'upgrade-subscription'])]]);
         }
 
         $skill = $request->get('pro_contact_skill');
@@ -146,7 +146,7 @@ class AgentContactController extends Controller
         $commission = $request->get('pro_contact_commission');
         $terms = $request->get('pro_contact_terms');
         $isAlreadyUser = $request->get('pro_contact_already_user');
-        $alreadyUserEmail = $request->get('pro_contact_already_user_email');
+        $alreadyUserEmail = strtolower($request->get('pro_contact_already_user_email'));
 
         if($isAlreadyUser == '1'){
 
@@ -226,7 +226,7 @@ class AgentContactController extends Controller
 
         $commission = $request->get('pro_contact_commission');
         $terms = $request->get('pro_contact_terms');
-        $email = $request->get('pro_contact_email');
+        $email = strtolower($request->get('pro_contact_email'));
         $questionnaireId = $request->get('pro_contact_questionnaireId');
         $contactId = $request->get('edit');
         $contact = AgentContact::where(['id' => $contactId, 'agent_id' => $user->id])->first();

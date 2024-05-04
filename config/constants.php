@@ -52,6 +52,8 @@ return [
 
     'crowdfund_application_fee' => 4.75,
 
+    'disclaimer' => '1Platform provides a platform for users to buy, sell, and collaborate. We are not responsible for any agreements made between users. Users should be cautious and diligent when interacting with others. By using our services, you agree that 1Platform cannot be held liable for any disputes, and you waive any right to take legal action against us..',
+
     'user_internal_packages' => [
         0 => ['name' => 'silver', 'volume' => 2, 'network_limit' => 10, 'application_fee' => 14, 'pricing' => ['month' => 0, 'year' => 0], 'plans' => ['month' => '', 'year' => '']],
         1 => ['name' => 'gold', 'volume' => 5, 'network_limit' => 100, 'application_fee' => 7, 'pricing' => ['month' => 15, 'year' => 150], 'plans' => ['month' => 'plan_GvpknURF7L8Ard', 'year' => 'plan_GvpjjnaxsDNNBs']],

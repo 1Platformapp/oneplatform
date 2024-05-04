@@ -80,7 +80,7 @@
 <script src="{{asset('esign/src/jSignature.js')}}"></script>
 <script src="{{asset('esign/src/main.js')}}"></script>
 <script>
-    
+
     function openModal() {
         document.getElementById('myModal').style.display = 'block';
     }
@@ -205,12 +205,7 @@
                     </div>
                     <div>
                         <p style="font-size: 16px;color: #818181;margin: 10px 0;">
-                            <span class="text-red-600">Disclaimer:</span> 1Platform is not responsible for any agreements made between users on the platform. 
-                            Our website serves as a platform for users to buy, sell, and collaborate. 
-                            We do not take responsibility for any disputes or legal issues arising from these interactions. 
-                            Users are advised to exercise caution and diligence when engaging with others on the platform. 
-                            By using our services, you agree that 1Platform cannot be held liable for any such disputes, 
-                            and you waive any right to take legal action against the platform.
+                            <span class="text-red-600 text-sm">Disclaimer:</span> {{Config('constants.disclaimer')}}
                         </p>
                     </div>
                     <button id="signature-submit-button" type="button" class="my-10 ml-auto rounded-md bg-indigo-600 px-5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>

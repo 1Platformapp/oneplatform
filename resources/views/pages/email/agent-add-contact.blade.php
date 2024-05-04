@@ -103,10 +103,10 @@
                                             @if($action == 'create')
                                             <tr>
                                                 <td style="color:#8c8c8c;font-family:Open Sans,sans-serif;font-weight: 500;font-size:11px">
-                                                    You have been invited by 
+                                                    You have been invited by
                                                     <span style="color:#fc064c;">{{$agent->name}}</span>
-                                                     to join 1platform.<br>Before you join you are required to review and sign the following document. 
-                                                     
+                                                     to join 1platform.<br>{{$agent->namePartOne()}} would like you to join the network<br><br>Before you join you are required to review and sign the following document.
+
                                                      <br><br>
                                                      <tr>
                                                          <td height="22">&nbsp;</td>
@@ -114,11 +114,11 @@
 
                                                      <tr>
                                                         <td align="center" style="cursor: pointer; padding: 3px;background: #737373;color: #fff;font-family: Open Sans,sans-serif;border-radius: 5px;font-size: 14px;">
-                                                            <a style="color: #fff;text-decoration: none;" href="{{route('agent.contact.approve.agreement', ['id' => $contact->id, 'agentId' => $agent->id])}}">
+                                                            <a target="_blank" style="color: #fff;text-decoration: none;" href="{{route('agent.contact.approve.agreement', ['id' => $contact->id, 'agentId' => $agent->id])}}">
                                                             Open Document
-                                                            </a>                       
+                                                            </a>
                                                         </td>
-                                                         
+
                                                      </tr>
                                                      <br><br>
                                                 </td>

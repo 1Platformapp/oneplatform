@@ -33,6 +33,10 @@
         <div class="error_span">
             <i class="fa fa-times-circle"></i>
             {{ (is_array(Session::get('error'))) ? Session::get('error')[0] : Session::get('error') }}
+
+            @if (Session::has('action'))
+            <a class="font-bold px-2 py-1 text-center border border-white rounded" href="{{Session::get('action')['url']}}">{{Session::get('action')['text']}}</a>
+            @endif
         </div>
 
     @endif

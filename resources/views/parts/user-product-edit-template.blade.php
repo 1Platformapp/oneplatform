@@ -86,7 +86,7 @@
     		<div class="pro_stream_input_row">
                 <div class="pro_stream_input_row">
                     <div class="pro_stream_input_each">
-                        <input class="product_timer_price pro_stream_input" type="number" placeholder="Enter special price" name="product_timer_price" value="{{$product->special_price ? $product->special_price['price'] : ''}}" />
+                        <input class="product_timer_price pro_stream_input" type="number" placeholder="Enter price" name="product_timer_price" value="{{$product->special_price ? $product->special_price['price'] : ''}}" />
                     </div>
                     @if($userPersonalDetails['countryCode'] != '')
                         @php $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $userPersonalDetails['countryCode']) @endphp
@@ -164,7 +164,7 @@
     <div data-prod-id="{{$customProduct->id}}" class="pro_design_st_3_outer pro_edit_design_st_3_outer">
         <div class="pro_design_st_3_each">
             <div data-background="{{$commonMethods::getUserProductThumbnail($userProduct->id)}}" class="pro_design_st4_prod_outer">
-                
+
             </div>
 
             <div class="port_each_field">
