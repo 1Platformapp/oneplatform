@@ -138,6 +138,13 @@ class AgencyController extends Controller
             $mePage = Session::get('me-page');
         }
 
+        if($user->expert && $user->apply_expert == 2){
+
+            if($user->expert->pdf == NULL){
+                $user->prepareExpertAgreement();
+            }
+        }
+
         $data   = [
 
             'commonMethods' => $commonMethods,

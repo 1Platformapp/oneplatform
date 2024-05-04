@@ -159,6 +159,16 @@ class User extends Authenticatable
         return $return;
     }
 
+    public function prepareExpertAgreement(){
+
+        $pdfName = strtoupper('APA_'.uniqid()).'.pdf';
+        $fileName = 'agent-agreements/'.$pdfName;
+        $data = ['expert' => $this->expert];
+        PDF::loadView('pdf.agent-platform-agreement', $data)->setPaper('a4', 'portrait')->setWarnings(false)->save($fileName);
+        $this->expert->pdf = $pdfName;
+        $this->expert->save();
+    }
+
 
     public function vouchers()
 
