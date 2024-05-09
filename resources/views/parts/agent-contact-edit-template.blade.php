@@ -159,8 +159,9 @@ Excited to have you on board!  @endif</textarea>
             </span>
         </div>
 
-        <div class="overflow-hidden bg-gray-200 divide-y divide-gray-200 rounded-lg shadow contact-edit-section-right md:col-span-2 sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
+        <div class="overflow-hidden bg-transparent divide-y divide-gray-200 rounded-lg shadow contact-edit-section-right md:col-span-2 sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
             @php $canSwitchAccount = !$contact->is_already_user || ($contact->is_already_user && $contact->approved) ? true : false @endphp
+            @if($contact->agentUser && $contact->agentUser->expert && $contact->agentUser->apply_expert == 2)
             <div class="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 {{$canSwitchAccount ? 'm_btm_switch_account cursor-pointer' : 'opacity-60 cursor-not-allowed'}}" data-id="{{$canSwitchAccount ? route('agent.contact.switch.account',['code' => $contact->code]) : ''}}">
                 <div>
                     <span class="inline-flex p-3 text-teal-700 rounded-lg bg-teal-50 ring-4 ring-white">
@@ -180,6 +181,7 @@ Excited to have you on board!  @endif</textarea>
                     <p class="mt-2 text-sm text-gray-500">Login to your contact's account and manage the profile</p>
                 </div>
             </div>
+            @endif
             @php $hasHomePage = $partnerUser->username ? true : false @endphp
             <div class="sm:rounded-tr-lg group relative bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500 {{$hasHomePage ? 'cursor-pointer m_btm_navigate_contact_home' : 'cursor-not-allowed opacity-60'}}" data-id="{{$hasHomePage ? route('user.home',['params' => $partnerUser->username]) : ''}}">
                 <div>

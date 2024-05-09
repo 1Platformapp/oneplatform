@@ -669,26 +669,32 @@ class AgentContactController extends Controller
 
         $agent = Auth::user();
         $contact = AgentContact::where(['agent_id' => $agent->id, 'code' => $code])->first();
-        if($contact && $contact->contactUser){
+        if($contact && $contact->agentUser && $contact->agentUser->expert && $contact->agentUser->apply_expert == 2){
 
-            if(!isset($_SESSION)) {
-                session_start();
-            }
-            if(isset($_SESSION['basket_customer_id'])){
-                unset($_SESSION['basket_customer_id']);
-            }
-            if(isset($_SESSION['avatar'])){
-                unset($_SESSION['avatar']);
-            }
-            Auth::user()->last_activity = null;
-            Auth::user()->save();
-            Auth::logout();
+            if($contact && $contact->contactUser){
 
-            Auth::login($contact->contactUser);
-            return redirect(route('agency.dashboard'));
-        }else{
+                if(!isset($_SESSION)) {
+                    session_start();
+                }
+                if(isset($_SESSION['basket_customer_id'])){
+                    unset($_SESSION['basket_customer_id']);
+                }
+                if(isset($_SESSION['avatar'])){
+                    unset($_SESSION['avatar']);
+                }
+                Auth::user()->last_activity = null;
+                Auth::user()->save();
+                Auth::logout();
 
-            return 'Invalid code or authorization issue detected';
+                Auth::login($contact->contactUser);
+                return redirect(route('agency.dashboard'));
+            } else{
+
+                return 'Invalid code or authorization issue detected';
+            }
+        } else{
+
+            return 'This function is only for pro agents';
         }
     }
 
