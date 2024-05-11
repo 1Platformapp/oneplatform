@@ -9,7 +9,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('pagetitle')</title>
         <link href="{{asset('css/style.min.css?v=3.3')}}" rel="stylesheet" type="text/css">
-        <link href="/css/app.css?v=3.80" rel="stylesheet" type="text/css" />
+        <link href="/css/app.css?v=3.81" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
         <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />

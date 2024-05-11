@@ -402,7 +402,52 @@ class RegisterController extends Controller
             'user' => $userData && isset($userData['id']) ? User::find($userData['id']) : null
         ];
 
-        return view('pages.setup.simple.index', $data);
+        return view('pages.setup.simple.temp-register', $data);
+    }
+
+    public function vetUser(Request $request){
+
+        try {
+            $user = new User();
+            $address = new Address();
+            $profile = new Profile;
+
+            $user->name = $request->name;
+            $user->first_name = $request->firstName;
+            $user->surname = $request->lastName;
+            $user->email = $request->email;
+            $user->contact_number = NULL;
+            $user->music_url = isset($request->music_url) ? $request->music_url : NULL;
+            $user->password = bcrypt($request->password);
+            $user->subscription_id = 0;
+            $user->active = 0;
+            $user->api_token = str_random(60);
+            $user->manager_chat = NULL;
+            $user->skills = $request->has('skill') ? $request->skill : '';
+            $user->sec_skill = '';
+            $user->level = '';
+            $user->username = $request->username;
+            $user->save();
+
+            $address->alias = 'main address';
+            $address->user_id = $user->id;
+            $address->city_id = 36;
+            $address->country_id = 213;
+            $address->save();
+
+            $profile->birth_date = Carbon::now();
+            $profile->user_id = $user->id;
+            $profile->default_currency = $request->currency;
+            $profile->basic_setup = 1;
+            $profile->save();
+
+            $result = Mail::to(Config('constants.admin_email'))->send(new MailUser('registrationRequest', $user));
+        } catch (\Exception $ex) {
+
+            return response()->json(['success' => false, 'message' => $ex->getMessage()]);
+        }
+
+        return response()->json(['success' => true, 'message' => 'Your request has been submited. We will be in touch shortly']);
     }
 
     public function getActivate($token){

@@ -22,10 +22,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::domain(Config::get('constants.primaryDomain'))->group(function () {
     Route::post('register/user', [RegisterController::class, 'register']);
+    Route::post('vet/user', [RegisterController::class, 'vetUser']);
 });
 
 Route::prefix('users')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('users.index');
 });
 
-        
+
