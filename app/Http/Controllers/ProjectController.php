@@ -2347,6 +2347,8 @@ class ProjectController extends Controller
                     }else{
                         $redirectUrl = route('user.home', ['params' => $sellerUser->username]);
                     }
+
+                    Auth::logout();
                 }
             }else{
                 $message = $checkoutMessage;
