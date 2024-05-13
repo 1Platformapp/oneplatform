@@ -2361,10 +2361,10 @@ class ProjectController extends Controller
                     }else{
                         $redirectUrl = route('user.home', ['params' => $sellerUser->username]);
                     }
+
+                    Auth::logout();
                 }
             }
-
-            Auth::logout();
         }else{
             if($paymentData['free'] == '1'){
                 $message = 'Successfully finished';
