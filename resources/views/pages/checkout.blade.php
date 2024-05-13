@@ -486,9 +486,9 @@
                         }
 
                         if ($('#is_cotyso').val() == '1') {
-                            //window.location = url;
                             alert(url);
-                            alert(message);
+                            alert(response.message);
+                            window.location = url;
                         } else {
                             $('#login_email_address').val(email);
                             $('#login_password').val(password);
