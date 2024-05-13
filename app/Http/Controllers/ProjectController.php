@@ -2335,7 +2335,7 @@ class ProjectController extends Controller
             $checkoutMessage = 'Successfully sent money to ' . $sellerUser->name;
         }
 
-        if($sellerUser->isCotyso() && !Auth::check()){
+        if($sellerUser->isCotyso()){
             $domain = parse_url($request->root())['host'];
             if($paymentData['free'] == '1'){
                 $message = 'Successfully finished';
@@ -2363,6 +2363,8 @@ class ProjectController extends Controller
                     }
                 }
             }
+
+            Auth::logout();
         }else{
             if($paymentData['free'] == '1'){
                 $message = 'Successfully finished';
@@ -2403,7 +2405,7 @@ class ProjectController extends Controller
                 $profile->user_id = $user->id;
                 $profile->save();
 
-                //Auth::login($user);
+                Auth::login($user);
                 return true;
             }else{
 
