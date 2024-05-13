@@ -2403,7 +2403,7 @@ class ProjectController extends Controller
                 $profile->user_id = $user->id;
                 $profile->save();
 
-                Auth::login($user);
+                //Auth::login($user);
                 return true;
             }else{
 
