@@ -734,7 +734,7 @@ $('#pay_int_sub_final').removeClass('disabled');
             </div>
         </div>
     </div>
-    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
+    <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
 
     @if(Session::has('seller_first_things_first'))
         @php $showSellerCurrency = 'display: block;'; @endphp

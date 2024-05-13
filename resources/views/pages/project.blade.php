@@ -774,7 +774,7 @@
 
     <input type="hidden" id="share_current_page" value="project">
 
-    
+
     @php
         $shareVideoTitle = preg_replace('/[^\w]/', ' ', $defaultVideoTitle);
         $url = 'project_'.$user->id;
@@ -782,7 +782,7 @@
         $shareVideoURL = route('vid.share', ['videoId' => '0cSXq4TYIIk', 'userName' => $user->name, 'url' => $url]);
         $shareURL = route('url.share', ['userName' => $user->name, 'imageName' => base64_encode($userImageName), 'url' => $url]);
     @endphp
-    
+
     <input type="hidden" id="video_share_id" value="{{$defaultVideoId}}">
 
     <input type="hidden" id="video_share_link" value="{{$shareVideoURL}}">
@@ -1404,6 +1404,6 @@
     <div id="body-overlay"></div>
     @include('parts.chart-popups')
 
-    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
+    <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
     <input type="hidden" id="connect_account_id" value="{{$user->profile->stripe_user_id}}">
 @stop

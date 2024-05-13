@@ -33,6 +33,7 @@ use Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Browser;
 use AmrShawky\Currency;
+use Illuminate\Support\Facades\URL;
 
 class CommonMethods extends Controller
 
@@ -844,7 +845,37 @@ class CommonMethods extends Controller
 
 
 
+    public function isDomainCotyso()
+    {
+        $currentUrl = URL::current();
+        $domain = parse_url($currentUrl, PHP_URL_HOST);
 
+        if ($domain == Config('constants.singingExperienceDomain')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getStripePublicKey()
+    {
+        return $this->isDomainCotyso() ? Config('constants.stripe_live_key_public') : Config('constants.stripe_key_public');
+    }
+
+    public function getStripeSecretKey()
+    {
+        return Config('constants.stripe_payment_mode') == 'live' || $this->isDomainCotyso() ? Config('constants.stripe_live_key_secret') : Config('constants.stripe_key_secret');
+    }
+
+    public function getStripeConnectId()
+    {
+        return Config('constants.stripe_payment_mode') == 'live' || $this->isDomainCotyso() ? Config('constants.stripe_live_connect_client_id') : Config('constants.stripe_connect_client_id');
+    }
+
+    public function getStripeWebhookSecret()
+    {
+        return Config('constants.stripe_payment_mode') == 'live' || $this->isDomainCotyso() ? Config('constants.stripe_live_webhook_secret') : Config('constants.stripe_webhook_secret');
+    }
 
 
     public static function convert($currencyFrom, $currencyTo, $amount){

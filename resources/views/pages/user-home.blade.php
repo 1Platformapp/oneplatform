@@ -802,7 +802,7 @@
     <div id="body-overlay"></div>
     @include('parts.chart-popups')
     <input id="has_free_sub" type="hidden" value="{{$user->hasActiveFreeSubscription() ? '1' : '0'}}" />
-    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
+    <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
     <div class="tab_btns_alt_outer tab_dsk hide_on_desktop">
         <div class="each_tab_alt_btn tab_alt_btn_user_bio {{$user->default_tab_home == NULL || $user->default_tab_home == 1 ? 'true_active' : ''}}" data-target-id="1">
             <div class="border"></div>

@@ -1540,6 +1540,6 @@
         </div>
     </div>
     <div id="body-overlay"></div>
-    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
+    <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
     <input type="hidden" id="connect_account_id" value="{{$basket->first()->user->profile->stripe_user_id}}">
 @stop

@@ -399,6 +399,7 @@ class RegisterController extends Controller
         $data = [
             'genres' => $genres,
             'prefill' => $userData,
+            'commonMethods' => $commonMethods,
             'user' => $userData && isset($userData['id']) ? User::find($userData['id']) : null
         ];
 

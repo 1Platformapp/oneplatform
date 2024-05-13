@@ -341,6 +341,7 @@ class ProfileController extends Controller
         }
 
         $user = Auth::check() ? Auth::user() : NULL;
+        $commonMethods = new CommonMethods();
 
         if(!$user){
 
@@ -365,7 +366,7 @@ class ProfileController extends Controller
                     $authorize_request_body = array(
                         'response_type' => 'code',
                         'scope' => 'read_write',
-                        'client_id' => Config('constants.stripe_connect_client_id')
+                        'client_id' => $commonMethods->getStripeConnectId()
                     );
                     $userName = explode("@", preg_replace('/\s+/', ' ', $user->email));
                     $stripeUrl = Config('constants.stripe_connect_authorize_uri') . '?' . http_build_query($authorize_request_body) . '&redirect_uri='.Config('services.stripe.redirect').'&stripe_user[email]='.$user->email.'&stripe_user[business_name]='.$user->name.'&stripe_user[url]='.($user->username?route('user.home',['params' => $user->username]):'');
@@ -391,7 +392,9 @@ class ProfileController extends Controller
 
                     'paypalUrl' => $paypalUrl,
 
-                    'backBtnUrl' => $backBtnUrl
+                    'backBtnUrl' => $backBtnUrl,
+
+                    'commonMethods' => $commonMethods
                 ];
 
                 return view( 'pages.startup-wizard', $data );
@@ -415,7 +418,9 @@ class ProfileController extends Controller
 
                 'action' => $action,
 
-                'backBtnUrl' => $backBtnUrl
+                'backBtnUrl' => $backBtnUrl,
+
+                'commonMethods' => $commonMethods
             ];
 
             return view( 'pages.startup-wizard', $data );
@@ -435,7 +440,7 @@ class ProfileController extends Controller
 
                     // updates the stripe data once in a day
 
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     $url = 'https://api.stripe.com/v1/subscriptions/'.$user->internalSubscription->stripe_subscription_id;
                     $subscription = $commonMethods->stripeCall($url, $headers, [], 'GET');
                     if(isset($subscription['id'])){
@@ -647,7 +652,7 @@ class ProfileController extends Controller
                 	$userInternalSubscription->subscription_status = 1;
                 	$userInternalSubscription->save();
 
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     $url = 'https://api.stripe.com/v1/subscriptions/'.$userInternalSubscription->stripe_subscription_id;
                     $stripeSubscription = $commonMethods->stripeCall($url, $headers, [], 'GET');
                     if(isset($stripeSubscription['metadata']) && count($stripeSubscription['metadata']) && isset($stripeSubscription['metadata']['voucher'])){
@@ -856,7 +861,7 @@ class ProfileController extends Controller
 
         if($planId != ''){
 
-            $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+            $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
             try {
 
                 $url = 'https://api.stripe.com/v1/customers';
@@ -5330,8 +5335,8 @@ class ProfileController extends Controller
 
         require_once(app_path().'/includes/stripe/oauth-classes/StripeOAuth.class.php');
 
-        $clientId = Config('constants.stripe_connect_client_id');
-        $secretKey = Config('constants.stripe_key_secret');
+        $clientId = $commonMethods->getStripeConnectId();
+        $secretKey = $commonMethods->getStripeSecretKey();
 
         $oauth = (new \StripeOAuth($clientId, $secretKey));
 
@@ -5342,7 +5347,7 @@ class ProfileController extends Controller
             $user_id = $oauth->getUserId();
 
             $url = 'https://api.stripe.com/v1/accounts/'.$user_id;
-            $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+            $headers = ['Authorization: Bearer '.$secretKey];
             $fields = [];
             $stripeAccount = $commonMethods->stripeCall($url, $headers, $fields, 'GET');
 
@@ -6827,8 +6832,9 @@ class ProfileController extends Controller
 
         require_once(app_path().'/includes/stripe2/stripe-php-7/init.php');
 
-        \Stripe\Stripe::setApiKey(Config('constants.stripe_key_secret'));
-        $endpoint_secret = Config('constants.stripe_webhook_secret');
+        $commonMethods = new CommonMethods();
+        \Stripe\Stripe::setApiKey($commonMethods->getStripeSecretKey());
+        $endpoint_secret = $commonMethods->getStripeWebhookSecret();
 
         $payload = @file_get_contents('php://input');
         $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
@@ -6872,13 +6878,13 @@ class ProfileController extends Controller
 
                                     //first make sure the platform has not refunded the source application fee
                                     $url = 'https://api.stripe.com/v1/application_fees/'.$agentTransfer->stripe_application_fee_id;
-                                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                                     $fields = [];
                                     $fee = $commonMethods->stripeCall($url, $headers, $fields, 'GET');
                                     if(!$fee['refunded']){
 
                                         $url = 'https://api.stripe.com/v1/transfers';
-                                        $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                                        $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                                         $fields = [
                                             'amount' => $agentTransfer->amount,
                                             'currency' => $agentTransfer->currency,
@@ -6977,7 +6983,7 @@ class ProfileController extends Controller
 
                     if($request->has('intent')){
                         $intentId = $request->get('intent');
-                        $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                        $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                         array_push($headers, 'Stripe-Account: '.$chat->sender->profile->stripe_user_id);
 
                         $url = 'https://api.stripe.com/v1/payment_intents/'.$intentId;
@@ -7184,7 +7190,7 @@ class ProfileController extends Controller
                 $seller = User::find($request->get('seller'));
                 if($seller && $seller->profile->stripe_user_id != ''){
                     $intentId = $request->get('intent');
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     array_push($headers, 'Stripe-Account: '.$seller->profile->stripe_user_id);
 
                     $url = 'https://api.stripe.com/v1/payment_intents/'.$intentId;
@@ -7328,7 +7334,7 @@ class ProfileController extends Controller
 
             $url = 'https://api.stripe.com/v1/subscriptions/'.$userSubscription->stripe_subscription_id;
             $fields = ['cancel_at_period_end' => true];
-            $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret'), 'Content-Type' => 'application/x-www-form-urlencoded'];
+            $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey(), 'Content-Type' => 'application/x-www-form-urlencoded'];
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -7397,7 +7403,7 @@ class ProfileController extends Controller
 
                 try{
 
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     array_push($headers, 'Stripe-Account: '.$seller->profile->stripe_user_id);
                     $createPaymentIntent = 1;
 
@@ -7508,7 +7514,7 @@ class ProfileController extends Controller
                     ];
 
                     $url = 'https://api.stripe.com/v1/payment_intents';
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     array_push($headers, 'Stripe-Account: '.$seller->profile->stripe_user_id);
                     $fields = [
                         'amount' => $paymentDet['total']*100,
@@ -7707,7 +7713,7 @@ class ProfileController extends Controller
 
                     if($stripeSubscription->stripe_subscription_id){
 
-                        $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                        $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                         array_push($headers, 'Stripe-Account: '.$stripeSubscription->user->profile->stripe_user_id);
                         $url = 'https://api.stripe.com/v1/subscriptions/'.$stripeSubscription->stripe_subscription_id;
                         $subscription = $commonMethods->stripeCall($url, $headers, [], 'GET');

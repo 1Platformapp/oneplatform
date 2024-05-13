@@ -1120,7 +1120,7 @@ class ProjectController extends Controller
                 $amountRaised = $campaign->amountRaised();
                 $amountRaisingCustomers = array();
 
-                $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                 array_push($headers, 'Stripe-Account: '.$campaign->user->profile->stripe_user_id);
 
                 if($amountRaised >= $campaign->amount){
@@ -1166,7 +1166,7 @@ class ProjectController extends Controller
 
                                     require_once(app_path().'/includes/stripe2/stripe-php-7/init.php');
                                     try{
-                                        \Stripe\Stripe::setApiKey(Config('constants.stripe_key_secret'));
+                                        \Stripe\Stripe::setApiKey($commonMethods->getStripeSecretKey());
                                         $paymentIntent = \Stripe\PaymentIntent::create([
                                             'amount' => $checkout->amount * 100,
                                             'currency' => $checkout->currency,
@@ -1387,7 +1387,7 @@ class ProjectController extends Controller
             try{
                 if($totalAmount){
 
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     array_push($headers, 'Stripe-Account: '.$sellerUser->profile->stripe_user_id);
                     $createPaymentIntent = $createSetupIntent = 1;
 
@@ -1517,7 +1517,7 @@ class ProjectController extends Controller
 
                         if($hasSubscription && $request->has('paymentMethod')){
 
-                            $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                            $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                             array_push($headers, 'Stripe-Account: '.$sellerUser->profile->stripe_user_id);
 
                             $url1 = 'https://api.stripe.com/v1/customers';
@@ -1650,7 +1650,7 @@ class ProjectController extends Controller
                 // proceed with stripe's payment intent
                 $id = $request->get('intent');
                 if($customerBasket->first()->payment_intent_id == $id){
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     array_push($headers, 'Stripe-Account: '.$sellerUser->profile->stripe_user_id);
 
                     if($type == 'crowdfund' && $campaign && $campaign->is_charity != 1 && !$request->has('failedcheckout')){
@@ -1820,7 +1820,7 @@ class ProjectController extends Controller
 
                 		$stripeCustomerId = $request->get('stripeCustomer');
                 		$buyerUser = Auth::user();
-                		$headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                		$headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                 		array_push($headers, 'Stripe-Account: '.$sellerUser->profile->stripe_user_id);
 
                 		$url = 'https://api.stripe.com/v1/products';
@@ -2456,7 +2456,7 @@ class ProjectController extends Controller
     		        $stripeCheckout = StripeCheckout::find($id);
                     if($user->id == $stripeCheckout->customer->id){
 
-                        $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                        $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                         array_push($headers, 'Stripe-Account: '.$stripeCheckout->user->profile->stripe_user_id);
 
                         $paymentIntentId = $stripeCheckout->stripe_payment_id;
@@ -2503,7 +2503,7 @@ class ProjectController extends Controller
 
     		if($checkout  && $checkout->user && $checkout->customer && Auth::check()){
     			if(Auth::user()->id == $checkout->customer->id){
-    				$headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+    				$headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
     				array_push($headers, 'Stripe-Account: '.$checkout->user->profile->stripe_user_id);
 
     				$url = 'https://api.stripe.com/v1/payment_intents/'.$checkout->stripe_payment_id;
@@ -2551,7 +2551,7 @@ class ProjectController extends Controller
         if($checkout && $checkout->error && $checkout->stripe_payment_id){
 
             if(count($checkout->crowdfundCheckoutItems) && $checkout->user && $checkout->user->profile->stripe_user_id != '' && $checkout->customer){
-                $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                 array_push($headers, 'Stripe-Account: '.$checkout->user->profile->stripe_user_id);
 
                 $paymentIntentId = $checkout->stripe_payment_id;

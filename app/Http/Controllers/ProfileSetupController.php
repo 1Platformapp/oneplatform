@@ -165,7 +165,7 @@ class ProfileSetupController extends Controller
             $authorize_request_body = array(
                 'response_type' => 'code',
                 'scope' => 'read_write',
-                'client_id' => Config('constants.stripe_connect_client_id')
+                'client_id' => $commonMethods->getStripeConnectId()
             );
             $stripeUrl = Config('constants.stripe_connect_authorize_uri') . '?' . http_build_query($authorize_request_body) . '&redirect_uri='.Config('services.stripe.redirect').'&stripe_user[email]='.$user->email.'&stripe_user[business_name]='.$user->name.'&stripe_user[url]='.($user->username?route('user.home',['params' => $user->username]):'');
             $agents = User::where('apply_expert', 2)->orderBy('name', 'asc')->get()->filter(function ($user){

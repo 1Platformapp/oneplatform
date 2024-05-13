@@ -1683,7 +1683,7 @@ class ChartController extends Controller
 
                     $tokenId = $find;
                     $url = 'https://api.stripe.com/v1/tokens/'.$tokenId;
-                    $headers = ['Authorization: Bearer '.Config('constants.stripe_key_secret')];
+                    $headers = ['Authorization: Bearer '.$commonMethods->getStripeSecretKey()];
                     array_push($headers, 'Stripe-Account: '.$user->profile->stripe_user_id);
                     $fields = [];
                     $token = $commonMethods->stripeCall($url, $headers, $fields, 'GET');

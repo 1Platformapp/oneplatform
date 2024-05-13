@@ -959,7 +959,7 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
+    <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
     <input type="hidden" id="prefill" value="{{$prefill ? '1' : ''}}">
 
 @endsection

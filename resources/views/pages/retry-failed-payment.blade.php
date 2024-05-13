@@ -4,7 +4,7 @@
 
 @section('page-level-css')
     <link rel="stylesheet" href="{{asset('css/project.css')}}"></link>
-    
+
     <style>
 
         .user_checkout_bonus { display: flex; align-items: center; flex-direction: row; margin-bottom: 15px; }
@@ -27,11 +27,11 @@
 
 
 @section('page-level-js')
-    
+
     <script src="https://js.stripe.com/v3/"></script>
 
 	<script type="text/javascript">
-		
+
 		$('document').ready(function(){
 
 			var stripe = Stripe($('#stripe_publishable_key').val(), { stripeAccount: atob($('#connect_account_id').val())});
@@ -132,7 +132,7 @@
 			    dataType: 'json',
 			    success: function (response) {
 			        if(response.success){
-			            
+
 			            var paymentData = {
 			                userdata: $('#monies_form').serialize(),
 			                type: 'crowdfund',
@@ -218,7 +218,7 @@
 
             return success;
         }
-	</script>   
+	</script>
 
 @stop
 
@@ -236,7 +236,7 @@
     @if (Session::has('error'))
 
         <div class="error_span">
-        	<i class="fa fa-times-circle"></i> 
+        	<i class="fa fa-times-circle"></i>
         	{{ (is_array(Session::get('error'))) ? Session::get('error')[0] : Session::get('error') }}
         </div>
 
@@ -245,7 +245,7 @@
     @if (Session::has('success'))
 
         <div class="success_span">
-            <i class="fa fa-check-circle"></i> 
+            <i class="fa fa-check-circle"></i>
             {{ (is_array(Session::get('success'))) ? Session::get('success')[0] : Session::get('success') }}
         </div>
 
@@ -269,7 +269,7 @@
 
 
 @section('top-center')
-    
+
     <div class="ch_center_outer user_hm_center">
 
     	<h4 class="clearfix"> Retry your failed payment  </h4>
@@ -285,8 +285,8 @@
             <div class="proj_notice_para">
                 <i class="fa fa-credit-card"></i>&nbsp;&nbsp;
                 {{isset($paymentIntent['metadata']['CardHolderName']) ? $paymentIntent['metadata']['CardHolderName'].' - ' : ''}}
-                **** {{$paymentMethodDetails['card']['last4']}} - 
-                {{$paymentMethodDetails['card']['exp_month']}} / 
+                **** {{$paymentMethodDetails['card']['last4']}} -
+                {{$paymentMethodDetails['card']['exp_month']}} /
                 {{$paymentMethodDetails['card']['exp_year']}}
             </div>
             @endif
@@ -296,7 +296,7 @@
                 As per your decline code, your card issuer need you to authenticate this payment before we could process it. Please click on the following button to complete this step.
             </div>
             <div id="proceed_payment_attempt" class="failed_checkout_action_btn">Authenticate</div>
-            @elseif($checkout->error == 'approve_with_id' || $checkout->error == 'issuer_not_available' || $checkout->error == 'processing_error' || $checkout->error == 'reenter_transaction' || $checkout->error == 'try_again_later') 
+            @elseif($checkout->error == 'approve_with_id' || $checkout->error == 'issuer_not_available' || $checkout->error == 'processing_error' || $checkout->error == 'reenter_transaction' || $checkout->error == 'try_again_later')
             <div class="proj_notice_para">
                 Your decline code suggests we can make an attempt for the payment again.
             </div>
@@ -362,7 +362,7 @@
 
 @section('top-right')
 
-    
+
 
 @stop
 
@@ -458,7 +458,7 @@
 @section('miscellaneous-html')
 
     <div id="body-overlay"></div>
-    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
+    <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
     <input type="hidden" id="connect_account_id" value="{{base64_encode($checkout->user->profile->stripe_user_id)}}">
     <input type="hidden" id="intent_client_secret" value="{{base64_encode($paymentIntent['client_secret'])}}">
     <input type="hidden" id="intent_payment_method_id" value="{{$paymentMethodDetails ? base64_encode($paymentIntent['charges']['data'][0]['payment_method']) : ''}}">

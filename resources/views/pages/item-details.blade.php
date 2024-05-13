@@ -4,10 +4,10 @@
 
 @section('pagetitle') {{$type == 'track' ? str_limit($item->song_name, 40) : str_limit($item->title, 40) }} - {{$item->user->name}} @endsection
 
-@section('pagekeywords') 
+@section('pagekeywords')
 @endsection
 
-@section('pagedescription') 
+@section('pagedescription')
     @if($type == 'product')
     <meta name="description" content="{{$user->name}} presents {{$item->title}} - {!! str_replace(array('"', "'"), '', strip_tags($item->description)) !!}" />
     @endif
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}" >
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/item-details.min.css?v=3.6')}}" >
-    
+
     <meta property="og:url"           content="" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{$title}}" />
@@ -38,7 +38,7 @@
 @stop
 
 @section('page-level-js')
-    
+
     <script defer src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript">
         $('document').ready(function(){
@@ -93,7 +93,7 @@
 @stop
 
 @section('header')
-    
+
 @stop
 
 @section('audio-player')
@@ -111,7 +111,7 @@
 
 
 @section('page-content')
-    
+
     @php $domain = parse_url(request()->root())['host'] @endphp
     @php $backLink = $domain == Config('constants.primaryDomain') ? route('user.home', ['params' => $user->username]) : 'https://'.$domain @endphp
     <aside>
@@ -133,14 +133,14 @@
 @stop
 
 @section('miscellaneous-html')
-	
+
 	@include('parts.basket-popups')
 	@include('parts.chart-popups')
-    <input type="hidden" id="stripe_publishable_key" value="{{config('constants.stripe_key_public')}}">
+    <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
 @stop
 
 @section('footer')
-    
+
     @if($user->isCotyso())
         @include('parts.singing-footer')
     @endif
