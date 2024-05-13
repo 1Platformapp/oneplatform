@@ -1760,6 +1760,7 @@ class ProjectController extends Controller
 
                                 $response = $this->proceedSavingPayment($request, $customerBasket, $paymentIntent, $paymentData, $subscription);
                                 $redirectUrl = $response['redirectUrl'];
+                                $message = $response['message'];
                                 $checkoutId = $response['checkoutId'];
                                 $metaData = $paymentIntent['metadata'];
                                 $metaData['Buyer'] = $buyerUser->id.': '.$buyerUser->name.' - '.$buyerUser->email;
@@ -1791,6 +1792,8 @@ class ProjectController extends Controller
                     $error = 'something went wrong';
                 }
             }else if($request->has('free') && $totalAmount == 0 && $customerBasket->first()){
+
+                $message = 'free';
 
                 // proceed without payment intent
                 $paymentData = [
@@ -1870,9 +1873,10 @@ class ProjectController extends Controller
             }
         }else{
             $error = 'incomplete data';
+            $message = 'no message';
         }
 
-        echo json_encode(['success' => $success, 'error' => $error, 'url' => $redirectUrl]);
+        echo json_encode(['success' => $success, 'error' => $error, 'url' => $redirectUrl, 'message' => $message]);
     }
 
     public function postCrowdfundBasket(Request $request){
@@ -2372,7 +2376,7 @@ class ProjectController extends Controller
         }
 
         Session::flash('success', $message);
-        return ['redirectUrl' => $redirectUrl, 'checkoutId' => $stripeCheckOut->id];
+        return ['redirectUrl' => $redirectUrl, 'checkoutId' => $stripeCheckOut->id, 'message' => $message];
     }
 
     public function createBuyerUser($sellerUser, $paymentData){
