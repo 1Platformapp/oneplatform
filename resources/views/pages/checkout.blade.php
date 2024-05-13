@@ -485,11 +485,14 @@
                             url = 'https://' + url;
                         }
 
-                        $('#login_email_address').val(email);
-                        $('#login_password').val(password);
-                        $('#login-form').submit();
+                        if ($('#is_cotyso').val() == '1') {
+                            window.location = url;
+                        } else {
+                            $('#login_email_address').val(email);
+                            $('#login_password').val(password);
+                            $('#login-form').submit();
+                        }
 
-                        //window.location = url;
                     }else{
                         alert(response.error);
                         document.getElementById('spinner').classList.add('hidden');
@@ -1595,4 +1598,5 @@
     <div id="body-overlay"></div>
     <input type="hidden" id="stripe_publishable_key" value="{{$commonMethods->getStripePublicKey()}}">
     <input type="hidden" id="connect_account_id" value="{{$basket->first()->user->profile->stripe_user_id}}">
+    <input type="hidden" id="is_cotyso" value="{{ strpos(request()->url(), 'personalized-checkout') !== false ? '1' : '0' }}">
 @stop
