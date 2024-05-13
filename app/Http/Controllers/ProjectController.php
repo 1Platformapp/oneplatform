@@ -1647,6 +1647,8 @@ class ProjectController extends Controller
 
             if($request->has('intent')){
 
+                $message = 'processing with intent';
+
                 // proceed with stripe's payment intent
                 $id = $request->get('intent');
                 if($customerBasket->first()->payment_intent_id == $id){
@@ -1793,7 +1795,7 @@ class ProjectController extends Controller
                 }
             }else if($request->has('free') && $totalAmount == 0 && $customerBasket->first()){
 
-                $message = 'free';
+                $message = 'processing free';
 
                 // proceed without payment intent
                 $paymentData = [
