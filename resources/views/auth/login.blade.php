@@ -262,9 +262,9 @@
                                 <div class="auth_btn_submit">
                                     <input type="submit" value="Log In">
                                 </div>
-                                <!--<div class="auth_btn_helper">
+                                <div class="auth_btn_helper">
                                     <a href="{{ route('register') }}">Create an account</a>
-                                </div>!-->
+                                </div>
                                 <div width="400" class="login_register_text_02">
                                     <span>Creating an account with 1Platform<br> means you agree to our</span>
                                     <a href="{{route('tc')}}">terms and conditions, </a>
@@ -317,16 +317,16 @@
                                     <div class="login_button_outer">
                                         <input type="submit" value="LOG IN">
                                     </div><br /><br />
-                                    <!--<div class="register_button_outer">
+                                    <div class="register_button_outer">
                                         <a href="{{ route('register') }}">Create an account</a>
-                                    </div>!-->
+                                    </div>
 
                                 </form>
                             </div>
                         </div>
                         <div class="auth_social_logins_outer">
                             <div class="auth_social_logins_inner">
-                                <div class="auth_social_each auth_social_fb">
+                                <!--<div class="auth_social_each auth_social_fb">
                                     <a id="trig_login_fb" href="javascript:void(0)">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
@@ -345,7 +345,7 @@
                                     <a href="{{asset('login/instagram')}}">
                                         <i class="fab fa-instagram"></i>
                                     </a>
-                                </div>
+                                </div>!-->
                             </div>
                             <div class="login_register_text_02">
                                 <span>Creating an account with 1Platform means you agree to our</span><br class="hide_on_mobile">
