@@ -36,6 +36,12 @@
                             <i class="fas fa-handshake"></i>
                         </a>
                     </div>
+                    @else
+                    <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
+                        <a title="Personal Chat" class="m_btn_right_icon_each m_btn_personal_chat active" data-id="personal-chat" data-head="Chat">
+                            <i class="fa fa-comment"></i>
+                        </a>
+                    </div>
                     @endif
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions" data-head="My Transactions">
@@ -119,6 +125,9 @@
                             </div>
 
                             <div class="contact-management-well"></div>
+                        </div>
+                        <div class="each_dash_section instant_hide" data-value="personal-chat">
+                            <div class="personal-chat-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-calendar">
                             <div>
@@ -858,7 +867,7 @@
         });
     });
 
-    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
+    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_personal_chat, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
 
         var id = $(this).attr('data-id');
         var heading = $(this).attr('data-head');
@@ -918,6 +927,16 @@
 
             $('.order-stages.stage-one').removeClass('instant_hide');
             $('.order-stages.stage-two').addClass('instant_hide');
+        }
+
+        if($(this).hasClass('m_btn_personal_chat')){
+
+            if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                $('.loading').removeClass('instant_hide');
+                getPersonalChat();
+            } else {
+                $('.personal-chat-well').html('');
+            }
         }
     });
 
@@ -1146,6 +1165,27 @@
                 }else{
                     console.log(data.error);
                     $('.management-plan-well').html(data.error);
+                }
+            }
+        });
+    }
+
+    function getPersonalChat(){
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': 'personal-chat', 'find': '', 'identity_type': 'self', 'identity': ''},
+            success: function(response) {
+
+                removeLoading();
+                if(response.success == 1){
+                    $('.personal-chat-well').html(response.data.data);
+                }else{
+                    console.log(data.error);
+                    $('.personal-chat-well').html(data.error);
                 }
             }
         });

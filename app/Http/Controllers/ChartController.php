@@ -1294,6 +1294,11 @@ class ChartController extends Controller
                 $accessGranted = 1;
             }
 
+            if($findType == 'personal-chat' && $identityType == 'self'){
+                $find = Auth::user()->id;
+                $accessGranted = 1;
+            }
+
             if($identityType == 'subscription_user'){
                 $subscription = StripeSubscription::find($identity);
                 if($subscription && $subscription->user && $user && $subscription->user->id == $user->id){
@@ -1418,6 +1423,17 @@ class ChartController extends Controller
 
                         $success = 1;
                         $data = $commonMethods->getUserRealCampaignDetails($userr->id);
+                    }else{
+                        $error = 'Target information does not exist';
+                    }
+                }
+                if($findType == 'personal-chat'){
+                    $userr = User::find($find);
+                    if($userr){
+
+                        $success = 1;
+                        $data2 = \View::make('parts.personal-chats', ['user' => $userr, 'commonMethods' => $commonMethods])->render();
+                        $data['data'] = $data2;
                     }else{
                         $error = 'Target information does not exist';
                     }

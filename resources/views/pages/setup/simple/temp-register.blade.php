@@ -216,10 +216,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-row mt-6 lg:justify-end gap-x-6">
-                        <button id="submit_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500">
-                            Submit
-                        </button>
+                    <div class="flex flex-row justify-between items-center">
+                        <div class="flex">
+                            <p class="text-xs">
+                                Creating an account with 1Platform means you agree to our <br><a class="underline" href="{{route('tc')}}">terms and conditions, </a>
+                                <a class="underline" href="{{route('privacy.policy')}}">privacy policy</a> <span>,and</span> <a class="underline" href="{{route('faq')}}">FAQ </a>
+                            </p>
+                        </div>
+                        <div class="flex flex-row lg:justify-end gap-x-6">
+                            <button id="submit_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500">
+                                Submit
+                            </button>
+                        </div>
                     </div>
                 </div>
 
