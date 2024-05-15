@@ -190,8 +190,15 @@ class BispokeLicenseController extends Controller
                             		}
                             	}
                             }
-                        }else if($recipient && $currentChat && $currentChat->first()){
-                            $diffMins = $currentChat->first()->created_at->diffInMinutes();
+                        }else if($recipient){
+
+                            if (count($currentChat)) {
+
+                                $diffMins = $currentChat->first()->created_at->diffInMinutes();
+                            } else {
+                                $diffMins = 15;
+                            }
+
                             if($diffMins >= 15){
                                 $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new Agent($chat));
 
