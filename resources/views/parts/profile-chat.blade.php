@@ -110,7 +110,7 @@
                                             <div class="explainer-video-button flex px-6 py-5 bg-white border border-gray-300 rounded-lg shadow-sm cursor-pointer hover:border-gray-400">
                                                 <button class="w-full px-4 py-2 font-normal text-black project_list_video_btn">Watch Explainer Video</button>
                                             </div>
-                                            <div data-video-url="https://www.youtube.com/embed/2kPicLgUoNw" class="explainer-video-well w-full bg-white md:col-span-2"></div>
+                                            <div data-video-url="https://www.youtube.com/embed/KnUY6j2cysE" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                         </div>
                                     </div>
                                     <div class="border-t border-b border-gray-200">
