@@ -177,15 +177,10 @@ class PushNotificationController extends Controller
 
         $notification = [
 
-            'body' => $message,
-            'title' => $title,
-            'receiver' => 'erw',
-            'icon' => 'https://image.flaticon.com/icons/png/512/270/270014.png',
-            'sound' => 'default',
-            'platform' => $platform,
-            'priority' => 'high',
-            'time_to_live' => 86400,
-            'click_action' => 'FLUTTER_NOTIFICATION_CLICK'
+            "title" => $title,
+            "body" => $message,
+            "mutable_content" => true,
+            "sound" => "Tri-tone"
         ];
 
         $fields = [
