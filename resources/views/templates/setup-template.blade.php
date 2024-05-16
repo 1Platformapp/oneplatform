@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}" class="switchmediaall">
         <link rel="icon" href="/favicon.ico?v=1.1" type="image/x-icon" />
         <link href="/css/style.min.css?v=3.3" rel="stylesheet" type="text/css" />
-        <link href="/css/app.css?v=3.82" rel="stylesheet" type="text/css" />
+        <link href="/css/app.css?v=3.83" rel="stylesheet" type="text/css" />
         <link href="/css/jquery.bxslider.css" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <script src="/js/jquery.min.js" type="text/javascript"></script>

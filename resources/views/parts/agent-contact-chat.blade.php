@@ -18,7 +18,7 @@
                 <div class="chat_head_name"></div>
             </div>
             <img class="loading_messages instant_hide" src="{{asset('images/loading.gif')}}">
-            <div class="chat_main_body_messages mt-24"></div>
+            <div class="chat_main_body_messages mt-12"></div>
             <div class="chat_main_body_foot">
                 <div class="attachment_area">
                     <div class="close">
