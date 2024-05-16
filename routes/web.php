@@ -131,6 +131,7 @@ Route::prefix('agent-contact')->group(function(){
     Route::post('update', [AgentContactController::class, 'update'])->name('agent.contact.update');
     Route::post('add-remove-to-group', [AgentContactController::class, 'addRemoveContactToGroupChat'])->name('agent.contact.add.remove.group');
     Route::post('deleteYourNetworkContact', [AgentContactController::class, 'delete'])->name('delete.agent.network.contact');
+    Route::get('contact-registeration', [RegisterCOntroller::class, 'contactRegisteration'])->name('contact.register');
 });
 
 Route::post('prepare-payment', [ProjectController::class, 'preparePayment'])->name('prepare.payment');

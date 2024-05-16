@@ -503,7 +503,7 @@ class AgentContactController extends Controller
 
                 $data = ['id' => $contact->contactUser->id, 'name' => $contact->contactUser->name, 'firstName' => '', 'lastName' => '', 'email' => $contact->email, 'contact' => $contact->contactUser->contact_number];
                 Session::put('register.data', $data);
-                return redirect(route('register'));
+                return redirect(route('contact.register'));
             }
         }else{
 

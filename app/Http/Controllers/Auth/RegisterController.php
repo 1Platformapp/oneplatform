@@ -234,6 +234,25 @@ class RegisterController extends Controller
     }
 
 
+    public function contactRegisteration(Request $request){
+
+        $user = Auth::user();
+        $commonMethods = new CommonMethods();
+        $genres = Genre::all();
+        $userData = Session::get('register.data');
+        Session::forget('register.data');
+
+
+        $data = [
+            'genres' => $genres,
+            'prefill' => $userData,
+            'commonMethods' => $commonMethods,
+            'user' => $userData && isset($userData['id']) ? User::find($userData['id']) : null
+        ];
+
+        return view('pages.setup.simple.index', $data);
+    }
+
     public function registerUser(Request $request){
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret' => env('RECAPTCHA_SECRET_KEY'),
