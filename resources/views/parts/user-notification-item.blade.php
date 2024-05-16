@@ -15,6 +15,8 @@
 			@php $customLink = route('payment.failed.retry', ['id' => $notification->source_table_id]) @endphp
         @elseif($notification->type == 'sale')
 			@php $customLink = route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-sales']) @endphp
+        @elseif($notification->type == 'contact_approved_for_agent')
+			@php $customLink = route('agency.dashboard.tab', ['tab' => 'contact-management']) @endphp
 		@elseif($notification->type == 'contact_questionnaire')
 			@php $contact = \App\Models\AgentContact::find($notification->source_table_id) @endphp
 			@php $customLink = $contact ? route('agent.contact.details', ['code' => $contact->code]) : '' @endphp
