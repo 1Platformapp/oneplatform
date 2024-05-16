@@ -2040,7 +2040,7 @@ class ChartController extends Controller
 
                     if($recipient){
 
-                        $currentChat = UserChat::where(['recipient_id' => $recipient->id, 'sender_id' => $user->id])->orderBy('id', 'desc')->get();
+                        $currentChat = UserChat::where(['recipient_id' => $recipient->id, 'sender_id' => $user->id, 'is_personal' => 1])->orderBy('id', 'desc')->get();
                     }
 
                     $chat = new UserChat();

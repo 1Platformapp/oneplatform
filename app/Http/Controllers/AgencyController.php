@@ -591,7 +591,7 @@ class AgencyController extends Controller
                     $q->where('sender_id', $user->id)->orWhere('recipient_id', $user->id);
                 })->where(function($q) use ($partner) {
                     $q->where('sender_id', $partner->id)->orWhere('recipient_id', $partner->id);
-                });
+                })->where('is_personal', 1);
             if((int ) $cursor > 0){
 
                 $chatQuery->where('id', '<' , $cursor);
@@ -659,6 +659,7 @@ class AgencyController extends Controller
                 }else if($request->has('partner')){
                     $partner = User::findOrFail($partnerId);
                     $chat->recipient_id = $partner->id;
+                    $chat->is_personal = 1;
                 }
 
                 $chat->sender_id = $user->id;
