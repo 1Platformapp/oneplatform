@@ -189,7 +189,7 @@
             formData.append('user_id', $('#user_id').val());
             formData.append('g-recaptcha-response', grecaptcha.getResponse());
 
-            const response = await fetch('api/register/user', {
+            const response = await fetch('/api/register/user', {
                 method: 'POST',
                 body: formData,
             });
