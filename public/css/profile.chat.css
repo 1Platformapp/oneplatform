@@ -256,4 +256,6 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
     .edit_now { margin-top: 10px; margin-left: unset !important; }
     .foot_action_ext_btns { grid-template-columns: auto auto; }
     .chat_each_message .chat_message_det { flex: 0 1 80%; }
+
+    .chat_each_message .chat_message_det_top, .chat_each_message .chat_message_det_bottom { font-size: 13px; }
 }
