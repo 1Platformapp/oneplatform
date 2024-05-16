@@ -238,7 +238,6 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
     .chat_each_message { margin-bottom: 50px; }
     .chat_each_message.msg_agreement .chat_message_det_bottom i { font-size: 25px !important; }
     .chat_each_message.msg_agreement .msg_agreement_det { margin-left: 8px !important; font-size: 11px !important; }
-    .chat_main_body .chat_main_body_messages { min-height: 200px !important; max-height: 200px !important; }
     .chat_each_user .chat_user_sh_message { display: none; }
     .chat_each_user .chat_user_status_txt { display: none; }
     .chat_each_admin { margin-bottom: 10px  !important; }

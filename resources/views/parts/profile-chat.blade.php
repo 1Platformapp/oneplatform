@@ -571,7 +571,7 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.16')}}">
+<link rel="stylesheet" href="{{asset('css/profile.chat.css?v=1.17')}}">
 <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
 <script src="{{ asset('select2/select2.min.js') }}"></script>
 <style>
