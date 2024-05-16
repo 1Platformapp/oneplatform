@@ -61,7 +61,7 @@
 .chat_main_body .chat_main_body_foot.attachment .attachment_area .each_attach.file { text-align: center; border: 1px solid #818181; padding: 2px; }
 .chat_main_body .chat_main_body_foot.attachment .attachment_area .each_attach.file .up { background: #818181; color: #fff; }
 .chat_main_body .chat_main_body_foot.attachment .attachment_area .each_attach.file .down { color: #818181; margin-top: 5px; text-transform: uppercase; }
-.chat_main_body .chat_main_body_foot { margin-top: 40px; position: relative; }
+.chat_main_body .chat_main_body_foot { /*margin-top: 40px;*/ position: relative; }
 .chat_main_body .chat_main_body_foot .foot_action_btn { cursor: pointer; color: #fff; padding: 7px 12px; border-radius: 3px; }
 .chat_main_body .chat_main_body_foot .foot_action_btn.disabled { opacity: 0.5; cursor: not-allowed; }
 .chat_main_body .chat_main_foot_actions { display: flex; margin-top: 20px; position: relative; }
