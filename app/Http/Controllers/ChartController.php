@@ -2053,13 +2053,20 @@ class ChartController extends Controller
                     $chat->save();
                     $success = 1;
 
-                    if($type == 'init'){
-                        $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new LicenseMail('bespokeOffer', $recipient, $user, $chat));
-                    }else if($currentChat && $currentChat->first()){
-                        $diffDays = $currentChat->first()->created_at->diffInDays();
-                        if($diffDays >= 1){
-                            $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgentMail($chat));
+                    $shouldSendNotif = count($currentChat) == 0 || $currentChat->first()->created_at->diffInMinutes() >= 15 ? true : false;
+                    if ($shouldSendNotif) {
+
+                        $redirectUrl = base64_encode(route('agency.dashboard.tab', ['tab' => 'contact-management']));
+                        if(count($recipient->devices)){
+                            foreach ($recipient->devices as $device) {
+                                if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
+                                    $fcm = new PushNotificationController();
+                                    $return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
+                                }
+                            }
                         }
+
+                        $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new AgentMail($chat));
                     }
 
                     $userNotification = new UserNotificationController();

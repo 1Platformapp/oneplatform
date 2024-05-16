@@ -192,6 +192,9 @@ class BispokeLicenseController extends Controller
                             }
                         }else if($recipient){
 
+                            $chat->is_personal = 1;
+                            $chat->save();
+
                             if (count($currentChat)) {
 
                                 $diffMins = $currentChat->first()->created_at->diffInMinutes();
@@ -212,30 +215,6 @@ class BispokeLicenseController extends Controller
                                 			$return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
                                 		}
                                 	}
-                                }
-                            }
-                        }else if($recipient && $type == 'platform-manager-first'){
-
-                            // default reply for user from manager
-                            $chat = new UserChat();
-                            $chat->sender_id = $recipient->id;
-                            $chat->group_id = NULL;
-                            $chat->recipient_id = $user->id;
-                            $chat->message = 'Hi, I am david. I will be with you shortly';
-                            $chat->music_id = NULL;
-                            $chat->save();
-
-                            $result = Mail::to($recipient->email)->bcc(Config('constants.bcc_email'))->send(new Agent($chat));
-
-                            if(count($recipient->devices)){
-
-                                foreach ($recipient->devices as $device) {
-
-                                    if(($device->platform == 'android' || $device->platform == 'ios') && $device->device_id != NULL){
-
-                                        $fcm = new PushNotificationController();
-                                        $return = $fcm->send($device->device_id, 'Message from '.$user->firstName(), str_limit($chat->message, 24), $device->platform, 'chat', $redirectUrl);
-                                    }
                                 }
                             }
                         }else if($group && count($currentChat) == 0 && $group->contact && $group->agent){
