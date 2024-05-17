@@ -1256,7 +1256,7 @@
                 <div class="each_tab_content">
                     @php $favCon = (is_array($user->favourite_industry_contacts)) ? array_filter($user->favourite_industry_contacts) : array() @endphp
                     @if(count($favCon))
-                        <div class="ind_con_result_outer">
+                        <ul class="contracts_list grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             @foreach($favCon as $key => $favConId)
                                 @php $contact = \App\Models\IndustryContact::find($favConId) @endphp
                                 @if($contact)
@@ -1268,7 +1268,7 @@
                             @if(!isset($contactfav) || $contactfav != 1)
                                 <div class="no_results">Here you can see your favourite industry contacts</div>
                             @endif
-                        </div>
+                        </ul>
                     @else
                     <div class="no_results">Here you can see your favourite industry contacts</div>
                     @endif
