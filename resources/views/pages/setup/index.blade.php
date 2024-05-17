@@ -487,6 +487,10 @@
 
         @include('parts.profile-edit-section', ['page' => 'edit', 'subTab' => 'email_section', 'setupWizard' => ''])
 
+    @elseif($page == 'my-favourites')
+
+        @include('parts.profile-edit-section', ['page' => 'edit', 'subTab' => 'favourites'])
+
 	@elseif($page == 'media')
 
 		<div class="setup_tray_main">

@@ -366,6 +366,23 @@
                             </div>
                         </div>
                     </div>
+                    <div class="usr_men_cat_each {{isset($page)&&$page=='chat'?'pro_tb_active':''}}">
+                        <div class="usr_men_cat_head">
+                            My Favourites
+                        </div>
+                        <div class="usr_men_cat_body">
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'my-favourites'])}}" class="usr_men_quick_txt">
+                                    <div class="px-5 usr_men_quick_each">
+                                        <div class="usr_men_quick_ic">
+                                            <i class="fas fa-comment-dots"></i>
+                                        </div>
+                                        View
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="usr_men_cat_each usr_men_seller_help mobile-only">
                     	Get help to build your profile
                     </div>

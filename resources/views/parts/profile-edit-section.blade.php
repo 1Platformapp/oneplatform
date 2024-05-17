@@ -1216,8 +1216,8 @@
             @endif
             @if(!isset($isQuickSetup))
             <div id="favourites_section" class="sub_cat_data {{$subTab == 'favourites' ? '' : 'instant_hide'}} each_pro_edit_section">
-            	<div class="pro_main_tray">
-                    <div class="pro_tray_title">Your Favourite Music</div>
+            	<div class="">
+                    <div class="font-medium text-lg">Your Favourite Musics</div>
                 </div>
                 <div class="each_tab_content user_musics_outer">
                     @php $favourites = (is_array($user->favourite_musics)) ? array_filter($user->favourite_musics) : array() @endphp
@@ -1250,8 +1250,8 @@
                 </div>
                 <br><br>
                 @if($user->hasActivePaidSubscription())
-                <div class="pro_main_tray">
-                    <div class="pro_tray_title">Your Favourite Industry Contacts</div>
+                <div class="">
+                    <div class="font-medium text-lg">Your Favourite Industry Contacts</div>
                 </div>
                 <div class="each_tab_content">
                     @php $favCon = (is_array($user->favourite_industry_contacts)) ? array_filter($user->favourite_industry_contacts) : array() @endphp
@@ -1275,8 +1275,8 @@
                 </div>
                 @endif
                 <br><br>
-                <div class="pro_main_tray">
-                    <div class="pro_tray_title">Your Favourite Videos From TV</div>
+                <div class="">
+                    <div class="font-medium text-lg">Your Favourite Videos From TV</div>
                 </div>
                 <div class="each_tab_content tv_center_outer">
                     @php $tvFavourites = (is_array($user->favourite_streams)) ? array_filter($user->favourite_streams) : array() @endphp
@@ -1331,8 +1331,8 @@
                     @endif
                 </div>
                 <br><br>
-                <div class="pro_main_tray">
-                    <div class="pro_tray_title">People You Follow</div>
+                <div class="">
+                    <div class="font-medium text-lg">People You Follow</div>
                 </div>
                 <div class="each_tab_content">
                     @if(count($user->followings))
@@ -1359,8 +1359,8 @@
                     @endif
                 </div>
                 <br><br>
-                <div class="pro_main_tray">
-                    <div class="pro_tray_title">People Who Follow You</div>
+                <div class="">
+                    <div class="font-medium text-lg">People Who Follow You</div>
                 </div>
                 <div class="each_tab_content">
                     @if(count($user->followers))
@@ -1388,6 +1388,35 @@
                 </div>
             </div>
             @endif
+        </div>
+    </div>
+
+    @include('parts.audio-player')
+
+    <div class="pro_page_pop_up clearfix" id="private_music_unlock_popup" data-type="" data-music-id="" data-mode="0">
+
+        <div class="pro_soc_con_face_inner clearfix">
+
+            <div class="soc_con_top_logo clearfix">
+                <a style="opacity:0;" class="logo8">
+                    <img alt="image popup" class="pro_soc_top_logo defer_loading" src="#" data-src="{{ asset('images/1logo8.png') }}"><div>Platform</div>
+                </a>
+                <i class="fa fa-times pro_soc_top_close"></i>
+            </div>
+            <div class="stage_one">
+                <div class="soc_con_face_username clearfix">
+                    <div class="main_headline">This is a private music</div>
+                    <div class="second_headline">To unlock it, enter the PIN below</div><br>
+                    <input class="dummy_field" type="text" name="fakeusernameremembered">
+                    <input placeholder="Enter PIN" type="text" id="unlock_pin" />
+                    <div class="instant_hide error" id="unlock_pin_error">Required</div>
+                </div>
+                <br>
+                <div id="unlock_private_music" class="pro_button">UNLOCK</div><br>
+                <div class="pro_pop_dark_note">
+                    <a href="#">How to get PIN?</a>
+                </div>
+            </div>
         </div>
     </div>
 
