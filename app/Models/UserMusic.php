@@ -86,7 +86,7 @@ class UserMusic extends Authenticatable
     public function addDownloadItem($file, $itemType, $source, $decFName){
 
         $counter = 1;
-        if(count($this->downloads)){
+        if($this->downloads && count($this->downloads)){
 
             foreach ($this->downloads as $value) {
                 $result[$counter]['filename'] = $value['filename'];

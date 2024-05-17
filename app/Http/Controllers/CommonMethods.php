@@ -25,6 +25,7 @@ use App\Models\UserMusic;
 use App\Models\UserAlbum;
 use App\Models\User;
 use App\Models\EditableLink;
+use Illuminate\Support\Facades\File;
 
 use DB;
 use Auth;
@@ -3259,7 +3260,7 @@ class CommonMethods extends Controller
         $return = false;
 
 
-        if (file_exists($file)){
+        if (File::exists($file)){
 
 
 

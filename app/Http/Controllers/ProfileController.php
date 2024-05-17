@@ -2846,6 +2846,7 @@ class ProfileController extends Controller
                 $userMusic->personal_use_only = $request->personal_use_only != '' ? $request->personal_use_only: NULL;
                 $userMusic->duration = $request->duration;
                 $userMusic->slug = str_slug($userMusic->song_name);
+                $userMusic->show_play_count = $request->show_play_count;
 
                 foreach (Config('constants.licenses') as $key2 => $eachLicense) {
 
@@ -2927,7 +2928,7 @@ class ProfileController extends Controller
                 $music = UserMusic::find($musicId);
                 $itemType = $request->get('type');
 
-                $musicArray = $music->downloads;
+                $musicArray = $music->downloads ? $music->downloads : [];
 
                 if(count($musicArray)){
 

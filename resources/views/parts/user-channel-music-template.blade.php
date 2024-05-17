@@ -8,8 +8,13 @@
     @php $defaultCurrSym = $comm->getCurrencySymbol(strtoupper($music->user->profile->default_currency)); @endphp
 
         <div class="summary">
-            <a class="main_an" href="javascript:void(0)">
-                <img class="play_now vertical_center instant_hide " src="{{ asset('images/play_icon.png') }}">
+            <a class="main_an relative" href="javascript:void(0)">
+                <div class="play_now instant_hide flex items-center justify-center gap-1 bg-black opacity-70 absolute top-0 !left-0 !w-full h-full">
+                    <img class="!w-[35px] !h-[35px]" src="{{ asset('images/play_icon.png') }}">
+                    @if($music->play_count > 0)
+                    <div class="font-bold text-lg text-white">{{$music->play_count}}</div>
+                    @endif
+                </div>
                 <i class="fa fa-spin fa-spinner vertical_center instant_hide loading_smg"></i>
                 <img class="main_img" src="{{ $musicThumb }}" alt="#" />
             </a>
@@ -22,7 +27,7 @@
                 </div>
                 <div class="thismusic_wave_img">
                     @if($music->waveform_image && $music->waveform_image != '' && $comm->fileExists(public_path('user-music-waveform/'.$music->waveform_image)))
-                    <img src="{{asset('user-music-waveform/'.$music->waveform_image)}}">
+                    <img class="!max-h-[30px]" src="{{asset('user-music-waveform/'.$music->waveform_image)}}">
                     @endif
                 </div>
                 <div class="lower_music_det">
@@ -36,7 +41,7 @@
 	                            @if($music->personal_use_only > 0)
 	                            	{{$defaultCurrSym.$music->personal_use_only}}
 	                            @else
-	                            	Free 
+	                            	Free
 	                            @endif
 	                            <i class="fa fa-shopping-cart"></i>
                             @endif
@@ -60,7 +65,7 @@
                     	    @if($music->personal_use_only > 0)
                     	    {{$comm->getCurrencySymbol(strtoupper($music->user->profile->default_currency)).$music->personal_use_only}}
                     	    @else
-                    	    Free 
+                    	    Free
                     	    @endif
                     	</div>
                     </div>
@@ -91,7 +96,7 @@
                 </div>
                 @endif
                 @php $musicStems = $musicLoops = [] @endphp
-                @php 
+                @php
                     $downloads = [];
                     if($music->downloads && is_array($music->downloads) && count($music->downloads)) {
                         $downloads = [array_filter(unserialize($music->downloads))];
@@ -169,8 +174,8 @@
                 <div class="ch_video_detail_right_sec">
                     <div class="ch_select_options {{$music->allow_bespoke_license_offer && $music->user->chat_switch == 1 ? 'allow_offer' : ''}}">
                         @foreach(config('constants.licenses') as $key => $license)
-                            @if($music->{$license['input_name']}) 
-                                @php $hasLicensePrice = 1 @endphp 
+                            @if($music->{$license['input_name']})
+                                @php $hasLicensePrice = 1 @endphp
                             @endif
                         @endforeach
 
@@ -197,7 +202,7 @@
                                     </div>
                                     <div class="choose_music_license_terms_contain">
                                         <div class="choose_music_license_terms_handle">
-                                            <i class="fa fa-angle-down"></i> 
+                                            <i class="fa fa-angle-down"></i>
                                             <span>show terms</span>
                                         </div>
                                         <div class="choose_music_license_terms_each">
@@ -213,11 +218,11 @@
                                 @if($music->user->has_music_license)
                                 @foreach(config('constants.licenses') as $key => $license)
                                     @if($music->{$license['input_name']})
-                                    @php 
+                                    @php
                                         $licKey = $music->{$license['input_name']} != 'POA' ? $license['filename'].'::'.$defaultCurrSym.$music->{$license['input_name']} : 'POA';
                                         $licValue = $license['filename'];
                                         $licValue .= $music->{$license['input_name']} != 'POA' ? ' ('.$defaultCurrSym.$music->{$license['input_name']}.')' : ' (POA)';
-                                    @endphp 
+                                    @endphp
                                     <div class="choose_music_license_contain" data-price="{{$licKey}}" value="{{$licValue}}">
                                         <div class="choose_music_license_each">
                                             <div class="choose_music_license_input">
@@ -233,7 +238,7 @@
                                         @if($music->{$license['input_name']} != 'POA')
                                         <div class="choose_music_license_terms_contain">
                                             <div class="choose_music_license_terms_handle">
-                                                <i class="fa fa-angle-down"></i> 
+                                                <i class="fa fa-angle-down"></i>
                                                 <span>show terms</span>
                                             </div>
                                             <div class="choose_music_license_terms_each">

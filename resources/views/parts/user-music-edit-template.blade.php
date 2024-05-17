@@ -13,7 +13,7 @@
             <i class="fa fa-times edit_elem_close"></i>
         </label>
 
-        @php 
+        @php
             $downloads = [];
             if($userMusic->downloads && is_array($userMusic->downloads) && count($userMusic->downloads)) {
                 $downloads = [array_filter(unserialize($userMusic->downloads))];
@@ -21,7 +21,7 @@
                 $downloads = [];
             }
         @endphp
-        
+
         @if($downloads)
             @foreach($downloads as $key => $item)
                 @if($item['itemtype'] == 'loop_one') @php $loopOne = $userMusic->getDownloadName($item) @endphp @endif
@@ -38,7 +38,7 @@
                 @if($item['itemtype'] == 'main') @php $mainFile = $userMusic->getDownloadName($item) @endphp @endif
             @endforeach
         @else
-            @php $mainFile = $userMusic->music_file @endphp 
+            @php $mainFile = $userMusic->music_file @endphp
         @endif
 
         @php $edit_music_thumb = asset('img/url-thumb-profile.jpg') @endphp
@@ -58,7 +58,7 @@
             </div>
             <div class="pro_left_video_img pro_file_uploader">
                 <span class="upload_vieo_img">
-                    @if($userMusic->music_file && $userMusic->music_file != '' && $comm->fileExists(public_path('user-music-files/'.$music->music_file)))
+                    @if($userMusic->music_file && $userMusic->music_file != '' && $comm->fileExists(public_path('user-music-files/'.$userMusic->music_file)))
                     <img class="music_file_label" style="cursor: pointer;" src="/images/p_music_filled.png" />
                     @else
                     <img class="music_file_button" style="cursor: pointer;" src="/images/p_music_thum_img.png?v=1.2" />
@@ -140,7 +140,7 @@
                         <span>{{ $userMusic->dropdown_two != "" ? $userMusic->dropdown_two : "Mood" }}</span>
                         <select id="dropdown_two_{{ $userMusic->id }}" name="dropdown_two">
                             <option value="" <?php if($userMusic->dropdown_two == "" ){?>selected<?php }?>>Mood</option>
-                            
+
                             @foreach($moods as $mood)
                                 <option value="{{$mood->name}}" <?php if($userMusic->dropdown_two == $mood->name ){?>selected<?php }?>>{{$mood->name}}</option>
                             @endforeach
@@ -169,6 +169,16 @@
                                 </div>
                             @endforeach
                         @endif
+                    </div>
+                </li>
+                <li>
+                    <div class="lab_title">Show play count</div>
+                    <div class="music_sec_opt_outer">
+                        <span>{{ $userMusic->show_play_count == 1 ? 'Yes' : 'No' }}</span>
+                        <select name="show_play_count">
+                            <option value="1" <?php if($userMusic->show_play_count == 1 ){?>selected<?php }?>>Yes</option>
+                            <option value="0" <?php if($userMusic->show_play_count == 0 ){?>selected<?php }?>>No</option>
+                        </select>
                     </div>
                 </li>
             </ul>
@@ -211,7 +221,7 @@
                     </div>
                     <div class="each_license_terms">
                         <div class="each_license_terms_handle">
-                            <i class="fa fa-angle-down"></i> 
+                            <i class="fa fa-angle-down"></i>
                         </div>
                         <div class="each_license_terms_each">
                             <div class="each_license_topen">
@@ -417,7 +427,7 @@
                             <div class="license_custom_price_outer">
                                 <input type="number" value="" class="license_custom_price" placeholder="Enter Price (applies to ticked licenses below)">
                             </div>
-                        </div>    
+                        </div>
                         <div class="music_ice_listing">
                             <ul>
                                 @foreach(config('constants.licenses') as $key => $license)
@@ -431,7 +441,7 @@
                                         </div>
                                         <div class="each_license_terms">
                                             <div class="each_license_terms_handle">
-                                                <i class="fa fa-angle-down"></i> 
+                                                <i class="fa fa-angle-down"></i>
                                             </div>
                                             <div class="each_license_terms_each"></div>
                                         </div>

@@ -156,6 +156,16 @@
                             </div>
                             <div class="clearfix music_moods_saved"></div>
                         </li>
+                        <li>
+                            <div class="lab_title">Show play count</div>
+                            <div class="music_sec_opt_outer">
+                                <span>Yes</span>
+                                <select name="show_play_count">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </li>
                     </ul>
 
                 </div>
