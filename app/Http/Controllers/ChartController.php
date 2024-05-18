@@ -2083,5 +2083,20 @@ class ChartController extends Controller
 
         return json_encode(['success' => $success, 'error' => $error, 'data' => $data]);
     }
+
+    public function ckeditorUpload(Request $request) {
+
+        if ($request->file('upload')) {
+
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+            $request->file('upload')->move (public_path('media'), $fileName);
+            $url = asset('media/' . $fileName);
+            return response()->json(['fileName' => $fileName, 'uploaded' => 1
+            , 'url' => $url]);
+        }
+    }
 }
 

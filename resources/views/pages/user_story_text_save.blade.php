@@ -1,5 +1,5 @@
 <html>
-	
+
 	<head>
 
 		<link type="text/css" href="/ckeditor/classic/sample/css/sample.css" rel="stylesheet" media="screen" />
@@ -22,7 +22,7 @@
         .create( document.querySelector( '#project_story_text' ), {
             // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
             ckfinder: {
-                uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+                uploadUrl: "{{route('ckeditor.upload', ['_token' => csrf_token()])}}",
             },
         } )
         .then( editor => {

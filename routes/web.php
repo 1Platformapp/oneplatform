@@ -87,6 +87,7 @@ foreach ($domainSubscribers as $key => $domainSubscriber) {
     });
 }
 
+Route::post('ckeditor-upload', [ChartController::class, 'ckEditorUpload'])->name('ckeditor.upload');
 Route::get('item/{itemType}/{itemId}/{itemSlug}', [ChartController::class, 'itemShareOld'])->name('item.share.old');
 Route::get('product/{itemSlug}', [ChartController::class, 'itemShare'])->name('item.share.product');
 Route::get('track/{itemSlug}', [ChartController::class, 'itemShare'])->name('item.share.track');
