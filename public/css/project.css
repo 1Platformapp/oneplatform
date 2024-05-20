@@ -66,7 +66,7 @@
 
 @media (min-width:320px) and (max-width: 767px) {
 
-    .panel:not(.main_panel) { margin-right: 7px; margin-left: 7px; } 
+    .panel:not(.main_panel) { margin-right: 7px; margin-left: 7px; }
     .content_outer.playing .ch_tab_det_outer { padding: 0 !important; }
     .content_outer.playing .main_panel .colio_header { transform: translate(-50%, 0%); }
     .content_outer.playing .main_panel .fund_raise_left img { margin-top: 10px !important; }
@@ -111,6 +111,7 @@
     .to_bonuses img { margin-right: 10px; height: 35px; }
     #donator_outer_filler { margin-bottom: 20px; }
     .each_fro_bonus:not(:last-of-type) { margin-bottom: 20px; }
+    .project_tabs_mobile { margin-top: 20px; }
 }
 
 @media (min-width:768px) {

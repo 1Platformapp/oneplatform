@@ -105,7 +105,7 @@
                                             <tr>
                                                 <td style="text-align: center;color: #818181; font-family:Open Sans,sans-serif;font-weight: normal;font-size:13px;">
                                                     You have received {{$commonMethods->getCurrencySymbol($checkout->currency).$checkout->amount}} support from <br><br>
-                                                    <a style="text-decoration: none;" href="{{route('user.home', ['params' => $checkout->customer->username])}}"><span style="color: #fc064c; font-weight: 600;">{{$checkout->customer->name}}</span>
+                                                    <a style="text-decoration: none;" href="{{$checkout->customer->username ? route('user.home', ['params' => $checkout->customer->username]) : 'javascript:void(0)'}}"><span style="color: #fc064c; font-weight: 600;">{{$checkout->customer->name}}</span>
                                                     </a>
                                                 </td>
                                             </tr>

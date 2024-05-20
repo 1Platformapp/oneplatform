@@ -201,6 +201,12 @@ class ProjectController extends Controller
 
         $countries = Country::all();
 
+        $countriesIds = [213,214];
+        $countries = $countries->sortBy(function ($country) use ($countriesIds) {
+            $position = array_search($country->id, $countriesIds);
+            return $position !== false ? $position : count($countriesIds);
+        })->values();
+
         $basket = $commonMethods::getCustomerBasket();
 
         $allPastProjects = \App\Models\UserCampaign::where('user_id', $user->id)->where('status', 'inactive')->orderBy('id', 'desc')->get();
@@ -2368,16 +2374,15 @@ class ProjectController extends Controller
                 }
             }
         }else{
+
+            $subTab = $paymentData['type'] == 'instant' ? 'my-purchases' : 'my-crowdfund-purchases';
+
             if($paymentData['free'] == '1'){
                 $message = 'Successfully finished';
-                Session::flash('page', 'orders');
-                Session::flash('dash-sub-tab', 'my-purchases');
-                $redirectUrl = route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-purchases']);
+                $redirectUrl = route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => $subTab]);
             }else{
                 $message = $checkoutMessage;
-                Session::flash('page', 'orders');
-                Session::flash('dash-sub-tab', 'my-purchases');
-                $redirectUrl = route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => 'my-purchases']);
+                $redirectUrl = route('agency.dashboard.tab', ['tab' => 'my-transactions', 'subTab' => $subTab]);
             }
         }
 

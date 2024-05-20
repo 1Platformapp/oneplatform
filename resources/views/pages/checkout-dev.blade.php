@@ -4,7 +4,7 @@
 
 @section('page-level-css')
 
-    <link rel="stylesheet" href="{{asset('css/project.css?v=2.2')}}"></link>
+    <link rel="stylesheet" href="{{asset('css/project.css?v=2.3')}}"></link>
     <link rel="stylesheet" href="{{asset('css/checkout.css?v=1.7')}}"></link>
     <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}"></link>
 

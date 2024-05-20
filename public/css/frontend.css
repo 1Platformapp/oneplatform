@@ -33,7 +33,7 @@
 .tab_btns_alt_outer.tab_dsk .each_tab_alt_btn { background-color: #27282A !important; }
 .tab_btns_alt_outer .each_tab_alt_btn.tab_alt_btn_fans:not(.active) { background: url(../images/tab_fans.png) no-repeat center center/33px 35px; }
 .tab_btns_alt_outer .each_tab_alt_btn.tab_alt_btn_music:not(.active) { background: url(../images/tab_music.png) no-repeat center center/33px 35px; }
-.tab_btns_alt_outer .each_tab_alt_btn.tab_alt_btn_social:not(.active) { background: url(../images/tab_social.png) no-repeat center center/35px; } 
+.tab_btns_alt_outer .each_tab_alt_btn.tab_alt_btn_social:not(.active) { background: url(../images/tab_social.png) no-repeat center center/35px; }
 .tab_btns_alt_outer .each_tab_alt_btn.tab_alt_btn_crowd_fund { font-size: 12px!important; }
 .tab_btns_alt_outer .each_tab_alt_btn.tab_alt_btn_video:not(.active) { background: url(../images/tab_play.png) no-repeat center center/31px 35px; }
 .tab_btns_alt_outer .each_tab_alt_btn.tab_alt_btn_tv:not(.active) { background: url(../images/tab_tv.png) no-repeat center center/41px 35px; }
@@ -94,7 +94,7 @@
 .fund_raise_right { display: inline-block; width: 67%; padding-left: 16px; }
 .pricing_setail { width:99%; padding-bottom:18px; }
 .pricing_setail .p { font-size:14px;  color:#4f5051; }
-.pricing_setail .fleft { display: block; float: left; width: 60%; } 
+.pricing_setail .fleft { display: block; float: left; width: 60%; }
 .pricing_setail .fright { display: block; float: left; width: 40%; }
 .pricing_setail ul li { width:100%; }
 .pricing_setail ul li h3, .pricing_setail ul li .header3 { font-family: Open sans, sans-serif; font-size:18px; color: #777; line-height: 25px;}
@@ -424,7 +424,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 .add_basket_btn .normal_price { text-decoration: line-through; }
 .tot_awe_pro_offer { background: #fff; padding: 6px; border-radius: 3px; flex: 0 1 40%; }
 .tot_awe_pro_offer_left { display: flex; align-items: center; text-align: center; justify-content: center; }
-.tot_awe_pro_offer_ic { font-size: 18px; font-family: SANS-SERIF; display: flex; flex-direction: row; align-items: center; text-transform: uppercase; } 
+.tot_awe_pro_offer_ic { font-size: 18px; font-family: SANS-SERIF; display: flex; flex-direction: row; align-items: center; text-transform: uppercase; }
 .tot_awe_pro_offer_ic img { margin-right: 12px; }
 .tot_awe_pro_offer_countdown { display: flex; align-items: center; flex-direction: row; }
 .big_offer_cowntdown_each { display: flex; flex-direction: row; align-items: center; margin-right: 10px; }
@@ -442,7 +442,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 .choose_music_license_outer { margin-top: 15px; max-height: 400px; overflow-y: auto; }
 .choose_music_license_contain { margin-bottom: 20px; box-shadow: 0 0 13px #ccc; background: #fff; padding: 5px; }
 .choose_music_license_each { display: flex; flex-direction: row; align-items: center; cursor: pointer; }
-.choose_music_license_input input { margin-right: 5px; margin-top: 4px; cursor: pointer; } 
+.choose_music_license_input input { margin-right: 5px; margin-top: 4px; cursor: pointer; }
 .choose_music_license_price { margin-left: auto; cursor: pointer; font-size: 13px; }
 .choose_music_license_name { cursor: pointer; font-weight: bold; font-size: 13px; }
 .choose_music_license_terms_contain { display: flex; flex-direction: column; }
@@ -511,7 +511,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
     .ch_tab_det_outer { border: none; }
     .btm_text_stor_outer { padding: 25px 0; }
     .panel { background-color: rgb(39, 40, 42); margin-bottom: 20px; padding: 10px; position: relative; color: #fff; }
-    
+
 	.tab_chan_tp_btns ul li { float: none; margin: 20px 0 20px 0; width: 210px !important; }
 	.tab_chan_tp_btns ul li.music,.tab_chan_tp_btns ul li.album,.tab_chan_tp_btns ul li.store { width: 100%; }
 
@@ -527,7 +527,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 	.user_hm_center .tp_center_video_outer {  margin-bottom: 0; }
     .proj_cntr_contribut_sec_otr h3 { text-align: left; }
     .project_rit_btm_bns_otr h4, .user_lsa_subscribe_box h4{ text-align: center; }
-	
+
     .tot_awe_pro_outer { padding: 20px 10px; margin-bottom: 40px; }
 	.tot_awe_pro_outer h3 { font-size: 18px; }
 
@@ -546,7 +546,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 }
 
 @media (width:1199px)  {
-	
+
     .ch_bag_pric_sec { padding:33px 0px; }
     .ch_bag_pric_sec span { padding-bottom:11px; }
 }
@@ -569,7 +569,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 
 @media (min-width:1024px) {
 
-    
+
 }
 
 @media (width: 1024px) {
@@ -613,12 +613,12 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 	.ch_tab_sec_outer.mobile-only { background: rgb(39, 40, 42); color: #fff; border-top: 1px solid #fff; }
 	.top_info_outer { padding: 0 11px; }
 	.each_user_live_stream .lock_outer { font-size: 11px !important; }
-	.a_percent { margin-top: 0 !important; height: 45px !important; }
+	.a_percent { margin-top: 0 !important; }
 	.vid_preloader { background-size: 50px !important; }
 	.lyrics_detail.overflowing { max-height: 80px !important; }
-	
+
 	.fund_raise_status { margin: 10px !important; }
-	.fund_raise_left { padding-top: 10px; }
+	.fund_raise_left { padding-top: 30px; }
 	.fund_raise_left h3.project_line { padding: 0 !important; font-size: 14px !important; }
 	.pricing_setail ul li h3 { font-size: 12px !important; line-height: 12px !important; }
 	.pricing_setail ul li .header3 { font-size: 15px !important; }
@@ -639,7 +639,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 	.each_user_live_stream .user_product_img_thumb img { height: auto !important; }
 	.each_user_live_stream .tab_chanel_img_det p, .each_user_video .tab_chanel_img_det p { font-size: 11px; }
 	.tot_awe_pro_top { margin-bottom: 10px; flex-direction: column; }
-	.tot_awe_pro_left { margin-right: 0; } 
+	.tot_awe_pro_left { margin-right: 0; }
 	.tot_awe_pro_right { max-height: unset; padding: 5px; }
 	.tot_awe_purchase { margin-top: unset; align-items: stretch; }
 	.user_product_img_thumb img { max-width: 100% !important; }
@@ -718,6 +718,8 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 
     .tot_awe_pro_outer h3 { font-size: 15px; line-height: 25px; padding: 6px 0; }
     .tot_awe_pro_outer p,.main_prod_list li { font-size: 13px; }
+
+    .target_value { font-size: 20px; }
 }
 
 @media (min-width:500px) and (max-width: 640px) {
