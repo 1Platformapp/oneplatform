@@ -875,6 +875,30 @@
                 </aside>
                 <main>
                     <section class="tab_det_left_sec tab_det_dsk tab_det_inner right_height_res @if($user->isCotyso()) expanded @endif">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 mt-8">
+                            <div class="relative flex items-start px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                <div class="flex-shrink-0 text-lg">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-300">1 Platform links creators with backers to finance projects.</p>
+                            </div>
+                            <div class="relative flex items-start px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                <div class="flex-shrink-0 text-lg">
+                                    <i class="fa fa-gift"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-300">While rewards are not guaranteed, creators are required to provide regular updates to backers.</p>
+                            </div>
+                            <div class="relative flex items-start px-6 py-5 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                <div class="flex-shrink-0 text-lg">
+                                    <i class="fa fa-dollar-sign"></i>
+                                </div>
+                                @if($userCampaign->is_charity == 1)
+                                <p class="text-sm font-medium text-gray-300">The seller receives the money regardless of whether the target goal is met.</p>
+                                @else
+                                <p class="text-sm font-medium text-gray-300">You will only be charged if the project reaches its funding goal by the campaign deadline.</p>
+                                @endif
+                            </div>
+                        </div>
                         <h1 class="page_title">
                             @if($user->profile->seo_h1)
                                 {{$user->profile->seo_h1}}
