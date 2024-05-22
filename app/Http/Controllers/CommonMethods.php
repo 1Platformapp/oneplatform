@@ -1042,7 +1042,7 @@ class CommonMethods extends Controller
 
 
 
-        return asset('user-display-images').'/general-display-image-2.jpg';
+        return asset('user-display-images').'/general-user.svg';
 
 
 
@@ -1078,7 +1078,7 @@ class CommonMethods extends Controller
 
 
 
-        return asset('user-display-images').'/general-display-image-2.jpg';
+        return asset('user-display-images').'/general-user.svg';
 
 
 
