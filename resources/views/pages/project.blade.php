@@ -1108,7 +1108,7 @@
                                         <li class="proj_bottom_description">
                                             <div class="clearfix proj_cont_flt_outer">
                                                 <p>
-                                                    1Platform does not investigate projects. Project owners are responsible for their projects and ensuring that the project is complete and that all promises are kept. Please contact project owners if you have an issue. Your name, email will be visible to the seller. Shipping address will also be visible where applicable
+                                                To get funds for your project, connect to Stripe. Your funds come 15 days after reaching your goal (for flexible projects). Refunds are managed through Stripe. 1Platform TV takes a 5% fee from each donation. Payment Processing fees are 1.4% + £0.20 + VAT for EEA cards, and 2.9% + £0.20 + VAT for non-EEA cards. By proceeding, you accept 1Platform TV’s terms and privacy policy.
                                                 </p>
                                             </div>
                                         </li>
