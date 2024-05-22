@@ -1068,11 +1068,11 @@ class ChartController extends Controller
         $existingBasket = null;
 
         if($request->purchase_type == 'product') {
-            $existingBasket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('product_id', $request->product_id)->first();
+            $existingBasket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('product_id', $request->product_id)->where('sold_out', 0)->first();
         }
 
         if($request->purchase_type == 'music') {
-            $existingBasket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('music_id', $request->music_id)->first();
+            $existingBasket = CustomerBasket::where('customer_id', $_SESSION['basket_customer_id'])->where('music_id', $request->music_id)->where('sold_out', 0)->first();
         }
 
         if($existingBasket) {
@@ -2097,6 +2097,16 @@ class ChartController extends Controller
             return response()->json(['fileName' => $fileName, 'uploaded' => 1
             , 'url' => $url]);
         }
+    }
+
+    public function playMediaElementVideo(Request $request, $videoId) {
+
+        $data   = [
+
+            'id' => $videoId
+        ];
+
+        return view( 'pages.play-video', $data );
     }
 }
 

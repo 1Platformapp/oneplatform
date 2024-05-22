@@ -348,6 +348,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
     Route::post('prepare-zip', [ProfileController::class, 'prepareZip'])->name('prepare.zip');
     Route::get('download-zip/{dir}/{fileName}/{downloadAs}', [ProfileController::class, 'downloadZip'])->name('download.zip');
     Route::get('save-user-story-text/{id}', [ProjectController::class, 'saveUserStoryText'])->name('save.user.story.text');
+    Route::get('play-media-element-video/{videoId}', [ChartController::class, 'playMediaElementVideo'])->name('play-.media.element.video');
     Route::post('removeUserInstagramApp', [ProfileController::class, 'removeUserSocialInstagram'])->name('user.instagram.remove');
     Route::post('saveUserDomain', [ProfileController::class, 'saveUserDomain'])->name('save.user.domain');
     Route::post('processInternalSubscription', [ProfileController::class, 'processInternalSubscription'])->name('process.internal.subscription');
