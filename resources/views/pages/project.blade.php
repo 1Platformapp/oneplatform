@@ -1294,6 +1294,22 @@
                         </div>
                     </div>
                 </div>
+                @if(count($campaignDonations))
+                <div class="flex flex-col mt-8 gap-2">
+                    <div class="text-lg">Latest donations</div>
+                    <div class="grid grid-cols-1 gap-4">
+                        @foreach($campaignDonations as $campaignDonation)
+                            <div class="relative flex items-center px-3 py-3 space-x-3 bg-transparent border border-gray-300 rounded-lg shadow-sm cursor-pointer focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+                                <div class="flex-shrink-0 text-lg">
+                                    <i class="fa fa-hand-holding-heart"></i>
+                                </div>
+                                <p class="text-sm font-medium text-gray-300">{{$campaignDonation['customer']['name']}}</p>
+                                <p class="!ml-auto">{{$campaignDonation['amount']}}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                @endif
             </div>
 
         </div>

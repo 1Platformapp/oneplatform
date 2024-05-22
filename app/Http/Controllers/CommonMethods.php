@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\CrowdfundCheckoutItem;
 use App\Models\InternalSubscription;
 use App\Models\Competition;
 use App\Models\Genre;
@@ -1096,6 +1097,30 @@ class CommonMethods extends Controller
 
 
 
+    }
+
+    public static function getCampaignDonations($campaignId){
+
+        $checkoutDonations = [];
+
+        $userCampaign = UserCampaign::find($campaignId);
+
+        if ($userCampaign) {
+            $checkouts = StripeCheckout::where(['campaign_id' => $campaignId, 'type' => 'crowdfund'])->orderBy('id', 'desc')->take(5)->get();
+            foreach ($checkouts as $key => $checkout) {
+                $donation = CrowdfundCheckoutItem::where(['stripe_checkout_id' => $checkout->id, 'type' => 'donation'])->get()->first();
+                if ($donation) {
+
+                    $checkoutDonations[] = [
+                        'customer' => ['id' => $checkout->customer_id, 'name' => $checkout->customer_name],
+                        'amount' => self::getCurrencySymbol($checkout->currency).number_format($donation->price),
+                        'date' => date('d/m/Y H:i A', strtotime($checkout->created_at))
+                    ];
+                }
+            }
+        }
+
+        return $checkoutDonations;
     }
 
 

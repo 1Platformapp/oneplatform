@@ -63,7 +63,7 @@ return [
 
     'instagram_profile' => 'https://www.instagram.com/1PlatformTV',
 
-    'crowdfund_application_fee' => 4.75,
+    'crowdfund_application_fee' => 5,
 
     'paypal_mode' => 'live',
 

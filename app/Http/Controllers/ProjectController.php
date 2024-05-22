@@ -260,9 +260,9 @@ class ProjectController extends Controller
 
             'loadCampaign' => $loadPreCampaign,
 
+            'campaignDonations' => $commonMethods->getCampaignDonations($userCampaign->id)
+
         ];
-
-
 
         return view( 'pages.project', $data );
 
