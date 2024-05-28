@@ -63,7 +63,7 @@
                 errorMessage = 'Skill is required';
                 error = true;
             } else if (musicLink.val() == '') {
-                errorMessage = 'Music link is required';
+                errorMessage = 'Work link is required';
                 error = true;
             }
 
@@ -222,7 +222,7 @@
                             <label for="fake_password" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Link</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
-                                    <input type="text" name="music_link" id="music_link" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="https://www.mywebsite.com/janesmith-music">
+                                    <input type="text" name="music_link" id="music_link" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="https://www.mywebsite.com/janesmith-work">
                                 </div>
                                 <p class="text-sm leading-6 text-gray-500">Add a link here to your work skills and experience</p>
                             </div>
