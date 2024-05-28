@@ -56,7 +56,7 @@
 .int_sub_act_outer { display: flex; align-items: center; justify-content: center; flex: 0 1 50%; }
 
 .int_sub_dhead { cursor: pointer; background-color: rgb(237, 242, 245); border-radius: 0px 2px 2px 0px;  height: 100px; -webkit-box-align: center; -webkit-box-pack: center; justify-content: center; border-top: 2px solid; border-bottom: 2px solid; border-color: transparent; display: flex; flex: 0 1 auto; flex-direction: column; }
-.int_sub_dhead .inner { flex-flow: row nowrap; display: flex; flex-direction: row; justify-content: center; } 
+.int_sub_dhead .inner { flex-flow: row nowrap; display: flex; flex-direction: row; justify-content: center; }
 .int_sub_dhead .inner p { font-size: 30px; }
 .int_sub_dhead.solo .inner p { font-size: 20px; }
 .int_sub_dhead .inner sup { font-size: 13px; top: 0.9em; font-weight: bold; line-height: 0; position: relative; vertical-align: baseline; }
@@ -95,8 +95,8 @@
 .auth_social_each.auth_social_insta i { background-color: #222;  }
 .auth_social_each.auth_social_google i { background-color: #df4b37; }
 .login_register_text_02 { font-family: Open sans, sans-serif; margin-top: 15px; }
-.login_register_text_02 span { color: #777; font-size: 12px; }
-.login_register_text_02 a { color: #3b5998; font-size: 12px; font-weight: bold; text-decoration: underline; }
+.login_register_text_02 span { color: #111; font-size: 12px; }
+.login_register_text_02 a { color: deepskyblue; font-size: 12px; font-weight: bold; text-decoration: underline; }
 .login_register_text_02 a:hover { text-decoration: underline; }
 
 .pro_note_2 .note_head { margin-bottom: 30px; border-bottom: 1px solid #000; width: fit-content; }
@@ -171,7 +171,7 @@
 	.int_sub_head_down { font-size: 11px !important; }
 	.int_sub_main_head_jun { font-size: 10px !important; }
 	.int_sub_main_head { font-size: 18px !important; }
-	
+
 	.startup_wizard_signup_row { flex-direction: column !important; }
 	.wizard_head_step_right { text-align: center; }
 	.wizard_head_each_step { flex-direction: column !important; margin-right: 5px !important; }

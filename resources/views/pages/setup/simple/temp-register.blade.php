@@ -165,8 +165,8 @@
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <select name="industry" id="industry" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
-                                        <option selected value="1">Artist</option>
-                                        <option value="2">Builder</option>
+                                        <option selected value="1">Music / Media Industry</option>
+                                        <option value="2">Construction Indsustry</option>
                                     </select>
                                 </div>
                             </div>
