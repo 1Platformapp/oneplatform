@@ -22,7 +22,7 @@
                         </a>
                     </div>
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
-                        <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires" data-head="Creative Briefs">
+                        <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires" data-head="Project Briefs">
                             <i class="far fa-question-circle"></i>
                         </a>
                     </div>
@@ -86,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div data-video-url="/play-media-element-video/PU1DIn6ObGk" class="explainer-video-well w-full bg-white md:col-span-2"></div>
+                                        <div data-video-url="https://www.youtube.com/embed/PU1DIn6ObGk" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                     </div>
 
                                     <div class="border-t border-b border-gray-200">
@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="pro_note">
                                             <ul>
-                                                <li>Enable seamless collaboration by attaching Creative Briefs easily for your Contacts.</li>
+                                                <li>Enable seamless collaboration by attaching project briefs easily for your contacts.</li>
                                                 <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion.</li>
                                             </ul>
                                         </div>
@@ -665,7 +665,11 @@
                 webkitallowfullscreen: 'webkitallowfullscreen',
                 src: well.attr('data-video-url')
             });
-            well.html(iframe);
+            const iframeContainer = $('<div>', {
+                class: 'iframe-container'
+            });
+            iframeContainer.append(iframe);
+            well.html(iframeContainer).prepend('<div class="iframe-overlay"></div>');
         } else {
             well.html('');
         }
@@ -1277,12 +1281,9 @@
 
 <style>
     .select2.select2-container.select2-container--default { width: 100% !important; }
-    .explainer-video-well iframe {
-        height: 400px;
-    }
-    @media (max-width: 767px) {
-        .explainer-video-well iframe {
-            height: 280px;
-        }
+    .iframe-overlay { height: 100px; width: 100%; z-index: 9999999999; }
+    .explainer-video-well iframe { height: 400px }
+    @media (min-width:320px) and (max-width: 767px) {
+        .explainer-video-well iframe { height: 280px }
     }
 </style>

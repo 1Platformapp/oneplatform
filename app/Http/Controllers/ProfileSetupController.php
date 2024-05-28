@@ -153,11 +153,16 @@ class ProfileSetupController extends Controller
     public function fullWizard(Request $request, $page, $content = null){
         $currentUrl = $request->url();
         $isStandalone = (strpos($currentUrl, 'standalone') !== false) ? true : false;
+        $user = Auth::user();
 
-    	if(Auth::check() && !Auth::user()->is_buyer_only){
+        if($user && $user->role != 1 && ($page == 'music' || $page == 'album' || $page == 'song-links')){
+            return redirect()->back();
+        }
+
+    	if($user && !$user->is_buyer_only){
 
             $commonMethods = new CommonMethods();
-            $user = Auth::user();
+
             $userPersonalDetails = $commonMethods::getUserRealDetails($user->id);
             $genres = Genre::orderBy('name', 'asc')->get();
             $story_images = $user->profile->story_images;

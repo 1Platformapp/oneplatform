@@ -567,7 +567,7 @@
 <div id="token-content" class="flex items-center justify-center h-screen hidden">
     <div class="w-full max-w-md pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
-        <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
+        <p class="mt-1 text-sm text-center text-gray-500">Manage, Network and Sell - All in one platform</p>
         <div class="flex flex-col mt-6">
             <div class="mb-4">
                 <label for="token" class="block text-sm font-medium text-gray-600">Token</label>
@@ -586,7 +586,7 @@
 <div id="register-content" class="">
     <div class="w-full pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
-        <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
+        <p class="mt-1 text-sm text-center text-gray-500">Manage, Network and Sell - All in one platform</p>
         <nav aria-label="Progress" class="pt-16 pb-12">
             <ol role="list" class="space-y-4 md:flex md:space-x-8 md:space-y-0">
                 <li data-step="one" class="each-step md:flex-1">

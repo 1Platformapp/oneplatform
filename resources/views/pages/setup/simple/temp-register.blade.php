@@ -106,6 +106,7 @@
                     const confirmPassword = $('#fake_confirm_password');
                     const skill = $('#skill');
                     const musicLink = $('#music_link');
+                    const industry = $('#industry');
 
                     const formData = new FormData();
                     formData.append('username', fullName.val().replace(/\s/g,''));
@@ -114,6 +115,7 @@
                     formData.append('lastName', '');
                     formData.append('name', fullName.val());
                     formData.append('email', email.val());
+                    formData.append('industry', industry.val());
                     formData.append('password', password.val());
                     formData.append('skill', skill.val());
                     formData.append('music_url', musicLink.val());
@@ -149,7 +151,7 @@
 <div class="">
     <div class="w-full pt-6 pb-6">
         <h2 class="mt-6 text-2xl font-bold leading-9 tracking-tight text-center text-gray-900">Welcome to 1Platform</h2>
-        <p class="mt-1 text-sm text-center text-gray-500">1Platform: Your essential tool for music career success</p>
+        <p class="mt-1 text-sm text-center text-gray-500">Manage, Network and Sell - All in one platform</p>
     </div>
     <div class="bg-white rounded-lg">
         <form action="" method="POST">
@@ -158,6 +160,17 @@
                 <h2 class="mb-2 text-base font-semibold leading-7 text-gray-900"><span id="step-name"></span></h2>
                 <div class="space-y-12 each-step-body sm:space-y-16">
                     <div class="pb-12 space-y-8 border-b border-gray-900/10 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label for="fake_username" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Choose Your Industry</label>
+                            <div class="mt-2 sm:col-span-2 sm:mt-0">
+                                <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
+                                    <select name="industry" id="industry" class="h-10 block w-full rounded-md border-0 py-1.5 text-gray-900 outline-none bg-transparent sm:text-sm sm:leading-6">
+                                        <option selected value="1">Artist</option>
+                                        <option value="2">Builder</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="fake_username" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Full Name</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
@@ -202,7 +215,6 @@
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="text" name="skill" id="skill" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Producer">
                                 </div>
-                                <p class="text-sm leading-6 text-gray-500">Add a link here to your music or artist profile</p>
                             </div>
                         </div>
 
@@ -212,7 +224,7 @@
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
                                     <input type="text" name="music_link" id="music_link" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="https://www.mywebsite.com/janesmith-music">
                                 </div>
-                                <p class="text-sm leading-6 text-gray-500">Add a link here to your music or artist profile</p>
+                                <p class="text-sm leading-6 text-gray-500">Add a link here to your work skills and experience</p>
                             </div>
                         </div>
                     </div>

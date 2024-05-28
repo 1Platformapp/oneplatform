@@ -145,6 +145,7 @@
                             </div>
                         </div>
                     </div>
+                    @if($user->role_id == 1)
                     <div class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Music
@@ -186,6 +187,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Videos

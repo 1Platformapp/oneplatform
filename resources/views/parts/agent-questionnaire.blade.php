@@ -22,7 +22,7 @@
         @endforeach
     </div>
     <div class="my_sub_sec_inner">
-        <h3><span class="text-lg head_text">Creative Brief: {{$creativeBrief->title}}</span></h3>
+        <h3><span class="text-lg head_text">Project Brief: {{$creativeBrief->title}}</span></h3>
         <form action="{{route('agent.manage.questionnaire')}}" method="POST">
             {{csrf_field()}}
             <input type="hidden" name="brief_id" value="{{$creativeBrief->id}}">
@@ -79,7 +79,7 @@
     function expandQuestion(element) {
         element.classList.toggle('h-150');
     }
-    
+
     $('document').ready(function(){
 
         $('.agent_que_action_btn').click(function(){

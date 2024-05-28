@@ -73,6 +73,7 @@
     					{{$commonMethods->getCurrencySymbol(strtoupper($user->profile->default_currency))}}{{ number_format($purchaseParticulars['total_revenue'], 2) }}
     				</div>
     			</div>
+                @if($user->role_id == 1)
                 <div class="pro_acc_stat_each">
                     <div class="pro_acc_stat_name">
                         Singles Sold
@@ -97,6 +98,7 @@
                         {{$purchaseParticulars['products_sold']}}
                     </div>
                 </div>
+                @endif
                 <div class="pro_acc_stat_each">
                     <div class="pro_acc_stat_name">
                         Fans

@@ -29,8 +29,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <style type="text/css">
 
-        .auto_content { width: 100%; }
-        .video_upper_inner { background-image: url(https://www.1platform.tv/images/chart_back_04_2.jpg); background-size: cover; background-position: top center; background-repeat: no-repeat; }
+        .video_in { min-height: 100vh; background-image: url(/images/login-back-01.jpg); background-size: cover; background-position: top center; background-repeat: no-repeat; }
+        .content_outer { padding: 0 !important; }
+        .video_upper_inner {  }
         .auth_box_outer { width: 45%; padding: 0 5em 10em; position: relative; top: -60px; }
         .auth_box_outer .form_group input { font-size: 15px; background: #ccc none repeat scroll 0 0; border-radius: 23px; height: 40px; }
         .auth_box_outer .login_button_outer { background-color: #333; box-shadow: unset; border-radius: 27px; }
@@ -38,7 +39,7 @@
         .auth_box_outer { padding-top: 150px; border-radius: 3px; border-color: #818181; opacity: 0.75; background: #444; }
         .register_button_outer a { font-size: 14px !important; font-weight: bold; }
         .register_button_outer { background-color: #818181; box-shadow: unset; border-radius: 27px; height: 37px; display: flex; text-align: center; text-transform: uppercase; align-items: center; justify-content: center; }
-        .video_upper_inner { display: flex; flex-direction: column; justify-content: space-between; padding: 0 80px 40px; }
+        .video_upper_inner { display: flex; flex-direction: column; justify-content: space-between; }
         .auth_top_logo { position: relative; top: 40px; display: flex; align-items: center; justify-content: center; z-index: 1; }
         .auth_social_logins_outer { position: relative; width: 40%; }
         .auth_head_section { width: 40%; margin: 0 auto; text-align: center; position: relative; top: 50px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #fff; z-index: 1; }
@@ -50,6 +51,7 @@
 
         @media (min-width:320px) and (max-width: 767px) {
 
+            .video_in { background: none; min-height: unset; }
             body { background-size: auto; }
             .auth_box_outer { top: -35px; width: unset; padding: 114px 10px !important; margin: 0 10px; }
             .auth_box_outer .form_group input { height: 38px; }
@@ -215,9 +217,7 @@
 
 <!-- Page Header !-->
 @section('header')
-    <div class="hide_on_mobile">
-        @include('parts.header')
-    </div>
+
 @stop
 
 
@@ -238,7 +238,7 @@
 
 @section('page-content')
 
-            <div class="auto_content">
+            <div class="autocontent">
                 <div class="video_in">
                     <div class="login_resp hide_on_desktop">
                         <form class="form-horizontal" method="POST" action="{{ route('login') }}" style="width: 75%; margin: 0 auto;">
@@ -289,7 +289,7 @@
                                 1Platform
                             </h1>
                             <h3 class="auth_head_secon">
-                                Your complete suite of music<br>management tools, all in one place.
+                                Your complete suite of<br>management tools, all in one place.
                             </h3>
                         </div>
                         <div class="auth_box_outer">

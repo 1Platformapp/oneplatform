@@ -323,7 +323,7 @@
             @if($isAllowed)
             <div class="contact_details_section">
                 <div class="contact_section_head">
-                    <span class="font-bold">{{$contact->contactUser->name}} - Creative Brief</span>
+                    <span class="font-bold">{{$contact->contactUser->name}} - Project Brief</span>
                     <br>
                     <div class="contact_section_sub_head !text-white mt-4 !text-[15px]">
                         The brief is private and is only visible to you and your contact<br>

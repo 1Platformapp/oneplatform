@@ -447,6 +447,7 @@ class RegisterController extends Controller
             $user->sec_skill = '';
             $user->level = '';
             $user->username = $request->username;
+            $user->role_id = $request->industry;
             $user->save();
 
             $address->alias = 'main address';

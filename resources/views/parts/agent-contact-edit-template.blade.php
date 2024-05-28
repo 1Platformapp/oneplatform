@@ -103,13 +103,13 @@ Excited to have you on board!  @endif</textarea>
 
     <div class="grid grid-cols-1 pt-10 gap-x-8 gap-y-8 md:grid-cols-3 contact-edit-section">
         <div class="relative px-0">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Creative Briefs</h2>
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Project Briefs</h2>
             <div class="contact-edit-section-comp pro_music_search pro_music_info no_border">
                 <div class="pro_note">
                     <ul>
                         <li>Share ideas, ask questions and collaborate seamlessly with your contacts.</li>
-                        <li>We've included ready-made professional briefs to make your creative journey smoother. Join us for a simple and effective collaboration experience</li>
-                        <li>Check your dashboard for a list of all our creative briefs</li>
+                        <li>We've included ready-made professional briefs to make your project journey smoother. Join us for a simple and effective collaboration experience</li>
+                        <li>Check your dashboard for a list of all our project briefs</li>
                     </ul>
                 </div>
             </div>
