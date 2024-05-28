@@ -213,7 +213,7 @@
                             <label for="fake_password" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Your main skill</label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <div class="flex rounded-md shadow-sm outline-none ring-1 ring-inset ring-gray-300">
-                                    <input type="text" name="skill" id="skill" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="Producer">
+                                    <input type="text" name="skill" id="skill" autocomplete="off" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 outline-none sm:text-sm sm:leading-6" placeholder="">
                                 </div>
                             </div>
                         </div>
