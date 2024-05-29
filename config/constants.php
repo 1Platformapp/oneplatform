@@ -69,7 +69,7 @@ return [
 
     'paypal_api_uri' => 'https://api-m.paypal.com',
 
-	'editor_tinycloud_api_key' => 'qg6p2tpxnxk2ndkur6146uhi041588nfurd5y6km3fcndzno',
+	'editor_tinycloud_api_key' => 'd411xqja9m1eb67vx71xjrmm433w7270l0ng73g7959dzlh5',
 
     //'paypal_mode' => 'sandbox',
 
