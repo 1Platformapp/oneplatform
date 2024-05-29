@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                             <div class="clearfix pro_inp_outer">
-                                <label>Main Skill *</label>
+                                <label>Other Skill *</label>
                                 <div class="pro_inp_right music_sec_opt_outer simple_custom_dropdown">
                                     <span>{{ ($user->sec_skill != '') ? $user->sec_skill : 'Add Skill' }}</span>
                                     <select id="sec_skill_select" data-skill="{{$user->sec_skill}}" name="sec_skill">
