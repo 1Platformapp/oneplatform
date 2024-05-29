@@ -462,6 +462,12 @@ class RegisterController extends Controller
             $profile->basic_setup = 1;
             $profile->save();
 
+            $userInternalSubscription = new InternalSubscription();
+            $userInternalSubscription->user_id = $user->id;
+            $userInternalSubscription->subscription_package = 'silver_0_0';
+            $userInternalSubscription->subscription_status = 1;
+            $userInternalSubscription->save();
+
             $result = Mail::to(Config('constants.admin_email'))->send(new MailUser('registrationRequest', $user));
         } catch (\Exception $ex) {
 
