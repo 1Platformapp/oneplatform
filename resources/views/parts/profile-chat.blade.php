@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
-                        <a title="Industry contacts" class="m_btn_right_icon_each m_btn_industry-contacts active" data-id="industry-contacts" data-head="Industry Contacts">
+                        <a title="Industry contacts" class="m_btn_right_icon_each {{$user->role_id == 1 ? 'm_btn_industry-contacts' : 'm_btn_ind_empty'}} active" data-id="industry-contacts" data-head="Industry Contacts">
                             <i class="fas fa-handshake"></i>
                         </a>
                     </div>
@@ -296,6 +296,7 @@
                             </div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="industry-contacts">
+                            @if($user->role_id == 1)
                             <div>
                                 <div id="ind-contacts-head" class="flex flex-col gap-4 mt-8 mb-4">
                                     <div class="flex flex-col gap-4">
@@ -324,7 +325,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>!
+                                </div>
                                 @endif
                                 <div class="pro_form_title flex flex-col border border-[#ccc] rounded-lg px-3 py-2 lg:px-6 lg:py-3">
                                     <div class="flex items-start mb-3">
@@ -395,6 +396,9 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+                            <p class="text-sm text-[#333] font-bold" style="padding: 20px 0; text-align:center">This section is under construction. Come back later</p>
+                            @endif
                         </div>
                         <div class="mt-10 each_dash_section instant_hide" data-value="my-transactions">
                             <div data-video-url="https://www.youtube.com/embed/wnxlgkWyVn0" class="explainer-video-well w-full bg-white md:col-span-2 mb-4"></div>
@@ -869,6 +873,12 @@
                 thiss.removeClass('disabled');
             }
         });
+    });
+
+    $('.m_btn_ind_empty').click(function(e){
+
+        $('.each_dash_section').addClass('instant_hide');
+        $('.each_dash_section[data-value="industry-contacts"').removeClass('instant_hide');
     });
 
     $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_personal_chat, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
