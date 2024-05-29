@@ -180,6 +180,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($user->role_id == 1)
                             <div id="further_skills_results" class="clearfix profile_custom_dropdown_results_outer">
                                 @if(count($userPersonalDetails['furtherSkillsArray']))
                                     @foreach($userPersonalDetails['furtherSkillsArray'] as $item)
@@ -206,6 +207,7 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
 
                             <div class="clearfix pro_inp_outer">
                                 <label>Level *</label>
