@@ -15,6 +15,14 @@
     @php $display = 'display: none;' @endphp
 @endif
 
+    @if (Session::has('profile_saved'))
+
+    <div class="success_span">
+        <i class="fa fa-check"></i>
+        Saved successfully
+    </div>
+    @php Illuminate\Support\Facades\Session::forget('profile_saved'); @endphp
+    @endif
     <div id="profile_tab_01" class="pro_my_profil_sec pro_pg_tb_det" style="{{ $display }}">
         <div class="pro_pg_tb_det_inner">
             <div id="personal_section" class="each_pro_edit_section sub_cat_data {{$subTab == 'info' || $subTab == '' ? '' : 'instant_hide'}}">
