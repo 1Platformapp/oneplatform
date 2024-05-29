@@ -604,7 +604,7 @@
                 <li data-step="three" class="each-step md:flex-1">
                     <div class="flex flex-col py-2 pl-4 border-l-4 border-gray-200 cursor-pointer each-step-in group hover:border-gray-300 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
                         <span class="text-sm font-medium text-gray-500 each-step-title group-hover:text-gray-700">Step 3</span>
-                        <span class="text-sm font-medium each-step-name">Add media information</span>
+                        <span class="text-sm font-medium each-step-name">Add skill information</span>
                     </div>
                 </li>
             </ol>
@@ -782,6 +782,7 @@
                                 </div> -->
                             </div>
                         </div>
+                        @if($user->role_id == 1)
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="genre" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Genre</label>
                             <div class="mt-2 rounded-md sm:col-span-2 ring-1 ring-inset ring-gray-300 sm:mt-0">
@@ -793,6 +794,7 @@
                                 </select>
                             </div>
                         </div>
+                        @endif
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="level" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Level</label>
                             <div class="mt-2 rounded-md sm:col-span-2 ring-1 ring-inset ring-gray-300 sm:mt-0">

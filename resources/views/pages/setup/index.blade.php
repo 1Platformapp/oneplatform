@@ -502,7 +502,7 @@
 					</div>
                     @endif
 					<div class="setup_tray_head">
-						Media information
+						Skill information
 					</div>
 				</div>
                 @if(!$isStandalone)
