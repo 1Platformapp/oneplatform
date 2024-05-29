@@ -268,7 +268,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>!
+                                </div>
                                 <form>
                                     <div class="px-2 py-4">
                                         <div class="flex items-center mb-3">
@@ -280,7 +280,7 @@
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                                            @foreach(\App\Models\Contract::all() as $contract)
+                                            @foreach(\App\Models\Contract::where('industry', $user->role_id)->get() as $contract)
                                             <div class="col-span-1 relative flex items-center space-x-3 rounded-lg border border-[#ccc] px-3 py-2 lg:px-6 lg:py-3 shadow-sm outline-none">
                                                 <div class="flex-1 min-w-0">
                                                     <a target="blank" href="{{route('agency.contract.preview', ['id' => $contract->id])}}" class="text-sm font-medium text-[#333] flex flex-row items-center gap-2">
