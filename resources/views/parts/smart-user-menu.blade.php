@@ -58,7 +58,7 @@
                                         <div class="usr_men_quick_ic">
                                             <i class="fas fa-user-cog"></i>
                                         </div>
-                                        Add Media Info
+                                        Add Skill Info
                                     </div>
                                 </a>
                                 <a href="{{route('profile.setup.standalone', ['page' => 'change-password'])}}" class="text-black usr_men_quick_txt">

@@ -121,7 +121,7 @@
             </div>
             <div id="musical_section" class="each_pro_edit_section sub_cat_data {{$subTab == 'media' ? '' : 'instant_hide'}}">
                 <div class="pro_main_tray">
-                    <div class="pro_tray_title">Media Information</div>
+                    <div class="pro_tray_title">Skill Information</div>
                 </div>
                 <div class="musical_intro {{$user->hasMusicalFilled()?'instant_hide':''}}">
                     <p class="section_note">
