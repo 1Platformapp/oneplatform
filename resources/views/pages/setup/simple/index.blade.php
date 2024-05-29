@@ -748,7 +748,7 @@
                 </div>
 
                 <div data-step="three" class="hidden space-y-12 each-step-body sm:space-y-16">
-                    @php $skills = \App\Models\Skill::all() @endphp
+                    @php $skills = \App\Models\Skill::where('user_role_id', $user->role_id)->get() @endphp
                     <div class="pb-12 space-y-8 border-b border-gray-900/10 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label for="skillname" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Main skill</label>

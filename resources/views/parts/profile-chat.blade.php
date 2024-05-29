@@ -58,7 +58,7 @@
                 </div>
             </div>
             @php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
-            @php $skills = \App\Models\Skill::all() @endphp
+            @php $skills = \App\Models\Skill::where('user_role_id', $user->role_id)->get() @endphp
             @php $skill = $skills->first(function ($skill) use ($user) {
                 return $skill->value == $user->skills;
             });@endphp

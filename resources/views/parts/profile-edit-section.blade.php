@@ -143,7 +143,7 @@
                                     <li>If you want to be an agent tick the option below. <a target="_blank" href="{{route('faq')}}">Click here</a> to learn more about 1platform agents</li>
                                 </ul>
                             </div>
-                            @php $skills = \App\Models\Skill::all() @endphp
+                            @php $skills = \App\Models\Skill::where('user_role_id', $user->role_id) @endphp
                             <div class="clearfix pro_inp_outer">
                                 <label>Main Skill *</label>
                                 <div class="pro_inp_right">

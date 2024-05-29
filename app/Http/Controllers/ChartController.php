@@ -1611,7 +1611,7 @@ class ChartController extends Controller
                 }
                 if($findType == 'contact-management'){
 
-                    $skills = Skill::all();
+                    $skills = Skill::where('user_role_id', $user->role_id)->get();
                     $data['data'] = \View::make('parts.contact-management.index', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills])->render();
                     $success = 1;
                 }

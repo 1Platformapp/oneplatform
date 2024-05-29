@@ -153,12 +153,13 @@ class AgentContactController extends Controller
             $contactUser = User::where(['email' => $alreadyUserEmail, 'active' => 1])->first();
             if(!$contactUser){
                 return redirect()->back()->with(['error' => 'The user email is not an email of a valid account at 1Platform']);
+            } else if ($contactUser && $contactUser->role_id != $user->role_id) {
+                return redirect()->back()->with(['error' => 'The user email does not belong to your choosen industry']);
             }
 
             $contactExist = AgentContact::where(function($q) use ($user) {
                 $q->where('contact_id', $user->id)->orWhere('agent_id', $user->id);
             })->where('email', $isAlreadyUser)->get()->first();
-
             if($contactExist){
                 return redirect()->back()->with(['error' => 'This person is already in your contact list']);
             }
@@ -166,6 +167,7 @@ class AgentContactController extends Controller
 
             $contactUser = new User();
             $contactUser->name = trim($name.' '.$lastName);
+            $contactUser->role_id = $user->role_id;
             $contactUser->first_name = $name;
             $contactUser->surname = $lastName;
             $contactUser->skills = $skill;
