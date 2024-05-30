@@ -468,6 +468,8 @@ class RegisterController extends Controller
             $userInternalSubscription->subscription_status = 1;
             $userInternalSubscription->save();
 
+            $user->createDefaultQuestions();
+
             $result = Mail::to(Config('constants.admin_email'))->send(new MailUser('registrationRequest', $user));
         } catch (\Exception $ex) {
 
