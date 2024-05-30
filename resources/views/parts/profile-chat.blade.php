@@ -166,11 +166,13 @@
                                                 <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion.</li>
                                             </ul>
                                         </div>
+                                        @if($user->id != config('constants.admins')['1platformagent']['user_id'])
                                         <div>
                                             <button id="reset-briefs-button" class="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm edit_now hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                                 Reset Briefs
                                             </button>
                                         </div>
+                                        @endif
                                     </div>
                                     <div data-video-url="https://www.youtube.com/embed/wnxlgkWyVn0" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                 </div>
