@@ -700,6 +700,14 @@ class AgentContactController extends Controller
         }
     }
 
+    public function resetQuestionnaires(Request $request){
+
+        $user = Auth::user();
+        $user->resetQuestions();
+
+        return json_encode(['success' => 1]);
+    }
+
     public function getQuestionnaire(Request $request){
 
         $agent = Auth::user();

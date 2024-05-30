@@ -166,6 +166,11 @@
                                                 <li>Contacts receive personalized email alerts for efficient submission and instant updates upon completion.</li>
                                             </ul>
                                         </div>
+                                        <div>
+                                            <button id="reset-briefs-button" class="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm edit_now hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                Reset Briefs
+                                            </button>
+                                        </div>
                                     </div>
                                     <div data-video-url="https://www.youtube.com/embed/wnxlgkWyVn0" class="explainer-video-well w-full bg-white md:col-span-2"></div>
                                 </div>
@@ -708,6 +713,34 @@
 
     $('.brief_close_btn').click(function(){
         $(this).closest('.brief_video_holder').addClass('instant_hide').find('.inner').html('');
+    });
+
+    $('body').delegate('#reset-briefs-button', 'click', function(e){
+
+        if (confirm('Are you sure? You cannot undo this action')) {
+
+            $.ajax({
+
+                url: '/agent/reset-questionnaires',
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function (response) {
+                    $('.notification .icon').addClass('instant_hide');
+                    if (response.success) {
+                        $('.notification .success').removeClass('instant_hide');
+                        $('.notification .notification-title').text('Success');
+                        $('.notification .notification-body').text('Your response has been saved');
+                    }else {
+                        $('.notification .icon.error').removeClass('instant_hide');
+                        $('.notification .notification-title').text('Error');
+                        $('.notification .notification-body').text(response.error);
+                    }
+                    $('.notification').removeClass('hidden');
+                }
+            });
+        }
     });
 
     $('body').delegate('.each-stage-det .notes-submit', 'click', function(e){

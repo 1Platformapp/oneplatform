@@ -1938,5 +1938,23 @@ class User extends Authenticatable
             }
         }
     }
+
+    public function resetQuestions(){
+
+        $agentQuestionnaires = AgentQuestionnaire::where(['agent_id' => $this->id])->get();
+        foreach($agentQuestionnaires as $agentQuestionnaire){
+            $agentQuestionnaireElements = AgentQuestionnaireElement::where(['agent_questionnaire_id' => $agentQuestionnaire->id])->get();
+
+            if (count($agentQuestionnaireElements)) {
+                foreach($agentQuestionnaireElements as $agentQuestionnaireElement){
+                    $agentQuestionnaireElement->delete();
+                }
+            }
+
+            $agentQuestionnaire->delete();
+        }
+
+        $this->createDefaultQuestions();
+    }
 }
 
