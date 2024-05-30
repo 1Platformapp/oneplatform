@@ -1917,7 +1917,7 @@ class User extends Authenticatable
     public function createDefaultQuestions(){
 
         $platformManager = User::find(config('constants.admins')['1platformagent']['user_id']);
-        $creativeBriefs = CreativeBrief::all();
+        $creativeBriefs = CreativeBrief::where('industry', $this->role_id)->get();
         foreach($creativeBriefs as $creativeBrief){
             $agentQuestionnaire = AgentQuestionnaire::where(['brief_id' => $creativeBrief->id, 'agent_id' => $platformManager->id])->first();
 

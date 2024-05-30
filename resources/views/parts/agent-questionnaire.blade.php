@@ -1,6 +1,10 @@
 
 @php $agentQuestionnaires = \App\Models\AgentQuestionnaire::where(['agent_id' => Auth::user()->id])->get(); @endphp
-@php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
+@if(Auth::user()->id != config('constants.admins')['1platformagent']['user_id'])
+    @php $creativeBriefs = \App\Models\CreativeBrief::where('industry', Auth::user()->role_id)->get() @endphp
+@else
+    @php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
+@endif
 <div data-skill="{{$creativeBrief->title}}" class="my_sub_sec">
     <div class="instant_hide other-questionnaires">
         @foreach($agentQuestionnaires as $agentQuestionnaire)
