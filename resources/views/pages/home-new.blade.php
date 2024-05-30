@@ -87,12 +87,6 @@
 	                            @endif
 	                        </div>
                     	</div>
-                    	<div class="dsk_right">
-                    		<video poster="{{asset('images/home-poster.jpg')}}" controls id="myVideo">
-							  <source src="{{asset('videos/1platform_revised.mp4')}}" type="video/mp4">
-							  Your browser does not support HTML5 video.
-							</video>
-                    	</div>
                     </div>
                     <div class="app_download">
                         <a class="app_download_ic" href="#">

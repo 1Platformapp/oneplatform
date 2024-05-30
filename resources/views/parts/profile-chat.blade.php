@@ -57,7 +57,11 @@
                     @endif
                 </div>
             </div>
-            @php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
+            @if($user->id != config('constants.admins')['1platformagent']['user_id'])
+                @php $creativeBriefs = \App\Models\CreativeBrief::where('industry', $user->role_id)->get() @endphp
+            @else
+                @php $creativeBriefs = \App\Models\CreativeBrief::all() @endphp
+            @endif
             @php $skills = \App\Models\Skill::where('user_role_id', $user->role_id)->get() @endphp
             @php $skill = $skills->first(function ($skill) use ($user) {
                 return $skill->value == $user->skills;

@@ -2,8 +2,8 @@
 .auto_content { width: 100% !important; }
 .video_upper_inner { background-image: url(https://www.1platform.tv/images/chart_back_04_2.jpg); background-size: cover; background-position: top center; background-repeat: no-repeat; }
 .auth_box_outer { width: 45%; padding: 0 5em 10em; position: relative; top: -60px; }
-.auth_box_outer .form_group input { font-size: 15px; background: #ccc none repeat scroll 0 0; border-radius: 23px; height: 40px; } 
-.auth_box_outer .login_button_outer { background-color: #333; box-shadow: unset; border-radius: 27px; }   
+.auth_box_outer .form_group input { font-size: 15px; background: #ccc none repeat scroll 0 0; border-radius: 23px; height: 40px; }
+.auth_box_outer .login_button_outer { background-color: #333; box-shadow: unset; border-radius: 27px; }
 .auth_box_outer .login_button_outer input { height: 27px; font-family: 'Montserrat', sans-serif; font-size: 15px; }
 .auth_box_outer { padding-top: 150px; border-radius: 3px; border-color: #818181; opacity: 0.75; background: #444; }
 .register_button_outer a { font-size: 14px !important; font-weight: bold; }
@@ -21,11 +21,11 @@
 .home_section_music h2 { font-size: 43px; }
 .home_section_music h4 { font-size: 20px; }
 .home_section_spacer { background-color: #dbe1e5; min-height: 5px; margin-bottom: 20px; }
-.home_section_portfolio { font-family: 'Montserrat', sans-serif; padding: 20px 30px; margin-top: 20px; } 
+.home_section_portfolio { font-family: 'Montserrat', sans-serif; padding: 20px 30px; margin-top: 20px; }
 .portfolio_outer { font-family: 'Montserrat', sans-serif; }
 .home_section_portfolio h2 { font-size: 20px; margin-bottom: 30px; }
 .home_section_portfolio h2 span { font-size: 30px; }
-.home_section_packages { margin-top: 50px; font-family: 'Montserrat', sans-serif; padding: 20px 30px; } 
+.home_section_packages { margin-top: 50px; font-family: 'Montserrat', sans-serif; padding: 20px 30px; }
 .home_section_packages .header { padding: 20px 0; background: #222; color: #fff; }
 .home_section_packages h2 { font-size: 30px; text-align: center; }
 .home_section_packages h4 { text-align: center; margin-top: 15px; font-size: 16px; margin-bottom: 20px; }
@@ -34,7 +34,7 @@
 .portfolio_det_elem_each iframe { max-width: 800px; margin: 20px auto 0 auto; }
 .int_sub_liner .int_sub_offer_each, .int_sub_liner .int_sub_dhead { font-weight: normal; }
 
-.auth_carosel_section { font-family: Open sans, sans-serif; position: relative; margin: 60px 20px 0 20px; display: flex; flex-direction: column; } 
+.auth_carosel_section { font-family: Open sans, sans-serif; position: relative; margin: 60px 20px 0 20px; display: flex; flex-direction: column; }
 .auth_each_carosel { padding: 7px; background: rgb(39, 40, 42); color: #fff; min-width: calc(14.2857%); flex-direction: column; flex-grow: 1; display: flex; align-items: center; transition: 0.3s all ease-in-out; font-size: 9px; cursor: pointer; }
 .auth_each_carosel img { max-width: 100px; }
 .auth_carosel_in { display: flex; flex-direction: row; overflow-x: auto; overflow-y: hidden; }
@@ -46,7 +46,7 @@
 .auth_carosel_animate { font-size: 18px; margin-left: 1px; }
 .auth_carosel_nav_each.disabled { cursor: not-allowed; opacity: 0.65; }
 
-.dsk_her { display: flex; flex-direction: row; font-family: 'Montserrat', sans-serif; background-image: url('/images/dsk_he.jpg?v=1.1'); background-position: right center; background-repeat: no-repeat; height: 370px; }
+.dsk_her { display: flex; flex-direction: row; font-family: 'Montserrat', sans-serif; background-image: url('/images/login-back-02.jpg'); background-position: right center; background-repeat: no-repeat; height: 370px; }
 .dsk_her .dsk_main_title { text-transform: capitalize; color: #fff; font-size: 37px; font-weight: bold; margin-left: 50px; }
 .dsk_her .dsk_sub_title { margin-top: 16px; color: #fff; font-size: 15px; margin-left: 50px; }
 .dsk_her #dsk_signup { display: inline-block; background: rgb(19, 168, 158); color: #fff; border-radius: 2px; margin-left: 50px; padding: 8px; cursor: pointer; text-decoration: none; border: 1px solid rgb(19, 168, 158);  }
@@ -99,7 +99,7 @@
     .app_download a { max-width: unset;]}
     .app_download_ic { margin-right: 10px; flex: 0 1 50%; }
     .app_download_ic img { width: 100%; }
-    .dsk_support_each,.dsk_sub_title { font-size: 14px; } 
+    .dsk_support_each,.dsk_sub_title { font-size: 14px; }
     .dsk_tools { margin-top: 20px; }
     #dsk_dashboard { margin-left: 23px; margin-top: 15px; }
 }
