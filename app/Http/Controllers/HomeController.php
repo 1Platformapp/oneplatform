@@ -123,18 +123,7 @@ class HomeController extends Controller
             'commonMethods' => $commonMethods,
         ];
 
-        if(Auth::check()){
-            $user = Auth::user();
-            if(!$user->is_buyer_only && !$user->internalSubscription){
-                return redirect(route('user.action.required', ['type' => 'subscription.for.home']));
-            }else if($user->is_buyer_only || !$user->internalSubscription || $user->username == null){
-                return redirect(route('agency.dashboard'));
-            }else{
-                return redirect(route('user.home', ['params' => $user->username]));
-            }
-        }else{
-            return view( 'pages.home-new', $data );
-        }
+        return view( 'pages.home-new', $data );
     }
 
     public function userHome(){

@@ -23,7 +23,7 @@
 @stop
 
 @section('page-level-js')
-    <script type="text/javascript" src="{{asset('js/site-home.min.js') }}"></script>
+    <script type="text/javascript" src="{{asset('js/site-home.min.js?v=1.1') }}"></script>
 @stop
 
 @section('header')
@@ -89,10 +89,10 @@
                     	</div>
                     </div>
                     <div class="app_download">
-                        <a class="app_download_ic" href="#">
+                        <a class="app_download_ic" href="https://play.google.com/store/apps/details?id=com.one_platform.one_platform&pli=1">
                             <img src="{{asset('images/android-app-download.png')}}">
                         </a>
-                        <a class="app_download_ic" href="#">
+                        <a class="app_download_ic" href="https://apps.apple.com/gb/app/1-platform/id1587209739">
                             <img src="{{asset('images/ios-app-download.png')}}">
                         </a>
                     </div>

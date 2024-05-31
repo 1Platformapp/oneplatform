@@ -15,10 +15,10 @@
 
 @section('page-level-js')
 
-  	<script type="text/javascript" src="{{asset('js/site-home.min.js') }}"></script>
-    
+  	<script type="text/javascript" src="{{asset('js/site-home.min.js?v=1.1') }}"></script>
+
     <script>
-        
+
         var currentTabId = sessionStorage.getItem("current_search_tab_id");
         if(currentTabId && currentTabId != ''){
         	$('.each_main_tab#'+currentTabId).addClass('active');
@@ -32,7 +32,7 @@
 		$('#'+contentId).removeClass('instant_hide');
 
         $('body').addClass('search_outer');
-        
+
 
 		$('.each_main_tab:not(#edit_search)').click(function(){
 
@@ -52,7 +52,7 @@
 			$('.card_sub_content[id="'+id+'"]').addClass('active').removeClass('instant_hide');
 		});
 		$('.card_check_label').unbind('click').click(function(e){
-			
+
 			e.preventDefault();
 			if($(this).hasClass('checked')){
 				$(this).removeClass('checked');
@@ -101,7 +101,7 @@
 	            parent.find(".each-music:hidden").slice(0, loadMoreItems).slideDown( "slow", function() {
 
 		            $('html,body').animate({
-		                scrollTop: $(window).scrollTop() + (loadMoreScroll*loadMoreItems) 
+		                scrollTop: $(window).scrollTop() + (loadMoreScroll*loadMoreItems)
 		            }, 1000);
 		        });
 	            if (parent.find(".each-music:hidden").length == 0) {
@@ -114,7 +114,7 @@
 	            parent.find(".each_artist:hidden").slice(0, loadMoreItems).slideDown( "slow", function() {
 
 		            $('html,body').animate({
-		                scrollTop: $(window).scrollTop() + (loadMoreScroll*loadMoreItems) 
+		                scrollTop: $(window).scrollTop() + (loadMoreScroll*loadMoreItems)
 		            }, 1000);
 		        });
 	            if (parent.find(".each_artist:hidden").length == 0) {
@@ -175,7 +175,7 @@
 
 
 @section('header')
-	
+
 	<div class="hide_on_mobile">
 	    @include('parts.header')
 	</div>
@@ -202,7 +202,7 @@
     <input type="hidden" id="url_share_link" value="{{$shareURL}}">
 
     <input type="hidden" id="item_share_title" value="">
-    
+
     <input type="hidden" id="item_share_link" value="">
 
 @stop
@@ -226,7 +226,7 @@
 	    		if($slide->type == 'user' and $slide->user and $slide->user->active == 1){
 	    			$details = $commonMethods->getUserRealCampaignDetails($slide->user_id);
 	    			$thumb = $details['campaignUserInfo']['profileImageCarosel'];
-	    			
+
 	    	        if($details['campaignIsLive'] == '1' && $details['campaignStatus'] == 'active'){
 	    	            $hasCrowdFundd = 1;
 	    	            $link = $details['campaignUserInfo']['projectPage'];
@@ -342,11 +342,11 @@
 	                    </div>
 	                </div>
 	            </div>!-->
-                @php 
+                @php
                     $music_search_results = \App\Models\UserMusic::inRandomOrder()->get()->filter(function ($music) {
                         return (!$music->privacy || count($music->privacy) == 0 || !isset($music->privacy['status']) || $music->privacy['status'] == 0) && $music->user && $music->user->isSearchable() == 1;
                     })
-                @endphp 
+                @endphp
 	            <div class="search_result_outer">
 	                <div class="search_result_inner">
 	                	<!--
@@ -361,7 +361,7 @@
 	                    	@if($music_search_results)
 		                        @foreach($music_search_results as $key => $music)
 		                        	@if(count($music->privacy) && isset($music->privacy['status']) && $music->privacy['status'] == '1')
-                                        
+
                                     @else
                                         @include('parts.user-channel-music-template',['music'=>$music])
                                     @endif
@@ -442,7 +442,7 @@
 		            	</div>
 		            	<br><br>
 		            	<div type="apply_filters" class="card_main_btn smart_btn">Apply Filters</div>
-		            	
+
                         <div class="card_pre_search">
                             <div class="card_pre_search_each">
                                 <div data-genre="13" class="card_each_pre pre_search_genre">
@@ -525,7 +525,7 @@
                     <img class="bio_sec_percent_image a_percent" src="{{asset('images/1a_right_license.png')}}" alt="#" />
                     <h3 class="project_line"></h3>
                     <div class="fund_raise_status">
-                    
+
                     </div>
 
                 </div>
@@ -534,7 +534,7 @@
 
                     <div class="pricing_setail">
 
-                        
+
 
                     </div>
 
@@ -549,12 +549,12 @@
                     <li>
                         <a id="facebook_share_url" onclick="return facebookShare('url')" class="ch_sup_fb" href="javascript:void(0)">
                             <i class="fab fa-facebook-f"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a id="twitter_share_url" onclick="return twitterShare('url')" class="ch_sup_tw" href="javascript:void(0)">
                             <i class="fab fa-twitter"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a class="ch_sup_feature_tab chart_disabled full_support_me" href="javascript:void(0)">
@@ -581,14 +581,14 @@
 
 
 @section('slide')
-    
+
 
 @stop
 
 
 
 @section('miscellaneous-html')
-    
+
     <div id="body-overlay"></div>
 	<input type="hidden" id="search_filters" value="{{ json_encode($search_filters) }}">
     @include('parts.chart-popups')
