@@ -437,6 +437,14 @@ class RegisterController extends Controller
 
     public function vetUser(Request $request){
 
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', new EmailRule],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'message' => 'Your provided email is not a valid email address. ('.$request->email.')']);
+        }
+
         try {
             $user = new User();
             $address = new Address();
