@@ -9,9 +9,13 @@ use App\Models\CrowdfundBasket;
 
 use App\Models\CustomerBasket;
 
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\CampaignPerks as CampaignPerk;
 
 use App\Models\EmbedCode;
+
+use App\Rules\EmailRule;
 
 use App\Models\UserCampaign as UserCampaign;
 
@@ -238,6 +242,13 @@ class AgentContactController extends Controller
         $skill = $request->get('pro_contact_skill');
         $phone = $request->get('pro_contact_phone');
 
+        $validator = Validator::make($request->all(), [
+            'pro_contact_email' => ['required', new EmailRule],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->with(['error' => 'Your provided email is not a valid email address. ('.$email.')']);
+        }
 
         if($contact){
 

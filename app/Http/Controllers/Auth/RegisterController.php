@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Controllers\PushNotificationController;
 use App\Models\Address;
+use App\Rules\EmailRule;
 use App\Models\Profile;
 use App\Models\Genre;
 use Carbon\Carbon;
@@ -103,6 +104,15 @@ class RegisterController extends Controller
                 Session::flash('error', "The google verification is required");
                 return Response(['message' => 'The google verification is required'], 401);
             }
+
+            $validator = Validator::make($request->all(), [
+                'email' => ['required', new EmailRule],
+            ]);
+
+            if ($validator->fails()) {
+                return Response(['message' => 'Your provided email is not a valid email address. ('.$request->email.')'], 401);
+            }
+
             $user = User::where("email", $request->email)->first();
 
             if($user){
