@@ -131,7 +131,7 @@ class HomeController extends Controller
                 return redirect(route('user.home', ['params' => $user->username]));
             }
         }else{
-            return view( 'pages.home', $data );
+            return view( 'pages.home-new', $data );
         }
     }
 
