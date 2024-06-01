@@ -123,7 +123,16 @@ class HomeController extends Controller
             'commonMethods' => $commonMethods,
         ];
 
-        return view( 'pages.home-new', $data );
+        if(Auth::check()){
+            $user = Auth::user();
+            if($user->is_buyer_only || !$user->internalSubscription || $user->profile->stripe_secret_key == '' || $user->username == null){
+                return redirect(route('agency.dashboard'));
+            }else{
+                return redirect(route('user.home', ['params' => $user->username]));
+            }
+        }else{
+            return view( 'pages.home', $data );
+        }
     }
 
     public function userHome(){
