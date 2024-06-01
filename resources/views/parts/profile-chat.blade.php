@@ -57,7 +57,7 @@
                     @endif
                     <div class="flex items-center justify-center flex-grow h-full">
                         <a title="Chat with 1Platform admin" class="m_btn_right_icon_each m_btm_admin_chat active" data-id="admin-chat" data-head="Chat with Admin">
-                            <img class="w-[20px]" id="admin-chat-icon" src="/icons/admin-chat.svg" alt="">
+                            <img class="w-[20px]" id="admin-chat-icon" src="/public/icons/admin-chat.svg" alt="">
                         </a>
                     </div>
                 </div>
@@ -976,10 +976,10 @@
 
         if ($(this).hasClass('m_btm_admin_chat')) {
 
-            $('#admin-chat-icon').attr('src', '/icons/admin-chat-active.svg');
+            $('#admin-chat-icon').attr('src', '/public/icons/admin-chat-active.svg');
             getAdminChat();
         } else {
-            $('#admin-chat-icon').attr('src', '/icons/admin-chat.svg');
+            $('#admin-chat-icon').attr('src', '/public/icons/admin-chat.svg');
         }
 
         if($(this).hasClass('m_btn_calendarr')){
