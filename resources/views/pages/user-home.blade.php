@@ -306,9 +306,11 @@
                     <div class="each_tab_btn tab_btn_user_bio {{$user->default_tab_home == NULL || $user->default_tab_home == 1 ? 'true_active' : ''}}" data-show="#tabd1">
                         <div class="border"></div>
                     </div>
+                    @if($user->role_id == 1)
                     <div class="each_tab_btn tab_btn_music {{count($user->hidden_tabs_home) && in_array('2', $user->hidden_tabs_home) ? 'disabled' : ''}} {{$user->default_tab_home == 2 ? 'true_active' : ''}}" data-show="#tabd2">
                         <div class="border"></div>
                     </div>
+                    @endif
                     <div class="each_tab_btn tab_btn_fans {{count($user->hidden_tabs_home) && in_array('3', $user->hidden_tabs_home) ? 'disabled' : ''}} {{$user->default_tab_home == 3 ? 'true_active' : ''}}" data-show="#tabd3">
                         <div class="border"></div>
                     </div>
