@@ -49,12 +49,17 @@
                         </a>
                     </div>
                     @if(!$user->is_buyer_only)
-                    <div class="flex items-center justify-center flex-grow h-full">
-                        <a title="Edit profile" title="Edit Profile" class="m_btn_right_icon_each m_btm_profile active" data-id="my-profile" data-head="My Profile">
+                    <div class="flex items-center justify-center flex-grow h-full border-r border-gray-main-icons lg:pr-8">
+                        <a title="Edit profile" class="m_btn_right_icon_each m_btm_profile active" data-id="my-profile" data-head="My Profile">
                             <i class="fa fa-edit"></i>
                         </a>
                     </div>
                     @endif
+                    <div class="flex items-center justify-center flex-grow h-full">
+                        <a title="Chat with 1Platform admin" class="m_btn_right_icon_each m_btm_admin_chat active" data-id="admin-chat" data-head="Chat with Admin">
+                            <img class="w-[20px]" id="admin-chat-icon" src="/icons/admin-chat.svg" alt="">
+                        </a>
+                    </div>
                 </div>
             </div>
             @if($user->id != config('constants.admins')['1platformagent']['user_id'])
@@ -580,6 +585,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="each_dash_section instant_hide" data-value="admin-chat">
+                            <div class="admin-chat-well"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -920,7 +928,7 @@
         $('.each_dash_section[data-value="industry-contacts"').removeClass('instant_hide');
     });
 
-    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btn_personal_chat, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
+    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btm_admin_chat, .m_btn_personal_chat, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
 
         var id = $(this).attr('data-id');
         var heading = $(this).attr('data-head');
@@ -964,6 +972,14 @@
                 $('.each_dash_section[data-value="contact-management"] .each-stage').first().trigger('click');
                 $('.each_dash_section[data-value="contact-management"] .each-stage').addClass('disabled');
             }
+        }
+
+        if ($(this).hasClass('m_btm_admin_chat')) {
+
+            $('#admin-chat-icon').attr('src', '/icons/admin-chat-active.svg');
+            getAdminChat();
+        } else {
+            $('#admin-chat-icon').attr('src', '/icons/admin-chat.svg');
         }
 
         if($(this).hasClass('m_btn_calendarr')){
@@ -1263,6 +1279,26 @@
                 }else{
                     console.log(data.error);
                     $('.contact-management-well').html(data.error);
+                }
+            }
+        });
+    }
+
+    function getAdminChat(){
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': 'admin-chat', 'find': '', 'identity_type': 'auth_user', 'identity': 'self'},
+            success: function(response) {
+
+                if(response.success == 1){
+                    $('.admin-chat-well').html(response.data.data);
+                }else{
+                    console.log(data.error);
+                    $('.admin-chat-well').html(data.error);
                 }
             }
         });

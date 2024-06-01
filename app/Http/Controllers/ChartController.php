@@ -1326,6 +1326,11 @@ class ChartController extends Controller
                 $accessGranted = 1;
             }
 
+            if($identityType == 'auth_user' && $findType == 'admin-chat' && $user) {
+
+                $accessGranted = 1;
+            }
+
             if($identityType == 'subscriber' && $findType == 'contact-management' && $user) {
 
                 $accessGranted = 1;
@@ -1613,6 +1618,11 @@ class ChartController extends Controller
 
                     $skills = Skill::where('user_role_id', $user->role_id)->get();
                     $data['data'] = \View::make('parts.contact-management.index', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills])->render();
+                    $success = 1;
+                }
+                if($findType == 'admin-chat'){
+
+                    $data['data'] = \View::make('parts.personal-chats', ['user' => $user, 'commonMethods' => $commonMethods, 'adminChat' => true])->render();
                     $success = 1;
                 }
                 if($findType == 'my-calendar'){

@@ -665,6 +665,9 @@ video {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.\!ml-auto {
+  margin-left: auto !important;
+}
 .\!mt-12 {
   margin-top: 3rem !important;
 }
@@ -760,9 +763,6 @@ video {
 }
 .mt-\[1px\] {
   margin-top: 1px;
-}
-.\!ml-auto {
-  margin-left: auto !important;
 }
 .block {
   display: block;
@@ -883,6 +883,9 @@ video {
 }
 .w-7 {
   width: 1.75rem;
+}
+.w-\[20px\] {
+  width: 20px;
 }
 .w-fit {
   width: -moz-fit-content;

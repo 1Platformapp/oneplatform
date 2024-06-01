@@ -1,5 +1,7 @@
-@if(count($user->personalChatPartners()) > 0)
-    @foreach($user->personalChatPartners() as $partnerId)
+@php $personalChats = isset($adminChat) ? [config('constants.admins')['masteradmin']['user_id']] : $user->personalChatPartners() @endphp
+@if(count($personalChats) > 0)
+
+    @foreach($personalChats as $partnerId)
         @php $partner = \App\Models\User::find($partnerId) @endphp
         @if(!$partner)
             @php continue @endphp
