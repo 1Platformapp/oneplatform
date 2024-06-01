@@ -175,7 +175,7 @@ i.orders_bottom_arrow.opened { border-bottom: 5px solid #808080; }
 .agents_listing .fully_booked { background: #28a745; opacity: 0.5; cursor: auto !important; }
 .smart_switch_outer { position: relative; }
 .smart_switch_txt { top: -25px; right: 0; position: absolute; font-size: 12px; color: #818181; }
-.user_message_hyp { color: #818181; text-decoration: none; word-break: break-all; }
+.user_message_hyp { text-decoration: none; word-break: break-all; }
 .user_message_hyp:hover { text-decoration: underline; }
 .ques_field_textarea { width: 100%; height: 100px; border: 1px solid #ccc; padding: 10px; font-size: 14px; font-family: Open sans, sans-serif; line-height: 20px; color: #444; }
 .chat_personal_group { align-items: center !important; }

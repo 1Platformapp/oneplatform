@@ -136,7 +136,7 @@
             @if($showAdvertMenus)
             <div class="hrd_center_outer hide_on_mobile clearfix">
                 <div class="hdr_search_outer">
-                    <input readonly class="evade_auto_fill" id="header-search-input" placeholder="Search Music, Artists and Lyrics" type="text">
+                    <input readonly class="evade_auto_fill" id="header-search-input" placeholder="Search" type="text">
                 </div>
             </div>
             @endif

@@ -738,7 +738,7 @@
 
                                     <li class="clearfix">
 
-                                        <p class="">Fans supported this</p>
+                                        <p class="">Supporters supported this</p>
 
                                     </li>
 

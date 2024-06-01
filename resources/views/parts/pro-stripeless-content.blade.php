@@ -12,7 +12,7 @@
         @if($page != 'domain' && $page != 'industry_contacts' && $page != 'crowdfund' && $page != 'add agent contacts')
         <div class="pro_stripeless_inner clearfix">
             <div class="pro_stripeless_head">
-                <i class="fa fa-exclamation-triangle"></i> 
+                <i class="fa fa-exclamation-triangle"></i>
                 @if($page == 'website_design')
                     You can design your website page but no one can purchase from it unless you complete your profile
                 @elseif($page == 'services')
@@ -63,7 +63,7 @@
                 <div class="pro_connect_head">{{$accessAction}} to get access</div>
                 <div class="pro_note">
                     <ul>
-                        <li>Add YouTube or Soundcloud URLs for your fans to promote your website or showcase your artworks online</li>
+                        <li>Add YouTube or Soundcloud URLs for your supporters to promote your website or showcase your artworks online</li>
                         <li>The YouTube or Soudcloud will stream from its respective source on your website</li>
                     </ul>
                 </div>
@@ -88,7 +88,7 @@
                 <div class="pro_note">
                     <ul>
                         <li>Add your premium videos from YouTube</li>
-                        <li>The premium videos can only viewed by particular users like your fans, supporters, subscribers or followers</li>
+                        <li>The premium videos can only viewed by particular users like your supporters, subscribers or followers</li>
                         <li>You will have full control over who can view these videos</li>
                     </ul>
                 </div>
@@ -100,7 +100,7 @@
                 <div class="pro_connect_head">{{$accessAction}} to get access</div>
                 <div class="pro_note">
                     <ul>
-                        <li>Add an option so your fans or supporters can subscribe to you</li>
+                        <li>Add an option so your supporters can subscribe to you</li>
                         <li>You can control the subscription amount and whether to switch it ON or OFF</li>
                     </ul>
                 </div>
@@ -137,7 +137,7 @@
                 <div class="pro_connect_head">{{$accessAction}} to get access</div>
                 <div class="pro_note">
                     <ul>
-                        <li>Create news and keep your fans updated with new events</li>
+                        <li>Create news and keep your supporters updated with new events</li>
                     </ul>
                 </div>
             </div>
@@ -164,7 +164,7 @@
                 <ul>
                     <li>Generate capital for your next musical venture</li>
                     <li>Create a charity campaign for good causes or a personal campaign to help your music</li>
-                    <li>Let your fans support you like never before</li>
+                    <li>Let your supporters support you like never before</li>
                     <li>Add unique bonuses to incentivise your supporters</li>
                 </ul>
             </div>

@@ -101,7 +101,7 @@
                 @endif
                 <div class="pro_acc_stat_each">
                     <div class="pro_acc_stat_name">
-                        Fans
+                        Supporters
                     </div>
                     <div class="pro_acc_stat_val">
                         {{count($purchaseParticulars['fans'])}}

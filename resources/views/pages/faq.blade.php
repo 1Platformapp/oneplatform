@@ -729,7 +729,7 @@
             </div>
             <div class="que_bottom">
                     <p>
-                        The secret to a great project is both a great idea and to connect your social media accounts, this will allow yourself to share with family, friends and fans.
+                        The secret to a great project is both a great idea and to connect your social media accounts, this will allow yourself to share with family, friends and supporters.
                     </p>
                     <p>
                         We also recommend using the best quality pitch video you can make as this is what will sell your project to your audience. You will be certain to gain donations from people who feel passionate about why you're raising money

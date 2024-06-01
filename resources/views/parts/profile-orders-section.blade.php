@@ -839,7 +839,7 @@
                                 <p>{{ $userCampaignDetails['campaignCurrencySymbol'].$userCampaignDetails['amountRaised'] }}</p>
                             </div>
                             <div class="ins_not_left">
-                                <p>Fans</p>
+                                <p>Supporters</p>
                             </div>
                             <div class="ins_not_right">
                                 <p>{{ $userCampaignDetails['campaignDonators'] }}</p>

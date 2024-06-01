@@ -765,7 +765,7 @@
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
-					Connecting at least 1 social media account is mandatory. It will help your fans connect with you from your website.
+					Connecting at least 1 social media account is mandatory. It will help your supporters connect with you from your website.
 				</div>
 			</div>
 		</div>
@@ -967,7 +967,7 @@
 			</div>
 			<div class="setup_tray_foot">
 				<div class="setup_tray_info">
-		            This is optional but highly recommended that you can look for an artist manager that will help you boost your sales or increase your fan base
+		            This is optional but highly recommended that you can look for an artist manager that will help you boost your sales or increase your support base
 		        </div>
 			</div>
 		</div>

@@ -500,7 +500,7 @@
                                         Print
                                     </div>
                                     <div class="pro_option_desc">
-                                        You design it, we print and ship it to your fans
+                                        You design it, we print and ship it to your supporters
                                     </div>
                                 </div>
                             </div>
@@ -585,7 +585,7 @@
                                                     <div class="pro_note">
                                                         <ul>
                                                             <li>This print process is for single colour designs only, and those that DO NOT include shading or fine detail</li>
-                                                            <li>The advantage of this process is flexibility - the logo colour is not fixed, and so your fans can choose any of the colour combos we offer at any time</li>
+                                                            <li>The advantage of this process is flexibility - the logo colour is not fixed, and so your supporters can choose any of the colour combos we offer at any time</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -779,7 +779,7 @@
                                         <div class="pro_design_st3_notes">
                                             <div class="pro_note">
                                                 <ul>
-                                                    <li>Choose which colors this product should be available to your fans</li>
+                                                    <li>Choose which colors this product should be available to your supporters</li>
                                                     <li>You must make your product available in at least one color</li>
                                                     <li>You can also choose which color should be the default</li>
                                                 </ul>
@@ -1316,7 +1316,7 @@
                                     <select id="pro_stream_more_viewers" name="pro_stream_more_viewers">
                                         <option value="">Choose who have access (optional)</option>
                                         <option value="all_subs">My subscribers</option>
-                                        <option value="all_fans">My fans</option>
+                                        <option value="all_fans">My supporters</option>
                                         <option value="all_follow">My followers</option>
                                         <option value="all_subs_fans_follow">All of above</option>
                                     </select>
@@ -1391,7 +1391,7 @@
                         <div class="clearfix proj_subscriber_sec">
                             <div class="pro_note">
                                 <ul>
-                                    <li>Encourage fans to subscribe a monthly contribution towards your projects</li>
+                                    <li>Encourage supporters to subscribe a monthly contribution towards your projects</li>
                                     <li>Before you change your subscription price please note that all current subscriptions will continue on the previous price. Only new subscribers will pay the new price</li>
                                 </ul>
                             </div>
@@ -1414,7 +1414,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-2">Contributions Box. This feature appears on your website, ideal for fans who want to contribute towards your career projects</div>
+                    <div class="mb-2">Contributions Box. This feature appears on your website, ideal for supporters who want to contribute towards your career projects</div>
                     <div class="border border-[#666] p-2 w-fit mb-2">
                         <div class="panel donator_profile_version donation_goalless colio_outer colio_dark">
                             <div class="donator_outer">
@@ -1731,7 +1731,7 @@
             <div class="pro_note">
                 <ul>
                     <li>Manage your news feed</li>
-                    <li>Let your fans know what you are upto</li>
+                    <li>Let your supporters know what you are upto</li>
                     <li>Write what you are planning ahead</li>
                 </ul>
             </div>
@@ -1750,7 +1750,7 @@
                                         <option value="">Choose tab</option>
                                         <option value="1">Bio</option>
                                         <option value="2">Music</option>
-                                        <option value="3">Fans</option>
+                                        <option value="3">Supporters</option>
                                         <option value="4">Social</option>
                                         <option value="6">Product</option>
                                         <option value="5">Video</option>

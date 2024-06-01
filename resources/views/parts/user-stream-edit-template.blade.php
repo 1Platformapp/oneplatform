@@ -62,11 +62,11 @@
             <div class="pro_stream_input_each">
                 <div class="stream_sec_opt_outer">
                     <select id="pro_stream_more_viewers" name="pro_stream_more_viewers">
-                        <option value="">Add Your Followers, Fans or Subscribers</option>
+                        <option value="">Add Your Followers, Supporters or Subscribers</option>
                         <option {{$stream->more_viewers == 'all_subs' ? 'selected' : ''}} value="all_subs">Add all my subscribers</option>
-                        <option {{$stream->more_viewers == 'all_fans' ? 'selected' : ''}} value="all_fans">Add all my fans</option>
+                        <option {{$stream->more_viewers == 'all_fans' ? 'selected' : ''}} value="all_fans">Add all my supporters</option>
                         <option {{$stream->more_viewers == 'all_follow' ? 'selected' : ''}} value="all_follow">Add my followers</option>
-                        <option {{$stream->more_viewers == 'all_subs_fans_follow' ? 'selected' : ''}} value="all_subs_fans_follow">Add my fans, followers, and subscribers</option>
+                        <option {{$stream->more_viewers == 'all_subs_fans_follow' ? 'selected' : ''}} value="all_subs_fans_follow">Add my supporters, followers, and subscribers</option>
                     </select>
                 </div>
             </div>

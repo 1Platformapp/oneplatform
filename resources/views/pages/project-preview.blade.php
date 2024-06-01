@@ -813,7 +813,7 @@
 
                             <li class="fleft">
 
-                                <p class="tier_one_text_two">Fans supported this</p>
+                                <p class="tier_one_text_two">Supporters supported this</p>
 
                             </li>
 

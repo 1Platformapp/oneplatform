@@ -289,7 +289,7 @@
                 <div class="pro_inp_list_outer">
                     <div class="pro_note">
                         <ul>
-                            <li>Boost your income and fan base by providing services</li>
+                            <li>Boost your income and support base by providing services</li>
                             <li>The services will appear on your website</li>
                         </ul>
                     </div>
@@ -404,7 +404,7 @@
                 <div class="pro_inp_list_outer">
                     <div class="pro_explainer_outer">
                         <div class="pro_explainer_inner">
-                            <div data-explainer-file="{{base64_encode('14FjTvLyrualDG_DqdCDF-Nqs3fjwnsOl')}}" data-explainer-title="How to add your portfolio" data-explainer-description="Add portfolios to boost confidance of your fans" class="pro_explainer_each">
+                            <div data-explainer-file="{{base64_encode('14FjTvLyrualDG_DqdCDF-Nqs3fjwnsOl')}}" data-explainer-title="How to add your portfolio" data-explainer-description="Add portfolios to boost confidance of your supporters" class="pro_explainer_each">
                                 <div class="pro_explainer_anim">
                                     <i class="fa fa-caret-right"></i>
                                 </div>
@@ -940,7 +940,7 @@
                                 <div class="check_each_outer">
                                     <i class="fa fa-check {{$user->default_tab_home == 3 ? '' : 'instant_hide'}}"></i>
                                 </div>
-                                <div class="check_each_name">Fans</div>
+                                <div class="check_each_name">Supporters</div>
                             </div>
                             <div class="pro_h_tab_btn_bottom">
                                 <i title="Hide" class="pro_tab_hide_show {{count($user->hidden_tabs_home) && in_array('3', $user->hidden_tabs_home) ? 'active' : ''}} fa fa-eye-slash"></i>&nbsp;
@@ -1136,7 +1136,7 @@
                 </div>
                 <p>Your 1Platform.tv domain is 1platform.tv/team. You can point your own custom domain that you own like team.com by following the instructions below.</p><br>
                 <p>
-                    After completing all the below steps, 1Platform TV team will be automatically notified about this and it can take up to two days for the changes to “propagate” out to your many fans around the world. During this transition phase, some people visiting your custom domain might see your 1Platform TV home page, while others see your old site (if you have one). This is normal. You’ll know things are set up correctly when entering your custom domain into your web browser brings up your 1Platform TV site.
+                    After completing all the below steps, 1Platform TV team will be automatically notified about this and it can take up to two days for the changes to “propagate” out to your many supporters around the world. During this transition phase, some people visiting your custom domain might see your 1Platform TV home page, while others see your old site (if you have one). This is normal. You’ll know things are set up correctly when entering your custom domain into your web browser brings up your 1Platform TV site.
                 </p><br>
                 <div class="each_order_tab">
                     <i class="fa fa-globe"></i>

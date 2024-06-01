@@ -1,33 +1,33 @@
 @extends('templates.advanced-template')
 
 
-@section('pagetitle') 
+@section('pagetitle')
     @if($user->profile->seo_title != '')
-        {{$user->profile->seo_title}} 
-    @else 
-        {{$user->name}} - Home 
+        {{$user->profile->seo_title}}
+    @else
+        {{$user->name}} - Home
     @endif
 @endsection
 
-@section('pagekeywords') 
+@section('pagekeywords')
     <meta name="robots" content="noindex, nofollow" />
 @endsection
 
-@section('pagedescription') 
+@section('pagedescription')
     @if($user->profile->seo_description != '')
         <meta name="description" content="{{$user->profile->seo_description}}"/>
-    @else 
+    @else
         <meta name="description" content="{{strip_tags(preg_replace('/\s+/', ' ', $userPersonalDetails['storyText']))}}"/>
     @endif
 @endsection
 
-@section('seocontent') 
+@section('seocontent')
 @endsection
 
 @section('page-level-css')
     <link rel="stylesheet" href="{{asset('css/user-home.min.css?v=3.8')}}"></link>
     <link rel="stylesheet" href="{{asset('css/portfolio.min.css')}}"></link>
-    
+
     @if($user->home_layout == 'background')
         <link rel="stylesheet" href="{{asset('css/user_home_background.min.css')}}"></link>
     @endif
@@ -92,7 +92,7 @@
 
 
 @section('preheader')
-    
+
     @if($user->home_layout == 'banner' && $user->custom_banner != '')
         <div style="background: none; width: 100%;" class="pre_header_banner">
             <img class="defer_loading instant_hide" alt="{{$user->name.'\'s banner'}}" style="width: 100%;" src="#" data-src="{{asset('user-media/banner/'.$user->custom_banner)}}">
@@ -122,7 +122,7 @@
 @stop
 
 @section('page-background')
-    
+
     @if($user->home_layout == 'background')
         <div data-url="/user-media/background/{{$user->custom_background}}" class="pg_back back_inactive"></div>
     @endif
@@ -171,10 +171,10 @@
                             <a href="{{route('item.share.track', ['itemSlug' => str_slug($item->song_name)])}}">Listen</a>
                         @else
                             <a href="{{route('item.share.product', ['itemSlug' => str_slug($item->title)])}}">View</a>
-                        @endif 
+                        @endif
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     @endif
 
@@ -221,10 +221,10 @@
 
     <div class="ch_center_outer user_hm_center">
 
-        <aside class="top_info_box hide_on_mobile"> 
+        <aside class="top_info_box hide_on_mobile">
             <div class="top_info_right_icon">
                 <i class="fa fa-share"></i>
-            </div> 
+            </div>
         </aside>
         <div class="tp_center_video_outer">
             <div class="jp-gui">
@@ -245,7 +245,7 @@
                     <div class="each_tab_btn tab_btn_social disabled" data-show="#tabd4">
                         <div class="border"></div>
                     </div>
-                    @if($userCampaignDetails['campaignIsLive'] == '1' && $userCampaignDetails['campaignStatus'] == 'active') 
+                    @if($userCampaignDetails['campaignIsLive'] == '1' && $userCampaignDetails['campaignStatus'] == 'active')
                         @php $hasCrowdfunder = 1 @endphp
                     @else
                         @php $hasCrowdfunder = 0 @endphp
@@ -268,7 +268,7 @@
                 <aside class="clearfix tab_btns_outer tab_shared mobile-only ch_tab_sec_outer">
                     <div class="each_tab_btn tab_btn_user_bio true_active" data-show="#tabd1">
                         <div class="border"></div>
-                    </div>  
+                    </div>
                     <div class="each_tab_btn tab_btn_music disabled" data-show="#tabd2">
                         <div class="border"></div>
                     </div>
@@ -421,12 +421,12 @@
                     <li>
                         <a onclick="return false;" class="ch_sup_fb chart_disabled" href="javascript:void(0)">
                             <i class="fab fa-facebook-f"></i>
-                        </a> 
+                        </a>
                     </li>
                     <li>
                         <a onclick="return false;" class="ch_sup_tw chart_disabled" href="javascript:void(0)">
                             <i class="fab fa-twitter"></i>
-                        </a> 
+                        </a>
                     </li>
                     @if($user->feature_tab_home)
                     <li>
@@ -442,20 +442,20 @@
                             @elseif($user->feature_tab_home == 6)
                             <i class="fa fa-ticket-alt"></i>
                             @endif
-                        </a> 
+                        </a>
                     </li>
                     @endif
                     @if(!$user->isCotyso())
                     <li>
                         <a class="ch_sup_chat chart_disabled" href="javascript:void(0)">
                             <i class="fa fa-comments"></i>
-                        </a> 
+                        </a>
                     </li>
                     @endif
                     <li>
                         <a onclick="return false;" class="ch_sup_fb full_support_me chart_disabled" href="javascript:void(0)">
                             <img src="{{asset('images/fa-users.png')}}">
-                        </a> 
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -463,7 +463,7 @@
         <div class="panel user_follow_outer disabled">
             <div class="user_follow_btn">
                 <div class="user_follow_inner">
-                    <i class="fa fa-rss"></i> 
+                    <i class="fa fa-rss"></i>
                     {{Auth::check() && $user && Auth::user()->isFollowerOf($user) ? 'Following' : 'Follow' }}
                 </div>
             </div>
@@ -473,8 +473,8 @@
             @include('parts.user-services-panel', ['user' => $user])
         @endif
 
-        @php 
-            $userNews = \App\Models\UserNews::where(['user_id' => $user->id])->orderBy('featured' , 'desc')->get() 
+        @php
+            $userNews = \App\Models\UserNews::where(['user_id' => $user->id])->orderBy('featured' , 'desc')->get()
         @endphp
         @if(count($userNews))
         <div class="panel news_updates_outer colio_outer colio_dark">
@@ -497,7 +497,7 @@
                     @php $tname = 'My bio' @endphp
                     @elseif($news->tab == '3')
                     <i class="fa fa-hand-holding-heart"></i>
-                    @php $tname = 'My fans' @endphp
+                    @php $tname = 'My supporters' @endphp
                     @elseif($news->tab == '4')
                     <i class="fa fa-share-alt"></i>
                     @php $tname = 'My social family' @endphp
@@ -631,7 +631,7 @@
                 </div>
                 <div data-target-id="3" class="user_short_tab_each disabled fa_tb">
                     <div class="user_short_tab_icon"></div>
-                    <div class="user_short_tab_txt">FANS</div>
+                    <div class="user_short_tab_txt">SUPPORTERS</div>
                 </div>
                 <div data-target-id="6" class="user_short_tab_each disabled st_tb">
                     <div class="user_short_tab_icon"></div>
@@ -684,7 +684,7 @@
 
                             <li class="fleft">
 
-                                <p class="tier_one_text_two">Fans supported this</p>
+                                <p class="tier_one_text_two">Supporters supported this</p>
 
                             </li>
 
@@ -747,7 +747,7 @@
 
 
 @section('slide')
-    
+
 @stop
 
 
@@ -787,9 +787,9 @@
 
 
 @section('footer')
-    
+
     @if($user->isCotyso())
         @include('parts.singing-footer')
     @endif
-    
+
 @stop

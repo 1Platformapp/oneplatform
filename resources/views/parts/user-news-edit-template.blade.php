@@ -21,7 +21,7 @@
                     <option value="">Choose tab</option>
                     <option {{$userNews->tab == '1' ? 'selected' : ''}} value="1">Bio</option>
                     <option {{$userNews->tab == '2' ? 'selected' : ''}} value="2">Music</option>
-                    <option {{$userNews->tab == '3' ? 'selected' : ''}} value="3">Fans</option>
+                    <option {{$userNews->tab == '3' ? 'selected' : ''}} value="3">Followers</option>
                     <option {{$userNews->tab == '4' ? 'selected' : ''}} value="4">Social</option>
                     <option {{$userNews->tab == '6' ? 'selected' : ''}} value="6">Product</option>
                     <option {{$userNews->tab == '5' ? 'selected' : ''}} value="5">Video</option>

@@ -880,7 +880,7 @@
                         <div class="flex-1 min-w-0">
                             <div class="cursor-pointer focus:outline-none">
                                 <span class="absolute inset-0" aria-hidden="true"></span>
-                                <p class="text-sm font-medium text-gray-900">Fans</p>
+                                <p class="text-sm font-medium text-gray-900">Supporters</p>
                                 <p class="text-sm text-gray-500 truncate">{{ $userCampaignDetails['campaignDonators'] }}</p>
                             </div>
                         </div>

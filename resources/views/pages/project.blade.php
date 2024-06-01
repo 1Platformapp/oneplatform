@@ -1196,7 +1196,7 @@
 
                             <li class="fleft">
 
-                                <p class="tier_one_text_two">Fans supported this</p>
+                                <p class="tier_one_text_two">Suporters supported this</p>
 
                             </li>
 
