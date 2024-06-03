@@ -637,6 +637,9 @@ video {
 .m-auto {
   margin: auto;
 }
+.m-2 {
+  margin: 0.5rem;
+}
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -664,6 +667,10 @@ video {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .\!ml-auto {
   margin-left: auto !important;
@@ -821,6 +828,9 @@ video {
 .h-\[28px\] {
   height: 28px;
 }
+.h-\[30px\] {
+  height: 30px;
+}
 .h-auto {
   height: auto;
 }
@@ -829,6 +839,12 @@ video {
 }
 .h-screen {
   height: 100vh;
+}
+.h-\[40px\] {
+  height: 40px;
+}
+.h-\[50px\] {
+  height: 50px;
 }
 .\!max-h-\[30px\] {
   max-height: 30px !important;
@@ -1027,6 +1043,9 @@ video {
 }
 .gap-px {
   gap: 1px;
+}
+.gap-8 {
+  gap: 2rem;
 }
 .gap-x-2 {
   -moz-column-gap: 0.5rem;

@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 use App\Mail\InstantCheckout;
+use App\Rules\EmailRule;
 use App\Mail\CancelSubscription;
+use App\Mail\SupporterMail;
 use App\Mail\ExpertRequest;
 use App\Mail\SecurePasswordChange;
 use App\Mail\ProjectUpdate;
@@ -26,6 +28,7 @@ use App\Mail\Chart;
 use App\Mail\ThankYou;
 
 use App\Models\Address;
+use App\Models\UserSupporter;
 use App\Models\Service;
 use App\Models\PersonalDomain;
 use App\Models\AgentTransfer;
@@ -3987,6 +3990,149 @@ class ProfileController extends Controller
         $instaRedirect = config('services.instagram.redirect');
         $redirectUrl = 'https://api.instagram.com/oauth/authorize/?client_id='.$instaClientId.'&redirect_uri='.$instaRedirect.'&scope=user_profile,user_media&response_type=code';
         return redirect($redirectUrl);
+    }
+
+    public function supporterForm(Request $request, $username = null){
+
+        if ($username) {
+
+            $commonMethods = new CommonMethods();
+            $user = User::where('username', $username)->get()->first();
+
+            if (!$user) {
+                return 'no user found';
+            }
+
+            $data = [
+                'commonMethods' => $commonMethods,
+                'userProfileImage' => $commonMethods->getUserDisplayImage($user->id),
+                'user' => $user
+            ];
+
+            return view( 'pages.supporter-form', $data );
+        }
+    }
+
+    public function supporterSignup(Request $request){
+
+        if ($request->has('stage')) {
+
+            $commonMethods = new CommonMethods();
+            $stage = $request->get('stage');
+            $email = $request->email;
+            $name = $request->name;
+            $password = $request->password;
+            $userId = $request->user_id;
+
+
+            if ($stage == 'one') {
+
+                $owner = User::find($userId);
+
+                if (!$owner) {
+                    return response()->json(['success' => false, 'message' => 'Unknow owner']);
+                }
+
+                $validator = Validator::make($request->all(), [
+                    'email' => ['required', new EmailRule, 'unique:users,email'],
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json(['success' => false, 'message' => 'Your provided email is not a valid email address or is taken ('.$email.')']);
+                }
+
+                $agentContact = AgentContact::where(['email' => $email])->get()->first();
+                $userSupporter = UserSupporter::where(['supporter_email' => $email])->get()->first();
+
+                if ($agentContact || $userSupporter) {
+                    return response()->json(['success' => false, 'message' => 'Your provided email is already registered. ('.$email.')']);
+                }
+
+                $code = rand(1000000, 9999999);
+                $userSupporter = new UserSupporter();
+                $userSupporter->owner_user_id = $owner->id;
+                $userSupporter->supporter_email = $email;
+                $userSupporter->supporter_name = $name;
+                $userSupporter->email_verification_code = $code;
+                $userSupporter->save();
+
+                Mail::to($email)->bcc(Config('constants.bcc_email'))->send(new SupporterMail($userSupporter, 'verify-email'));
+
+                return response()->json(['success' => true]);
+            } else if ($stage == 'two') {
+
+                $code = $request->code;
+                $userSupporter = UserSupporter::where('email_verification_code', $code)->where('is_email_verified', 0)->where('supporter_email', $email)->get()->first();
+
+                if (!$userSupporter) {
+                    return response()->json(['success' => false, 'message' => 'This action is expired or invalid']);
+                }
+
+                $owner = User::find($userSupporter->owner_user_id);
+
+                if (!$owner) {
+                    return response()->json(['success' => false, 'message' => 'Unknow owner']);
+                }
+
+                try {
+
+                    $nameParts = explode(' ', $name, 2);
+                    $firstName = $nameParts[0] ?? '';
+                    $lastName = $nameParts[1] ?? '';
+
+                    $user = new User();
+                    $address = new Address();
+                    $profile = new Profile;
+
+                    $user->name = $name;
+                    $user->first_name = $firstName;
+                    $user->surname = $lastName;
+                    $user->email = $email;
+                    $user->contact_number = NULL;
+                    $user->music_url = NULL;
+                    $user->password = bcrypt($password);
+                    $user->subscription_id = 0;
+                    $user->active = 0;
+                    $user->api_token = str_random(60);
+                    $user->manager_chat = NULL;
+                    $user->skills = '';
+                    $user->sec_skill = '';
+                    $user->level = '';
+                    $user->username = NULL;
+                    $user->is_buyer_only = 1;
+                    $user->role_id = $owner->role_id;
+                    $user->save();
+
+                    $address->alias = 'main address';
+                    $address->user_id = $user->id;
+                    $address->city_id = 36;
+                    $address->country_id = 213;
+                    $address->save();
+
+                    $profile->birth_date = Carbon::now();
+                    $profile->user_id = $user->id;
+                    $profile->default_currency = 'USD';
+                    $profile->basic_setup = 1;
+                    $profile->save();
+
+                    $userInternalSubscription = new InternalSubscription();
+                    $userInternalSubscription->user_id = $user->id;
+                    $userInternalSubscription->subscription_package = 'silver_0_0';
+                    $userInternalSubscription->subscription_status = 1;
+                    $userInternalSubscription->save();
+
+                    $userSupporter->is_email_verified = 1;
+                    $userSupporter->save();
+
+                    Mail::to($owner->email)->bcc(Config('constants.bcc_email'))->send(new SupporterMail($userSupporter, 'request-approval'));
+                    return response()->json(['success' => true]);
+
+                } catch (\Exception $ex) {
+
+                    return response()->json(['success' => false, 'message' => $ex->getMessage()]);
+                }
+            }
+        }
     }
 
     public function connectUserSocialInstagram(Request $request){

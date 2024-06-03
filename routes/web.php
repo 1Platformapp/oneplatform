@@ -347,6 +347,8 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
     Route::get('master-user', [ChartController::class, 'masterUser'])->name('master.user');
     Route::post('master-user', [ChartController::class, 'masterUser'])->name('post.master.user');
     Route::post('prepare-zip', [ProfileController::class, 'prepareZip'])->name('prepare.zip');
+    Route::get('supporters/{username}', [ProfileController::class, 'supporterForm'])->name('user.supporter.form');
+    Route::post('supporter-signup', [ProfileController::class, 'supporterSignup'])->name('user.supporter.signup');
     Route::get('download-zip/{dir}/{fileName}/{downloadAs}', [ProfileController::class, 'downloadZip'])->name('download.zip');
     Route::get('save-user-story-text/{id}', [ProjectController::class, 'saveUserStoryText'])->name('save.user.story.text');
     Route::get('play-media-element-video/{videoId}', [ChartController::class, 'playMediaElementVideo'])->name('play-.media.element.video');
