@@ -71,6 +71,14 @@ class UserChatGroup extends Authenticatable
         }
     }
 
+    public function isSupporterGroup(){
+
+        $group = UserSupporter::where(['supporter_user_id'=> $this->contact_id, 'owner_user_id'=> $this->agent_id])->get()->first();
+        $return = $group ? true : false;
+
+        return $return;
+    }
+
     public function getGroupMembers(){
 
         $return = '';

@@ -16,11 +16,13 @@
                             <i class="fas fa-users"></i>
                         </a>
                     </div>
+                    @endif
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Calendar" class="m_btn_right_icon_each m_btn_calendarr active" data-id="my-calendar" data-head="My Calendar">
                             <i class="fa fa-calendar"></i>
                         </a>
                     </div>
+                    @if(!$user->is_buyer_only)
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Questions" class="m_btn_right_icon_each m_btn_questionnaires active" data-id="my-questionnaires" data-head="Project Briefs">
                             <i class="far fa-question-circle"></i>
@@ -38,8 +40,8 @@
                     </div>
                     @else
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
-                        <a title="Personal Chat" class="m_btn_right_icon_each m_btn_personal_chat active" data-id="personal-chat" data-head="Chat">
-                            <i class="fa fa-comment"></i>
+                        <a title="Chat" class="m_btn_right_icon_each m_btn_group_chat active" data-id="group-chat" data-head="Chat">
+                            <i class="fa fa-comments"></i>
                         </a>
                     </div>
                     @endif
@@ -137,6 +139,9 @@
                         </div>
                         <div class="each_dash_section instant_hide" data-value="personal-chat">
                             <div class="personal-chat-well"></div>
+                        </div>
+                        <div class="each_dash_section instant_hide" data-value="group-chat">
+                            <div class="group-chat-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-calendar">
                             <div>
@@ -928,7 +933,7 @@
         $('.each_dash_section[data-value="industry-contacts"').removeClass('instant_hide');
     });
 
-    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_industry-contacts, .m_btm_admin_chat, .m_btn_personal_chat, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
+    $('.m_btn_management_plan, .m_btn_contact_management, .m_btn_calendarr, .m_btn_group_chat, .m_btn_industry-contacts, .m_btm_admin_chat, .m_btn_personal_chat, .m_btn_transactions, .m_btn_questionnaires, .m_btn_contracts, .m_btm_profile').click(function(e){
 
         var id = $(this).attr('data-id');
         var heading = $(this).attr('data-head');
@@ -971,6 +976,16 @@
                 $('.contact-management-well').html('');
                 $('.each_dash_section[data-value="contact-management"] .each-stage').first().trigger('click');
                 $('.each_dash_section[data-value="contact-management"] .each-stage').addClass('disabled');
+            }
+        }
+
+        if ($(this).hasClass('m_btn_group_chat')) {
+
+            if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
+                $('.loading').removeClass('instant_hide');
+                getGroupChat();
+            } else {
+                $('.group-chat-well').html('');
             }
         }
 
@@ -1279,6 +1294,27 @@
                 }else{
                     console.log(data.error);
                     $('.contact-management-well').html(data.error);
+                }
+            }
+        });
+    }
+
+    function getGroupChat(){
+
+        $.ajax({
+
+            url: "/informationFinder",
+            dataType: "json",
+            type: 'post',
+            data: {'find_type': 'group-chat', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
+            success: function(response) {
+
+                removeLoading();
+                if(response.success == 1){
+                    $('.group-chat-well').html(response.data.data);
+                }else{
+                    console.log(data.error);
+                    $('.group-chat-well').html(data.error);
                 }
             }
         });

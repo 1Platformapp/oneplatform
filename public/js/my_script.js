@@ -1960,6 +1960,13 @@ $(document).ready(function() {
 
             });
 
+        }else if( deleteId && deleteItemType == 'agent-supporter-request' ){
+
+            $.post( "/supporter-request-delete" , { id: deleteId }, function(data) {
+
+                location.reload();
+            });
+
         }else if( deleteId && deleteItemType == 'user-port' ){
 
 
@@ -2018,6 +2025,33 @@ $(document).ready(function() {
 
         }
 
+    });
+
+    $('body').delegate( ".pro_confirm_approve_outer #pro_approve_submit_yes", "click", function(e){
+
+        e.preventDefault();
+        var id = $('.pro_confirm_approve_outer #pro_approve_submit_yes').attr('data-id');
+        var itemType = $('.pro_confirm_approve_outer #pro_approve_submit_yes').attr('data-item-type');
+
+        if( id && itemType == 'contact' ){
+
+        }else if( id && itemType == 'supporter' ){
+
+            $.post( "/supporter-signup-approve" , { id: id }, function(data) {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    $('.pro_confirm_approve_outer .error').removeClass('instant_hide').text(data.message);
+                }
+            });
+        }
+    });
+
+    $('body').delegate( ".pro_confirm_approve_outer #pro_confirm_approve_submit_no", "click", function(e){
+
+        e.preventDefault();
+        $('.pro_confirm_approve_outer').hide();
+        $('#body-overlay').hide();
     });
 
     $('.pro_confirm_delete_outer #pro_confirm_delete_submit_no').click(function(e){

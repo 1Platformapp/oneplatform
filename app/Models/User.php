@@ -890,6 +890,15 @@ class User extends Authenticatable
         return $groups;
     }
 
+    public function allChatGroups(){
+
+        $groups = UserChatGroup::where('agent_id', $this->id)->orWhere('contact_id', $this->id)->get()->filter(function ($group){
+            return $group->agent && $group->contact && $group->isSupporterGroup();
+        });
+
+        return $groups;
+    }
+
     /**
 
      * @return bool
@@ -1587,6 +1596,20 @@ class User extends Authenticatable
     {
 
         return $this->hasMany( StripeSubscription::class, 'customer_id', 'id' )->orderBy('id', 'desc');
+
+    }
+
+    public function supporterRequests()
+    {
+        $requests = UserSupporter::where(['owner_user_id' => $this->id, 'is_email_verified' => 1, 'is_accepted' => 0])->get();
+        return $requests;
+    }
+
+    public function supportOwners()
+
+    {
+
+        return $this->hasMany( UserSupporter::class, 'supporter_user_id' );
 
     }
 

@@ -9,13 +9,13 @@ use Illuminate\Notifications\Notifiable;
 
 class UserSupporter extends Authenticatable
 {
-    public function owner()
+    public function supporterUser()
     {
-        return $this->belongsTo( User::class );
+        return $this->belongsTo(User::class, 'supporter_user_id');
     }
 
-    public function supporter()
+    public function ownerUser()
     {
-        return $this->belongsTo( User::class );
+        return $this->belongsTo(User::class, 'owner_user_id');
     }
 }

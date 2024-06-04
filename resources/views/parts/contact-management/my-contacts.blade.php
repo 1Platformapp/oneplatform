@@ -7,6 +7,7 @@
             <i class="ml-2 text-gray-500 fa fa-search"></i>
             <div data-target="agent_contact_listing" class="flex-1 ml-2" contenteditable="true" placeholder="Search your contacts by name"></div>
         </div>
+        @if(!isset($userGroups))
         <div class="flex-1 m_btm_filter_drop">
             <select data-target="agent_contact_listing" class="m_btm_filter_dropdown">
                 <option value="">Filter contacts</option>
@@ -16,6 +17,7 @@
                 <option value="Main Network">My Main Network</option>
             </select>
         </div>
+        @endif
         <div class="flex-1 mt-10 smart_switch_outer switch_personal_chat md:mt-0 md:ml-auto">
             <div class="smart_switch_txt">Show Personal Chat</div>
             <label class="smart_switch">
@@ -27,7 +29,7 @@
     <div class="btn_list_outer">
         <div class="chat_filter_container">
             <div class="chat_filter_tab chat_filter_contacts">
-            @if(count($contacts) > 0)
+            @if(isset($contacts) && count($contacts) > 0)
                 @php $counter = 0 @endphp
                 @foreach($contacts as $key => $contact)
                     @if(!$contact->contactUser || !$contact->agentUser)
@@ -158,6 +160,74 @@
                             </div>
                             @endif
                             <div class="each_dash_section instant_hide" data-id="contact_chat_{{$contact->id}}">
+                                @include('parts.agent-contact-chat')
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @elseif(isset($userGroups) && count($userGroups))
+            @php $counter = 0 @endphp
+                @foreach($userGroups as $key => $group)
+                    @php $counter++ @endphp
+                    @php
+                        $contactUser = $group->contact;
+                        $agentUser = $group->agent;
+                        $partnerUser = Auth::user()->id == $contactUser->id ? $agentUser : $contactUser;
+                        $contactPDetails = $commonMethods->getUserRealDetails($partnerUser->id)
+                    @endphp
+                    <div data-partner="{{$partnerUser->id}}" class="clearfix agent_contact_listing music_btm_list no_sorting">
+                        <div class="edit_elem_top">
+                            <div class="m_btm_list_left">
+                                @if($counter < 10)
+                                <div class="music_btm_thumb">
+                                    <img src="{{$contactPDetails['image']}}" alt="">
+                                </div>
+                                @else
+                                <div data-image="{{$contactPDetails['image']}}" class="music_btm_thumb">
+                                    <div class="music_bottom_load_thumb">Load Image</div>
+                                </div>
+                                @endif
+                                <ul class="music_btm_img_det">
+                                    <li>
+                                        <a class="filter_search_target" href="">
+                                            {{$partnerUser->first_name.' '.$partnerUser->surname}}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <br>
+                                            {{$contactPDetails['city'] != '' ? ' - '.$contactPDetails['city'] : ''}}
+                                            {{$contactPDetails['country'] != '' ? ' - '.$contactPDetails['country'] : ''}}
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="m_btm_right_icons">
+                                <ul>
+                                    <li>
+                                        <a title="Chat" class="m_btn_right_icon_each m_btn_chat active" data-id="{{$group->id}}">
+                                            <i class="fas fa-comment-dots"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a title="Calendar" class="m_btn_right_icon_each m_btn_calendar active" data-id="{{$group->id}}">
+                                            <i class="fa fa-calendar"></i>
+                                        </a>
+                                    </li>
+                                    @if(Auth::user()->id == $agentUser->id)
+                                    <li>
+                                        <a title="Delete" class="m_btn_right_icon_each m_btm_del active" data-del-id="{{$group->id}}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="edit_elem_bottom">
+                            <div class="each_dash_section instant_hide" data-id="contact_chat_{{$group->id}}">
                                 @include('parts.agent-contact-chat')
                             </div>
                         </div>
@@ -373,7 +443,7 @@
             }
         });
 
-        $('.m_btm_del').click(function(e) {
+        $('body').delegate('.m_btm_del', 'click', function(e){
 
             e.preventDefault();
             var id = $(this).attr('data-del-id');
@@ -385,6 +455,9 @@
             } else if ($(this).closest('.music_btm_list').hasClass('agent_contact_request_listing')) {
 
                 $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-item-type', 'agent-contact-request');
+            } else if ($(this).closest('.music_btm_list').hasClass('agent_supporter_request_listing')) {
+
+                $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-item-type', 'agent-supporter-request');
             }
 
             if (id) {

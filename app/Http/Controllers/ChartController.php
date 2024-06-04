@@ -1299,6 +1299,11 @@ class ChartController extends Controller
                 $accessGranted = 1;
             }
 
+            if($findType == 'group-chat' && $identityType == 'subscriber'){
+                $find = Auth::user()->id;
+                $accessGranted = 1;
+            }
+
             if($identityType == 'subscription_user'){
                 $subscription = StripeSubscription::find($identity);
                 if($subscription && $subscription->user && $user && $subscription->user->id == $user->id){
@@ -1442,6 +1447,12 @@ class ChartController extends Controller
                     }else{
                         $error = 'Target information does not exist';
                     }
+                }
+                if($findType == 'group-chat'){
+
+                    $success = 1;
+                    $data2 = \View::make('parts.contact-management.my-contacts', ['commonMethods' => $commonMethods, 'user' => Auth::user(), 'userGroups' => Auth::user()->allChatGroups()])->render();
+                    $data['data'] = $data2;
                 }
                 if($findType == 'email_duplication_truth'){
 

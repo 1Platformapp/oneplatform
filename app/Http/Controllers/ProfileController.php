@@ -4062,7 +4062,12 @@ class ProfileController extends Controller
             } else if ($stage == 'two') {
 
                 $code = $request->code;
-                $userSupporter = UserSupporter::where('email_verification_code', $code)->where('is_email_verified', 0)->where('supporter_email', $email)->get()->first();
+
+                if (!ctype_digit($code)) {
+                    return response()->json(['success' => false, 'message' => 'This action is expired or invalid']);
+                }
+
+                $userSupporter = UserSupporter::where('email_verification_code', '=', $code)->where('is_email_verified', 0)->where('supporter_email', $email)->get()->first();
 
                 if (!$userSupporter) {
                     return response()->json(['success' => false, 'message' => 'This action is expired or invalid']);
@@ -4076,51 +4081,7 @@ class ProfileController extends Controller
 
                 try {
 
-                    $nameParts = explode(' ', $name, 2);
-                    $firstName = $nameParts[0] ?? '';
-                    $lastName = $nameParts[1] ?? '';
-
-                    $user = new User();
-                    $address = new Address();
-                    $profile = new Profile;
-
-                    $user->name = $name;
-                    $user->first_name = $firstName;
-                    $user->surname = $lastName;
-                    $user->email = $email;
-                    $user->contact_number = NULL;
-                    $user->music_url = NULL;
-                    $user->password = bcrypt($password);
-                    $user->subscription_id = 0;
-                    $user->active = 0;
-                    $user->api_token = str_random(60);
-                    $user->manager_chat = NULL;
-                    $user->skills = '';
-                    $user->sec_skill = '';
-                    $user->level = '';
-                    $user->username = NULL;
-                    $user->is_buyer_only = 1;
-                    $user->role_id = $owner->role_id;
-                    $user->save();
-
-                    $address->alias = 'main address';
-                    $address->user_id = $user->id;
-                    $address->city_id = 36;
-                    $address->country_id = 213;
-                    $address->save();
-
-                    $profile->birth_date = Carbon::now();
-                    $profile->user_id = $user->id;
-                    $profile->default_currency = 'USD';
-                    $profile->basic_setup = 1;
-                    $profile->save();
-
-                    $userInternalSubscription = new InternalSubscription();
-                    $userInternalSubscription->user_id = $user->id;
-                    $userInternalSubscription->subscription_package = 'silver_0_0';
-                    $userInternalSubscription->subscription_status = 1;
-                    $userInternalSubscription->save();
-
+                    $userSupporter->supporter_password = base64_encode($password);
                     $userSupporter->is_email_verified = 1;
                     $userSupporter->save();
 
@@ -4133,6 +4094,106 @@ class ProfileController extends Controller
                 }
             }
         }
+    }
+
+    public function supporterSignupApprove(Request $request){
+
+        $userSupporter = UserSupporter::where('id', $request->id)->where('is_accepted', 0)->get()->first();
+
+        if (!$userSupporter) {
+            return response()->json(['success' => false, 'message' => 'This action is expired or invalid']);
+        }
+
+        try {
+
+            $owner = User::find($userSupporter->owner_user_id);
+            $nameParts = explode(' ', $userSupporter->supporter_name, 2);
+            $firstName = $nameParts[0] ?? '';
+            $lastName = $nameParts[1] ?? '';
+
+            $user = new User();
+            $address = new Address();
+            $profile = new Profile;
+
+            $user->name = $userSupporter->supporter_name;
+            $user->first_name = $firstName;
+            $user->surname = $lastName;
+            $user->email = $userSupporter->supporter_email;
+            $user->contact_number = NULL;
+            $user->music_url = NULL;
+            $user->password = bcrypt(base64_decode($userSupporter->supporter_password));
+            $user->subscription_id = 0;
+            $user->active = 1;
+            $user->api_token = str_random(60);
+            $user->manager_chat = NULL;
+            $user->skills = '';
+            $user->sec_skill = '';
+            $user->level = '';
+            $user->username = NULL;
+            $user->is_buyer_only = 1;
+            $user->role_id = $owner->role_id;
+            $user->save();
+
+            $address->alias = 'main address';
+            $address->user_id = $user->id;
+            $address->city_id = 36;
+            $address->country_id = 213;
+            $address->save();
+
+            $profile->birth_date = Carbon::now();
+            $profile->user_id = $user->id;
+            $profile->default_currency = 'USD';
+            $profile->basic_setup = 1;
+            $profile->save();
+
+            $userInternalSubscription = new InternalSubscription();
+            $userInternalSubscription->user_id = $user->id;
+            $userInternalSubscription->subscription_package = 'silver_0_0';
+            $userInternalSubscription->subscription_status = 1;
+            $userInternalSubscription->save();
+
+            $userSupporter->is_accepted = 1;
+            $userSupporter->supporter_user_id = $user->id;
+            $userSupporter->save();
+
+            $userChatGroup = new UserChatGroup();
+            $userChatGroup->agent_id = $owner->id;
+            $userChatGroup->contact_id = $user->id;
+            $userChatGroup->save();
+
+            Mail::to($user->email)->bcc(Config('constants.bcc_email'))->send(new SupporterMail($userSupporter, 'request-approved'));
+            return response()->json(['success' => true]);
+
+        } catch (\Exception $ex) {
+
+            return response()->json(['success' => false, 'message' => $ex->getMessage()]);
+        }
+    }
+
+    public function supporterRequestDelete(Request $request){
+
+        $user = Auth::user();
+        $success = 0;
+        $error = '';
+
+        if($request->has('id') && $user){
+
+            $id = $request->get('id');
+            $request = UserSupporter::where(['owner_user_id' => $user->id, 'id' => $id])->first();
+            if($request){
+
+                $request->delete();
+                $success = 1;
+            }else{
+
+                $error = 'No data exist';
+            }
+        }else{
+
+            $error = 'No/Invalid data';
+        }
+
+        return json_encode(['error' => $error, 'success' => $success]);
     }
 
     public function connectUserSocialInstagram(Request $request){

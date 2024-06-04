@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Models\UserSupporter;
+use App\Models\User;
 
 class SupporterMail extends Mailable
 {
@@ -45,7 +46,15 @@ class SupporterMail extends Mailable
         } else if($this->mode == 'request-approval'){
 
             return $this->view('pages.email.user-supporter-request-approval')
-            ->subject($this->supporter->supporter_name.", want to become your suppoter")
+            ->subject($this->supporter->supporter_name.", want to become your supporter")
+            ->with([
+                'supporter' => $this->supporter,
+            ]);
+        } else if($this->mode == 'request-approved'){
+
+            $owner = User::find($this->supporter->owner_user_id);
+            return $this->view('pages.email.user-supporter-request-approved')
+            ->subject($owner->name.", has approved your request to become a supporter")
             ->with([
                 'supporter' => $this->supporter,
             ]);
