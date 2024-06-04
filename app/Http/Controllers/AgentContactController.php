@@ -242,12 +242,15 @@ class AgentContactController extends Controller
         $skill = $request->get('pro_contact_skill');
         $phone = $request->get('pro_contact_phone');
 
-        $validator = Validator::make($request->all(), [
-            'pro_contact_email' => ['required', new EmailRule],
-        ]);
+        if ($email != '') {
 
-        if ($validator->fails()) {
-            return redirect()->back()->with(['error' => 'Your provided email is not a valid email address. ('.$email.')']);
+            $validator = Validator::make($request->all(), [
+                'pro_contact_email' => [new EmailRule],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->with(['error' => 'Your provided email is not a valid email address. ('.$email.')']);
+            }
         }
 
         if($contact){
