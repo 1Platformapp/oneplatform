@@ -46,7 +46,7 @@
 .auth_carosel_animate { font-size: 18px; margin-left: 1px; }
 .auth_carosel_nav_each.disabled { cursor: not-allowed; opacity: 0.65; }
 
-.dsk_her { display: flex; flex-direction: row; font-family: 'Montserrat', sans-serif; background-image: url('/images/login-back-02.jpg'); background-position: right center; background-repeat: no-repeat; height: 370px; }
+.dsk_her { display: flex; flex-direction: row; font-family: 'Montserrat', sans-serif; background-image: url('/images/login-back-03.jpg'); background-position: right center; background-repeat: no-repeat; height: 370px; }
 .dsk_her .dsk_main_title { text-transform: capitalize; color: #fff; font-size: 37px; font-weight: bold; margin-left: 50px; }
 .dsk_her .dsk_sub_title { margin-top: 16px; color: #fff; font-size: 15px; margin-left: 50px; }
 .dsk_her #dsk_signup { display: inline-block; background: rgb(19, 168, 158); color: #fff; border-radius: 2px; margin-left: 50px; padding: 8px; cursor: pointer; text-decoration: none; border: 1px solid rgb(19, 168, 158);  }
