@@ -98,7 +98,7 @@
                     </div>
                     @php $slides = \App\Models\ScrollerSetting::all() @endphp
                     @if(count($slides))
-                    <div class="auth_carosel_section auth_carosel_user">
+                    <!--<div class="auth_carosel_section auth_carosel_user">
                         <div class="auth_carosel_in">
                         	@foreach($slides as $slide)
                         	@php $details = 0 @endphp
@@ -149,7 +149,7 @@
                                 <i class="fa fa-angle-right"></i>
                             </div>
                         </div>
-                    </div>
+                    </div>!-->
                     @endif
                     @php $programs = \App\Models\SiteProgram::orderBy('order' ,'asc')->get() @endphp
                     @if(count($programs))
