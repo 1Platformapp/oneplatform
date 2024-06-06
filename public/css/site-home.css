@@ -47,10 +47,10 @@
 .auth_carosel_nav_each.disabled { cursor: not-allowed; opacity: 0.65; }
 
 .dsk_her { display: flex; flex-direction: row; font-family: 'Montserrat', sans-serif; background-image: url('/images/login-back-03.jpg'); background-position: right center; background-repeat: no-repeat; height: 370px; }
-.dsk_her .dsk_main_title { text-transform: capitalize; color: #fff; font-size: 37px; font-weight: bold; margin-left: 50px; }
-.dsk_her .dsk_sub_title { margin-top: 16px; color: #fff; font-size: 15px; margin-left: 50px; }
+.dsk_her .dsk_main_title { text-transform: capitalize; font-size: 37px; font-weight: bold; margin-left: 50px; }
+.dsk_her .dsk_sub_title { margin-top: 16px; font-size: 15px; margin-left: 50px; }
 .dsk_her #dsk_signup { display: inline-block; background: rgb(19, 168, 158); color: #fff; border-radius: 2px; margin-left: 50px; padding: 8px; cursor: pointer; text-decoration: none; border: 1px solid rgb(19, 168, 158);  }
-.dsk_her #dsk_signin { display: inline-block; border: 1px solid #fff; color: #fff; border-radius: 2px; margin-left: 20px; padding: 8px; }
+.dsk_her #dsk_signin { display: inline-block; border: 1px solid black; border-radius: 2px; margin-left: 20px; padding: 8px; }
 .dsk_right { padding: 20px 0; padding-right: 7rem; margin-left: auto; }
 .dsk_left { padding-top: 40px; }
 .dsk_right video { max-width: 100%; max-height: 100%; }

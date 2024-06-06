@@ -23,7 +23,7 @@
 @stop
 
 @section('page-level-js')
-    <script type="text/javascript" src="{{asset('js/site-home.min.js?v=1.1') }}"></script>
+    <script type="text/javascript" src="{{asset('js/site-home.min.js?v=1.2') }}"></script>
 @stop
 
 @section('header')
