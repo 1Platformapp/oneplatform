@@ -66,6 +66,8 @@
 
 @media (min-width:320px) and (max-width: 767px) {
 
+    .dsk_left, .dsk_her { padding-top: 0 !important; }
+    .dsk_her { height: 320px !important; }
     body { background-size: auto; }
     .auth_box_outer { top: -35px; width: unset; padding: 114px 10px !important; margin: 0 10px; }
     .auth_box_outer .form_group input { height: 38px; }
@@ -82,11 +84,11 @@
 
     .dsk_support_outer { margin-left: 23px; max-width: unset; }
     .dsk_support_each { flex: 0 1 33.33%; margin-bottom: 3px; margin-right: unset; }
-    .dsk_her { height: auto; background-position: right top; background-image: url('/images/mob_he.jpg?v=1.2'); padding-top: 50px; flex-direction: column; }
+    .dsk_her { height: auto; background-position: right top; background-image: url('/images/mob-home.jpeg?v=1.2'); padding-top: 50px; flex-direction: column; }
     .dsk_her .dsk_main_title { margin-left: 23px; font-size: 29px; font-weight: normal; }
     .dsk_her .dsk_sub_title { margin-left: 23px; line-height: 20px; }
-    .dsk_her #dsk_signup { font-size: 13px; margin-left: 23px; padding: 8px; width: 150px; text-align: center; }
-    .dsk_her #dsk_signin { margin-left: 23px; width: 150px; text-align: center; font-size: 13px; padding: 8px; }
+    .dsk_her #dsk_signup { font-size: 13px; margin-left: 23px; padding: 8px; text-align: center; }
+    .dsk_her #dsk_signin { margin-left: 23px; text-align: center; font-size: 13px; padding: 8px; }
     .dsk_her .dsk_right { padding: 20px 0 0 0; }
     .auth_carosel_user { margin: 20px 0px 0 0px; }
     .auth_carosel_user .auth_carosel_in { width: 95%; margin: 0 auto; }
@@ -96,9 +98,9 @@
     .auth_carosel_user .auth_each_carosel { min-width: 50%; }
     .auth_carosel_nav { margin-bottom: 20px; margin-left: 26px; }
     .app_download { margin-left: 10px; margin-bottom: 30px; margin-top: 18px; position: relative; top: unset; }
-    .app_download a { max-width: unset;]}
+    .app_download a { max-width: unset;}
     .app_download_ic { margin-right: 10px; flex: 0 1 50%; }
-    .app_download_ic img { width: 100%; }
+    .app_download_ic img { width: 120px; }
     .dsk_support_each,.dsk_sub_title { font-size: 14px; }
     .dsk_tools { margin-top: 20px; }
     #dsk_dashboard { margin-left: 23px; margin-top: 15px; }
