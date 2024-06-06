@@ -217,7 +217,7 @@
                     </div>
                     <div class="usr_men_cat_each {{isset($page)&&$page=='media'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
-                            My Products
+                            My E-Shop
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -287,7 +287,7 @@
                     @if(!Auth::user()->is_buyer_only)
                     <div class="usr_men_cat_each {{isset($page)&&$page=='tools'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
-                            Artist Tools
+                            Marketing Tools
                         </div>
                         <div class="usr_men_cat_body">
                             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -390,9 +390,6 @@
                     </div>
                     @endif
                     <div class="usr_men_cat_each usr_men_logout">
-                        <button type="button" class="usr_men_cat_head" onclick="confirmPopUp()">
-                            <i class="fa fa-trash"></i>&nbsp;Delete my account
-                        </button>
                         <a href="{{route('logout')}}" class="usr_men_cat_head">
                             <i class="fa fa-sign-out"></i>&nbsp;Logout
                         </a>
@@ -412,11 +409,6 @@
     </div>
 
     <script>
-        function confirmPopUp() {
-            if(confirm('Are you sure you want to delete your account?')) {
-                window.location.href = "{{ route('agency.delete.account') }}";
-            }
-        }
 
         $('.us_men_close svg').click(function(){
 

@@ -1141,8 +1141,7 @@
             <div class="pro_note">
                 <ul>
                     <li>You can add YouTube or SoundCloud Links here</li>
-                    <li>All links must be music related to you or the platform. You must own the copyrights</li>
-                    <li>You will be able to optionally use a YouTube link and apply for 1Platform chart competition (Coming soon)</li>
+                    <li>You must own the copyrights for all the videos you add here</li>
                 </ul>
             </div>
             @if($user->internalSubscription)

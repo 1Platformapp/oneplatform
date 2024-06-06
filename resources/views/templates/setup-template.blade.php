@@ -49,7 +49,7 @@
                     <div style="max-width: 55%; margin: 40px auto 0 auto;">
                         <div class="back_to_profile">
                             <i class="fa fa-arrow-left"></i>
-                            <a style="color: #000;" href="{{route('agency.dashboard')}}">Back to dashboard</a>
+                            <a style="background-color: #444; padding: 8px; color: #fff; border-radius: 7px;" href="{{route('agency.dashboard')}}">Back to dashboard</a>
                         </div>
                     </div>
                     <div class="clearfix setup_inner">

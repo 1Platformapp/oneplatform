@@ -61,12 +61,12 @@
 		<img alt="1platform tv" class="lazy_loading"  src="#" data-src="{{asset('images/banner5_res.jpg')}}">
 	</a>
 </div>
-<div id="tv_menu_license" class="tv_menu_each">
-	<!--<a href="{{route('search')}}">!-->
+<!--<div id="tv_menu_license" class="tv_menu_each">
+	<a href="{{route('search')}}">
 	<a onclick="$('.tv_slide_out_outer').removeClass('active');" class="hdr_search_outer" href="javascript:void(0)">
 		<img alt="1platform licensing" class="lazy_loading"  src="#" data-src="{{asset('images/banner7_res.jpg')}}">
 	</a>
-</div>
+</div>!-->
 <!--
 <div id="tv_menu_expert" class="tv_menu_each">
 	<a href="{{route('live')}}">

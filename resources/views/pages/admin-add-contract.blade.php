@@ -135,7 +135,7 @@
         @if(Auth::check())
         <div class="back_to_profile">
             <i class="fa fa-arrow-left"></i>
-            <a href="{{route('agency.dashboard')}}">Back to dashboard</a>
+            <a style="background-color: #444; padding: 8px; color: #fff; border-radius: 7px;" href="{{route('agency.dashboard')}}">Back to dashboard</a>
         </div>
         @endif
         <div class="contact_details_section">

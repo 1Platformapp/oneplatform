@@ -108,6 +108,9 @@
                                 </select>
                             </div>
                         </div>
+                        <button type="button" class="usr_men_cat_head" onclick="confirmPopUp()">
+                            <i class="fa fa-trash"></i>&nbsp;Delete my account
+                        </button>
                     </div>
                 </form>
                 <div class="clearfix save_profile_outer edit_profile_btn_1"><a href="javascript:void(0)">Save</a></div>
@@ -1422,6 +1425,12 @@
     </div>
 
     <script>
+
+        function confirmPopUp() {
+            if(confirm('Are you sure you want to delete your account?')) {
+                window.location.href = "{{ route('agency.delete.account') }}";
+            }
+        }
 
         var mainSkill = $('#main_skill_select');
         var secSkill = $('#sec_skill_select');
