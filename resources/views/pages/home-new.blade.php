@@ -18,7 +18,7 @@
 @section('page-level-css')
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}" >
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/portfolio.min.css?v=1.2')}}"></link>
+    <link rel="stylesheet" href="{{asset('css/portfolio.min.css?v=1.3')}}"></link>
     <link rel="stylesheet" href="{{asset('css/site-home.css?v=1.18')}}"></link>
 @stop
 

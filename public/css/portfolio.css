@@ -3,7 +3,7 @@
 .portfolio_outer { font-family: Open sans, sans-serif; }
 .portfolio_main_title { color: #fff; font-size: 16px; margin-bottom: 20px; padding-bottom: 10px; }
 .portfolio_each_contain { display: flex; flex-wrap: wrap; flex-direction: row; }
-.portfolio_each { flex: 0 1 32%; margin-bottom: 25px; margin-right: 1.33%; }
+.portfolio_each { flex: 0 1 32%; max-width:32%; margin-bottom: 25px; margin-right: 1.33%; }
 .each_port_up { overflow:hidden; cursor: pointer; display: flex; flex-direction: column; position: relative; }
 .each_port_up span { position: absolute; top: 50%; left: 50%; color: #fff; background: #000; transform: translate(-50%, -50%); padding: 10px; border-radius: 2px; font-size: 12px; letter-spacing: 0.5px; visibility: hidden; z-index: 1; }
 .each_port_up span:hover { color: #dd9900; }
