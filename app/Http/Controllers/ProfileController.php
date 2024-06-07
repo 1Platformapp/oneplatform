@@ -4196,6 +4196,47 @@ class ProfileController extends Controller
         return json_encode(['error' => $error, 'success' => $success]);
     }
 
+    public function supporterDelete(Request $request){
+
+        $user = Auth::user();
+        $success = 0;
+        $error = '';
+
+        if($request->has('id') && $user){
+
+            $id = $request->get('id');
+            $group = UserChatGroup::find($id);
+
+            if ($group) {
+
+                $supporter = UserSupporter::where(['owner_user_id' => $user->id, 'supporter_user_id' => $group->contact_id, 'is_accepted' => 1])->first();
+                $supporterUser = User::find($group->contact_id);
+                if($supporter && $supporterUser){
+
+                    $supporter->delete();
+
+                    $supporterUserProfile = Profile::where(['user_id', $supporterUser->id])->get()->first();
+                    $supporterUserAddress = Address::where(['user_id', $supporterUser->id])->get()->first();
+                    $supporterUserProfile->delete();
+                    $supporterUserAddress->delete();
+                    $supporterUser->delete();
+
+                    $success = 1;
+                }else{
+
+                    $error = 'No data exist';
+                }
+            } else {
+                $error = 'No group exist';
+            }
+        }else{
+
+            $error = 'No/Invalid data';
+        }
+
+        return json_encode(['error' => $error, 'success' => $success]);
+    }
+
     public function connectUserSocialInstagram(Request $request){
 
         if( $request->error == 'access_denied' ){

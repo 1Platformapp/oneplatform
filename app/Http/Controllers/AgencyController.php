@@ -609,6 +609,45 @@ class AgencyController extends Controller
             }
 
             $success = true;
+        }else if($type == 'supporter-chat'){
+
+            $chatGroup = UserChatGroup::findorFail($dataId);
+
+            if(!$chatGroup){
+
+                return json_encode(array('success' => false, 'error' => 'some required data does not exist'));
+            }
+
+            $chatQuery = UserChat::where('group_id', $chatGroup->id);
+            if((int ) $cursor > 0){
+
+                $chatQuery->where('id', '<' , $cursor);
+            }
+            $chatMessages = $chatQuery->orderBy('id', 'desc')->take(20)->get()->reverse();
+            if(count($chatMessages)){
+
+                foreach ($chatMessages as $key => $chatMessage) {
+
+                    if($chatMessage->sender){
+                        $data['group']['messages'][] .= \View::make('parts.chat-partner-message', ['chat' => $chatMessage])->render();
+                        $seen = $chatMessage->seen;
+                        if(count($seen)){
+                            if(!in_array($user->id, $seen)){
+                                $seen[] = $user->id;
+                                $chatMessage->seen = $seen;
+                                $chatMessage->save();
+                            }
+                        }else{
+                            $seen[] = $user->id;
+                            $chatMessage->seen = $seen;
+                            $chatMessage->save();
+                        }
+                    }
+                }
+            }
+
+            $data['group']['members'] = [];
+            $success = true;
         }
 
         return json_encode(['success' => $success, 'data' => $data]);
@@ -621,6 +660,7 @@ class AgencyController extends Controller
             $user = Auth::user();
             $contactId = $request->get('contact');
             $partnerId = $request->get('partner');
+            $groupId = $request->get('supporter');
             $message = $request->get('message');
             $action = $request->get('action');
 
@@ -660,6 +700,11 @@ class AgencyController extends Controller
                     $partner = User::findOrFail($partnerId);
                     $chat->recipient_id = $partner->id;
                     $chat->is_personal = 1;
+                }else if($request->has('supporter')){
+                    $group = UserChatGroup::findOrFail($groupId);
+                    $partner = $group->agent_id == $user->id ? $group->contact : $group->agent;
+                    $chat->recipient_id = $partner->id;
+                    $chat->group_id = $group->id;
                 }
 
                 $chat->sender_id = $user->id;

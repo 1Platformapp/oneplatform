@@ -30,7 +30,7 @@
                 @if($partner == '')
                 <button type="button" class="w-full px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow outline-none add-event hover:bg-indigo-500">Add event</button>
                 @endif
-                <button type="button" class="w-full px-3 py-2 text-sm font-semibold text-indigo-600 bg-white border rounded-md shadow outline-none add-event">Show all events</button>
+                <button type="button" class="w-full px-3 py-2 text-sm font-semibold text-indigo-600 bg-white border rounded-md shadow outline-none show-all-events">Show all events</button>
             </div>
         </div>
         <ul class="mt-4 text-sm leading-6 divide-y divide-gray-200 selected-date-events lg:col-span-7 xl:col-span-8"></ul>
@@ -410,7 +410,7 @@
                         $('.participants-search-result-outer').html('');
                         var users = response.users ?? [];
                         users = users.filter((item) => !userIds.includes(String(item.id)));
-                        
+
                         if(users.length > 0) {
                             users.forEach((item) => {
                                 $('.participants-search-result-outer').append('<li data-id="'+item.id+'" class="relative py-2 pl-3 text-sm text-gray-900 cursor-pointer select-none participants-search-result hover:bg-gray-200 pr-9" role="option" tabindex="-1"><span class="block truncate">'+item.name+'</span></li>').removeClass('hidden');

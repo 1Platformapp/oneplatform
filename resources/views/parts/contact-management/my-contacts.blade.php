@@ -7,8 +7,7 @@
             <i class="ml-2 text-gray-500 fa fa-search"></i>
             <div data-target="agent_contact_listing" class="flex-1 ml-2" contenteditable="true" placeholder="Search your contacts by name"></div>
         </div>
-        @if(!isset($userGroups))
-        <div class="flex-1 m_btm_filter_drop">
+        <div @if(isset($userGroups)) style="opacity: 0;" @endif class="flex-1 m_btm_filter_drop">
             <select data-target="agent_contact_listing" class="m_btm_filter_dropdown">
                 <option value="">Filter contacts</option>
                 <option value="all">All</option>
@@ -17,7 +16,7 @@
                 <option value="Main Network">My Main Network</option>
             </select>
         </div>
-        @endif
+        @if(!isset($userGroups))
         <div class="flex-1 mt-10 smart_switch_outer switch_personal_chat md:mt-0 md:ml-auto">
             <div class="smart_switch_txt">Show Personal Chat</div>
             <label class="smart_switch">
@@ -25,7 +24,16 @@
                 <span class="slider"></span>
             </label>
         </div>
+        @endif
     </div>
+    @if(isset($userGroups))
+    <div class="pro_note block">
+        <ul>
+            <li>Share your support URL with your fans, followers and supporters</li>
+            <li>Your support URL: <a href="{{route('user.supporter.form', ['username' => Auth::user()->username])}}">{{route('user.supporter.form', ['username' => Auth::user()->username])}}</a></li>
+        </ul>
+    </div>
+    @endif
     <div class="btn_list_outer">
         <div class="chat_filter_container">
             <div class="chat_filter_tab chat_filter_contacts">
@@ -175,7 +183,7 @@
                         $partnerUser = Auth::user()->id == $contactUser->id ? $agentUser : $contactUser;
                         $contactPDetails = $commonMethods->getUserRealDetails($partnerUser->id)
                     @endphp
-                    <div data-partner="{{$partnerUser->id}}" class="clearfix agent_contact_listing music_btm_list no_sorting">
+                    <div data-partner="{{$partnerUser->id}}" class="clearfix agent_supporter_listing music_btm_list no_sorting">
                         <div class="edit_elem_top">
                             <div class="m_btm_list_left">
                                 @if($counter < 10)
@@ -227,8 +235,11 @@
                         </div>
 
                         <div class="edit_elem_bottom">
-                            <div class="each_dash_section instant_hide" data-id="contact_chat_{{$group->id}}">
+                            <div class="each_dash_section instant_hide" data-id="supporter_chat_{{$group->id}}">
                                 @include('parts.agent-contact-chat')
+                            </div>
+                            <div class="each_dash_section instant_hide" data-id="supporter_calendar_{{$group->id}}">
+
                             </div>
                         </div>
                     </div>
@@ -238,7 +249,7 @@
             @endif
             </div>
             <div class="chat_filter_tab chat_filter_personal instant_hide">
-            @if(count($user->personalChatPartners()) > 0)
+            @if(!isset($userGroups) && count($user->personalChatPartners()) > 0)
                 @foreach($user->personalChatPartners() as $partnerId)
                     @php $partner = \App\Models\User::find($partnerId) @endphp
                     @if(!$partner)
@@ -305,14 +316,14 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
 
-    function getContactCalendar(well, contact){
+    function getContactCalendar(well, contact, type){
 
         $.ajax({
 
             url: "/informationFinder",
             dataType: "json",
             type: 'post',
-            data: {'find_type': 'my-calendar', 'find': '', 'identity_type': 'subscriber', 'identity': contact},
+            data: {'find_type': 'my-calendar', 'find': type, 'identity_type': 'subscriber', 'identity': contact},
             success: function(response) {
 
                 if(response.success == 1){
@@ -409,12 +420,22 @@
                 mainP.find('.each_dash_section:not(.each_dash_section[data-id="contact_agreement_' + id + '"])').addClass('instant_hide');
                 mainP.find('.each_dash_section[data-id="contact_agreement_' + id + '"]').toggleClass('instant_hide');
             } else if ($(this).hasClass('m_btn_calendar')) {
-                mainP.find('.each_dash_section:not(.each_dash_section[data-id="contact_calendar_' + id + '"])').addClass('instant_hide');
-                // mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]').toggleClass('instant_hide');
-                if (mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]').hasClass('instant_hide')) {
-                    getContactCalendar(mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]'), id);
+
+
+                if (mainP.hasClass('agent_contact_listing')) {
+                    mainP.find('.each_dash_section:not(.each_dash_section[data-id="contact_calendar_' + id + '"])').addClass('instant_hide');
+                    var elem = mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]');
+                    var type = 'contact';
+                } else if (mainP.hasClass('agent_supporter_listing')) {
+                    mainP.find('.each_dash_section:not(.each_dash_section[data-id="supporter_calendar_' + id + '"])').addClass('instant_hide');
+                    var elem = mainP.find('.each_dash_section[data-id="supporter_calendar_' + id + '"]');
+                    var type = 'supporter';
+                }
+
+                if (elem.hasClass('instant_hide')) {
+                    getContactCalendar(elem, id, type);
                 } else {
-                    mainP.find('.each_dash_section[data-id="contact_calendar_' + id + '"]').addClass('instant_hide');
+                    elem.addClass('instant_hide');
                 }
             } else if ($(this).hasClass('m_btn_chat')) {
                 if (mainP.hasClass('agent_contact_listing')) {
@@ -427,6 +448,11 @@
                     var elem = $('.each_dash_section[data-id="partner_chat_' + id + '"]');
                     var parent = $(this).closest('.agent_partner_listing');
                     var type = 'partner-chat';
+                } else if (mainP.hasClass('agent_supporter_listing')) {
+
+                    var elem = $('.each_dash_section[data-id="supporter_chat_' + id + '"]');
+                    var parent = $(this).closest('.agent_supporter_listing');
+                    var type = 'supporter-chat';
                 }
 
                 parent.find('.each_dash_section').not(elem).addClass('instant_hide');
@@ -458,6 +484,9 @@
             } else if ($(this).closest('.music_btm_list').hasClass('agent_supporter_request_listing')) {
 
                 $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-item-type', 'agent-supporter-request');
+            }  else if ($(this).closest('.music_btm_list').hasClass('agent_supporter_listing')) {
+
+                $('.pro_confirm_delete_outer #pro_delete_submit_yes').attr('data-delete-item-type', 'agent-supporter');
             }
 
             if (id) {
@@ -465,7 +494,7 @@
                 $('.pro_confirm_delete_outer').show();
                 $('#body-overlay').show();
             }
-            });
+        });
 
             $('.m_btm_switch_account').click(function(e) {
 
@@ -556,6 +585,9 @@
                 }else if(parent.closest('.music_btm_list').hasClass('agent_partner_listing')){
                     var id = parent.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
                     $type = 'partner-chat';
+                }else if(parent.closest('.music_btm_list').hasClass('agent_supporter_listing')){
+                    var id = parent.closest('.agent_supporter_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                    $type = 'supporter-chat';
                 }
 
                 var formData = new FormData();
@@ -581,6 +613,10 @@
 
                 var id = parent.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
                 $type = 'partner';
+            }else if($(this).closest('.music_btm_list').hasClass('agent_supporter_listing')){
+
+                var id = parent.closest('.agent_supporter_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                $type = 'supporter';
             }
 
             if(message.val() != '' || attachments.val() != ''){
@@ -1086,9 +1122,11 @@
             var id = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
             $type = 'contact-chat';
         } else if (element.closest('.music_btm_list').hasClass('agent_partner_listing')) {
-
             var id = element.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
             $type = 'partner-chat';
+        } else if (element.closest('.music_btm_list').hasClass('agent_supporter_listing')) {
+            var id = element.closest('.agent_supporter_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'supporter-chat';
         }
         var formData = new FormData();
         formData.append('type', $type);
@@ -1141,9 +1179,20 @@
 
             if (dataType == 'attachment-finalize') {
 
-                var contactId = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                let pId = null;
+                if(element.closest('.music_btm_list').hasClass('agent_contact_listing')){
+                    $type = 'contact';
+                    pId = element.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                }else if(element.closest('.music_btm_list').hasClass('agent_partner_listing')){
+                    $type = 'partner';
+                    pId = element.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                }else if(element.closest('.music_btm_list').hasClass('agent_supporter_listing')){
+                    $type = 'supporter';
+                    pId = element.closest('.agent_supporter_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+                }
+
                 formData.append('chat', id);
-                formData.append('contact', contactId);
+                formData.append($type, pId);
                 formData.append('message', element.find('.new_message').val());
             } else if (dataType == 'attachment-upload') {
 

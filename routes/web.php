@@ -351,6 +351,7 @@ Route::domain(Config::get('constants.primaryDomain'))->group(function () {
     Route::post('supporter-signup', [ProfileController::class, 'supporterSignup'])->name('user.supporter.signup');
     Route::post('supporter-signup-approve', [ProfileController::class, 'supporterSignupApprove'])->name('user.supporter.signup.approve');
     Route::post('supporter-request-delete', [ProfileController::class, 'supporterRequestDelete'])->name('user.supporter.request.delete');
+    Route::post('supporter-delete', [ProfileController::class, 'supporterDelete'])->name('user.supporter.delete');
     Route::get('download-zip/{dir}/{fileName}/{downloadAs}', [ProfileController::class, 'downloadZip'])->name('download.zip');
     Route::get('save-user-story-text/{id}', [ProjectController::class, 'saveUserStoryText'])->name('save.user.story.text');
     Route::get('play-media-element-video/{videoId}', [ChartController::class, 'playMediaElementVideo'])->name('play-.media.element.video');

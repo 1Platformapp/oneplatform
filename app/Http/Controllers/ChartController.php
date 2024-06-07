@@ -1639,18 +1639,30 @@ class ChartController extends Controller
                 if($findType == 'my-calendar'){
 
                     $partnerId = '';
+                    $isReadOnly = false;
                     if (isset($identity) && $identity != '') {
-                        $contact = AgentContact::find($identity);
-                        if ($contact && Auth::user()->id == $contact->contactUser->id) {
-                            $partnerId = $contact->agentUser->id;
-                        } else if ($contact && Auth::user()->id == $contact->agentUser->id) {
-                            $partnerId = $contact->contactUser->id;
+
+                        if ($find == 'contact') {
+                            $contact = AgentContact::find($identity);
+                            if ($contact && Auth::user()->id == $contact->contactUser->id) {
+                                $partnerId = $contact->agentUser->id;
+                            } else if ($contact && Auth::user()->id == $contact->agentUser->id) {
+                                $partnerId = $contact->contactUser->id;
+                            }
+                        } else if ($find == 'supporter') {
+                            $group = UserChatGroup::find($identity);
+                            if ($group && Auth::user()->id == $group->contact_id) {
+                                $partnerId = $group->agent_id;
+                            } else {
+                                $partnerId = $group->contact_id;
+                                $isReadOnly = true;
+                            }
                         }
                     }
 
                     $rand = rand(10000, 99999);
 
-                    $data['data'] = \View::make('parts.calendar', ['commonMethods' => $commonMethods, 'user' => $user, 'partner' => $partnerId, 'uuid' => $rand])->render();
+                    $data['data'] = \View::make('parts.calendar', ['commonMethods' => $commonMethods, 'user' => $user, 'partner' => $partnerId, 'uuid' => $rand, 'isReadOnly' => $isReadOnly])->render();
                     $success = 1;
                 }
                 if($findType == 'industry_contact_details'){

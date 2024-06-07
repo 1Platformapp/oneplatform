@@ -1967,6 +1967,13 @@ $(document).ready(function() {
                 location.reload();
             });
 
+        }else if( deleteId && deleteItemType == 'agent-supporter' ){
+
+            $.post( "/supporter-delete" , { id: deleteId }, function(data) {
+
+                location.reload();
+            });
+
         }else if( deleteId && deleteItemType == 'user-port' ){
 
 
@@ -8579,10 +8586,25 @@ function refreshNotificationsBox(){
     var formData = new FormData();
     formData.append('mode', 'fetch');
     formData.append('id', currentNotifId);
+    let elem = null;
 
     if(window.location.href.indexOf('dashboard') !== -1 && $('.each_dash_section:not(.instant_hide)').length){
-        var id = $('.each_dash_section:not(.instant_hide)').closest('.agent_contact_listing').find('.m_btm_right_icons .m_btn_chat').attr('data-id');
-        formData.append('contact', id);
+
+        elem = $('.each_dash_section:not(.instant_hide)');
+        if (elem.closest('.music_btm_list').hasClass('agent_contact_listing')) {
+            var id = elem.closest('.agent_contact_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'contact';
+        } else if (elem.closest('.music_btm_list').hasClass('agent_partner_listing')) {
+
+            var id = elem.closest('.agent_partner_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'partner';
+        } else if (elem.closest('.music_btm_list').hasClass('agent_supporter_listing')) {
+
+            var id = elem.closest('.agent_supporter_listing').find('.m_btn_right_icon_each.m_btn_chat').attr('data-id');
+            $type = 'supporter';
+        }
+
+        formData.append($type, id);
     }
 
     $.ajax({
@@ -8610,8 +8632,7 @@ function refreshNotificationsBox(){
                             }
                         });
                         if(window.location.href.indexOf('/dashboard') !== -1 && updateC && $('.each_dash_section:not(.instant_hide)').length){
-                            var element = $('.each_dash_section:not(.instant_hide)').find('.chat_outer');
-                            refreshChat(element);
+                            refreshChat(elem);
                         }
                         $('#notif_count_res,#notif_count').text(newNotifs).addClass('notif_counter_ok');
                         notifInAud.currentTime = 0;
