@@ -4,7 +4,7 @@
 
 @endphp
 
-<div class="mt-12 each-stage-det instant_hide" data-stage-ref="my-groups">
+<div class="mt-12 each-stage-det {{$defaultTab == '' || $defaultTab == 'groups' ? '' : 'instant_hide'}}" data-stage-ref="my-groups">
     <div class="btn_list_outer">
         @if(count($chatGroups))
         <div class="chat_groups">

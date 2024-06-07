@@ -1,7 +1,7 @@
 
 @php $hasActiveSub = $user->hasActivePaidSubscription() @endphp
 
-<div class="mt-12 each-stage-det" data-stage-ref="my-contacts">
+<div class="mt-12 each-stage-det {{!isset($defaultTab) || $defaultTab == '' || $defaultTab == 'my-contacts' ? '' : 'instant_hide'}}" data-stage-ref="my-contacts">
     <div class="items-end m_btm_filters_outer md:items-center">
         <div class="flex items-center flex-1 m_btm_filter_search m_btm_filter_search_field">
             <i class="ml-2 text-gray-500 fa fa-search"></i>

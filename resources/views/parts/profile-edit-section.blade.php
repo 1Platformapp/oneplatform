@@ -1220,7 +1220,8 @@
             @endif
             @if(!isset($isQuickSetup))
             <div id="favourites_section" class="sub_cat_data {{$subTab == 'favourites' ? '' : 'instant_hide'}} each_pro_edit_section">
-            	<div class="">
+                @if($user->role_id == 1)
+                <div class="">
                     <div class="font-medium text-lg">Your Favourite Musics</div>
                 </div>
                 <div class="each_tab_content user_musics_outer">
@@ -1253,6 +1254,7 @@
                     @endif
                 </div>
                 <br><br>
+                @endif
                 @if($user->hasActivePaidSubscription())
                 <div class="">
                     <div class="font-medium text-lg">Your Favourite Industry Contacts</div>

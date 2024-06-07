@@ -39,12 +39,13 @@
                         </a>
                     </div>
                     @else
+
+                    @endif
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
-                        <a title="Chat" class="m_btn_right_icon_each m_btn_group_chat active" data-id="group-chat" data-head="Chat">
+                        <a title="Chat" class="m_btn_right_icon_each m_btn_group_chat active" data-id="supporter-chat" data-head="Chat">
                             <i class="fa fa-comments"></i>
                         </a>
                     </div>
-                    @endif
                     <div class="flex items-center justify-center flex-grow h-full pr-2 border-r border-gray-main-icons lg:pr-8">
                         <a title="Transactions" class="m_btn_right_icon_each m_btn_transactions active" data-id="my-transactions" data-head="My Transactions">
                             <i class="fas fa-dollar-sign"></i>
@@ -140,8 +141,8 @@
                         <div class="each_dash_section instant_hide" data-value="personal-chat">
                             <div class="personal-chat-well"></div>
                         </div>
-                        <div class="each_dash_section instant_hide" data-value="group-chat">
-                            <div class="group-chat-well"></div>
+                        <div class="each_dash_section instant_hide" data-value="supporter-chat">
+                            <div class="supporter-chat-well"></div>
                         </div>
                         <div class="each_dash_section instant_hide" data-value="my-calendar">
                             <div>
@@ -646,9 +647,10 @@
             $('.m_btn_right_icon_each[data-id="'+activeTab+'"]').trigger('click');
             if (defaultSubTab == 'groups') {
                 var element = $('body').find('.each-stage[data-stage="my-groups"]');
-                element.removeClass('disabled');
-
-                element.trigger('click');
+                element.removeClass('disabled').trigger('click');
+            } else if (defaultSubTab == 'supporters') {
+                var element = $('body').find('.each-stage[data-stage="my-supporters"]');
+                element.removeClass('disabled').trigger('click');
             } else {
                 $('.order-stage-head[data-id="'+defaultSubTab+'"]').trigger('click');
             }
@@ -971,7 +973,7 @@
 
             if (!$('.each_dash_section[data-value="'+id+'"]').hasClass('instant_hide')) {
                 $('.loading').removeClass('instant_hide');
-                getContactManagement();
+                getContactManagement(defaultSubTab);
             } else {
                 $('.contact-management-well').html('');
                 $('.each_dash_section[data-value="contact-management"] .each-stage').first().trigger('click');
@@ -985,7 +987,7 @@
                 $('.loading').removeClass('instant_hide');
                 getGroupChat();
             } else {
-                $('.group-chat-well').html('');
+                $('.supporter-well').html('');
             }
         }
 
@@ -1275,7 +1277,7 @@
         });
     }
 
-    function getContactManagement(){
+    function getContactManagement(defaultSubTab){
 
         $('#contact-head').addClass('instant_hide');
         $.ajax({
@@ -1283,7 +1285,7 @@
             url: "/informationFinder",
             dataType: "json",
             type: 'post',
-            data: {'find_type': 'contact-management', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
+            data: {'find_type': 'contact-management', 'find': defaultSubTab, 'identity_type': 'subscriber', 'identity': ''},
             success: function(response) {
 
                 removeLoading();
@@ -1306,15 +1308,15 @@
             url: "/informationFinder",
             dataType: "json",
             type: 'post',
-            data: {'find_type': 'group-chat', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
+            data: {'find_type': 'supporter-chat', 'find': '', 'identity_type': 'subscriber', 'identity': ''},
             success: function(response) {
 
                 removeLoading();
                 if(response.success == 1){
-                    $('.group-chat-well').html(response.data.data);
+                    $('.supporter-chat-well').html(response.data.data);
                 }else{
                     console.log(data.error);
-                    $('.group-chat-well').html(data.error);
+                    $('.supporter-chat-well').html(data.error);
                 }
             }
         });

@@ -9,8 +9,9 @@
 
 @include('parts.contact-management.add-contact', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills])
 
-@include('parts.contact-management.my-contacts', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills, 'contracts' => $contracts, 'contacts' => $contacts, 'myContracts' => $myContracts])
+@include('parts.contact-management.my-contacts', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills, 'contracts' => $contracts, 'contacts' => $contacts, 'myContracts' => $myContracts, 'default_tab' => $defaultTab])
 
 @include('parts.contact-management.contact-requests', ['commonMethods' => $commonMethods, 'user' => $user])
 
-@include('parts.contact-management.my-groups', ['commonMethods' => $commonMethods, 'user' => $user])
+@include('parts.contact-management.my-groups', ['commonMethods' => $commonMethods, 'user' => $user, 'default_tab' => $defaultTab])
+

@@ -1299,7 +1299,7 @@ class ChartController extends Controller
                 $accessGranted = 1;
             }
 
-            if($findType == 'group-chat' && $identityType == 'subscriber'){
+            if($findType == 'supporter-chat' && $identityType == 'subscriber'){
                 $find = Auth::user()->id;
                 $accessGranted = 1;
             }
@@ -1448,7 +1448,7 @@ class ChartController extends Controller
                         $error = 'Target information does not exist';
                     }
                 }
-                if($findType == 'group-chat'){
+                if($findType == 'supporter-chat'){
 
                     $success = 1;
                     $data2 = \View::make('parts.contact-management.my-contacts', ['commonMethods' => $commonMethods, 'user' => Auth::user(), 'userGroups' => Auth::user()->allChatGroups()])->render();
@@ -1628,7 +1628,7 @@ class ChartController extends Controller
                 if($findType == 'contact-management'){
 
                     $skills = Skill::where('user_role_id', $user->role_id)->get();
-                    $data['data'] = \View::make('parts.contact-management.index', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills])->render();
+                    $data['data'] = \View::make('parts.contact-management.index', ['commonMethods' => $commonMethods, 'user' => $user, 'skills' => $skills, 'defaultTab' => $find])->render();
                     $success = 1;
                 }
                 if($findType == 'admin-chat'){
