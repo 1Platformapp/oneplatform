@@ -201,10 +201,11 @@
                                             {{$partnerUser->first_name.' '.$partnerUser->surname}}
                                         </a>
                                     </li>
+                                    <li><p>{{$partnerUser->email}}</p></li>
                                     <li>
                                         <p>
                                             <br>
-                                            {{$contactPDetails['city'] != '' ? ' - '.$contactPDetails['city'] : ''}}
+                                            {{$contactPDetails['city'] != '' ? $contactPDetails['city'] : ''}}
                                             {{$contactPDetails['country'] != '' ? ' - '.$contactPDetails['country'] : ''}}
                                         </p>
                                     </li>
@@ -791,6 +792,11 @@
                     var id = element.closest('.agent_contact_listing').attr('data-partner');
                     purchaseType = 'partner-purchase';
                     customers.push({ key: id, value: element.closest('.music_btm_list.agent_contact_listing').find('.filter_search_target').text() });
+                }else if(element.closest('.music_btm_list').hasClass('agent_supporter_listing')){
+
+                    var id = element.closest('.agent_supporter_listing').find('.m_btn_right_icon_each.m_btm_del').attr('data-del-id');
+                    purchaseType = 'supporter-purchase';
+                    customers.push({ key: 'partner', value: element.closest('.music_btm_list.agent_supporter_listing').find('.filter_search_target').text() });
                 }
 
                 for (var i = 0; i < customers.length; i++) {

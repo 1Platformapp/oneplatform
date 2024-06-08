@@ -17,6 +17,8 @@ use App\Models\EmbedCode;
 
 use App\Models\UserCampaign as UserCampaign;
 
+use App\Models\UserSupporter;
+
 use App\Models\Profile;
 
 use App\Models\UserAlbum;
@@ -165,6 +167,26 @@ class ProfferProjectController extends Controller
             }else{
                 $recipient = User::find($customer);
             }
+        } else if($type == 'supporter-purchase'){
+
+            $groupId = $request->get('id');
+            $group = UserChatGroup::find($groupId);
+
+            if(!$group){
+                return json_encode(['success' => 0, 'error' => 'unknown group']);
+            }
+
+            $userSupporter = UserSupporter::where(['owner_user_id' => $user->id, 'supporter_user_id' => $group->contact->id, 'is_accepted' => 1])->get()->first();
+
+            if(!$userSupporter){
+                return json_encode(['success' => 0, 'error' => 'unknown supporter']);
+            }
+
+            if($user->id !== $group->agent_id){
+                return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
+            }
+
+            $recipient = $group->contact;
         }
 
         if($recipient){
@@ -192,7 +214,7 @@ class ProfferProjectController extends Controller
 
             $chat->save();
 
-            if($agentContact){
+            if(isset($agentContact) && $agentContact){
                 $agentContact->latest_message_at = date('Y-m-d H:i:s');
                 $agentContact->save();
             }

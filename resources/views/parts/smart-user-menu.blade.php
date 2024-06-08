@@ -13,7 +13,6 @@
             <div class="usr_men_items_inner">
                 <div class="usr_men_cat_in">
                     @if(Auth::check())
-                    @if(!Auth::user()->is_buyer_only)
                     <div class="usr_men_cat_each usr_men_recommend">
                         <div class="usr_men_cat_head">
                             Our recommendations
@@ -28,6 +27,7 @@
                                         </div>My Dashboard
                                     </div>
                                 </a>
+                                @if(!Auth::user()->is_buyer_only)
                                 <a href="{{route('profile.setup', ['page' => 'welcome'])}}" class="usr_men_quick_each usr_men_setup_wizard">
                                     <img src="{{asset('images/setup_recommend.gif')}}">
                                     <div class="usr_men_quick_txt">
@@ -36,10 +36,10 @@
                                         </div>Profile Setup Wizard
                                     </div>
                                 </a>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    @endif
                     <div class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             Personal

@@ -13,6 +13,7 @@ use App\Models\UserMusic;
 use App\Models\UserProduct;
 use App\Models\StripeCheckout;
 use App\Models\StripeSubscription;
+use App\Models\UserSupporter;
 use App\Models\UserChatGroup;
 use App\Models\City;
 use App\Models\Country;
@@ -376,6 +377,26 @@ class BispokeLicenseController extends Controller
                 // }else{
                 //     $recipient = User::find($customer);
                 // }
+            }else if($type == 'supporter-purchase'){
+
+                $groupId = $request->get('id');
+                $group = UserChatGroup::find($groupId);
+
+                if(!$group){
+                    return json_encode(['success' => 0, 'error' => 'unknown group']);
+                }
+
+                $userSupporter = UserSupporter::where(['owner_user_id' => $user->id, 'supporter_user_id' => $group->contact->id, 'is_accepted' => 1])->get()->first();
+
+                if(!$userSupporter){
+                    return json_encode(['success' => 0, 'error' => 'unknown supporter']);
+                }
+
+                if($user->id !== $group->agent_id){
+                    return json_encode(['success' => 0, 'error' => 'You cannot add project or agreement in this chat']);
+                }
+
+                $recipient = $group->contact;
             }
 
             if($music && $music->user->id == $user->id && $recipient){
