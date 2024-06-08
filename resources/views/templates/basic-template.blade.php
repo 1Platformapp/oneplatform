@@ -27,7 +27,7 @@
         <link href="{{asset('css/auth.min.css?v=14')}}" rel="stylesheet" type="text/css" />
         <!------------------------>
         <script src="{{asset('js/jquery.min.js')}}" type="text/javascript"></script>
-        <script defer type="application/javascript" src="{{asset('js/my_script.min.js?v=9.92')}}"></script>
+        <script defer type="application/javascript" src="{{asset('js/my_script.min.js?v=9.96')}}"></script>
 
         @yield('page-level-css','')
 

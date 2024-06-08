@@ -39,6 +39,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             Personal
@@ -53,6 +54,7 @@
                                         Add Personal Info
                                     </div>
                                 </a>
+                                @if(!Auth::user()->is_buyer_only)
                                 <a href="{{route('profile.setup.standalone', ['page' => 'media'])}}" class=" usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -61,6 +63,7 @@
                                         Add Skill Info
                                     </div>
                                 </a>
+                                @endif
                                 <a href="{{route('profile.setup.standalone', ['page' => 'change-password'])}}" class="text-black usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
@@ -72,6 +75,7 @@
                             </div>
                         </div>
                     </div>
+                    @if(!Auth::user()->is_buyer_only)
                     <div class="usr_men_cat_each {{isset($page)&&$page=='edit'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Website
@@ -368,6 +372,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="usr_men_cat_each {{isset($page)&&$page=='chat'?'pro_tb_active':''}}">
                         <div class="usr_men_cat_head">
                             My Favourites
@@ -385,6 +390,7 @@
                             </div>
                         </div>
                     </div>
+                    @if(!Auth::user()->is_buyer_only)
                     <div class="usr_men_cat_each usr_men_seller_help mobile-only">
                     	Get help to build your profile
                     </div>

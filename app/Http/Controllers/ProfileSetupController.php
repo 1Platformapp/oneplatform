@@ -160,125 +160,128 @@ class ProfileSetupController extends Controller
             return redirect()->back();
         }
 
-    	if($user && !$user->is_buyer_only){
+        if (!$user || ($user->is_buyer_only && ($page != 'personal' && $page != 'change-password' && $page != 'my-favourites'))) {
 
-            $commonMethods = new CommonMethods();
-
-            $userPersonalDetails = $commonMethods::getUserRealDetails($user->id);
-            $genres = Genre::orderBy('name', 'asc')->get();
-            $story_images = $user->profile->story_images;
-            $userSocialAccountDetails = $commonMethods::getUserSocialAccountDetails($user->id);
-            $authorize_request_body = array(
-                'response_type' => 'code',
-                'scope' => 'read_write',
-                'client_id' => $commonMethods->getStripeConnectId()
-            );
-            $stripeUrl = Config('constants.stripe_connect_authorize_uri') . '?' . http_build_query($authorize_request_body) . '&redirect_uri='.Config('services.stripe.redirect').'&stripe_user[email]='.$user->email.'&stripe_user[business_name]='.$user->name.'&stripe_user[url]='.($user->username?route('user.home',['params' => $user->username]):'');
-            $agents = User::where('apply_expert', 2)->orderBy('name', 'asc')->get()->filter(function ($user){
-                return $user->expert;
-            });
-
-            if(Session::has('forceNext')){
-
-                $forceN = Session::get('forceNext');
-                Session::forget('forceNext');
-                $forceNext = $forceN;
-            }else{
-
-                $forceNext = NULL;
+            if (!$user) {
+                return redirect('login');
             }
 
-            if($request->isMethod('post')){
+            return 'no user';
+        }
 
-                if($request->has('pro_service')){
+    	$commonMethods = new CommonMethods();
 
-                    $response = (new ProfileController)->postUserService($request);
-                }else if($request->has('title') && $request->has('element')){
+        $userPersonalDetails = $commonMethods::getUserRealDetails($user->id);
+        $genres = Genre::orderBy('name', 'asc')->get();
+        $story_images = $user->profile->story_images;
+        $userSocialAccountDetails = $commonMethods::getUserSocialAccountDetails($user->id);
+        $authorize_request_body = array(
+            'response_type' => 'code',
+            'scope' => 'read_write',
+            'client_id' => $commonMethods->getStripeConnectId()
+        );
+        $stripeUrl = Config('constants.stripe_connect_authorize_uri') . '?' . http_build_query($authorize_request_body) . '&redirect_uri='.Config('services.stripe.redirect').'&stripe_user[email]='.$user->email.'&stripe_user[business_name]='.$user->name.'&stripe_user[url]='.($user->username?route('user.home',['params' => $user->username]):'');
+        $agents = User::where('apply_expert', 2)->orderBy('name', 'asc')->get()->filter(function ($user){
+            return $user->expert;
+        });
 
-                    $response = (new ProfileController)->saveUserPortfolio($request);
-                }else if($request->has('seo_title')){
+        if(Session::has('forceNext')){
 
-                    $response = (new ProfileController)->saveUserProfileSeo($request);
-                }else if($request->has('value') && $request->has('pro_stream_tab')){
-
-                    $response = (new ProfileController)->postYourNews($request);
-                }else if($request->has('video_url')){
-
-                    $response = (new ProfileController)->postUserCompetitionVideo($request);
-                }else if($request->has('product_title') && $request->has('pro_product_price_option')){
-
-                    $response = (new ProfileController)->postYourProduct($request);
-                }else{
-
-                    $response = (new ProfileController)->saveUserProfile($request);
-                }
-
-                // if($page == 'design'){
-
-                //     $designError = null;
-                //     $page = 'design';
-                // }
-
-                // if($page == 'personal' && $user->manager_chat == 1){
-
-                //     Session::put('managerChat', 'personal');
-                //     $nextPage = $page;
-                // }else{
-
-                //     if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product' || $page == 'music' || $page == 'album' || $page == 'video'){
-
-                //         $nextPage = $page;
-                //     }else{
-                //         $nextPage = $user->setupWizardnNext($page);
-                //     }
-                // }
-                // if (!$isStandalone) {
-
-                //     return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
-                // } else if($page == 'design' && $nextPage == 'bio' && $designError == null) {
-                //     $page = $nextPage;
-                // }
-
-                // echo $page;exit;
-            }
-            $vouchers = [];
-            if($user->isCotyso()){
-                $database = Config('constants.clients_portal_database');
-                $clientsPortalCon = $commonMethods->createDBConnection($database['host'], $database['username'], $database['password'], $database['database']);
-                if($clientsPortalCon && $result = mysqli_query($clientsPortalCon, 'SELECT * FROM Voucher ORDER BY id DESC')){
-                    $assocArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                    foreach($assocArray as $key => $value){
-
-                        $vouchers[$value['id']]['id'] = $value['id'];
-                        $vouchers[$value['id']]['name'] = $value['name'];
-                    }
-                    mysqli_free_result($result);
-                }
-            }
-
-            $data = [
-
-                'user' => $user,
-                'userPersonalDetails' => $userPersonalDetails,
-                'userSocialAccountDetails' => $userSocialAccountDetails,
-                'page' => $page,
-                'content' => $content,
-                'title' => 'Profile setup wizard',
-                'genres' => $genres,
-                'story_images' => $story_images,
-                'commonMethods' => $commonMethods,
-                'domain' => $user->customDomainSubscription,
-                'stripeUrl' => $stripeUrl,
-                'agents' => $agents,
-                'isStandalone' => $isStandalone,
-                'vouchers' => $vouchers
-            ];
-
-            return view('pages.setup.index', $data);
+            $forceN = Session::get('forceNext');
+            Session::forget('forceNext');
+            $forceNext = $forceN;
         }else{
 
-    		return 'No user';
-    	}
+            $forceNext = NULL;
+        }
+
+        if($request->isMethod('post')){
+
+            if($request->has('pro_service')){
+
+                $response = (new ProfileController)->postUserService($request);
+            }else if($request->has('title') && $request->has('element')){
+
+                $response = (new ProfileController)->saveUserPortfolio($request);
+            }else if($request->has('seo_title')){
+
+                $response = (new ProfileController)->saveUserProfileSeo($request);
+            }else if($request->has('value') && $request->has('pro_stream_tab')){
+
+                $response = (new ProfileController)->postYourNews($request);
+            }else if($request->has('video_url')){
+
+                $response = (new ProfileController)->postUserCompetitionVideo($request);
+            }else if($request->has('product_title') && $request->has('pro_product_price_option')){
+
+                $response = (new ProfileController)->postYourProduct($request);
+            }else{
+
+                $response = (new ProfileController)->saveUserProfile($request);
+            }
+
+            // if($page == 'design'){
+
+            //     $designError = null;
+            //     $page = 'design';
+            // }
+
+            // if($page == 'personal' && $user->manager_chat == 1){
+
+            //     Session::put('managerChat', 'personal');
+            //     $nextPage = $page;
+            // }else{
+
+            //     if($page == 'portfolio' || $page == 'service' || $page == 'news' || $page == 'product' || $page == 'music' || $page == 'album' || $page == 'video'){
+
+            //         $nextPage = $page;
+            //     }else{
+            //         $nextPage = $user->setupWizardnNext($page);
+            //     }
+            // }
+            // if (!$isStandalone) {
+
+            //     return redirect(route('profile.setup.with.next', ['page' => $nextPage]));
+            // } else if($page == 'design' && $nextPage == 'bio' && $designError == null) {
+            //     $page = $nextPage;
+            // }
+
+            // echo $page;exit;
+        }
+        $vouchers = [];
+        if($user->isCotyso()){
+            $database = Config('constants.clients_portal_database');
+            $clientsPortalCon = $commonMethods->createDBConnection($database['host'], $database['username'], $database['password'], $database['database']);
+            if($clientsPortalCon && $result = mysqli_query($clientsPortalCon, 'SELECT * FROM Voucher ORDER BY id DESC')){
+                $assocArray = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                foreach($assocArray as $key => $value){
+
+                    $vouchers[$value['id']]['id'] = $value['id'];
+                    $vouchers[$value['id']]['name'] = $value['name'];
+                }
+                mysqli_free_result($result);
+            }
+        }
+
+        $data = [
+
+            'user' => $user,
+            'userPersonalDetails' => $userPersonalDetails,
+            'userSocialAccountDetails' => $userSocialAccountDetails,
+            'page' => $page,
+            'content' => $content,
+            'title' => 'Profile setup wizard',
+            'genres' => $genres,
+            'story_images' => $story_images,
+            'commonMethods' => $commonMethods,
+            'domain' => $user->customDomainSubscription,
+            'stripeUrl' => $stripeUrl,
+            'agents' => $agents,
+            'isStandalone' => $isStandalone,
+            'vouchers' => $vouchers
+        ];
+
+        return view('pages.setup.index', $data);
     }
 }
 

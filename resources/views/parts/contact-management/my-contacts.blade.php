@@ -26,7 +26,7 @@
         </div>
         @endif
     </div>
-    @if(isset($userGroups))
+    @if(isset($userGroups) && !$user->is_buyer_only)
     <div class="pro_note block">
         <ul>
             <li>Share your support URL with your fans, followers and supporters</li>
@@ -236,7 +236,7 @@
 
                         <div class="edit_elem_bottom">
                             <div class="each_dash_section instant_hide" data-id="supporter_chat_{{$group->id}}">
-                                @include('parts.agent-contact-chat')
+                                @include('parts.agent-contact-chat', ['hideButtons' => $user->is_buyer_only ? true : false])
                             </div>
                             <div class="each_dash_section instant_hide" data-id="supporter_calendar_{{$group->id}}">
 

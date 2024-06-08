@@ -18,6 +18,8 @@ use App\Models\InstantCheckoutItemDetail;
 use App\Models\CustomDomainSubscription;
 use App\Models\UserProduct;
 use App\Models\AgentTransfer;
+use App\Models\UserSupporter;
+use App\Models\UserChatGroup;
 use App\Models\Address;
 use App\Models\InstantCheckoutItem;
 use App\Models\User;
@@ -880,7 +882,7 @@ class ProjectController extends Controller
 
 
 
-    public function registerBeforeContribute($paymentData){
+    public function registerBeforeContribute($sellerUser, $paymentData){
 
         $user = User::where('email', $paymentData['email'])->first();
         if(!$user){
@@ -910,6 +912,24 @@ class ProjectController extends Controller
             $profile->save();
 
             Auth::login($user);
+
+            // add buyer as approved supporter
+            $userSupporter = new UserSupporter();
+            $userSupporter->owner_user_id = $sellerUser->id;
+            $userSupporter->supporter_user_id = $user->id;
+            $userSupporter->supporter_email = $user->email;
+            $userSupporter->supporter_name = $user->name;
+            $userSupporter->email_verification_code = '1';
+            $userSupporter->supporter_password = NULL;
+            $userSupporter->is_accepted = 1;
+            $userSupporter->is_email_verified = 1;
+            $userSupporter->save();
+
+            $userChatGroup = new UserChatGroup();
+            $userChatGroup->agent_id = $sellerUser->id;
+            $userChatGroup->contact_id = $user->id;
+            $userChatGroup->save();
+
             return true;
         }else{
 
@@ -2416,7 +2436,7 @@ class ProjectController extends Controller
                 return true;
             }else{
 
-                return $this->registerBeforeContribute($paymentData);
+                return $this->registerBeforeContribute($sellerUser, $paymentData);
             }
         }else{
             return true;

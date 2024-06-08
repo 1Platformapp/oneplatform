@@ -10,7 +10,7 @@
 	    <link rel="stylesheet" href="{{asset('player-element/dist/chromecast/chromecast.min.css')}}">
 	    <link rel="stylesheet" href="{{asset('player-element/dist/context-menu/context-menu.min.css')}}">
         <script src="{{asset('js/jquery.min.js')}}"></script>
-        <script defer src="{{asset('js/my_script.min.js?v=9.92')}}"></script>
+        <script defer src="{{asset('js/my_script.min.js?v=9.96')}}"></script>
         <style>
 
         </style>

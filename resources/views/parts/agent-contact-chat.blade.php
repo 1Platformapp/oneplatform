@@ -30,7 +30,7 @@
                     <div class="chat_main_body_attach">
                         <i class="fa fa-paperclip"></i>
                     </div>
-                    @if(!isset($isPersonal))
+                    @if(!isset($isPersonal) && (!isset($hideButtons) || (isset($hideButtons) && $hideButtons == false)))
                     <div class="foot_action_ext_btns gap-2">
                         <div class="add_agreement_btn foot_action_btn text-center"><i class="fa fa-plus"></i> License</div>
                         <div class="add_product_btn foot_action_btn text-center"><i class="fa fa-plus"></i> Product</div>

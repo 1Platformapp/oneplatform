@@ -16,6 +16,10 @@
 <!-- Page Level CSS !-->
 @section('page-level-css')
 <link rel="stylesheet" href="{{asset('css/item-details.min.css?v=3.6')}}" >
+<style>
+    .submit-btn.busy { opacity: 0.6; cusrsor: not-allowed; }
+    .submit-btn:not(.busy) { cursor: pointer; }
+</style>
 @stop
 
 @section('page-level-js')
@@ -26,7 +30,7 @@
             var back = $('.page_background').attr('data-url');
             $('.page_background').css('background-image', 'url('+back+')');
 
-            $('#submit_btn').click(function(){
+            $('body').delegate('#submit_btn:not(.busy)', 'click', function(e){
 
                 const name = $('#supporter_name').val();
                 const email = $('#supporter_email').val();
@@ -36,6 +40,7 @@
                 let passwordError = null;
                 let error = null;
                 $('.error').addClass('hidden');
+
 
                 if (name == '') {
                     nameError = 'Name is required';
@@ -70,6 +75,8 @@
                 }
 
                 if (!error) {
+
+                    $('#submit_btn').addClass('busy');
                     $.ajax({
 
                         url: "/supporter-signup",
@@ -83,12 +90,14 @@
                             }else{
                                 $('#submit_error').text(response.message).removeClass('hidden');
                             }
+
+                            $('#submit_btn').removeClass('busy');
                         }
                     });
                 }
             });
 
-            $('#submit_btn_two').click(function(){
+            $('body').delegate('#submit_btn_two:not(.busy)', 'click', function(e){
 
                 const code = $('#verify_code').val();
                 const name = $('#supporter_name').val();
@@ -108,6 +117,9 @@
                 }
 
                 if (!error) {
+
+                    $('#submit_btn_two').addClass('busy');
+
                     $.ajax({
 
                         url: "/supporter-signup",
@@ -121,6 +133,8 @@
                             }else{
                                 $('#submit_error_verify').text(response.message).removeClass('hidden');
                             }
+
+                            $('#submit_btn_two').removeClass('busy');
                         }
                     });
                 }
@@ -184,7 +198,7 @@
                         <div id="password_error" class="error hidden text-sm leading-6 text-red-600"></div>
                     </div>
 
-                    <button id="submit_btn" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500 ml-auto w-fit my-2">
+                    <button id="submit_btn" type="button" class="submit-btn inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500 ml-auto w-fit my-2">
                         Submit
                     </button>
                     <div id="submit_error" class="error hidden text-sm leading-6 text-red-600"></div>
@@ -196,7 +210,7 @@
                         <div id="verify_code_error" class="error hidden text-sm leading-6 text-red-600"></div>
                     </div>
 
-                    <button id="submit_btn_two" type="button" class="inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500 ml-auto w-fit my-2">
+                    <button id="submit_btn_two" type="button" class="submit-btn inline-flex justify-center px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm outline-none next-btn hover:bg-indigo-500 ml-auto w-fit my-2">
                         Submit
                     </button>
                     <div id="submit_error_verify" class="error hidden text-sm leading-6 text-red-600"></div>

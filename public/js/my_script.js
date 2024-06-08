@@ -2034,9 +2034,10 @@ $(document).ready(function() {
 
     });
 
-    $('body').delegate( ".pro_confirm_approve_outer #pro_approve_submit_yes", "click", function(e){
+    $('body').delegate( ".pro_confirm_approve_outer #pro_approve_submit_yes:not(.busy)", "click", function(e){
 
         e.preventDefault();
+        var thiss = $(this);
         var id = $('.pro_confirm_approve_outer #pro_approve_submit_yes').attr('data-id');
         var itemType = $('.pro_confirm_approve_outer #pro_approve_submit_yes').attr('data-item-type');
 
@@ -2044,11 +2045,13 @@ $(document).ready(function() {
 
         }else if( id && itemType == 'supporter' ){
 
+            thiss.addClass('busy');
             $.post( "/supporter-signup-approve" , { id: id }, function(data) {
                 if (data.success) {
                     location.reload();
                 } else {
                     $('.pro_confirm_approve_outer .error').removeClass('instant_hide').text(data.message);
+                    thiss.removeClass('busy');
                 }
             });
         }
