@@ -101,7 +101,7 @@
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <td style="color:#000; font-size: 17px;  width:100%;vertical-align:bottom;">1Platform Fee</td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
@@ -117,7 +117,7 @@
                             </td>
                             <td style="width:30%;vertical-align:top;"></td>
                             <td style="width:15%;vertical-align:top;"></td>
-                        </tr>
+                        </tr>!-->
                         <tr>
                             <td style="height: 15px;width:55%;vertical-align:top;"></td>
                             <td style="width:30%;vertical-align:top;"></td>
