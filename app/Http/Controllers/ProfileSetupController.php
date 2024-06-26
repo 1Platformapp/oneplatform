@@ -156,7 +156,7 @@ class ProfileSetupController extends Controller
         $isStandalone = (strpos($currentUrl, 'standalone') !== false) ? true : false;
         $user = Auth::user();
 
-        if($user && $user->role != 1 && ($page == 'music' || $page == 'album' || $page == 'song-links')){
+        if($user && $user->role_id != 1 && ($page == 'music' || $page == 'album' || $page == 'song-links')){
             return redirect()->back();
         }
 
