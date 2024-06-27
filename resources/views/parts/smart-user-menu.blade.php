@@ -207,7 +207,7 @@
                                     </div>
                                 </a>
 
-                                <a href="{{route('profile.setup.standalone', ['page' => 'video'])}}" class="usr_men_quick_txt">
+                                <a href="{{route('profile.setup.standalone', ['page' => 'premium-videos'])}}" class="usr_men_quick_txt">
                                     <div class="px-5 usr_men_quick_each">
                                         <div class="usr_men_quick_ic">
                                             <i class="fa fa-video"></i>

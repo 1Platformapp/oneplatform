@@ -808,6 +808,38 @@
 
 		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'videos', 'setupWizard' => ''])
 
+    @elseif($page == 'premium-videos')
+
+		<div class="setup_tray_main">
+			<div class="setup_tray_top">
+				<div class="setup_tray_left">
+                    @if(!$isStandalone)
+					<div class="setup_tray_step">
+						Step 14 of 19
+					</div>
+                    @endif
+					<div class="setup_tray_head">
+						Add Premium Videos
+					</div>
+				</div>
+                @if(!$isStandalone)
+                <div class="setup_tray_right">
+                    <div class="setup_tray_btn setup_back_btn">
+                        <a href="{{route('profile.setup', ['page' => 'social'])}}"><i class="fa fa-chevron-left"></i>&nbsp;&nbsp;Back</a>
+                    </div>
+                    <div class="setup_tray_btn setup_next_btn">
+                        <a href="{{route('profile.setup', ['page' => 'product'])}}">Next&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                @endif
+			</div>
+			<div class="setup_tray_foot">
+
+			</div>
+		</div>
+
+		@include('parts.profile-media', ['page' => 'media', 'subTab' => 'premium-videos', 'setupWizard' => ''])
+
     @elseif($page == 'setup-patron')
 
 		<div class="setup_tray_main">
