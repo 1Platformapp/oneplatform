@@ -629,7 +629,7 @@ a.ch_sup_fb,a.ch_sup_tw { position: relative; }
 
 	.portfolio_each:not(.site_program) .each_port_up { max-height: 110px !important; }
 	.each_port_up span { padding: 5px !important; font-size: 10px !important; }
-	.portfolio_each { flex: 0 1 48% !important; margin-bottom: 10px !important; margin-right: 2% !important; }
+	.portfolio_each { margin-bottom: 10px !important; }
 	.each_port_name { letter-spacing: 0 !important; text-transform: unset !important; font-size: 12px !important; font-weight: normal !important; }
 	.portfolio_det_outer { padding: 20px !important; }
 	.port_front_para { line-height: 17px !important; }
